@@ -1,19 +1,24 @@
-# Reparto de roles
+# Reparto de tareas
 
-> Propuesta para 6 personas: cada una es responsable de unos bloques del plan, pero **todas deben saber defender el proyecto entero**. Rellenad los nombres en la primera reunión.
+**Equipo:** Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio.
 
-| Rol | Persona | Bloques del plan | Revisa a |
-|---|---|---|---|
-| Coordinación y documentación | | 0 Gestión · 11 Pruebas, documentación y entrega | Todos |
-| Sistemas | | 1 Hardware y presupuesto · 2 SO y mínimos privilegios | Redes |
-| Arcade | | 3 Máquina MAME · 4 Arcade stick Arduino | Sistemas |
-| Redes | | 5 Redes y WDS | Arcade |
-| Web y cloud | | 6 Web y hosting en AWS | ERP |
-| ERP y datos | | 7 Odoo + TPV · 8 Bases de datos · 9 RAID y backups | Web y cloud |
+No hay roles fijos por bloque: las 49 tareas se reparten de forma que cada persona trabaje en 6-8 bloques distintos y revise tareas de los bloques en los que no ha trabajado. El objetivo es que cualquiera pueda defender el proyecto completo.
 
-La **seguridad transversal (bloque 10)** es responsabilidad de cada dueño en su bloque; la coordinación revisa que se cumpla al final.
+El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), generado desde [backlog-kanban.csv](backlog-kanban.csv).
 
-## Rotación para que todos sepan defenderlo todo
+## Criterios
 
-- Cada semana, en la revisión, una persona explica un bloque que **no** es suyo.
-- Antes de la entrega, ensayo en el que se reparten los bloques al azar.
+- **Carga:** 8-9 tareas y 7-8 revisiones por persona.
+- **Responsable:** ejecuta la tarea, la documenta y deja las evidencias en `docs/evidencias/`.
+- **Revisor:** valida la tarea en el Pull Request antes de unirla a `main`. Nunca coincide con el responsable.
+- **Equipo:** las tareas marcadas así (contrato, presentación) las valida el equipo completo.
+- **Coordinación:** Adrian mantiene el Anexo II y la planificación.
+- **Seguridad transversal:** cada responsable aplica el bloque 10 en su tarea; Eneko.S hace la revisión final.
+
+## Cambios en el reparto
+
+Se acuerdan en la reunión semanal, se reflejan en el CSV y se regenera el Gantt:
+
+```bash
+python3 scripts/gantt.py
+```

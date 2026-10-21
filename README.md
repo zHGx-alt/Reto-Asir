@@ -18,10 +18,11 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 
 - Contrato de equipo: [docs/gestion/anexo-I-contrato-equipo.md](docs/gestion/anexo-I-contrato-equipo.md)
 - 11 pasos: [docs/gestion/anexo-II-11-pasos.md](docs/gestion/anexo-II-11-pasos.md)
-- Roles: [docs/gestion/roles.md](docs/gestion/roles.md)
-- Backlog para el tablero Kanban: [docs/gestion/backlog-kanban.csv](docs/gestion/backlog-kanban.csv)
+- Diagrama de Gantt: [docs/gestion/gantt.md](docs/gestion/gantt.md) (se regenera con `python3 scripts/gantt.py`)
+- Reparto de tareas: [docs/gestion/roles.md](docs/gestion/roles.md)
+- Planificación (fuente del Gantt y del Kanban): [docs/gestion/backlog-kanban.csv](docs/gestion/backlog-kanban.csv)
 - Uso de IA: [docs/gestion/registro-ia.md](docs/gestion/registro-ia.md)
 
 ## Contribuir
 
-Lee [CONTRIBUTING.md](CONTRIBUTING.md) y ejecuta `./scripts/instalar-hooks.sh` tras clonar. Los secretos no se suben nunca al repo.
+Si nunca has usado Git, empieza por la [guía de Git del equipo](CONTRIBUTING.md): instalación, flujo diario con ramas y Pull Requests, problemas habituales y chuleta de comandos.
