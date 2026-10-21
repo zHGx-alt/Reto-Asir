@@ -1,0 +1,57 @@
+# --- Secretos (NUNCA en Git) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.kdbx
+secrets/
+credentials*
+*.tfvars
+!*.tfvars.example
+
+# --- Terraform ---
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+crash.log
+
+# --- AWS ---
+.aws/
+
+# --- Web ---
+node_modules/
+dist/
+.cache/
+
+# --- Arduino ---
+arduino/**/build/
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+
+# --- Bases de datos y backups ---
+*.sql.gz
+*.dump
+backups/
+
+# --- VMs, ISOs y ROMs (pesadas o con licencia) ---
+*.iso
+*.vmdk
+*.vmx
+*.ova
+*.zip
+roms/
+
+# --- Sistema / editores ---
+.DS_Store
+Thumbs.db
+~$*
+.vscode/
+.idea/
+*.swp

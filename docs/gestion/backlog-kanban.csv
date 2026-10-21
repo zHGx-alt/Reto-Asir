@@ -1,0 +1,50 @@
+Title,Bloque,Rol,Responsable,Semana inicio,Semana fin,Estado
+Firmar Anexo I (contrato de equipo),0 Gestión,Coordinación,,1,1,Todo
+Rellenar Anexo II (11 pasos),0 Gestión,Coordinación,,1,10,Todo
+Repartir roles,0 Gestión,Coordinación,,1,1,Todo
+Crear tablero Kanban con responsables y fechas,0 Gestión,Coordinación,,1,1,Todo
+Repo con estructura y gitleaks; todos con commits propios,0 Gestión,Coordinación,,1,1,Todo
+Preguntar dudas pendientes al profesor,0 Gestión,Coordinación,,1,1,Todo
+Definir necesidades de equipos (gerente; 2 TPV; impresoras),1 Hardware,Sistemas,,1,2,Todo
+Tabla de hardware con justificación,1 Hardware,Sistemas,,1,2,Todo
+Tabla de software y licencias,1 Hardware,Sistemas,,1,2,Todo
+Presupuesto con enlaces (incl. WAN y router extra),1 Hardware,Sistemas,,1,2,Todo
+Diagrama de arquitectura de equipos,1 Hardware,Sistemas,,2,2,Todo
+Dual boot Win10 + Linux en el equipo del gerente,2 SO,Sistemas,,3,5,Todo
+Bastionado de los 2 TPV Windows (usuario estándar; kiosko; USB),2 SO,Sistemas,,3,5,Todo
+Instalar impresora de tickets y prueba,2 SO,Sistemas,,3,5,Todo
+Scripts de configuración reproducibles,2 SO,Sistemas,,3,5,Todo
+Instalar SO ligero y MAME con arranque directo,3 Arcade,Arcade,,3,5,Todo
+Pruebas de rendimiento MAME antes/después,3 Arcade,Arcade,,3,5,Todo
+Monitorización de recursos de la recreativa,3 Arcade,Arcade,,4,5,Todo
+Montaje del arcade stick (ATmega32U4),4 Arduino,Arcade,,3,5,Todo
+Firmware HID y mapeo configurable (EEPROM),4 Arduino,Arcade,,3,5,Todo
+Pruebas del stick con MAME y otro emulador,4 Arduino,Arcade,,5,5,Todo
+Comparativa de operadores WAN,5 Redes,Redes,,1,2,Todo
+Plano del local y plan de direccionamiento IP,5 Redes,Redes,,1,2,Todo
+Configurar red segura (WPA3; invitados; firewall),5 Redes,Redes,,3,5,Todo
+WDS con segundo router y pruebas de cobertura,5 Redes,Redes,,3,5,Todo
+Análisis de conectividad (Wireshark; nmap),5 Redes,Redes,,5,5,Todo
+Wireframes y diseño conceptual web,6 Web,Web y cloud,,1,2,Todo
+Implementar web (mapa; formulario; slideshow),6 Web,Web y cloud,,3,5,Todo
+Validación W3C; Lighthouse y accesibilidad,6 Web,Web y cloud,,5,5,Todo
+Hosting AWS con dominio y HTTPS,6 Web,Web y cloud,,5,7,Todo
+IaC y despliegue automatizado (Terraform + Actions),6 Web,Web y cloud,,5,7,Todo
+Comparativa y elección de ERP,7 ERP,ERP y datos,,1,2,Todo
+Instalar Odoo + PostgreSQL con Docker,7 ERP,ERP y datos,,5,7,Todo
+Configurar módulos de Odoo,7 ERP,ERP y datos,,5,7,Todo
+Caso de uso end-to-end automatizado,7 ERP,ERP y datos,,7,9,Todo
+Importar y exportar datos en Odoo,7 ERP,ERP y datos,,7,9,Todo
+Imprimir ticket desde el TPV de Odoo,7 ERP,ERP y datos,,7,9,Todo
+Modelo E/R,8 BD,ERP y datos,,1,2,Todo
+Modelo lógico normalizado (3FN),8 BD,ERP y datos,,3,5,Todo
+Scripts DDL,8 BD,ERP y datos,,3,5,Todo
+Datos de prueba y consultas,8 BD,ERP y datos,,3,5,Todo
+Usuarios de BD con mínimos privilegios,8 BD,ERP y datos,,3,5,Todo
+RAID 1 y simulación de fallo,9 Backup,ERP y datos,,5,7,Todo
+Plan de backup 3-2-1 cifrado y automatizado,9 Backup,ERP y datos,,5,7,Todo
+Prueba de restauración con evidencias,9 Backup,ERP y datos,,7,9,Todo
+Revisión de seguridad transversal,10 Seguridad,Coordinación,,7,9,Todo
+Tabla de pruebas por bloque,11 Entrega,Coordinación,,7,9,Todo
+Documentación final paso a paso,11 Entrega,Coordinación,,9,10,Todo
+Presentación y ensayo,11 Entrega,Coordinación,,9,10,Todo

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Bloquea el commit si gitleaks detecta secretos en los cambios preparados.
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "[pre-commit] gitleaks no está instalado; se omite el escaneo (la CI lo hará igualmente)."
+  exit 0
+fi
+gitleaks protect --staged --redact --config .gitleaks.toml || {
+  echo "[pre-commit] Posible secreto detectado. Quítalo del commit antes de continuar."
+  exit 1
+}

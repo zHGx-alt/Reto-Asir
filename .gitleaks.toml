@@ -1,0 +1,13 @@
+# Configuración de gitleaks para Almi-Chain
+# Usa las reglas por defecto (claves AWS, tokens, contraseñas, etc.)
+title = "Almi-Chain gitleaks"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ficheros de ejemplo sin secretos reales"
+paths = [
+  '''\.env\.example$''',
+  '''\.tfvars\.example$''',
+]
