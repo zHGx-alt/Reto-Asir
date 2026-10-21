@@ -1,7 +1,7 @@
 # Anexo I · Contrato de equipo de trabajo
 
 **Reto:** 1 · Almi-Chain · ASIR1 2026-2027
-**Fecha de firma:** ____/____/2026
+**Fecha de firma:** 21/10/2026
 
 ## 1. Miembros del equipo
 
@@ -20,9 +20,9 @@ Entregar la solución completa del reto Almi-Chain (sistemas, red, arcade, web e
 
 ## 3. Normas de funcionamiento
 
-- **Reuniones:** al inicio de cada sesión, stand-up de 10 min (qué hice / qué haré / bloqueos). Reunión de revisión semanal: día ______ a las ______.
-- **Puntualidad y asistencia:** avisar por ______ antes de la sesión si no se puede asistir.
-- **Comunicación:** canal principal ______ (Discord/WhatsApp/Teams). Respuesta en menos de ______ h en días lectivos.
+- **Reuniones:** al inicio de cada sesión, stand-up de 10 min (qué hice / qué haré / bloqueos). Reunión de revisión semanal: lunes a las 9:00.
+- **Puntualidad y asistencia:** avisar por WhatsApp antes de la sesión si no se puede asistir.
+- **Comunicación:** canal principal WhatsApp.
 - **Seguimiento:** cada tarea tiene responsable, revisor y fechas en el tablero Kanban y en el [Gantt](gantt.md). Reparto en [roles.md](roles.md).
 - **Git:** todos hacen commits propios siguiendo [CONTRIBUTING.md](../../CONTRIBUTING.md). Nada de secretos en el repo.
 - **Revisión cruzada:** cada bloque lo revisa al menos una persona distinta de quien lo hizo.
