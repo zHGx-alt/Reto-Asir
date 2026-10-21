@@ -5,14 +5,14 @@
 
 ## 1. Miembros del equipo
 
-| Nombre | Contacto | Usuario GitHub |
-|---|---|---|
-| Adrian | | |
-| Iker | | |
-| Eneko.S | | |
-| Eneko.P | | |
-| Markel | | |
-| Peio | | |
+| Nombre |
+|---|
+| Adrian |
+| Iker | 
+| Eneko.S | 
+| Eneko.P | 
+| Markel | 
+| Peio | 
 
 ## 2. Objetivo común
 
@@ -45,9 +45,9 @@ Entregar la solución completa del reto Almi-Chain (sistemas, red, arcade, web e
 
 | Nombre | Firma | Fecha |
 |---|---|---|
-| Adrian | | |
-| Iker | | |
-| Eneko.S | | |
-| Eneko.P | | |
-| Markel | | |
-| Peio | | |
+| Adrian | Si |21/10/2026|
+| Iker | Si |21/10/2026|
+| Eneko.S | Si |21/10/2026|
+| Eneko.P | Si |21/10/2026|
+| Markel | Si |21/10/2026|
+| Peio | Si |21/10/2026|
