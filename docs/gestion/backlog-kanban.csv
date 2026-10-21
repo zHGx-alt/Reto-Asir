@@ -1,50 +1,50 @@
-ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Estado
-1,Firmar Anexo I (contrato de equipo),0 Gestión,Adrian,Equipo,2026-10-21,2026-10-21,Pendiente
-2,Mantener Anexo II (11 pasos),0 Gestión,Adrian,Iker,2026-10-21,2026-11-10,En curso
-3,Repartir tareas y responsables,0 Gestión,Adrian,Equipo,2026-10-21,2026-10-21,Hecho
-4,Crear tablero Kanban en GitHub Projects,0 Gestión,Iker,Adrian,2026-10-21,2026-10-22,Pendiente
-5,Repo con estructura y gitleaks; commits de todos,0 Gestión,Adrian,Eneko.P,2026-10-21,2026-10-22,En curso
-6,Resolver dudas pendientes con el profesor,0 Gestión,Peio,Adrian,2026-10-21,2026-10-22,Pendiente
-7,Definir necesidades de equipos (gerente; 2 TPV; impresoras),1 Hardware,Eneko.S,Iker,2026-10-22,2026-10-23,Pendiente
-8,Tabla de hardware con justificación,1 Hardware,Eneko.S,Peio,2026-10-23,2026-10-26,Pendiente
-9,Tabla de software y licencias,1 Hardware,Markel,Eneko.P,2026-10-23,2026-10-26,Pendiente
-10,Presupuesto con enlaces (incl. WAN y router extra),1 Hardware,Peio,Eneko.S,2026-10-26,2026-10-27,Pendiente
-11,Diagrama de arquitectura de equipos,1 Hardware,Iker,Adrian,2026-10-27,2026-10-28,Pendiente
-12,Dual boot Win10 + Linux en el equipo del gerente,2 SO,Eneko.P,Eneko.S,2026-10-28,2026-10-30,Pendiente
-13,Bastionado de los 2 TPV Windows (usuario estándar; kiosko; USB),2 SO,Markel,Iker,2026-10-28,2026-11-02,Pendiente
-14,Instalar impresora de tickets y prueba,2 SO,Peio,Eneko.S,2026-10-29,2026-10-30,Pendiente
-15,Scripts de configuración reproducibles,2 SO,Adrian,Markel,2026-10-30,2026-11-03,Pendiente
-16,Instalar SO ligero y MAME con arranque directo,3 Arcade,Iker,Markel,2026-10-26,2026-10-28,Pendiente
-17,Pruebas de rendimiento MAME antes/después,3 Arcade,Iker,Eneko.P,2026-10-29,2026-10-30,Pendiente
-18,Monitorización de recursos de la recreativa,3 Arcade,Eneko.S,Markel,2026-10-30,2026-11-02,Pendiente
-19,Montaje del arcade stick (ATmega32U4),4 Arduino,Eneko.P,Peio,2026-10-22,2026-10-27,Pendiente
-20,Firmware HID y mapeo configurable (EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-27,2026-10-30,Pendiente
-21,Pruebas del stick con MAME y otro emulador,4 Arduino,Eneko.P,Markel,2026-11-02,2026-11-03,Pendiente
-22,Comparativa de operadores WAN,5 Redes,Markel,Eneko.S,2026-10-22,2026-10-23,Pendiente
-23,Plano del local y plan de direccionamiento IP,5 Redes,Eneko.P,Iker,2026-10-22,2026-10-26,Pendiente
-24,Configurar red segura (WPA3; invitados; firewall),5 Redes,Peio,Adrian,2026-10-28,2026-10-30,Pendiente
-25,WDS con segundo router y pruebas de cobertura,5 Redes,Peio,Iker,2026-11-02,2026-11-04,Pendiente
-26,Análisis de conectividad (Wireshark; nmap),5 Redes,Eneko.S,Markel,2026-11-04,2026-11-05,Pendiente
-27,Wireframes y diseño conceptual web,6 Web,Peio,Eneko.S,2026-10-22,2026-10-23,Pendiente
-28,Implementar web (mapa; formulario; slideshow),6 Web,Markel,Eneko.S,2026-10-26,2026-10-30,Pendiente
-29,Validación W3C; Lighthouse y accesibilidad,6 Web,Eneko.P,Peio,2026-11-02,2026-11-03,Pendiente
-30,Hosting AWS con dominio y HTTPS,6 Web,Adrian,Eneko.P,2026-11-02,2026-11-04,Pendiente
-31,IaC y despliegue automatizado (Terraform + Actions),6 Web,Iker,Adrian,2026-11-02,2026-11-05,Pendiente
-32,Comparativa y elección de ERP,7 ERP,Eneko.S,Markel,2026-10-22,2026-10-23,Pendiente
-33,Instalar Odoo + PostgreSQL con Docker,7 ERP,Iker,Peio,2026-10-26,2026-10-28,Pendiente
-34,Configurar módulos de Odoo,7 ERP,Markel,Adrian,2026-10-29,2026-11-02,Pendiente
-35,Caso de uso end-to-end automatizado,7 ERP,Adrian,Iker,2026-11-03,2026-11-05,Pendiente
-36,Importar y exportar datos en Odoo,7 ERP,Peio,Eneko.P,2026-11-04,2026-11-05,Pendiente
-37,Imprimir ticket desde el TPV de Odoo,7 ERP,Eneko.P,Peio,2026-11-04,2026-11-05,Pendiente
-38,Modelo E/R,8 BD,Adrian,Peio,2026-10-22,2026-10-23,Pendiente
-39,Modelo lógico normalizado (3FN),8 BD,Eneko.S,Peio,2026-10-26,2026-10-27,Pendiente
-40,Scripts DDL,8 BD,Eneko.S,Adrian,2026-10-28,2026-10-29,Pendiente
-41,Datos de prueba y consultas,8 BD,Iker,Eneko.S,2026-10-30,2026-11-02,Pendiente
-42,Usuarios de BD con mínimos privilegios,8 BD,Markel,Iker,2026-11-02,2026-11-03,Pendiente
-43,RAID 1 y simulación de fallo,9 Backup,Eneko.P,Iker,2026-10-29,2026-11-02,Pendiente
-44,Plan de backup 3-2-1 cifrado y automatizado,9 Backup,Markel,Eneko.S,2026-11-03,2026-11-05,Pendiente
-45,Prueba de restauración con evidencias,9 Backup,Iker,Markel,2026-11-05,2026-11-06,Pendiente
-46,Revisión de seguridad transversal,10 Seguridad,Eneko.S,Eneko.P,2026-11-05,2026-11-06,Pendiente
-47,Tabla de pruebas por bloque,11 Entrega,Eneko.P,Markel,2026-11-05,2026-11-09,Pendiente
-48,Documentación final paso a paso,11 Entrega,Markel,Peio,2026-11-06,2026-11-10,Pendiente
-49,Presentación y ensayo,11 Entrega,Peio,Equipo,2026-11-09,2026-11-10,Pendiente
+ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
+1,Firmar Anexo I (contrato de equipo),0 Gestión,Adrian,Equipo,2026-10-21,2026-10-21,,Pendiente
+2,Mantener Anexo II (11 pasos),0 Gestión,Adrian,Iker,2026-10-21,2026-11-10,,En curso
+3,Repartir tareas y responsables,0 Gestión,Adrian,Equipo,2026-10-21,2026-10-21,,Hecho
+4,Crear tablero Kanban en GitHub Projects,0 Gestión,Iker,Adrian,2026-10-21,2026-10-22,,Pendiente
+5,Repo con estructura y gitleaks; commits de todos,0 Gestión,Adrian,Eneko.P,2026-10-21,2026-10-22,,En curso
+6,Resolver dudas pendientes con el profesor,0 Gestión,Peio,Adrian,2026-10-21,2026-10-22,,Pendiente
+7,Definir necesidades de equipos (gerente; 2 TPV; impresoras),1 Hardware,Eneko.S,Iker,2026-10-22,2026-10-22,,Pendiente
+8,Tabla de hardware con justificación,1 Hardware,Eneko.S,Peio,2026-10-23,2026-10-26,7,Pendiente
+9,Tabla de software y licencias,1 Hardware,Markel,Eneko.P,2026-10-23,2026-10-26,7,Pendiente
+10,Presupuesto con enlaces (incl. WAN y router extra),1 Hardware,Peio,Eneko.S,2026-10-27,2026-10-27,8 9 22,Pendiente
+11,Diagrama de arquitectura de equipos,1 Hardware,Iker,Adrian,2026-10-27,2026-10-28,8 9,Pendiente
+12,Dual boot Win10 + Linux en el equipo del gerente,2 SO,Eneko.P,Eneko.S,2026-10-28,2026-10-30,8,Pendiente
+13,Bastionado de los 2 TPV Windows (usuario estándar; kiosko; USB),2 SO,Markel,Iker,2026-10-28,2026-11-02,9,Pendiente
+14,Instalar impresora de tickets y prueba,2 SO,Peio,Eneko.S,2026-10-29,2026-10-30,8,Pendiente
+15,Scripts de configuración reproducibles,2 SO,Eneko.S,Markel,2026-11-03,2026-11-04,12 13,Pendiente
+16,Instalar SO ligero y MAME con arranque directo,3 Arcade,Iker,Markel,2026-10-26,2026-10-28,,Pendiente
+17,Pruebas de rendimiento MAME antes/después,3 Arcade,Iker,Eneko.P,2026-10-29,2026-10-30,16,Pendiente
+18,Monitorización de recursos de la recreativa,3 Arcade,Eneko.S,Markel,2026-10-30,2026-11-02,16,Pendiente
+19,Montaje del arcade stick (ATmega32U4),4 Arduino,Eneko.P,Peio,2026-10-22,2026-10-27,,Pendiente
+20,Firmware HID y mapeo configurable (EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-27,2026-10-30,,Pendiente
+21,Pruebas del stick con MAME y otro emulador,4 Arduino,Eneko.P,Markel,2026-11-02,2026-11-03,16 19 20,Pendiente
+22,Comparativa de operadores WAN,5 Redes,Markel,Eneko.S,2026-10-22,2026-10-23,,Pendiente
+23,Plano del local y plan de direccionamiento IP,5 Redes,Eneko.P,Iker,2026-10-22,2026-10-26,,Pendiente
+24,Configurar red segura (WPA3; invitados; firewall),5 Redes,Peio,Adrian,2026-10-28,2026-10-30,23,Pendiente
+25,WDS con segundo router y pruebas de cobertura,5 Redes,Peio,Iker,2026-11-02,2026-11-03,24,Pendiente
+26,Análisis de conectividad (Wireshark; nmap),5 Redes,Eneko.S,Markel,2026-11-04,2026-11-05,25,Pendiente
+27,Wireframes y diseño conceptual web,6 Web,Peio,Eneko.S,2026-10-22,2026-10-23,,Pendiente
+28,Implementar web (mapa; formulario; slideshow),6 Web,Markel,Eneko.S,2026-10-26,2026-10-30,27,Pendiente
+29,Validación W3C; Lighthouse y accesibilidad,6 Web,Eneko.P,Peio,2026-11-02,2026-11-03,28,Pendiente
+30,Hosting AWS con dominio y HTTPS,6 Web,Adrian,Eneko.P,2026-11-02,2026-11-04,28,Pendiente
+31,IaC y despliegue automatizado (Terraform + Actions),6 Web,Iker,Adrian,2026-11-02,2026-11-05,28,Pendiente
+32,Comparativa y elección de ERP,7 ERP,Eneko.S,Markel,2026-10-22,2026-10-23,,Pendiente
+33,Instalar Odoo + PostgreSQL con Docker,7 ERP,Iker,Peio,2026-10-26,2026-10-28,32,Pendiente
+34,Configurar módulos de Odoo,7 ERP,Markel,Adrian,2026-10-29,2026-11-02,33,Pendiente
+35,Caso de uso end-to-end automatizado,7 ERP,Adrian,Iker,2026-11-03,2026-11-05,34,Pendiente
+36,Importar y exportar datos en Odoo,7 ERP,Peio,Eneko.P,2026-11-04,2026-11-05,34,Pendiente
+37,Imprimir ticket desde el TPV de Odoo,7 ERP,Eneko.P,Peio,2026-11-04,2026-11-05,14 34,Pendiente
+38,Modelo E/R,8 BD,Adrian,Peio,2026-10-22,2026-10-23,,Pendiente
+39,Modelo lógico normalizado (3FN),8 BD,Eneko.S,Peio,2026-10-26,2026-10-27,38,Pendiente
+40,Scripts DDL,8 BD,Eneko.S,Adrian,2026-10-28,2026-10-29,39,Pendiente
+41,Datos de prueba y consultas,8 BD,Iker,Eneko.S,2026-10-30,2026-11-02,40,Pendiente
+42,Usuarios de BD con mínimos privilegios,8 BD,Markel,Iker,2026-11-02,2026-11-03,40,Pendiente
+43,RAID 1 y simulación de fallo,9 Backup,Eneko.P,Iker,2026-10-29,2026-11-02,,Pendiente
+44,Plan de backup 3-2-1 cifrado y automatizado,9 Backup,Markel,Eneko.S,2026-11-03,2026-11-04,41 43,Pendiente
+45,Prueba de restauración con evidencias,9 Backup,Iker,Markel,2026-11-05,2026-11-06,44,Pendiente
+46,Revisión de seguridad transversal,10 Seguridad,Eneko.S,Eneko.P,2026-11-05,2026-11-06,13 24 30 42,Pendiente
+47,Tabla de pruebas por bloque,11 Entrega,Eneko.P,Markel,2026-11-06,2026-11-09,21 26 29,Pendiente
+48,Documentación final paso a paso,11 Entrega,Markel,Peio,2026-11-09,2026-11-10,45,Pendiente
+49,Presentación y ensayo,11 Entrega,Peio,Equipo,2026-11-09,2026-11-10,46,Pendiente
