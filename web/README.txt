@@ -4,7 +4,6 @@ ALMI CHAIN - WEB DE DEMOSTRACION
 2. La seccion Ubicacion incluye un mapa interactivo de OpenStreetMap centrado en Bilbao.
 3. Sustituye el telefono, horario, enlace y coordenadas del mapa por los datos definitivos del restaurante.
 4. El formulario es un placeholder y no envia datos.
-5. Las fotografias y el mapa necesitan conexion a Internet.
 
 Archivos:
 - index.html: estructura, contenido y mapa.
