@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Almi Chain, cocina vasca contemporánea en Bilbao. Descubre nuestros platos estrella y nuestra filosofía.">
+  <meta name="theme-color" content="#f3efe6">
+  <title>Almi Chain | Cocina vasca contemporánea en Bilbao</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" id="inicio">
+    <a class="brand" href="#inicio" aria-label="Almi Chain, inicio">ALMI<span>CHAIN</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <a href="#historia">Historia</a>
+      <a href="#platos">Platos</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a class="nav-cta" href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Bilbao · Cocina vasca contemporánea</p>
+      <h1 id="hero-title">Tradición que<br><em>se mueve.</em></h1>
+      <div class="hero-copy">
+        <p>Una cadena nacida en Bilbao para acercar el producto vasco a una mesa actual, directa y sin artificios.</p>
+        <a class="text-link" href="#platos">Ver platos estrella <span aria-hidden="true">↘</span></a>
+      </div>
+      <figure class="hero-media">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=82" alt="Plato de carne a la parrilla servido con una presentación cuidada" width="1600" height="1067" fetchpriority="high">
+        <figcaption>Producto, fuego y temporada.</figcaption>
+      </figure>
+      <p class="hero-number" aria-hidden="true">01</p>
+    </section>
+
+    <section class="manifesto section-space" id="historia" aria-labelledby="historia-title">
+      <div>
+        <p class="eyebrow">Nuestra manera de hacer</p>
+        <h2 id="historia-title">Menos decoración.<br>Más <em>sabor.</em></h2>
+      </div>
+      <div class="manifesto-copy">
+        <p class="lead">Trabajamos con recetas reconocibles, proveedores cercanos y una mirada contemporánea.</p>
+        <p>Almi Chain propone espacios diferentes con una misma idea: que cada plato tenga un origen claro y que cada visita se sienta cercana.</p>
+      </div>
+    </section>
+
+    <section class="showcase section-space" id="platos" aria-labelledby="platos-title">
+      <div class="showcase-heading">
+        <p class="eyebrow">Selección de la casa</p>
+        <h2 id="platos-title">Platos<br><em>estrella.</em></h2>
+        <div class="slider-controls" aria-label="Controles del carrusel">
+          <button class="slider-button" id="prev" type="button" aria-label="Plato anterior">←</button>
+          <p><span id="current">01</span> / 03</p>
+          <button class="slider-button" id="next" type="button" aria-label="Plato siguiente">→</button>
+        </div>
+      </div>
+
+      <div class="slider" aria-live="polite">
+        <article class="slide active" data-index="0">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1400&q=80" alt="Txuleta a la parrilla cortada y lista para servir" width="1400" height="934">
+          <div class="slide-caption"><span>01</span><h3>Txuleta al fuego</h3><p>Carne, brasa y el punto justo.</p></div>
+        </article>
+        <article class="slide" data-index="1" hidden>
+          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1400&q=80" alt="Plato contemporáneo elaborado con verduras de temporada" width="1400" height="934" loading="lazy">
+          <div class="slide-caption"><span>02</span><h3>Huerta de temporada</h3><p>Color, textura y producto local.</p></div>
+        </article>
+        <article class="slide" data-index="2" hidden>
+          <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=1400&q=80" alt="Porción de tarta cremosa servida en plato" width="1400" height="934" loading="lazy">
+          <div class="slide-caption"><span>03</span><h3>Tarta de queso</h3><p>Cremosa, tostada y sin exceso.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="location section-space" id="ubicacion" aria-labelledby="ubicacion-title">
+      <div class="location-intro">
+        <p class="eyebrow">Encuéntranos</p>
+        <h2 id="ubicacion-title">Bilbao<br><em>nos inspira.</em></h2>
+        <div class="location-details">
+          <div><span>Zona</span><strong>Bilbao, Bizkaia</strong></div>
+          <div><span>Horario</span><strong>Lun–Dom · 12:30–23:30</strong></div>
+          <div><span>Contacto</span><strong>+34 944 000 000</strong></div>
+        </div>
+        <p class="demo-note">Dirección, horario y teléfono provisionales para la demostración.</p>
+        <div class="location-actions">
+          <a class="primary-button" href="https://www.openstreetmap.org/#map=15/43.2630/-2.9350" target="_blank" rel="noopener">Cómo llegar</a>
+          <button class="secondary-button" id="geo-button" type="button">Usar mi ubicación</button>
+        </div>
+        <p class="geo-status" id="geo-status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="map-wrap">
+        <iframe title="Mapa de la zona de Bilbao donde se encuentra Almi Chain" src="https://www.openstreetmap.org/export/embed.html?bbox=-2.965%2C43.247%2C-2.905%2C43.279&amp;layer=mapnik&amp;marker=43.263%2C-2.935" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-badge" aria-hidden="true"><span>ALMI</span><small>Bilbao</small></div>
+      </div>
+    </section>
+
+    <section class="contact section-space" id="contacto" aria-labelledby="contacto-title">
+      <div>
+        <p class="eyebrow">Hablemos</p>
+        <h2 id="contacto-title">Tu mesa<br>empieza <em>aquí.</em></h2>
+        <p class="contact-note">Formulario de demostración. No envía datos ni realiza reservas reales.</p>
+      </div>
+      <form id="contact-form">
+        <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field field-full"><label for="mensaje">¿En qué podemos ayudarte?</label><textarea id="mensaje" name="mensaje" rows="4" required></textarea></div>
+        <button class="primary-button" type="submit">Enviar consulta</button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#inicio">ALMI<span>CHAIN</span></a>
+    <p>Bilbao, Bizkaia</p>
+    <p>Proyecto web académico · 2026</p>
+  </footer>
+</body>
+</html>
