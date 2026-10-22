@@ -5,8 +5,8 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 4,Crear tablero Kanban en GitHub Projects,0 Gestión,Iker,Adrian,2026-10-21,2026-10-22,,Pendiente
 5,Repo con estructura y gitleaks; commits de todos,0 Gestión,Adrian,Eneko.P,2026-10-21,2026-10-22,,En curso
 6,Resolver dudas pendientes con el profesor,0 Gestión,Peio,Adrian,2026-10-21,2026-10-22,,Pendiente
-7,Definir necesidades de equipos (gerente; 2 TPV; impresoras),1 Hardware,Eneko.S,Iker,2026-10-22,2026-10-22,,Pendiente
-8,Tabla de hardware con justificación,1 Hardware,Eneko.S,Peio,2026-10-23,2026-10-26,7,Pendiente
+7,Definir necesidades de equipos (gerente; 2 TPV; impresoras),1 Hardware,Eneko.S,Iker,2026-10-22,2026-10-22,,Hecho
+8,Tabla de hardware con justificación,1 Hardware,Eneko.S,Peio,2026-10-23,2026-10-26,7,Hecho
 9,Tabla de software y licencias,1 Hardware,Markel,Eneko.P,2026-10-23,2026-10-26,7,En curso
 10,Presupuesto con enlaces (incl. WAN y router extra),1 Hardware,Peio,Eneko.S,2026-10-27,2026-10-27,8 9 22,Pendiente
 11,Diagrama de arquitectura de equipos,1 Hardware,Iker,Adrian,2026-10-27,2026-10-28,8 9,Pendiente
@@ -18,8 +18,9 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 17,Pruebas de rendimiento MAME antes/después,3 Arcade,Iker,Eneko.P,2026-10-29,2026-10-30,16,Pendiente
 18,Monitorización de recursos de la recreativa,3 Arcade,Eneko.S,Markel,2026-10-30,2026-11-02,16,Pendiente
 19,Montaje del arcade stick (ATmega32U4),4 Arduino,Eneko.P,Peio,2026-10-22,2026-10-27,,Pendiente
-20,Firmware HID y mapeo configurable (EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-27,2026-10-30,,Pendiente
-21,Pruebas del stick con MAME y otro emulador,4 Arduino,Eneko.P,Markel,2026-11-02,2026-11-03,16 19 20,Pendiente
+20,Firmware HID y mapeo configurable (EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-27,2026-10-30,,En curso
+21,Pruebas del stick con MAME y otro emulador,4 Arduino,Eneko.P,Markel,2026-11-02,2026-11-03,16 19 20 50,Pendiente
+50,Probar el firmware del stick en físico (HID; comandos; EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-28,2026-10-30,19,Pendiente
 22,Comparativa de operadores WAN,5 Redes,Markel,Eneko.S,2026-10-22,2026-10-23,,Hecho
 23,Plano del local y plan de direccionamiento IP,5 Redes,Eneko.P,Iker,2026-10-22,2026-10-26,,Pendiente
 24,Configurar red segura (WPA3; invitados; firewall),5 Redes,Peio,Adrian,2026-10-28,2026-10-30,23,Pendiente
@@ -36,7 +37,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 35,Caso de uso end-to-end automatizado,7 ERP,Adrian,Iker,2026-11-03,2026-11-05,34,Pendiente
 36,Importar y exportar datos en Odoo,7 ERP,Peio,Eneko.P,2026-11-04,2026-11-05,34,Pendiente
 37,Imprimir ticket desde el TPV de Odoo,7 ERP,Eneko.P,Peio,2026-11-04,2026-11-05,14 34,Pendiente
-38,Modelo E/R,8 BD,Adrian,Peio,2026-10-22,2026-10-23,,Pendiente
+38,Modelo E/R,8 BD,Adrian,Peio,2026-10-22,2026-10-23,,Hecho
 39,Modelo lógico normalizado (3FN),8 BD,Eneko.S,Peio,2026-10-26,2026-10-27,38,Pendiente
 40,Scripts DDL,8 BD,Eneko.S,Adrian,2026-10-28,2026-10-29,39,Pendiente
 41,Datos de prueba y consultas,8 BD,Iker,Eneko.S,2026-10-30,2026-11-02,40,Pendiente
