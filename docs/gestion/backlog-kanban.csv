@@ -25,7 +25,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 24,Configurar red segura (WPA3; invitados; firewall),5 Redes,Peio,Adrian,2026-10-28,2026-10-30,23,Pendiente
 25,WDS con segundo router y pruebas de cobertura,5 Redes,Peio,Iker,2026-11-02,2026-11-03,24,Pendiente
 26,Análisis de conectividad (Wireshark; nmap),5 Redes,Eneko.S,Markel,2026-11-04,2026-11-05,25,Pendiente
-27,Wireframes y diseño conceptual web,6 Web,Peio,Eneko.S,2026-10-22,2026-10-23,,Pendiente
+27,Wireframes y diseño conceptual web,6 Web,Peio,Eneko.S,2026-10-22,2026-10-23,,Hecho
 28,Implementar web (mapa; formulario; slideshow),6 Web,Markel,Eneko.S,2026-10-26,2026-10-30,27,Pendiente
 29,Validación W3C; Lighthouse y accesibilidad,6 Web,Eneko.P,Peio,2026-11-02,2026-11-03,28,Pendiente
 30,Hosting AWS con dominio y HTTPS,6 Web,Adrian,Eneko.P,2026-11-02,2026-11-04,28,Pendiente
