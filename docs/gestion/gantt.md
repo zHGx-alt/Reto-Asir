@@ -32,6 +32,7 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | 27/10–30/10 | — | Eneko.P | Hecho |
 | 50 | Probar el firmware del stick en físico (HID; comandos; EEPROM) | 4 Arduino | 28/10–30/10 | #19 (Eneko.P) | Eneko.P | Pendiente |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | 02/11–04/11 | #28 (Markel) | Eneko.P | Pendiente |
+| 34 | Configurar módulos de Odoo | 7 ERP | 29/10–02/11 | #33 (Iker) | Markel | Pendiente |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | 03/11–05/11 | #34 (Markel) | Iker | Pendiente |
 | 38 | Modelo E/R | 8 BD | 22/10–23/10 | — | Peio | Hecho |
 
@@ -83,7 +84,6 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | 13 | Bastionado de los 2 TPV Windows (usuario estándar; kiosko; USB) | 2 SO | 28/10–02/11 | #9 (Markel) | Iker | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | 22/10–23/10 | — | Eneko.S | Hecho |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | 26/10–30/10 | #27 (Peio) | Eneko.S | Hecho |
-| 34 | Configurar módulos de Odoo | 7 ERP | 29/10–02/11 | #33 (Iker) | Adrian | Pendiente |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | 02/11–03/11 | #40 (Eneko.S) | Iker | Pendiente |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | 03/11–04/11 | #41 (Iker), #43 (Eneko.P) | Eneko.S | Pendiente |
 | 48 | Documentación final paso a paso | 11 Entrega | 09/11–10/11 | #45 (Iker) | Peio | Pendiente |
