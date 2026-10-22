@@ -57,7 +57,7 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | 15 | Scripts de configuración reproducibles | 2 SO | 03/11–04/11 | #12 (Eneko.P), #13 (Markel) | Markel | Pendiente |
 | 18 | Monitorización de recursos de la recreativa | 3 Arcade | 30/10–02/11 | #16 (Iker) | Markel | Pendiente |
 | 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | 04/11–05/11 | #25 (Peio) | Markel | Pendiente |
-| 32 | Comparativa y elección de ERP | 7 ERP | 22/10–23/10 | — | Markel | Pendiente |
+| 32 | Comparativa y elección de ERP | 7 ERP | 22/10–23/10 | — | Markel | Hecho |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | 26/10–27/10 | #38 (Adrian) | Peio | Hecho |
 | 40 | Scripts DDL | 8 BD | 28/10–29/10 | #39 (Eneko.S) | Adrian | Pendiente |
 | 46 | Revisión de seguridad transversal | 10 Seguridad | 05/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Markel) | Eneko.P | Pendiente |
