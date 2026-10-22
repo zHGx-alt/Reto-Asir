@@ -12,8 +12,8 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 | Persona | Tareas | Días-tarea | Revisiones | Bloques que toca |
 |---|---|---|---|---|
-| Adrian | 8 | 31 | 7 | 0, 4, 6, 7, 8 |
-| Eneko.P | 8 | 21 | 7 | 2, 4, 5, 6, 7, 9, 11 |
+| Adrian | 9 | 34 | 7 | 0, 4, 6, 7, 8 |
+| Eneko.P | 8 | 21 | 8 | 2, 4, 5, 6, 7, 9, 11 |
 | Eneko.S | 9 | 17 | 8 | 1, 2, 3, 5, 7, 8, 10 |
 | Iker | 8 | 20 | 8 | 0, 1, 3, 6, 7, 8, 9 |
 | Markel | 8 | 22 | 8 | 1, 2, 5, 6, 7, 8, 9, 11 |
@@ -29,7 +29,8 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | 2 | Mantener Anexo II (11 pasos) | 0 Gestión | 21/10–10/11 | — | Iker | En curso |
 | 3 | Repartir tareas y responsables | 0 Gestión | 21/10–21/10 | — | Equipo | Hecho |
 | 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | 21/10–22/10 | — | Eneko.P | En curso |
-| 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | 27/10–30/10 | — | Eneko.P | Pendiente |
+| 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | 27/10–30/10 | — | Eneko.P | En curso |
+| 50 | Probar el firmware del stick en físico (HID; comandos; EEPROM) | 4 Arduino | 28/10–30/10 | #19 (Eneko.P) | Eneko.P | Pendiente |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | 02/11–04/11 | #28 (Markel) | Eneko.P | Pendiente |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | 03/11–05/11 | #34 (Markel) | Iker | Pendiente |
 | 38 | Modelo E/R | 8 BD | 22/10–23/10 | — | Peio | Hecho |
@@ -40,7 +41,7 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 |---|---|---|---|---|---|---|
 | 12 | Dual boot Win10 + Linux en el equipo del gerente | 2 SO | 28/10–30/10 | #8 (Eneko.S) | Eneko.S | Pendiente |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | 22/10–27/10 | — | Peio | Pendiente |
-| 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | 02/11–03/11 | #16 (Iker), #19 (Eneko.P), #20 (Adrian) | Markel | Pendiente |
+| 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | 02/11–03/11 | #16 (Iker), #19 (Eneko.P), #20 (Adrian), #50 (Adrian) | Markel | Pendiente |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | 22/10–26/10 | — | Iker | Pendiente |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | 02/11–03/11 | #28 (Markel) | Peio | Pendiente |
 | 37 | Imprimir ticket desde el TPV de Odoo | 7 ERP | 04/11–05/11 | #14 (Peio), #34 (Markel) | Peio | Pendiente |
@@ -78,9 +79,9 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 | # | Tarea | Bloque | Fechas | Depende de | Revisa | Estado |
 |---|---|---|---|---|---|---|
-| 9 | Tabla de software y licencias | 1 Hardware | 23/10–26/10 | #7 (Eneko.S) | Eneko.P | Pendiente |
+| 9 | Tabla de software y licencias | 1 Hardware | 23/10–26/10 | #7 (Eneko.S) | Eneko.P | En curso |
 | 13 | Bastionado de los 2 TPV Windows (usuario estándar; kiosko; USB) | 2 SO | 28/10–02/11 | #9 (Markel) | Iker | Pendiente |
-| 22 | Comparativa de operadores WAN | 5 Redes | 22/10–23/10 | — | Eneko.S | Pendiente |
+| 22 | Comparativa de operadores WAN | 5 Redes | 22/10–23/10 | — | Eneko.S | Hecho |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | 26/10–30/10 | #27 (Peio) | Eneko.S | Pendiente |
 | 34 | Configurar módulos de Odoo | 7 ERP | 29/10–02/11 | #33 (Iker) | Adrian | Pendiente |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | 02/11–03/11 | #40 (Eneko.S) | Iker | Pendiente |
@@ -96,6 +97,6 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | 14 | Instalar impresora de tickets y prueba | 2 SO | 29/10–30/10 | #8 (Eneko.S) | Eneko.S | Pendiente |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | 28/10–30/10 | #23 (Eneko.P) | Adrian | Pendiente |
 | 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | 02/11–03/11 | #24 (Peio) | Iker | Pendiente |
-| 27 | Wireframes y diseño conceptual web | 6 Web | 22/10–23/10 | — | Eneko.S | Pendiente |
+| 27 | Wireframes y diseño conceptual web | 6 Web | 22/10–23/10 | — | Eneko.S | Hecho |
 | 36 | Importar y exportar datos en Odoo | 7 ERP | 04/11–05/11 | #34 (Markel) | Eneko.P | Pendiente |
 | 49 | Presentación y ensayo | 11 Entrega | 09/11–10/11 | #46 (Eneko.S) | Equipo | Pendiente |
