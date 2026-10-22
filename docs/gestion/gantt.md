@@ -92,7 +92,6 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 | # | Tarea | Bloque | Fechas | Depende de | Revisa | Estado |
 |---|---|---|---|---|---|---|
-| 6 | Resolver dudas pendientes con el profesor | 0 Gestión | 21/10–22/10 | — | Adrian | Pendiente |
 | 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | 27/10–27/10 | #8 (Eneko.S), #9 (Markel), #22 (Markel) | Eneko.S | Pendiente |
 | 14 | Instalar impresora de tickets y prueba | 2 SO | 29/10–30/10 | #8 (Eneko.S) | Eneko.S | Pendiente |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | 28/10–30/10 | #23 (Eneko.P) | Adrian | Pendiente |
