@@ -52,7 +52,7 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | # | Tarea | Bloque | Fechas | Depende de | Revisa | Estado |
 |---|---|---|---|---|---|---|
 | 7 | Definir necesidades de equipos (gerente; 2 TPV; impresoras) | 1 Hardware | 22/10–22/10 | — | Iker | Hecho |
-| 8 | Tabla de hardware con justificación | 1 Hardware | 23/10–26/10 | #7 (Eneko.S) | Peio | Pendiente |
+| 8 | Tabla de hardware con justificación | 1 Hardware | 23/10–26/10 | #7 (Eneko.S) | Peio | Hecho |
 | 15 | Scripts de configuración reproducibles | 2 SO | 03/11–04/11 | #12 (Eneko.P), #13 (Markel) | Markel | Pendiente |
 | 18 | Monitorización de recursos de la recreativa | 3 Arcade | 30/10–02/11 | #16 (Iker) | Markel | Pendiente |
 | 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | 04/11–05/11 | #25 (Peio) | Markel | Pendiente |
