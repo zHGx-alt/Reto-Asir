@@ -20,7 +20,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 19,Montaje del arcade stick (ATmega32U4),4 Arduino,Eneko.P,Peio,2026-10-22,2026-10-27,,Pendiente
 20,Firmware HID y mapeo configurable (EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-27,2026-10-30,,Pendiente
 21,Pruebas del stick con MAME y otro emulador,4 Arduino,Eneko.P,Markel,2026-11-02,2026-11-03,16 19 20,Pendiente
-22,Comparativa de operadores WAN,5 Redes,Markel,Eneko.S,2026-10-22,2026-10-23,,En curso
+22,Comparativa de operadores WAN,5 Redes,Markel,Eneko.S,2026-10-22,2026-10-23,,Hecho
 23,Plano del local y plan de direccionamiento IP,5 Redes,Eneko.P,Iker,2026-10-22,2026-10-26,,Pendiente
 24,Configurar red segura (WPA3; invitados; firewall),5 Redes,Peio,Adrian,2026-10-28,2026-10-30,23,Pendiente
 25,WDS con segundo router y pruebas de cobertura,5 Redes,Peio,Iker,2026-11-02,2026-11-03,24,Pendiente
