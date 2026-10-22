@@ -2,6 +2,8 @@
 
 Tarea #38 del backlog (bloque 8 BD). Fuente: `Reto_1_ASIR1_2026-2027.docx`.
 
+> **Versión revisada.** Se han aplicado los cambios C-01 a C-04 acordados al normalizar el modelo en la tarea #39 (3FN). Están resumidos en la sección 5.
+
 ## 1. Qué dice el enunciado sobre la BD
 
 El documento **no trae un enunciado de BD propio** (no hay lista de datos, atributos ni reglas de negocio).
@@ -31,6 +33,7 @@ Referencias usadas:
 erDiagram
     ESTABLECIMIENTO ||--o{ EMPLEADO : "trabaja en"
     ESTABLECIMIENTO ||--o{ EQUIPO : "tiene"
+    MODELO_EQUIPO ||--o{ EQUIPO : "es de modelo"
     ESTABLECIMIENTO ||--o{ STOCK : "almacena"
     ARTICULO ||--o{ STOCK : "está en"
     EQUIPO |o--o{ EQUIPO : "impresora conectada a TPV"
@@ -74,13 +77,10 @@ erDiagram
     }
     FACTURA {
         int id_factura PK
-        string serie
-        int numero
+        string serie "UK con numero"
+        int numero "UK con serie"
         datetime fecha_hora
-        decimal base_imponible
-        decimal iva
-        decimal total
-        string forma_pago
+        string forma_pago "efectivo, tarjeta, otro"
         int id_cliente FK "nulo = ticket simplificado"
         int id_empleado FK
         int id_equipo FK "TPV que la emite"
@@ -90,7 +90,8 @@ erDiagram
         int num_linea PK
         int id_plato FK
         int cantidad
-        decimal precio_unitario
+        decimal precio_unitario "vigente en la venta"
+        decimal tipo_iva "vigente en la venta"
     }
     PLATO {
         int id_plato PK
@@ -98,6 +99,7 @@ erDiagram
         string descripcion
         string categoria
         decimal precio
+        decimal tipo_iva "4, 10 o 21"
         boolean es_estrella
         string url_imagen
     }
@@ -129,11 +131,15 @@ erDiagram
         int id_cliente PK, FK
         datetime fecha_envio
     }
-    EQUIPO {
-        int id_equipo PK
+    MODELO_EQUIPO {
+        int id_modelo PK
         string tipo "despacho, TPV, recreativa, impresora_tickets"
         string marca
         string modelo
+    }
+    EQUIPO {
+        int id_equipo PK
+        int id_modelo FK
         string sistema_operativo
         string ip
         string ubicacion
@@ -146,6 +152,7 @@ erDiagram
 > El diagrama está en notación «pata de gallo» (Mermaid, se ve en GitHub). Si se pide en notación Chen, se pasa a draw.io
 > con las mismas entidades y cardinalidades. `STOCK`, `RECETA`, `ENVIO_CAMPANA` y `LINEA_FACTURA` son relaciones N:M o entidades débiles,
 > no entidades fuertes.
+> Los importes de la factura (base imponible, IVA y total) no se guardan en FACTURA: se calculan a partir de sus líneas. `(marca, modelo)` es única en MODELO_EQUIPO.
 
 ## 3. Trazabilidad: de dónde sale cada cosa
 
@@ -156,7 +163,7 @@ erDiagram
 | ESTABLECIMIENTO | 📄 R1, R5 | «Una cadena de restaurantes…» (R1); «las bases de datos que habrá en cada establecimiento» (R5) |
 | EMPLEADO | 📄 R5, R2 | ERP para gestionar «el personal» (R5); «El gerente» (R2) → el gerente es un valor de `puesto`, no una entidad aparte |
 | CLIENTE | 📄 R5 | ERP para gestionar «la relación con los clientes» (R5) |
-| FACTURA | 📄 R5, T12 | ERP para gestionar «las facturas» (R5); «automatizando al menos un caso de uso real (p. ej. emisión de una factura)» (T12) |
+| FACTURA | 📄 R5, T12 | ERP para gestionar «las facturas» (R5); «automatizando al menos un caso de uso real (p. ej. emisión de una factura)» (T12). Los importes (base, IVA, total) se calculan desde las líneas, no se almacenan (3FN) |
 | LINEA_FACTURA | 🛠 | Una factura tiene varios platos con cantidad y precio → entidad débil de FACTURA (necesaria para normalizar, RA.2 de BD) |
 | PLATO | 📄 R5 | «un slideshow para mostrar sus platos estrella» (R5). Es un restaurante: lo que se factura son platos |
 | ARTICULO | 📄 R5 | ERP para gestionar el «inventariado» (R5) → artículos/ingredientes del almacén |
@@ -165,6 +172,7 @@ erDiagram
 | CAMPANA_MARKETING | 📄 R5 | ERP para gestionar «marketing» (R5) |
 | ENVIO_CAMPANA | 🛠 | N:M CLIENTE–CAMPAÑA: a qué clientes se envía cada campaña |
 | EQUIPO | 📄 R2, R3, T1, T13 | «un equipo con arranque dual» para el despacho, «dos equipos de barra (que funcionarán como TPV…) e impresoras de tickets» (R2); «otro equipo como máquina recreativa» (R3); T1 «configuración y presupuesto de equipos e impresoras» |
+| MODELO_EQUIPO | 🛠 sobre R2, R3, T2 | T2 pide «identificar y documentar el hardware necesario»: marca, modelo y tipo se guardan una sola vez por modelo y no se repiten en cada equipo (3FN) |
 
 ### Relaciones y cardinalidades
 
@@ -172,6 +180,7 @@ erDiagram
 |---|---|---|---|
 | EMPLEADO *trabaja en* ESTABLECIMIENTO | N:1 | 🛠 sobre R1/R5 | Cada empleado pertenece a un local de la cadena |
 | EQUIPO *está en* ESTABLECIMIENTO | N:1 | 📄 R2 | Los equipos de R2 son del local (despacho, barra) |
+| MODELO_EQUIPO *describe a* EQUIPO | 1:N | 🛠 sobre R2/R3 | Un modelo (marca, modelo, tipo) se repite en varios equipos y se guarda una sola vez |
 | Impresora *conectada a* TPV | 0..N:0..1 (reflexiva) | 📄 R2 | «dos equipos de barra (TPV) e impresoras de tickets» |
 | TPV *emite* FACTURA | 1:N | 📄 R2 + T12 | Los TPV de barra cobran; T12 pide «ERP + TPV» con emisión de factura |
 | EMPLEADO *atiende* FACTURA | 1:N | 🛠 | Saber quién cobra (trazabilidad/seguridad, T18) |
@@ -189,7 +198,9 @@ erDiagram
 | `ESTABLECIMIENTO.latitud/longitud` | 📄 R5: la web debe tener «geolocalización» → se guardan las coordenadas del local |
 | `PLATO.es_estrella`, `PLATO.url_imagen` | 📄 R5: «slideshow para mostrar sus platos estrella» |
 | `EMPLEADO.puesto` | 📄 R2: «El gerente» (más el personal genérico de R5) |
-| `EQUIPO.tipo` | 📄 R2/R3: despacho, TPV, impresora de tickets, recreativa |
+| `MODELO_EQUIPO.tipo` | 📄 R2/R3: despacho, TPV, impresora de tickets, recreativa |
+| `PLATO.tipo_iva` | 🛠 sobre R5 (facturas): en restauración conviven tipos de IVA distintos (4, 10 o 21 %) |
+| `LINEA_FACTURA.precio_unitario`, `LINEA_FACTURA.tipo_iva` | 🛠 sobre R5: copia del precio y del IVA vigentes en la venta; la factura no cambia si el plato sube de precio después |
 | `EQUIPO.sistema_operativo`, `ip`, `precio` | 📄 R2: «detalles tanto del hardware como del software», «presupuesto»; T6 necesidades de comunicación |
 | `CLIENTE.acepta_publicidad` | 🛠 sobre R5 (marketing) + RGPD: no se envían campañas sin consentimiento |
 | Resto (nombre, dni, fechas, importes…) | 🛠 el documento no define ningún atributo; son los mínimos para identificar y operar cada entidad |
@@ -199,3 +210,14 @@ erDiagram
 No aparecen en el documento y no se modelan: **proveedores, mesas, reservas, pedidos de cocina, nóminas/turnos**.
 Si el equipo los quiere, encajan sin romper el modelo (p. ej. PROVEEDOR 1:N ARTICULO, MESA 1:N FACTURA).
 La red (WAN, WDS, R4), la web en AWS y el arcade stick no son datos de negocio, así que no entran en la BD.
+
+## 5. Cambios de esta versión (tarea #39)
+
+| Id | Cambio | Motivo |
+|---|---|---|
+| C-01 | Se eliminan `base_imponible`, `iva` y `total` de FACTURA. | `total = base_imponible + iva` y los tres se calculan desde las líneas: dependencia que viola la 3FN y redundancia. |
+| C-02 | Se añade `tipo_iva` a LINEA_FACTURA y a PLATO. | Hace falta para calcular el IVA con tipos distintos. |
+| C-03 | Nueva entidad MODELO_EQUIPO (`tipo`, `marca`, `modelo`); EQUIPO pasa a tener `id_modelo`. | En EQUIPO, `modelo` determinaba `marca` y `tipo`: dependencia transitiva. |
+| C-04 | `(serie, numero)` única en FACTURA y valores permitidos en `puesto`, `categoria`, `tipo` y `forma_pago`. | Integridad. |
+
+El detalle de la normalización (1FN, 2FN, 3FN), el diccionario de datos y las restricciones están en el documento de la tarea #39.
