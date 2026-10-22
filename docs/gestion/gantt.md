@@ -32,7 +32,7 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | 27/10–30/10 | — | Eneko.P | Pendiente |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | 02/11–04/11 | #28 (Markel) | Eneko.P | Pendiente |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | 03/11–05/11 | #34 (Markel) | Iker | Pendiente |
-| 38 | Modelo E/R | 8 BD | 22/10–23/10 | — | Peio | Pendiente |
+| 38 | Modelo E/R | 8 BD | 22/10–23/10 | — | Peio | Hecho |
 
 ### Eneko.P
 
