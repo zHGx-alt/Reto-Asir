@@ -10,3 +10,4 @@ El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para pod
 | 2026-10-22 | Adrian | Claude | 8 BD | Modelo E/R con trazabilidad al enunciado | Pendiente de revisar por el equipo |
 | 2026-10-22 | Adrian | Claude Code | 4 Arduino | Firmware HID del stick con mapeo en EEPROM | Compila (`pio run`); falta probarlo en la placa (tarea #50) |
 | 2026-10-22 | Adrian | Claude Code | 0 Gestión | Actualizar estados del backlog, Gantt y Anexo II según lo que hay en el repo | Pendiente de revisar por el equipo |
+| 2026-10-22 | Adrian | Claude Code | 2 SO | Guía paso a paso del arranque dual (cuentas, cortafuegos, actualizaciones) y redacción del documento de la tarea 12 | Instalación y pruebas hechas a mano en VMware; capturas en docs/evidencias/12-dual-boot |

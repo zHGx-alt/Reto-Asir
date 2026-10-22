@@ -45,6 +45,7 @@ backups/
 *.vmdk
 *.vmx
 *.ova
+*.vmdk.tmp
 *.zip
 roms/
 
