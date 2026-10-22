@@ -36,18 +36,7 @@ Condiciones transversales: seguridad por defecto, reproducibilidad, documentaci�
 | Base de datos | Modelo E/R, lógico en 3FN y físico con datos y consultas | Usuarios con privilegios mínimos; scripts DDL versionados |
 | Disponibilidad y copias | RAID 1 y plan de backup | Regla 3-2-1, copias cifradas y automatizadas; failover y restauración probados con evidencias |
 
-## 3. Dudas planteadas al profesor
-
-| # | Cuestión | Respuesta | Fecha |
-|---|---|---|---|
-| 1 | Versión y edición de Odoo a utilizar | | |
-| 2 | Validez del dual boot sobre máquina virtual (VMware) | | |
-| 3 | Disponibilidad de cuenta AWS Academy | | |
-| 4 | Contenido de los Anexos VI, VII, VIII y IX | | |
-| 5 | Tamaño del equipo: el enunciado indica 4-5 personas y somos 6 | | |
-| 6 | Plazo de entrega: planificamos a 3 semanas frente a las 10 del calendario orientativo | | |
-
-## 4. Investigación
+## 3. Investigación
 
 Fuentes y documentación técnica de referencia por bloque. Cada responsable añade lo que consulte.
 
@@ -55,7 +44,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 |---|---|---|
 | | | |
 
-## 5. Alternativas evaluadas
+## 4. Alternativas evaluadas
 
 | Decisión | Opciones | Criterios |
 |---|---|---|
@@ -68,7 +57,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Backup | restic, borg, rsync + cron | Cifrado, deduplicación, destino S3 |
 | Placa del arcade stick | Arduino Leonardo, Pro Micro | HID nativo, precio, tamaño |
 
-## 6. Decisiones
+## 5. Decisiones
 
 | Decisión | Elección | Justificación | Fecha |
 |---|---|---|---|
@@ -82,7 +71,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Backup | | | |
 | Placa del arcade stick | | | |
 
-## 7. Planificación
+## 6. Planificación
 
 - Diagrama de Gantt y carga por persona: [gantt.md](gantt.md).
 - Fuente de datos de la planificación: [backlog-kanban.csv](backlog-kanban.csv).
@@ -94,7 +83,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | 2 | 28/10 – 03/11 | Implantación: SO y TPV, recreativa y stick, red y WDS, web, Odoo, BD y RAID |
 | 3 | 04/11 – 10/11 | AWS e IaC, caso de uso del ERP, backups y restauración, pruebas, documentación y defensa |
 
-## 8. Ejecución
+## 7. Ejecución
 
 | Bloque | Ubicación en el repositorio |
 |---|---|
@@ -111,7 +100,7 @@ Incidencias relevantes durante la ejecución:
 |---|---|---|---|
 | | | | |
 
-## 9. Pruebas
+## 8. Pruebas
 
 | Bloque | Prueba | Resultado esperado | Resultado obtenido | Evidencia |
 |---|---|---|---|---|
@@ -128,7 +117,7 @@ Incidencias relevantes durante la ejecución:
 | RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | | |
 | Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | | |
 
-## 10. Documentación y presentación
+## 9. Documentación y presentación
 
 | Entregable | Responsable | Estado |
 |---|---|---|
@@ -137,7 +126,7 @@ Incidencias relevantes durante la ejecución:
 | Tabla de pruebas | Eneko.P | Pendiente |
 | Presentación y ensayo | Peio | Pendiente |
 
-## 11. Evaluación y retrospectiva
+## 10. Evaluación y retrospectiva
 
 | | |
 |---|---|
