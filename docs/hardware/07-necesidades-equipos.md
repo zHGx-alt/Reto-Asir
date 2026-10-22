@@ -113,7 +113,7 @@ Estos son los **mínimos recomendados** para cada puesto. Son valores nuestros, 
 | S-04 | Impresora por **USB o por red**. Se deja abierto hasta tener el plano de red. | Bloque de redes |
 | S-05 | **Direcciones IP** de cada puesto: dependen del plan de direccionamiento. | Bloque de redes |
 | S-06 | Las cifras de la sección 4 son recomendaciones propias, no requisitos del cliente. | Revisión del equipo |
-| S-07 | En las pruebas del reto, los equipos se simulan en VirtualBox. Las máquinas virtuales tendrán menos recursos que los equipos reales (por ejemplo, 2-4 vCPU, 4 GB y 40-80 GB de disco). | Bloque de puestos |
+| S-07 | En las pruebas del reto, los equipos se simulan en máquinas virtuales (VirtualBox o VMware Workstation). Las máquinas virtuales tendrán menos recursos que los equipos reales (por ejemplo, 2-4 vCPU, 4 GB y 40-80 GB de disco). | Bloque de puestos |
 
 ## 7. Trazabilidad con las pruebas
 

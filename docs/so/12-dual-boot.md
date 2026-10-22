@@ -1,0 +1,172 @@
+# Tarea 12: Arranque dual Windows 10 + Ubuntu en el equipo del gerente
+
+- **Bloque:** 2 SO
+- **Depende de:** tarea 8 (tabla de hardware)
+- **Requisitos que cubre:** RG-01, RG-03, RG-04 y RG-05 (tarea 7, sección 3.1)
+- **Reto:** Almi-Chain (ASIR1 2026-27)
+- **Estado:** pendiente de revisión
+- **Fecha:** 22/10/2026
+
+## 1. Alcance
+
+El enunciado pide para el despacho del gerente un equipo con arranque dual Windows 10 y GNU/Linux, restringido con mínimos privilegios y configuración segura por defecto. Este documento explica cómo se ha instalado y configurado en una máquina virtual, qué se ha comprobado y dónde están las evidencias.
+
+La distribución elegida es **Ubuntu Desktop LTS**: tiene soporte largo, instalador que detecta Windows y crea el arranque dual solo, y actualizaciones de seguridad automáticas de serie.
+
+## 2. Entorno de pruebas
+
+El equipo real (Lenovo ThinkCentre Neo 50q, tarea 8) se simula en una máquina virtual con menos recursos (supuesto S-07 de la tarea 7).
+
+| Elemento | Valor |
+|---|---|
+| Hipervisor | VMware Workstation |
+| Firmware | UEFI, disco GPT (como el equipo real) |
+| CPU y memoria | 4 procesadores virtuales, 8 GB de RAM |
+| Disco | 60 GB, NVMe virtual |
+| Red | NAT |
+| Sistema 1 | Windows 10 x64 |
+| Sistema 2 | Ubuntu Desktop LTS (versión exacta: `lsb_release -d`) |
+| Nombre del equipo en Ubuntu | `pc-gerente` |
+
+## 3. Particiones
+
+Resultado de `lsblk -f` en Ubuntu ([captura](../evidencias/12-dual-boot/ubu-04-lsblk-particiones.png)):
+
+| Partición | Sistema de archivos | Uso |
+|---|---|---|
+| `nvme0n1p1` | FAT32, unos 200 MB | Partición EFI. La comparten los dos sistemas; Ubuntu la monta en `/boot/efi`. |
+| `nvme0n1p2` | — | Partición reservada de Microsoft (MSR). |
+| `nvme0n1p3` | NTFS | Windows (`C:`). |
+| `nvme0n1p4` | ext4, unos 18 GB | Ubuntu (`/`). Sin partición swap: Ubuntu usa un archivo de intercambio. |
+
+En el equipo real, con 512 GB, el reparto previsto es de unos 100 GB para cada sistema y el resto para datos (tarea 8).
+
+## 4. Procedimiento
+
+El orden importa: **primero Windows y después Ubuntu**. Si se hace al revés, Windows sobrescribe el arranque y GRUB desaparece.
+
+### 4.1 Windows 10
+
+1. Instalar Windows 10 desde la ISO **sin usar todo el disco**, dejando espacio sin asignar para Ubuntu.
+2. Comprobar el disco en **Administración de discos**. Si `C:` se queda corta, ampliarla con **Extender volumen**, dejando sin asignar el espacio de Ubuntu.
+3. Comprobar que **BitLocker está desactivado** (Panel de control → Sistema y seguridad → Cifrado de unidad BitLocker). Con el disco cifrado, Ubuntu no puede reducir ni leer la partición de Windows.
+4. Desactivar la **hibernación y el inicio rápido**. Con el inicio rápido, Windows deja la partición NTFS a medio cerrar y puede corromperse si se accede a ella desde Linux. En un CMD como administrador:
+   ```
+   powercfg /h off
+   ```
+   ```
+   powercfg /a
+   ```
+   El segundo comando debe indicar que el inicio rápido no está disponible.
+5. Crear las cuentas (sección 5). En un CMD como administrador; el `*` hace que la contraseña se pida sin mostrarse:
+   ```
+   net user admin * /add
+   ```
+   ```
+   net localgroup Administradores admin /add
+   ```
+   ```
+   net user gerente * /add
+   ```
+   `gerente` queda solo en el grupo `Usuarios` (cuenta estándar).
+6. Entrar como `admin` y eliminar la cuenta creada durante la instalación (Configuración → Cuentas → Familia y otros usuarios → Quitar → Eliminar cuenta y datos), para que solo quede una cuenta de administración.
+7. Comprobar que la cuenta integrada `Administrador` está desactivada (`net user Administrador` → «Cuenta activa: No»).
+8. Comprobar que el Firewall de Windows Defender está activo en todos los perfiles y que Windows Update funciona.
+
+### 4.2 Ubuntu
+
+1. Apagar Windows del todo. En VMware: **VM → Settings → CD/DVD → Use ISO image file** con la ISO de Ubuntu y **Connect at power on**. Si arranca Windows, usar **VM → Power → Power On to Firmware** y poner el CD primero.
+2. En el instalador: idioma y teclado español, **instalación interactiva**, selección predeterminada.
+3. Tipo de instalación: **«Instalar Ubuntu junto a Windows Boot Manager»**. Usa el espacio sin asignar y no toca Windows. Nunca «Borrar disco».
+4. Cuenta: usuario **`administrador`**, equipo **`pc-gerente`**, «Solicitar mi contraseña para acceder» marcado. El usuario creado en el instalador tiene `sudo`, así que es la cuenta de mantenimiento. El nombre `admin` no se puede usar en Ubuntu (sección 7).
+5. Al terminar, desconectar la ISO y reiniciar. Debe aparecer el menú de GRUB con Ubuntu y Windows Boot Manager.
+
+Si Windows no aparece en el menú, o el menú no se muestra, editar `/etc/default/grub` con estos valores y ejecutar `sudo update-grub`:
+
+```
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TIMEOUT=10
+GRUB_DISABLE_OS_PROBER=false
+```
+
+### 4.3 Configuración de Ubuntu (como `administrador`)
+
+```bash
+sudo apt update && sudo apt full-upgrade -y
+```
+
+Usuario de uso diario, sin `sudo`:
+
+```bash
+sudo adduser gerente
+```
+
+Cortafuegos: deniega todo lo entrante y permite lo saliente.
+
+```bash
+sudo ufw enable
+```
+
+Las actualizaciones de seguridad automáticas (`unattended-upgrades`) vienen activadas en Ubuntu. Se comprueba que las dos líneas valen `"1"`:
+
+```bash
+cat /etc/apt/apt.conf.d/20auto-upgrades
+```
+
+## 5. Cuentas
+
+| Sistema | Cuenta | Tipo | Uso |
+|---|---|---|---|
+| Windows | `admin` | Administrador | Solo mantenimiento (RG-04) |
+| Windows | `gerente` | Usuario estándar | Uso diario (RG-03) |
+| Windows | `Administrador` | Integrada de Windows | Desactivada |
+| Ubuntu | `administrador` | Grupo `sudo` | Solo mantenimiento (RG-04) |
+| Ubuntu | `gerente` | Sin `sudo` (grupos `gerente` y `users`) | Uso diario (RG-03) |
+
+Las contraseñas **no están en el repositorio** ([CONTRIBUTING, sección 6](../../CONTRIBUTING.md#6-secretos)). Se entregan aparte, en el archivo `CREDENCIALES-dualboot-gerente.txt`, que está en la misma carpeta de descarga que la máquina virtual (sección 8).
+
+## 6. Verificación
+
+| Requisito | Prueba | Resultado | Evidencia |
+|---|---|---|---|
+| RG-01 | Arrancar y elegir cada sistema en el menú de GRUB | Pendiente de captura | — |
+| RG-01 | Particiones de los dos sistemas y EFI compartida | OK | [lsblk](../evidencias/12-dual-boot/ubu-04-lsblk-particiones.png) |
+| RG-03 Windows | `net user gerente`: solo en `Usuarios` | OK | [net user](../evidencias/12-dual-boot/win-03-net-user-gerente.png) |
+| RG-03 Windows | Abrir CMD como administrador con `gerente`: el UAC pide usuario y contraseña de `admin` | OK | [UAC](../evidencias/12-dual-boot/win-04-uac-gerente.png) |
+| RG-03 Ubuntu | `groups gerente` sin `sudo`; `sudo -v` denegado | OK | [sudo](../evidencias/12-dual-boot/ubu-05-gerente-sin-sudo.webp) |
+| RG-04 Windows | `net localgroup Administradores`: solo `admin` (y `Administrador` desactivada) | Pendiente de captura | — |
+| RG-04 Ubuntu | `administrador` en el grupo `sudo` | OK | [groups](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
+| RG-05 Windows | Firewall activo y Windows Update funcionando | Pendiente de captura | — |
+| RG-05 Ubuntu | `ufw status verbose`: activo, deny entrante | OK | [ufw](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
+| RG-05 Ubuntu | `20auto-upgrades` con las dos opciones a `"1"` | OK | [auto-upgrades](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
+| Preparación | BitLocker desactivado | OK | [BitLocker](../evidencias/12-dual-boot/win-01-bitlocker-desactivado.png) |
+| Preparación | Inicio rápido e hibernación no disponibles | OK | [powercfg](../evidencias/12-dual-boot/win-02-powercfg-sin-inicio-rapido.png) |
+
+## 7. Decisiones y problemas encontrados
+
+- **`admin` está reservado en Ubuntu.** El instalador lo rechaza («Ese nombre está reservado para uso del sistema», [captura](../evidencias/12-dual-boot/ubu-01-admin-reservado.png)) porque existe un grupo `admin` heredado de versiones antiguas. Por eso la cuenta de mantenimiento se llama `admin` en Windows y `administrador` en Ubuntu ([captura](../evidencias/12-dual-boot/ubu-02-cuenta-administrador.png)).
+- **Mensaje de `sudo` en Ubuntu.** Al intentar `sudo` con `gerente`, aparece «I'm sorry gerente. I'm afraid I can't do that». Las versiones recientes de Ubuntu usan **sudo-rs** (reimplementación de `sudo` en Rust), y ese es su mensaje cuando el usuario no está en sudoers.
+- **Disco de Windows lleno.** Tras instalar, `C:` tenía 13 GB y solo 53 MB libres. Se amplió con «Extender volumen» antes de instalar Ubuntu, porque Windows sin espacio libre no puede instalar actualizaciones.
+- **Inicio rápido.** La opción no aparece en las opciones de energía porque la VM no admite hibernación. Aun así se ejecutó `powercfg /h off` para dejarlo garantizado.
+
+## 8. Entrega de la máquina virtual
+
+La VM no se sube al repositorio, porque ocupa varios GB y GitHub no admite archivos de más de 100 MB. Se exporta desde VMware con **File → Export to OVF**. Los archivos pequeños están en el repositorio, en [`docs/evidencias/12-dual-boot/vm/`](../evidencias/12-dual-boot/vm/). El disco y las credenciales están en Google Drive: [carpeta Reto-Asir](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link).
+
+| Archivo | Dónde | Tamaño | Contenido | SHA-256 |
+|---|---|---|---|---|
+| `VM-dualboot-W10-ubuntu.ovf` | Repositorio | 15 KB | Descripción de la VM (hardware virtual) | `d63b165e81d83960265334c389ca9eb13db284dcc7ce772320d635247c0e39a6` |
+| `VM-dualboot-W10-ubuntu.mf` | Repositorio | 318 B | Sumas SHA-256 de los archivos de la VM | — |
+| `VM-dualboot-W10-ubuntu-file1.nvram` | Repositorio | 265 KB | Variables UEFI (entradas de arranque de Windows y Ubuntu) | `ca67a8cecde57ed5012c8458819a27df0f35ea2dde729e889a08a951176a02a6` |
+| `VM-dualboot-W10-ubuntu-disk1.vmdk` | Drive | 12,5 GB | Disco con los dos sistemas | `617fc4b83cdd69128dffa2e803c472e5f0542b797e3ff8da042e485b13bc5e5f` |
+| `CREDENCIALES-dualboot-gerente.txt` | Drive | — | Contraseñas de las cuentas (sección 5) | — |
+
+El disco no puede ir al repositorio: GitHub no admite archivos de más de 100 MB, y el `.gitignore` excluye los discos de VM.
+
+Para usarla:
+
+1. Poner en la misma carpeta los tres archivos del repositorio y el `.vmdk` de Drive.
+2. Comprobar que no se han corrompido: `sha256sum VM-dualboot-W10-ubuntu*` y comparar con la tabla o con el `.mf`.
+3. En VMware, **File → Open** y elegir el `.ovf`.
+
+La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM puede no encontrar GRUB al arrancar.

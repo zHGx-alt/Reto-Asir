@@ -116,7 +116,7 @@ Los precios proceden de tiendas online españolas consultadas el 22/10/2026. Las
 
 | Requisito | Cumple | Cómo |
 |---|---|---|
-| RG-01 Arranque dual | Sí | 512 GB de SSD para dos sistemas. El equipo es moderno y lleva UEFI, a confirmar en su ficha. Se simula en VirtualBox. |
+| RG-01 Arranque dual | Sí | 512 GB de SSD para dos sistemas. El equipo es moderno y lleva UEFI, a confirmar en su ficha. Se simula en VMware Workstation (tarea 12). |
 | RG-06 Rendimiento | Sí | 8 núcleos y 16 GB de RAM. |
 | RG-07 Conexión | Sí | Ethernet gigabit. |
 | RT-01, RT-04, RT-06 Quiosco y restricciones | Sí | Windows Pro (modo quiosco, directivas de seguridad local, cortafuegos). Hay que aplicar los derechos de licencia (sección 6). |
@@ -154,7 +154,7 @@ Elementos sin precio verificado, para añadir al presupuesto con el valor que se
 | H-03 | Stock: a fecha de consulta no hay stock del Lenovo Neo 50q Gen 4 ni de la versión Ethernet de la impresora. | Buscar el mismo modelo en otras tiendas o el sucesor. |
 | H-04 | El modelo de impresora está descatalogado por Epson. | Valorar la serie TM-T20IV. |
 | H-05 | RT-09 (hostelería) no confirmado. | Decidir con el equipo si se acepta el riesgo o se sube de gama. |
-| H-06 | En las pruebas del reto estos equipos se simulan en VirtualBox. | Ver S-07 de la tarea 7. |
+| H-06 | En las pruebas del reto estos equipos se simulan en máquinas virtuales (VirtualBox o VMware Workstation). | Ver S-07 de la tarea 7. |
 | H-07 | Precios sujetos a cambio. | Actualizar antes de la entrega final. |
 
 ## 7. Hardware de otros bloques pendiente de consolidar
