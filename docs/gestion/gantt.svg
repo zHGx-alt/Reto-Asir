@@ -45,11 +45,11 @@
 <text x="22" y="109" class="t b">0 Gestión</text>
 <line x1="16" y1="140" x2="1202" y2="140" stroke="#f0efeb"/>
 <text x="16" y="133.0" class="s">1</text>
-<text x="44" y="133.0" class="t">Firmar Anexo I (contrato de equipo)</text>
+<text x="44" y="133.0" class="m">Firmar Anexo I (contrato de equipo) ✓</text>
 <circle cx="449" cy="129.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="133.0" class="t">Adrian</text>
 <text x="528" y="133.0" class="s">—</text>
-<rect x="604" y="122" width="36" height="14" rx="4" fill="#2a78d6"><title>1. Firmar Anexo I (contrato de equipo) · Adrian · 21/10–21/10 · Pendiente</title></rect>
+<rect x="604" y="122" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>1. Firmar Anexo I (contrato de equipo) · Adrian · 21/10–21/10 · Hecho</title></rect>
 <line x1="16" y1="162" x2="1202" y2="162" stroke="#f0efeb"/>
 <text x="16" y="155.0" class="s">2</text>
 <text x="44" y="155.0" class="t">Mantener Anexo II (11 pasos)</text>
@@ -186,11 +186,11 @@
 <rect x="644" y="622" width="156" height="14" rx="4" fill="#eb6834"><title>19. Montaje del arcade stick (ATmega32U4) · Eneko.P · 22/10–27/10 · Pendiente</title></rect>
 <line x1="16" y1="662" x2="1202" y2="662" stroke="#f0efeb"/>
 <text x="16" y="655.0" class="s">20</text>
-<text x="44" y="655.0" class="t">Firmware HID y mapeo configurable (EEPROM)</text>
+<text x="44" y="655.0" class="m">Firmware HID y mapeo configurable (EEPROM) ✓</text>
 <circle cx="449" cy="651.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="655.0" class="t">Adrian</text>
 <text x="528" y="655.0" class="s">—</text>
-<rect x="764" y="644" width="156" height="14" rx="4" fill="#2a78d6" stroke="#0b0b0b" stroke-width="1.5"><title>20. Firmware HID y mapeo configurable (EEPROM) · Adrian · 27/10–30/10 · En curso</title></rect>
+<rect x="764" y="644" width="156" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>20. Firmware HID y mapeo configurable (EEPROM) · Adrian · 27/10–30/10 · Hecho</title></rect>
 <line x1="16" y1="684" x2="1202" y2="684" stroke="#f0efeb"/>
 <text x="16" y="677.0" class="s">21</text>
 <text x="44" y="677.0" class="t">Pruebas del stick con MAME y otro emulador</text>
@@ -253,11 +253,11 @@
 <rect x="644" y="872" width="76" height="14" rx="4" fill="#008300" fill-opacity="0.4"><title>27. Wireframes y diseño conceptual web · Peio · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="912" x2="1202" y2="912" stroke="#f0efeb"/>
 <text x="16" y="905.0" class="s">28</text>
-<text x="44" y="905.0" class="t">Implementar web (mapa, formulario, slideshow)</text>
+<text x="44" y="905.0" class="m">Implementar web (mapa, formulario, slideshow) ✓</text>
 <circle cx="449" cy="901.0" r="4.5" fill="#e87ba4"/>
 <text x="458" y="905.0" class="t">Markel</text>
 <text x="528" y="905.0" class="s">27</text>
-<rect x="724" y="894" width="196" height="14" rx="4" fill="#e87ba4"><title>28. Implementar web (mapa, formulario, slideshow) · Markel · 26/10–30/10 · Pendiente</title></rect>
+<rect x="724" y="894" width="196" height="14" rx="4" fill="#e87ba4" fill-opacity="0.4"><title>28. Implementar web (mapa, formulario, slideshow) · Markel · 26/10–30/10 · Hecho</title></rect>
 <line x1="16" y1="934" x2="1202" y2="934" stroke="#f0efeb"/>
 <text x="16" y="927.0" class="s">29</text>
 <text x="44" y="927.0" class="t">Validación W3C, Lighthouse y accesibilidad</text>
@@ -338,7 +338,7 @@
 <circle cx="449" cy="1195.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1199.0" class="t">Eneko.S</text>
 <text x="528" y="1199.0" class="s">38</text>
-<rect x="724" y="1188" width="76" height="14" rx="4" fill="#1baf7a"><title>39. Modelo lógico normalizado (3FN) · Eneko.S · 26/10–27/10 · Pendiente</title></rect>
+<rect x="724" y="1188" width="76" height="14" rx="4" fill="#1baf7a" stroke="#0b0b0b" stroke-width="1.5"><title>39. Modelo lógico normalizado (3FN) · Eneko.S · 26/10–27/10 · En curso</title></rect>
 <line x1="16" y1="1228" x2="1202" y2="1228" stroke="#f0efeb"/>
 <text x="16" y="1221.0" class="s">40</text>
 <text x="44" y="1221.0" class="t">Scripts DDL</text>

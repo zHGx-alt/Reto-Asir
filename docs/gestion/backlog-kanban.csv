@@ -1,5 +1,5 @@
 ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
-1,Firmar Anexo I (contrato de equipo),0 Gestión,Adrian,Equipo,2026-10-21,2026-10-21,,Pendiente
+1,Firmar Anexo I (contrato de equipo),0 Gestión,Adrian,Equipo,2026-10-21,2026-10-21,,Hecho
 2,Mantener Anexo II (11 pasos),0 Gestión,Adrian,Iker,2026-10-21,2026-11-10,,En curso
 3,Repartir tareas y responsables,0 Gestión,Adrian,Equipo,2026-10-21,2026-10-21,,Hecho
 4,Crear tablero Kanban en GitHub Projects,0 Gestión,Iker,Adrian,2026-10-21,2026-10-22,,Pendiente
@@ -18,7 +18,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 17,Pruebas de rendimiento MAME antes/después,3 Arcade,Iker,Eneko.P,2026-10-29,2026-10-30,16,Pendiente
 18,Monitorización de recursos de la recreativa,3 Arcade,Eneko.S,Markel,2026-10-30,2026-11-02,16,Pendiente
 19,Montaje del arcade stick (ATmega32U4),4 Arduino,Eneko.P,Peio,2026-10-22,2026-10-27,,Pendiente
-20,Firmware HID y mapeo configurable (EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-27,2026-10-30,,En curso
+20,Firmware HID y mapeo configurable (EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-27,2026-10-30,,Hecho
 21,Pruebas del stick con MAME y otro emulador,4 Arduino,Eneko.P,Markel,2026-11-02,2026-11-03,16 19 20 50,Pendiente
 50,Probar el firmware del stick en físico (HID; comandos; EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-28,2026-10-30,19,Pendiente
 22,Comparativa de operadores WAN,5 Redes,Markel,Eneko.S,2026-10-22,2026-10-23,,Hecho
@@ -27,7 +27,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 25,WDS con segundo router y pruebas de cobertura,5 Redes,Peio,Iker,2026-11-02,2026-11-03,24,Pendiente
 26,Análisis de conectividad (Wireshark; nmap),5 Redes,Eneko.S,Markel,2026-11-04,2026-11-05,25,Pendiente
 27,Wireframes y diseño conceptual web,6 Web,Peio,Eneko.S,2026-10-22,2026-10-23,,Hecho
-28,Implementar web (mapa; formulario; slideshow),6 Web,Markel,Eneko.S,2026-10-26,2026-10-30,27,Pendiente
+28,Implementar web (mapa; formulario; slideshow),6 Web,Markel,Eneko.S,2026-10-26,2026-10-30,27,Hecho
 29,Validación W3C; Lighthouse y accesibilidad,6 Web,Eneko.P,Peio,2026-11-02,2026-11-03,28,Pendiente
 30,Hosting AWS con dominio y HTTPS,6 Web,Adrian,Eneko.P,2026-11-02,2026-11-04,28,Pendiente
 31,IaC y despliegue automatizado (Terraform + Actions),6 Web,Iker,Adrian,2026-11-02,2026-11-05,28,Pendiente
@@ -38,7 +38,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 36,Importar y exportar datos en Odoo,7 ERP,Peio,Eneko.P,2026-11-04,2026-11-05,34,Pendiente
 37,Imprimir ticket desde el TPV de Odoo,7 ERP,Eneko.P,Peio,2026-11-04,2026-11-05,14 34,Pendiente
 38,Modelo E/R,8 BD,Adrian,Peio,2026-10-22,2026-10-23,,Hecho
-39,Modelo lógico normalizado (3FN),8 BD,Eneko.S,Peio,2026-10-26,2026-10-27,38,Pendiente
+39,Modelo lógico normalizado (3FN),8 BD,Eneko.S,Peio,2026-10-26,2026-10-27,38,En curso
 40,Scripts DDL,8 BD,Eneko.S,Adrian,2026-10-28,2026-10-29,39,Pendiente
 41,Datos de prueba y consultas,8 BD,Iker,Eneko.S,2026-10-30,2026-11-02,40,Pendiente
 42,Usuarios de BD con mínimos privilegios,8 BD,Markel,Iker,2026-11-02,2026-11-03,40,Pendiente

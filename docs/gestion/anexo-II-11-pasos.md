@@ -42,8 +42,8 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 
 | Bloque | Fuente |
 |---|---|
-|Modelo E:R|Claude|
-|Firmware HID y mapeo configurable (EEPROM)|Claude|
+| BD · Modelo E/R | Claude (ver [registro-ia.md](registro-ia.md)) |
+| Arduino · Firmware HID y EEPROM | Claude; librería [mheironimus/ArduinoJoystickLibrary](https://github.com/MHeironimus/ArduinoJoystickLibrary) |
 
 ## 4. Alternativas evaluadas
 
@@ -70,7 +70,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Firmware de router | | | |
 | SGBD | | | |
 | Backup | | | |
-| Placa del arcade stick | | | |
+| Placa del arcade stick | Arduino Leonardo (ATmega32U4) | HID nativo por USB sin drivers; compatible con la librería Joystick; EEPROM para guardar el mapeo | 22/10/2026 |
 
 ## 6. Planificación
 
