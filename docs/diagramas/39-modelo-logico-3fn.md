@@ -448,7 +448,7 @@ Si el equipo prefiere guardar esos importes en la factura por rendimiento o por 
 
 ### 6.3 Reglas que una clave foránea no puede expresar
 
-Estas reglas se aplican con disparadores (triggers) o desde la aplicación, y se implementan en el diseño físico (tarea siguiente):
+Estas reglas se aplican con disparadores (triggers) o con permisos. Están implementadas y probadas en la tarea 40 (scripts DDL): R-01, R-02, R-03, R-05 y R-06 en `02-reglas.sql`, y R-04 en `03-roles.sql`.
 
 | Id | Regla |
 |---|---|
@@ -461,10 +461,12 @@ Estas reglas se aplican con disparadores (triggers) o desde la aplicación, y se
 
 ## 7. Preguntas abiertas para Adrian y Peio
 
-1. ¿Los tipos de IVA 4, 10 y 21 % son los que queréis admitir? (El equipo de Odoo debe usar los mismos.)
-2. ¿Se necesita registrar la baja de empleados y la retirada de platos? Se resolvería con un campo `activo` o `fecha_baja`, que ahora no existe en el E/R.
-3. Las listas de valores permitidos (`puesto`, `categoria`, `canal`, `forma_pago`) están como CHECK. Si cambian a menudo, se pueden pasar a tablas de catálogo.
+Los scripts de la tarea 40 se escribieron con el supuesto indicado en cada punto. Si la respuesta es otra, hay que cambiar el modelo, el E/R y los scripts.
+
+1. ¿Los tipos de IVA 4, 10 y 21 % son los que queréis admitir? (El equipo de Odoo debe usar los mismos.) **Supuesto adoptado: sí.**
+2. ¿Se necesita registrar la baja de empleados y la retirada de platos? Se resolvería con un campo `activo` o `fecha_baja`, que ahora no existe en el E/R. **Supuesto adoptado: no.**
+3. Las listas de valores permitidos (`puesto`, `categoria`, `canal`, `forma_pago`) están como CHECK. Si cambian a menudo, se pueden pasar a tablas de catálogo. **Supuesto adoptado: se mantienen como CHECK.**
 
 ## 8. Siguiente paso
 
-Tarea de diseño físico: escribir el script SQL (`CREATE TABLE`, claves, restricciones, índices y roles) a partir de este esquema, e implementar las reglas R-01 a R-06.
+Hecho en la tarea 40: scripts SQL con tablas, claves, restricciones, índices, vista, reglas R-01 a R-06 y roles, probados en PostgreSQL 16. La única restricción añadida al pasar a SQL es que un equipo no puede apuntar a sí mismo en `id_equipo_tpv` (`CHECK id_equipo_tpv <> id_equipo`); no cambia el esquema.
