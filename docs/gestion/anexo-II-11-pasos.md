@@ -40,9 +40,10 @@ Condiciones transversales: seguridad por defecto, reproducibilidad, documentaci�
 
 Fuentes y documentación técnica de referencia por bloque. Cada responsable añade lo que consulte.
 
-| Bloque | Fuente | Uso |
-|---|---|---|
-| | | |
+| Bloque | Fuente |
+|---|---|
+|Modelo E:R|Claude|
+|Firmware HID y mapeo configurable (EEPROM)|Claude|
 
 ## 4. Alternativas evaluadas
 
