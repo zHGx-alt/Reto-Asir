@@ -4,7 +4,7 @@
 - **Depende de:** tarea 8 (tabla de hardware)
 - **Requisitos que cubre:** RG-01, RG-03, RG-04 y RG-05 (tarea 7, sección 3.1)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** pendiente de revisión
+- **Estado:** hecha; pendiente de revisión
 - **Fecha:** 22/10/2026
 
 ## 1. Alcance
@@ -123,26 +123,24 @@ cat /etc/apt/apt.conf.d/20auto-upgrades
 | Ubuntu | `administrador` | Grupo `sudo` | Solo mantenimiento (RG-04) |
 | Ubuntu | `gerente` | Sin `sudo` (grupos `gerente` y `users`) | Uso diario (RG-03) |
 
-Las contraseñas **no están en el repositorio** ([CONTRIBUTING, sección 6](../../CONTRIBUTING.md#6-secretos)). Se entregan aparte, en el archivo `CREDENCIALES-dualboot-gerente.txt`, que está en la misma carpeta de descarga que la máquina virtual (sección 8).
+Las contraseñas **no están en el repositorio** ([CONTRIBUTING, sección 6](../../CONTRIBUTING.md#6-secretos)). Se entregan aparte, en una base de KeePassXC que está en la misma carpeta de Drive que la máquina virtual (sección 8).
 
-> ⚠️ **Pendiente (tarea 55).** Las contraseñas actuales de la VM son cortas y fáciles de adivinar, y se entregan en un `.txt` en texto plano. El enunciado pide «soluciones seguras» y «gestión de credenciales y secretos», y el plan, «sin contraseñas por defecto ni en texto plano». Hay que:
-> 1. Cambiar las contraseñas de las 4 cuentas (`admin` y `gerente` en Windows; `administrador` y `gerente` en Ubuntu) por otras robustas: al menos 14 caracteres, generadas con el gestor de contraseñas y distintas en cada cuenta. No hace falta reinstalar: basta con `net user <cuenta> *` en Windows (CMD como `admin`) y `sudo passwd <cuenta>` en Ubuntu.
-> 2. Borrar cualquier cuenta que sobre de la instalación (por ejemplo, la creada al instalar Windows, sección 4.1, paso 6) y comprobarlo con `net user`.
-> 3. Guardarlas en una base de **KeePassXC** (`.kdbx`, cifrada) en vez del `.txt`, y dar la contraseña maestra al profesor por otro canal.
-> 4. Volver a exportar la VM, subir el `.vmdk` nuevo a Drive y actualizar las sumas SHA-256 de la sección 8.
+Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una distinta por cuenta) y se cambiaron el 23/10/2026 (tarea 55). La base de KeePassXC (`.kdbx`, cifrada) se entrega con la VM en Drive; su contraseña maestra se da aparte, nunca por escrito en el repositorio ni en Drive.
 
 ## 6. Verificación
 
 | Requisito | Prueba | Resultado | Evidencia |
 |---|---|---|---|
-| RG-01 | Arrancar y elegir cada sistema en el menú de GRUB | Pendiente de captura | — |
+| RG-01 | Menú de GRUB al arrancar | OK: aparecen Ubuntu y Windows Boot Manager (GRUB 2.14) | [GRUB](../evidencias/12-dual-boot/ubu-06-menu-grub.png) |
 | RG-01 | Particiones de los dos sistemas y EFI compartida | OK | [lsblk](../evidencias/12-dual-boot/ubu-04-lsblk-particiones.png) |
 | RG-03 Windows | `net user gerente`: solo en `Usuarios` | OK | [net user](../evidencias/12-dual-boot/win-03-net-user-gerente.png) |
 | RG-03 Windows | Abrir CMD como administrador con `gerente`: el UAC pide usuario y contraseña de `admin` | OK | [UAC](../evidencias/12-dual-boot/win-04-uac-gerente.png) |
 | RG-03 Ubuntu | `groups gerente` sin `sudo`; `sudo -v` denegado | OK | [sudo](../evidencias/12-dual-boot/ubu-05-gerente-sin-sudo.webp) |
-| RG-04 Windows | `net localgroup Administradores`: solo `admin` (y `Administrador` desactivada) | Pendiente de captura | — |
+| RG-04 Windows | `net user`, `net localgroup Administradores` y estado de `Administrador` | OK: solo `admin` y `gerente` como cuentas de uso; en Administradores solo `admin` y la integrada `Administrador`, con «Cuenta activa: No» | [cuentas](../evidencias/12-dual-boot/win-05-cuentas-y-administradores.png) |
 | RG-04 Ubuntu | `administrador` en el grupo `sudo` | OK | [groups](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
-| RG-05 Windows | Firewall activo y Windows Update funcionando | Pendiente de captura | — |
+| RG-05 Windows | `netsh advfirewall show allprofiles state` | OK: dominio, privado y público en ACTIVAR | [firewall](../evidencias/12-dual-boot/win-06-firewall.png) |
+| RG-05 Windows | Windows Update funcionando | OK: el 22/10 sincronizó e instaló KB5020683 y un driver. El 23/10 la VM no tenía conexión en esa sesión (errores 0x8024402c y 0x80240438); la configuración de red y los servicios son correctos | [historial](../evidencias/12-dual-boot/win-07-historial-windows-update.txt) |
+| Seguridad (tarea 55) | Contraseñas robustas, solo las cuentas previstas | OK: las 4 contraseñas cambiadas el 23/10 y guardadas en KeePassXC; en Ubuntu solo `administrador` y `gerente`, y solo `administrador` en `sudo`; la cuenta de instalación de Windows ya no existe | [Ubuntu](../evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt), [Windows](../evidencias/12-dual-boot/win-05-cuentas-y-administradores.png) |
 | RG-05 Ubuntu | `ufw status verbose`: activo, deny entrante | OK | [ufw](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
 | RG-05 Ubuntu | `20auto-upgrades` con las dos opciones a `"1"` | OK | [auto-upgrades](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
 | Preparación | BitLocker desactivado | OK | [BitLocker](../evidencias/12-dual-boot/win-01-bitlocker-desactivado.png) |
@@ -157,15 +155,17 @@ Las contraseñas **no están en el repositorio** ([CONTRIBUTING, sección 6](../
 
 ## 8. Entrega de la máquina virtual
 
+Exportación actual: **23/10/2026**, después de cambiar las contraseñas (tarea 55).
+
 La VM no se sube al repositorio, porque ocupa varios GB y GitHub no admite archivos de más de 100 MB. Se exporta desde VMware con **File → Export to OVF**. Los archivos pequeños están en el repositorio, en [`docs/evidencias/12-dual-boot/vm/`](../evidencias/12-dual-boot/vm/). El disco y las credenciales están en Google Drive: [carpeta Reto-Asir](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link).
 
 | Archivo | Dónde | Tamaño | Contenido | SHA-256 |
 |---|---|---|---|---|
-| `VM-dualboot-W10-ubuntu.ovf` | Repositorio | 15 KB | Descripción de la VM (hardware virtual) | `d63b165e81d83960265334c389ca9eb13db284dcc7ce772320d635247c0e39a6` |
+| `VM-dualboot-W10-ubuntu.ovf` | Repositorio | 10 KB | Descripción de la VM (hardware virtual) | `c23de2fccd742c986462a3c2a59ec025e322fea661ef71e2d3fe9a4944dce2ff` |
 | `VM-dualboot-W10-ubuntu.mf` | Repositorio | 318 B | Sumas SHA-256 de los archivos de la VM | — |
-| `VM-dualboot-W10-ubuntu-file1.nvram` | Repositorio | 265 KB | Variables UEFI (entradas de arranque de Windows y Ubuntu) | `ca67a8cecde57ed5012c8458819a27df0f35ea2dde729e889a08a951176a02a6` |
-| `VM-dualboot-W10-ubuntu-disk1.vmdk` | Drive | 12,5 GB | Disco con los dos sistemas | `617fc4b83cdd69128dffa2e803c472e5f0542b797e3ff8da042e485b13bc5e5f` |
-| `CREDENCIALES-dualboot-gerente.txt` | Drive | — | Contraseñas de las cuentas (sección 5) | — |
+| `VM-dualboot-W10-ubuntu-file1.nvram` | Repositorio | 265 KB | Variables UEFI (entradas de arranque de Windows y Ubuntu) | `0ebda58a3956a09f1f0115275dd8e6e960a64446ea68ac3bfe1d2b52099d7c54` |
+| `VM-dualboot-W10-ubuntu-disk1.vmdk` | Drive | 12,4 GB | Disco con los dos sistemas | `29d633bb62d832d1239d8eace263a835d4896c8dcc037e7d8e9573aa6cc3597a` |
+| `Contraseñas.kdbx` | Drive | — | Base de KeePassXC cifrada con las contraseñas de las cuentas (sección 5) | — |
 
 El disco no puede ir al repositorio: GitHub no admite archivos de más de 100 MB, y el `.gitignore` excluye los discos de VM.
 
@@ -176,3 +176,5 @@ Para usarla:
 3. En VMware, **File → Open** y elegir el `.ovf`.
 
 La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM puede no encontrar GRUB al arrancar.
+
+**Si se exporta con `ovftool`** en vez de con el menú de VMware, comprobar que la `.nvram` está en el paquete: la exportación del 23/10 la dejó fuera (el `.ovf` apuntaba a `Windows 10 x64.nvram` sin incluirla). Se añadió a mano: copia de la `.nvram` de la VM como `VM-dualboot-W10-ubuntu-file1.nvram`, una línea `<File>` en `<References>`, `vmw:value="ovf:/file/file2"` en la clave `nvram` y el `.mf` regenerado. `ovftool VM-dualboot-W10-ubuntu.ovf` lo valida sin errores.

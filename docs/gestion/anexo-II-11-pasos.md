@@ -126,7 +126,7 @@ Incidencias relevantes durante la ejecución:
 
 | Bloque | Prueba | Resultado esperado | Resultado obtenido | Evidencia |
 |---|---|---|---|---|
-| SO | Arranque de ambos sistemas desde GRUB | Ambos arrancan y GRUB muestra las dos entradas | Pendiente de captura; las particiones y la EFI compartida sí están comprobadas | [tarea 12](../so/12-dual-boot.md) |
+| SO | Arranque de ambos sistemas desde GRUB | Ambos arrancan y GRUB muestra las dos entradas | GRUB 2.14 muestra Ubuntu y Windows Boot Manager; particiones, EFI compartida, cuentas, firewall y Windows Update comprobados; contraseñas robustas en KeePassXC (23/10) | [tarea 12](../so/12-dual-boot.md) |
 | SO | Cajero intenta instalar software / usar USB | Operación denegada | | |
 | Arcade | Rendimiento MAME antes y después de optimizar | Aumento de FPS y menor consumo de RAM | Robby Roto +27 % y más estable, Gridlee +6 %, timers de 8 a 3, −277 MB de disco; la RAM no cambia. Medido en una VM de 2 núcleos y 1,5 GB: falta repetirlo con 1 núcleo y 1 GB | [tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | Arduino | Stick en MAME y en un segundo emulador | Todas las entradas reconocidas y remapeables | | |

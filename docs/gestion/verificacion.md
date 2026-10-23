@@ -47,7 +47,7 @@ Las que necesitan Docker o PlatformIO se saltan si no están instalados. Resulta
 | 3 | 34 | `cargar-carta-y-mesas.py` | ❌ → ✅ Fallaba al crear la carta (ver 4.2). Corregido: 15 productos con IVA 10 % incluido, salas y mesas. Repetido dos veces |
 | 4 | 35 | `factura_automatica.py` dos veces, como `gerente` | ✅ `INV/2026/00001` (12,10 €) e `INV/2026/00002` (193,60 €) validadas, cobradas y con PDF |
 | 5 | 34 | `cajero1` intenta cambiar un precio y crear un usuario | ✅ Las dos operaciones, denegadas |
-| 6 | 12 | SHA-256 de los ficheros de la VM del repositorio contra el `.mf` y el documento | ✅ Coinciden `.ovf` y `.nvram` (el `.vmdk` está en Drive y no se ha comprobado) |
+| 6 | 12 | SHA-256 de los ficheros de la VM del repositorio contra el `.mf` y el documento | ✅ Coinciden `.ovf` y `.nvram`. Tras cambiar las contraseñas (tarea 55) la VM se exportó de nuevo el mismo día y las sumas nuevas, `.vmdk` incluido, están en la tarea 12 |
 | 7 | 8, 10 | Sumas del presupuesto | ✅ 2.361,36 € (tarea 8); 2.447,34 € de inversión (tarea 10). El primer año pasa de 3.035,46 € a 2.807,34 € al cambiar la WAN a DIGI (ver sección 6) |
 | 8 | 30 | `nginx -t` de la configuración que genera `instalar-servidor-web.sh` | ✅ Sintaxis correcta |
 | 9 | 30 | `curl` a `https://almichain1.duckdns.org` | ⏸ Sin respuesta: el DNS apunta a la IP elástica `52.200.94.167`, pero el Learner Lab está parado. Es lo esperado (sección 8 de la tarea 30); las pruebas con el laboratorio encendido están en sus evidencias |
@@ -86,13 +86,13 @@ En Odoo 19, `copy` devuelve por la API una **lista** de ids. El script la metía
 
 ### 4.5 Contraseñas fuera de Git
 
-En la carpeta de trabajo de Adrian había un fichero sin seguimiento, `VM dual boot.txt`, con las contraseñas de la VM del gerente, que además son muy débiles. No se ha subido; se ha añadido al `.gitignore` junto con `CREDENCIALES*` y `.credenciales*`. **Hay que cambiar esas contraseñas** por otras robustas, guardarlas en un gestor de contraseñas y borrar el fichero: es la nueva tarea 55. El enunciado lo exige («soluciones seguras», «gestión de credenciales y secretos») y el plan dice «sin contraseñas por defecto ni en texto plano».
+En la carpeta de trabajo de Adrian había un fichero sin seguimiento, `VM dual boot.txt`, con las contraseñas de la VM del gerente, que además son muy débiles. No se ha subido; se ha añadido al `.gitignore` junto con `CREDENCIALES*` y `.credenciales*`. **Hecho el 23/10 (tarea 55):** las contraseñas se han cambiado por otras robustas, guardadas en KeePassXC. Falta borrar el `.txt`. El enunciado lo exige («soluciones seguras», «gestión de credenciales y secretos») y el plan dice «sin contraseñas por defecto ni en texto plano».
 
 ## 5. Estados corregidos en el backlog
 
 | # | Tarea | Antes | Ahora | Por qué |
 |---|---|---|---|---|
-| 12 | Dual boot | Hecho | En curso | Su tabla de verificación tiene 3 pruebas *Pendiente de captura* |
+| 12 | Dual boot | Hecho | En curso → Hecho | Tenía 3 pruebas *Pendiente de captura*; se completaron el mismo 23/10 (GRUB, cuentas, firewall e historial de Windows Update) |
 | 16 | Recreativa en VM | En curso | Hecho | Hecha y probada en VM; lo físico pasa a la tarea 53 y Batocera a la 51 |
 | 23 | Plano y direccionamiento | Pendiente | Hecho | Están el plano, el plan de IP, la segmentación y la simulación en Packet Tracer |
 | 24 | Red segura | Hecho | En curso | Su propio documento dice que faltan la red de invitados y WPA3 |

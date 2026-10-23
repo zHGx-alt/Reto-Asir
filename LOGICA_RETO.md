@@ -366,7 +366,7 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 
 | Capa | Mínimos privilegios | Secretos | Cifrado | Estado |
 |---|---|---|---|---|
-| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | — | Gerente y recreativa hechos; contraseñas de la VM del gerente (#55) y TPV (#13) pendientes |
+| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | — | Gerente (con contraseñas robustas, #55) y recreativa hechos; TPV pendiente (#13) |
 | Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi | WPA2-AES; WPA3 pendiente | En curso (#24) |
 | Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS pendiente** (#52) | En curso |
 | Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Usuarios con login creados aparte | — | En curso (#42) |
@@ -374,7 +374,7 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
 | Repositorio | Cambios por Pull Request con revisor | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
-Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo, contraseña de root de Batocera, red de invitados y WPA3, y las contraseñas débiles de la VM del gerente (#55).
+Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo, contraseña de root de Batocera, red de invitados y WPA3. Las contraseñas de la VM del gerente ya se cambiaron (#55).
 
 **Regla para todas las contraseñas del proyecto:** nada de contraseñas por defecto ni en texto plano. Se generan con el gestor (KeePassXC), son distintas en cada cuenta y nunca entran en Git (lo vigilan el `.gitignore` y gitleaks).
 

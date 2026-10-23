@@ -1,0 +1,22 @@
+# Tarea 12 · Historial de Windows Update de la VM del gerente
+# Fichero C:\Windows\SoftwareDistribution\ReportingEvents.log, leído del disco de la VM apagada
+# en solo lectura con libguestfs (23/10/2026). Columnas: fecha, cliente, resultado, tipo, mensaje.
+
+== 22/10/2026: Windows Update conecta con Microsoft, detecta e instala actualizaciones
+2026-10-22 12:27:49  OOBE ZDP  Success  Software Synchronization  Windows Update Client successfully detected 1 updates.
+2026-10-22 12:28:03  OOBE ZDP  Success  Content Download          Download succeeded.
+2026-10-22 12:28:30  OOBE ZDP  Success  Content Install           Installation Successful: 2022-11 Actualización de Windows 10 Version 22H2 para x64 sistemas basados en (KB5020683)
+2026-10-22 12:29:18  Device Driver Retrieval Client  Success  Software Synchronization  Windows Update Client successfully detected 1 updates.
+2026-10-22 12:29:28  Device Driver Retrieval Client  Success  Content Download  Download succeeded.
+2026-10-22 12:29:30  Device Driver Retrieval Client  Success  Content Install   Installation Successful: Broadcom Inc. - System - 9.8.30.0
+
+== 23/10/2026: todos los intentos fallan por falta de conexión de la VM en esa sesión
+2026-10-23 13:03:19  Microsoft Defender    Failure  Software Synchronization  failed to detect with error 0x80240438
+2026-10-23 13:08:07  MoUpdateOrchestrator  Failure  Software Synchronization  failed to detect with error 0x8024402c
+2026-10-23 13:16:03  MoUpdateOrchestrator  Failure  Software Synchronization  failed to detect with error 0x8024402c
+2026-10-23 13:18:23  CompatTelRunner.exe   Failure  Software Synchronization  failed to detect with error 0x80240438
+
+# 0x8024402c y 0x80240438 son errores de conexión (no se llega al servidor de Windows Update).
+# La configuración de red de Windows es correcta (registro SYSTEM, ControlSet001): adaptador Intel 82574L
+# con DHCP, última IP 192.168.87.132 y puerta de enlace 192.168.87.2 (NAT de VMware). Los servicios
+# Dhcp, Dnscache, BITS, UsoSvc, NlaSvc y mpssvc arrancan en automático y wuauserv bajo demanda (lo normal).
