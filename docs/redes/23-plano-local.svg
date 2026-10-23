@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="730" viewBox="0 0 960 730" font-family="Arial, Helvetica, sans-serif">
+<title>Plano del local con cableado y Wi-Fi</title>
+<desc>Plano supuesto de 20 x 12 m con el armario de red en el despacho, cable Cat6 a los TPV y al PC del gerente, router WDS en el comedor y Wi-Fi de invitados para clientes y recreativa.</desc>
+<rect width="960" height="730" fill="#FFFFFF"/>
+<text x="40" y="40" font-size="20" font-weight="bold" fill="#222">Almi-Chain · plano del local con cableado y Wi-Fi</text>
+<text x="40" y="62" font-size="13" fill="#555">Tarea 23 · local supuesto de 20 × 12 m, una planta · direcciones en 192.168.10.0/24</text>
+<defs><clipPath id="local"><rect x="60" y="100" width="800" height="480"/></clipPath></defs>
+<rect x="60" y="100" width="200" height="160" fill="#EEF3FA" stroke="#444" stroke-width="2"/>
+<rect x="260" y="100" width="120" height="160" fill="#F4F4F4" stroke="#444" stroke-width="2"/>
+<rect x="380" y="100" width="200" height="160" fill="#F4F4F4" stroke="#444" stroke-width="2"/>
+<rect x="580" y="100" width="280" height="160" fill="#F4F4F4" stroke="#444" stroke-width="2"/>
+<rect x="60" y="260" width="560" height="320" fill="#FFFFFF" stroke="#444" stroke-width="2"/>
+<rect x="620" y="260" width="240" height="320" fill="#FFF7E6" stroke="#444" stroke-width="2"/>
+<g clip-path="url(#local)">
+<circle cx="128.0" cy="164.0" r="380.0" fill="#7B3FA0" fill-opacity="0.06" stroke="#7B3FA0" stroke-opacity="0.5" stroke-dasharray="4 6"/>
+<circle cx="556.0" cy="504.0" r="380.0" fill="#7B3FA0" fill-opacity="0.06" stroke="#7B3FA0" stroke-opacity="0.5" stroke-dasharray="4 6"/>
+</g>
+<text x="70" y="122" font-size="14" font-weight="bold" fill="#666">Despacho del gerente</text>
+<text x="270" y="122" font-size="14" font-weight="bold" fill="#666">Aseos</text>
+<text x="390" y="122" font-size="14" font-weight="bold" fill="#666">Almacén</text>
+<text x="590" y="122" font-size="14" font-weight="bold" fill="#666">Cocina</text>
+<text x="236.0" y="566" font-size="14" font-weight="bold" fill="#666">Comedor</text>
+<text x="630" y="566" font-size="14" font-weight="bold" fill="#666">Barra</text>
+<rect x="684.0" y="284.0" width="32.0" height="272.0" fill="#D9B98C" stroke="#8A6A3B"/>
+<line x1="420.0" y1="580.0" x2="500.0" y2="580.0" stroke="#FFFFFF" stroke-width="5"/>
+<text x="460.0" y="598.0" font-size="12" fill="#444" text-anchor="middle">Entrada</text>
+<polyline points="8.0,164.0 68.0,164.0" fill="none" stroke="#2E8B57" stroke-width="3" stroke-linejoin="round"/>
+<text x="4.0" y="154.0" font-size="11" fill="#2E8B57" font-weight="bold">Fibra</text>
+<polyline points="188.0,156.0 224.0,156.0 224.0,204.0" fill="none" stroke="#1F5FA8" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="192.0" y="148.0" font-size="11" fill="#1F5FA8" font-weight="bold">Cat6 · 5 m</text>
+<polyline points="156.0,196.0 156.0,270.0 736.0,270.0 736.0,316.0 740.0,316.0" fill="none" stroke="#1F5FA8" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="440.0" y="264.0" font-size="11" fill="#1F5FA8" font-weight="bold">Cat6 · 20 m</text>
+<polyline points="140.0,196.0 140.0,280.0 724.0,280.0 724.0,440.0 740.0,440.0" fill="none" stroke="#1F5FA8" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="440.0" y="294.0" font-size="11" fill="#1F5FA8" font-weight="bold">Cat6 · 24 m</text>
+<polyline points="172.0,196.0 524.0,484.0" fill="none" stroke="#7B3FA0" stroke-width="2" stroke-dasharray="8 5" stroke-linejoin="round"/>
+<text x="364.0" y="336.0" font-size="11" fill="#7B3FA0" font-weight="bold">Enlace WDS</text>
+<polyline points="108.0,508.0 108.0,196.0" fill="none" stroke="#B7791F" stroke-width="2" stroke-dasharray="2 4" stroke-linejoin="round"/>
+<polyline points="284.0,400.0 180.0,196.0" fill="none" stroke="#B7791F" stroke-width="2" stroke-dasharray="2 4" stroke-linejoin="round"/>
+<rect x="68.0" y="136.0" width="120.0" height="60.0" rx="5" fill="#FDECEC" stroke="#C0392B" stroke-width="1.5"/>
+<text x="128.0" y="156.0" font-size="11" font-weight="bold" fill="#222" text-anchor="middle">Armario de red</text>
+<text x="128.0" y="170.0" font-size="11" fill="#222" text-anchor="middle">ONT · Router 1 (.1)</text>
+<text x="128.0" y="184.0" font-size="11" fill="#222" text-anchor="middle">Servidor Odoo (.10)</text>
+<rect x="192.0" y="204.0" width="64.0" height="40.0" rx="5" fill="#E8F1FB" stroke="#1F5FA8" stroke-width="1.5"/>
+<text x="224.0" y="221.0" font-size="11" font-weight="bold" fill="#222" text-anchor="middle">PC gerente</text>
+<text x="224.0" y="235.0" font-size="11" fill="#222" text-anchor="middle">.20</text>
+<rect x="740.0" y="308.0" width="104.0" height="40.0" rx="5" fill="#E8F1FB" stroke="#1F5FA8" stroke-width="1.5"/>
+<text x="792.0" y="325.0" font-size="11" font-weight="bold" fill="#222" text-anchor="middle">TPV 1 + impresora</text>
+<text x="792.0" y="339.0" font-size="11" fill="#222" text-anchor="middle">.31</text>
+<rect x="740.0" y="420.0" width="104.0" height="40.0" rx="5" fill="#E8F1FB" stroke="#1F5FA8" stroke-width="1.5"/>
+<text x="792.0" y="437.0" font-size="11" font-weight="bold" fill="#222" text-anchor="middle">TPV 2 + impresora</text>
+<text x="792.0" y="451.0" font-size="11" fill="#222" text-anchor="middle">.32</text>
+<rect x="508.0" y="484.0" width="96.0" height="40.0" rx="5" fill="#FDECEC" stroke="#C0392B" stroke-width="1.5"/>
+<text x="556.0" y="501.0" font-size="11" font-weight="bold" fill="#222" text-anchor="middle">Router 2 (WDS)</text>
+<text x="556.0" y="515.0" font-size="11" fill="#222" text-anchor="middle">.2</text>
+<rect x="76.0" y="508.0" width="104.0" height="40.0" rx="5" fill="#FFF4DE" stroke="#B7791F" stroke-width="1.5"/>
+<text x="128.0" y="525.0" font-size="11" font-weight="bold" fill="#222" text-anchor="middle">Recreativa</text>
+<text x="128.0" y="539.0" font-size="11" fill="#222" text-anchor="middle">Wi-Fi invitados</text>
+<rect x="284.0" y="380.0" width="136.0" height="40.0" rx="5" fill="#FFF4DE" stroke="#B7791F" stroke-width="1.5"/>
+<text x="352.0" y="397.0" font-size="11" font-weight="bold" fill="#222" text-anchor="middle">Móviles de clientes</text>
+<text x="352.0" y="411.0" font-size="11" fill="#222" text-anchor="middle">Wi-Fi invitados</text>
+<line x1="60" y1="612.0" x2="260" y2="612.0" stroke="#222" stroke-width="2"/>
+<line x1="60" y1="608.0" x2="60" y2="616.0" stroke="#222"/>
+<line x1="100" y1="608.0" x2="100" y2="616.0" stroke="#222"/>
+<line x1="140" y1="608.0" x2="140" y2="616.0" stroke="#222"/>
+<line x1="180" y1="608.0" x2="180" y2="616.0" stroke="#222"/>
+<line x1="220" y1="608.0" x2="220" y2="616.0" stroke="#222"/>
+<line x1="260" y1="608.0" x2="260" y2="616.0" stroke="#222"/>
+<text x="268" y="616.0" font-size="11" fill="#222">5 m</text>
+<line x1="40" y1="650" x2="70" y2="650" stroke="#2E8B57" stroke-width="3"/>
+<text x="78" y="654" font-size="12" fill="#222">Fibra DIGI</text>
+<line x1="230" y1="650" x2="260" y2="650" stroke="#1F5FA8" stroke-width="2.5"/>
+<text x="268" y="654" font-size="12" fill="#222">Cable Cat6 (canaleta)</text>
+<line x1="420" y1="650" x2="450" y2="650" stroke="#7B3FA0" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="458" y="654" font-size="12" fill="#222">Enlace WDS</text>
+<line x1="610" y1="650" x2="640" y2="650" stroke="#B7791F" stroke-width="2" stroke-dasharray="2 4"/>
+<text x="648" y="654" font-size="12" fill="#222">Wi-Fi invitados (aislada)</text>
+<circle cx="812" cy="650" r="10" fill="#7B3FA0" fill-opacity="0.06" stroke="#7B3FA0" stroke-opacity="0.5" stroke-dasharray="4 6"/>
+<text x="830" y="654" font-size="12" fill="#222">Cobertura aprox.</text>
+<rect x="40" y="666" width="30" height="16" rx="3" fill="#FDECEC" stroke="#C0392B"/>
+<text x="78" y="678" font-size="12" fill="#222">Red (routers, servidor)</text>
+<rect x="250" y="666" width="30" height="16" rx="3" fill="#E8F1FB" stroke="#1F5FA8"/>
+<text x="288" y="678" font-size="12" fill="#222">Equipos del personal</text>
+<rect x="460" y="666" width="30" height="16" rx="3" fill="#FFF4DE" stroke="#B7791F"/>
+<text x="498" y="678" font-size="12" fill="#222">Clientes y recreativa</text>
+<text x="40" y="702" font-size="11" fill="#666">Medidas y distribución supuestas: el enunciado no da el plano. Longitudes de cable aproximadas, con holgura. Detalle en 23-plano-direccionamiento.md.</text>
+</svg>
