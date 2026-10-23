@@ -39,7 +39,6 @@ server {
     root $WEBROOT;
     index index.html;
 
-    server_tokens off;
     add_header Strict-Transport-Security "max-age=31536000" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-Frame-Options "SAMEORIGIN" always;
@@ -52,6 +51,8 @@ server {
 EOF
 ln -sf /etc/nginx/sites-available/almichain /etc/nginx/sites-enabled/almichain
 rm -f /etc/nginx/sites-enabled/default
+# En el bloque http, para que también se aplique a la redirección que crea certbot.
+echo "server_tokens off;" > /etc/nginx/conf.d/ocultar-version.conf
 nginx -t
 systemctl reload nginx
 
