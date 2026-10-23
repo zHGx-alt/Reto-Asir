@@ -93,9 +93,9 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | # | Tarea | Bloque | Fechas | Depende de | Revisa | Estado |
 |---|---|---|---|---|---|---|
 | 6 | Resolver dudas pendientes con el profesor | 0 Gestión | 21/10–22/10 | — | Adrian | Pendiente |
-| 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | 27/10–27/10 | #8 (Eneko.S), #9 (Markel), #22 (Markel) | Eneko.S | Pendiente |
+| 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | 27/10–27/10 | #8 (Eneko.S), #9 (Markel), #22 (Markel) | Eneko.S | Hecho |
 | 14 | Instalar impresora de tickets y prueba | 2 SO | 29/10–30/10 | #8 (Eneko.S) | Eneko.S | Pendiente |
-| 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | 28/10–30/10 | #23 (Eneko.P) | Adrian | En curso |
+| 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | 28/10–30/10 | #23 (Eneko.P) | Adrian | Hecho |
 | 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | 02/11–03/11 | #24 (Peio) | Iker | Pendiente |
 | 27 | Wireframes y diseño conceptual web | 6 Web | 22/10–23/10 | — | Eneko.S | Hecho |
 | 36 | Importar y exportar datos en Odoo | 7 ERP | 04/11–05/11 | #34 (Markel) | Eneko.P | Pendiente |
