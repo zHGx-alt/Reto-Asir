@@ -116,7 +116,7 @@ El menú de MAME se configura con el filtro **Available** (`~/.mame/ui.ini`) par
 ![MAME con los 5 juegos](evidencias/06-mame-con-roms.png)
 
 ### 4.6 Preparar la recreativa para el arcade stick de Arduino
-Detalles en [`STICK-ARDUINO.md`](STICK-ARDUINO.md) y firmware en [`../arcade-stick/`](../arcade-stick/).
+Detalles en [`STICK-ARDUINO.md`](STICK-ARDUINO.md) y firmware en [`arduino/mando-joystick/`](../../../arduino/mando-joystick/).
 - MAME tiene los mandos activados y el usuario `arcade` está en el grupo `input`.
 - Un mando virtual con la identidad USB del Arduino Leonardo (VID 2341 / PID 8036) fue detectado por MAME (`Input: Adding joystick #1: LLC Arduino Leonardo`).
 - En los menús, **Botón 1** y **Start** también sirven para elegir (`~/.mame/cfg/default.cfg`).

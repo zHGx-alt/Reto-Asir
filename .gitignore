@@ -9,6 +9,9 @@
 *.kdbx
 secrets/
 credentials*
+CREDENCIALES*
+.credenciales*
+VM dual boot.txt
 *.tfvars
 !*.tfvars.example
 

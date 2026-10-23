@@ -1,0 +1,465 @@
+# Lógica del reto Almi-Chain
+
+Este documento explica **cómo encaja todo**: qué pide el enunciado, qué pieza lo resuelve, cómo se conectan las piezas entre sí (la red, el ERP, la web, la base de datos, las copias, la recreativa…) y por qué se ha hecho así. Es el punto de partida para entender el proyecto y para defenderlo.
+
+- Lo que está hecho y lo que falta: [Gantt](docs/gestion/gantt.md) (generado desde el [backlog](docs/gestion/backlog-kanban.csv)).
+- Cómo se ha comprobado cada cosa: [verificación del 23/10/2026](docs/gestion/verificacion.md).
+- Enunciado: [Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx) · Plan con herramientas: [almi-chain-plan.pdf](almi-chain-plan.pdf).
+
+> Los números de tarea (#12, #34…) son los del backlog. Si una pieza está pendiente, se dice.
+
+---
+
+## 1. El reto en pocas líneas
+
+Una cadena de restaurantes nos contrata para montar la informática de un local. El enunciado pide, además de que todo sea **seguro, reproducible, verificado y documentado** para que lo siga un técnico nuevo:
+
+| # | Qué pide el enunciado | Cómo lo resolvemos | Tareas | Carpeta |
+|---|---|---|---|---|
+| 1 | Equipo del gerente con arranque dual Windows 10 + Linux | Windows 10 + Ubuntu LTS con GRUB, en VMware | 7, 8, 12 | [docs/so](docs/so/) |
+| 2 | 2 TPV Windows de barra + impresoras de tickets, con configuración, presupuesto y diagrama | Todo en uno táctil Iggual N100 + Epson TM-T20IV por USB; el TPV es un navegador en modo quiosco contra Odoo | 7–11, 13–15, 37 | [docs/hardware](docs/hardware/) |
+| 3 | Mínimos privilegios y seguridad por defecto | Cuentas separadas usuario/administrador en todos los sistemas, secretos fuera de Git, cifrado | 13, 42, 46, 52 | Transversal |
+| 4 | Recreativa MAME en un equipo de 1 núcleo y 1 GB, optimizada y con pruebas de rendimiento | Debian 13 mínimo que arranca directamente en MAME; medidas antes y después; monitorización | 16–18, 51, 53, 54 | [docs/arcade](docs/arcade/) |
+| 5 | Arcade stick compatible con cualquier emulador y con input personalizable | Arduino Leonardo (ATmega32U4) como joystick HID estándar; mapeo guardado en EEPROM | 19–21, 50 | [arduino](arduino/) |
+| 6 | Línea WAN, esquema de conectividad y plano de red, cableado y Wi-Fi, red segura | Fibra, router principal + router WDS, plan de IP y segmentación, simulación en Packet Tracer | 22–26 | [docs/redes](docs/redes/) |
+| 7 | Segundo router Wi-Fi por WDS, comprobando que funciona | Dos TP-Link Archer C6 | 25 | [docs/redes](docs/redes/) |
+| 8 | Web unidireccional, atractiva, responsiva, accesible y rápida, con geolocalización, formulario placeholder y slideshow | HTML, CSS y JavaScript sin frameworks; mapa de OpenStreetMap incrustado | 27–29 | [web](web/), [docs/web](docs/web/) |
+| 9 | Web por HTTPS, dominio propio, en la nube y con despliegue reproducible (a poder ser automatizado) | AWS: bucket S3 privado + EC2 con nginx, Let's Encrypt y `almichain1.duckdns.org`; Terraform pendiente | 30, 31 | [docs/web](docs/web/), [scripts/web](scripts/web/), [iac](iac/) |
+| 10 | ERP para facturas, clientes, personal, marketing, inventario… con un caso de uso automatizado de extremo a extremo | Odoo 19 Community con TPV de restaurante; emisión automática de facturas por API | 32–37 | [docs/erp](docs/erp/) |
+| 11 | Bases de datos de cada establecimiento: E/R, tablas, implementación y consultas | Modelo E/R → 3FN → PostgreSQL con reglas y roles | 38–42 | [docs/bd](docs/bd/) |
+| 12 | BD en un dispositivo redundante, plan de copias y prueba de restauración | RAID 1 con mdadm, restic cifrado 3-2-1, restauración aislada | 43–45 | [docs/backup](docs/backup/) |
+| 13 | Seguimiento (Gantt o Kanban) y control de versiones | CSV → Gantt generado por script; GitHub con PR, revisión y gitleaks | 1–6 | [docs/gestion](docs/gestion/) |
+| 14 | Pruebas, documentación reproducible con diagramas, presentación | Tabla de pruebas, este documento, guías por tarea | 47–49 | — |
+
+Los resultados de aprendizaje que cubre cada bloque están en el enunciado (ISO, PAR, LMSGI, GBD y Digitalización).
+
+---
+
+## 2. Visión de conjunto
+
+Hay **tres sitios** distintos donde "vive" el proyecto. Entender esto es la clave de casi todo lo demás:
+
+1. **El local** (el restaurante): los equipos, la red, el servidor con Odoo y la base de datos, la recreativa. Es privado: desde internet no se entra.
+2. **La nube** (AWS): solo la web pública. No tiene datos de clientes ni de ventas.
+3. **El repositorio** (GitHub): el código, los scripts, la documentación y la planificación. Desde aquí se reconstruye todo lo demás.
+
+```mermaid
+flowchart LR
+    subgraph NUBE["☁️ AWS (us-east-1)"]
+        S3[("Bucket S3 privado<br/>almi-chain-web-2026")]
+        EC2["EC2 t3.micro · Ubuntu 24.04<br/>nginx + Let's Encrypt<br/>IP elástica 52.200.94.167"]
+        S3 -- "aws s3 sync cada 5 min<br/>(rol del laboratorio)" --> EC2
+    end
+    DNS["DuckDNS<br/>almichain1.duckdns.org → IP elástica"]
+    CLIENTE_WEB(("Cliente en internet")) -- "HTTPS" --> DNS --> EC2
+
+    subgraph LOCAL["🏪 Local del restaurante"]
+        ONT["Router del operador (fibra)"] --- R1["Router 1 · Archer C6<br/>firewall · DHCP · Wi-Fi"]
+        R1 -. "WDS" .- R2["Router 2 · Archer C6"]
+        R1 --- SRV["Servidor · 192.168.10.10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · restic"]
+        R1 --- GER["PC gerente · .20<br/>Windows 10 / Ubuntu"]
+        R1 --- TPV1["TPV 1 · .31"] & TPV2["TPV 2 · .32"]
+        TPV1 -- USB --- IMP1["Impresora 1"]
+        TPV2 -- USB --- IMP2["Impresora 2"]
+        R1 & R2 -. "Wi-Fi invitados (aislada)" .- INV["Móviles de clientes<br/>Recreativa + stick"]
+        SRV -- USB --- USBK[("Disco USB de copias")]
+    end
+
+    subgraph REPO["🐙 GitHub · Reto-Asir"]
+        CODE["web/ · scripts/ · docs/ · arduino/"]
+    end
+    CODE -- "se sube a mano o con aws s3 sync<br/>(GitHub Actions: tarea 31)" --> S3
+    CODE -- "scripts que montan cada pieza" --> LOCAL
+```
+
+**Lo más importante:** la web y Odoo **no están conectados**. Se explica en la sección 6.
+
+---
+
+## 3. Los equipos del local
+
+Las necesidades salen de la tarea 7 (requisitos RG para el gerente, RT para los TPV y RI para las impresoras, cada uno con su prueba prevista); los modelos y precios, de las tareas 8 y 10.
+
+| Equipo | Modelo elegido | Sistema | Qué hace | Cómo se conecta | Dónde se ha probado |
+|---|---|---|---|---|---|
+| PC del gerente | Lenovo ThinkCentre Neo 50q Gen 4 + monitor Xiaomi A24i | Windows 10 + Ubuntu LTS (arranque dual) | Gestión y ofimática; entra en Odoo como `gerente` | Cable, LAN 2 | VM de VMware (#12) |
+| TPV 1 y 2 | Iggual AIO B156.88.N100 táctil | Windows 10 Pro restringido | Solo abre el TPV de Odoo en el navegador | Cable, LAN 3 y 4 | Pendiente (#13) |
+| Impresoras de tickets | Epson TM-T20IV | Driver de Windows | Imprime el ticket del TPV | **USB** a su TPV (sin IP: no expone nada en la red) | Pendiente (#14, #37) |
+| Servidor | No presupuestado (supuesto: un equipo del centro) | Debian 13 sin escritorio + Docker | Odoo, PostgreSQL, RAID y copias | Cable, LAN 1 | VM de VirtualBox `ServidorERP` (#33–45) |
+| Recreativa | Equipo de 1 núcleo y 1 GB | Debian 13 mínimo + MAME (o Batocera, #51) | Juegos arcade para clientes | Wi-Fi de invitados | VM (#16, #17); equipo real pendiente (#53) |
+| Arcade stick | Keyestudio Leonardo (ATmega32U4) + 6 botones | Firmware propio | Mando de la recreativa | USB a la recreativa | Compila; placa pendiente (#50) |
+| Router 1 y 2 | TP-Link Archer C6 V3 (×2) | Firmware de fábrica | Router, firewall, DHCP, Wi-Fi; el 2 amplía por WDS | WAN al router del operador | Probado en un TL-WR841N (#24); WDS pendiente (#25) |
+
+Coste: **2.447,34 €** de inversión y **3.035,46 €** el primer año con la fibra ([tarea 10](docs/hardware/10-presupuesto-hardware.md)). Software: 3 licencias de Windows 10 Pro; todo lo demás es libre o viene incluido ([tarea 9](docs/hardware/09-tabla-software-licencias.md)).
+
+> **Simulación.** Los equipos no se han comprado: se simulan en máquinas virtuales (supuesto S-07 de la tarea 7). Lo que necesita hardware real (stick, routers, impresora, recreativa) está marcado como **Físico** en el backlog.
+
+---
+
+## 4. La red
+
+### 4.1 De internet al local
+
+```
+Fibra ─► Router del operador (ONT) ─► WAN del Router 1 ─► LAN 192.168.10.0/24
+                                           │
+                                           ├─ Wi-Fi del personal (WPA3/WPA2)
+                                           ├─ Wi-Fi de invitados (aislada) ◄── clientes y recreativa
+                                           └─ WDS (sin cable) ─► Router 2 (amplía las dos Wi-Fi)
+```
+
+- **WAN:** la comparativa ([tarea 22](docs/redes/22-comparativa-wan.md)) elige DIGI 1 Gb; el presupuesto usa Telefónica 600 Mb. **Hay que unificarlo.**
+- **Por qué `192.168.10.0/24`:** los routers de operador suelen usar `192.168.1.0/24`; si la LAN usara la misma red, el router 1 tendría la misma red a los dos lados.
+- **IPs fijas por reserva DHCP:** el router da siempre la misma IP a cada MAC, así todo queda en un sitio (servidor `.10`, gerente `.20`, TPV `.31` y `.32`, router 2 `.2`).
+
+Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direccionamiento.md).
+
+### 4.2 Quién puede hablar con quién
+
+| Desde ↓ / hacia → | Servidor Odoo | TPV | PC gerente | Internet |
+|---|---|---|---|---|
+| TPV | Sí (Odoo, puerto 8069) | — | No | Sí |
+| PC gerente | Sí (Odoo y administración) | No | — | Sí |
+| Clientes | **No** | **No** | **No** | Sí |
+| Recreativa | **No** | **No** | **No** | Sí |
+
+**Con el hardware presupuestado** (Archer C6 de fábrica, sin VLANs) se consigue así: clientes y recreativa en la Wi-Fi de invitados, que solo sale a internet; TPV y gerente en la misma LAN pero en rangos distintos, y protegidos por el modo quiosco y el firewall de Windows.
+
+**Diseño ideal**, simulado y probado en Packet Tracer ([23-segmentacion-vlan.pkt](docs/redes/23-segmentacion-vlan.pkt)): una VLAN por grupo (servidores 10, TPV 20, gerencia 30, arcade 40, invitados 50, gestión 99), router-on-a-stick y ACLs que aplican la tabla de arriba. Las 8 pruebas de ping y la prueba HTTP del TPV al servidor dan lo esperado.
+
+### 4.3 Red segura y WDS
+
+- Hecho en un TL-WR841N ([tarea 24](docs/redes/24-red-segura/DOCUMENTACION.md)): administración remota cerrada, WPA2-AES, firewall SPI y protección DoS.
+- Falta: red de invitados aislada con su prueba, y WPA3 (el TL-WR841N no lo tiene; el Archer C6 sí). Después, WDS con medidas de cobertura (#25) y análisis con Wireshark y nmap (#26).
+
+---
+
+## 5. El ERP: Odoo, la pieza central del local
+
+### 5.1 Por qué Odoo
+
+Comparado con ERPNext y Dolibarr ([tarea 32](docs/erp/32-comparativa-erp.md)): cubre todo lo que pide el enunciado (facturas, CRM, empleados, marketing, inventario) **y trae un TPV táctil de restaurante**, usa PostgreSQL, tiene localización española y es gratuito en su edición Community.
+
+### 5.2 Cómo está montado
+
+```
+Servidor Debian 13 ─ Docker
+ ├─ contenedor odoo (odoo:19.0) ── puerto 8069 publicado en la LAN
+ │     volumen odoo-web-data: adjuntos y PDF (filestore)
+ └─ contenedor db (postgres:17) ── SIN puerto publicado: solo lo ve Odoo por la red Docker "interna"
+       volumen odoo-db-data: la base de datos "tienda"
+```
+
+- [`docker-compose.yml`](docs/erp/33-odoo-docker/odoo/docker-compose.yml) define los dos servicios; [`desplegar-odoo.sh`](docs/erp/33-odoo-docker/odoo/desplegar-odoo.sh) instala Docker, **genera contraseñas aleatorias** en `/opt/odoo/.env` (fuera de Git), crea la base `tienda` en español sin datos de demostración y cambia la contraseña por defecto de `admin`.
+- Seguridad por defecto: gestor web de bases de datos desactivado (`list_db = False`), solo la base de la tienda (`dbfilter`), registro libre de usuarios desactivado, el usuario del sistema no está en el grupo `docker`.
+- [`configurar-odoo.py`](docs/erp/34-configurar-odoo/configurar-odoo.py) lo configura todo **por la API XML-RPC**, sin clics y de forma idempotente: empresa en España con euros, plan contable PYMES, módulos, dos TPV de restaurante con su caja cada uno y los usuarios.
+
+| Usuario de Odoo | Puede | Para qué |
+|---|---|---|
+| `admin` | Todo | Solo mantenimiento |
+| `gerente` | Ventas, facturación, inventario, TPV, crear productos | Gestión diaria |
+| `cajero1`, `cajero2` | **Solo el TPV**: no cambia precios, facturas ni usuarios | Cobrar en la barra |
+
+### 5.3 Una venta en la barra, paso a paso
+
+Probado de verdad el 23/10 ([tarea 34, sección 8](docs/erp/34-configurar-odoo/DOCUMENTACION.md)):
+
+```mermaid
+sequenceDiagram
+    participant C as Cajero (TPV 1, Windows en quiosco)
+    participant O as Odoo (servidor .10:8069)
+    participant P as PostgreSQL (base "tienda")
+    participant I as Impresora USB del TPV
+    C->>O: Entra como cajero1 (navegador) y abre la caja con 100 €
+    C->>O: Mesa 3: 2 menús, 2 cañas, 1 café = 35,50 € (IVA 10 % incluido)
+    C->>O: Cobro en efectivo (40 €, cambio 4,50 €)
+    O->>P: Pedido "done" + factura simplificada 262-1-000001
+    O-->>C: Ticket en pantalla
+    C-->>I: Imprimir (diálogo del navegador → driver de Windows) · pendiente #14/#37
+    C->>O: Cierre de caja: esperado 135,50 €, contado 135,50 €
+    O->>P: Asiento contable POSS/2026/10/0001 (Clientes 35,50 · Ventas 32,27 · IVA 3,23)
+```
+
+- La carta de ejemplo (15 productos, salas y mesas) la carga [`cargar-carta-y-mesas.py`](docs/erp/34-configurar-odoo/cargar-carta-y-mesas.py). La carta real se importará en la tarea 36.
+- **Stock:** los productos de la carta no tienen activado el seguimiento de inventario, así que una venta **no descuenta stock** en Odoo. Se puede activar si el cliente lo quiere; el descuento por receta sí está en la BD de la tarea 40 (sección 7).
+- **HTTPS:** Odoo responde por HTTP dentro de la LAN. Falta el proxy HTTPS (#52), que además permite al TPV seguir cobrando si se cae la red (el *service worker* solo funciona con HTTPS).
+
+### 5.4 El caso de uso automatizado: emitir una factura
+
+[`factura_automatica.py`](docs/erp/35-factura-automatica/factura_automatica.py) hace, con el usuario `gerente` y sin tocar la pantalla, lo mismo que haría el gerente a mano:
+
+```
+cliente (busca o crea) → producto (busca o crea, IVA 21 % servicios) → pedido de venta confirmado
+   → factura creada y validada (numeración correlativa INV/2026/xxxxx) → cobro registrado ("paid") → PDF descargado
+```
+
+Es el caso de uso de extremo a extremo que pide el enunciado. Repetido el 23/10 en una instalación limpia. No envía la factura por correo ni descuenta stock (eran ideas de ampliación del plan).
+
+**Pendiente legal:** TicketBAI (Euskadi) o Veri\*Factu. Los módulos existen en Odoo, pero necesitan un certificado digital; está en las dudas para el profesor (#6).
+
+---
+
+## 6. Cómo se relaciona Odoo con la web
+
+**No se relacionan: están separados a propósito.**
+
+| | Web pública | Odoo |
+|---|---|---|
+| Para quién | Cualquiera en internet | Personal del restaurante |
+| Dónde está | AWS (EC2 + S3) | Servidor del local |
+| Qué datos tiene | Solo texto e imágenes públicas | Clientes, ventas, facturas, empleados, contabilidad |
+| Accesible desde internet | Sí, por HTTPS | **No**: solo desde la LAN |
+| Dirección | `https://almichain1.duckdns.org` | `http://192.168.10.10:8069` (HTTPS pendiente, #52) |
+
+Por qué:
+
+1. **El enunciado pide una web unidireccional**: «que, de momento, sea únicamente unidireccional (es decir, solo exponga información)». No tiene que recibir ni guardar nada, así que no necesita hablar con el ERP.
+2. **Seguridad:** si atacan la web, en ella no hay ventas, facturas ni datos de clientes. Y como Odoo no está publicado en internet, no hay un camino desde la web hasta el ERP.
+3. **Odoo trae su propio módulo de sitio web y se desinstaló** ([tarea 34, incidencias 4 y 5](docs/erp/34-configurar-odoo/DOCUMENTACION.md)): convertía a Odoo en una web pública y activaba el registro libre de usuarios.
+
+Lo que sí comparten es la **información de negocio**, que hoy se mantiene a mano en los dos sitios: el nombre de la empresa, la dirección y los platos. Los platos del slideshow de la web y la carta del TPV son contenidos distintos; si cambia la carta, hay que cambiar la web a mano y volver a publicarla (sección 11).
+
+**Si en el futuro la web dejara de ser unidireccional**, el camino natural sería que el formulario de contacto creara una *oportunidad* en el CRM de Odoo. Habría que hacerlo con un intermediario (por ejemplo, una función en AWS que llame a la API de Odoo con un usuario con permiso solo para crear oportunidades), nunca abriendo Odoo a internet. Hoy el formulario es un placeholder que no envía nada.
+
+---
+
+## 7. Cómo se relaciona Odoo con la base de datos del establecimiento
+
+El enunciado pide **diseñar** las bases de datos de cada establecimiento (E/R, tablas, implementación y consultas). Eso es un ejercicio de diseño de la asignatura de Bases de Datos, distinto de la base que usa Odoo por dentro. Por eso hay **dos bases de datos**, las dos en PostgreSQL:
+
+| | Base `tienda` (Odoo) | Base `almi_chain` (nuestro diseño) |
+|---|---|---|
+| Quién la diseña | Odoo (cientos de tablas) | Nosotros: E/R → 3FN → DDL (tareas 38–40) |
+| Versión | PostgreSQL 17, en Docker | Probada en PostgreSQL 16 |
+| Tablas | Las de Odoo | 13: establecimiento, empleado, cliente, modelo_equipo, equipo, plato, articulo, stock, receta, factura, linea_factura, campana_marketing, envio_campana |
+| Para qué | Funcionamiento real del restaurante | Demostrar el diseño: claves, normalización, reglas y permisos |
+| Copia de seguridad | Sí (restic, tarea 44) | **Pendiente** de añadir a la copia cuando tenga datos (#41, #44) |
+
+Las dos modelan **el mismo negocio**, así que sus entidades se corresponden:
+
+| Nuestra tabla | Equivalente en Odoo |
+|---|---|
+| establecimiento | `res.company` / `stock.warehouse` |
+| empleado | `hr.employee` |
+| cliente | `res.partner` |
+| plato | `product.template` disponible en el TPV |
+| articulo, stock, receta | `product.product`, `stock.quant`, listas de materiales (no se usan) |
+| factura, linea_factura | `pos.order` / `account.move` y sus líneas |
+| equipo, modelo_equipo | `pos.config` (los TPV); Odoo no inventaría los equipos |
+| campana_marketing, envio_campana | `mailing.mailing` (Email Marketing) |
+
+Las reglas de negocio de nuestra base se aplican en el propio gestor ([tarea 40](docs/bd/40-scripts-ddl.md)):
+
+| Regla | Qué garantiza | Cómo |
+|---|---|---|
+| R-01 | El empleado y el TPV de una factura son del mismo local | Disparador |
+| R-02 | Solo un TPV emite facturas | Disparador |
+| R-03 | Una impresora solo se conecta a un TPV de su local | Disparador |
+| R-04 | Las facturas emitidas no se modifican ni se borran | Permisos: `rol_aplicacion` solo tiene INSERT |
+| R-05 | Numeración correlativa y sin huecos por serie | Disparador con bloqueo por serie |
+| R-06 | Cada venta descuenta del stock los artículos de la receta del plato | Disparador |
+
+Odoo aplica las equivalentes por su cuenta (numeración de facturas, no modificar facturas validadas, permisos por grupo). **Decisión pendiente del equipo:** si `almi_chain` va en el mismo PostgreSQL que Odoo (otra base en el mismo servidor y el mismo RAID) o en uno aparte. Lo más sencillo es el mismo servidor, en otra base y con sus propios roles, para que entre en las mismas copias.
+
+---
+
+## 8. Los datos no se pierden: RAID, copias y restauración
+
+```mermaid
+flowchart LR
+    ODOO["Odoo + PostgreSQL<br/>(datos vivos)"] -- "pg_dump + filestore + configuración<br/>cada día a las 02:30 (systemd timer)" --> RESTIC{{"restic<br/>cifra AES-256 · deduplica"}}
+    RESTIC --> RAID[("RAID 1 /srv/datos<br/>2 discos en espejo")]
+    RESTIC --> USB[("Disco USB BACKUP_USB<br/>el gerente se lo lleva")]
+    USB -- "probar-restauracion.sh<br/>entorno aislado" --> PRUEBA["Odoo temporal en :8070<br/>16 comprobaciones · RTO 46 s"]
+```
+
+| Pieza | Protege contra | No protege contra |
+|---|---|---|
+| **RAID 1** ([#43](docs/backup/43-raid1/DOCUMENTACION.md)) | La avería de un disco: el servidor sigue funcionando y el espejo se reconstruye (27 s en la prueba) | Borrados, virus o un incendio: el RAID copia el error a los dos discos |
+| **Copias 3-2-1** ([#44](docs/backup/44-backup-3-2-1/DOCUMENTACION.md)) | Todo lo anterior: **3** copias (datos vivos, RAID, USB), **2** soportes, **1** fuera del local. Retención 7 diarias, 4 semanales y 6 mensuales | — |
+| **Prueba de restauración** ([#45](docs/backup/45-restauracion/DOCUMENTACION.md)) | Copias que parecen buenas y no lo son: se restaura de verdad en un entorno aislado y se compara con producción | — |
+
+- **RPO** (datos que se pueden perder): hasta 24 h. **RTO** (tiempo hasta volver a funcionar): 46 s en la prueba.
+- La contraseña de cifrado está en el servidor y **fuera de él** (gestor de contraseñas del gerente). Sin ella, las copias no sirven.
+- Todo se identifica por UUID o etiqueta, nunca por `/dev/sdX`: al conectar el USB los discos cambiaron de nombre y no se rompió nada.
+
+---
+
+## 9. La recreativa y el arcade stick
+
+```
+Botones y palanca ─► Arduino Leonardo (firmware HID, mapeo en EEPROM)
+                        │ USB: se presenta como un joystick estándar, sin drivers
+                        ▼
+Equipo de 1 núcleo y 1 GB ─ Debian 13 sin escritorio
+   arranque ─► autologin del usuario "arcade" (sin sudo, contraseña bloqueada) en tty1
+            ─► startx ─► MAME a pantalla completa en bucle (4,7 s desde el encendido)
+   red: Wi-Fi de invitados (aislada del TPV y del servidor)
+```
+
+- **Por qué un joystick HID:** cualquier emulador y cualquier sistema (Linux, Windows) lo reconoce sin drivers, que es lo que pide el enunciado («compatible con cualquier emulador»). El mapeo se cambia por el puerto serie (`MAP`, `INV`, `ZM`, `GUARDAR`…) y se guarda en la EEPROM con número de control y checksum: eso es el «input personalizable» ([firmware](arduino/mando-joystick/README.md)).
+- **Optimización** ([tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md)): sin escritorio, arranque a `multi-user.target`, GRUB sin espera, fuera las tareas en segundo plano que dan tirones (actualizaciones automáticas, índices), `swappiness` bajo y menos disco. Se mantienen AppArmor y SSH (seguridad y administración).
+- **Pruebas de rendimiento:** antes y después con `systemd-analyze`, `free`, `ps` y `mame -bench`. **Falta repetirlas en la VM de 1 núcleo y 1 GB** (la del enunciado) y en el equipo real.
+- **Monitorización** ([tarea 18](docs/arcade/18-monitorizacion-recreativa.md)): `monitor-recreativa.sh` toma CPU, carga, RAM, swap, temperatura y consumo de MAME a un CSV mientras se juega, y `resumen-monitorizacion.sh` lo resume.
+- **Alternativa en estudio:** Batocera (#51). Arranca con 1 GB, pero su propia guía pide 2 GB y viene con contraseña de root por defecto.
+- **ROMs:** solo las 5 que el equipo de MAME publica con permiso de sus autores para uso no comercial.
+
+---
+
+## 10. Los puestos Windows y Linux
+
+### 10.1 Gerente (arranque dual)
+
+Primero Windows y después Ubuntu (si se hace al revés, Windows borra el arranque de GRUB). Ubuntu se instala «junto a Windows Boot Manager» en el espacio libre y los dos comparten la partición EFI. Antes: BitLocker desactivado e hibernación apagada, para que Linux no estropee la partición de Windows.
+
+| Sistema | Cuenta de uso diario | Cuenta de mantenimiento | Seguridad |
+|---|---|---|---|
+| Windows 10 | `gerente` (estándar) | `admin`; la cuenta integrada `Administrador`, desactivada | UAC pide la contraseña de `admin`; Firewall y Windows Update |
+| Ubuntu | `gerente` (sin sudo) | `administrador` (sudo; `admin` está reservado en Ubuntu) | `ufw` deniega lo entrante; actualizaciones de seguridad automáticas |
+
+[Guía y evidencias (tarea 12)](docs/so/12-dual-boot.md). La VM está en Google Drive; sus contraseñas, nunca en el repositorio.
+
+### 10.2 TPV (pendiente, #13 y #15)
+
+Lo previsto en la tarea 7: usuario estándar para el cajero y otro de administración; **modo quiosco** (Acceso asignado de Windows 10 Pro) con el navegador abriendo solo el TPV de Odoo; USB de almacenamiento bloqueado; firewall con salida solo al servidor, DNS y actualizaciones; actualizaciones activas. Todo con un script de PowerShell para repetirlo en los dos TPV.
+
+**Riesgo conocido:** Windows 10 dejó de tener actualizaciones gratuitas el 14/10/2025. El enunciado lo exige, así que se compensa aislando y restringiendo los TPV.
+
+### 10.3 Impresoras (pendiente, #14 y #37)
+
+Por USB al TPV: el ticket que genera Odoo en el navegador se imprime con el driver de Windows de la Epson. Así la impresora no tiene IP ni panel de administración en la red.
+
+---
+
+## 11. La web y su publicación en AWS
+
+### 11.1 La web
+
+Una sola página ([web/](web/)) en HTML, CSS y JavaScript sin dependencias:
+
+| Requisito | Cómo |
+|---|---|
+| Geolocalización | Botón «Usar mi ubicación» (`navigator.geolocation`) y mapa de OpenStreetMap; solo funciona con HTTPS |
+| Formulario de contacto placeholder | Se valida en el navegador y muestra que no envía datos |
+| Slideshow de platos estrella | Botones anterior/siguiente accesibles |
+| Responsiva | Diseño adaptable con menú desplegable en móvil ([wireframes](docs/web/27-wireframes.md)) |
+| Accesible y rápida | Lighthouse 98–100 en móvil y escritorio; W3C sin errores ([tarea 29](docs/evidencias/web/lighthouse-w3c.txt)) |
+
+### 11.2 Cómo llega al navegador
+
+```
+web/ (repositorio) ──subida──► S3 almi-chain-web-2026 (privado, bloqueo de acceso público)
+                                    │  aws s3 sync cada 5 min, con el rol de la instancia (sin claves guardadas)
+                                    ▼
+                              EC2: /var/www/almichain ─ nginx (HTTPS, HSTS, cabeceras de seguridad, sin versión)
+                                    ▲
+navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443 ─┘   (80 redirige a 443)
+```
+
+- **Por qué no CloudFront + ACM:** el dominio gratuito (DuckDNS) solo admite registros A, y CloudFront y ACM necesitan CNAME. Con una IP elástica basta un registro A y Let's Encrypt emite el certificado gratis (renovación automática).
+- **Reproducible:** [`instalar-servidor-web.sh`](scripts/web/instalar-servidor-web.sh) monta el servidor en una EC2 nueva. Falta automatizar la creación de la infraestructura con Terraform y la publicación con GitHub Actions (#31).
+- **Learner Lab:** la EC2 se apaga al terminar cada sesión, así que la web solo responde con el laboratorio arrancado. Al terminar el reto hay que **liberar la IP elástica**.
+
+---
+
+## 12. Seguridad en toda la solución
+
+| Capa | Mínimos privilegios | Secretos | Cifrado | Estado |
+|---|---|---|---|---|
+| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git (Drive para la VM) | — | Gerente y recreativa hechos; TPV pendiente (#13) |
+| Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi | WPA2-AES; WPA3 pendiente | En curso (#24) |
+| Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS pendiente** (#52) | En curso |
+| Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Usuarios con login creados aparte | — | En curso (#42) |
+| Copias | Solo root lee la contraseña | Contraseña de restic fuera del servidor | AES-256 | Hecho |
+| AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
+| Repositorio | Cambios por Pull Request con revisor | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
+
+Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo, contraseña de root de Batocera, red de invitados y WPA3, y cambiar las contraseñas débiles de la VM del gerente.
+
+---
+
+## 13. Cómo se gestiona el proyecto
+
+```mermaid
+flowchart LR
+    CSV["backlog-kanban.csv<br/>(fuente única)"] -- "python3 scripts/gantt.py" --> G["gantt.md + gantt.svg"]
+    CSV -.-> A2["Anexo II · 11 pasos"]
+    RAMA["rama por tarea"] --> PR["Pull Request"] --> REV["revisor ≠ responsable"] --> MAIN["main"]
+    PR -- "CI" --> GL["gitleaks"]
+    MAIN --> VER["scripts/verificar-repo.sh"]
+```
+
+- **Planificación:** cada tarea tiene responsable, revisor (nunca el mismo), fechas, dependencias, **tipo** (Software, Físico, Documentación, Gestión), estado, evidencia y observaciones en el [CSV](docs/gestion/backlog-kanban.csv). El script valida el CSV (ciclos, fechas, fines de semana, evidencias que existen) y genera el [Gantt](docs/gestion/gantt.md) con las tareas hechas separadas de las que faltan.
+- **Reparto** ([roles.md](docs/gestion/roles.md)): el software pendiente lo llevan Adrian e Iker; las tareas físicas, cualquiera salvo Eneko.P (pendiente de confirmar si sigue en el equipo).
+- **Git** ([CONTRIBUTING.md](CONTRIBUTING.md)): una rama por tarea, Pull Request y revisión. Los secretos nunca entran (`.gitignore`, gitleaks en CI y hook de pre-commit con `bash scripts/instalar-hooks.sh`).
+- **Anexos:** [I, contrato de equipo](docs/gestion/anexo-I-contrato-equipo.md) y [II, 11 pasos](docs/gestion/anexo-II-11-pasos.md) (análisis, requisitos, decisiones, incidencias y pruebas).
+- **IA:** permitida por el enunciado; cada uso se anota en el [registro de IA](docs/gestion/registro-ia.md) con lo que se comprobó a mano.
+- **Comprobaciones:** `bash scripts/verificar-repo.sh` repite las pruebas automáticas (enlaces, Gantt, sintaxis, firmware, SQL, W3C, gitleaks).
+
+### Organización del repositorio
+
+| Carpeta | Contenido |
+|---|---|
+| `docs/gestion/` | Anexos, backlog, Gantt, reparto, registro de IA, verificación |
+| `docs/hardware/` | Necesidades, hardware, software y presupuesto (tareas 7–10) |
+| `docs/diagramas/` | Diagrama de arquitectura (11) y wireframes (27) |
+| `docs/so/` | Arranque dual (12) |
+| `docs/arcade/` | Recreativa, rendimiento, Batocera y monitorización (16–18) |
+| `docs/redes/` | WAN (22), plano y direccionamiento (23), red segura (24) |
+| `docs/web/` | Wireframes (27) y hosting (30) |
+| `docs/erp/` | Comparativa, Odoo, configuración y factura automática (32–35) |
+| `docs/bd/` | Modelo E/R (38), 3FN (39), DDL (40) y scripts SQL |
+| `docs/backup/` | RAID (43), copias (44) y restauración (45) |
+| `docs/evidencias/` | Capturas del arranque dual, la web y el hosting |
+| `arduino/` | Firmware y esquema del arcade stick |
+| `web/` | La web publicada |
+| `scripts/` | Gantt, verificación, hooks, servidor web y monitorización de la recreativa |
+| `iac/` | Infraestructura como código (vacía, tarea 31) |
+
+---
+
+## 14. Qué depende de qué
+
+```mermaid
+flowchart TD
+    REQ["Enunciado"] --> HW["Necesidades y hardware (7-10)"]
+    HW --> SO["Dual boot (12) · TPV (13-15)"]
+    HW --> RED["Plano e IP (23)"] --> SEG["Red segura (24)"] --> WDS["WDS (25)"] --> ANA["Análisis (26)"]
+    REQ --> ERP["Comparativa ERP (32)"] --> ODOO["Odoo (33)"] --> CONF["Módulos y TPV (34)"] --> CASO["Factura automática (35)"]
+    CONF --> IMPORT["Importar/exportar (36)"]
+    SO --> IMPR["Impresora (14)"] --> TICKET["Ticket desde Odoo (37)"]
+    CONF --> TICKET
+    ODOO --> HTTPS["HTTPS en Odoo (52)"]
+    REQ --> ER["E/R (38)"] --> FN["3FN (39)"] --> DDL["DDL (40)"] --> DATOS["Datos y consultas (41)"] & ROLES["Usuarios BD (42)"]
+    ODOO --> RAID["RAID 1 (43)"] --> COPIA["Copias 3-2-1 (44)"] --> RESTORE["Restauración (45)"]
+    DATOS --> COPIA
+    REQ --> ARC["Recreativa VM (16)"] --> REND["Rendimiento (17)"] & MON["Monitorización (18)"]
+    ARC --> FIS["Recreativa real (53)"] --> MED["Medidas reales (54)"]
+    FW["Firmware (20)"] --> PLACA["Prueba en placa (50)"]
+    MONT["Montaje stick (19)"] --> PLACA --> STICK["Stick con emuladores (21)"]
+    FIS --> STICK
+    REQ --> WF["Wireframes (27)"] --> WEB["Web (28)"] --> VAL["W3C y Lighthouse (29)"] & AWS["Hosting (30)"] --> IAC["IaC (31)"]
+    SO & SEG & AWS & ROLES & HTTPS --> SEGUR["Revisión de seguridad (46)"]
+    STICK & ANA & VAL --> PRUEBAS["Tabla de pruebas (47)"]
+    RESTORE --> DOC["Documentación final (48)"]
+    SEGUR --> PRES["Presentación (49)"]
+```
+
+---
+
+## 15. Glosario rápido
+
+| Término | Qué es |
+|---|---|
+| **TPV** | Terminal punto de venta: el ordenador de la barra donde se cobra |
+| **ERP** | Programa de gestión de la empresa (facturas, clientes, stock, personal…) |
+| **HID** | *Human Interface Device*: clase USB de teclados y mandos; funciona sin drivers |
+| **WDS** | *Wireless Distribution System*: une dos routers por Wi-Fi para ampliar la cobertura |
+| **VLAN** | Red virtual: separa grupos de equipos aunque compartan switch |
+| **RAID 1** | Dos discos con los mismos datos (espejo) |
+| **3-2-1** | 3 copias, 2 soportes distintos, 1 fuera del local |
+| **RTO / RPO** | Tiempo hasta recuperar el servicio / datos que se pueden perder |
+| **3FN** | Tercera forma normal: tablas sin redundancias ni dependencias transitivas |
+| **IaC** | Infraestructura como código (Terraform): la infraestructura se crea desde ficheros |
+| **Idempotente** | Que se puede ejecutar varias veces y deja el mismo resultado |
+| **Modo quiosco** | Windows abre una sola aplicación a pantalla completa y no deja salir de ella |

@@ -37,7 +37,7 @@ En el Arduino se hace con la librería `Keyboard.h` (`Keyboard.press()` / `Keybo
 En los menús de MAME, **Botón 1 (Ctrl)** y **Start (1)** también sirven para elegir, además de `Enter`.
 Lo configura `instalar-arcade.sh` en `/home/arcade/.mame/cfg/default.cfg` (puerto `UI_SELECT`).
 
-**Firmware ya hecho y compilado:** [`../arcade-stick/arcade_stick/arcade_stick.ino`](../arcade-stick/arcade_stick/arcade_stick.ino) (cableado y uso en [`../arcade-stick/README.md`](../arcade-stick/README.md)).
+**Firmware ya hecho y compilado:** [`arduino/mando-joystick/mando_joystick/mando_joystick.ino`](../../../arduino/mando-joystick/mando_joystick/mando_joystick.ino) (cableado y uso en [`arduino/mando-joystick/README.md`](../../../arduino/mando-joystick/README.md)).
 
 El "mapeo configurable en EEPROM" de la tarea 20 consiste en guardar en la EEPROM qué tecla manda cada botón,
 para poder cambiarlas sin volver a programar el Arduino.

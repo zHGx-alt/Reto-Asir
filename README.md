@@ -2,19 +2,35 @@
 
 Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de restaurantes. Enunciado en [Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx) y plan de trabajo en [almi-chain-plan.pdf](almi-chain-plan.pdf).
 
+**Para entender el proyecto entero** (qué pide el enunciado, qué pieza lo resuelve y cómo se relacionan la red, Odoo, la web, la base de datos y las copias): [LOGICA_RETO.md](LOGICA_RETO.md).
+
+## Estado
+
+**23 de 54 tareas hechas** (revisión del 23/10/2026). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
+
+```bash
+bash scripts/verificar-repo.sh
+```
+
 ## Estructura
 
 | Carpeta | Contenido |
 |---|---|
-| `docs/gestion/` | Anexo I, Anexo II, roles, backlog Kanban y registro de IA |
-| `docs/diagramas/` | Diagramas draw.io (arquitectura, red, AWS, BD) |
+| `docs/gestion/` | Anexo I, Anexo II, reparto, backlog, Gantt, registro de IA y verificación |
+| `docs/hardware/` | Necesidades, hardware, software y presupuesto (tareas 7-10) |
+| `docs/diagramas/` | Diagrama de arquitectura (tarea 11) y wireframes (tarea 27) |
+| `docs/so/` | Arranque dual del gerente (tarea 12) |
+| `docs/arcade/` | Recreativa MAME, rendimiento, Batocera y monitorización (tareas 16-18) |
+| `docs/redes/` | Comparativa WAN, plano y direccionamiento, red segura (tareas 22-24) |
 | `docs/web/` | Wireframes (tarea 27) y hosting en AWS (tarea 30) |
-| `docs/redes/` | Plano del local y plan de direccionamiento IP (tarea 23) |
-| `docs/evidencias/` | Capturas y logs de pruebas |
-| `iac/` | Infraestructura como código (Terraform/CloudFormation) |
+| `docs/erp/` | Comparativa de ERP, Odoo con Docker, configuración y factura automática (tareas 32-35) |
+| `docs/bd/` | Modelo E/R, modelo lógico 3FN, DDL y scripts SQL (tareas 38-40) |
+| `docs/backup/` | RAID 1, copias 3-2-1 y prueba de restauración (tareas 43-45) |
+| `docs/evidencias/` | Capturas del arranque dual, la web y el hosting |
+| `iac/` | Infraestructura como código (vacía: tarea 31) |
 | `web/` | Página web del restaurante |
-| `arduino/` | Firmware y esquemas del arcade stick |
-| `scripts/` | Scripts de configuración, backup y hooks de Git |
+| `arduino/` | Firmware y esquema del arcade stick |
+| `scripts/` | Gantt, verificación, hooks de Git, servidor web y monitorización de la recreativa |
 
 ## Gestión del proyecto
 
@@ -22,6 +38,7 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 - 11 pasos: [docs/gestion/anexo-II-11-pasos.md](docs/gestion/anexo-II-11-pasos.md)
 - Diagrama de Gantt: [docs/gestion/gantt.md](docs/gestion/gantt.md) (se regenera con `python3 scripts/gantt.py`)
 - Reparto de tareas: [docs/gestion/roles.md](docs/gestion/roles.md)
+- Verificación del estado: [docs/gestion/verificacion.md](docs/gestion/verificacion.md)
 - Planificación (fuente del Gantt y del Kanban): [docs/gestion/backlog-kanban.csv](docs/gestion/backlog-kanban.csv)
 - Uso de IA: [docs/gestion/registro-ia.md](docs/gestion/registro-ia.md)
 
