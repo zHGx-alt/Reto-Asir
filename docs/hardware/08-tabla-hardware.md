@@ -3,7 +3,7 @@
 - **Bloque:** 1 Hardware
 - **Depende de:** tarea 7 (necesidades de equipos)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Fecha de consulta de precios y disponibilidad:** 22/10/2026
+- **Fecha de consulta de precios y disponibilidad:** 22/10/2026 (impresora actualizada el 23/10/2026)
 - **Estado:** pendiente de revisión
 
 ## 1. Alcance y criterios
@@ -26,10 +26,10 @@ El hardware de otros bloques (router, repetidor Wi-Fi, switch, equipo de la máq
 | Gerente: equipo | 1 | Lenovo ThinkCentre Neo 50q Gen 4 (Mini PC) | Core i5-13420H (8 núcleos), 16 GB DDR4 ampliable a 32 GB, SSD NVMe de 512 GB, Windows 11 Pro, Gigabit Ethernet, HDMI y DisplayPort | 792,67 € | 792,67 € |
 | Gerente: monitor | 1 | Xiaomi A24i 24" | 23,8", Full HD 1920x1080, IPS, 100 Hz, DisplayPort y HDMI | 90,99 € | 90,99 € |
 | TPV de barra | 2 | Iggual AIO B156.88.N100 | Todo en uno de 15,6" Full HD táctil capacitivo, Intel N100 (4 núcleos), 8 GB, SSD de 256 GB, Windows 11 Pro, Gigabit Ethernet, 6 USB 2.0, 2 USB 3.2, RS-232 | 538,99 € | 1.077,98 € |
-| Impresora de tickets | 2 | Epson TM-T20III (011) USB + serie | Térmica de 80 mm, 250 mm/s, cortador automático, USB y RS-232, salida para cajón | 241,20 € | 482,40 € |
-| | | | **Total verificado** | | **2.444,04 €** |
+| Impresora de tickets | 2 | Epson TM-T20IV (C31CL47102) | Térmica de 80 mm, 250 mm/s, cortador automático, USB, Ethernet 10/100 y RS-232 | 199,86 € | 399,72 € |
+| | | | **Total verificado** | | **2.361,36 €** |
 
-Los precios proceden de tiendas online españolas consultadas el 22/10/2026. Las páginas no indican si el precio incluye IVA. En tiendas minoristas el precio mostrado suele incluirlo, pero hay que confirmarlo antes de preparar el presupuesto final (sección 6).
+Los precios proceden de tiendas online españolas consultadas el 22/10/2026 (la impresora, el 23/10/2026). Las páginas no indican si el precio incluye IVA. En tiendas minoristas el precio mostrado suele incluirlo, pero hay que confirmarlo antes de preparar el presupuesto final (sección 6).
 
 ## 3. Justificación por puesto
 
@@ -82,22 +82,22 @@ Los precios proceden de tiendas online españolas consultadas el 22/10/2026. Las
 
 ### 3.3 Impresoras de tickets (2 unidades)
 
-| | A: Epson TM-T20III (011) USB + serie (elegida) | B: Epson TM-T20III (012) Ethernet |
+| | A: Epson TM-T20IV (C31CL47102) (elegida) | B: Epson TM-T20III (011) USB + serie |
 |---|---|---|
-| Interfaces | USB y RS-232 | Solo Ethernet |
+| Interfaces | USB, Ethernet 10/100 y RS-232 | USB y RS-232 |
 | Velocidad | 250 mm/s | 250 mm/s |
 | Papel y corte | 80 mm, cortador automático | 80 mm, cortador automático |
-| Cajón portamonedas | Salida para cajón (ficha de Epson) | Sin confirmar |
-| Precio | 241,20 € | 227,00 € (PcComponentes) o 197,18 € (Beep) |
-| Disponibilidad | Disponible | Sin stock en ambas tiendas |
+| Cajón portamonedas | No consta en la página | Salida para cajón (ficha de Epson) |
+| Precio | 199,86 € | 241,20 € |
+| Estado del modelo | Vigente (sucesor de la serie T20III) | Descatalogado por Epson |
 
-**Elección: A (USB), una por TPV.** Conectar la impresora por USB directamente al TPV evita un dispositivo más en la red: no necesita IP, ni reglas de cortafuegos, ni panel de administración expuesto (RI-06). Es coherente con el principio de mínimos privilegios. Cumple RI-01 (80 mm térmica), RI-03 (cortador automático) y RI-07 (250 mm/s), y trae salida para cajón (RI-04) para ampliarlo si el cliente lo pide. Es compatible con los comandos de impresión estándar de tickets y con el controlador de Windows (RI-02), que debe comprobarse en la tarea de instalación de impresora.
+**Elección: A, conectada por USB al TPV (una por TPV).** Se cambia la T20III de la primera versión por la T20IV por tres razones: cuesta menos (41,34 € menos por unidad), sigue en catálogo del fabricante y trae USB y Ethernet, lo que cumple RI-05 por completo. La propuesta de Peio en el presupuesto (tarea 10) ya incluía este modelo.
 
-**Cuándo elegir B:** si más adelante se decide imprimir por red desde el servidor, o compartir una impresora entre dos puestos. Esta opción añade la gestión de IP fija y reglas entre redes, y a fecha de consulta no hay stock.
+La conexión recomendada sigue siendo **USB** directamente al TPV: evita un dispositivo más en la red, sin IP ni reglas de cortafuegos ni panel de administración expuesto (RI-06), en coherencia con los mínimos privilegios. La interfaz Ethernet queda disponible si más adelante se decide imprimir por red o compartir una impresora entre dos puestos; en ese caso habría que añadir IP fija y reglas entre redes (ver tarea 10, sección 4.3). Cumple RI-01 (80 mm térmica), RI-03 (cortador automático) y RI-07 (250 mm/s). La compatibilidad con ESC/POS y con el controlador de Windows (RI-02) debe comprobarse en la tarea de instalación de impresora.
 
 **Riesgos:**
-- La ficha de Epson Europa marca el modelo TM-T20III (011) como **descatalogado**. Se sigue vendiendo en tiendas, pero hay riesgo de recambios y soporte. El sucesor es la serie TM-T20IV; una ficha de un distribuidor la describe con USB, serie y Ethernet, pero no se ha podido verificar precio ni disponibilidad en euros.
-- Una opinión de un comprador dice que este modelo no trae puerto RJ11 para cajón, y Epson lo lista como compatible con apertura de cajón. Hay que confirmarlo en la hoja técnica antes de comprar si el cliente quiere cajón.
+- La página de la tienda no menciona la salida para cajón (RI-04). Epson lista la serie TM-T20 como compatible con apertura de cajón, pero hay que confirmarlo en la hoja técnica del modelo antes de comprar si el cliente quiere cajón.
+- La tienda no indica si el precio incluye IVA (H-02) ni stock; muestra entrega estimada para el 26/10/2026.
 - El enunciado no dice cuántas impresoras hay. Se ha supuesto una por TPV (S-01 de la tarea 7).
 
 ### 3.4 Monitor del gerente
@@ -127,9 +127,9 @@ Los precios proceden de tiendas online españolas consultadas el 22/10/2026. Las
 | RT-09 Apto hostelería | **No confirmado** | Sin datos de refrigeración ni protección IP. |
 | RI-01, RI-03, RI-07 Térmica, corte y velocidad | Sí | 80 mm, cortador automático, 250 mm/s. |
 | RI-02 ESC/POS y controlador Windows | A verificar | Comprobar en la tarea de instalación de la impresora. |
-| RI-04 Cajón | A verificar | Epson lo lista; una opinión dice lo contrario. |
-| RI-05 USB y Ethernet | Parcial | La elegida es USB y serie. Ethernet queda como alternativa. |
-| RI-06 Seguridad de la impresora | Sí | Al ir por USB no expone ningún servicio de red. |
+| RI-04 Cajón | A verificar | La página de la tienda no lo menciona; hay que confirmarlo en la hoja técnica de Epson. |
+| RI-05 USB y Ethernet | Sí | La TM-T20IV trae USB, Ethernet y RS-232. |
+| RI-06 Seguridad de la impresora | Sí | Al ir por USB no expone ningún servicio de red. Si se usa Ethernet, IP fija y reglas de cortafuegos. |
 
 ## 5. Coste
 
@@ -138,12 +138,12 @@ Los precios proceden de tiendas online españolas consultadas el 22/10/2026. Las
 | Equipo del gerente | 792,67 € |
 | Monitor del gerente | 90,99 € |
 | 2 TPV | 1.077,98 € |
-| 2 impresoras | 482,40 € |
-| **Total verificado (precios de tienda)** | **2.444,04 €** |
-| Si los precios incluyen IVA del 21 %: base imponible | 2.019,87 € |
-| Si los precios incluyen IVA del 21 %: IVA | 424,17 € |
+| 2 impresoras | 399,72 € |
+| **Total verificado (precios de tienda)** | **2.361,36 €** |
+| Si los precios incluyen IVA del 21 %: base imponible | 1.951,54 € |
+| Si los precios incluyen IVA del 21 %: IVA | 409,82 € |
 
-Elementos sin precio verificado, para añadir al presupuesto con el valor que se confirme: teclado y ratón del gerente (estimación propia de 20 €, sin verificar), rollos de papel térmico de 80 mm (estimación propia de 25 € por el primer pack, sin verificar) y SAI opcional. Con esas dos estimaciones, el total sería de unos 2.489,04 €.
+Elementos sin precio verificado, para añadir al presupuesto con el valor que se confirme: teclado y ratón del gerente (estimación propia de 20 €, sin verificar), rollos de papel térmico de 80 mm (estimación propia de 25 € por el primer pack, sin verificar) y SAI opcional. Con esas dos estimaciones, el total sería de unos 2.406,36 €.
 
 ## 6. Incidencias y supuestos
 
@@ -151,8 +151,8 @@ Elementos sin precio verificado, para añadir al presupuesto con el valor que se
 |---|---|---|
 | H-01 | **Windows 10 frente a Windows 11 Pro.** Los equipos elegidos traen Windows 11 Pro y el enunciado exige Windows 10. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en las condiciones de licencia de Microsoft y del vendedor. | Confirmar la licencia. Documentar el riesgo de Windows 10 sin soporte estándar en la tarea de software. |
 | H-02 | Los precios no indican si incluyen IVA. | Confirmar con la tienda o en el carrito antes del presupuesto final. |
-| H-03 | Stock: a fecha de consulta no hay stock del Lenovo Neo 50q Gen 4 ni de la versión Ethernet de la impresora. | Buscar el mismo modelo en otras tiendas o el sucesor. |
-| H-04 | El modelo de impresora está descatalogado por Epson. | Valorar la serie TM-T20IV. |
+| H-03 | Stock: a fecha de consulta no hay stock del Lenovo Neo 50q Gen 4. | Buscar el mismo modelo en otras tiendas o el sucesor. |
+| H-04 | Resuelta: se sustituye la impresora descatalogada TM-T20III por la TM-T20IV (vigente). | Comprobar precio y stock antes de comprar. |
 | H-05 | RT-09 (hostelería) no confirmado. | Decidir con el equipo si se acepta el riesgo o se sube de gama. |
 | H-06 | En las pruebas del reto estos equipos se simulan en máquinas virtuales (VirtualBox o VMware Workstation). | Ver S-07 de la tarea 7. |
 | H-07 | Precios sujetos a cambio. | Actualizar antes de la entrega final. |
@@ -172,6 +172,7 @@ Se añadirá al presupuesto global cuando cada bloque lo defina:
 - [Iggual AIO B156.88.N100, PcComponentes](https://www.pccomponentes.com/ordenador-todo-en-uno-iggual-aio-b15688n100-intel-n100-8gb-256gb-ssd-uhd-156-windows-11-pro-tactil)
 - [Approx APPTPV05+ G8-256, PcComponentes](https://www.pccomponentes.com/approx-apptpv05-plus-g8-256-ordenador-tpv-intel-celeron-j4125-8gb-256gb-ssd-15-6-tactil)
 - [10POS TPV J6412, Beep](https://www2.beep.es/es/product/10t-15j648128w1-10pos-tpv-15-intel-j6412-8gb-128gb-w11-iot)
+- [Epson TM-T20IV Ethernet/USB/RS-232, PcComponentes (consultada el 23/10/2026)](https://www.pccomponentes.com/impresora-termica-ethernet-usb-rs-232-epson-tm-t20iv-con-cortador-automatico-y-codigos-de-barras)
 - [Epson TM-T20III USB + serie, PcComponentes](https://www.pccomponentes.com/epson-tm-t20iii-impresora-tickets-usb-serial-negra)
 - [Epson TM-T20III Ethernet, PcComponentes](https://www.pccomponentes.com/epson-tm-t20iii-impresora-tickets-ethernet-negra)
 - [Epson TM-T20III Ethernet, Beep](https://www.beep.es/c31ch51012-epson-impresora-tickets-tm-t20iii-ethernet/p)
