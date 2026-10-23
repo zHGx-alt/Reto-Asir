@@ -55,7 +55,7 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 | 7 | Definir necesidades de equipos (gerente; 2 TPV; impresoras) | 1 Hardware | 22/10–22/10 | — | Iker | Hecho |
 | 8 | Tabla de hardware con justificación | 1 Hardware | 23/10–26/10 | #7 (Eneko.S) | Peio | Hecho |
 | 15 | Scripts de configuración reproducibles | 2 SO | 03/11–04/11 | #12 (Eneko.P), #13 (Markel) | Markel | Pendiente |
-| 18 | Monitorización de recursos de la recreativa | 3 Arcade | 30/10–02/11 | #16 (Iker) | Markel | Pendiente |
+| 18 | Monitorización de recursos de la recreativa | 3 Arcade | 30/10–02/11 | #16 (Iker) | Markel | Hecho |
 | 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | 04/11–05/11 | #25 (Peio) | Markel | Pendiente |
 | 32 | Comparativa y elección de ERP | 7 ERP | 22/10–23/10 | — | Markel | Hecho |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | 26/10–27/10 | #38 (Adrian) | Peio | Hecho |
