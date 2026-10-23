@@ -23,6 +23,12 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 - Planificación (fuente del Gantt y del Kanban): [docs/gestion/backlog-kanban.csv](docs/gestion/backlog-kanban.csv)
 - Uso de IA: [docs/gestion/registro-ia.md](docs/gestion/registro-ia.md)
 
+## Archivos en Google Drive
+
+Lo que no cabe en el repositorio (GitHub no admite archivos de más de 100 MB) o no debe estar en él (contraseñas) está en la [carpeta Reto-Asir de Google Drive](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link):
+
+- Disco de la VM de arranque dual Windows 10 + Ubuntu (`VM-dualboot-W10-ubuntu-disk1.vmdk`, 12,5 GB) y sus credenciales. Cómo importarla en otro equipo: [docs/so/12-dual-boot.md, sección 8](docs/so/12-dual-boot.md#8-entrega-de-la-máquina-virtual).
+
 ## Contribuir
 
 Si nunca has usado Git, empieza por la [guía de Git del equipo](CONTRIBUTING.md): instalación, flujo diario con ramas y Pull Requests, problemas habituales y chuleta de comandos.
