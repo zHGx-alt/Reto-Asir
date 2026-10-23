@@ -1,0 +1,52 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Arquitectura de equipos</title>
+<style>body{margin:0;background:#fff;font-family:sans-serif} .mermaid{padding:16px}</style></head>
+<body><div class="mermaid">
+flowchart TB
+    internet((Internet))
+
+    subgraph AWS["☁️ AWS (tareas 30–31)"]
+        cf["CloudFront + HTTPS<br/>dominio propio"]
+        s3[("S3<br/>web estática")]
+        cf --> s3
+    end
+    gh["GitHub<br/>repo + Actions"] -- "despliegue automático (OIDC)" --> s3
+
+    internet --- cf
+    internet --- ont["Router del operador / ONT<br/>WAN (tarea 22, pendiente)"]
+
+    subgraph LOCAL["🏪 Local"]
+        router["Router principal<br/>firewall · WPA3 · DHCP<br/>(tarea 24)"]
+        wds["Router 2 · WDS<br/>amplía la WiFi<br/>(tarea 25)"]
+        ont --- router
+        router -. "WDS" .- wds
+
+        subgraph LAN["LAN tienda · 192.168.10.0/24 (propuesta, tarea 23)"]
+            srv["🖥️ Servidor ERP · .10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · backup restic"]
+            usb[("💾 USB backup<br/>BACKUP_USB")]
+            ger["💼 PC gerente · .20<br/>Windows 10 + Linux<br/>(arranque dual, tarea 12)"]
+            tpv1["🧾 TPV 1 · .31<br/>Windows (bastionado, tarea 13)"]
+            tpv2["🧾 TPV 2 · .32<br/>Windows (bastionado, tarea 13)"]
+            imp["🖨️ Impresora de tickets<br/>(tarea 14)"]
+            rec["🕹️ Recreativa · .50<br/>Debian 13 · MAME 0.276"]
+            stick["Arcade stick<br/>ATmega32U4 (HID)"]
+        end
+
+        subgraph INV["WiFi invitados · 192.168.20.0/24 (aislada)"]
+            cli["📱 Móviles de clientes"]
+        end
+
+        router --- srv & ger & tpv1 & tpv2 & rec
+        wds --- cli
+        router --- cli
+        srv -- "USB" --- usb
+        tpv1 -- "USB" --- imp
+        rec -- "USB" --- stick
+    end
+
+    tpv1 & tpv2 -- "navegador → Odoo TPV<br/>:8069 (HTTPS pendiente)" --> srv
+    ger -- "navegador → Odoo<br/>gestión" --> srv
+    cli -. "✖ sin acceso a la LAN" .-> srv
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'default', flowchart:{htmlLabels:true, curve:'basis'}});</script>
+</body></html>
