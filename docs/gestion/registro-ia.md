@@ -26,3 +26,6 @@ El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para pod
 | 2026-10-22 | Iker | Claude Code | 9 Backup | RAID 1 con simulación de fallo, backup 3-2-1 cifrado con restic y prueba de restauración aislada (tareas 43-45) | Revisada la comparación de la restauración: la primera versión solo comprobaba 1 de 9 datos (corregido) |
 | 2026-10-22 | Iker | Claude Code | 1 Hardware | Borrador del diagrama de arquitectura de equipos en Mermaid (tarea 11) | Pendiente de completar con los modelos de las tareas 8-9 |
 | 2026-10-23 | Iker | Claude Code | 3 Arcade | Recreativa con Batocera 43.1 en VM de 1 núcleo/1 GB | En curso: arranca; faltan medidas y endurecimiento |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Capturas de la web implementada para el documento de wireframes (tarea 27) | Generadas con Chrome; comprobado que el mapa carga |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Revisión de la web contra el enunciado y corrección de contraste, imágenes, favicon y validación | Lighthouse 98-100 y W3C sin errores; pendiente de revisar por Eneko.P (tarea 29) |
+| 2026-10-23 | Adrian | Claude Code | 0 Gestión | Estados del backlog (tareas 12 y 30), Anexo II (hosting, incidencias y pruebas web) y README | Pendiente de revisar por el equipo |

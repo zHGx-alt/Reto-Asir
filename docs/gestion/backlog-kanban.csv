@@ -10,7 +10,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 9,Tabla de software y licencias,1 Hardware,Markel,Eneko.P,2026-10-23,2026-10-26,7,Hecho
 10,Presupuesto con enlaces (incl. WAN y router extra),1 Hardware,Peio,Eneko.S,2026-10-27,2026-10-27,8 9 22,Pendiente
 11,Diagrama de arquitectura de equipos,1 Hardware,Iker,Adrian,2026-10-27,2026-10-28,8 9,Pendiente
-12,Dual boot Win10 + Linux en el equipo del gerente,2 SO,Eneko.P,Eneko.S,2026-10-28,2026-10-30,8,Pendiente
+12,Dual boot Win10 + Linux en el equipo del gerente,2 SO,Eneko.P,Eneko.S,2026-10-28,2026-10-30,8,Hecho
 13,Bastionado de los 2 TPV Windows (usuario estándar; kiosko; USB),2 SO,Markel,Iker,2026-10-28,2026-11-02,9,Pendiente
 14,Instalar impresora de tickets y prueba,2 SO,Peio,Eneko.S,2026-10-29,2026-10-30,8,Pendiente
 15,Scripts de configuración reproducibles,2 SO,Eneko.S,Markel,2026-11-03,2026-11-04,12 13,Pendiente
@@ -29,7 +29,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 27,Wireframes y diseño conceptual web,6 Web,Peio,Eneko.S,2026-10-22,2026-10-23,,Hecho
 28,Implementar web (mapa; formulario; slideshow),6 Web,Markel,Eneko.S,2026-10-26,2026-10-30,27,Hecho
 29,Validación W3C; Lighthouse y accesibilidad,6 Web,Eneko.P,Peio,2026-11-02,2026-11-03,28,Pendiente
-30,Hosting AWS con dominio y HTTPS,6 Web,Adrian,Eneko.P,2026-11-02,2026-11-04,28,Pendiente
+30,Hosting AWS con dominio y HTTPS,6 Web,Adrian,Eneko.P,2026-11-02,2026-11-04,28,Hecho
 31,IaC y despliegue automatizado (Terraform + Actions),6 Web,Iker,Adrian,2026-11-02,2026-11-05,28,Pendiente
 32,Comparativa y elección de ERP,7 ERP,Eneko.S,Markel,2026-10-22,2026-10-23,,Hecho
 33,Instalar Odoo + PostgreSQL con Docker,7 ERP,Iker,Peio,2026-10-26,2026-10-28,32,Pendiente
