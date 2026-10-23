@@ -6,13 +6,16 @@ Hace por la API (XML-RPC), sin clics, el mismo recorrido que haría el gerente a
   1. Busca o crea el cliente
   2. Busca o crea el producto
   3. Crea el pedido de venta y lo confirma
-  4. Genera la factura y la valida (asiento contable con IVA 21 %)
+  4. Genera la factura y la valida (asiento contable con su IVA)
   5. Registra el cobro
   6. Descarga el PDF de la factura
 
 Uso:
   ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente ODOO_PASSWORD=... \
-  python3 factura_automatica.py --cliente "Cliente de prueba" --producto "Partida recreativa" --precio 2.50 --cantidad 4
+  python3 factura_automatica.py --cliente "Eventos Ejemplo S.L." --producto "Menú de grupo (evento)" --precio 30 --cantidad 20
+
+Caso de uso real del restaurante: una empresa reserva una comida de grupo y pide factura completa
+(con su NIF), no el ticket simplificado del TPV. En hostelería el IVA es del 10 % (--iva 10, por defecto).
 
 Se ejecuta con el usuario "gerente", no con admin (mínimos privilegios).
 """
@@ -30,11 +33,12 @@ USUARIO = os.environ.get("ODOO_USER", "gerente")
 PASSWORD = os.environ["ODOO_PASSWORD"]
 
 p = argparse.ArgumentParser(description="Emite una factura de principio a fin en Odoo")
-p.add_argument("--cliente", default="Cliente de prueba")
-p.add_argument("--email", default="cliente.prueba@example.com")
-p.add_argument("--producto", default="Partida recreativa")
-p.add_argument("--precio", type=float, default=2.50, help="precio sin IVA")
-p.add_argument("--cantidad", type=float, default=4)
+p.add_argument("--cliente", default="Eventos Ejemplo S.L.")
+p.add_argument("--email", default="reservas@eventos.ejemplo.test")
+p.add_argument("--producto", default="Menú de grupo (evento)")
+p.add_argument("--precio", type=float, default=30.00, help="precio por comensal sin IVA")
+p.add_argument("--cantidad", type=float, default=20, help="comensales")
+p.add_argument("--iva", type=float, default=10, choices=[10, 21], help="10 = hostelería; 21 = otros servicios")
 p.add_argument("--pdf-dir", default=".")
 args = p.parse_args()
 
@@ -69,20 +73,22 @@ cliente = cliente[0] if cliente else x("res.partner", "create", {
     "country_id": x("res.country", "search", [["code", "=", "ES"]])[0]})
 paso(1, f"Cliente: {args.cliente} (id {cliente})")
 
-# 2. Producto: es un servicio (una partida), así que lleva el IVA 21 % de SERVICIOS ("21% S"), no el de bienes ("21% G").
-#    En la localización española la diferencia importa para la declaración del IVA (modelo 303).
-iva21 = x("account.tax", "search", [["type_tax_use", "=", "sale"], ["amount", "=", 21],
-                                     ["amount_type", "=", "percent"], ["tax_scope", "=", "service"]], limit=1)
+# 2. Producto: es un servicio (el menú servido en el local), así que lleva el IVA de SERVICIOS ("10% S" o "21% S"),
+#    no el de bienes ("G"). En la localización española la diferencia importa para la declaración del IVA (modelo 303).
+filtro_iva = [["type_tax_use", "=", "sale"], ["amount", "=", args.iva], ["amount_type", "=", "percent"]]
+iva = x("account.tax", "search", filtro_iva + [["tax_scope", "=", "service"]], limit=1)     or x("account.tax", "search", filtro_iva, limit=1)
+if not iva:
+    sys.exit(f"No hay un impuesto de venta del {args.iva:g} % en Odoo")
 producto = x("product.product", "search", [["name", "=", args.producto]], limit=1)
 if producto:
     producto = producto[0]
-    x("product.product", "write", [producto], {"taxes_id": [(6, 0, iva21)]})
+    x("product.product", "write", [producto], {"taxes_id": [(6, 0, iva)]})
 else:
     plantilla = x("product.template", "create", {
         "name": args.producto, "type": "service", "list_price": args.precio,
-        "invoice_policy": "order", "taxes_id": [(6, 0, iva21)], "available_in_pos": True})
+        "invoice_policy": "order", "taxes_id": [(6, 0, iva)], "available_in_pos": True})
     producto = x("product.product", "search", [["product_tmpl_id", "=", plantilla]])[0]
-nombre_iva = x("account.tax", "read", iva21, fields=["name"])[0]["name"]
+nombre_iva = x("account.tax", "read", iva, fields=["name"])[0]["name"]
 paso(2, f"Producto: {args.producto} a {args.precio:.2f} € + IVA {nombre_iva} (id {producto})")
 
 # 3. Pedido de venta

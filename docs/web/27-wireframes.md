@@ -12,6 +12,21 @@ Wireframes de baja fidelidad de la web del restaurante (tarea 28) en escritorio 
 
 La web se implementó antes que los wireframes. Por eso los wireframes se han sacado de la web ya hecha (`web/index.html` y `web/style.css`): reflejan la estructura real y sirven de referencia para las tareas que siguen (validación, tarea 29, y hosting, tareas 30 y 31).
 
+> [!NOTE]
+> **Orden de las tareas.** El enunciado pone el «diseño conceptual» antes de la implementación, y aquí se hizo al revés: los wireframes son posteriores a la web. Se reconoce así en la defensa. Lo que sí se decidió antes de programar está en el apartado 1.1.
+
+### 1.1 Diseño conceptual (lo decidido antes de programar)
+
+| Decisión | Qué se eligió | Por qué |
+|---|---|---|
+| Objetivo | Web unidireccional que da a conocer el restaurante: quiénes son, platos estrella, dónde están y cómo contactar | Es lo que pide el enunciado («solo exponga información») |
+| Estructura | Una sola página con anclas: inicio, filosofía, platos estrella (slideshow), ubicación (mapa y geolocalización), contacto (formulario de ejemplo) | Pocas secciones, un solo documento: carga rápida y fácil de mantener sin CMS |
+| Paleta | Fondo crema `#f3efe6`, texto verde muy oscuro `#18231d` y acento teja `#c84b31` (`#ad3f28` para texto, por contraste) | Colores cálidos de cocina tradicional; el acento oscuro cumple el contraste AA de accesibilidad |
+| Tipografía | Títulos con serifa (Georgia) y texto sin serifa (Inter/Arial), sin fuentes externas | Contraste entre lo tradicional y lo actual, y ninguna descarga de fuentes (rendimiento y privacidad) |
+| Adaptable | Móvil primero: a menos de 800 px, una columna y menú desplegable | Muchos clientes miran la web desde el móvil, en la calle |
+| Accesibilidad | Enlace «saltar al contenido», textos alternativos, botones del slideshow con nombre, foco visible | Lo pide el enunciado («accesible») y lo mide Lighthouse (tarea 29) |
+
+
 ## 2. Archivos
 
 | Archivo | Contenido |

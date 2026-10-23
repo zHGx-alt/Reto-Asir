@@ -2,7 +2,7 @@
 
 - **Bloque:** 6 Web
 - **Depende de:** tarea 28 (web implementada)
-- **Responsable:** Adrian · **Revisa:** Eneko.P
+- **Responsable:** Adrian · **Revisa:** Iker
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Estado:** montado y probado; pendiente de revisión
 - **Fecha:** 23/10/2026
@@ -170,6 +170,11 @@ Las pruebas con `curl` y `openssl` se hicieron desde un equipo externo; su salid
 
 La validación W3C, Lighthouse y la accesibilidad son la tarea 29.
 
+> [!WARNING]
+> **La web publicada no es la del repositorio.** En [`08-pruebas-curl.txt`](../evidencias/30-hosting-aws/08-pruebas-curl.txt) el servidor devuelve `Content-Length: 7143`, que es el `index.html` del 22/10. El del repositorio es posterior (commit `87a8b65`, 9.167 bytes, y el 24/10 se le añadieron los créditos de las imágenes, la distancia al local en la geolocalización y dos cabeceras nuevas, sección 7). Además, Lighthouse se pasó **en local** ([tarea 29](../evidencias/web/lighthouse-w3c.txt)), no contra la URL pública.
+>
+> **Pendiente:** con el laboratorio arrancado, subir la versión actual (`aws s3 sync`, sección 6), volver a ejecutar `instalar-servidor-web.sh` para que nginx tenga las cabeceras nuevas, y repetir el `curl` y Lighthouse **contra `https://almichain1.duckdns.org`**. Comprobar que `Content-Length` coincide con el tamaño de `web/index.html` del repositorio y sustituir las evidencias.
+
 ### Capturas
 
 **La web por HTTPS** («La conexión es segura»):
@@ -220,13 +225,16 @@ aws s3 sync web/ s3://almi-chain-web-2026/ --delete --exclude "README.txt" --exc
 - Todo el tráfico va por HTTPS. HSTS hace que el navegador no vuelva a intentarlo por HTTP.
 - SSH solo está abierto a nuestra IP. Los puertos 80 y 443 son los únicos públicos.
 - nginx no muestra su versión.
+- **Content-Security-Policy** (añadida el 24/10/2026): el navegador solo carga los ficheros de la propia web, las fotos de `images.unsplash.com` y el mapa de `www.openstreetmap.org`; ningún script de otro dominio ni en línea. Si alguien consiguiera inyectar HTML en la página, sus scripts no se ejecutarían.
+- **Permissions-Policy** (24/10/2026): solo la propia web puede pedir la ubicación (`geolocation=(self)`); el iframe del mapa, no. Cámara, micrófono, pagos y USB, bloqueados.
 - El token de DuckDNS y las credenciales del Learner Lab no se suben al repositorio.
+- **Mínimos privilegios en AWS: limitación del laboratorio.** La instancia usa `LabInstanceProfile`, el único rol que deja usar el Learner Lab, y ese rol tiene **permisos amplios** (mucho más que leer un bucket). En una cuenta normal se crearía un rol propio con una sola política: `s3:GetObject` y `s3:ListBucket` sobre `almi-chain-web-2026`. Queda escrito como limitación y como recurso para la tarea 31.
 
 ## 8. Limitaciones y coste
 
 - **El Learner Lab para las instancias al acabar cada sesión**, así que la web solo está en línea mientras el laboratorio está arrancado. Al volver a pulsar **Start Lab**, la instancia arranca, nginx se inicia solo y la IP elástica sigue siendo la misma, de modo que no hay que tocar DuckDNS. En producción habría que usar una cuenta de AWS normal.
 - **Coste aproximado:** la `t3.micro` cuesta unos 0,01 $ por hora encendida. La IP elástica cuesta unos 0,005 $ por hora, también con la instancia parada: unos 3,6 $ al mes. El bucket cuesta céntimos. Para un mes de reto sale bastante por debajo de los 50 $ del laboratorio. Al terminar el reto, **liberar la IP elástica** para que deje de cobrarse.
-- **El dominio es un subdominio de `duckdns.org`.** Si más adelante se consigue un dominio propio, basta con crearle un registro A hacia `52.200.94.167` y volver a ejecutar certbot con el nuevo nombre.
+- **El dominio es un subdominio de `duckdns.org`.** El enunciado pide «dominio propio»: hay que **confirmar con el profesor** (tarea 6) si un subdominio gratuito vale. Si no vale, las opciones son un dominio de pago (unos 10 €/año, que se añadiría al presupuesto de la tarea 10) o uno gratuito del GitHub Student Pack. En los dos casos basta con crearle un registro A hacia `52.200.94.167` y volver a ejecutar certbot con el nuevo nombre (`DOMINIO=` del script).
 
 ## 9. Para la tarea 31 (Terraform)
 

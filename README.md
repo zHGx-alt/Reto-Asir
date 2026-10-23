@@ -6,7 +6,7 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 
 ## Estado
 
-**27 de 55 tareas hechas** (revisión del 23/10/2026). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
+**26 de 55 tareas hechas** (revisión del 24/10/2026, tras aplicar las [correcciones](CORRECIONES.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
 
 ```bash
 bash scripts/verificar-repo.sh
@@ -50,7 +50,7 @@ La web está en **<https://almichain1.duckdns.org>**, alojada en AWS (bucket S3 
 
 Lo que no cabe en el repositorio (GitHub no admite archivos de más de 100 MB) o no debe estar en él (contraseñas) está en la [carpeta Reto-Asir de Google Drive](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link):
 
-- Disco de la VM de arranque dual Windows 10 + Ubuntu (`VM-dualboot-W10-ubuntu-disk1.vmdk`, 12,5 GB) y sus credenciales. Cómo importarla en otro equipo: [docs/so/12-dual-boot.md, sección 8](docs/so/12-dual-boot.md#8-entrega-de-la-máquina-virtual).
+- Disco de la VM de arranque dual Windows 10 + Ubuntu (`VM-dualboot-W10-ubuntu-disk1.vmdk`, 12,5 GB) y sus credenciales, en una base cifrada de KeePassXC (`.kdbx`). **Pendiente:** borrar de la carpeta el `.txt` antiguo con las contraseñas débiles y revisar quién tiene acceso a ella. Cómo importarla en otro equipo: [docs/so/12-dual-boot.md, sección 8](docs/so/12-dual-boot.md#8-entrega-de-la-máquina-virtual).
 
 ## Contribuir
 

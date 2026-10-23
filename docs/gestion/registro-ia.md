@@ -1,30 +1,30 @@
 # Registro de uso de IA
 
-El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para poder explicar y defender el resultado.
+El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para poder explicar y defender el resultado. Las filas van por fecha. Donde pone «pendiente de revisar por el equipo», la persona que revise tiene que cambiarlo por lo que comprobó y su nombre.
 
 | Fecha | Persona | Herramienta | Bloque | Qué se pidió | Qué se comprobó / cambió a mano |
 |---|---|---|---|---|---|
-| 2026-10-21 | | Claude Code | 0 Gestión | Estructura del repo, .gitignore, gitleaks, plantillas de Anexo I/II, roles y backlog | Pendiente de revisar por el equipo |
+| 2026-10-21 | Adrian | Claude Code | 0 Gestión | Estructura del repo, .gitignore, gitleaks, plantillas de Anexo I/II, roles y backlog | Pendiente de revisar por el equipo |
 | 2026-10-21 | Adrian | Claude Code | 0 Gestión | Reparto de tareas entre 6 personas en 3 semanas, generador del Gantt y redacción del Anexo II | Pendiente de revisar por el equipo |
 | 2026-10-21 | Adrian | Claude Code | 0 Gestión | Dependencias entre tareas con validación y Gantt en SVG legible | Pendiente de revisar por el equipo |
 | 2026-10-22 | Adrian | Claude | 8 BD | Modelo E/R con trazabilidad al enunciado | Pendiente de revisar por el equipo |
 | 2026-10-22 | Adrian | Claude Code | 4 Arduino | Firmware HID del stick con mapeo en EEPROM | Compila (`pio run`); falta probarlo en la placa (tarea #50) |
 | 2026-10-22 | Adrian | Claude Code | 0 Gestión | Actualizar estados del backlog, Gantt y Anexo II según lo que hay en el repo | Pendiente de revisar por el equipo |
 | 2026-10-22 | Adrian | Claude Code | 2 SO | Guía paso a paso del arranque dual (cuentas, cortafuegos, actualizaciones) y redacción del documento de la tarea 12 | Instalación y pruebas hechas a mano en VMware; capturas en docs/evidencias/12-dual-boot |
-| 2026-10-23 | Adrian | Claude Code | 6 Web | Wireframes de escritorio y móvil (tarea 27) sacados de la web ya implementada | Pendiente de revisar por Peio y Eneko.S |
-| 2026-10-23 | Adrian | Claude Code | 6 Web | Guía de hosting en AWS con S3, CloudFront y ACM (tarea 30) | Borrador: falta montarlo en el Learner Lab, con dominio y capturas |
-| 2026-10-23 | Adrian | Claude Code | 6 Web | Cambiar el hosting a S3 + EC2 con nginx, DuckDNS y Let's Encrypt, con script de instalación (tarea 30) | Script revisado con bash -n, shellcheck y nginx -t; falta montarlo en el Learner Lab |
 | 2026-10-22 | Eneko.S | Claude | 1 Hardware | Documento de necesidades de equipos (tarea 7): requisitos por puesto, dimensionado y supuestos | Pendiente de revisar por el equipo |
-| 2026-10-22 | Eneko.S | Claude | 1 Hardware | Tabla de hardware con alternativas, cumplimiento de requisitos y presupuesto (tarea 8) | Precios y enlaces consultados el 22/10; suma de 2.444,04 € comprobada; pendiente de revisar por el equipo |
+| 2026-10-22 | Eneko.S | Claude | 1 Hardware | Tabla de hardware con alternativas, cumplimiento de requisitos y presupuesto (tarea 8) | Precios y enlaces consultados el 22/10; suma corregida a 2.361,36 € (la primera cifra, 2.444,04 €, era de una versión anterior de la tabla); pendiente de revisar por el equipo |
 | 2026-10-22 | Eneko.S | Claude | 8 BD | Modelo lógico en 3FN (tarea 39) y corrección del E/R (cambios C-01 a C-04) | Normalización comprobada tabla a tabla y esquema probado en SQLite; cambios aceptados por el equipo |
 | 2026-10-22 | Eneko.S | Claude | 7 ERP | Comparativa de ERP y elección de Odoo Community (tarea 32) | Fuentes consultadas el 22/10; puntuaciones recalculadas con un script; pendiente de revisar por Markel |
 | 2026-10-22 | Eneko.S | Claude | 8 BD | Scripts DDL en PostgreSQL con reglas, roles y pruebas (tarea 40) | Ejecutados en PostgreSQL 16, 33 pruebas correctas; pendiente de revisar por Adrian |
-| 2026-10-23 | Eneko.S | Claude | 1 Hardware | Revisión de la tarea 10 contra la tabla de hardware (tarea 8) y redacción del comentario | Incoherencias comprobadas leyendo ambos documentos |
-| 2026-10-23 | Adrian | Claude Code | 6 Web | Montaje guiado en el Learner Lab, pruebas externas y guía final de la tarea 30 con evidencias | Montado y probado a mano en AWS; pruebas con curl y openssl desde fuera |
 | 2026-10-22 | Iker | Claude Code | 3 Arcade | Recreativa Debian + MAME con arranque directo, instalación desatendida (preseed) y medidas antes/después (tareas 16-17) | Probado en VM; las medidas se repiten con 1 núcleo/1 GB como pide el enunciado. Comprobado jugando con teclado |
 | 2026-10-22 | Iker | Claude Code | 7 ERP | Odoo 19 + PostgreSQL 17 con Docker, configuración por API y factura automatizada de extremo a extremo (tareas 33-35) | Login comprobado en el navegador; corregido el IVA de la primera factura (bienes → servicios) y el registro libre de usuarios |
 | 2026-10-22 | Iker | Claude Code | 9 Backup | RAID 1 con simulación de fallo, backup 3-2-1 cifrado con restic y prueba de restauración aislada (tareas 43-45) | Revisada la comparación de la restauración: la primera versión solo comprobaba 1 de 9 datos (corregido) |
 | 2026-10-22 | Iker | Claude Code | 1 Hardware | Borrador del diagrama de arquitectura de equipos en Mermaid (tarea 11) | Pendiente de completar con los modelos de las tareas 8-9 |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Wireframes de escritorio y móvil (tarea 27) sacados de la web ya implementada | Pendiente de revisar por Peio y Eneko.S |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Guía de hosting en AWS con S3, CloudFront y ACM (tarea 30) | Borrador: falta montarlo en el Learner Lab, con dominio y capturas |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Cambiar el hosting a S3 + EC2 con nginx, DuckDNS y Let's Encrypt, con script de instalación (tarea 30) | Script revisado con bash -n, shellcheck y nginx -t; falta montarlo en el Learner Lab |
+| 2026-10-23 | Eneko.S | Claude | 1 Hardware | Revisión de la tarea 10 contra la tabla de hardware (tarea 8) y redacción del comentario | Incoherencias comprobadas leyendo ambos documentos |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Montaje guiado en el Learner Lab, pruebas externas y guía final de la tarea 30 con evidencias | Montado y probado a mano en AWS; pruebas con curl y openssl desde fuera |
 | 2026-10-23 | Iker | Claude Code | 3 Arcade | Recreativa con Batocera 43.1 en VM de 1 núcleo/1 GB | En curso: arranca; faltan medidas y endurecimiento |
 | 2026-10-23 | Adrian | Claude Code | 6 Web | Capturas de la web implementada para el documento de wireframes (tarea 27) | Generadas con Chrome; comprobado que el mapa carga |
 | 2026-10-23 | Adrian | Claude Code | 6 Web | Revisión de la web contra el enunciado y corrección de contraste, imágenes, favicon y validación | Lighthouse 98-100 y W3C sin errores; pendiente de revisar por Eneko.P (tarea 29) |
@@ -37,3 +37,4 @@ El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para pod
 | 2026-10-23 | Adrian | Claude Code | 1 Hardware / 4 Arduino | Actualizar el diagrama de arquitectura (tarea 11), dejar el joystick HID en la documentación del stick y añadir la tarea 55 de contraseñas | SVG regenerado con Chrome y revisado a ojo; decisión del joystick y de Projects tomadas por el equipo |
 | 2026-10-23 | Adrian | Claude Code | 1 Hardware / 5 Redes | Unificar la WAN en DIGI 1 Gb (presupuesto, diagrama y documentación) | Decisión del equipo; totales recalculados (2.807,34 € el primer año) |
 | 2026-10-23 | Adrian | Claude Code | 2 SO | Cerrar las tareas 12 y 55: evidencias leídas del disco de la VM apagada (solo lectura, libguestfs), historial de Windows Update, nueva exportación de la VM con la .nvram y sumas SHA-256 | Contraseñas cambiadas a mano por Adrian con KeePassXC; capturas de GRUB, cuentas y firewall hechas a mano; paquete OVF validado con ovftool |
+| 2026-10-24 | Adrian | Claude Code | Todos | Aplicar las correcciones de `CORRECIONES.md`: tapar las contraseñas de las capturas de la tarea 24, quitar la clave SSH fija del preseed, actualizaciones de seguridad en la recreativa, presupuesto completo, análisis de necesidades WAN, versiones del software, datos y consultas de `almi_chain`, fechas reales del backlog y responsables coherentes | Pendiente de revisar por el equipo. Las consultas SQL no se han podido ejecutar en este equipo (sin PostgreSQL ni Docker): hay que pasarlas con `scripts/verificar-repo.sh` |

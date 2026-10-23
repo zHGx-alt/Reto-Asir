@@ -1,15 +1,15 @@
 # Tarea 18: Monitorización de recursos de la recreativa
 
 - **Bloque:** 3 Arcade
-- **Depende de:** tarea 16 (Batocera y MAME, Iker)
-- **Revisa:** Markel
+- **Depende de:** tarea 16 (recreativa Debian + MAME, Iker); Batocera es la alternativa de la tarea 51
+- **Responsable:** Adrian · **Revisa:** Markel
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** scripts listos y probados en Linux; pendiente de ejecutarlos en la VM de Batocera
+- **Estado:** scripts listos y probados en Linux; **no se han ejecutado nunca en la recreativa**: pendiente en la VM de 1 núcleo y 1 GB
 - **Fecha:** 23/10/2026
 
 ## 1. Objetivo
 
-La recreativa tiene recursos muy justos (1 núcleo y 1 GB de RAM), y Batocera pide 1 GB como mínimo. Hay que medir cuánto consume MAME para saber si va sobrado o al límite, y comprobar con datos si las optimizaciones de la tarea 17 mejoran algo.
+La recreativa tiene recursos muy justos (1 núcleo y 1 GB de RAM). Con Debian y MAME, el sistema usa unos 425 MB con MAME abierto (tarea 17). La alternativa, Batocera, arranca con 1 GB pero su propia guía pide **2 GB** ([notas de la tarea 51](16-batocera/NOTAS.md)). Hay que medir cuánto consume MAME para saber si va sobrado o al límite, y comprobar con datos si las optimizaciones de la tarea 17 mejoran algo.
 
 ## 2. Archivos
 
@@ -18,7 +18,7 @@ La recreativa tiene recursos muy justos (1 núcleo y 1 GB de RAM), y Batocera pi
 | `scripts/arcade/monitor-recreativa.sh` | Toma una muestra cada pocos segundos y la guarda en un CSV |
 | `scripts/arcade/resumen-monitorizacion.sh` | Resume uno o varios CSV en una tabla (por ejemplo, antes y después) |
 
-Solo leen `/proc` y `/sys`, así que funcionan en Batocera sin instalar nada. Están escritos en `sh` estándar, compatible con BusyBox.
+Solo leen `/proc` y `/sys`, así que funcionan en Debian y en Batocera sin instalar nada. Están escritos en `sh` estándar, compatible con BusyBox.
 
 ## 3. Qué se mide
 
@@ -32,39 +32,42 @@ Solo leen `/proc` y `/sys`, así que funcionan en Batocera sin instalar nada. Es
 | `temp_c` | Temperatura más alta de los sensores. Vacía en una máquina virtual |
 | `proc_cpu_pct`, `proc_rss_mb` | CPU y memoria del emulador (por defecto, el proceso `mame`) |
 
-## 4. Cómo usarlo en Batocera
+## 4. Cómo usarlo en la recreativa (Debian 13 + MAME)
+
+El sistema elegido, de momento, es **Debian 13 con MAME** (tareas 16 y 17); Batocera está en estudio (tarea 51, sección 4.5). La recreativa está en la Wi-Fi de invitados, aislada, así que **no se llega a ella por SSH desde la LAN** ([tarea 23, apartado 5.2](../redes/23-plano-direccionamiento.md#52-lo-que-se-monta-con-el-hardware-actual)): los scripts se ejecutan **en la propia recreativa, desde su consola**.
 
 ### 4.1 Copiar los scripts
 
-Desde el PC, con el acceso SSH de Batocera activado y su IP (se ve en el menú de Batocera, en la información de red):
+Con un USB (o con `git clone` del repositorio, si la recreativa tiene salida a internet). En la recreativa, `Ctrl+Alt+F2` y entrar como `tecnico`:
 
 ```
-ssh root@IP_BATOCERA "mkdir -p /userdata/monitor"
-scp scripts/arcade/*.sh root@IP_BATOCERA:/userdata/monitor/
+sudo mkdir -p /opt/monitor && sudo cp /media/usb/scripts/arcade/*.sh /opt/monitor/
 ```
 
-`/userdata` es la partición de datos: lo que se guarda ahí no se pierde al reiniciar.
-
-### 4.2 Saber cómo se llama el proceso del emulador
-
-Con un juego abierto, desde SSH:
+En la VM de pruebas, que sí tiene SSH por el reenvío de puertos de VirtualBox (tarea 16):
 
 ```
-cat /proc/[0-9]*/comm | sort -u
+scp -P 2222 scripts/arcade/*.sh tecnico@127.0.0.1:/tmp/
 ```
 
-Si aparece `mame`, no hay que cambiar nada. Si el juego se ejecuta con el núcleo de RetroArch, aparecerá `retroarch` y hay que añadir `-p retroarch`.
+### 4.2 Nombre del proceso del emulador
 
-### 4.3 Medir
-
-Para medir mientras se juega, hay que lanzarlo en segundo plano y dejarlo correr:
+En Debian el proceso se llama `mame`, que es el valor por defecto. Se comprueba con un juego abierto:
 
 ```
-cd /userdata/monitor
-nohup sh monitor-recreativa.sh -e antes -i 5 -d 600 > /dev/null 2>&1 &
+pgrep -a mame
 ```
 
-Esto toma una muestra cada 5 segundos durante 10 minutos. Mientras tanto, se juega con el stick. Para pararlo antes de tiempo: `kill <PID>` (el PID lo da `pgrep -f monitor-recreativa`). Si se ejecuta en primer plano, se para con Ctrl+C.
+### 4.3 Medir mientras se juega
+
+En tty2, en segundo plano, y volver a tty1 (`Ctrl+Alt+F1`) para jugar con el stick:
+
+```
+mkdir -p ~/monitor
+nohup sh /opt/monitor/monitor-recreativa.sh -e antes -i 5 -d 600 -o ~/monitor > /dev/null 2>&1 &
+```
+
+Esto toma una muestra cada 5 segundos durante 10 minutos. Para pararlo antes: `pkill -f monitor-recreativa`.
 
 Opciones:
 
@@ -73,25 +76,30 @@ Opciones:
 | `-i` | 5 | Segundos entre muestras |
 | `-d` | 300 | Duración total; 0 = sin límite |
 | `-e` | prueba | Etiqueta del CSV: `reposo`, `antes`, `despues`… |
-| `-o` | `/userdata/monitor` | Carpeta de salida |
+| `-o` | `/userdata/monitor` si existe (Batocera); si no, `./monitor` | Carpeta de salida |
 | `-p` | mame | Proceso del emulador |
 
 ### 4.4 Sacar los resultados y resumirlos
 
+Copiar `~/monitor/monitor_*.csv` a un USB (o con `scp -P 2222` desde la VM) y, en el PC:
+
 ```
-scp root@IP_BATOCERA:/userdata/monitor/monitor_*.csv docs/evidencias/18-monitorizacion/
 sh scripts/arcade/resumen-monitorizacion.sh docs/evidencias/18-monitorizacion/*.csv
 ```
 
 El resumen saca una fila por CSV: número de muestras, CPU media y máxima, memoria usada media, memoria disponible mínima, temperatura máxima y CPU media del emulador.
 
+### 4.5 Si se elige Batocera (tarea 51)
+
+Los scripts están en `sh` estándar, compatible con BusyBox, y solo leen `/proc` y `/sys`, así que también funcionan allí. Cambia dónde se copian (`/userdata/monitor`, la partición de datos que se conserva al reiniciar) y el nombre del proceso, que puede ser `retroarch` en vez de `mame` (`-p retroarch`). En Batocera se entra como `root`: antes hay que cambiar su contraseña por defecto (sección 8).
+
 ## 5. Protocolo de medida (coordinado con la tarea 17)
 
-Para que antes y después se puedan comparar, las dos medidas se hacen igual:
+Para que antes y después se puedan comparar, las medidas se hacen en la VM **`Recreativa-1GB` (1 núcleo y 1 GB)**, la que pide el enunciado, y siempre igual:
 
-1. **Reposo:** Batocera en su menú, sin juego, 5 minutos (`-e reposo -d 300`).
+1. **Reposo:** MAME en su menú, sin juego, 5 minutos (`-e reposo -d 300`).
 2. **Antes:** el mismo juego, 10 minutos jugando (`-e antes -d 600`).
-3. Iker aplica las optimizaciones de la tarea 17.
+3. Se aplica `optimizar-arcade.sh` (tarea 17) y se reinicia.
 4. **Después:** el mismo juego y la misma duración (`-e despues -d 600`).
 5. Se guardan los CSV y la salida del resumen en `docs/evidencias/18-monitorizacion/`.
 
@@ -119,11 +127,12 @@ En un Linux normal (no Batocera), con `dash` y `bash`:
 | Parada con Ctrl+C en una terminal y con `kill` | Para limpiamente y conserva las muestras tomadas |
 | Resumen de dos CSV | Una fila por fichero con medias y extremos |
 
-**Falta:** ejecutarlo en la VM de Batocera de Iker (1 núcleo, 1 GB) y guardar las evidencias.
+**Falta:** ejecutarlo en la VM `Recreativa-1GB` (1 núcleo, 1 GB) durante una partida, siguiendo el protocolo de la sección 5, y guardar los CSV como evidencia.
 
 ## 8. Seguridad
 
-- El acceso SSH de Batocera usa el usuario `root` con una contraseña por defecto conocida. Hay que cambiarla antes de conectar la recreativa a la red del local y desactivar el SSH cuando no se use. Se revisará en la tarea 46.
+- En Debian los scripts se ejecutan como `tecnico` (no hace falta `root`). SSH solo admite clave (tarea 16).
+- Si se elige Batocera: su SSH usa `root` con una contraseña por defecto conocida. Hay que cambiarla antes de conectar la recreativa a la red del local y desactivar el SSH cuando no se use. Se revisará en la tarea 46.
 - Los scripts solo leen información del sistema y escriben en su carpeta de salida. No cambian nada.
 
 ## 9. Limitaciones

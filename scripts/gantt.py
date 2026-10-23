@@ -226,6 +226,12 @@ def main():
         "[backlog-kanban.csv](backlog-kanban.csv). Para cambiar fechas o "
         "responsables, edita el CSV y vuelve a generarlo.",
         "",
+        "> **Fechas.** En las tareas *Hecho*, Inicio y Fin son las fechas **reales** en que se hicieron "
+        "(sacadas de los documentos y del historial de Git); en el resto, las planificadas. "
+        "**Pendiente:** el enunciado reparte las 285 h del reto en las semanas 1-10 (Anexo VIII); "
+        "esta planificación las comprime en 3 semanas y hay que replanificarla sobre las 10 semanas "
+        "cuando se tengan las fechas del Anexo VIII.",
+        "",
         "![Diagrama de Gantt](gantt.svg)",
         "",
         "Cada barra tiene el color de su responsable. La columna *Necesita* indica "

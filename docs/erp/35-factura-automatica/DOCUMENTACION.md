@@ -1,9 +1,11 @@
 # Tarea 35 · Caso de uso de principio a fin automatizado: emitir una factura
 
-**Responsable (Kanban):** Adrian · **Hecha por:** Iker · **Revisa:** Iker → *cambiar a otro revisor* · **Fecha:** 22/10/2026 · **Depende de:** 34
+**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Adrian) · **Revisa:** Adrian · **Fecha:** 22/10/2026 · **Depende de:** 34
 **Estado:** ✅ Hecha en máquina virtual
 
 > El reto pide *"Elección e implementación del ERP + TPV, automatizando al menos un caso de uso real (p. ej. emisión de una factura)"*.
+
+> **Caso de uso (revisado el 24/10/2026).** La primera versión facturaba «Partida recreativa» y «Alquiler recreativa (día)» a «Bar Pepe» con IVA del 21 %, que no es una operación de un restaurante. El caso de uso real es este: **una empresa reserva una comida de grupo y pide factura completa** a su nombre (el TPV solo da factura simplificada). Ahora el script lo hace por defecto, con el IVA de hostelería (10 %); `--iva 21` queda para otros servicios. Las pruebas y los PDF de abajo son de la primera versión: **hay que repetir la ejecución** con los valores nuevos y sustituir las evidencias.
 
 ## 1. Resultado
 El script [`factura_automatica.py`](factura_automatica.py) emite una factura completa sin tocar la pantalla, en menos de 10 segundos:
@@ -28,7 +30,7 @@ PDF: [`evidencias/INV_2026_00002.pdf`](evidencias/INV_2026_00002.pdf).
 | Paso | En pantalla sería… | Por la API |
 |---|---|---|
 | 1. Cliente | *Contactos → Nuevo* | `res.partner` · `search` / `create` |
-| 2. Producto | *Ventas → Productos → Nuevo* | `product.template` · `create` (servicio, IVA 21 % S, disponible en el TPV) |
+| 2. Producto | *Ventas → Productos → Nuevo* | `product.template` · `create` (servicio, IVA 10 % S de hostelería o 21 % S con `--iva 21`, disponible en el TPV) |
 | 3. Pedido | *Ventas → Nuevo → Confirmar* | `sale.order` · `create` + `action_confirm` |
 | 4. Factura | *Crear factura → Confirmar* | asistente `sale.advance.payment.inv` · `create_invoices` + `account.move` · `action_post` |
 | 5. Cobro | *Registrar pago* | asistente `account.payment.register` · `action_create_payments` |
@@ -37,9 +39,11 @@ PDF: [`evidencias/INV_2026_00002.pdf`](evidencias/INV_2026_00002.pdf).
 ## 3. Cómo se usa
 ```bash
 ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente ODOO_PASSWORD=<contraseña de gerente> \
-python3 factura_automatica.py --cliente "Bar Pepe" --producto "Alquiler recreativa (día)" --precio 40 --cantidad 1
+python3 factura_automatica.py --cliente "Eventos Ejemplo S.L." --producto "Menú de grupo (evento)" --precio 30 --cantidad 20
 ```
-Opciones: `--cliente`, `--email`, `--producto`, `--precio` (sin IVA), `--cantidad` y `--pdf-dir`.
+Opciones: `--cliente`, `--email`, `--producto`, `--precio` (sin IVA), `--cantidad`, `--iva` (10 o 21, por defecto 10) y `--pdf-dir`.
+
+Resultado esperado con esos valores: 20 × 30,00 € = 600,00 € + IVA 10 % 60,00 € = **660,00 €**.
 
 **Seguridad:**
 - Se ejecuta con el usuario **`gerente`**, no con `admin` (mínimos privilegios).
@@ -51,7 +55,7 @@ Opciones: `--cliente`, `--email`, `--producto`, `--precio` (sin IVA), `--cantida
 | # | Prueba | Resultado |
 |---|---|---|
 | 1 | Ejecución completa | ✅ Pedido confirmado, factura validada y cobrada, PDF descargado |
-| 2 | Importes | ✅ 4 × 2,50 € = 10,00 € + IVA 21 % 2,10 € = 12,10 € |
+| 2 | Importes (primera versión) | ✅ 4 × 2,50 € = 10,00 € + IVA 21 % 2,10 € = 12,10 € · ⏳ Repetir con el menú de grupo: 660,00 € |
 | 3 | Numeración | ✅ Correlativa: `INV/2026/00001`, `INV/2026/00002` |
 | 4 | Ejecución repetida | ✅ Reutiliza el cliente y el producto y crea un pedido y una factura nuevos |
 | 5 | Permisos | ✅ Con `gerente` funciona. Sin el grupo *Productos / Crear*, Odoo lo impide (ver incidencia 1) |
@@ -66,5 +70,5 @@ Opciones: `--cliente`, `--email`, `--producto`, `--precio` (sin IVA), `--cantida
 
 ## 6. Ideas para ampliarlo
 - **Automatizar dentro de Odoo:** que cada pedido del TPV genere la factura solo (*Punto de Venta → Configuración → Facturación*) o una acción automática.
-- **Programarlo:** un `systemd timer` o un trabajo de GitHub Actions que facture cada mes los alquileres de recreativas.
+- **Programarlo:** un `systemd timer` que facture cada mes a las empresas con comidas de grupo pendientes.
 - **TicketBAI / Veri\*Factu:** ver la tarea 34, §6. Con el módulo instalado, `action_post` enviaría además la factura a Hacienda.

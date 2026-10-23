@@ -1,4 +1,11 @@
-# Configurar red segura (WPA3; invitados; firewall)
+# Tarea 24: Configurar red segura (WPA3; invitados; firewall)
+
+- **Bloque:** 5 Redes
+- **Responsable:** Peio · **Revisa:** Adrian
+- **Reto:** Almi-Chain (ASIR1 2026-27)
+- **Estado:** en curso (faltan la red de invitados, WPA3, WPS y la contraseña de administración, sección 12)
+- **Fecha:** 23/10/2026 · **Revisión:** 24/10/2026
+- **Depende de:** tarea 23 (plano y direccionamiento)
 
 ## 1. Objetivo
 
@@ -6,6 +13,9 @@ Configurar y comprobar la seguridad de la red inalámbrica del restaurante, prot
 
 > [!IMPORTANT]
 > El equipo utilizado es un **TP-Link TL-WR841N v14**. En las capturas solamente aparecen WPA/WPA2 y WPA2-PSK. Por tanto, este equipo no permite demostrar WPA3. La opción más segura mostrada es **WPA2-PSK con AES**. Para cumplir el requisito WPA3 hace falta un router o punto de acceso compatible con WPA3-SAE.
+
+> [!NOTE]
+> **Por qué un TL-WR841N y no el Archer C6.** Los Archer C6 del presupuesto (tarea 10) no se han comprado; el TL-WR841N es el router que había disponible para practicar. Sirve para demostrar el procedimiento (administración, cifrado, firewall), pero **no es el router del diseño**: su LAN está en `192.168.1.0/24` y no en `192.168.10.0/24` (tarea 23), y no tiene WPA3. La configuración definitiva se repite en el Archer C6 (sección 12).
 
 ## 2. Comprobación de conectividad
 
@@ -53,13 +63,23 @@ En **Security > Basic Security** se revisó el firewall SPI. La inspección con 
 
 ## 6. Seguridad Wi-Fi
 
-El panel recomienda WPA2-PSK con cifrado AES. Las contraseñas visibles en las capturas originales se han ocultado antes de preparar las imágenes para GitHub.
+El panel recomienda WPA2-PSK con cifrado AES.
+
+> [!CAUTION]
+> **Contraseñas expuestas (corregido el 24/10/2026).** En la primera versión de las figuras 7 y 8 el recuadro negro tapaba otra zona y **se leían la contraseña Wi-Fi y la contraseña RADIUS**. Ahora están tapadas encima del campo correcto, pero las imágenes antiguas **siguen en el historial de Git**, así que:
+> 1. Hay que **cambiar la contraseña Wi-Fi** de ese router si sigue en uso. Además era débil (8 cifras), contra la norma del proyecto. La nueva, una frase de 20 caracteres o más generada con KeePassXC.
+> 2. gitleaks no analiza imágenes: cada captura se revisa a ojo, ampliada, antes de subirla.
 
 ![Primera configuración de seguridad Wi-Fi](imagenes/07-wifi-seguridad-primera.png)
 
 *Figura 7. Primera comprobación de la seguridad inalámbrica.*
 
 En la configuración final se mantiene WPA2-PSK con AES. No se utiliza WEP ni TKIP porque son alternativas antiguas y menos seguras.
+
+Dos ajustes que quedan mal en las capturas y hay que corregir en el router definitivo:
+
+- **Periodo de renovación de la clave de grupo a `0`**: no se renueva nunca. Poner un valor, por ejemplo 3600 s.
+- **Modo `11bgn mixed`** (figura 9): admite clientes 802.11b, antiguos y lentos. Usar `11gn` o `11n` si no hay equipos antiguos.
 
 ![Configuración final de seguridad Wi-Fi](imagenes/08-wifi-seguridad-final.png)
 
@@ -86,6 +106,14 @@ La página de estado identifica el equipo como **TP-Link TL-WR841N v14**, muestr
 ## 8. Acceso al panel
 
 El panel solicita credenciales de administración. La contraseña administrativa debe ser robusta, diferente de la contraseña Wi-Fi y no debe conservar el valor predeterminado.
+
+**Problemas que se ven en las capturas:**
+
+- Se entra como `Admin` con una contraseña de 5 caracteres, que parece la de fábrica (`admin`). No hay evidencia de que se haya cambiado.
+- El panel va por **HTTP** (el navegador marca «No es seguro»): la contraseña viaja sin cifrar.
+- La administración local está abierta a **todos** los equipos de la LAN (figura 4).
+
+**Qué hay que hacer y documentar:** cambiar la contraseña de administración por una de KeePassXC (distinta de la Wi-Fi), limitar la administración local a la MAC del PC del gerente (figura 4) y administrar solo por cable, nunca desde la Wi-Fi.
 
 ![Acceso al panel del router](imagenes/11-acceso-administracion.png)
 
@@ -114,6 +142,9 @@ El menú incluye **Guest Network**, pero las once capturas no muestran la págin
 | Firewall SPI | Revisado en el panel |
 | Protección DoS | Disponible y revisada |
 | Red de invitados aislada | Pendiente de configuración y evidencia |
+| WPS | Sin evidencia de que esté desactivado |
+| Contraseña de administración | Parece la de fábrica; pendiente de cambiar y de limitar a la MAC del gerente |
+| Contraseña Wi-Fi | Expuesta en las capturas antiguas y débil: **pendiente de cambiar** |
 
 ## 11. Conclusión
 
@@ -121,3 +152,12 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 
 > [!WARNING]
 > No deben subirse al repositorio las capturas originales sin censurar, ya que contienen contraseñas Wi-Fi y credenciales RADIUS visibles.
+
+## 12. Pendiente
+
+- [ ] Cambiar la contraseña Wi-Fi expuesta del TL-WR841N (frase de KeePassXC de 20 caracteres o más).
+- [ ] Cambiar la contraseña de administración y limitar la administración a la MAC del PC del gerente; captura.
+- [ ] Desactivar WPS; captura.
+- [ ] Repetir la configuración en el Archer C6: LAN `192.168.10.0/24`, reservas de la tarea 23, WPA3 (o WPA2/WPA3), clave de grupo con renovación y modo sin 802.11b.
+- [ ] Configurar la red de invitados (`192.168.50.0/24` si el router lo permite) con aislamiento entre clientes y hacer las pruebas 3 a 5 de la [tarea 23, sección 6](../23-plano-direccionamiento.md#6-cómo-se-comprueba).
+- [ ] Comprobar en la tarea 25 si la red de invitados pasa por el enlace WDS al router 2. Si no pasa, documentarlo y corregir los diagramas (tarea 11 y LOGICA_RETO).

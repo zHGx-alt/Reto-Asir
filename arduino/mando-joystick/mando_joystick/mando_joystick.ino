@@ -3,7 +3,10 @@
 //
 // Conexiones (esquema en ../esquema-conexiones.svg):
 //   Botones 1-6: cable rojo -> pines 2..7, cable negro -> GND comun (fila - de la protoboard)
-//   Palanca analogica (cuando la haya): VRx -> A0, VRy -> A1, +5V -> 5V, GND -> GND
+//   Botones 7-8 (opcionales): pines 8 y 9, igual que los demas
+//   Palanca digital de arcade (Sanwa, Zippy...: 4 microinterruptores, modo por defecto):
+//     arriba -> A2, abajo -> A3, izquierda -> A4, derecha -> A5, comun -> GND
+//   Palanca analogica (potenciometros): VRx -> A0, VRy -> A1, +5V -> 5V, GND -> GND
 //
 // Necesita la libreria Joystick de MHeironimus:
 // https://github.com/MHeironimus/ArduinoJoystickLibrary
@@ -12,20 +15,28 @@
 #include <EEPROM.h>
 #include <Joystick.h>
 
-// Sin palanca conectada, A0 y A1 quedan al aire y darian lecturas aleatorias.
-// Mientras sea false, los ejes se quedan fijos en el centro.
-const bool USAR_EJES = false;
+// Tipo de palanca (se cambia con el comando PALANCA y se guarda en EEPROM):
+//   NINGUNA:   ejes fijos en el centro
+//   DIGITAL:   palanca de arcade de 4 microinterruptores. Con INPUT_PULLUP, si no hay palanca
+//              los pines leen HIGH (sin pulsar) y los ejes se quedan en el centro: es el modo seguro
+//   ANALOGICA: palanca de potenciometros. Sin ella, A0 y A1 quedan al aire y los ejes se moverian solos
+enum ModoPalanca : uint8_t { PALANCA_NINGUNA = 0, PALANCA_DIGITAL = 1, PALANCA_ANALOGICA = 2 };
+
 const int PIN_X = A0;
 const int PIN_Y = A1;
+const int PIN_ARRIBA = A2;
+const int PIN_ABAJO = A3;
+const int PIN_IZQUIERDA = A4;
+const int PIN_DERECHA = A5;
 
-// Botones 1-6 en el orden del esquema: rojo, azul, rojo, azul, azul, azul.
+// Botones 1-6 en el orden del esquema: rojo, azul, rojo, azul, azul, azul. 7 y 8, opcionales.
 // No usar los pines 0 y 1 (RX/TX).
-const int PINES_BOTON[] = {2, 3, 4, 5, 6, 7};
+const int PINES_BOTON[] = {2, 3, 4, 5, 6, 7, 8, 9};
 const uint8_t NUM_FISICOS = sizeof(PINES_BOTON) / sizeof(PINES_BOTON[0]);
 const uint8_t NUM_HID = 8;
 
 const uint16_t MAGIA = 0xA5C1;
-const uint8_t VERSION_CONFIG = 2;  // 2: pasa de 2 a 6 botones
+const uint8_t VERSION_CONFIG = 3;  // 2: pasa de 2 a 6 botones; 3: 8 botones y tipo de palanca
 const int DIR_EEPROM = 0;
 
 // Lo que se guarda en EEPROM. Si cambia la estructura, subir VERSION_CONFIG.
@@ -35,7 +46,8 @@ struct Config {
   uint8_t mapa[NUM_FISICOS];  // boton fisico -> boton HID (0..NUM_HID-1)
   uint8_t invertirX;
   uint8_t invertirY;
-  uint8_t zonaMuerta;         // unidades ADC alrededor del centro (512)
+  uint8_t zonaMuerta;         // unidades ADC alrededor del centro (512), solo palanca analogica
+  uint8_t modoPalanca;        // ModoPalanca
   uint8_t checksum;
 };
 
@@ -62,6 +74,7 @@ void configPorDefecto() {
   cfg.invertirX = 0;
   cfg.invertirY = 0;
   cfg.zonaMuerta = 20;
+  cfg.modoPalanca = PALANCA_DIGITAL;
 }
 
 bool cargarConfig() {
@@ -74,6 +87,7 @@ bool cargarConfig() {
   for (uint8_t i = 0; i < NUM_FISICOS; i++) {
     if (leida.mapa[i] >= NUM_HID) return false;
   }
+  if (leida.modoPalanca > PALANCA_ANALOGICA) return false;
   cfg = leida;
   return true;
 }
@@ -99,6 +113,10 @@ void mostrarConfig() {
   Serial.println(cfg.invertirY ? F("si") : F("no"));
   Serial.print(F("Zona muerta: "));
   Serial.println(cfg.zonaMuerta);
+  Serial.print(F("Palanca: "));
+  if (cfg.modoPalanca == PALANCA_DIGITAL) Serial.println(F("digital (A2-A5)"));
+  else if (cfg.modoPalanca == PALANCA_ANALOGICA) Serial.println(F("analogica (A0, A1)"));
+  else Serial.println(F("ninguna"));
 }
 
 void mostrarAyuda() {
@@ -106,7 +124,8 @@ void mostrarAyuda() {
   Serial.println(F("  VER                 muestra la configuracion"));
   Serial.println(F("  MAP <fisico> <hid>  asigna boton fisico a boton HID (1-8)"));
   Serial.println(F("  INV X|Y             invierte un eje"));
-  Serial.println(F("  ZM <0-200>          zona muerta del stick"));
+  Serial.println(F("  ZM <0-200>          zona muerta de la palanca analogica"));
+  Serial.println(F("  PALANCA DIGITAL|ANALOGICA|NINGUNA"));
   Serial.println(F("  GUARDAR             guarda en EEPROM"));
   Serial.println(F("  CARGAR              descarta cambios y recarga de EEPROM"));
   Serial.println(F("  RESET               valores por defecto (sin guardar)"));
@@ -142,6 +161,15 @@ void procesarComando(char *cmd) {
     }
     cfg.zonaMuerta = zm;
     Serial.println(F("OK"));
+  } else if (!strcmp(orden, "PALANCA") && arg1) {
+    if (!strcmp(arg1, "DIGITAL")) cfg.modoPalanca = PALANCA_DIGITAL;
+    else if (!strcmp(arg1, "ANALOGICA")) cfg.modoPalanca = PALANCA_ANALOGICA;
+    else if (!strcmp(arg1, "NINGUNA")) cfg.modoPalanca = PALANCA_NINGUNA;
+    else {
+      Serial.println(F("ERROR: DIGITAL, ANALOGICA o NINGUNA"));
+      return;
+    }
+    Serial.println(F("OK"));
   } else if (!strcmp(orden, "GUARDAR")) {
     guardarConfig();
     Serial.println(F("OK: guardado"));
@@ -171,15 +199,44 @@ void leerSerie() {
   }
 }
 
-int leerEje(int pin, bool invertir) {
-  if (!USAR_EJES) return 512;
+int invertirEje(int v, bool invertir) {
+  if (!invertir || v == 512) return v;
+  return 1023 - v;
+}
+
+int leerEjeAnalogico(int pin, bool invertir) {
   int v = analogRead(pin);
   if (abs(v - 512) < cfg.zonaMuerta) v = 512;
-  return invertir ? 1023 - v : v;
+  return invertirEje(v, invertir);
+}
+
+// Microinterruptores: pulsado = LOW. Si se pulsan los dos a la vez (no deberia pasar), centro.
+int leerEjeDigital(int pinMenos, int pinMas, bool invertir) {
+  bool menos = digitalRead(pinMenos) == LOW;
+  bool mas = digitalRead(pinMas) == LOW;
+  int v = 512;
+  if (menos && !mas) v = 0;
+  else if (mas && !menos) v = 1023;
+  return invertirEje(v, invertir);
+}
+
+void leerPalanca(int &x, int &y) {
+  x = 512;
+  y = 512;
+  if (cfg.modoPalanca == PALANCA_ANALOGICA) {
+    x = leerEjeAnalogico(PIN_X, cfg.invertirX);
+    y = leerEjeAnalogico(PIN_Y, cfg.invertirY);
+  } else if (cfg.modoPalanca == PALANCA_DIGITAL) {
+    // En HID, Y = 0 es arriba y X = 0 es izquierda
+    x = leerEjeDigital(PIN_IZQUIERDA, PIN_DERECHA, cfg.invertirX);
+    y = leerEjeDigital(PIN_ARRIBA, PIN_ABAJO, cfg.invertirY);
+  }
 }
 
 void setup() {
   for (uint8_t i = 0; i < NUM_FISICOS; i++) pinMode(PINES_BOTON[i], INPUT_PULLUP);
+  const int pinesPalanca[] = {PIN_ARRIBA, PIN_ABAJO, PIN_IZQUIERDA, PIN_DERECHA};
+  for (int pin : pinesPalanca) pinMode(pin, INPUT_PULLUP);
   if (!cargarConfig()) configPorDefecto();
 
   Serial.begin(9600);
@@ -191,8 +248,10 @@ void setup() {
 void loop() {
   leerSerie();
 
-  Joystick.setXAxis(leerEje(PIN_X, cfg.invertirX));
-  Joystick.setYAxis(leerEje(PIN_Y, cfg.invertirY));
+  int x, y;
+  leerPalanca(x, y);
+  Joystick.setXAxis(x);
+  Joystick.setYAxis(y);
 
   // Se recalculan todos los botones HID para que ninguno se quede pulsado al remapear
   bool pulsado[NUM_HID] = {false};

@@ -3,7 +3,7 @@
 -- Gestor: PostgreSQL 16 (válido desde PostgreSQL 12)
 -- Origen: modelo lógico 3FN de la tarea 39 (13 tablas + vista v_factura_totales)
 --
--- Se ejecuta UNA VEZ en la base de datos de cada establecimiento:
+-- Se ejecuta UNA VEZ en la base central de la cadena (ver tarea 38, apartado 1.1):
 --   psql -d almi_chain -v ON_ERROR_STOP=1 -f 01-crear-tablas.sql
 --
 -- Supuestos adoptados (a confirmar con Adrian y Peio):

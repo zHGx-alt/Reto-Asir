@@ -149,7 +149,7 @@ Elementos sin precio verificado, para añadir al presupuesto con el valor que se
 
 | Id | Asunto | Cómo se resuelve |
 |---|---|---|
-| H-01 | **Windows 10 frente a Windows 11 Pro.** Los equipos elegidos traen Windows 11 Pro y el enunciado exige Windows 10. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en las condiciones de licencia de Microsoft y del vendedor. | Confirmar la licencia. Documentar el riesgo de Windows 10 sin soporte estándar en la tarea de software. |
+| H-01 | **Windows 10 frente a Windows 11 Pro.** Los equipos elegidos traen Windows 11 Pro y el enunciado exige Windows 10. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en las condiciones de licencia de Microsoft y del vendedor. | Confirmar la licencia. Windows 10 Pro no tiene soporte gratuito desde el 14/10/2025 y el ESU para particulares terminó el 13/10/2026. Para los TPV se propone **Windows 10 IoT Enterprise LTSC 2021** (soporte hasta 2032) o el ESU de pago para empresas ([tarea 10](10-presupuesto-hardware.md), apartado 4.1). |
 | H-02 | Los precios no indican si incluyen IVA. | Confirmar con la tienda o en el carrito antes del presupuesto final. |
 | H-03 | Stock: a fecha de consulta no hay stock del Lenovo Neo 50q Gen 4. | Buscar el mismo modelo en otras tiendas o el sucesor. |
 | H-04 | Resuelta: se sustituye la impresora descatalogada TM-T20III por la TM-T20IV (vigente). | Comprobar precio y stock antes de comprar. |
@@ -159,7 +159,7 @@ Elementos sin precio verificado, para añadir al presupuesto con el valor que se
 
 ## 7. Hardware de otros bloques pendiente de consolidar
 
-Se añadirá al presupuesto global cuando cada bloque lo defina:
+Ya están en el presupuesto ([tarea 10](10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto), secciones 4.4 y 12): routers, switch, servidor, discos del RAID, disco USB de copias, SAI, cable, adaptador Wi-Fi de la recreativa y palanca del stick. Lista original:
 
 - Router, repetidor Wi-Fi y switch (bloque de redes).
 - Equipo de la máquina recreativa y placa Arduino con el joystick (bloque de arcade; el centro presta algunos).

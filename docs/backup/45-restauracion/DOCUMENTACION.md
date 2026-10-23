@@ -1,7 +1,7 @@
 # Tarea 45 · Prueba de restauración con evidencias
 
 **Responsable:** Iker · **Revisa:** Markel · **Fecha:** 22/10/2026 · **Depende de:** 44
-**Estado:** ✅ Hecha en máquina virtual (`ServidorERP`)
+**Estado:** ✅ Restauración aislada hecha en máquina virtual (`ServidorERP`) · ⏳ Falta la restauración en una máquina nueva (sección 6)
 
 ## 1. Resultado
 Se ha restaurado la copia del **disco USB externo**, que es la copia que estaría fuera del local, en un **entorno aislado**.
@@ -9,7 +9,8 @@ Se ha restaurado la copia del **disco USB externo**, que es la copia que estarí
 
 | | |
 |---|---|
-| **RTO medido** (tiempo hasta tener Odoo recuperado y funcionando) | **46 s** |
+| **Tiempo de restauración medido** (con el servidor ya instalado) | **46 s** |
+| **RTO real** (servidor perdido: instalar uno nuevo y restaurar) | **Sin medir.** Los 46 s no incluyen reinstalar Debian, Docker y Odoo, que es lo que pasaría si se pierde el servidor (sección 5). Pendiente: repetir la prueba en una VM nueva y dar ese tiempo como RTO |
 | **RPO** (datos que se pueden perder como máximo) | Hasta 24 h con la copia diaria. En la prueba, la copia tenía 6 min |
 | Producción durante la prueba | Sin tocar: sigue funcionando, solo existe la base `tienda` y nadie se conectó desde la prueba |
 
@@ -74,3 +75,12 @@ Log completo: [`evidencias/restauracion-desde-usb.log`](evidencias/restauracion-
 3. Copiar la contraseña de cifrado (desde el gestor del gerente) a un fichero y restaurar: `restic -r /mnt/usb-backup/restic restore latest --target /`.
 4. `cd /opt/odoo && docker compose up -d db` → `createdb tienda` → `pg_restore` del volcado → copiar el *filestore* al volumen → `docker compose up -d`.
 5. Comprobar con este mismo script o entrando en `http://<servidor>:8069`.
+
+## 6. Pendiente: restaurar en una máquina nueva
+
+La prueba de la sección 3 se hizo **en el mismo servidor**, con Docker, las imágenes y la configuración ya instaladas. Si el servidor se pierde, nada de eso existe. Para medir el RTO de verdad:
+
+1. Crear una VM nueva, vacía, con el preseed del servidor (tarea 33) y cronometrar desde ese momento.
+2. Seguir el plan de la sección 5 con el USB `BACKUP_USB` y la contraseña sacada de KeePassXC (no de un fichero del técnico).
+3. Parar el cronómetro cuando un cajero pueda entrar en el TPV y la última venta de la copia aparezca en Odoo.
+4. Guardar el log como evidencia y poner ese tiempo como **RTO** en la tabla de la sección 1, en LOGICA_RETO y en el Anexo II.

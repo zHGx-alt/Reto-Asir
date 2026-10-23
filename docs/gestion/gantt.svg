@@ -70,7 +70,7 @@
 <circle cx="449" cy="195.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="199.0" class="t">Iker</text>
 <text x="528" y="199.0" class="s">—</text>
-<rect x="724" y="188" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>4. Herramienta de seguimiento (Gantt en el repo) · Iker · 26/10–27/10 · Hecho</title></rect>
+<rect x="604" y="188" width="116" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>4. Herramienta de seguimiento (Gantt en el repo) · Iker · 21/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="228" x2="1202" y2="228" stroke="#f0efeb"/>
 <text x="16" y="221.0" class="s">5</text>
 <text x="44" y="221.0" class="t">Repo con estructura y gitleaks, commits de todos</text>
@@ -100,28 +100,28 @@
 <circle cx="449" cy="309.0" r="4.5" fill="#eb6834"/>
 <text x="458" y="313.0" class="t">Eneko.S</text>
 <text x="528" y="313.0" class="s">7</text>
-<rect x="684" y="302" width="76" height="14" rx="4" fill="#eb6834" fill-opacity="0.4"><title>8. Tabla de hardware con justificación · Eneko.S · 23/10–26/10 · Hecho</title></rect>
+<rect x="644" y="302" width="76" height="14" rx="4" fill="#eb6834" fill-opacity="0.4"><title>8. Tabla de hardware con justificación · Eneko.S · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="342" x2="1202" y2="342" stroke="#f0efeb"/>
 <text x="16" y="335.0" class="s">9</text>
 <text x="44" y="335.0" class="m">Tabla de software y licencias ✓</text>
 <circle cx="449" cy="331.0" r="4.5" fill="#eda100"/>
 <text x="458" y="335.0" class="t">Markel</text>
 <text x="528" y="335.0" class="s">7</text>
-<rect x="684" y="324" width="76" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>9. Tabla de software y licencias · Markel · 23/10–26/10 · Hecho</title></rect>
+<rect x="644" y="324" width="76" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>9. Tabla de software y licencias · Markel · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="364" x2="1202" y2="364" stroke="#f0efeb"/>
 <text x="16" y="357.0" class="s">10</text>
 <text x="44" y="357.0" class="m">Presupuesto con enlaces (incl. WAN y router extra) ✓</text>
 <circle cx="449" cy="353.0" r="4.5" fill="#e87ba4"/>
 <text x="458" y="357.0" class="t">Peio</text>
 <text x="528" y="357.0" class="s">8, 9, 22</text>
-<rect x="764" y="346" width="36" height="14" rx="4" fill="#e87ba4" fill-opacity="0.4"><title>10. Presupuesto con enlaces (incl. WAN y router extra) · Peio · 27/10–27/10 · Hecho</title></rect>
+<rect x="644" y="346" width="76" height="14" rx="4" fill="#e87ba4" fill-opacity="0.4"><title>10. Presupuesto con enlaces (incl. WAN y router extra) · Peio · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="386" x2="1202" y2="386" stroke="#f0efeb"/>
 <text x="16" y="379.0" class="s">11</text>
 <text x="44" y="379.0" class="m">Diagrama de arquitectura de equipos ✓</text>
 <circle cx="449" cy="375.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="379.0" class="t">Iker</text>
 <text x="528" y="379.0" class="s">8, 9</text>
-<rect x="764" y="368" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>11. Diagrama de arquitectura de equipos · Iker · 27/10–28/10 · Hecho</title></rect>
+<rect x="684" y="368" width="36" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>11. Diagrama de arquitectura de equipos · Iker · 23/10–23/10 · Hecho</title></rect>
 <rect x="16" y="386" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="403" class="t b">2 SO</text>
 <line x1="16" y1="434" x2="1202" y2="434" stroke="#f0efeb"/>
@@ -130,7 +130,7 @@
 <circle cx="449" cy="423.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="427.0" class="t">Adrian</text>
 <text x="528" y="427.0" class="s">8</text>
-<rect x="804" y="416" width="116" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>12. Dual boot Win10 + Linux en el equipo del gerente (VM) · Adrian · 28/10–30/10 · Hecho</title></rect>
+<rect x="644" y="416" width="76" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>12. Dual boot Win10 + Linux en el equipo del gerente (VM) · Adrian · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="456" x2="1202" y2="456" stroke="#f0efeb"/>
 <text x="16" y="449.0" class="s">13</text>
 <text x="44" y="449.0" class="t">Bastionado de los 2 TPV Windows en VM (usuario estándar, kiosko, USB)</text>
@@ -158,7 +158,7 @@
 <circle cx="449" cy="511.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="515.0" class="t">Adrian</text>
 <text x="528" y="515.0" class="s">—</text>
-<rect x="724" y="504" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>55. Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC · Adrian · 26/10–26/10 · Hecho</title></rect>
+<rect x="684" y="504" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>55. Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC · Adrian · 23/10–23/10 · Hecho</title></rect>
 <rect x="16" y="522" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="539" class="t b">3 Arcade</text>
 <line x1="16" y1="570" x2="1202" y2="570" stroke="#f0efeb"/>
@@ -167,7 +167,7 @@
 <circle cx="449" cy="559.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="563.0" class="t">Iker</text>
 <text x="528" y="563.0" class="s">—</text>
-<rect x="724" y="552" width="116" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>16. Instalar SO ligero y MAME con arranque directo (VM) · Iker · 26/10–28/10 · Hecho</title></rect>
+<rect x="644" y="552" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>16. Instalar SO ligero y MAME con arranque directo (VM) · Iker · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="592" x2="1202" y2="592" stroke="#f0efeb"/>
 <text x="16" y="585.0" class="s">51</text>
 <text x="44" y="585.0" class="t">Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO</text>
@@ -218,7 +218,7 @@
 <circle cx="449" cy="739.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="743.0" class="t">Adrian</text>
 <text x="528" y="743.0" class="s">—</text>
-<rect x="764" y="732" width="156" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>20. Firmware HID y mapeo configurable (EEPROM) · Adrian · 27/10–30/10 · Hecho</title></rect>
+<rect x="644" y="732" width="76" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>20. Firmware HID y mapeo configurable (EEPROM) · Adrian · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="772" x2="1202" y2="772" stroke="#f0efeb"/>
 <text x="16" y="765.0" class="s">50</text>
 <text x="44" y="765.0" class="t">Probar el firmware del stick en la placa (HID, comandos, EEPROM)<tspan class="s"> · físico</tspan></text>
@@ -248,7 +248,7 @@
 <circle cx="449" cy="853.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="857.0" class="t">Adrian</text>
 <text x="528" y="857.0" class="s">—</text>
-<rect x="644" y="846" width="116" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>23. Plano del local y plan de direccionamiento IP · Adrian · 22/10–26/10 · Hecho</title></rect>
+<rect x="644" y="846" width="76" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>23. Plano del local y plan de direccionamiento IP · Adrian · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="886" x2="1202" y2="886" stroke="#f0efeb"/>
 <text x="16" y="879.0" class="s">24</text>
 <text x="44" y="879.0" class="t">Configurar red segura (WPA3, invitados, firewall)<tspan class="s"> · físico</tspan></text>
@@ -285,21 +285,21 @@
 <circle cx="449" cy="989.0" r="4.5" fill="#eda100"/>
 <text x="458" y="993.0" class="t">Markel</text>
 <text x="528" y="993.0" class="s">27</text>
-<rect x="724" y="982" width="196" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>28. Implementar web (mapa, formulario, slideshow) · Markel · 26/10–30/10 · Hecho</title></rect>
+<rect x="604" y="982" width="116" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>28. Implementar web (mapa, formulario, slideshow) · Markel · 21/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1022" x2="1202" y2="1022" stroke="#f0efeb"/>
 <text x="16" y="1015.0" class="s">29</text>
 <text x="44" y="1015.0" class="m">Validación W3C, Lighthouse y accesibilidad ✓</text>
 <circle cx="449" cy="1011.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="1015.0" class="t">Adrian</text>
 <text x="528" y="1015.0" class="s">28</text>
-<rect x="924" y="1004" width="76" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>29. Validación W3C, Lighthouse y accesibilidad · Adrian · 02/11–03/11 · Hecho</title></rect>
+<rect x="684" y="1004" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>29. Validación W3C, Lighthouse y accesibilidad · Adrian · 23/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1044" x2="1202" y2="1044" stroke="#f0efeb"/>
 <text x="16" y="1037.0" class="s">30</text>
 <text x="44" y="1037.0" class="m">Hosting AWS con dominio y HTTPS ✓</text>
 <circle cx="449" cy="1033.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="1037.0" class="t">Adrian</text>
 <text x="528" y="1037.0" class="s">28</text>
-<rect x="924" y="1026" width="116" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>30. Hosting AWS con dominio y HTTPS · Adrian · 02/11–04/11 · Hecho</title></rect>
+<rect x="684" y="1026" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>30. Hosting AWS con dominio y HTTPS · Adrian · 23/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1066" x2="1202" y2="1066" stroke="#f0efeb"/>
 <text x="16" y="1059.0" class="s">31</text>
 <text x="44" y="1059.0" class="t">IaC y despliegue automatizado (Terraform + Actions)</text>
@@ -322,21 +322,21 @@
 <circle cx="449" cy="1125.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1129.0" class="t">Iker</text>
 <text x="528" y="1129.0" class="s">32</text>
-<rect x="724" y="1118" width="116" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>33. Instalar Odoo + PostgreSQL con Docker · Iker · 26/10–28/10 · Hecho</title></rect>
+<rect x="644" y="1118" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>33. Instalar Odoo + PostgreSQL con Docker · Iker · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1158" x2="1202" y2="1158" stroke="#f0efeb"/>
 <text x="16" y="1151.0" class="s">34</text>
 <text x="44" y="1151.0" class="m">Configurar módulos de Odoo ✓</text>
 <circle cx="449" cy="1147.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1151.0" class="t">Iker</text>
 <text x="528" y="1151.0" class="s">33</text>
-<rect x="844" y="1140" width="116" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>34. Configurar módulos de Odoo · Iker · 29/10–02/11 · Hecho</title></rect>
+<rect x="644" y="1140" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>34. Configurar módulos de Odoo · Iker · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1180" x2="1202" y2="1180" stroke="#f0efeb"/>
 <text x="16" y="1173.0" class="s">35</text>
 <text x="44" y="1173.0" class="m">Caso de uso end-to-end automatizado ✓</text>
 <circle cx="449" cy="1169.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1173.0" class="t">Iker</text>
 <text x="528" y="1173.0" class="s">34</text>
-<rect x="964" y="1162" width="116" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>35. Caso de uso end-to-end automatizado · Iker · 03/11–05/11 · Hecho</title></rect>
+<rect x="644" y="1162" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>35. Caso de uso end-to-end automatizado · Iker · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1202" x2="1202" y2="1202" stroke="#f0efeb"/>
 <text x="16" y="1195.0" class="s">36</text>
 <text x="44" y="1195.0" class="t">Importar y exportar datos en Odoo</text>
@@ -373,21 +373,21 @@
 <circle cx="449" cy="1305.0" r="4.5" fill="#eb6834"/>
 <text x="458" y="1309.0" class="t">Eneko.S</text>
 <text x="528" y="1309.0" class="s">38</text>
-<rect x="724" y="1298" width="76" height="14" rx="4" fill="#eb6834" fill-opacity="0.4"><title>39. Modelo lógico normalizado (3FN) · Eneko.S · 26/10–27/10 · Hecho</title></rect>
+<rect x="644" y="1298" width="76" height="14" rx="4" fill="#eb6834" fill-opacity="0.4"><title>39. Modelo lógico normalizado (3FN) · Eneko.S · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1338" x2="1202" y2="1338" stroke="#f0efeb"/>
 <text x="16" y="1331.0" class="s">40</text>
 <text x="44" y="1331.0" class="m">Scripts DDL ✓</text>
 <circle cx="449" cy="1327.0" r="4.5" fill="#eb6834"/>
 <text x="458" y="1331.0" class="t">Eneko.S</text>
 <text x="528" y="1331.0" class="s">39</text>
-<rect x="804" y="1320" width="76" height="14" rx="4" fill="#eb6834" fill-opacity="0.4"><title>40. Scripts DDL · Eneko.S · 28/10–29/10 · Hecho</title></rect>
+<rect x="644" y="1320" width="76" height="14" rx="4" fill="#eb6834" fill-opacity="0.4"><title>40. Scripts DDL · Eneko.S · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1360" x2="1202" y2="1360" stroke="#f0efeb"/>
 <text x="16" y="1353.0" class="s">41</text>
 <text x="44" y="1353.0" class="t">Datos de prueba y consultas</text>
 <circle cx="449" cy="1349.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1353.0" class="t">Iker</text>
 <text x="528" y="1353.0" class="s">40</text>
-<rect x="884" y="1342" width="76" height="14" rx="4" fill="#1baf7a"><title>41. Datos de prueba y consultas · Iker · 30/10–02/11 · Pendiente</title></rect>
+<rect x="884" y="1342" width="76" height="14" rx="4" fill="#1baf7a" stroke="#0b0b0b" stroke-width="1.5"><title>41. Datos de prueba y consultas · Iker · 30/10–02/11 · En curso</title></rect>
 <line x1="16" y1="1382" x2="1202" y2="1382" stroke="#f0efeb"/>
 <text x="16" y="1375.0" class="s">42</text>
 <text x="44" y="1375.0" class="t">Usuarios de BD con mínimos privilegios</text>
@@ -399,11 +399,11 @@
 <text x="22" y="1399" class="t b">9 Backup</text>
 <line x1="16" y1="1430" x2="1202" y2="1430" stroke="#f0efeb"/>
 <text x="16" y="1423.0" class="s">43</text>
-<text x="44" y="1423.0" class="m">RAID 1 y simulación de fallo ✓</text>
+<text x="44" y="1423.0" class="t">RAID 1 y simulación de fallo</text>
 <circle cx="449" cy="1419.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1423.0" class="t">Iker</text>
 <text x="528" y="1423.0" class="s">—</text>
-<rect x="844" y="1412" width="116" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>43. RAID 1 y simulación de fallo · Iker · 29/10–02/11 · Hecho</title></rect>
+<rect x="644" y="1412" width="316" height="14" rx="4" fill="#1baf7a" stroke="#0b0b0b" stroke-width="1.5"><title>43. RAID 1 y simulación de fallo · Iker · 22/10–02/11 · En curso</title></rect>
 <line x1="16" y1="1452" x2="1202" y2="1452" stroke="#f0efeb"/>
 <text x="16" y="1445.0" class="s">44</text>
 <text x="44" y="1445.0" class="t">Plan de backup 3-2-1 cifrado y automatizado</text>
@@ -417,7 +417,7 @@
 <circle cx="449" cy="1463.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1467.0" class="t">Iker</text>
 <text x="528" y="1467.0" class="s">44</text>
-<rect x="1044" y="1456" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>45. Prueba de restauración con evidencias · Iker · 05/11–06/11 · Hecho</title></rect>
+<rect x="644" y="1456" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>45. Prueba de restauración con evidencias · Iker · 22/10–23/10 · Hecho</title></rect>
 <rect x="16" y="1474" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="1491" class="t b">10 Seguridad</text>
 <line x1="16" y1="1522" x2="1202" y2="1522" stroke="#f0efeb"/>
