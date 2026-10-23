@@ -1,0 +1,260 @@
+
+==> 1/6 Instalando Docker (paquetes oficiales de Debian)
+Synchronizing state of docker.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable docker
+Docker version 26.1.5+dfsg1, build a72d7cd
+Docker Compose version 2.26.1-4
+
+==> 2/6 Copiando el proyecto a /opt/odoo (solo root puede leerlo)
+
+==> 3/6 Generando secretos (solo la primera vez)
+  .env creado (permisos 600)
+  config/odoo.conf creado
+
+==> 4/6 Descargando imágenes y arrancando PostgreSQL
+ Network odoo_interna  Creating
+ Network odoo_interna  Created
+ Volume "odoo_odoo-web-data"  Creating
+ Volume "odoo_odoo-web-data"  Created
+ Volume "odoo_odoo-db-data"  Creating
+ Volume "odoo_odoo-db-data"  Created
+ Container odoo-db-1  Creating
+ Container odoo-db-1  Created
+ Container odoo-db-1  Starting
+ Container odoo-db-1  Started
+  PostgreSQL listo
+
+==> 5/6 Creando la base de datos 'tienda' (español, sin datos de demostración)
+ Container odoo-db-1  Running
+2026-10-22 09:29:59,321 1 WARNING ? odoo.tools.config: option --without-demo: since 19.0, invalid boolean value: 'all', assume True 
+2026-10-22 09:29:59,321 1 INFO ? odoo: Odoo version 19.0-20261015 
+2026-10-22 09:29:59,321 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-10-22 09:29:59,322 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+2026-10-22 09:29:59,322 1 INFO ? odoo: database: odoo@db:5432 
+2026-10-22 09:29:59,933 1 INFO tienda odoo.modules.loading: Initializing database tienda 
+2026-10-22 09:30:01,733 1 INFO tienda odoo.modules.loading: loading 1 modules... 
+2026-10-22 09:30:01,733 1 INFO tienda odoo.modules.loading: Loading module base (1/1) 
+2026-10-22 09:30:01,783 1 INFO tienda odoo.registry: module base: creating or updating database tables 
+2026-10-22 09:30:02,058 1 INFO tienda odoo.models: Prepare computation of ir.module.module.menus_by_module 
+2026-10-22 09:30:02,058 1 INFO tienda odoo.models: Prepare computation of ir.module.module.reports_by_module 
+2026-10-22 09:30:02,059 1 INFO tienda odoo.models: Prepare computation of ir.module.module.views_by_module 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.user_id 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.commercial_partner_id 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.complete_name 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.lang 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.company_registry 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.commercial_company_name 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.properties 
+2026-10-22 09:30:02,139 1 INFO tienda odoo.models: Prepare computation of res.partner.partner_share 
+2026-10-22 09:30:02,166 1 INFO tienda odoo.models: Prepare computation of res.currency.decimal_places 
+2026-10-22 09:30:02,189 1 INFO tienda odoo.models: Prepare computation of res.company.uses_default_logo 
+2026-10-22 09:30:02,189 1 INFO tienda odoo.models: Prepare computation of res.company.logo_web 
+2026-10-22 09:30:02,192 1 INFO tienda odoo.models: Computing parent_path for table res_company... 
+2026-10-22 09:30:02,217 1 INFO tienda odoo.models: Prepare computation of res.users.signature 
+2026-10-22 09:30:02,218 1 INFO tienda odoo.models: Prepare computation of res.users.share 
+2026-10-22 09:30:04,113 1 INFO tienda odoo.modules.loading: loading base/data/res_bank.xml 
+2026-10-22 09:30:04,118 1 INFO tienda odoo.modules.loading: loading base/data/res.lang.csv 
+2026-10-22 09:30:04,189 1 INFO tienda odoo.modules.loading: loading base/data/res_lang_data.xml 
+2026-10-22 09:30:04,233 1 INFO tienda odoo.modules.loading: loading base/data/res_partner_data.xml 
+2026-10-22 09:30:04,291 1 INFO tienda odoo.modules.loading: loading base/data/res_currency_data.xml 
+2026-10-22 09:30:04,884 1 INFO tienda odoo.modules.loading: loading base/data/res_company_data.xml 
+2026-10-22 09:30:04,897 1 INFO tienda odoo.modules.loading: loading base/data/res_users_data.xml 
+2026-10-22 09:30:06,170 1 INFO tienda odoo.modules.loading: loading base/data/report_paperformat_data.xml 
+2026-10-22 09:30:06,180 1 INFO tienda odoo.modules.loading: loading base/data/res_country_data.xml 
+2026-10-22 09:30:06,972 1 INFO tienda odoo.modules.loading: loading base/data/ir_demo_data.xml 
+2026-10-22 09:30:06,993 1 INFO tienda odoo.modules.loading: loading base/security/base_groups.xml 
+2026-10-22 09:30:07,335 1 INFO tienda odoo.modules.loading: loading base/security/base_security.xml 
+2026-10-22 09:30:07,659 1 INFO tienda odoo.modules.loading: loading base/wizard/wizard_ir_model_menu_create_views.xml 
+2026-10-22 09:30:07,681 1 INFO tienda odoo.modules.loading: loading base/views/base_menus.xml 
+2026-10-22 09:30:07,770 1 INFO tienda odoo.modules.loading: loading base/views/decimal_precision_views.xml 
+2026-10-22 09:30:07,790 1 INFO tienda odoo.modules.loading: loading base/views/res_config_views.xml 
+2026-10-22 09:30:07,799 1 INFO tienda odoo.modules.loading: loading base/data/res.country.state.csv 
+2026-10-22 09:30:09,209 1 INFO tienda odoo.modules.loading: loading base/views/ir_actions_views.xml 
+2026-10-22 09:30:09,420 1 INFO tienda odoo.modules.loading: loading base/views/ir_asset_views.xml 
+2026-10-22 09:30:09,445 1 INFO tienda odoo.modules.loading: loading base/views/ir_config_parameter_views.xml 
+2026-10-22 09:30:09,470 1 INFO tienda odoo.modules.loading: loading base/views/ir_cron_views.xml 
+2026-10-22 09:30:09,512 1 INFO tienda odoo.modules.loading: loading base/views/ir_cron_trigger_views.xml 
+2026-10-22 09:30:09,541 1 INFO tienda odoo.modules.loading: loading base/views/ir_filters_views.xml 
+2026-10-22 09:30:09,576 1 INFO tienda odoo.modules.loading: loading base/views/ir_mail_server_views.xml 
+2026-10-22 09:30:09,607 1 INFO tienda odoo.modules.loading: loading base/views/ir_model_views.xml 
+2026-10-22 09:30:09,815 1 INFO tienda odoo.modules.loading: loading base/views/ir_attachment_views.xml 
+2026-10-22 09:30:09,847 1 INFO tienda odoo.modules.loading: loading base/views/ir_rule_views.xml 
+2026-10-22 09:30:09,876 1 INFO tienda odoo.modules.loading: loading base/views/ir_sequence_views.xml 
+2026-10-22 09:30:09,910 1 INFO tienda odoo.modules.loading: loading base/views/ir_ui_menu_views.xml 
+2026-10-22 09:30:09,944 1 INFO tienda odoo.modules.loading: loading base/views/ir_ui_view_views.xml 
+2026-10-22 09:30:10,032 1 INFO tienda odoo.modules.loading: loading base/views/ir_default_views.xml 
+2026-10-22 09:30:10,069 1 INFO tienda odoo.modules.loading: loading base/data/ir_config_parameter_data.xml 
+2026-10-22 09:30:10,074 1 INFO tienda odoo.modules.loading: loading base/data/ir_cron_data.xml 
+2026-10-22 09:30:10,092 1 INFO tienda odoo.modules.loading: loading base/report/ir_model_report.xml 
+2026-10-22 09:30:10,098 1 INFO tienda odoo.modules.loading: loading base/report/ir_model_templates.xml 
+2026-10-22 09:30:10,111 1 INFO tienda odoo.modules.loading: loading base/views/ir_logging_views.xml 
+2026-10-22 09:30:10,140 1 INFO tienda odoo.modules.loading: loading base/views/ir_qweb_widget_templates.xml 
+2026-10-22 09:30:10,160 1 INFO tienda odoo.modules.loading: loading base/views/ir_module_views.xml 
+2026-10-22 09:30:10,251 1 INFO tienda odoo.modules.loading: loading base/data/ir_module_category_data.xml 
+2026-10-22 09:30:10,307 1 INFO tienda odoo.modules.loading: loading base/data/ir_module_module.xml 
+2026-10-22 09:30:10,423 1 INFO tienda odoo.modules.loading: loading base/report/ir_module_reports.xml 
+2026-10-22 09:30:10,427 1 INFO tienda odoo.modules.loading: loading base/report/ir_module_report_templates.xml 
+2026-10-22 09:30:10,438 1 INFO tienda odoo.modules.loading: loading base/wizard/base_module_update_views.xml 
+2026-10-22 09:30:10,458 1 INFO tienda odoo.modules.loading: loading base/wizard/base_language_install_views.xml 
+2026-10-22 09:30:10,483 1 INFO tienda odoo.modules.loading: loading base/wizard/base_import_language_views.xml 
+2026-10-22 09:30:10,499 1 INFO tienda odoo.modules.loading: loading base/wizard/base_module_upgrade_views.xml 
+2026-10-22 09:30:10,521 1 INFO tienda odoo.modules.loading: loading base/wizard/base_module_uninstall_views.xml 
+2026-10-22 09:30:10,535 1 INFO tienda odoo.modules.loading: loading base/wizard/base_export_language_views.xml 
+2026-10-22 09:30:10,552 1 INFO tienda odoo.modules.loading: loading base/wizard/base_partner_merge_views.xml 
+2026-10-22 09:30:10,570 1 INFO tienda odoo.modules.loading: loading base/data/ir_demo_failure_data.xml 
+2026-10-22 09:30:10,595 1 INFO tienda odoo.modules.loading: loading base/views/ir_profile_views.xml 
+2026-10-22 09:30:10,635 1 INFO tienda odoo.modules.loading: loading base/views/res_company_views.xml 
+2026-10-22 09:30:10,667 1 INFO tienda odoo.modules.loading: loading base/views/res_lang_views.xml 
+2026-10-22 09:30:10,694 1 INFO tienda odoo.modules.loading: loading base/views/res_partner_views.xml 
+2026-10-22 09:30:10,827 1 INFO tienda odoo.modules.loading: loading base/views/res_bank_views.xml 
+2026-10-22 09:30:10,878 1 INFO tienda odoo.modules.loading: loading base/views/res_country_views.xml 
+2026-10-22 09:30:10,954 1 INFO tienda odoo.modules.loading: loading base/views/res_currency_views.xml 
+2026-10-22 09:30:11,028 1 INFO tienda odoo.modules.loading: loading base/views/res_groups_views.xml 
+2026-10-22 09:30:11,105 1 INFO tienda odoo.modules.loading: loading base/views/res_users_views.xml 
+2026-10-22 09:30:11,274 1 INFO tienda odoo.modules.loading: loading base/views/res_users_apikeys_views.xml 
+2026-10-22 09:30:11,285 1 INFO tienda odoo.modules.loading: loading base/views/res_device_views.xml 
+2026-10-22 09:30:11,331 1 INFO tienda odoo.modules.loading: loading base/views/res_users_identitycheck_views.xml 
+2026-10-22 09:30:11,343 1 INFO tienda odoo.modules.loading: loading base/views/res_config_settings_views.xml 
+2026-10-22 09:30:11,356 1 INFO tienda odoo.modules.loading: loading base/views/report_paperformat_views.xml 
+2026-10-22 09:30:11,388 1 INFO tienda odoo.modules.loading: loading base/security/ir.model.access.csv 
+2026-10-22 09:30:11,495 1 INFO tienda odoo.addons.base.models.ir_module: module base: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base/i18n/es.po for language es_ES 
+2026-10-22 09:30:13,187 1 INFO tienda odoo.modules.loading: Module base loaded in 11.45s, 8492 queries (+8492 other) 
+2026-10-22 09:30:13,187 1 INFO tienda odoo.modules.loading: 1 modules loaded in 11.45s, 8492 queries (+8492 extra) 
+2026-10-22 09:30:13,214 1 INFO tienda odoo.addons.base.models.ir_module: module base: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base/i18n/es.po for language es_ES 
+2026-10-22 09:30:14,944 1 INFO tienda odoo.modules.loading: updating modules list 
+2026-10-22 09:30:14,945 1 INFO tienda odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2026-10-22 09:30:16,383 1 INFO tienda odoo.modules.loading: loading 14 modules... 
+2026-10-22 09:30:16,383 1 INFO tienda odoo.modules.loading: Loading module rpc (2/14) 
+2026-10-22 09:30:16,399 1 INFO tienda odoo.addons.base.models.ir_module: module rpc: no translation for language es_ES 
+2026-10-22 09:30:16,409 1 INFO tienda odoo.modules.loading: Module rpc loaded in 0.03s, 9 queries (+9 other) 
+2026-10-22 09:30:16,409 1 INFO tienda odoo.modules.loading: Loading module web (3/14) 
+2026-10-22 09:30:16,469 1 INFO tienda odoo.registry: module web: creating or updating database tables 
+2026-10-22 09:30:17,006 1 INFO tienda odoo.modules.loading: loading web/security/ir.model.access.csv 
+2026-10-22 09:30:17,016 1 INFO tienda odoo.modules.loading: loading web/security/web_security.xml 
+2026-10-22 09:30:17,030 1 INFO tienda odoo.modules.loading: loading web/views/webclient_templates.xml 
+2026-10-22 09:30:17,099 1 INFO tienda odoo.modules.loading: loading web/views/report_templates.xml 
+2026-10-22 09:30:17,223 1 INFO tienda odoo.modules.loading: loading web/views/base_document_layout_views.xml 
+2026-10-22 09:30:17,245 1 INFO tienda odoo.modules.loading: loading web/views/partner_view.xml 
+2026-10-22 09:30:17,255 1 INFO tienda odoo.modules.loading: loading web/views/speedscope_template.xml 
+2026-10-22 09:30:17,261 1 INFO tienda odoo.modules.loading: loading web/views/memory_template.xml 
+2026-10-22 09:30:17,268 1 INFO tienda odoo.modules.loading: loading web/views/speedscope_config_wizard.xml 
+2026-10-22 09:30:17,277 1 INFO tienda odoo.modules.loading: loading web/views/neutralize_views.xml 
+2026-10-22 09:30:17,288 1 INFO tienda odoo.modules.loading: loading web/views/ir_ui_view_views.xml 
+2026-10-22 09:30:17,301 1 INFO tienda odoo.modules.loading: loading web/data/ir_attachment.xml 
+2026-10-22 09:30:17,310 1 INFO tienda odoo.modules.loading: loading web/data/report_layout.xml 
+2026-10-22 09:30:17,366 1 INFO tienda odoo.addons.base.models.ir_module: module web: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web/i18n/es.po for language es_ES 
+2026-10-22 09:30:17,771 1 INFO tienda odoo.modules.loading: Module web loaded in 1.36s, 1244 queries (+1244 other) 
+2026-10-22 09:30:17,771 1 INFO tienda odoo.modules.loading: Loading module api_doc (4/14) 
+2026-10-22 09:30:17,779 1 INFO tienda odoo.registry: module api_doc: creating or updating database tables 
+2026-10-22 09:30:17,799 1 INFO tienda odoo.modules.loading: loading api_doc/security/res_groups.xml 
+2026-10-22 09:30:17,827 1 INFO tienda odoo.modules.loading: loading api_doc/views/docclient.xml 
+2026-10-22 09:30:17,839 1 INFO tienda odoo.addons.base.models.ir_module: module api_doc: no translation for language es_ES 
+2026-10-22 09:30:17,853 1 INFO tienda odoo.modules.loading: Module api_doc loaded in 0.08s, 63 queries (+63 other) 
+2026-10-22 09:30:17,853 1 INFO tienda odoo.modules.loading: Loading module auth_totp (5/14) 
+2026-10-22 09:30:17,878 1 INFO tienda odoo.registry: module auth_totp: creating or updating database tables 
+2026-10-22 09:30:17,963 1 INFO tienda odoo.modules.loading: loading auth_totp/security/security.xml 
+2026-10-22 09:30:17,990 1 INFO tienda odoo.modules.loading: loading auth_totp/security/ir.model.access.csv 
+2026-10-22 09:30:18,000 1 INFO tienda odoo.modules.loading: loading auth_totp/data/ir_action_data.xml 
+2026-10-22 09:30:18,009 1 INFO tienda odoo.modules.loading: loading auth_totp/views/res_users_views.xml 
+2026-10-22 09:30:18,044 1 INFO tienda odoo.modules.loading: loading auth_totp/views/templates.xml 
+2026-10-22 09:30:18,051 1 INFO tienda odoo.modules.loading: loading auth_totp/wizard/auth_totp_wizard_views.xml 
+2026-10-22 09:30:18,065 1 INFO tienda odoo.addons.base.models.ir_module: module auth_totp: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_totp/i18n/es.po for language es_ES 
+2026-10-22 09:30:18,100 1 INFO tienda odoo.modules.loading: Module auth_totp loaded in 0.25s, 226 queries (+226 other) 
+2026-10-22 09:30:18,100 1 INFO tienda odoo.modules.loading: Loading module base_import (6/14) 
+2026-10-22 09:30:18,161 1 INFO tienda odoo.registry: module base_import: creating or updating database tables 
+2026-10-22 09:30:18,713 1 INFO tienda odoo.modules.loading: loading base_import/security/base_import_security.xml 
+2026-10-22 09:30:18,721 1 INFO tienda odoo.modules.loading: loading base_import/security/ir.model.access.csv 
+2026-10-22 09:30:18,735 1 INFO tienda odoo.addons.base.models.ir_module: module base_import: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_import/i18n/es.po for language es_ES 
+2026-10-22 09:30:18,794 1 INFO tienda odoo.modules.loading: Module base_import loaded in 0.69s, 968 queries (+968 other) 
+2026-10-22 09:30:18,794 1 INFO tienda odoo.modules.loading: Loading module base_import_module (7/14) 
+2026-10-22 09:30:18,804 1 INFO tienda odoo.registry: module base_import_module: creating or updating database tables 
+2026-10-22 09:30:18,898 1 INFO tienda odoo.modules.loading: loading base_import_module/security/ir.model.access.csv 
+2026-10-22 09:30:18,905 1 INFO tienda odoo.modules.loading: loading base_import_module/views/base_import_module_view.xml 
+2026-10-22 09:30:18,928 1 INFO tienda odoo.modules.loading: loading base_import_module/views/ir_module_views.xml 
+2026-10-22 09:30:18,982 1 INFO tienda odoo.addons.base.models.ir_module: module base_import_module: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_import_module/i18n/es.po for language es_ES 
+2026-10-22 09:30:19,013 1 INFO tienda odoo.modules.loading: Module base_import_module loaded in 0.22s, 183 queries (+183 other) 
+2026-10-22 09:30:19,013 1 INFO tienda odoo.modules.loading: Loading module base_setup (8/14) 
+2026-10-22 09:30:19,025 1 INFO tienda odoo.registry: module base_setup: creating or updating database tables 
+2026-10-22 09:30:19,085 1 INFO tienda odoo.modules.loading: loading base_setup/data/base_setup_data.xml 
+2026-10-22 09:30:19,090 1 INFO tienda odoo.modules.loading: loading base_setup/views/res_config_settings_views.xml 
+2026-10-22 09:30:19,138 1 INFO tienda odoo.modules.loading: loading base_setup/views/res_partner_views.xml 
+2026-10-22 09:30:19,153 1 INFO tienda odoo.addons.base.models.ir_module: module base_setup: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_setup/i18n/es.po for language es_ES 
+2026-10-22 09:30:19,198 1 INFO tienda odoo.modules.loading: Module base_setup loaded in 0.18s, 162 queries (+162 other) 
+2026-10-22 09:30:19,198 1 INFO tienda odoo.modules.loading: Loading module bus (9/14) 
+2026-10-22 09:30:19,233 1 INFO tienda odoo.registry: module bus: creating or updating database tables 
+2026-10-22 09:30:19,351 1 INFO tienda odoo.modules.loading: loading bus/security/ir.model.access.csv 
+2026-10-22 09:30:19,363 1 INFO tienda odoo.addons.base.models.ir_module: module bus: loading translation file /usr/lib/python3/dist-packages/odoo/addons/bus/i18n/es.po for language es_ES 
+2026-10-22 09:30:19,378 1 INFO tienda odoo.modules.loading: Module bus loaded in 0.18s, 162 queries (+162 other) 
+2026-10-22 09:30:19,378 1 INFO tienda odoo.modules.loading: Loading module web_tour (10/14) 
+2026-10-22 09:30:19,390 1 INFO tienda odoo.registry: module web_tour: creating or updating database tables 
+2026-10-22 09:30:19,396 1 INFO tienda odoo.models: Prepare computation of res.users.tour_enabled 
+2026-10-22 09:30:19,495 1 INFO tienda odoo.modules.loading: loading web_tour/security/ir.model.access.csv 
+2026-10-22 09:30:19,505 1 INFO tienda odoo.modules.loading: loading web_tour/views/tour_views.xml 
+2026-10-22 09:30:19,548 1 INFO tienda odoo.addons.base.models.ir_module: module web_tour: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web_tour/i18n/es.po for language es_ES 
+2026-10-22 09:30:19,583 1 INFO tienda odoo.modules.loading: Module web_tour loaded in 0.20s, 192 queries (+192 other) 
+2026-10-22 09:30:19,583 1 INFO tienda odoo.modules.loading: Loading module auth_passkey (11/14) 
+2026-10-22 09:30:19,635 1 INFO tienda odoo.registry: module auth_passkey: creating or updating database tables 
+2026-10-22 09:30:19,732 1 INFO tienda odoo.modules.loading: loading auth_passkey/views/auth_passkey_key_views.xml 
+2026-10-22 09:30:19,759 1 INFO tienda odoo.modules.loading: loading auth_passkey/views/auth_passkey_login_templates.xml 
+2026-10-22 09:30:19,774 1 INFO tienda odoo.modules.loading: loading auth_passkey/views/res_users_identitycheck_views.xml 
+2026-10-22 09:30:19,787 1 INFO tienda odoo.modules.loading: loading auth_passkey/views/res_users_views.xml 
+2026-10-22 09:30:19,814 1 INFO tienda odoo.modules.loading: loading auth_passkey/security/ir.model.access.csv 
+2026-10-22 09:30:19,825 1 INFO tienda odoo.modules.loading: loading auth_passkey/security/security.xml 
+2026-10-22 09:30:19,849 1 INFO tienda odoo.addons.base.models.ir_module: module auth_passkey: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_passkey/i18n/es.po for language es_ES 
+2026-10-22 09:30:19,880 1 INFO tienda odoo.modules.loading: Module auth_passkey loaded in 0.30s, 226 queries (+226 other) 
+2026-10-22 09:30:19,880 1 INFO tienda odoo.modules.loading: Loading module html_editor (12/14) 
+2026-10-22 09:30:20,121 1 INFO tienda odoo.registry: module html_editor: creating or updating database tables 
+2026-10-22 09:30:20,716 1 INFO tienda odoo.modules.loading: loading html_editor/security/ir.model.access.csv 
+2026-10-22 09:30:20,731 1 INFO tienda odoo.addons.base.models.ir_module: module html_editor: loading translation file /usr/lib/python3/dist-packages/odoo/addons/html_editor/i18n/es.po for language es_ES 
+2026-10-22 09:30:20,780 1 INFO tienda odoo.modules.loading: Module html_editor loaded in 0.90s, 1038 queries (+1038 other) 
+2026-10-22 09:30:20,781 1 INFO tienda odoo.modules.loading: Loading module iap (13/14) 
+2026-10-22 09:30:20,786 1 INFO tienda odoo.registry: module iap: creating or updating database tables 
+2026-10-22 09:30:20,870 1 INFO tienda odoo.modules.loading: loading iap/data/services.xml 
+2026-10-22 09:30:20,875 1 INFO tienda odoo.modules.loading: loading iap/security/ir.model.access.csv 
+2026-10-22 09:30:20,885 1 INFO tienda odoo.modules.loading: loading iap/security/ir_rule.xml 
+2026-10-22 09:30:20,896 1 INFO tienda odoo.modules.loading: loading iap/views/iap_views.xml 
+2026-10-22 09:30:20,931 1 INFO tienda odoo.modules.loading: loading iap/views/res_config_settings.xml 
+2026-10-22 09:30:20,952 1 INFO tienda odoo.addons.base.models.ir_module: module iap: loading translation file /usr/lib/python3/dist-packages/odoo/addons/iap/i18n/es.po for language es_ES 
+2026-10-22 09:30:20,983 1 INFO tienda odoo.modules.loading: Module iap loaded in 0.20s, 199 queries (+199 other) 
+2026-10-22 09:30:20,983 1 INFO tienda odoo.modules.loading: Loading module web_unsplash (14/14) 
+2026-10-22 09:30:20,995 1 INFO tienda odoo.registry: module web_unsplash: creating or updating database tables 
+2026-10-22 09:30:21,042 1 INFO tienda odoo.modules.loading: loading web_unsplash/views/res_config_settings_view.xml 
+2026-10-22 09:30:21,077 1 INFO tienda odoo.addons.base.models.ir_module: module web_unsplash: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web_unsplash/i18n/es.po for language es_ES 
+2026-10-22 09:30:21,099 1 INFO tienda odoo.modules.loading: Module web_unsplash loaded in 0.12s, 97 queries (+97 other) 
+2026-10-22 09:30:21,099 1 INFO tienda odoo.modules.loading: 14 modules loaded in 4.72s, 4769 queries (+4769 extra) 
+2026-10-22 09:30:21,423 1 INFO tienda odoo.modules.loading: Modules loaded. 
+2026-10-22 09:30:21,440 1 INFO tienda odoo.registry: Registry changed, signaling through the database 
+2026-10-22 09:30:21,444 1 INFO tienda odoo.registry: Registry loaded in 21.539s 
+2026-10-22 09:30:21,444 1 INFO tienda odoo.service.server: Initiating shutdown 
+2026-10-22 09:30:21,444 1 INFO tienda odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-10-22 09:30:21,445 1 INFO tienda odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections  
+ Container odoo-db-1  Running
+2026-10-22 09:30:23,559 1 INFO ? odoo: Odoo version 19.0-20261015 
+2026-10-22 09:30:23,559 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-10-22 09:30:23,559 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+2026-10-22 09:30:23,560 1 INFO ? odoo: database: odoo@db:5432 
+2026-10-22 09:30:23,997 1 INFO ? odoo.service.server: Initiating shutdown 
+2026-10-22 09:30:23,997 1 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-10-22 09:30:24,034 1 INFO tienda odoo.modules.loading: loading 1 modules... 
+2026-10-22 09:30:24,040 1 INFO tienda odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-10-22 09:30:24,046 1 INFO tienda odoo.modules.loading: loading 14 modules... 
+2026-10-22 09:30:24,303 1 INFO tienda odoo.modules.loading: 14 modules loaded in 0.26s, 0 queries (+0 extra) 
+2026-10-22 09:30:24,361 1 INFO tienda odoo.modules.loading: Modules loaded. 
+2026-10-22 09:30:24,377 1 INFO tienda odoo.registry: Registry loaded in 0.379s 
+Contraseña de admin cambiada
+
+==> 6/6 Arrancando Odoo
+ Container odoo-db-1  Running
+ Container odoo-odoo-1  Creating
+ Container odoo-odoo-1  Created
+ Container odoo-db-1  Waiting
+ Container odoo-db-1  Healthy
+ Container odoo-odoo-1  Starting
+ Container odoo-odoo-1  Started
+curl: (56) Recv failure: Conexión reinicializada por la máquina remota
+NAME          IMAGE         COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+odoo-db-1     postgres:17   "docker-entrypoint.s…"   db        42 seconds ago   Up 38 seconds (healthy)   5432/tcp
+odoo-odoo-1   odoo:19.0     "/entrypoint.sh odoo"    odoo      4 seconds ago    Up 2 seconds              0.0.0.0:8069->8069/tcp, :::8069->8069/tcp, 8071-8072/tcp
+
+Odoo funcionando en http://<IP-del-servidor>:8069  ·  base de datos: tienda  ·  usuario: admin
+La contraseña de admin está en /opt/odoo/.env (ODOO_ADMIN_PASSWORD):  sudo grep ODOO_ADMIN /opt/odoo/.env

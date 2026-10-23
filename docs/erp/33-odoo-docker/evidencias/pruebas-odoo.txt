@@ -1,0 +1,16 @@
+1. Página de login:            HTTP 200
+2. Versión:                    19.0-20261015
+3. Login admin con contraseña del .env -> uid: 2
+4. Login admin/admin (por defecto)     -> uid: False   (False = rechazado)
+5. Gestor de bases de datos web:        HTTP 200, pero muestra "database manager has been disabled by the administrator"
+6. Listado de bases de datos:           Access Denied
+7. PostgreSQL desde la red del servidor: cerrado
+8. Permisos: 750 root /opt/odoo
+600 root /opt/odoo/.env
+9. Usuario tecnico en grupo docker: no
+NAME          IMAGE         STATUS                    PORTS
+odoo-db-1     postgres:17   Up 57 seconds (healthy)   5432/tcp
+odoo-odoo-1   odoo:19.0     Up 22 seconds             0.0.0.0:8069->8069/tcp, :::8069->8069/tcp, 8071-8072/tcp
+               total       usado       libre  compartido   búf/caché  disponible
+Mem:           3,8Gi       703Mi       101Mi        47Mi       3,4Gi       3,1Gi
+/dev/sda1         28G   4,5G   22G  17% /

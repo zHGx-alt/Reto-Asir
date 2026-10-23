@@ -1,0 +1,37 @@
+
+==> 1/4 Empresa: Almi-Chain (España, EUR)
+    {'id': 1, 'name': 'Almi-Chain', 'country_id': [68, 'Spain'], 'currency_id': [126, 'EUR']}
+
+==> 2/4 Instalando módulos (puede tardar unos minutos)
+    account: ya instalado
+    sale_management: ya instalado
+    crm: instalando...
+    hr: instalando...
+    mass_mailing: instalando...
+    stock: ya instalado
+    point_of_sale: ya instalado
+    pos_restaurant: instalando...
+    sale_management: installed
+    pos_restaurant: installed
+    account: installed
+    crm: installed
+    stock: installed
+    point_of_sale: installed
+    mass_mailing: installed
+    hr: installed
+    l10n_es: installed
+    Plan contable: es_pymes · IVA de venta 21 %: 21% G
+
+==> 3/4 Puntos de venta (cada TPV con su caja de efectivo; la tarjeta va al banco)
+    TPV 1 -> renombrado a TPV Barra 1
+    TPV Barra 1: listo (modo restaurante)
+    TPV 2 -> renombrado a TPV Barra 2
+    TPV Barra 2: listo (modo restaurante)
+
+==> 4/4 Usuarios (mínimos privilegios)
+    Registro libre de usuarios: desactivado (solo por invitación)
+    gerente: ya existe (grupos actualizados)
+    cajero1: ya existe (grupos actualizados)
+    cajero2: ya existe (grupos actualizados)
+
+Listo.

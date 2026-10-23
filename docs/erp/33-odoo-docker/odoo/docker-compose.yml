@@ -1,0 +1,44 @@
+# Tarea 33 · Odoo + PostgreSQL con Docker
+# Las contraseñas están en .env (lo genera desplegar-odoo.sh y NO se sube a Git; ver .env.example).
+name: odoo
+
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    networks: [interna]          # sin "ports": PostgreSQL no es accesible desde fuera de Docker
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  odoo:
+    image: odoo:${ODOO_VERSION}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST: db
+      USER: ${POSTGRES_USER}
+      PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
+    ports:
+      - "8069:8069"
+    networks: [interna]
+
+volumes:
+  odoo-db-data:
+  odoo-web-data:
+
+networks:
+  interna:
