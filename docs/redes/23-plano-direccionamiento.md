@@ -212,7 +212,9 @@ El primer ping de cada pareja pierde 1 o 2 paquetes mientras se resuelve la dire
 
 `show access-lists` en R1 confirma que los bloqueos los hacen las ACLs y no un fallo de red: suben los contadores de las líneas `deny ip any 192.168.0.0 0.0.255.255` de `TPV-IN`, `GERENCIA-IN` y `AISLADA-IN`.
 
-Queda por probar el acceso HTTP del TPV al servidor desde el navegador del PC en Packet Tracer (*Desktop → Web Browser*, `http://192.168.10.10`).
+**Acceso web del TPV al servidor:** desde TPV1, *Desktop → Web Browser* con `http://192.168.10.10`, se abre la página del servidor. En `show access-lists TPV-IN`, la línea `permit tcp … host 192.168.10.10 eq www` registra 5 coincidencias, así que el tráfico pasa por la regla prevista.
+
+![Navegador del TPV1 abriendo el servidor](23-prueba-http-tpv1.png)
 
 ## 6. Cómo se comprueba
 
@@ -245,4 +247,4 @@ Estas pruebas se hacen en las tareas 24 y 25, con el router montado. Se dejan ap
 - [ ] Confirmar en la tarea 24 qué subred da el Archer C6 a la red de invitados.
 - [ ] Confirmar si el PC de la recreativa tiene Wi-Fi.
 - [x] Simular el diseño con VLANs en Packet Tracer (apartado 5.4).
-- [ ] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador.
+- [x] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador.
