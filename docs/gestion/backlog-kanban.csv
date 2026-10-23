@@ -31,15 +31,15 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 29,Validación W3C; Lighthouse y accesibilidad,6 Web,Eneko.P,Peio,2026-11-02,2026-11-03,28,Pendiente
 30,Hosting AWS con dominio y HTTPS,6 Web,Adrian,Eneko.P,2026-11-02,2026-11-04,28,Pendiente
 31,IaC y despliegue automatizado (Terraform + Actions),6 Web,Iker,Adrian,2026-11-02,2026-11-05,28,Pendiente
-32,Comparativa y elección de ERP,7 ERP,Eneko.S,Markel,2026-10-22,2026-10-23,,Pendiente
+32,Comparativa y elección de ERP,7 ERP,Eneko.S,Markel,2026-10-22,2026-10-23,,Hecho
 33,Instalar Odoo + PostgreSQL con Docker,7 ERP,Iker,Peio,2026-10-26,2026-10-28,32,Pendiente
 34,Configurar módulos de Odoo,7 ERP,Markel,Adrian,2026-10-29,2026-11-02,33,Pendiente
 35,Caso de uso end-to-end automatizado,7 ERP,Adrian,Iker,2026-11-03,2026-11-05,34,Pendiente
 36,Importar y exportar datos en Odoo,7 ERP,Peio,Eneko.P,2026-11-04,2026-11-05,34,Pendiente
 37,Imprimir ticket desde el TPV de Odoo,7 ERP,Eneko.P,Peio,2026-11-04,2026-11-05,14 34,Pendiente
 38,Modelo E/R,8 BD,Adrian,Peio,2026-10-22,2026-10-23,,Hecho
-39,Modelo lógico normalizado (3FN),8 BD,Eneko.S,Peio,2026-10-26,2026-10-27,38,En curso
-40,Scripts DDL,8 BD,Eneko.S,Adrian,2026-10-28,2026-10-29,39,Pendiente
+39,Modelo lógico normalizado (3FN),8 BD,Eneko.S,Peio,2026-10-26,2026-10-27,38,Hecho
+40,Scripts DDL,8 BD,Eneko.S,Adrian,2026-10-28,2026-10-29,39,Hecho
 41,Datos de prueba y consultas,8 BD,Iker,Eneko.S,2026-10-30,2026-11-02,40,Pendiente
 42,Usuarios de BD con mínimos privilegios,8 BD,Markel,Iker,2026-11-02,2026-11-03,40,Pendiente
 43,RAID 1 y simulación de fallo,9 Backup,Eneko.P,Iker,2026-10-29,2026-11-02,,Pendiente
