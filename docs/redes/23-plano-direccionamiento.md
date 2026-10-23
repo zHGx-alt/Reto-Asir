@@ -162,7 +162,57 @@ Con un router que admita VLANs (por ejemplo, uno compatible con OpenWrt) o un sw
 | 50 | Invitados | 192.168.50.0/24 | Móviles de clientes |
 | 99 | Gestión | 192.168.99.0/24 | Panel de administración de routers y switch |
 
-Haría falta un switch gestionable de 8 puertos o cambiar de router. Queda como propuesta para la memoria, porque con el Archer C6 de fábrica no se puede montar.
+Haría falta un switch gestionable de 8 puertos o cambiar de router. Con el Archer C6 de fábrica no se puede montar, así que se ha comprobado en Packet Tracer (apartado 5.4).
+
+### 5.4 Simulación en Packet Tracer
+
+Fichero: [23-segmentacion-vlan.pkt](23-segmentacion-vlan.pkt) (Packet Tracer 9.0.1).
+
+![Topología en Packet Tracer](23-segmentacion-vlan.png)
+
+**Montaje:**
+- Router **R1** (Cisco 2911) y switch **SW1** (2960-24TT) unidos por un *trunk* (`R1 Gi0/0` ↔ `SW1 Gi0/1`).
+- R1 tiene una subinterfaz por VLAN (`Gi0/0.10` … `Gi0/0.99`), que hace de puerta de enlace `.1` de cada red. Este montaje se llama *router-on-a-stick*.
+- R1 reparte las IPs por DHCP, con un pool por VLAN que empieza en `.10`. El servidor tiene IP fija: `192.168.10.10`.
+- SW1 se administra desde la VLAN 99 (`192.168.99.2`).
+
+| Puerto de SW1 | VLAN | Equipo | IP obtenida |
+|---|---|---|---|
+| Fa0/1 | 10 Servidores | SRV-ODOO | 192.168.10.10 (fija) |
+| Fa0/2 | 20 TPV | TPV1 | 192.168.20.10 |
+| Fa0/3 | 20 TPV | TPV2 | 192.168.20.11 |
+| Fa0/4 | 30 Gerencia | GERENTE | 192.168.30.10 |
+| Fa0/5 | 40 Arcade | RECREATIVA | 192.168.40.10 |
+| Fa0/6 | 50 Invitados | CLIENTE | 192.168.50.10 |
+
+**ACLs en R1** (de entrada en cada subinterfaz; aplican la tabla 5.1):
+
+| ACL | Subinterfaz | Qué deja pasar |
+|---|---|---|
+| `TPV-IN` | Gi0/0.20 | DHCP; HTTP (80) y ping al servidor; nada más hacia redes internas; resto (internet) sí |
+| `GERENCIA-IN` | Gi0/0.30 | DHCP; todo hacia el servidor y hacia la VLAN de gestión; nada más hacia redes internas; resto sí |
+| `AISLADA-IN` | Gi0/0.40 y Gi0/0.50 | DHCP; ninguna red interna (`192.168.0.0/16`); resto sí |
+
+En Packet Tracer no existe Odoo. El servidor responde por HTTP en el puerto 80 en lugar del 8069 del local real.
+
+**Pruebas** (ping desde cada equipo, 23/10/2026):
+
+| # | Desde → hasta | Esperado | Resultado |
+|---|---|---|---|
+| 1 | TPV1 → servidor (192.168.10.10) | Llega | 4/4 ✔ |
+| 2 | GERENTE → servidor | Llega | 4/4 ✔ |
+| 3 | GERENTE → SW1, gestión (192.168.99.2) | Llega | 4/4 ✔ |
+| 4 | TPV1 → GERENTE (192.168.30.10) | Bloqueado | 0/4 ✔ |
+| 5 | GERENTE → TPV1 (192.168.20.10) | Bloqueado | 0/4 ✔ |
+| 6 | CLIENTE → servidor | Bloqueado | 0/4 ✔ |
+| 7 | CLIENTE → RECREATIVA (192.168.40.10) | Bloqueado | 0/4 ✔ |
+| 8 | RECREATIVA → TPV1 | Bloqueado | 0/4 ✔ |
+
+El primer ping de cada pareja pierde 1 o 2 paquetes mientras se resuelve la dirección MAC (ARP). En las tablas se pone el resultado de la repetición.
+
+`show access-lists` en R1 confirma que los bloqueos los hacen las ACLs y no un fallo de red: suben los contadores de las líneas `deny ip any 192.168.0.0 0.0.255.255` de `TPV-IN`, `GERENCIA-IN` y `AISLADA-IN`.
+
+Queda por probar el acceso HTTP del TPV al servidor desde el navegador del PC en Packet Tracer (*Desktop → Web Browser*, `http://192.168.10.10`).
 
 ## 6. Cómo se comprueba
 
@@ -194,4 +244,5 @@ Estas pruebas se hacen en las tareas 24 y 25, con el router montado. Se dejan ap
 - [ ] Apuntar las MAC de los equipos cuando estén montados.
 - [ ] Confirmar en la tarea 24 qué subred da el Archer C6 a la red de invitados.
 - [ ] Confirmar si el PC de la recreativa tiene Wi-Fi.
-- [ ] (Opcional) Pasar la red a Cisco Packet Tracer para la defensa.
+- [x] Simular el diseño con VLANs en Packet Tracer (apartado 5.4).
+- [ ] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador.
