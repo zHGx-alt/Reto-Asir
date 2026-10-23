@@ -70,10 +70,6 @@ es = x("res.country", "search", [["code", "=", "ES"]])[0]
 eur = x("res.currency", "search", [["name", "=", "EUR"]], context={"active_test": False})[0]
 x("res.currency", "write", [eur], {"active": True})
 x("res.company", "write", [1], {"name": EMPRESA, "country_id": es, "currency_id": eur})
-# el almacén se crea con el nombre que tuviera la empresa al instalar Inventario
-almacenes = x("stock.warehouse", "search", [])
-if almacenes:
-    x("stock.warehouse", "write", almacenes, {"name": EMPRESA})
 print("   ", x("res.company", "read", [1], fields=["name", "country_id", "currency_id"])[0])
 
 paso("2/4 Instalando módulos (puede tardar unos minutos)")
@@ -88,6 +84,11 @@ instalados = x("ir.module.module", "search_read",
                [["name", "in", MODULOS + ["l10n_es"]]], fields=["name", "state"])
 for m in instalados:
     print(f"    {m['name']}: {m['state']}")
+# el almacén se crea con el nombre que tuviera la empresa al instalar Inventario
+# (va después de instalar los módulos: en una base nueva stock.warehouse aún no existe)
+almacenes = x("stock.warehouse", "search", [])
+if almacenes:
+    x("stock.warehouse", "write", almacenes, {"name": EMPRESA})
 plan = x("res.company", "read", [1], fields=["chart_template"])[0]["chart_template"]
 iva21 = x("account.tax", "search_read", [["type_tax_use", "=", "sale"], ["amount", "=", 21],
                                           ["amount_type", "=", "percent"]], fields=["name"], limit=1)

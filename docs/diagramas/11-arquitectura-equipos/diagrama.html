@@ -4,48 +4,50 @@
 flowchart TB
     internet((Internet))
 
-    subgraph AWS["☁️ AWS (tareas 30–31)"]
-        cf["CloudFront + HTTPS<br/>dominio propio"]
-        s3[("S3<br/>web estática")]
-        cf --> s3
+    subgraph AWS["☁️ AWS · us-east-1 (tarea 30)"]
+        s3[("S3 privado<br/>almi-chain-web-2026")]
+        ec2["EC2 t3.micro · Ubuntu 24.04<br/>nginx + Let's Encrypt<br/>IP elástica"]
+        s3 -- "aws s3 sync cada 5 min" --> ec2
     end
-    gh["GitHub<br/>repo + Actions"] -- "despliegue automático (OIDC)" --> s3
+    dns["DuckDNS<br/>almichain1.duckdns.org"]
+    gh["GitHub<br/>repositorio"] -- "subida de web/<br/>(Actions: tarea 31, pendiente)" --> s3
 
-    internet --- cf
-    internet --- ont["Router del operador / ONT<br/>WAN (tarea 22, pendiente)"]
+    internet -- "HTTPS" --- dns --- ec2
+    internet --- ont["Router de DIGI (ONT)<br/>fibra 1 Gb · tarea 22"]
 
     subgraph LOCAL["🏪 Local"]
-        router["Router principal<br/>firewall · WPA3 · DHCP<br/>(tarea 24)"]
-        wds["Router 2 · WDS<br/>amplía la WiFi<br/>(tarea 25)"]
+        router["Router 1 · TP-Link Archer C6 · .1<br/>firewall · DHCP · Wi-Fi<br/>(tarea 24)"]
+        wds["Router 2 · Archer C6 · .2<br/>WDS: amplía la Wi-Fi<br/>(tarea 25)"]
         ont --- router
         router -. "WDS" .- wds
 
-        subgraph LAN["LAN tienda · 192.168.10.0/24 (propuesta, tarea 23)"]
-            srv["🖥️ Servidor ERP · .10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · backup restic"]
-            usb[("💾 USB backup<br/>BACKUP_USB")]
-            ger["💼 PC gerente · .20<br/>Windows 10 + Linux<br/>(arranque dual, tarea 12)"]
-            tpv1["🧾 TPV 1 · .31<br/>Windows (bastionado, tarea 13)"]
-            tpv2["🧾 TPV 2 · .32<br/>Windows (bastionado, tarea 13)"]
-            imp["🖨️ Impresora de tickets<br/>(tarea 14)"]
-            rec["🕹️ Recreativa · .50<br/>Debian 13 · MAME 0.276"]
-            stick["Arcade stick<br/>ATmega32U4 (HID)"]
+        subgraph LAN["LAN · 192.168.10.0/24 (tarea 23)"]
+            srv["🖥️ Servidor · .10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · copias restic"]
+            usb[("💾 Disco USB<br/>BACKUP_USB")]
+            ger["💼 PC gerente · .20<br/>Lenovo Neo 50q Gen 4<br/>Windows 10 + Ubuntu (tarea 12)"]
+            tpv1["🧾 TPV 1 · .31<br/>Iggual AIO N100 táctil<br/>Windows 10 Pro en quiosco"]
+            tpv2["🧾 TPV 2 · .32<br/>Iggual AIO N100 táctil<br/>Windows 10 Pro en quiosco"]
+            imp1["🖨️ Epson TM-T20IV"]
+            imp2["🖨️ Epson TM-T20IV"]
         end
 
-        subgraph INV["WiFi invitados · 192.168.20.0/24 (aislada)"]
+        subgraph INV["Wi-Fi de invitados (aislada de la LAN)"]
             cli["📱 Móviles de clientes"]
+            rec["🕹️ Recreativa<br/>1 núcleo · 1 GB<br/>Debian 13 + MAME"]
+            stick["Arcade stick<br/>Arduino Leonardo<br/>joystick HID"]
         end
 
-        router --- srv & ger & tpv1 & tpv2 & rec
-        wds --- cli
-        router --- cli
+        router --- srv & ger & tpv1 & tpv2
+        router & wds -.- cli & rec
         srv -- "USB" --- usb
-        tpv1 -- "USB" --- imp
+        tpv1 -- "USB" --- imp1
+        tpv2 -- "USB" --- imp2
         rec -- "USB" --- stick
     end
 
-    tpv1 & tpv2 -- "navegador → Odoo TPV<br/>:8069 (HTTPS pendiente)" --> srv
-    ger -- "navegador → Odoo<br/>gestión" --> srv
-    cli -. "✖ sin acceso a la LAN" .-> srv
+    tpv1 & tpv2 -- "navegador → TPV de Odoo<br/>:8069 (HTTPS: tarea 52)" --> srv
+    ger -- "navegador → Odoo" --> srv
+    cli & rec -. "✖ sin acceso" .-> srv
 </div>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true, theme:'default', flowchart:{htmlLabels:true, curve:'basis'}});</script>

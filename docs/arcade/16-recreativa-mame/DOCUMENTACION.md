@@ -116,7 +116,7 @@ El menú de MAME se configura con el filtro **Available** (`~/.mame/ui.ini`) par
 ![MAME con los 5 juegos](evidencias/06-mame-con-roms.png)
 
 ### 4.6 Preparar la recreativa para el arcade stick de Arduino
-Detalles en [`STICK-ARDUINO.md`](STICK-ARDUINO.md) y firmware en [`../arcade-stick/`](../arcade-stick/).
+Detalles en [`STICK-ARDUINO.md`](STICK-ARDUINO.md) y firmware en [`arduino/mando-joystick/`](../../../arduino/mando-joystick/).
 - MAME tiene los mandos activados y el usuario `arcade` está en el grupo `input`.
 - Un mando virtual con la identidad USB del Arduino Leonardo (VID 2341 / PID 8036) fue detectado por MAME (`Input: Adding joystick #1: LLC Arduino Leonardo`).
 - En los menús, **Botón 1** y **Start** también sirven para elegir (`~/.mame/cfg/default.cfg`).
@@ -161,7 +161,7 @@ Ficheros: [`arranque-debian-limpio.txt`](evidencias/arranque-debian-limpio.txt),
 | 2 | La comprobación del script decía "MAME NO INSTALADO" aunque sí lo estaba | Debian instala MAME en `/usr/games`, que no está en el PATH de `sudo` | Usar la ruta completa `/usr/games/mame` en el script y en `.xinitrc` |
 | 3 | No se podían descargar las ROMs | `www.mamedev.org` rechazaba las conexiones el 22/10/2026 (puertos 80 y 443) | Descargar los mismos ficheros oficiales desde la copia de la página en el Internet Archive. No se usan ROMs de fuentes no oficiales. |
 | 4 | Al elegir un juego salía "Required ROM/disk images … are missing" | El menú enseña los 41.390 sistemas que MAME sabe emular, aunque no estén instalados | Instalar las ROMs y poner por defecto el filtro **Available** en `ui.ini`. Añadido al script. |
-| 5 | "No funciona con el teclado" | Las teclas enviadas a la VM con pulsación instantánea (sin mantenerlas) no las detecta MAME, que lee el estado de las teclas una vez por fotograma. Además, la ventana de VirtualBox tiene que tener el foco (hacer clic dentro). | Con pulsaciones normales (≥ 1 fotograma) funciona: menú, moneda, start y movimiento comprobados. El firmware usa un antirrebote de 10 ms y mantiene la tecla pulsada mientras se pulsa el botón. |
+| 5 | "No funciona con el teclado" | Las teclas enviadas a la VM con pulsación instantánea (sin mantenerlas) no las detecta MAME, que lee el estado de las teclas una vez por fotograma. Además, la ventana de VirtualBox tiene que tener el foco (hacer clic dentro). | Con pulsaciones normales (≥ 1 fotograma) funciona: menú, moneda, start y movimiento comprobados. El firmware del stick mantiene el botón HID pulsado mientras se pulsa el botón físico, así que no tiene este problema. |
 | 6 | VirtualBox no puede pasar USB a la VM | El usuario del anfitrión no está en el grupo `vboxusers` | `sudo usermod -aG vboxusers $USER` y volver a iniciar sesión (lo tiene que hacer el propietario del PC). |
 
 ## 8. Pendiente

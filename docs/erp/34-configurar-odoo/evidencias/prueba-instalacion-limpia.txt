@@ -1,0 +1,103 @@
+# Prueba en instalación limpia (23/10/2026, Adrian con Claude Code)
+# Odoo 19.0 + PostgreSQL 17 con el docker-compose.yml de la tarea 33, en Docker local (puerto 18069).
+# Antes de los arreglos: configurar-odoo.py fallaba en el paso 1 (stock.warehouse no existe aún)
+# y cargar-carta-y-mesas.py fallaba al crear productos (copy devuelve lista en Odoo 19).
+
+== config
+== pull/db
+== init
+2026-10-23 10:05:19,824 1 INFO tienda odoo.service.server: Initiating shutdown 
+2026-10-23 10:05:19,824 1 INFO tienda odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-10-23 10:05:19,824 1 INFO tienda odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections  
+2026-10-23 10:05:22,493 1 INFO tienda odoo.registry: Registry loaded in 0.229s 
+== login 200?
+200
+== dbmanager
+disabled by the administrator
+== puerto 5432 publicado?
+:0
+== configurar-odoo.py (1)
+==> 1/4 Empresa: Almi-Chain (España, EUR)
+== configurar-odoo.py (1)
+==> 1/4 Empresa: Almi-Chain (España, EUR)
+    {'id': 1, 'name': 'Almi-Chain', 'country_id': [68, 'Spain'], 'currency_id': [126, 'EUR']}
+==> 2/4 Instalando módulos (puede tardar unos minutos)
+    account: instalando...
+    sale_management: instalando...
+    crm: instalando...
+    hr: instalando...
+    mass_mailing: instalando...
+    stock: instalando...
+    point_of_sale: instalando...
+    pos_restaurant: instalando...
+    sale_management: installed
+    pos_restaurant: installed
+    account: installed
+    crm: installed
+    stock: installed
+    point_of_sale: installed
+    mass_mailing: installed
+    hr: installed
+    l10n_es: installed
+    Plan contable: es_pymes · IVA de venta 21 %: 21% G
+==> 3/4 Puntos de venta (cada TPV con su caja de efectivo; la tarjeta va al banco)
+    TPV Barra 1: creado en modo restaurante (Efectivo TPV Barra 1 + Tarjeta)
+    TPV Barra 2: creado en modo restaurante (Efectivo TPV Barra 2 + Tarjeta)
+==> 4/4 Usuarios (mínimos privilegios)
+== configurar-odoo.py (2, idempotencia)
+==> 1/4 Empresa: Almi-Chain (España, EUR)
+    {'id': 1, 'name': 'Almi-Chain', 'country_id': [68, 'Spain'], 'currency_id': [126, 'EUR']}
+==> 2/4 Instalando módulos (puede tardar unos minutos)
+    Plan contable: es_pymes · IVA de venta 21 %: 21% G
+==> 3/4 Puntos de venta (cada TPV con su caja de efectivo; la tarjeta va al banco)
+    TPV Barra 1: listo (modo restaurante)
+    TPV Barra 2: listo (modo restaurante)
+==> 4/4 Usuarios (mínimos privilegios)
+    Registro libre de usuarios: desactivado (solo por invitación)
+    gerente: ya existe (grupos actualizados)
+    cajero1: ya existe (grupos actualizados)
+    cajero2: ya existe (grupos actualizados)
+Listo.
+== cargar-carta-y-mesas.py
+==> 1/3 Carta de ejemplo
+    Cafés · Café solo: 1.50 € (10% S (IVA incluido))
+    Cafés · Café con leche: 1.80 € (10% S (IVA incluido))
+    Cafés · Infusión: 1.60 € (10% S (IVA incluido))
+    Bebidas · Agua 50 cl: 1.50 € (10% S (IVA incluido))
+    Bebidas · Refresco: 2.50 € (10% S (IVA incluido))
+    Bebidas · Caña: 2.50 € (10% S (IVA incluido))
+    Bebidas · Copa de vino: 3.00 € (10% S (IVA incluido))
+    Entrantes · Patatas bravas: 5.50 € (10% S (IVA incluido))
+    Entrantes · Croquetas (6 uds): 7.00 € (10% S (IVA incluido))
+    Entrantes · Ensalada mixta: 8.50 € (10% S (IVA incluido))
+    Platos · Menú del día: 14.50 € (10% S (IVA incluido))
+    Platos · Hamburguesa Almi: 12.50 € (10% S (IVA incluido))
+    Platos · Entrecot: 19.00 € (10% S (IVA incluido))
+    Postres · Tarta de queso: 5.00 € (10% S (IVA incluido))
+    Postres · Flan casero: 4.00 € (10% S (IVA incluido))
+==> 2/3 Salas y mesas
+    Sala: 6 mesas (1-6), en los dos TPV
+    Barra: 4 mesas (11-14), en los dos TPV
+==> 3/3 TPV con precios con IVA incluido
+    Listo
+== factura_automatica.py (1)
+[1/6] Cliente: Cliente de prueba (id 10)
+[2/6] Producto: Partida recreativa a 2.50 € + IVA 21% S (id 21)
+[3/6] Pedido S00001 confirmado (sale), total 12.10 €
+[4/6] Factura INV/2026/00001 validada el 2026-10-23: base 10.00 € + IVA 2.10 € = 12.10 €
+[5/6] Cobro registrado: estado de pago 'paid'
+[6/6] PDF guardado en <scratch>/pdf/INV_2026_00001.pdf (24 KB)
+OK · S00001 → INV/2026/00001 · 12.10 € · paid
+== factura_automatica.py (2)
+[1/6] Cliente: Bar Pepe (id 11)
+[2/6] Producto: Alquiler recreativa (día) a 40.00 € + IVA 21% S (id 22)
+[3/6] Pedido S00002 confirmado (sale), total 193.60 €
+[4/6] Factura INV/2026/00002 validada el 2026-10-23: base 160.00 € + IVA 33.60 € = 193.60 €
+[5/6] Cobro registrado: estado de pago 'paid'
+[6/6] PDF guardado en <scratch>/pdf/INV_2026_00002.pdf (25 KB)
+OK · S00002 → INV/2026/00002 · 193.60 € · paid
+== admin/admin rechazado?
+uid False
+== cajero1 intenta modificar un producto
+Denegado: No puede modificar informes 'Product' (product.template)
+Denegado crear usuario: No puede crear informes 'User' (res.users)

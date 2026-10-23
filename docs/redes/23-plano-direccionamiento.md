@@ -24,7 +24,7 @@ El enunciado no da el plano ni las medidas del local. Se trabaja con estos supue
 |---|---|---|
 | S-01 | Local de una planta de 20 × 12 m: despacho, aseos, almacén, cocina, comedor y barra | Tamaño habitual de un restaurante pequeño. Basta para justificar el segundo router (WDS) |
 | S-02 | La fibra de DIGI entra por el despacho del gerente y ahí va el armario de red | El despacho es la única estancia que se cierra con llave, así que el router y el servidor quedan fuera del alcance de los clientes |
-| S-03 | Internet: DIGI 1 Gb con su router, que hace de ONT ([tarea 22](../gestion/tarea-22.md)) | Operador elegido en la tarea 22 |
+| S-03 | Internet: DIGI 1 Gb con su router, que hace de ONT ([tarea 22](22-comparativa-wan.md)) | Operador elegido en la tarea 22 |
 | S-04 | Router principal y router WDS: 2 × TP-Link Archer C6 V3 ([tarea 10](../hardware/10-presupuesto-hardware.md), apartado 4.4) | Equipos elegidos en el presupuesto |
 | S-05 | No hay switch: los 4 puertos LAN del router principal son todos los puertos con cable | No está en el presupuesto |
 | S-06 | Las impresoras de tickets van por USB a su TPV, así que no llevan IP ([tarea 8](../hardware/08-tabla-hardware.md), apartado 3.3) | Decisión de la tarea 8 |
@@ -116,7 +116,7 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 | `Restaurante-Almichain` | WPA3-Personal (o WPA2/WPA3 mixto si algún equipo no soporta WPA3) | LAN | Personal |
 | `Restaurante-Almichain-Invitados` | WPA2/WPA3, contraseña distinta y que se cambia cada cierto tiempo | Invitados | Clientes y recreativa |
 
-Se mantienen los nombres de la [tarea 24](../evidencias/Configurar-red-segura/configurar-red-segura.md).
+Se mantienen los nombres de la [tarea 24](24-red-segura/DOCUMENTACION.md).
 
 **A comprobar en la tarea 24:** no está confirmado que la red de invitados del Archer C6 use una subred propia (`192.168.20.0/24`). Algunos routers domésticos dan a los invitados IPs del mismo rango que la LAN y los aíslan solo con reglas internas. Lo importante es el aislamiento, que se prueba igual en los dos casos (apartado 6). La subred que asigne el router de verdad se apunta en esta tabla.
 

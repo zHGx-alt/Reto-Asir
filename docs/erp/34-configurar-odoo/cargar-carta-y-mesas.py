@@ -54,7 +54,8 @@ iva = x("account.tax", "search", [["name", "=", NOMBRE_IVA]], limit=1)
 if not iva:
     base = x("account.tax", "search", [["type_tax_use", "=", "sale"], ["amount", "=", IVA_HOSTELERIA],
                                         ["amount_type", "=", "percent"], ["tax_scope", "=", "service"]], limit=1)
-    iva = [x("account.tax", "copy", base[0], {"name": NOMBRE_IVA, "price_include_override": "tax_included"})]
+    copia = x("account.tax", "copy", base[0], {"name": NOMBRE_IVA, "price_include_override": "tax_included"})
+    iva = copia if isinstance(copia, list) else [copia]  # en Odoo 19, copy devuelve una lista de ids
 nombre_iva = NOMBRE_IVA
 
 print("==> 1/3 Carta de ejemplo")

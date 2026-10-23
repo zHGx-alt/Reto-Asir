@@ -4,7 +4,7 @@
 |---|---|
 | **Reto** | 1 · Almi-Chain |
 | **Grupo** | ASIR1 2026-2027 |
-| **Equipo** | Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio |
+| **Equipo** | Adrian, Iker, Eneko.S, Eneko.P (pendiente de confirmar si sigue), Markel, Peio |
 | **Periodo** | 21/10/2026 – 10/11/2026 |
 | **Responsable del documento** | Adrian |
 
@@ -68,13 +68,17 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 
 | Decisión | Elección | Justificación | Fecha |
 |---|---|---|---|
-| Gestión de tareas | GitHub Projects + Gantt en el repo | Integrado con el repositorio; el Gantt se regenera desde el CSV | 21/10/2026 |
+| Gestión de tareas | Gantt en el repo, generado desde el CSV | El enunciado pide Gantt o Kanban. El Gantt vive en el repositorio y se regenera con un script; el tablero de GitHub Projects se creó pero no se usa | 21/10/2026 (revisado el 23/10) |
+| Firmware del arcade stick | Joystick HID estándar (no teclado) | Cualquier emulador lo reconoce como mando sin drivers, no interfiere con el teclado y el mapeo se personaliza en la EEPROM; todo el firmware está hecho así. Moneda y Start se asignan una vez en MAME ([STICK-ARDUINO.md](../arcade/16-recreativa-mame/STICK-ARDUINO.md)) | 23/10/2026 |
+| Línea WAN | Fibra DIGI 1 Gb, 30 €/mes | Es la que elige la comparativa ([tarea 22](../redes/22-comparativa-wan.md)) y la que ya usaba el plano (tarea 23); el presupuesto se corrige para que coincida (360 €/año en vez de 588,12 €) | 23/10/2026 |
+| Contraseñas | Robustas, generadas y guardadas en KeePassXC; nunca en texto plano ni en Git | Lo exigen el enunciado (gestión de credenciales y secretos) y el plan | 23/10/2026 |
+| Reparto tras la revisión del estado | Software pendiente para Adrian e Iker; tareas físicas para cualquiera salvo Eneko.P; las tareas con parte en VM y parte física se separan | Eneko.P está pendiente de confirmar si sigue; Adrian e Iker son quienes han hecho casi todo el software ([roles.md](roles.md), [verificacion.md](verificacion.md)) | 23/10/2026 |
 | ERP | Odoo Community | Cubre las funciones del enunciado con un TPV táctil integrado, usa PostgreSQL, tiene más documentación en español y es gratuito ([tarea 32](../erp/32-comparativa-erp.md), sección 6) | 22/10/2026 |
 | Hosting web | Bucket S3 privado + EC2 con nginx, IP elástica, dominio `almichain1.duckdns.org` y certificado de Let's Encrypt | Dominio y certificado gratuitos. DuckDNS solo admite registros A, y CloudFront y ACM necesitan CNAME; con una IP elástica basta un registro A ([tarea 30](../web/30-hosting-aws.md)) | 23/10/2026 |
 | IaC | | | |
 | SO de la recreativa | *Provisional:* Debian 13 mínimo con arranque directo a MAME | Arranca a MAME en 4,7 s sin escritorio ([tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md)). Se está probando Batocera para compararlas con datos en una VM de 1 núcleo y 1 GB ([notas](../arcade/16-batocera/NOTAS.md)) | 23/10/2026 |
 | Firmware de router | | | |
-| SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 ([tarea 40](../bd/scripts/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
+| SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 ([tarea 40](../bd/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
 | Backup | restic sobre RAID 1 (`mdadm`) y disco USB externo | Copias cifradas con AES-256, deduplicadas y automatizadas; cumple la regla 3-2-1 ([tarea 44](../backup/44-backup-3-2-1/DOCUMENTACION.md)) | 22/10/2026 |
 | Placa del arcade stick | Arduino Leonardo (ATmega32U4) | HID nativo por USB sin drivers; compatible con la librería Joystick; EEPROM para guardar el mapeo | 22/10/2026 |
 
@@ -109,11 +113,14 @@ Incidencias relevantes durante la ejecución:
 | 22/10/2026 | Arcade | Las medidas de rendimiento se hicieron en una VM de 2 núcleos y 1,5 GB, no de 1 núcleo y 1 GB como pide el enunciado | Hay que repetirlas en la VM `Recreativa-1GB` ([tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md)) |
 | 22/10/2026 | ERP | Odoo se instaló antes de cerrar la comparativa de ERP (tarea 32) | La tarea 32 eligió Odoo Community, así que no hay que rehacer nada |
 | 22/10/2026 | ERP | Crear la factura por XML-RPC devolvía `cannot marshal None` | La acción sí se ejecuta; el script lo controla ([tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md)) |
-| 22/10/2026 | Redes | El router TP-Link TL-WR841N v14 no admite WPA3 | Se usa WPA2-PSK con AES; para WPA3 hace falta otro equipo ([red segura](../evidencias/Configurar-red-segura/configurar-red-segura.md)) |
+| 22/10/2026 | Redes | El router TP-Link TL-WR841N v14 no admite WPA3 | Se usa WPA2-PSK con AES; para WPA3 hace falta otro equipo ([red segura](../redes/24-red-segura/DOCUMENTACION.md)) |
 | 23/10/2026 | Web | Sin presupuesto para un dominio de pago; DuckDNS (gratuito) no admite CNAME, así que no puede apuntar a CloudFront ni validar un certificado de ACM | Se cambia a EC2 con IP elástica y Let's Encrypt; S3 sigue guardando la web ([tarea 30](../web/30-hosting-aws.md), sección 2) |
 | 23/10/2026 | Web | La consola de AWS no admite nombres de grupo de seguridad que empiecen por `sg-` | Se llama `web-almichain-sg` |
 | 23/10/2026 | Web | La redirección de HTTP que crea certbot mostraba la versión de nginx | `server_tokens off` en el bloque `http` del script |
 | 23/10/2026 | Web | Lighthouse: contraste insuficiente en tres textos, imágenes de 1600 px en móvil y un error del W3C | Corregido en `web/` (PR #25); Lighthouse 98-100 |
+| 23/10/2026 | ERP | En una instalación limpia de Odoo, `configurar-odoo.py` y `cargar-carta-y-mesas.py` fallaban (almacén buscado antes de instalar Inventario; `copy` devuelve una lista en Odoo 19) | Corregidos y repetida toda la instalación hasta la factura ([verificación](verificacion.md), sección 4) |
+| 23/10/2026 | Gestión | 14 enlaces rotos y documentos fuera de la carpeta de su bloque | Movidos a `docs/redes/` y `docs/bd/` y enlaces corregidos; `scripts/verificar-repo.sh` lo comprueba |
+| 23/10/2026 | Seguridad | Contraseñas débiles de la VM del gerente en un fichero de texto sin seguimiento | No se sube (añadido al `.gitignore`); se cambian y se guardan en KeePassXC (tarea 55) |
 
 ## 8. Pruebas
 
@@ -123,12 +130,13 @@ Incidencias relevantes durante la ejecución:
 | SO | Cajero intenta instalar software / usar USB | Operación denegada | | |
 | Arcade | Rendimiento MAME antes y después de optimizar | Aumento de FPS y menor consumo de RAM | Robby Roto +27 % y más estable, Gridlee +6 %, timers de 8 a 3, −277 MB de disco; la RAM no cambia. Medido en una VM de 2 núcleos y 1,5 GB: falta repetirlo con 1 núcleo y 1 GB | [tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | Arduino | Stick en MAME y en un segundo emulador | Todas las entradas reconocidas y remapeables | | |
-| Redes | Cliente de la red de invitados accede a la red interna | Acceso bloqueado | Pendiente: la red de invitados aún no está configurada | [red segura](../evidencias/Configurar-red-segura/configurar-red-segura.md) |
+| Redes | Cliente de la red de invitados accede a la red interna | Acceso bloqueado | Pendiente: la red de invitados aún no está configurada | [red segura](../redes/24-red-segura/DOCUMENTACION.md) |
 | Redes | Roaming y throughput con WDS | Cobertura ampliada; velocidad medida con iperf3 | | |
 | Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | W3C sin errores; Lighthouse móvil 98/100/100/100 y escritorio 99/100/100/100 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
 | Web | Acceso por HTTP | Redirección a HTTPS con certificado válido | `301` a HTTPS; certificado de Let's Encrypt válido hasta el 21/01/2027 | [tarea 30, sección 5](../web/30-hosting-aws.md#5-pruebas) |
-| ERP | Pedido en TPV | Factura emitida, enviada por correo y stock descontado | Parcial: un script crea el pedido, valida la factura INV/2026/00002 (12,10 €), registra el cobro y guarda el PDF. Falta lanzarlo desde el TPV, el envío por correo y el descuento de stock | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
-| BD | Usuario de aplicación ejecuta DDL | Permiso denegado | Los roles de aplicación y de lectura reciben `permission denied` al modificar facturas o insertar fuera de sus permisos (33 pruebas correctas). Falta una prueba expresa de DDL | [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
+| ERP | Venta en el TPV de barra | Ticket, cobro, cierre de caja y asiento contable | Mesa 3, 35,50 € en efectivo: factura simplificada, caja cuadrada (diferencia 0,00 €) y asiento `POSS/2026/10/0001` validado | [tarea 34, sección 8](../erp/34-configurar-odoo/DOCUMENTACION.md) |
+| ERP | Factura automática de extremo a extremo | Pedido, factura validada, cobro y PDF sin intervención | Repetido el 23/10 en una instalación limpia: `INV/2026/00001` y `00002` cobradas y con PDF. No incluye envío por correo ni descuento de stock (ideas del plan, no exigidas por el enunciado) | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
+| BD | Usuario de aplicación ejecuta DDL | Permiso denegado | `CREATE TABLE`: *permission denied for schema public*; `DROP` y `ALTER`: *must be owner*; `DELETE`/`UPDATE` de facturas denegados; 33 pruebas de reglas correctas (repetido el 23/10) | [verificación](verificacion.md), [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
 | RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
 | Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; RTO 46 s | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
 
@@ -136,9 +144,9 @@ Incidencias relevantes durante la ejecución:
 
 | Entregable | Responsable | Estado |
 |---|---|---|
-| Documentación técnica paso a paso | Markel | Pendiente |
+| Documentación técnica paso a paso | Markel | Pendiente (base: [LOGICA_RETO.md](../../LOGICA_RETO.md)) |
 | Diagramas (sistemas, red, AWS, BD) | Responsable de cada bloque | Pendiente |
-| Tabla de pruebas | Eneko.P | Pendiente |
+| Tabla de pruebas | Eneko.S | Pendiente (base: [verificacion.md](verificacion.md)) |
 | Presentación y ensayo | Peio | Pendiente |
 
 ## 10. Evaluación y retrospectiva

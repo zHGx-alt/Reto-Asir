@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Genera docs/gestion/gantt.svg (diagrama de Gantt) y docs/gestion/gantt.md
-(diagrama + avisos + carga por persona) a partir de docs/gestion/backlog-kanban.csv.
+(diagrama, avisos, tareas hechas y sin hacer, y carga por persona) a partir de
+docs/gestion/backlog-kanban.csv.
 
 Uso: python3 scripts/gantt.py
 """
@@ -15,6 +16,8 @@ CSV = RAIZ / "docs/gestion/backlog-kanban.csv"
 SALIDA = RAIZ / "docs/gestion/gantt.md"
 SVG = RAIZ / "docs/gestion/gantt.svg"
 ESTADOS = ("Pendiente", "En curso", "Hecho")
+# Software: se hace en un ordenador o una VM. Físico: necesita montar o tocar el equipo real.
+TIPOS = ("Gestión", "Documentación", "Software", "Físico")
 # Un color fijo por persona, en orden alfabético (paleta validada para daltonismo).
 COLORES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
 DIAS_SEMANA = "LMXJV"
@@ -86,6 +89,10 @@ def validar(tareas):
             errores.append(f"#{t['ID']}: el responsable no puede revisarse a sí mismo")
         if t["Estado"] not in ESTADOS:
             errores.append(f"#{t['ID']}: estado desconocido '{t['Estado']}'")
+        if t["Tipo"] not in TIPOS:
+            errores.append(f"#{t['ID']}: tipo desconocido '{t['Tipo']}'")
+        if t["Evidencia"] and not (RAIZ / t["Evidencia"]).exists():
+            errores.append(f"#{t['ID']}: no existe la evidencia {t['Evidencia']}")
     if errores:
         raise SystemExit("Errores en el CSV:\n  " + "\n  ".join(errores))
     return avisos
@@ -165,7 +172,8 @@ def generar_svg(tareas, por_id):
                  f'stroke="#f0efeb"/>')
         o.append(f'<text x="{m}" y="{cy}" class="s">{t["ID"]}</text>')
         o.append(f'<text x="{m + w_id}" y="{cy}" class="{clase}">{nombre}'
-                 f'{" ✓" if hecho else ""}</text>')
+                 f'{" ✓" if hecho else ""}'
+                 f'{"<tspan class=\"s\"> · físico</tspan>" if t["Tipo"] == "Físico" else ""}</text>')
         o.append(f'<circle cx="{m + w_id + w_tarea + 5}" cy="{cy - 4}" r="4.5" '
                  f'fill="{color[t["Responsable"]]}"/>')
         o.append(f'<text x="{m + w_id + w_tarea + 14}" y="{cy}" class="t">{escape(t["Responsable"])}</text>')
@@ -232,6 +240,45 @@ def main():
         lineas += [f"- {a}" for a in avisos]
         lineas.append("")
 
+    def enlace(t):
+        return f"[{Path(t['Evidencia']).name}](../../{t['Evidencia']})" if t["Evidencia"] else "—"
+
+    hechas = [t for t in tareas if t["Estado"] == "Hecho"]
+    sin_hacer = [t for t in tareas if t["Estado"] != "Hecho"]
+    lineas += [
+        "## Resumen",
+        "",
+        f"**{len(hechas)} de {len(tareas)} tareas hechas ({100 * len(hechas) // len(tareas)} %).** "
+        "*Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del "
+        "23/10/2026 están en [verificacion.md](verificacion.md).",
+        "",
+        "| Tipo | Hechas | En curso | Pendientes | Total |",
+        "|---|---|---|---|---|",
+    ]
+    for tipo in TIPOS:
+        ts = [t for t in tareas if t["Tipo"] == tipo]
+        n = {e: sum(t["Estado"] == e for t in ts) for e in ESTADOS}
+        lineas.append(f"| {tipo} | {n['Hecho']} | {n['En curso']} | {n['Pendiente']} | {len(ts)} |")
+    lineas += ["", "*Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita "
+               "el equipo real (montar, cablear o configurar hardware).", ""]
+
+    lineas += ["## Tareas sin terminar", "",
+               "Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento de cada tarea.", "",
+               "| # | Tarea | Tipo | Responsable | Fin | Estado | Qué falta | Evidencia |",
+               "|---|---|---|---|---|---|---|---|"]
+    for t in sorted(sin_hacer, key=lambda t: (t["Estado"] != "En curso", fecha(t["Fin"]), int(t["ID"]))):
+        lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Tipo']} | {t['Responsable']} | "
+                      f"{fecha(t['Fin']):%d/%m} | {t['Estado']} | {t['Observaciones'] or '—'} | {enlace(t)} |")
+    lineas.append("")
+
+    lineas += ["## Tareas hechas", "",
+               "| # | Tarea | Bloque | Tipo | Responsable | Revisa | Comprobación | Evidencia |",
+               "|---|---|---|---|---|---|---|---|"]
+    for t in sorted(hechas, key=lambda t: int(t["ID"])):
+        lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | {t['Tipo']} | {t['Responsable']} | "
+                      f"{t['Revisa']} | {t['Observaciones'] or '—'} | {enlace(t)} |")
+    lineas.append("")
+
     por_persona = defaultdict(list)
     revisiones = defaultdict(int)
     for t in tareas:
@@ -242,24 +289,27 @@ def main():
     lineas += [
         "## Carga por persona",
         "",
-        "| Persona | Tareas | Días-tarea | Revisiones | Bloques que toca |",
-        "|---|---|---|---|---|",
+        "| Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Revisiones | Bloques que toca |",
+        "|---|---|---|---|---|---|---|---|",
     ]
     for persona, ts in sorted(por_persona.items()):
         dias = sum(dias_laborables(fecha(t["Inicio"]), fecha(t["Fin"])) for t in ts)
         bloques = sorted({t["Bloque"].split()[0] for t in ts}, key=int)
-        lineas.append(f"| {persona} | {len(ts)} | {dias} | {revisiones[persona]} | "
+        abiertas = [t for t in ts if t["Estado"] != "Hecho"]
+        lineas.append(f"| {persona} | {len(ts)} | {len(abiertas)} | "
+                      f"{sum(t['Tipo'] == 'Software' for t in abiertas)} | "
+                      f"{sum(t['Tipo'] == 'Físico' for t in abiertas)} | {dias} | {revisiones[persona]} | "
                       f"{', '.join(bloques)} |")
     lineas.append("")
 
     lineas += ["## Tareas por persona", ""]
     for persona, ts in sorted(por_persona.items()):
         lineas += [f"### {persona}", "",
-                   "| # | Tarea | Bloque | Fechas | Depende de | Revisa | Estado |",
-                   "|---|---|---|---|---|---|---|"]
+                   "| # | Tarea | Bloque | Tipo | Fechas | Depende de | Revisa | Estado |",
+                   "|---|---|---|---|---|---|---|---|"]
         for t in ts:
             deps = ", ".join(f"#{d} ({por_id[d]['Responsable']})" for d in dependencias(t))
-            lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | "
+            lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | {t['Tipo']} | "
                           f"{fecha(t['Inicio']):%d/%m}–{fecha(t['Fin']):%d/%m} | "
                           f"{deps or '—'} | {t['Revisa']} | {t['Estado']} |")
         lineas.append("")
