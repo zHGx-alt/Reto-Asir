@@ -40,7 +40,7 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 | # | Tarea | Bloque | Fechas | Depende de | Revisa | Estado |
 |---|---|---|---|---|---|---|
-| 12 | Dual boot Win10 + Linux en el equipo del gerente | 2 SO | 28/10–30/10 | #8 (Eneko.S) | Eneko.S | Pendiente |
+| 12 | Dual boot Win10 + Linux en el equipo del gerente | 2 SO | 28/10–30/10 | #8 (Eneko.S) | Eneko.S | Hecho |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | 22/10–27/10 | — | Peio | Pendiente |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | 02/11–03/11 | #16 (Iker), #19 (Eneko.P), #20 (Adrian), #50 (Adrian) | Markel | Pendiente |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | 22/10–26/10 | — | Iker | Pendiente |
