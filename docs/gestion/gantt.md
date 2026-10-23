@@ -10,13 +10,13 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 ## Resumen
 
-**23 de 54 tareas hechas (42 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**25 de 55 tareas hechas (45 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
-| Gestión | 2 | 2 | 2 | 6 |
-| Documentación | 10 | 1 | 3 | 14 |
-| Software | 11 | 6 | 8 | 25 |
+| Gestión | 3 | 2 | 1 | 6 |
+| Documentación | 11 | 0 | 3 | 14 |
+| Software | 11 | 6 | 9 | 26 |
 | Físico | 0 | 1 | 8 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -28,16 +28,15 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Tipo | Responsable | Fin | Estado | Qué falta | Evidencia |
 |---|---|---|---|---|---|---|---|
 | 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 22/10 | En curso | Estructura, .gitignore y gitleaks hechos: CI en verde y gitleaks local sin fugas en 81 commits (23/10). Tienen commits 5 de 6 personas; falta Eneko.P (Anexo IX). | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
-| 11 | Diagrama de arquitectura de equipos | Documentación | Iker | 28/10 | En curso | Borrador desactualizado: dibuja CloudFront (se usa EC2 con nginx); pone la recreativa por cable (va por la Wi-Fi de invitados) y le faltan los modelos de las tareas 8 y 9. | [DIAGRAMA.md](../../docs/diagramas/11-arquitectura-equipos/DIAGRAMA.md) |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | Software | Iker | 28/10 | En curso | Batocera arranca con 1 GB (565 MB usados solo con el menú). Faltan medidas; endurecimiento (root con contraseña por defecto) y la decisión en el Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
-| 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | Software | Adrian | 30/10 | En curso | Hecho en VMware y entregado (SHA-256 del .ovf y la .nvram comprobados el 23/10). Faltan 3 capturas: menú de GRUB; net localgroup Administradores; firewall y Windows Update. Pasa de Eneko.P a Adrian, que hizo la VM. | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
+| 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | Software | Adrian | 30/10 | En curso | Hecho en VMware y entregado (SHA-256 del .ovf y la .nvram comprobados el 23/10). Faltan 3 capturas: menú de GRUB; net localgroup Administradores; firewall y Windows Update. Pasa de Eneko.P a Adrian, que hizo la VM. Contraseñas robustas: tarea 55. | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
 | 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Iker | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la que pide el enunciado) solo hay 3 medidas de antes; faltan las de después. | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS. Faltan la red de invitados aislada con su prueba y WPA3 (el TL-WR841N no lo admite; hace falta el Archer C6). Estaba en Hecho; su propio documento dice que no está terminada. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
 | 18 | Monitorización de recursos de la recreativa | Software | Adrian | 02/11 | En curso | Scripts hechos y probados en Linux. Falta ejecutarlos en la VM de 1 GB y guardar los CSV. Pasa de Eneko.S a Adrian. | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
 | 42 | Usuarios de BD con mínimos privilegios | Software | Adrian | 03/11 | En curso | Roles de grupo hechos. Probado el 23/10: un usuario con rol_aplicacion no puede CREATE; DROP; ALTER ni borrar facturas. Faltan los usuarios con LOGIN documentados y la evidencia. Pasa de Markel a Adrian. | [03-roles.sql](../../docs/bd/scripts/03-roles.sql) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. Falta añadir la BD de la tarea 41. Pasa de Markel a Iker, que la hizo. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Faltan las secciones 9 (entrega) y 10 (retrospectiva). | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
-| 4 | Crear tablero Kanban en GitHub Projects | Gestión | Iker | 27/10 | Pendiente | No se ha podido comprobar si existe (el token de gh no tiene permiso read:project). El enunciado pide Gantt o Kanban: ya se cumple con el Gantt. | — |
+| 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | Software | Adrian | 26/10 | Pendiente | Las actuales son cortas y se entregan en un .txt. El enunciado pide gestión de credenciales y el plan prohíbe el texto plano. Pasos en docs/so/12-dual-boot.md; sección 5. | — |
 | 6 | Resolver dudas pendientes con el profesor | Gestión | Peio | 27/10 | Pendiente | Sin acta. Dudas abiertas: dual boot en VM; TicketBAI o Veri*Factu; número de impresoras (S-01 de la tarea 7); Anexos VI a IX. | — |
 | 19 | Montaje del arcade stick (ATmega32U4) | Físico | Markel | 27/10 | Pendiente | Esquema de conexiones hecho; falta cablear la placa y conseguir la palanca. Pasa de Eneko.P a Markel. | [esquema-conexiones.svg](../../arduino/mando-joystick/esquema-conexiones.svg) |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Adrian | 30/10 | Pendiente | Sin empezar. Imprimir en la impresora real es la tarea 37. Pasa de Peio a Adrian. | — |
@@ -65,10 +64,12 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|---|
 | 1 | Firmar Anexo I (contrato de equipo) | 0 Gestión | Gestión | Adrian | Equipo | Firmado el 21/10. | [anexo-I-contrato-equipo.md](../../docs/gestion/anexo-I-contrato-equipo.md) |
 | 3 | Repartir tareas y responsables | 0 Gestión | Gestión | Adrian | Equipo | Reparto revisado el 23/10: software pendiente a Adrian e Iker; montaje físico a cualquiera salvo Eneko.P. | [roles.md](../../docs/gestion/roles.md) |
+| 4 | Herramienta de seguimiento (Gantt en el repo) | 0 Gestión | Gestión | Iker | Adrian | El enunciado pide Gantt o Kanban: se usa el Gantt generado desde el CSV. El tablero de GitHub Projects se creó pero no se usa. | [gantt.md](../../docs/gestion/gantt.md) |
 | 7 | Definir necesidades de equipos (gerente; 2 TPV; impresoras) | 1 Hardware | Documentación | Eneko.S | Iker | Requisitos RG, RT y RI con su prueba prevista. | [07-necesidades-equipos.md](../../docs/hardware/07-necesidades-equipos.md) |
 | 8 | Tabla de hardware con justificación | 1 Hardware | Documentación | Eneko.S | Peio | Total de 2.361,36 € comprobado el 23/10. | [08-tabla-hardware.md](../../docs/hardware/08-tabla-hardware.md) |
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | Markel | Iker | Falta indicar la versión concreta de cada programa (el plan la pide). | [09-tabla-software-licencias.md](../../docs/hardware/09-tabla-software-licencias.md) |
 | 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | Documentación | Peio | Eneko.S | Sumas comprobadas el 23/10 (2.447,34 € de inversión y 3.035,46 € el primer año). Incoherencia: presupuesta Telefónica 600 Mb y la tarea 22 elige DIGI 1 Gb; hay que unificarlo. | [10-presupuesto-hardware.md](../../docs/hardware/10-presupuesto-hardware.md) |
+| 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | Iker | Adrian | Actualizado el 23/10: EC2 con nginx en vez de CloudFront; recreativa en la Wi-Fi de invitados; dos impresoras; modelos de las tareas 8 y 10; SVG regenerado. Falta poner el operador WAN cuando se decida (tareas 10 y 22) y la revisión de Adrian. | [DIAGRAMA.md](../../docs/diagramas/11-arquitectura-equipos/DIAGRAMA.md) |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | Iker | Markel | Debian 13 + MAME 0.276 en VM: arranque directo en 4,7 s y 5 ROMs legales verificadas. La instalación en el equipo real es la tarea 53. | [DOCUMENTACION.md](../../docs/arcade/16-recreativa-mame/DOCUMENTACION.md) |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | Adrian | Iker | Compila (pio run del 23/10: Flash 37 %; RAM 17 %). Probarlo en la placa es la tarea 50. | [README.md](../../arduino/mando-joystick/README.md) |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Eneko.S | Elige DIGI 1 Gb (30 €/mes). No coincide con el presupuesto (tarea 10). | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
@@ -91,9 +92,9 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Revisiones | Bloques que toca |
 |---|---|---|---|---|---|---|---|
-| Adrian | 16 | 9 | 6 | 1 | 49 | 10 | 0, 2, 3, 4, 5, 6, 7, 8, 10 |
+| Adrian | 17 | 10 | 7 | 1 | 50 | 10 | 0, 2, 3, 4, 5, 6, 7, 8, 10 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 8 | 1, 3, 5, 7, 8, 11 |
-| Iker | 16 | 10 | 8 | 0 | 42 | 14 | 0, 1, 2, 3, 6, 7, 8, 9 |
+| Iker | 16 | 8 | 8 | 0 | 42 | 15 | 0, 1, 2, 3, 6, 7, 8, 9 |
 | Markel | 6 | 3 | 0 | 2 | 15 | 11 | 1, 4, 5, 6, 11 |
 | Peio | 7 | 5 | 0 | 3 | 14 | 8 | 0, 1, 5, 6, 7, 11 |
 
@@ -109,6 +110,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–22/10 | — | Iker | En curso |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | 28/10–30/10 | #8 (Eneko.S) | Eneko.S | En curso |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Eneko.S | Pendiente |
+| 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | 26/10–26/10 | — | Iker | Pendiente |
 | 18 | Monitorización de recursos de la recreativa | 3 Arcade | Software | 30/10–02/11 | #16 (Iker) | Markel | En curso |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | 27/10–30/10 | — | Iker | Hecho |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | 28/10–30/10 | #19 (Markel) | Markel | Pendiente |
@@ -138,8 +140,8 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Revisa | Estado |
 |---|---|---|---|---|---|---|---|
-| 4 | Crear tablero Kanban en GitHub Projects | 0 Gestión | Gestión | 26/10–27/10 | — | Adrian | Pendiente |
-| 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | 27/10–28/10 | #8 (Eneko.S), #9 (Markel) | Adrian | En curso |
+| 4 | Herramienta de seguimiento (Gantt en el repo) | 0 Gestión | Gestión | 26/10–27/10 | — | Adrian | Hecho |
+| 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | 27/10–28/10 | #8 (Eneko.S), #9 (Markel) | Adrian | Hecho |
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 28/10–02/11 | #9 (Markel) | Markel | Pendiente |
 | 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–04/11 | #12 (Adrian), #13 (Iker) | Markel | Pendiente |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | 26/10–28/10 | — | Markel | Hecho |

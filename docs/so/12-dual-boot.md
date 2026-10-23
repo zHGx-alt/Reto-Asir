@@ -125,6 +125,12 @@ cat /etc/apt/apt.conf.d/20auto-upgrades
 
 Las contraseñas **no están en el repositorio** ([CONTRIBUTING, sección 6](../../CONTRIBUTING.md#6-secretos)). Se entregan aparte, en el archivo `CREDENCIALES-dualboot-gerente.txt`, que está en la misma carpeta de descarga que la máquina virtual (sección 8).
 
+> ⚠️ **Pendiente (tarea 55).** Las contraseñas actuales de la VM son cortas y fáciles de adivinar, y se entregan en un `.txt` en texto plano. El enunciado pide «soluciones seguras» y «gestión de credenciales y secretos», y el plan, «sin contraseñas por defecto ni en texto plano». Hay que:
+> 1. Cambiar las contraseñas de las 4 cuentas (`admin` y `gerente` en Windows; `administrador` y `gerente` en Ubuntu) por otras robustas: al menos 14 caracteres, generadas con el gestor de contraseñas y distintas en cada cuenta. No hace falta reinstalar: basta con `net user <cuenta> *` en Windows (CMD como `admin`) y `sudo passwd <cuenta>` en Ubuntu.
+> 2. Borrar cualquier cuenta que sobre de la instalación (por ejemplo, la creada al instalar Windows, sección 4.1, paso 6) y comprobarlo con `net user`.
+> 3. Guardarlas en una base de **KeePassXC** (`.kdbx`, cifrada) en vez del `.txt`, y dar la contraseña maestra al profesor por otro canal.
+> 4. Volver a exportar la VM, subir el `.vmdk` nuevo a Drive y actualizar las sumas SHA-256 de la sección 8.
+
 ## 6. Verificación
 
 | Requisito | Prueba | Resultado | Evidencia |

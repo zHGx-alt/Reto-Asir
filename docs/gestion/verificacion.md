@@ -53,7 +53,7 @@ Las que necesitan Docker o PlatformIO se saltan si no están instalados. Resulta
 | 9 | 30 | `curl` a `https://almichain1.duckdns.org` | ⏸ Sin respuesta: el DNS apunta a la IP elástica `52.200.94.167`, pero el Learner Lab está parado. Es lo esperado (sección 8 de la tarea 30); las pruebas con el laboratorio encendido están en sus evidencias |
 | 10 | 5 | Autores de los commits de `main` | 5 de 6 personas tienen commits propios; Eneko.P no tiene ninguno |
 | 11 | 5 | CI de gitleaks en GitHub | ✅ Los 3 últimos merges a `main`, en verde |
-| 12 | 4 | Tablero de GitHub Projects | No comprobable: el token de `gh` no tiene el permiso `read:project` |
+| 12 | 4 | Tablero de GitHub Projects | Existe, pero no se usa (confirmado por el equipo): el seguimiento es el Gantt |
 
 La salida de las pruebas 1-5 está en [prueba-instalacion-limpia.txt](../erp/34-configurar-odoo/evidencias/prueba-instalacion-limpia.txt) (sin contraseñas).
 
@@ -86,7 +86,7 @@ En Odoo 19, `copy` devuelve por la API una **lista** de ids. El script la metía
 
 ### 4.5 Contraseñas fuera de Git
 
-En la carpeta de trabajo de Adrian había un fichero sin seguimiento, `VM dual boot.txt`, con las contraseñas de la VM del gerente, que además son muy débiles. No se ha subido; se ha añadido al `.gitignore` junto con `CREDENCIALES*` y `.credenciales*`. **Hay que cambiar esas contraseñas** por otras robustas, guardarlas en un gestor de contraseñas y borrar el fichero.
+En la carpeta de trabajo de Adrian había un fichero sin seguimiento, `VM dual boot.txt`, con las contraseñas de la VM del gerente, que además son muy débiles. No se ha subido; se ha añadido al `.gitignore` junto con `CREDENCIALES*` y `.credenciales*`. **Hay que cambiar esas contraseñas** por otras robustas, guardarlas en un gestor de contraseñas y borrar el fichero: es la nueva tarea 55. El enunciado lo exige («soluciones seguras», «gestión de credenciales y secretos») y el plan dice «sin contraseñas por defecto ni en texto plano».
 
 ## 5. Estados corregidos en el backlog
 
@@ -104,11 +104,11 @@ En la carpeta de trabajo de Adrian había un fichero sin seguimiento, `VM dual b
 | Dónde | Problema |
 |---|---|
 | Tareas 22 y 10 | La comparativa elige **DIGI 1 Gb a 30 €/mes**; el presupuesto usa **Telefónica 600 Mb a 49,01 €/mes**. El plano (tarea 23) sigue a la 22 |
-| Tarea 11 | El diagrama dibuja CloudFront y la recreativa por cable; el hosting real es EC2 con nginx y la recreativa va por la Wi-Fi de invitados |
-| Tarea 16 / `STICK-ARDUINO.md` | Recomienda que el stick sea un teclado USB; el firmware (tarea 20) es un joystick HID. Las dos opciones valen para MAME, pero hay que dejar una sola en la documentación |
 | Tarea 35 | El Anexo II la daba como *parcial*. El enunciado pide *al menos un caso de uso* y la factura lo es; el envío por correo y el descuento de stock eran ejemplos del plan |
 | Tarea 9 | No indica la versión de cada programa |
 | Tareas 7 y 8 | Los equipos traen Windows 11 Pro y el enunciado exige Windows 10: falta confirmar los derechos de *downgrade* (incidencia H-01) |
+
+Resueltas después de la revisión (23/10): el diagrama de la tarea 11 se ha actualizado (EC2, recreativa en la Wi-Fi de invitados, modelos y SVG regenerado) y la documentación del stick deja el **joystick HID**, que es como está hecho el firmware.
 
 ## 7. Lo que pide el enunciado y no tiene tarea terminada
 

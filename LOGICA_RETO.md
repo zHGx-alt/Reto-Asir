@@ -78,7 +78,7 @@ flowchart LR
 
 ## 3. Los equipos del local
 
-Las necesidades salen de la tarea 7 (requisitos RG para el gerente, RT para los TPV y RI para las impresoras, cada uno con su prueba prevista); los modelos y precios, de las tareas 8 y 10.
+Diagrama de todos los equipos: [tarea 11](docs/diagramas/11-arquitectura-equipos/DIAGRAMA.md). Las necesidades salen de la tarea 7 (requisitos RG para el gerente, RT para los TPV y RI para las impresoras, cada uno con su prueba prevista); los modelos y precios, de las tareas 8 y 10.
 
 | Equipo | Modelo elegido | Sistema | Qué hace | Cómo se conecta | Dónde se ha probado |
 |---|---|---|---|---|---|
@@ -297,7 +297,7 @@ Equipo de 1 núcleo y 1 GB ─ Debian 13 sin escritorio
    red: Wi-Fi de invitados (aislada del TPV y del servidor)
 ```
 
-- **Por qué un joystick HID:** cualquier emulador y cualquier sistema (Linux, Windows) lo reconoce sin drivers, que es lo que pide el enunciado («compatible con cualquier emulador»). El mapeo se cambia por el puerto serie (`MAP`, `INV`, `ZM`, `GUARDAR`…) y se guarda en la EEPROM con número de control y checksum: eso es el «input personalizable» ([firmware](arduino/mando-joystick/README.md)).
+- **Por qué un joystick HID** (decisión del equipo): cualquier emulador y cualquier sistema (Linux, Windows) lo reconoce sin drivers, que es lo que pide el enunciado («compatible con cualquier emulador»), y no interfiere con un teclado de mantenimiento. Moneda y Start se asignan una vez en MAME a los botones 5 y 6 ([STICK-ARDUINO.md](docs/arcade/16-recreativa-mame/STICK-ARDUINO.md)). El mapeo se cambia por el puerto serie (`MAP`, `INV`, `ZM`, `GUARDAR`…) y se guarda en la EEPROM con número de control y checksum: eso es el «input personalizable» ([firmware](arduino/mando-joystick/README.md)).
 - **Optimización** ([tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md)): sin escritorio, arranque a `multi-user.target`, GRUB sin espera, fuera las tareas en segundo plano que dan tirones (actualizaciones automáticas, índices), `swappiness` bajo y menos disco. Se mantienen AppArmor y SSH (seguridad y administración).
 - **Pruebas de rendimiento:** antes y después con `systemd-analyze`, `free`, `ps` y `mame -bench`. **Falta repetirlas en la VM de 1 núcleo y 1 GB** (la del enunciado) y en el equipo real.
 - **Monitorización** ([tarea 18](docs/arcade/18-monitorizacion-recreativa.md)): `monitor-recreativa.sh` toma CPU, carga, RAM, swap, temperatura y consumo de MAME a un CSV mientras se juega, y `resumen-monitorizacion.sh` lo resume.
@@ -366,7 +366,7 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 
 | Capa | Mínimos privilegios | Secretos | Cifrado | Estado |
 |---|---|---|---|---|
-| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git (Drive para la VM) | — | Gerente y recreativa hechos; TPV pendiente (#13) |
+| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | — | Gerente y recreativa hechos; contraseñas de la VM del gerente (#55) y TPV (#13) pendientes |
 | Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi | WPA2-AES; WPA3 pendiente | En curso (#24) |
 | Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS pendiente** (#52) | En curso |
 | Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Usuarios con login creados aparte | — | En curso (#42) |
@@ -374,7 +374,9 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
 | Repositorio | Cambios por Pull Request con revisor | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
-Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo, contraseña de root de Batocera, red de invitados y WPA3, y cambiar las contraseñas débiles de la VM del gerente.
+Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo, contraseña de root de Batocera, red de invitados y WPA3, y las contraseñas débiles de la VM del gerente (#55).
+
+**Regla para todas las contraseñas del proyecto:** nada de contraseñas por defecto ni en texto plano. Se generan con el gestor (KeePassXC), son distintas en cada cuenta y nunca entran en Git (lo vigilan el `.gitignore` y gitleaks).
 
 ---
 
@@ -389,6 +391,7 @@ flowchart LR
     MAIN --> VER["scripts/verificar-repo.sh"]
 ```
 
+- **Seguimiento:** el enunciado pide Gantt o Kanban; se usa el Gantt. El tablero de GitHub Projects existe pero no se usa.
 - **Planificación:** cada tarea tiene responsable, revisor (nunca el mismo), fechas, dependencias, **tipo** (Software, Físico, Documentación, Gestión), estado, evidencia y observaciones en el [CSV](docs/gestion/backlog-kanban.csv). El script valida el CSV (ciclos, fechas, fines de semana, evidencias que existen) y genera el [Gantt](docs/gestion/gantt.md) con las tareas hechas separadas de las que faltan.
 - **Reparto** ([roles.md](docs/gestion/roles.md)): el software pendiente lo llevan Adrian e Iker; las tareas físicas, cualquiera salvo Eneko.P (pendiente de confirmar si sigue en el equipo).
 - **Git** ([CONTRIBUTING.md](CONTRIBUTING.md)): una rama por tarea, Pull Request y revisión. Los secretos nunca entran (`.gitignore`, gitleaks en CI y hook de pre-commit con `bash scripts/instalar-hooks.sh`).

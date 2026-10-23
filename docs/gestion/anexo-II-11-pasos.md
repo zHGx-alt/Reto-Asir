@@ -68,7 +68,9 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 
 | Decisión | Elección | Justificación | Fecha |
 |---|---|---|---|
-| Gestión de tareas | GitHub Projects + Gantt en el repo | Integrado con el repositorio; el Gantt se regenera desde el CSV | 21/10/2026 |
+| Gestión de tareas | Gantt en el repo, generado desde el CSV | El enunciado pide Gantt o Kanban. El Gantt vive en el repositorio y se regenera con un script; el tablero de GitHub Projects se creó pero no se usa | 21/10/2026 (revisado el 23/10) |
+| Firmware del arcade stick | Joystick HID estándar (no teclado) | Cualquier emulador lo reconoce como mando sin drivers, no interfiere con el teclado y el mapeo se personaliza en la EEPROM; todo el firmware está hecho así. Moneda y Start se asignan una vez en MAME ([STICK-ARDUINO.md](../arcade/16-recreativa-mame/STICK-ARDUINO.md)) | 23/10/2026 |
+| Contraseñas | Robustas, generadas y guardadas en KeePassXC; nunca en texto plano ni en Git | Lo exigen el enunciado (gestión de credenciales y secretos) y el plan | 23/10/2026 |
 | Reparto tras la revisión del estado | Software pendiente para Adrian e Iker; tareas físicas para cualquiera salvo Eneko.P; las tareas con parte en VM y parte física se separan | Eneko.P está pendiente de confirmar si sigue; Adrian e Iker son quienes han hecho casi todo el software ([roles.md](roles.md), [verificacion.md](verificacion.md)) | 23/10/2026 |
 | ERP | Odoo Community | Cubre las funciones del enunciado con un TPV táctil integrado, usa PostgreSQL, tiene más documentación en español y es gratuito ([tarea 32](../erp/32-comparativa-erp.md), sección 6) | 22/10/2026 |
 | Hosting web | Bucket S3 privado + EC2 con nginx, IP elástica, dominio `almichain1.duckdns.org` y certificado de Let's Encrypt | Dominio y certificado gratuitos. DuckDNS solo admite registros A, y CloudFront y ACM necesitan CNAME; con una IP elástica basta un registro A ([tarea 30](../web/30-hosting-aws.md)) | 23/10/2026 |
@@ -117,7 +119,7 @@ Incidencias relevantes durante la ejecución:
 | 23/10/2026 | Web | Lighthouse: contraste insuficiente en tres textos, imágenes de 1600 px en móvil y un error del W3C | Corregido en `web/` (PR #25); Lighthouse 98-100 |
 | 23/10/2026 | ERP | En una instalación limpia de Odoo, `configurar-odoo.py` y `cargar-carta-y-mesas.py` fallaban (almacén buscado antes de instalar Inventario; `copy` devuelve una lista en Odoo 19) | Corregidos y repetida toda la instalación hasta la factura ([verificación](verificacion.md), sección 4) |
 | 23/10/2026 | Gestión | 14 enlaces rotos y documentos fuera de la carpeta de su bloque | Movidos a `docs/redes/` y `docs/bd/` y enlaces corregidos; `scripts/verificar-repo.sh` lo comprueba |
-| 23/10/2026 | Seguridad | Contraseñas débiles de la VM del gerente en un fichero de texto sin seguimiento | No se sube (añadido al `.gitignore`); hay que cambiarlas y guardarlas en un gestor de contraseñas |
+| 23/10/2026 | Seguridad | Contraseñas débiles de la VM del gerente en un fichero de texto sin seguimiento | No se sube (añadido al `.gitignore`); se cambian y se guardan en KeePassXC (tarea 55) |
 
 ## 8. Pruebas
 

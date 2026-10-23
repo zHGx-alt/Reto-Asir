@@ -49,6 +49,7 @@ Tras revisar el estado real de cada tarea ([verificacion.md](verificacion.md)):
 | 52 | HTTPS delante de Odoo (nueva) | — | Adrian |
 | 53 | Recreativa en el equipo real (nueva, físico) | — | Eneko.S |
 | 54 | Medidas en el equipo real (nueva, físico) | — | Eneko.S |
+| 55 | Contraseñas robustas en la VM del gerente (nueva) | — | Adrian |
 
 Las revisiones que tenía Eneko.P pasan a otras personas (columna `Revisa` del CSV).
 
