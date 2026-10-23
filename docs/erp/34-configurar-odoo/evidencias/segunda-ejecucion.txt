@@ -1,0 +1,10 @@
+    account: ya instalado
+    sale_management: ya instalado
+    stock: ya instalado
+    point_of_sale: ya instalado
+    TPV 1: ya existe
+    TPV 2: ya existe
+    gerente: ya existe (grupos actualizados)
+    cajero1: ya existe (grupos actualizados)
+    cajero2: ya existe (grupos actualizados)
+Listo.

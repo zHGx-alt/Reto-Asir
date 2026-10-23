@@ -1,0 +1,16 @@
+Permisos del usuario cajero1 (grupos: Usuario interno + Punto de Venta / Usuario), comprobados por XML-RPC
+con check_access_rights y con consultas reales:
+
+Modelo              leer  modificar  crear  borrar
+account.move        sí    no         no     no      (facturas: solo lectura, el TPV las consulta)
+account.account     sí    no         no     no      (plan contable: solo lectura)
+account.journal     sí    no         no     no
+product.product     sí    no         no     no      (productos: no puede cambiar precios)
+res.users           sí    no         no     no      (no puede crear ni modificar usuarios)
+res.groups          sí    no         no     no      (no puede darse permisos)
+pos.config          sí    sí         no     no      (puede abrir/cerrar su sesión de TPV)
+pos.order           sí    sí         sí     sí      (pedidos del TPV: su trabajo; Odoo impide borrar pedidos pagados)
+sale.order          ACCESO DENEGADO: "Póngase en contacto con su administrador para solicitar acceso si es necesario."
+
+Gerente: acceso a TPV, ventas, inventario y contabilidad (Responsable/Administrador en cada aplicación).
+Ni el gerente ni los cajeros pueden crear usuarios: solo admin (Ajustes).

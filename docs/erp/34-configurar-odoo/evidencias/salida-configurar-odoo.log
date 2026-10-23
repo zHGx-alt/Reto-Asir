@@ -1,0 +1,27 @@
+
+==> 1/4 Empresa: Tienda Reto ASIR (España, EUR)
+    {'id': 1, 'name': 'Tienda Reto ASIR', 'country_id': [68, 'Spain'], 'currency_id': [126, 'EUR']}
+
+==> 2/4 Instalando módulos (puede tardar unos minutos)
+    account: ya instalado
+    sale_management: ya instalado
+    stock: ya instalado
+    point_of_sale: ya instalado
+    sale_management: installed
+    account: installed
+    stock: installed
+    point_of_sale: installed
+    l10n_es: installed
+    Plan contable: es_pymes · IVA de venta 21 %: 21% G
+
+==> 3/4 Puntos de venta (cada TPV con su caja de efectivo; la tarjeta va al banco)
+    TPV 1: creado (Efectivo TPV 1 + Tarjeta)
+    TPV 2: creado (Efectivo TPV 2 + Tarjeta)
+
+==> 4/4 Usuarios (mínimos privilegios)
+    gerente: creado
+    cajero1: creado
+    cajero2: creado
+    Contraseñas nuevas guardadas en .credenciales-usuarios (no se muestran)
+
+Listo.

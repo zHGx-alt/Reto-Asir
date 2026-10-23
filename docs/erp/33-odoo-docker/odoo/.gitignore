@@ -1,0 +1,3 @@
+# Secretos: nunca al repositorio
+.env
+config/odoo.conf
