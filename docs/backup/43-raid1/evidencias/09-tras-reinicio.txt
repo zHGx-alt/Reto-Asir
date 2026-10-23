@@ -1,0 +1,9 @@
+== Tras reiniciar
+md0 : active raid1 sdb[0] sdc[2]
+      5237760 blocks super 1.2 [2/2] [UU]
+/srv/datos /dev/md0
+datos-200M.bin: La suma coincide
+factura.txt: La suma coincide
+escrito-degradado.txt: La suma coincide
+active
+Odoo: HTTP 200

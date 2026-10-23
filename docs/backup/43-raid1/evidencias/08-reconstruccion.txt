@@ -1,0 +1,24 @@
+== ¿Disco nuevo vacío?
+/dev/sdc: sin firmas, vacío
+
+== mdadm --add /dev/md0 /dev/sdc
+mdadm: added /dev/sdc
+
+== Reconstruyendo (recovery)
+md0 : active raid1 sdc[2] sdb[0]
+      5237760 blocks super 1.2 [2/1] [U_]
+      [=>...................]  recovery =  6.9% (363712/5237760) finish=0.4min speed=181856K/sec
+
+== Reconstrucción terminada en 27 s
+md0 : active raid1 sdc[2] sdb[0]
+      5237760 blocks super 1.2 [2/2] [UU]
+             State : clean 
+    Active Devices : 2
+    Failed Devices : 0
+       0       8       16        0      active sync   /dev/sdb
+       2       8       32        1      active sync   /dev/sdc
+
+== Integridad de los datos
+datos-200M.bin: La suma coincide
+factura.txt: La suma coincide
+escrito-degradado.txt: La suma coincide

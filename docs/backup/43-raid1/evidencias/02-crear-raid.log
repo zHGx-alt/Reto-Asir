@@ -1,0 +1,23 @@
+
+==> 1/5 Instalando mdadm
+mdadm - v4.4 - 2024-11-07 - Debian 4.4-11
+
+==> 2/5 Comprobando que los discos están vacíos
+  /dev/sdb: vacío (   5G)
+  /dev/sdc: vacío (   5G)
+
+==> 3/5 Creando el RAID 1 en /dev/md0
+mdadm: array /dev/md0 started.
+
+==> 4/5 Sistema de archivos ext4 y montaje en /srv/datos
+
+==> 5/5 Haciendo el RAID persistente y vigilado
+
+Personalities : [raid1] 
+md0 : active raid1 sdc[1] sdb[0]
+      5237760 blocks super 1.2 [2/2] [UU]
+      [=======>.............]  resync = 38.2% (2001536/5237760) finish=0.2min speed=222392K/sec
+      
+unused devices: <none>
+S.ficheros     Tamaño Usados  Disp Uso% Montado en
+/dev/md0         4,9G   1,3M  4,6G   1% /srv/datos

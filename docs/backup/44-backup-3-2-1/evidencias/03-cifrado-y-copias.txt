@@ -1,0 +1,28 @@
+== Segunda copia: success
+   avisos de caché: 7
+Added to the repository: 21.112 MiB (6.795 MiB stored)
+processed 477 files, 21.780 MiB in 0:01
+
+== ¿Está cifrado? Buscar texto de la base de datos dentro del repositorio
+   En el volcado original: 5 apariciones de "Cliente de prueba"
+   Dentro del repositorio restic: 0 apariciones
+   Sin contraseña: Fatal: wrong password or no key found
+
+== Instantáneas en el RAID
+ID        Time                 Host          Tags    Size
+---------------------------------------------------------------
+c5794183  2026-10-22 12:57:44  servidor-erp  odoo    21.780 MiB
+5c3b0e73  2026-10-22 12:58:15  servidor-erp  odoo    21.780 MiB
+---------------------------------------------------------------
+2 snapshots
+
+== USB
+ID        Time                 Host          Tags    Size
+---------------------------------------------------------------
+474be3dd  2026-10-22 12:57:44  servidor-erp  odoo    21.780 MiB
+a9a10316  2026-10-22 12:58:15  servidor-erp  odoo    21.780 MiB
+---------------------------------------------------------------
+2 snapshots
+
+NEXT                         LEFT LAST PASSED UNIT              ACTIVATES
+Fri 2026-10-23 02:36:26 CEST  13h -         - backup-odoo.timer backup-odoo.service

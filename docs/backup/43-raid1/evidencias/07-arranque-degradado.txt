@@ -1,0 +1,7 @@
+== Arranque con el RAID degradado
+md0 : active raid1 sdb[0]
+      5237760 blocks super 1.2 [2/1] [U_]
+TARGET     SOURCE   FSTYPE OPTIONS
+/srv/datos /dev/md0 ext4   rw,relatime
+sda   30G 0:0:0:0
+sdb    5G 2:0:0:0
