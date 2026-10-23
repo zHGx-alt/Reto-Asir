@@ -12,6 +12,7 @@
 | Impuestos | IVA incluido, salvo que se indique lo contrario |
 | Validez del presupuesto | 15 días |
 | Revisión | Eneko.S, 23/10/2026: ajustado a la tabla de hardware (tarea 8) |
+| Revisión | Equipo, 23/10/2026: la línea WAN pasa a DIGI 1 Gb, el operador elegido en la comparativa (tarea 22) y el que usa el plano de red (tarea 23) |
 
 > Los precios y la disponibilidad pueden cambiar. Antes de realizar una compra hay que comprobar el precio final, los gastos de envío, el vendedor y la versión exacta del producto.
 
@@ -59,7 +60,7 @@ Los dos puestos de barra deberán ejecutar Windows y el software TPV o ERP selec
 
 ### Requisitos de red
 
-- Conexión WAN de fibra simétrica.
+- Conexión WAN de fibra óptica.
 - Router principal con puertos Gigabit.
 - Red Wi-Fi de doble banda.
 - Cifrado WPA3 para las redes que lo permitan.
@@ -203,9 +204,9 @@ No se debe instalar firmware de otra versión porque puede dejar el router inuti
 
 ### 4.5. Conexión WAN
 
-Para la conexión WAN se propone contratar **fibra simétrica de 600 Mbps para empresas**.
+Se contrata la **fibra de 1 Gb de DIGI**, el operador elegido en la comparativa de operadores ([tarea 22](../redes/22-comparativa-wan.md)), que es también el que usa el plano de red ([tarea 23](../redes/23-plano-direccionamiento.md)).
 
-Esta velocidad es suficiente para:
+Esta velocidad es más que suficiente para:
 
 - Funcionamiento de los dos TPV.
 - Acceso al ERP.
@@ -216,38 +217,31 @@ Esta velocidad es suficiente para:
 - Copias de seguridad remotas.
 - Administración remota mediante VPN.
 
-**Servicio:** Fibra 600 Mb Empresas  
+**Servicio:** Fibra 1 Gb de DIGI  
 **Cantidad:** 1 línea  
-**Precio ordinario sin IVA:** 40,50 €/mes  
-**IVA del 21 %:** 8,51 €/mes  
-**Precio aproximado con IVA:** 49,01 €/mes  
-**Coste anual con IVA:** 588,12 €  
-**Fuente:** [Telefónica Empresas - Fibra para empresas](https://www.telefonicaempresas.es/internet-empresas)
+**Precio con IVA:** 30,00 €/mes (precio final, según la tarea 22)  
+**Base imponible:** 24,79 €/mes · **IVA del 21 %:** 5,21 €/mes  
+**Coste anual con IVA:** 360,00 €  
+**Router:** incluido (Wi-Fi 6) · **Instalación:** gratuita · **Permanencia:** 3 meses  
+**Fuente:** página oficial de DIGI, consultada el 22/10/2026 ([tarea 22](../redes/22-comparativa-wan.md))
 
 #### Motivos de la elección
 
-- Conexión simétrica de 600 Mbps.
-- Capacidad suficiente para los servicios del restaurante.
-- Tarifa orientada a empresas.
-- No es necesario contratar 1, 2 o 10 Gbps para solo dos TPV y una red de clientes.
-- Permite mantener una separación clara entre el coste inicial del hardware y el coste recurrente de Internet.
+- Es el operador elegido en la comparativa: 1 Gb, router incluido, instalación gratuita y el precio final más bajo de los cuatro comparados (Movistar, Vodafone, Orange y DIGI).
+- Su precio es el **precio final**, no una promoción de 12 meses que luego sube, así que el coste anual no queda infravalorado.
+- La permanencia más corta (3 meses) permite cambiar de operador si el servicio no responde.
+- Con 1 Gb sobra capacidad para dos TPV, el ERP, las copias y la Wi-Fi de clientes.
 
 #### Aspectos que se deben confirmar con la operadora
 
 Antes de contratar la línea se deberá comprobar:
 
-- Cobertura real en la dirección del restaurante.
-- Permanencia.
-- Coste de instalación.
-- Router y ONT incluidos.
-- Posibilidad de configurar el equipo de la operadora en modo puente.
-- Posibilidad de utilizar un router propio.
-- Disponibilidad de IPv4 pública.
-- Existencia de CG-NAT.
-- Precio después de las promociones.
-- Soporte técnico para empresas.
-
-> El presupuesto utiliza el precio ordinario y no una promoción temporal para evitar que el coste anual quede infravalorado.
+- Cobertura real de fibra en la dirección del restaurante.
+- Que la tarifa se puede contratar a nombre de la empresa, con factura, y su precio en ese caso.
+- Si la velocidad es simétrica (la comparativa indica 1 Gb sin especificar la subida).
+- Posibilidad de configurar el router de la operadora en modo puente o de usar un router propio (sección 9.5).
+- Disponibilidad de IPv4 pública y existencia de CG-NAT. Con CG-NAT no se puede entrar al local desde fuera (por ejemplo, por VPN); para la web no importa, porque está en AWS.
+- Precio y condiciones al terminar la permanencia.
 
 ---
 
@@ -270,15 +264,15 @@ De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impreso
 
 | Servicio | Coste mensual con IVA | Coste anual con IVA |
 |---|---:|---:|
-| Fibra simétrica de 600 Mbps para empresas | 49,01 € | 588,12 € |
+| Fibra 1 Gb de DIGI | 30,00 € | 360,00 € |
 
 ### 5.3. Coste total del primer año
 
 | Tipo de coste | Total |
 |---|---:|
 | Inversión inicial | 2.447,34 € |
-| Conexión WAN durante 12 meses | 588,12 € |
-| **Coste total estimado del primer año** | **3.035,46 €** |
+| Conexión WAN durante 12 meses | 360,00 € |
+| **Coste total estimado del primer año** | **2.807,34 €** |
 
 > No se incluyen posibles gastos de envío, instalación del operador, cableado estructurado, canaletas, rollos de papel, teclado y ratón del gerente, SAI, licencias de Windows 10 (si fueran necesarias) ni licencias del ERP. Estos elementos dependerán de las existencias del centro y de las características físicas definitivas del local.
 
@@ -296,7 +290,7 @@ De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impreso
 | Routers | MediaMarkt | [TP-Link Archer C6](https://www.mediamarkt.es/es/product/_router-tp-link-archer-c6-wifi-doble-banda-5xpuertos-gigabit-mu-mimo-wpa3-tecnologia-onemesh-negro-1524001.html) |
 | Firmware y documentación del router | TP-Link | [Soporte del Archer C6](https://www.tp-link.com/es/support/download/archer-c6/) |
 | Guía de WDS | TP-Link | [Configuración de WDS](https://www.tp-link.com/us/support/faq/1555/) |
-| Línea WAN | Telefónica Empresas | [Fibra para empresas](https://www.telefonicaempresas.es/internet-empresas) |
+| Línea WAN | DIGI | Comparativa de operadores: [tarea 22](../redes/22-comparativa-wan.md) |
 
 ---
 
@@ -305,7 +299,7 @@ De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impreso
 ```text
                          INTERNET
                             |
-                     Fibra óptica WAN
+                 Fibra DIGI 1 Gb (WAN)
                             |
                Router/ONT de la operadora
                             |
@@ -444,7 +438,7 @@ Si el equipo de la operadora no puede configurarse en modo puente, el Archer C6 
 
 ## 11. Conclusión
 
-La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **2.447,34 €** (2.361,36 € de equipos de la tarea 8 más 85,98 € de routers) y un coste total aproximado durante el primer año de **3.035,46 €**, con la conexión WAN incluida.
+La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **2.447,34 €** (2.361,36 € de equipos de la tarea 8 más 85,98 € de routers) y un coste total aproximado durante el primer año de **2.807,34 €**, con la fibra de 1 Gb de DIGI incluida (360 € al año).
 
 Los TPV táctiles incluyen Windows Pro para aplicar el modo quiosco y mínimos privilegios. Las impresoras Epson TM-T20IV ofrecen USB y Ethernet, velocidad adecuada y cortador automático. La utilización de dos routers TP-Link Archer C6 del mismo modelo permite diseñar una red Gigabit, utilizar WPA3 en las redes compatibles y realizar la práctica de ampliación de cobertura mediante WDS.
 

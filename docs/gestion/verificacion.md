@@ -48,7 +48,7 @@ Las que necesitan Docker o PlatformIO se saltan si no están instalados. Resulta
 | 4 | 35 | `factura_automatica.py` dos veces, como `gerente` | ✅ `INV/2026/00001` (12,10 €) e `INV/2026/00002` (193,60 €) validadas, cobradas y con PDF |
 | 5 | 34 | `cajero1` intenta cambiar un precio y crear un usuario | ✅ Las dos operaciones, denegadas |
 | 6 | 12 | SHA-256 de los ficheros de la VM del repositorio contra el `.mf` y el documento | ✅ Coinciden `.ovf` y `.nvram` (el `.vmdk` está en Drive y no se ha comprobado) |
-| 7 | 8, 10 | Sumas del presupuesto | ✅ 2.361,36 € (tarea 8); 2.447,34 € de inversión y 3.035,46 € el primer año (tarea 10) |
+| 7 | 8, 10 | Sumas del presupuesto | ✅ 2.361,36 € (tarea 8); 2.447,34 € de inversión (tarea 10). El primer año pasa de 3.035,46 € a 2.807,34 € al cambiar la WAN a DIGI (ver sección 6) |
 | 8 | 30 | `nginx -t` de la configuración que genera `instalar-servidor-web.sh` | ✅ Sintaxis correcta |
 | 9 | 30 | `curl` a `https://almichain1.duckdns.org` | ⏸ Sin respuesta: el DNS apunta a la IP elástica `52.200.94.167`, pero el Learner Lab está parado. Es lo esperado (sección 8 de la tarea 30); las pruebas con el laboratorio encendido están en sus evidencias |
 | 10 | 5 | Autores de los commits de `main` | 5 de 6 personas tienen commits propios; Eneko.P no tiene ninguno |
@@ -103,12 +103,11 @@ En la carpeta de trabajo de Adrian había un fichero sin seguimiento, `VM dual b
 
 | Dónde | Problema |
 |---|---|
-| Tareas 22 y 10 | La comparativa elige **DIGI 1 Gb a 30 €/mes**; el presupuesto usa **Telefónica 600 Mb a 49,01 €/mes**. El plano (tarea 23) sigue a la 22 |
 | Tarea 35 | El Anexo II la daba como *parcial*. El enunciado pide *al menos un caso de uso* y la factura lo es; el envío por correo y el descuento de stock eran ejemplos del plan |
 | Tarea 9 | No indica la versión de cada programa |
 | Tareas 7 y 8 | Los equipos traen Windows 11 Pro y el enunciado exige Windows 10: falta confirmar los derechos de *downgrade* (incidencia H-01) |
 
-Resueltas después de la revisión (23/10): el diagrama de la tarea 11 se ha actualizado (EC2, recreativa en la Wi-Fi de invitados, modelos y SVG regenerado) y la documentación del stick deja el **joystick HID**, que es como está hecho el firmware.
+Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los documentos (la comparativa ya lo elegía y el plano lo usaba; el presupuesto pasa de Telefónica 600 Mb, 588,12 €/año, a DIGI, 360 €/año); el diagrama de la tarea 11 se ha actualizado (EC2, recreativa en la Wi-Fi de invitados, modelos y SVG regenerado) y la documentación del stick deja el **joystick HID**, que es como está hecho el firmware.
 
 ## 7. Lo que pide el enunciado y no tiene tarea terminada
 

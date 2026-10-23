@@ -21,7 +21,7 @@ flowchart TB
     gh["GitHub<br/>repositorio"] -- "subida de web/<br/>(Actions: tarea 31, pendiente)" --> s3
 
     internet -- "HTTPS" --- dns --- ec2
-    internet --- ont["Router del operador (ONT)<br/>fibra · tarea 22"]
+    internet --- ont["Router de DIGI (ONT)<br/>fibra 1 Gb · tarea 22"]
 
     subgraph LOCAL["🏪 Local"]
         router["Router 1 · TP-Link Archer C6 · .1<br/>firewall · DHCP · Wi-Fi<br/>(tarea 24)"]
@@ -69,6 +69,7 @@ flowchart TB
 | Impresoras de tickets (2) | Ticket de cada TPV | Driver ESC/POS de Windows | USB a su TPV (sin IP) | — | 14, 37 | Epson TM-T20IV |
 | Recreativa | Máquina arcade para clientes | Debian 13 sin escritorio + MAME (o Batocera, tarea 51) | Wi-Fi de invitados | DHCP de invitados | 16–18, 51, 53, 54 | Equipo de 1 núcleo y 1 GB (lo pone el cliente) |
 | Arcade stick | Mando de la recreativa | Firmware propio: joystick HID, mapeo en EEPROM | USB a la recreativa | — | 19–21, 50 | Keyestudio Leonardo (ATmega32U4) + 6 botones |
+| Router de DIGI (ONT) | Llega la fibra de 1 Gb | Firmware de la operadora | Fibra; cable al WAN del router 1 | La de DIGI | 22 | Incluido con la línea |
 | Router 1 | Salida a internet, firewall, DHCP, Wi-Fi del personal y de invitados | Firmware de fábrica | WAN al router del operador | 192.168.10.1 | 24 | TP-Link Archer C6 V3 |
 | Router 2 | Amplía la Wi-Fi por WDS | Firmware de fábrica, DHCP apagado | WDS | 192.168.10.2 | 25 | TP-Link Archer C6 V3 |
 | Web pública | Web del restaurante | S3 privado + EC2 con nginx y Let's Encrypt | Internet | IP elástica | 27–31 | AWS (Learner Lab) |
@@ -86,5 +87,4 @@ flowchart TB
 Con un router o switch que admita VLANs, cada grupo iría en su propia red (servidores, TPV, gerencia, arcade, invitados y gestión), con ACLs que solo dejan pasar lo necesario. Está simulado y probado en Packet Tracer en la [tarea 23](../../redes/23-plano-direccionamiento.md#54-simulación-en-packet-tracer).
 
 ## 5. Pendiente
-- [ ] WAN: la tarea 22 elige DIGI 1 Gb y el presupuesto (tarea 10) Telefónica 600 Mb. Cuando se decida, poner el operador en el nodo del router del operador.
 - [ ] Revisión de Adrian.

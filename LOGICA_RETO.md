@@ -21,7 +21,7 @@ Una cadena de restaurantes nos contrata para montar la informática de un local.
 | 3 | Mínimos privilegios y seguridad por defecto | Cuentas separadas usuario/administrador en todos los sistemas, secretos fuera de Git, cifrado | 13, 42, 46, 52 | Transversal |
 | 4 | Recreativa MAME en un equipo de 1 núcleo y 1 GB, optimizada y con pruebas de rendimiento | Debian 13 mínimo que arranca directamente en MAME; medidas antes y después; monitorización | 16–18, 51, 53, 54 | [docs/arcade](docs/arcade/) |
 | 5 | Arcade stick compatible con cualquier emulador y con input personalizable | Arduino Leonardo (ATmega32U4) como joystick HID estándar; mapeo guardado en EEPROM | 19–21, 50 | [arduino](arduino/) |
-| 6 | Línea WAN, esquema de conectividad y plano de red, cableado y Wi-Fi, red segura | Fibra, router principal + router WDS, plan de IP y segmentación, simulación en Packet Tracer | 22–26 | [docs/redes](docs/redes/) |
+| 6 | Línea WAN, esquema de conectividad y plano de red, cableado y Wi-Fi, red segura | Fibra DIGI 1 Gb, router principal + router WDS, plan de IP y segmentación, simulación en Packet Tracer | 22–26 | [docs/redes](docs/redes/) |
 | 7 | Segundo router Wi-Fi por WDS, comprobando que funciona | Dos TP-Link Archer C6 | 25 | [docs/redes](docs/redes/) |
 | 8 | Web unidireccional, atractiva, responsiva, accesible y rápida, con geolocalización, formulario placeholder y slideshow | HTML, CSS y JavaScript sin frameworks; mapa de OpenStreetMap incrustado | 27–29 | [web](web/), [docs/web](docs/web/) |
 | 9 | Web por HTTPS, dominio propio, en la nube y con despliegue reproducible (a poder ser automatizado) | AWS: bucket S3 privado + EC2 con nginx, Let's Encrypt y `almichain1.duckdns.org`; Terraform pendiente | 30, 31 | [docs/web](docs/web/), [scripts/web](scripts/web/), [iac](iac/) |
@@ -54,7 +54,7 @@ flowchart LR
     CLIENTE_WEB(("Cliente en internet")) -- "HTTPS" --> DNS --> EC2
 
     subgraph LOCAL["🏪 Local del restaurante"]
-        ONT["Router del operador (fibra)"] --- R1["Router 1 · Archer C6<br/>firewall · DHCP · Wi-Fi"]
+        ONT["Router de DIGI (fibra 1 Gb)"] --- R1["Router 1 · Archer C6<br/>firewall · DHCP · Wi-Fi"]
         R1 -. "WDS" .- R2["Router 2 · Archer C6"]
         R1 --- SRV["Servidor · 192.168.10.10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · restic"]
         R1 --- GER["PC gerente · .20<br/>Windows 10 / Ubuntu"]
@@ -90,7 +90,7 @@ Diagrama de todos los equipos: [tarea 11](docs/diagramas/11-arquitectura-equipos
 | Arcade stick | Keyestudio Leonardo (ATmega32U4) + 6 botones | Firmware propio | Mando de la recreativa | USB a la recreativa | Compila; placa pendiente (#50) |
 | Router 1 y 2 | TP-Link Archer C6 V3 (×2) | Firmware de fábrica | Router, firewall, DHCP, Wi-Fi; el 2 amplía por WDS | WAN al router del operador | Probado en un TL-WR841N (#24); WDS pendiente (#25) |
 
-Coste: **2.447,34 €** de inversión y **3.035,46 €** el primer año con la fibra ([tarea 10](docs/hardware/10-presupuesto-hardware.md)). Software: 3 licencias de Windows 10 Pro; todo lo demás es libre o viene incluido ([tarea 9](docs/hardware/09-tabla-software-licencias.md)).
+Coste: **2.447,34 €** de inversión y **2.807,34 €** el primer año con la fibra de DIGI (360 € al año) ([tarea 10](docs/hardware/10-presupuesto-hardware.md)). Software: 3 licencias de Windows 10 Pro; todo lo demás es libre o viene incluido ([tarea 9](docs/hardware/09-tabla-software-licencias.md)).
 
 > **Simulación.** Los equipos no se han comprado: se simulan en máquinas virtuales (supuesto S-07 de la tarea 7). Lo que necesita hardware real (stick, routers, impresora, recreativa) está marcado como **Físico** en el backlog.
 
@@ -101,14 +101,14 @@ Coste: **2.447,34 €** de inversión y **3.035,46 €** el primer año con la f
 ### 4.1 De internet al local
 
 ```
-Fibra ─► Router del operador (ONT) ─► WAN del Router 1 ─► LAN 192.168.10.0/24
+Fibra DIGI 1 Gb ─► Router de DIGI (ONT) ─► WAN del Router 1 ─► LAN 192.168.10.0/24
                                            │
                                            ├─ Wi-Fi del personal (WPA3/WPA2)
                                            ├─ Wi-Fi de invitados (aislada) ◄── clientes y recreativa
                                            └─ WDS (sin cable) ─► Router 2 (amplía las dos Wi-Fi)
 ```
 
-- **WAN:** la comparativa ([tarea 22](docs/redes/22-comparativa-wan.md)) elige DIGI 1 Gb; el presupuesto usa Telefónica 600 Mb. **Hay que unificarlo.**
+- **WAN:** fibra de **DIGI 1 Gb** a 30 €/mes, con su router (que hace de ONT), instalación gratuita y 3 meses de permanencia. Es el operador elegido en la comparativa ([tarea 22](docs/redes/22-comparativa-wan.md)) y el que usan el plano y el presupuesto. Antes de contratar hay que confirmar cobertura, si se puede poner su router en modo puente y si hay CG-NAT.
 - **Por qué `192.168.10.0/24`:** los routers de operador suelen usar `192.168.1.0/24`; si la LAN usara la misma red, el router 1 tendría la misma red a los dos lados.
 - **IPs fijas por reserva DHCP:** el router da siempre la misma IP a cada MAC, así todo queda en un sitio (servidor `.10`, gerente `.20`, TPV `.31` y `.32`, router 2 `.2`).
 
