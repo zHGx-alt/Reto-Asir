@@ -1,15 +1,31 @@
+// Arcade stick para Keyestudio Leonardo (KS0248, ATmega32U4).
+// Se conecta por USB como joystick HID estandar y el mapeo se cambia por el puerto serie.
+//
+// Conexiones (esquema en ../esquema-conexiones.svg):
+//   Botones 1-6: cable rojo -> pines 2..7, cable negro -> GND comun (fila - de la protoboard)
+//   Palanca analogica (cuando la haya): VRx -> A0, VRy -> A1, +5V -> 5V, GND -> GND
+//
+// Necesita la libreria Joystick de MHeironimus:
+// https://github.com/MHeironimus/ArduinoJoystickLibrary
+
 #include <Arduino.h>
 #include <EEPROM.h>
 #include <Joystick.h>
 
+// Sin palanca conectada, A0 y A1 quedan al aire y darian lecturas aleatorias.
+// Mientras sea false, los ejes se quedan fijos en el centro.
+const bool USAR_EJES = false;
 const int PIN_X = A0;
 const int PIN_Y = A1;
-const int PINES_BOTON[] = {2, 3};
+
+// Botones 1-6 en el orden del esquema: rojo, azul, rojo, azul, azul, azul.
+// No usar los pines 0 y 1 (RX/TX).
+const int PINES_BOTON[] = {2, 3, 4, 5, 6, 7};
 const uint8_t NUM_FISICOS = sizeof(PINES_BOTON) / sizeof(PINES_BOTON[0]);
 const uint8_t NUM_HID = 8;
 
 const uint16_t MAGIA = 0xA5C1;
-const uint8_t VERSION_CONFIG = 1;
+const uint8_t VERSION_CONFIG = 2;  // 2: pasa de 2 a 6 botones
 const int DIR_EEPROM = 0;
 
 // Lo que se guarda en EEPROM. Si cambia la estructura, subir VERSION_CONFIG.
@@ -156,6 +172,7 @@ void leerSerie() {
 }
 
 int leerEje(int pin, bool invertir) {
+  if (!USAR_EJES) return 512;
   int v = analogRead(pin);
   if (abs(v - 512) < cfg.zonaMuerta) v = 512;
   return invertir ? 1023 - v : v;
