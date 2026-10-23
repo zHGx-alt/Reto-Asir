@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1350" height="4440" viewBox="0 0 1350 4440">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="40" y="48.7">Almi Chain · Wireframe de móvil (390 px)</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="40" y="72.2">Tarea 27 · por debajo de 800 px todas las secciones pasan a una columna</tspan></text>
+<rect x="40" y="90" width="390" height="4300" rx="0" fill="#ffffff" stroke="#666666" stroke-width="2"/>
+<rect x="40" y="90" width="390" height="88" rx="0" fill="#f2f2f2" stroke="#8c8c8c" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="140.5">ALMI CHAIN</tspan></text>
+<rect x="330" y="116" width="80" height="36" rx="0" fill="#ffffff" stroke="#3d3d3d" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#3d3d3d" text-anchor="middle" font-weight="bold"><tspan x="370.0" y="138.6">Menú</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="260.4">BILBAO · COCINA VASCA</tspan><tspan x="60" y="275.9">CONTEMPORÁNEA</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="58" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="355.1">Tradición</tspan><tspan x="60" y="417.7">que se</tspan><tspan x="60" y="480.4">mueve.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#333333" text-anchor="start"><tspan x="60" y="523.3">Una cadena nacida en Bilbao para</tspan><tspan x="60" y="543.6">acercar el producto vasco a una</tspan><tspan x="60" y="563.9">mesa actual, directa y sin artificios.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="603.3">Ver platos estrella ↘</tspan></text>
+<line x1="60" y1="613" x2="215" y2="613" stroke="#333333"/>
+<rect x="60" y="670" width="350" height="460" rx="0" fill="#e4e4e4" stroke="#8c8c8c" stroke-width="1"/>
+<line x1="60" y1="670" x2="410" y2="1130" stroke="#8c8c8c"/>
+<line x1="410" y1="670" x2="60" y2="1130" stroke="#8c8c8c"/>
+<rect x="162.68" y="884.875" width="144.64" height="30.25" rx="0" fill="#ffffff" stroke="#8c8c8c" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#333333" text-anchor="middle"><tspan x="235.0" y="904.2">Imagen principal</tspan></text>
+<line x1="40" y1="1170" x2="430" y2="1170" stroke="#8c8c8c"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="1240.5">NUESTRA MANERA DE HACER</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="1298.0">Menos</tspan><tspan x="60" y="1341.2">decoración.</tspan><tspan x="60" y="1384.4">Más sabor.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="start"><tspan x="60" y="1425.2">Trabajamos con recetas reconocibles,</tspan><tspan x="60" y="1448.4">proveedores cercanos y una mirada</tspan><tspan x="60" y="1471.6">contemporánea.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#333333" text-anchor="start"><tspan x="60" y="1512.3">Almi Chain propone espacios diferentes</tspan><tspan x="60" y="1531.2">con una misma idea: que cada plato</tspan><tspan x="60" y="1550.0">tenga un origen claro y que cada visita</tspan><tspan x="60" y="1568.9">se sienta cercana.</tspan></text>
+<rect x="40" y="1650" width="390" height="860" rx="0" fill="#3d3d3d" stroke="none" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="start" font-weight="bold"><tspan x="60" y="1724.5">SELECCIÓN DE LA CASA</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#ffffff" text-anchor="start" font-weight="bold"><tspan x="60" y="1778.0">Platos</tspan><tspan x="60" y="1821.2">estrella.</tspan></text>
+<circle cx="84" cy="1864" r="24" fill="none" stroke="#bbbbbb"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle"><tspan x="84.0" y="1872.0">←</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle"><tspan x="152.0" y="1868.5">01 / 03</tspan></text>
+<circle cx="220" cy="1864" r="24" fill="none" stroke="#bbbbbb"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle"><tspan x="220.0" y="1872.0">→</tspan></text>
+<rect x="60" y="1930" width="350" height="440" rx="0" fill="#5a5a5a" stroke="#8c8c8c" stroke-width="1"/>
+<line x1="60" y1="1930" x2="410" y2="2370" stroke="#8c8c8c"/>
+<line x1="410" y1="1930" x2="60" y2="2370" stroke="#8c8c8c"/>
+<rect x="162.68" y="2126.75" width="144.64" height="46.5" rx="0" fill="#ffffff" stroke="#8c8c8c" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#333333" text-anchor="middle"><tspan x="235.0" y="2146.1">Imagen del plato</tspan><tspan x="235.0" y="2162.3">(carrusel)</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#f59e6b" text-anchor="start" font-weight="bold"><tspan x="60" y="2407.1">01</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#ffffff" text-anchor="start" font-weight="bold"><tspan x="102" y="2407.0">Txuleta al fuego</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#dddddd" text-anchor="start"><tspan x="102" y="2432.3">Carne, brasa y el punto justo.</tspan></text>
+<rect x="40" y="2510" width="390" height="1000" rx="0" fill="#ebebeb" stroke="none" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="2584.4">ENCUÉNTRANOS</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="2638.0">Bilbao</tspan><tspan x="60" y="2681.2">nos inspira.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#555555" text-anchor="start" font-weight="bold"><tspan x="60" y="2757.2">ZONA</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="156" y="2758.6">Bilbao, Bizkaia</tspan></text>
+<line x1="60" y1="2778" x2="410" y2="2778" stroke="#8c8c8c"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#555555" text-anchor="start" font-weight="bold"><tspan x="60" y="2807.2">HORARIO</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="156" y="2808.6">Lun–Dom · 12:30–23:30</tspan></text>
+<line x1="60" y1="2828" x2="410" y2="2828" stroke="#8c8c8c"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#555555" text-anchor="start" font-weight="bold"><tspan x="60" y="2857.2">CONTACTO</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="156" y="2858.6">+34 944 000 000</tspan></text>
+<line x1="60" y1="2878" x2="410" y2="2878" stroke="#8c8c8c"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#555555" text-anchor="start" font-style="italic"><tspan x="60" y="2904.4">Dirección, horario y teléfono</tspan><tspan x="60" y="2920.4">provisionales para la demostración.</tspan></text>
+<rect x="60" y="2940" width="140" height="46" rx="0" fill="#3d3d3d" stroke="#3d3d3d" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="130.0" y="2967.2">CÓMO LLEGAR</tspan></text>
+<rect x="210" y="2940" width="180" height="46" rx="0" fill="#ffffff" stroke="#3d3d3d" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#3d3d3d" text-anchor="middle" font-weight="bold"><tspan x="300.0" y="2967.2">USAR MI UBICACIÓN</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#555555" text-anchor="start"><tspan x="60" y="3008.4">[Estado de la geolocalización]</tspan></text>
+<rect x="60" y="3040" width="350" height="420" rx="0" fill="#e4e4e4" stroke="#8c8c8c" stroke-width="1"/>
+<line x1="60" y1="3040" x2="410" y2="3460" stroke="#8c8c8c"/>
+<line x1="410" y1="3040" x2="60" y2="3460" stroke="#8c8c8c"/>
+<rect x="155.14" y="3226.75" width="159.72" height="46.5" rx="0" fill="#ffffff" stroke="#8c8c8c" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#333333" text-anchor="middle"><tspan x="235.0" y="3246.1">Mapa OpenStreetMap</tspan><tspan x="235.0" y="3262.3">(mín. 420 px de alto)</tspan></text>
+<circle cx="235" cy="3130" r="40" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="235.0" y="3128.0">ALMI</tspan><tspan x="235.0" y="3142.3">Bilbao</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="3584.4">HABLEMOS</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="3638.0">Tu mesa</tspan><tspan x="60" y="3681.2">empieza</tspan><tspan x="60" y="3724.4">aquí.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#555555" text-anchor="start" font-style="italic"><tspan x="60" y="3760.4">Formulario de demostración. No envía</tspan><tspan x="60" y="3776.4">datos ni realiza reservas reales.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="3821.4">NOMBRE</tspan></text>
+<line x1="60" y1="3878" x2="410" y2="3878" stroke="#333333"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="3907.4">CORREO ELECTRÓNICO</tspan></text>
+<line x1="60" y1="3964" x2="410" y2="3964" stroke="#333333"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="3993.4">¿EN QUÉ PODEMOS AYUDARTE?</tspan></text>
+<line x1="60" y1="4116" x2="410" y2="4116" stroke="#333333"/>
+<rect x="60" y="4130" width="190" height="48" rx="0" fill="#3d3d3d" stroke="#3d3d3d" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="155.0" y="4158.6">ENVIAR CONSULTA</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#555555" text-anchor="start"><tspan x="60" y="4200.4">[Estado del formulario]</tspan></text>
+<line x1="40" y1="4250" x2="430" y2="4250" stroke="#8c8c8c"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="4300.9">ALMI CHAIN</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="4326.4">BILBAO, BIZKAIA</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="60" y="4350.4">PROYECTO WEB ACADÉMICO · 2026</tspan></text>
+<line x1="436" y1="104" x2="494" y2="104" stroke="#c2410c" stroke-dasharray="6 4"/>
+<circle cx="514" cy="104" r="14" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="109.6">1</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="538" y="107.2">Cabecera: el menú se esconde tras el</tspan><tspan x="538" y="127.5">botón «Menú» (estado abierto, a la</tspan><tspan x="538" y="147.8">derecha).</tspan></text>
+<line x1="436" y1="254" x2="494" y2="254" stroke="#c2410c" stroke-dasharray="6 4"/>
+<circle cx="514" cy="254" r="14" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="259.6">2</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="538" y="257.2">Portada en una columna: sin pie</tspan><tspan x="538" y="277.5">vertical ni «01» decorativo; la</tspan><tspan x="538" y="297.8">imagen ocupa todo el ancho.</tspan></text>
+<line x1="436" y1="1224" x2="494" y2="1224" stroke="#c2410c" stroke-dasharray="6 4"/>
+<circle cx="514" cy="1224" r="14" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="1229.6">3</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="538" y="1227.2">Historia: titular y texto apilados.</tspan></text>
+<line x1="436" y1="1714" x2="494" y2="1714" stroke="#c2410c" stroke-dasharray="6 4"/>
+<circle cx="514" cy="1714" r="14" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="1719.6">4</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="538" y="1717.2">Platos estrella: título y controles</tspan><tspan x="538" y="1737.5">arriba; imagen del plato debajo.</tspan></text>
+<line x1="436" y1="2574" x2="494" y2="2574" stroke="#c2410c" stroke-dasharray="6 4"/>
+<circle cx="514" cy="2574" r="14" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="2579.6">5</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="538" y="2577.2">Ubicación: datos y botones arriba;</tspan><tspan x="538" y="2597.5">mapa debajo, de 420 px de alto</tspan><tspan x="538" y="2617.8">como mínimo.</tspan></text>
+<line x1="436" y1="3574" x2="494" y2="3574" stroke="#c2410c" stroke-dasharray="6 4"/>
+<circle cx="514" cy="3574" r="14" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="3579.6">6</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="538" y="3577.2">Contacto: formulario a una columna.</tspan></text>
+<line x1="436" y1="4284" x2="494" y2="4284" stroke="#c2410c" stroke-dasharray="6 4"/>
+<circle cx="514" cy="4284" r="14" fill="#c2410c" stroke="none"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="4289.6">7</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="start"><tspan x="538" y="4287.2">Pie: logo, ciudad y créditos</tspan><tspan x="538" y="4307.5">apilados.</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="920" y="67.1">Menú abierto (móvil)</tspan></text>
+<rect x="920" y="90" width="390" height="330" rx="0" fill="#ffffff" stroke="#666666" stroke-width="2"/>
+<rect x="920" y="90" width="390" height="88" rx="0" fill="#f2f2f2" stroke="#8c8c8c" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="940" y="140.5">ALMI CHAIN</tspan></text>
+<rect x="1210" y="116" width="80" height="36" rx="0" fill="#ffffff" stroke="#3d3d3d" stroke-width="1"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#3d3d3d" text-anchor="middle" font-weight="bold"><tspan x="1250.0" y="138.6">Menú</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start"><tspan x="952" y="235.5">Historia</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start"><tspan x="952" y="283.5">Platos</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start"><tspan x="952" y="331.5">Ubicación</tspan></text>
+<text font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start" font-weight="bold"><tspan x="952" y="379.5">Contacto</tspan></text>
+<line x1="920" y1="408" x2="1310" y2="408" stroke="#8c8c8c"/>
+<rect x="920" y="420" width="390" height="120" rx="0" fill="#e4e4e4" stroke="#bbbbbb" stroke-width="1" stroke-dasharray="6 4"/>
+<text font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#555555" text-anchor="middle"><tspan x="1115.0" y="484.2">(el resto de la página queda debajo)</tspan></text>
+</svg>
