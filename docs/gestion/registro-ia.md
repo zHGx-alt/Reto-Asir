@@ -29,3 +29,4 @@ El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para pod
 | 2026-10-23 | Adrian | Claude Code | 6 Web | Capturas de la web implementada para el documento de wireframes (tarea 27) | Generadas con Chrome; comprobado que el mapa carga |
 | 2026-10-23 | Adrian | Claude Code | 6 Web | Revisión de la web contra el enunciado y corrección de contraste, imágenes, favicon y validación | Lighthouse 98-100 y W3C sin errores; pendiente de revisar por Eneko.P (tarea 29) |
 | 2026-10-23 | Adrian | Claude Code | 0 Gestión | Estados del backlog (tareas 12 y 30), Anexo II (hosting, incidencias y pruebas web) y README | Pendiente de revisar por el equipo |
+| 2026-10-23 | Adrian | Claude Code | 0 Gestión | Puesta al día del Anexo II (decisiones, incidencias y pruebas de todos los bloques) y del backlog según el estado de cada documento | Cada dato se ha sacado del documento de su tarea, que se enlaza; pendiente de revisar por el equipo |

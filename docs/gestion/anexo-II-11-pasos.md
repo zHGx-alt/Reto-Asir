@@ -46,6 +46,10 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Arduino · Firmware HID y EEPROM | Claude; librería [mheironimus/ArduinoJoystickLibrary](https://github.com/MHeironimus/ArduinoJoystickLibrary) |
 | Web · Hosting | Claude Code; [documentación de Certbot](https://eff-certbot.readthedocs.io), [DuckDNS](https://www.duckdns.org/spec.jsp), documentación de Amazon S3 y EC2 |
 | Web · Validación | [Lighthouse](https://developer.chrome.com/docs/lighthouse), [validador Nu del W3C](https://validator.w3.org/nu/) |
+| ERP · Comparativa | Fuentes de Odoo, Dolibarr y ERPNext consultadas el 22/10 ([tarea 32](../erp/32-comparativa-erp.md)) |
+| ERP · Odoo | Documentación de Odoo 19 y su API XML-RPC ([tareas 33-35](../erp/)) |
+| Copias · restic y mdadm | Documentación de restic y de mdadm ([tareas 43-45](../backup/)) |
+| Arcade · MAME y Batocera | Documentación de MAME, Debian (preseed) y Batocera ([tareas 16-18](../arcade/)) |
 
 ## 4. Alternativas evaluadas
 
@@ -65,13 +69,13 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Decisión | Elección | Justificación | Fecha |
 |---|---|---|---|
 | Gestión de tareas | GitHub Projects + Gantt en el repo | Integrado con el repositorio; el Gantt se regenera desde el CSV | 21/10/2026 |
-| ERP | | | |
+| ERP | Odoo Community | Cubre las funciones del enunciado con un TPV táctil integrado, usa PostgreSQL, tiene más documentación en español y es gratuito ([tarea 32](../erp/32-comparativa-erp.md), sección 6) | 22/10/2026 |
 | Hosting web | Bucket S3 privado + EC2 con nginx, IP elástica, dominio `almichain1.duckdns.org` y certificado de Let's Encrypt | Dominio y certificado gratuitos. DuckDNS solo admite registros A, y CloudFront y ACM necesitan CNAME; con una IP elástica basta un registro A ([tarea 30](../web/30-hosting-aws.md)) | 23/10/2026 |
 | IaC | | | |
-| SO de la recreativa | | | |
+| SO de la recreativa | *Provisional:* Debian 13 mínimo con arranque directo a MAME | Arranca a MAME en 4,7 s sin escritorio ([tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md)). Se está probando Batocera para compararlas con datos en una VM de 1 núcleo y 1 GB ([notas](../arcade/16-batocera/NOTAS.md)) | 23/10/2026 |
 | Firmware de router | | | |
-| SGBD | | | |
-| Backup | | | |
+| SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 ([tarea 40](../bd/scripts/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
+| Backup | restic sobre RAID 1 (`mdadm`) y disco USB externo | Copias cifradas con AES-256, deduplicadas y automatizadas; cumple la regla 3-2-1 ([tarea 44](../backup/44-backup-3-2-1/DOCUMENTACION.md)) | 22/10/2026 |
 | Placa del arcade stick | Arduino Leonardo (ATmega32U4) | HID nativo por USB sin drivers; compatible con la librería Joystick; EEPROM para guardar el mapeo | 22/10/2026 |
 
 ## 6. Planificación
@@ -101,6 +105,11 @@ Incidencias relevantes durante la ejecución:
 
 | Fecha | Bloque | Incidencia | Resolución |
 |---|---|---|---|
+| 22/10/2026 | Arcade | Debian 13 reserva el nombre de usuario `admin` y el instalador desatendido se paraba | El administrador se llama `tecnico` ([tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md)) |
+| 22/10/2026 | Arcade | Las medidas de rendimiento se hicieron en una VM de 2 núcleos y 1,5 GB, no de 1 núcleo y 1 GB como pide el enunciado | Hay que repetirlas en la VM `Recreativa-1GB` ([tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md)) |
+| 22/10/2026 | ERP | Odoo se instaló antes de cerrar la comparativa de ERP (tarea 32) | La tarea 32 eligió Odoo Community, así que no hay que rehacer nada |
+| 22/10/2026 | ERP | Crear la factura por XML-RPC devolvía `cannot marshal None` | La acción sí se ejecuta; el script lo controla ([tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md)) |
+| 22/10/2026 | Redes | El router TP-Link TL-WR841N v14 no admite WPA3 | Se usa WPA2-PSK con AES; para WPA3 hace falta otro equipo ([red segura](../evidencias/Configurar-red-segura/configurar-red-segura.md)) |
 | 23/10/2026 | Web | Sin presupuesto para un dominio de pago; DuckDNS (gratuito) no admite CNAME, así que no puede apuntar a CloudFront ni validar un certificado de ACM | Se cambia a EC2 con IP elástica y Let's Encrypt; S3 sigue guardando la web ([tarea 30](../web/30-hosting-aws.md), sección 2) |
 | 23/10/2026 | Web | La consola de AWS no admite nombres de grupo de seguridad que empiecen por `sg-` | Se llama `web-almichain-sg` |
 | 23/10/2026 | Web | La redirección de HTTP que crea certbot mostraba la versión de nginx | `server_tokens off` en el bloque `http` del script |
@@ -110,18 +119,18 @@ Incidencias relevantes durante la ejecución:
 
 | Bloque | Prueba | Resultado esperado | Resultado obtenido | Evidencia |
 |---|---|---|---|---|
-| SO | Arranque de ambos sistemas desde GRUB | Ambos arrancan y GRUB muestra las dos entradas | | |
+| SO | Arranque de ambos sistemas desde GRUB | Ambos arrancan y GRUB muestra las dos entradas | Pendiente de captura; las particiones y la EFI compartida sí están comprobadas | [tarea 12](../so/12-dual-boot.md) |
 | SO | Cajero intenta instalar software / usar USB | Operación denegada | | |
-| Arcade | Rendimiento MAME antes y después de optimizar | Aumento de FPS y menor consumo de RAM | | |
+| Arcade | Rendimiento MAME antes y después de optimizar | Aumento de FPS y menor consumo de RAM | Robby Roto +27 % y más estable, Gridlee +6 %, timers de 8 a 3, −277 MB de disco; la RAM no cambia. Medido en una VM de 2 núcleos y 1,5 GB: falta repetirlo con 1 núcleo y 1 GB | [tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | Arduino | Stick en MAME y en un segundo emulador | Todas las entradas reconocidas y remapeables | | |
-| Redes | Cliente de la red de invitados accede a la red interna | Acceso bloqueado | | |
+| Redes | Cliente de la red de invitados accede a la red interna | Acceso bloqueado | Pendiente: la red de invitados aún no está configurada | [red segura](../evidencias/Configurar-red-segura/configurar-red-segura.md) |
 | Redes | Roaming y throughput con WDS | Cobertura ampliada; velocidad medida con iperf3 | | |
 | Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | W3C sin errores; Lighthouse móvil 98/100/100/100 y escritorio 99/100/100/100 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
 | Web | Acceso por HTTP | Redirección a HTTPS con certificado válido | `301` a HTTPS; certificado de Let's Encrypt válido hasta el 21/01/2027 | [tarea 30, sección 5](../web/30-hosting-aws.md#5-pruebas) |
-| ERP | Pedido en TPV | Factura emitida, enviada por correo y stock descontado | | |
-| BD | Usuario de aplicación ejecuta DDL | Permiso denegado | | |
-| RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | | |
-| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | | |
+| ERP | Pedido en TPV | Factura emitida, enviada por correo y stock descontado | Parcial: un script crea el pedido, valida la factura INV/2026/00002 (12,10 €), registra el cobro y guarda el PDF. Falta lanzarlo desde el TPV, el envío por correo y el descuento de stock | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
+| BD | Usuario de aplicación ejecuta DDL | Permiso denegado | Los roles de aplicación y de lectura reciben `permission denied` al modificar facturas o insertar fuera de sus permisos (33 pruebas correctas). Falta una prueba expresa de DDL | [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
+| RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
+| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; RTO 46 s | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
 
 ## 9. Documentación y presentación
 
