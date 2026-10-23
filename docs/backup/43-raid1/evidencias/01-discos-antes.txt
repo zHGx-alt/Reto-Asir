@@ -1,0 +1,8 @@
+NAME    SIZE TYPE MOUNTPOINTS HCTL
+sda      30G disk             0:0:0:0
+├─sda1 28,4G part /           
+├─sda2    1K part             
+└─sda5  1,6G part [SWAP]      
+sdb       5G disk             2:0:0:0
+sdc       5G disk             3:0:0:0
+sr0    1024M rom              1:0:0:0

@@ -1,0 +1,5 @@
+== Estado inicial
+md0 : active raid1 sdc[1] sdb[0]
+      5237760 blocks super 1.2 [2/2] [UU]
+f627f340e6712a1cab231fb726388b607d7c04ca17f862d472c7ff910d95a033  datos-200M.bin
+c536d734b0a704d9b7468420ccc553c66e80764044178fb3606a52a1777099ee  factura.txt

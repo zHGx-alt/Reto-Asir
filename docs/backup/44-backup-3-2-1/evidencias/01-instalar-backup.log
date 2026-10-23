@@ -1,0 +1,25 @@
+
+==> 1/5 Instalando restic
+restic 0.18.0 compiled with go1.24.4 on linux/amd64
+
+==> 2/5 Contraseña de cifrado
+  Creada en /root/.config/backup-odoo/restic.pass (permisos 600).
+  ⚠️  GUÁRDALA TAMBIÉN FUERA DEL SERVIDOR (gestor de contraseñas del gerente): sin ella las copias NO se pueden recuperar.
+
+==> 3/5 Repositorio en el RAID
+created restic repository 5fa6a0c47a at /srv/datos/restic
+
+Please note that knowledge of your password is required to access
+the repository. Losing your password means that your data is
+irrecoverably lost.
+
+==> 4/5 Disco USB externo
+  /dev/sdc formateado con la etiqueta BACKUP_USB
+
+==> 5/5 Script y timer diario (02:30)
+Created symlink '/etc/systemd/system/timers.target.wants/backup-odoo.timer' → '/etc/systemd/system/backup-odoo.timer'.
+NEXT                         LEFT LAST PASSED UNIT              ACTIVATES
+Fri 2026-10-23 02:39:39 CEST  13h -         - backup-odoo.timer backup-odoo.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.

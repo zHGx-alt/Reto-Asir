@@ -1,0 +1,41 @@
+== Resultado del servicio: success (exit 0) en 13 s
+c5794183  2026-10-22 12:57:44  servidor-erp  odoo        daily snapshot    /opt/odoo                                         21.780 MiB
+                                                         weekly snapshot   /srv/datos/temp-backup
+                                                         monthly snapshot  /var/lib/docker/volumes/odoo_odoo-web-data/_data
+---------------------------------------------------------------------------------------------------------------------------------------
+1 snapshots
+using temporary cache in /tmp/restic-check-cache-2909064676
+create exclusive lock for repository
+check all packs
+unable to open cache: unable to locate cache directory: neither $XDG_CACHE_HOME nor $HOME are defined
+created restic repository 17618436d8 at /mnt/usb-backup/restic with chunker parameters copied from secondary repository
+Please note that knowledge of your password is required to access
+the repository. Losing your password means that your data is
+irrecoverably lost.
+unable to open cache: unable to locate cache directory: neither $XDG_CACHE_HOME nor $HOME are defined
+unable to open cache: unable to locate cache directory: neither $XDG_CACHE_HOME nor $HOME are defined
+snapshot c5794183 of [/srv/datos/temp-backup /var/lib/docker/volumes/odoo_odoo-web-data/_data /opt/odoo] at 2026-10-22 12:57:44.265453286 +0200 CEST by root@servidor-erp
+  copy started, this may take a while...
+snapshot 474be3dd saved
+unable to open cache: unable to locate cache directory: neither $XDG_CACHE_HOME nor $HOME are defined
+Applying Policy: keep 7 daily, 4 weekly, 6 monthly snapshots
+keep 1 snapshots:
+ID        Time                 Host          Tags        Reasons           Paths                                             Size
+---------------------------------------------------------------------------------------------------------------------------------------
+474be3dd  2026-10-22 12:57:44  servidor-erp  odoo        daily snapshot    /opt/odoo                                         21.780 MiB
+                                                         weekly snapshot   /srv/datos/temp-backup
+                                                         monthly snapshot  /var/lib/docker/volumes/odoo_odoo-web-data/_data
+---------------------------------------------------------------------------------------------------------------------------------------
+1 snapshots
+using temporary cache in /tmp/restic-check-cache-3674287256
+create exclusive lock for repository
+check all packs
+unable to open cache: unable to locate cache directory: neither $XDG_CACHE_HOME nor $HOME are defined
+ID        Time                 Host          Tags    Size
+---------------------------------------------------------------
+c5794183  2026-10-22 12:57:44  servidor-erp  odoo    21.780 MiB
+---------------------------------------------------------------
+1 snapshots
+backup-odoo.service: Deactivated successfully.
+Finished backup-odoo.service - Copia de seguridad 3-2-1 cifrada de Odoo.
+backup-odoo.service: Consumed 8.402s CPU time, 184.1M memory peak.

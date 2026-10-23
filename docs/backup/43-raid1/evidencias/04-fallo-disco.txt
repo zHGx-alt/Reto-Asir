@@ -1,0 +1,25 @@
+== mdadm --fail /dev/md0 /dev/sdc
+
+== Estado: DEGRADADO
+md0 : active raid1 sdc[1](F) sdb[0]
+      5237760 blocks super 1.2 [2/1] [U_]
+             State : clean, degraded 
+    Active Devices : 1
+    Failed Devices : 1
+       0       8       16        0      active sync   /dev/sdb
+       1       8       32        1      faulty   /dev/sdc
+
+== ¿Siguen los datos bien con un solo disco?
+datos-200M.bin: La suma coincide
+factura.txt: La suma coincide
+
+== ¿Se puede seguir escribiendo?
+Escrito con el RAID degradado
+
+== Aviso del sistema (journal)
+oct 22 12:50:20 servidor-erp kernel: md: md0: resync done.
+oct 22 12:50:33 servidor-erp kernel: md/raid1:md0: Disk failure on sdc, disabling device.
+                                     md/raid1:md0: Operation continuing on 1 devices.
+
+== Retirar el disco averiado del RAID
+mdadm: hot removed /dev/sdc from /dev/md0
