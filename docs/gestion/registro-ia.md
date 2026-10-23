@@ -13,3 +13,4 @@ El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para pod
 | 2026-10-22 | Adrian | Claude Code | 2 SO | Guía paso a paso del arranque dual (cuentas, cortafuegos, actualizaciones) y redacción del documento de la tarea 12 | Instalación y pruebas hechas a mano en VMware; capturas en docs/evidencias/12-dual-boot |
 | 2026-10-23 | Adrian | Claude Code | 6 Web | Wireframes de escritorio y móvil (tarea 27) sacados de la web ya implementada | Pendiente de revisar por Peio y Eneko.S |
 | 2026-10-23 | Adrian | Claude Code | 6 Web | Guía de hosting en AWS con S3, CloudFront y ACM (tarea 30) | Borrador: falta montarlo en el Learner Lab, con dominio y capturas |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Cambiar el hosting a S3 + EC2 con nginx, DuckDNS y Let's Encrypt, con script de instalación (tarea 30) | Script revisado con bash -n, shellcheck y nginx -t; falta montarlo en el Learner Lab |
