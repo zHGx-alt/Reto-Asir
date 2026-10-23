@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Instala el servidor web de Almi Chain en una EC2 con Ubuntu 24.04 (tarea 30).
 # Sirve con nginx la web guardada en el bucket S3 y pide el certificado de Let's Encrypt.
-# Uso: sudo BUCKET=almi-chain-web-2026 DOMINIO=almichain.duckdns.org EMAIL=tu@correo ./instalar-servidor-web.sh
+# Uso: sudo BUCKET=almi-chain-web-2026 DOMINIO=almichain1.duckdns.org EMAIL=tu@correo ./instalar-servidor-web.sh
 set -euo pipefail
 
 : "${BUCKET:?Falta BUCKET (nombre del bucket S3)}"
-: "${DOMINIO:?Falta DOMINIO (por ejemplo almichain.duckdns.org)}"
+: "${DOMINIO:?Falta DOMINIO (por ejemplo almichain1.duckdns.org)}"
 : "${EMAIL:?Falta EMAIL (avisos de caducidad del certificado)}"
 REGION="${REGION:-us-east-1}"
 WEBROOT=/var/www/almichain
