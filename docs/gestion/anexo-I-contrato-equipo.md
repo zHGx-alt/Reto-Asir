@@ -14,6 +14,8 @@
 | Markel | 
 | Peio | 
 
+> **Tamaño del equipo.** El enunciado dice «Equipos de 4-5 personas» y este equipo es de 6. Eneko.P no tiene tareas ni commits (tarea 5). Pendiente de confirmar con el profesor (tarea 6); si Eneko.P sale del equipo, se quita de esta tabla y de la de firmas, con la fecha del cambio.
+
 ## 2. Objetivo común
 
 Entregar la solución completa del reto Almi-Chain (sistemas, red, arcade, web en AWS, ERP, BD y copias de seguridad) de forma segura, reproducible y verificada, de manera que **cada miembro sepa explicar y defender todo el proyecto**.

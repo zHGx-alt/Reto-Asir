@@ -9,7 +9,7 @@
 
 ## 1. Alcance
 
-El enunciado pide un *"plano del local con cableado y Wi-Fi"* y un *"plan de direccionamiento IP y segmentación (TPV, gerente, clientes, arcade)"*. Este documento recoge las dos cosas:
+El enunciado dice: *«necesitan contratar una línea WAN. De esta, se quiere crear un esquema de conectividad y un diagrama de la arquitectura de red (plano), cableado y Wi-Fi, con la red configurada de forma segura»*. La separación de la red por grupos (TPV, gerente, clientes y arcade) **no la pide el enunciado**: es una decisión del equipo (venía en el plan de trabajo) para cumplir lo de «configurada de forma segura» y los mínimos privilegios. El esquema de conectividad (WAN → router → LAN e invitados) está en la [tarea 22](22-comparativa-wan.md#4-esquema-de-conectividad). Este documento recoge:
 
 - **Plano:** dónde va cada equipo, por dónde pasa el cable y dónde se colocan los dos routers Wi-Fi.
 - **Direccionamiento:** qué red y qué IP tiene cada equipo, y cómo se separan los grupos.
@@ -26,7 +26,7 @@ El enunciado no da el plano ni las medidas del local. Se trabaja con estos supue
 | S-02 | La fibra de DIGI entra por el despacho del gerente y ahí va el armario de red | El despacho es la única estancia que se cierra con llave, así que el router y el servidor quedan fuera del alcance de los clientes |
 | S-03 | Internet: DIGI 1 Gb con su router, que hace de ONT ([tarea 22](22-comparativa-wan.md)) | Operador elegido en la tarea 22 |
 | S-04 | Router principal y router WDS: 2 × TP-Link Archer C6 V3 ([tarea 10](../hardware/10-presupuesto-hardware.md), apartado 4.4) | Equipos elegidos en el presupuesto |
-| S-05 | No hay switch: los 4 puertos LAN del router principal son todos los puertos con cable | No está en el presupuesto |
+| S-05 | Switch TP-Link TL-SG108E de 8 puertos en el armario, en el puerto LAN 1 del router 1; el servidor se conecta al switch ([tarea 10](../hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto), sección 12) | Sin switch, los 4 puertos LAN del router quedaban todos ocupados. Además admite VLAN (apartado 5.5) |
 | S-06 | Las impresoras de tickets van por USB a su TPV, así que no llevan IP ([tarea 8](../hardware/08-tabla-hardware.md), apartado 3.3) | Decisión de la tarea 8 |
 | S-07 | El cable va por canaleta a ras de techo o por falso techo y se usa Cat6 | Soporta 1 Gb/s con margen y es barato |
 
@@ -48,13 +48,13 @@ En el despacho hay un armario pequeño o una balda con:
 
 | Tirada | Desde → hasta | Puerto del router 1 | Longitud aprox. |
 |---|---|---|---|
-| 1 | Router 1 → servidor Odoo | LAN 1 | 1 m (dentro del armario) |
+| 1 | Router 1 → switch → servidor Odoo | LAN 1 (switch) | 1 m + 1 m (dentro del armario) |
 | 2 | Router 1 → PC del gerente | LAN 2 | 5 m |
 | 3 | Router 1 → TPV 1 (barra) | LAN 3 | 20 m |
 | 4 | Router 1 → TPV 2 (barra) | LAN 4 | 24 m |
 | — | Router de DIGI → router 1 (WAN) | WAN | 1 m |
 
-Las longitudes salen del plano y llevan holgura para las bajadas por la pared. Todas están muy por debajo del límite de 100 m del Ethernet. Con esto se ocupan los 4 puertos LAN, así que **no queda ningún puerto libre para la recreativa** (ver apartado 5.2).
+Las longitudes salen del plano y llevan holgura para las bajadas por la pared. Todas están muy por debajo del límite de 100 m del Ethernet. En total son unos 50 m (en el presupuesto, una bobina de 100 m). Con estas tiradas se ocupan los 4 puertos LAN del router 1, y el switch del armario (S-05) deja 6 puertos libres para ampliar. La recreativa va igualmente por la Wi-Fi de invitados, para que quede aislada (apartado 5.2).
 
 ### 3.3 Wi-Fi
 
@@ -69,7 +69,7 @@ Las longitudes salen del plano y llevan holgura para las bajadas por la pared. T
 | Red | Subred | Puerta de enlace | DHCP | Para qué |
 |---|---|---|---|---|
 | LAN del local | `192.168.10.0/24` | `192.168.10.1` (router 1) | Router 1 | Servidor, gerente, TPV y routers |
-| Wi-Fi de invitados | `192.168.20.0/24` *(a comprobar, ver 4.4)* | Router 1 | Router 1 | Móviles de clientes y recreativa |
+| Wi-Fi de invitados | `192.168.50.0/24` *(a comprobar, ver 4.4)* | Router 1 | Router 1 | Móviles de clientes y recreativa |
 | WAN | La que dé el router de DIGI | Router de DIGI | Router de DIGI | Enlace entre el router 1 y DIGI |
 
 **Por qué `192.168.10.0/24` y no `192.168.1.0/24`:** los routers de operador suelen venir con `192.168.1.0/24`. Si nuestra LAN usara la misma red que hay detrás del router de DIGI, el router 1 tendría la misma red a los dos lados y no sabría por dónde enviar el tráfico. Además, `192.168.10.x` es lo que ya proponía el diagrama de la [tarea 11](../diagramas/11-arquitectura-equipos/DIAGRAMA.md).
@@ -97,7 +97,7 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 |---|---|---|---|---|
 | Router 1 (Archer C6) | 192.168.10.1 | Fija en el router | — | *(apuntar al montarlo)* |
 | Router 2 (Archer C6, WDS) | 192.168.10.2 | Fija en el router, con su DHCP apagado | WDS | *(apuntar)* |
-| Servidor Odoo | 192.168.10.10 | Reserva DHCP | Cable, LAN 1 | *(apuntar)* |
+| Servidor Odoo | 192.168.10.10 | Reserva DHCP | Cable, switch (LAN 1) | *(apuntar)* |
 | PC del gerente | 192.168.10.20 | Reserva DHCP | Cable, LAN 2 | *(apuntar)* |
 | TPV 1 | 192.168.10.31 | Reserva DHCP | Cable, LAN 3 | *(apuntar)* |
 | TPV 2 | 192.168.10.32 | Reserva DHCP | Cable, LAN 4 | *(apuntar)* |
@@ -118,7 +118,7 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 
 Se mantienen los nombres de la [tarea 24](24-red-segura/DOCUMENTACION.md).
 
-**A comprobar en la tarea 24:** no está confirmado que la red de invitados del Archer C6 use una subred propia (`192.168.20.0/24`). Algunos routers domésticos dan a los invitados IPs del mismo rango que la LAN y los aíslan solo con reglas internas. Lo importante es el aislamiento, que se prueba igual en los dos casos (apartado 6). La subred que asigne el router de verdad se apunta en esta tabla.
+**A comprobar en la tarea 24:** no está confirmado que la red de invitados del Archer C6 use una subred propia (`192.168.50.0/24`, la misma que la VLAN 50 de invitados del apartado 5.3, para que una red no signifique cosas distintas en los dos diseños). Algunos routers domésticos dan a los invitados IPs del mismo rango que la LAN y los aíslan solo con reglas internas. Lo importante es el aislamiento, que se prueba igual en los dos casos (apartado 6). La subred que asigne el router de verdad se apunta en esta tabla.
 
 ## 5. Segmentación
 
@@ -138,16 +138,12 @@ El enunciado pide separar **TPV, gerente, clientes y arcade**.
 El Archer C6 con su firmware de fábrica **no tiene VLANs**: todos sus puertos LAN están en la misma red. Con lo que hay se consigue esto:
 
 1. **Clientes aislados:** van a la Wi-Fi de invitados, que solo tiene salida a internet y no ve la LAN.
-2. **Recreativa aislada:** también va a la **Wi-Fi de invitados**, no por cable. Tiene dos ventajas:
-   - Queda separada de los TPV y del servidor, como pide el enunciado.
-   - No hace falta un switch, porque los 4 puertos LAN ya están ocupados (apartado 3.2).
-   
-   Si el PC de la recreativa no trae Wi-Fi, hace falta un adaptador USB Wi-Fi (unos 10 €), que se añadiría al presupuesto de la tarea 10.
+2. **Recreativa aislada:** también va a la **Wi-Fi de invitados**, no por cable. Así queda separada de los TPV y del servidor sin necesidad de VLAN. Lleva un adaptador USB Wi-Fi (TP-Link TL-WN725N, ya en el presupuesto de la tarea 10, sección 12) y su configuración está en la [tarea 16, sección 6](../arcade/16-recreativa-mame/DOCUMENTACION.md#6-conexión-a-la-wi-fi-de-invitados).
 3. **TPV y gerente separados por rangos:** están en la misma red, pero en rangos distintos (.30 y .20). Eso ordena la red y facilita el firewall y los registros, aunque **no impide** que un TPV vea el PC del gerente. Para compensarlo:
    - Los TPV usan un usuario estándar en modo quiosco (tarea 13).
    - El PC del gerente tiene activado el firewall de Windows, que bloquea las conexiones entrantes.
 
-**Contrapartida:** desde la LAN no se llega a la recreativa por SSH, que es lo que usan los scripts de monitorización de la [tarea 18](../arcade/18-monitorizacion-recreativa.md). Para las pruebas, se conecta un portátil a la Wi-Fi de invitados o se trabaja directamente en la recreativa.
+**Contrapartida:** desde la LAN no se llega a la recreativa por SSH. Tampoco desde otro equipo de la Wi-Fi de invitados, porque la tarea 24 aísla a los clientes entre sí. **Decisión:** la recreativa se administra **desde su consola local** (teclado en la recreativa, `Ctrl+Alt+F2`, usuario `tecnico`), y los scripts de monitorización de la [tarea 18](../arcade/18-monitorizacion-recreativa.md) se ejecutan en ella y guardan el CSV en local. Si se monta la opción (a) del apartado 5.5, la recreativa pasa a la VLAN 40 y se administra por SSH desde la VLAN de gestión, como en Packet Tracer.
 
 ### 5.3 Diseño ideal (mejora)
 
@@ -216,6 +212,43 @@ El primer ping de cada pareja pierde 1 o 2 paquetes mientras se resuelve la dire
 
 ![Navegador del TPV1 abriendo el servidor](23-prueba-http-tpv1.png)
 
+### Lo que falta en la simulación
+
+La configuración se ha leído del propio `.pkt`, no solo de la captura. La simulación tiene **una red interna con 6 VLAN, pero ninguna red pública**: `Gi0/1` y `Gi0/2` de R1 están apagadas y sin IP, no hay ruta por defecto ni NAT, no hay ningún punto de acceso (el CLIENTE es un portátil con cable) y R1 y SW1 no tienen contraseñas ni SSH; los puertos Fa0/7-24 de SW1 están encendidos en la VLAN 1 y los pools DHCP no reparten DNS. Así no demuestra la línea WAN, la Wi-Fi, el WDS ni la red segura que pide el enunciado, ni el RA.7 de PAR («conecta redes privadas a redes públicas»). Las ACL acaban en `permit ip any any` («internet sí»), pero no hay internet que probar.
+
+Hay que añadir al `.pkt` (pendiente: el fichero solo se puede editar con Packet Tracer):
+
+1. **ISP e Internet:** un router `ISP` (el de DIGI) y detrás un servidor `INTERNET` con HTTP y DNS en `198.51.100.10`.
+2. **WAN y NAT con sobrecarga en R1:**
+   ```
+   interface GigabitEthernet0/1
+    ip address 203.0.113.2 255.255.255.252
+    ip nat outside
+    no shutdown
+   ! en cada subinterfaz Gi0/0.10 ... Gi0/0.99:
+    ip nat inside
+   ip route 0.0.0.0 0.0.0.0 203.0.113.1
+   access-list 1 permit 192.168.0.0 0.0.255.255
+   ip nat inside source list 1 interface GigabitEthernet0/1 overload
+   ```
+   En cada pool DHCP: `dns-server 198.51.100.10`. En el ISP, `203.0.113.1/30` hacia R1 y la red del servidor INTERNET, **sin ruta** hacia `192.168.0.0/16`.
+3. **Wi-Fi:** un punto de acceso en un puerto de la VLAN 50 (SSID de invitados, WPA2-PSK/AES) y otro para el personal; el portátil CLIENTE con tarjeta inalámbrica. El segundo router (WDS) se representa con otro punto de acceso con el mismo SSID. Packet Tracer no simula WDS tal cual, así que la prueba real del WDS es la tarea 25 con los Archer C6.
+4. **Seguridad de R1 y SW1:** `enable secret`, usuario local, `ip domain-name`, `crypto key generate rsa`, `ip ssh version 2`, `login local` y `transport input ssh` en las `vty`; `service password-encryption`; en SW1, `shutdown` en Fa0/7-24 y pasarlos a una VLAN sin uso (por ejemplo, la 999). Así la VLAN 99 sirve de verdad para administrar.
+5. **Pruebas nuevas:** desde cada VLAN, `ping 198.51.100.10` y abrir la web del servidor INTERNET; `show ip nat translations` en R1; desde INTERNET, `ping` a una IP interna (debe fallar); SSH a R1 y SW1 desde GERENTE (debe funcionar) y desde CLIENTE (debe fallar).
+6. Rehacer la captura `23-segmentacion-vlan.png` y la tabla de pruebas de arriba.
+
+### 5.5 Decisión pendiente: red real plana o con VLAN
+
+Con los dos Archer C6 de fábrica, el personal está en **una sola red** (apartado 5.2): separar TPV y gerente por rangos (.20 / .30) **no aísla nada**, porque cualquiera puede ponerse una IP fija. El diseño con VLAN solo existe en Packet Tracer. El equipo tiene que elegir una de dos:
+
+| | (a) Montar las VLAN de verdad | (b) Mantener la red plana |
+|---|---|---|
+| Qué hace falta | El switch TL-SG108E (ya presupuestado, admite 802.1Q) y un router que enrute las VLAN. El Archer C6 v3 parece estar soportado por OpenWrt: **comprobarlo en su tabla de hardware antes de decidir** | Nada más |
+| Aislamiento | TPV, gerente, servidor, recreativa e invitados en redes separadas, con las ACL del apartado 5.4 | Solo quedan aislados los invitados y la recreativa |
+| Packet Tracer | El `.pkt` actual, con lo que falta del apartado 5.4, representa la red real | Hay que simular **la red plana** (router con NAT, LAN del personal, red de invitados y WDS), y el `.pkt` con VLAN queda como anexo de mejora |
+
+Hasta que se decida, el plan de direccionamiento del apartado 4 es el de la opción (b).
+
 ## 6. Cómo se comprueba
 
 Estas pruebas se hacen en las tareas 24 y 25, con el router montado. Se dejan apuntadas aquí para que cuadren con el plan:
@@ -237,14 +270,16 @@ Estas pruebas se hacen en las tareas 24 y 25, con el router montado. Se dejan ap
 | 24 · Red segura (Peio) | Las capturas son de un TL-WR841N con la LAN en `192.168.1.0/24`. Al montar los Archer C6 hay que poner la LAN en `192.168.10.0/24`, configurar las reservas de la tabla 4.3 y documentar la red de invitados |
 | 25 · WDS | Router 2 en 192.168.10.2, DHCP apagado y colocado donde marca el plano |
 | 11 · Diagrama de arquitectura (Iker) | Pasar el direccionamiento de "propuesta" a definitivo. La recreativa va por la Wi-Fi de invitados, no por cable |
-| 10 · Presupuesto | Las IPs de ejemplo de las impresoras (.21 y .22) pasan al rango .40–.49 si algún día van por red. Añadir el adaptador USB Wi-Fi de la recreativa si hace falta |
-| 18 · Monitorización de la recreativa | Las pruebas por SSH se hacen desde la Wi-Fi de invitados (apartado 5.2) |
+| 10 · Presupuesto | Hecho el 24/10: impresoras en `.41` y `.42` (rango .40–.49, solo si algún día van por red); adaptador USB Wi-Fi de la recreativa, switch y cable añadidos (sección 12) |
+| 18 · Monitorización de la recreativa | Los scripts se ejecutan en la propia recreativa, desde su consola (apartado 5.2), no por SSH |
 
 ## 8. Pendiente
 
 - [ ] Revisión de Iker.
 - [ ] Apuntar las MAC de los equipos cuando estén montados.
 - [ ] Confirmar en la tarea 24 qué subred da el Archer C6 a la red de invitados.
-- [ ] Confirmar si el PC de la recreativa tiene Wi-Fi.
+- [ ] Confirmar si el PC de la recreativa tiene Wi-Fi (el adaptador USB ya está presupuestado).
+- [ ] Decidir entre las opciones (a) y (b) del apartado 5.5.
+- [ ] Completar el `.pkt` con WAN, NAT, Wi-Fi y seguridad («Lo que falta en la simulación», apartado 5.4) y rehacer la captura y las pruebas.
 - [x] Simular el diseño con VLANs en Packet Tracer (apartado 5.4).
 - [x] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador.

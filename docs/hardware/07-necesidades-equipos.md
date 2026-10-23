@@ -31,7 +31,7 @@ flowchart LR
   T2 --- I2[Impresora de tickets 2]
 ```
 
-Las impresoras pueden ir por USB al TPV o por red (IP fija). Lo decidirá el plano de red (bloque de redes).
+Las impresoras pueden ir por USB al TPV o por red (IP fija). Lo decidirá el plano de red (bloque de redes); se eligió USB (tarea 8). El switch del esquema es el TL-SG108E del armario ([tarea 10](10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto), sección 12): el servidor va conectado a él y el gerente y los TPV, directamente a los puertos del router ([tarea 23](../redes/23-plano-direccionamiento.md), apartado 3.2).
 
 ## 3. Requisitos por puesto
 
@@ -47,7 +47,7 @@ La seguridad es un requisito explícito del enunciado: los equipos deben estar �
 | RG-04 | Seguridad | Una cuenta de administración distinta, usada solo para mantenimiento. |
 | RG-05 | Seguridad | Cortafuegos activo y actualizaciones de seguridad automáticas en ambos sistemas. |
 | RG-06 | Rendimiento | Trabajar con varios programas y pestañas abiertos sin esperas apreciables. |
-| RG-07 | Conexión | Cable Ethernet a la red de oficina; acceso al servidor Odoo por HTTPS. |
+| RG-07 | Conexión | Cable Ethernet a la red de oficina; acceso al servidor Odoo por HTTPS (se cierra con la tarea 52, proxy HTTPS; hoy Odoo va por HTTP). |
 
 ### 3.2 TPV de barra (2 unidades)
 
@@ -60,7 +60,7 @@ La seguridad es un requisito explícito del enunciado: los equipos deben estar �
 | RT-05 | Seguridad | Puertos USB de almacenamiento bloqueados. |
 | RT-06 | Seguridad | Cortafuegos con salida limitada al servidor Odoo, DNS y actualizaciones. |
 | RT-07 | Rendimiento | Arrancar y quedar listo para vender en poco tiempo, con respuesta táctil sin retrasos. |
-| RT-08 | Conexión | Cable Ethernet a la red de TPV, con IP fija. |
+| RT-08 | Conexión | Cable Ethernet a la LAN del local, siempre con la misma IP (reserva DHCP, tarea 23). Si se montan las VLAN (tarea 23, apartado 5.5), en la red de los TPV. |
 | RT-09 | Entorno | Equipo apto para hostelería: preferible sin ventilador y con frontal resistente a salpicaduras. |
 
 ### 3.3 Impresoras de tickets
@@ -101,7 +101,7 @@ Estos son los **mínimos recomendados** para cada puesto. Son valores nuestros, 
 - **Ethernet con IP fija en TPV e impresoras:** simplifica las reglas de cortafuegos y evita que un cambio de dirección deje el TPV sin impresora.
 - **Software:** el detalle de programas, versiones y licencias se documenta en la tarea de software. Aquí solo se fija que ambos sistemas son los que exige el enunciado.
 
-**Aviso sobre Windows 10:** Microsoft terminó las actualizaciones gratuitas de Windows 10 el 14 de octubre de 2025 y recomienda pasar a Windows 11. El enunciado exige Windows 10, así que hay que documentar el riesgo y su mitigación en la tarea de software y de bastionado: aislamiento de red, TPV en modo quiosco con solo el navegador, cortafuegos restrictivo y, si procede, revisar las ediciones con soporte ampliado.
+**Aviso sobre Windows 10:** Microsoft terminó las actualizaciones gratuitas de Windows 10 el 14 de octubre de 2025 y recomienda pasar a Windows 11. El enunciado exige Windows 10, así que hay que documentar el riesgo y su mitigación en la tarea de software y de bastionado: aislamiento de red, TPV en modo quiosco con solo el navegador, cortafuegos restrictivo y, si procede, revisar las ediciones con soporte ampliado. El programa ESU de Windows 10 para particulares terminó el 13/10/2026. Para los TPV, que son equipos de función fija, la opción con soporte es **Windows 10 IoT Enterprise LTSC 2021**, con actualizaciones de seguridad hasta enero de 2032; la otra, el ESU de pago para empresas ([tarea 10](10-presupuesto-hardware.md), apartado 4.1).
 
 ## 6. Supuestos y dudas pendientes
 

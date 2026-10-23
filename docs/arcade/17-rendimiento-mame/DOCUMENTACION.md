@@ -1,12 +1,16 @@
 # Tarea 17 · Pruebas de rendimiento de MAME antes y después
 
-**Responsable:** Iker · **Revisa:** Eneko.P · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
-**Estado:** ✅ Hecha en máquina virtual · ⏳ Pendiente: repetir en la máquina física
+**Responsable:** Iker · **Revisa:** Adrian · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
+**Estado:** ⏳ En curso: hecha en una VM de 2 núcleos y 1,5 GB; **falta en la de 1 núcleo y 1 GB** que pide el enunciado, y en la máquina física
 
 > ⚠️ **PENDIENTE DE REPETIR.** Estas medidas se hicieron en una VM con **2 núcleos y 1,5 GB**, pero el enunciado dice que la recreativa
 > tiene **1 núcleo y 1 GB**. Ya hay una VM con esas especificaciones (`Recreativa-1GB`) con 3 medidas de "antes"
 > ([`evidencias/rendimiento-1gb.csv`](evidencias/rendimiento-1gb.csv)); faltan las de "después". Además, el equipo decidió probar
 > **Batocera**: su VM (`Batocera`, 1 núcleo, 1 GB) arranca, pero sus medidas están sin hacer. Ver [`../16-batocera/NOTAS.md`](../16-batocera/NOTAS.md).
+>
+> **Mientras no se repitan, esta tarea no demuestra nada sobre el equipo del cliente.** El enunciado dice «un procesador de un núcleo y 1 GB de RAM» y «dejando constancia de las pruebas de rendimiento»: con 2 núcleos, MAME tiene un núcleo para él y el sistema otro, y con 1,5 GB no hay presión de memoria. Las tablas de abajo se sustituyen por las de `Recreativa-1GB` cuando estén.
+>
+> Además, `-bench` emula **sin pantalla y sin límite de velocidad**: no es lo mismo que jugar. Falta medir **jugando** (FPS, CPU y RAM durante una partida) con `monitor-recreativa.sh` de la [tarea 18](../18-monitorizacion-recreativa.md).
 
 ## 1. Resumen
 
@@ -52,7 +56,7 @@ Script reproducible: [`optimizar-arcade.sh`](optimizar-arcade.sh). Log: [`eviden
 
 | # | Cambio | Por qué |
 |---|---|---|
-| 1 | Desactivar `apt-daily` y `apt-daily-upgrade` | Descargan e instalan actualizaciones en segundo plano: CPU, disco y red en mitad de una partida. Pasan a hacerse a mano en el mantenimiento. |
+| 1 | Mover `apt-daily` y `apt-daily-upgrade` a las 04:30 y 05:00, con `unattended-upgrades` | Descargan e instalan actualizaciones en segundo plano: CPU, disco y red. A esa hora el local está cerrado y no hay partidas. **Corrección del 24/10/2026:** la primera versión los desactivaba, y la recreativa (que está en la Wi-Fi de clientes) se quedaba sin actualizaciones de seguridad; eso va contra la seguridad por defecto. Las medidas de esta página se tomaron con la primera versión: con la nueva quedan 2 timers más (5 en vez de 3), que no se ejecutan durante el horario del local. |
 | 2 | Desactivar `man-db.timer` | Regenera el índice de las páginas de manual, que en una recreativa no se usan. |
 | 3 | Desactivar `e2scrub_all` y `e2scrub_reap` | Solo sirven con LVM, y aquí no hay LVM. |
 | 4 | Desactivar `dpkg-db-backup.timer` | Copia diaria de la base de datos de paquetes, que no cambia en una máquina dedicada. |
@@ -115,6 +119,8 @@ En la máquina física los tiempos de arranque serán mucho más estables, y ade
 | 2 | En el CSV, el tiempo de MAME salía como `10,08` y la coma del idioma español rompía las columnas | `export LC_ALL=C` en `medir-rendimiento.sh`. Las 3 filas del "antes" se corrigieron a mano. |
 
 ## 8. Pendiente
-- [ ] Repetir las medidas en la máquina física.
-- [ ] Revisión de Eneko.P → mover a **Hecho** en el Kanban.
-- [ ] Pasar a Eneko.S (tarea 18, monitorización) la lista de timers y servicios que quedan activos.
+- [ ] Repetir antes y después en la VM `Recreativa-1GB` (1 núcleo, 1 GB) con la versión nueva de `optimizar-arcade.sh` y sustituir las tablas.
+- [ ] Medir jugando (no solo `-bench`) con `monitor-recreativa.sh` y guardar los CSV (tarea 18).
+- [ ] Repetir las medidas en la máquina física (tarea 54).
+- [ ] Revisión de Adrian → mover a **Hecho** en el Kanban.
+- [ ] Pasar a Adrian (tarea 18, monitorización) la lista de timers y servicios que quedan activos.

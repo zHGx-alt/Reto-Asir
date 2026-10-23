@@ -1,6 +1,6 @@
 # Tarea 34 · Configurar módulos de Odoo
 
-**Responsable (Kanban):** Markel · **Hecha por:** Iker · **Revisa:** Adrian · **Fecha:** 22/10/2026 · **Depende de:** 33
+**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Markel) · **Revisa:** Adrian · **Fecha:** 22/10/2026 · **Depende de:** 33
 **Estado:** ✅ Hecha en máquina virtual
 
 ## 1. Resultado
@@ -72,19 +72,19 @@ Entrar en <http://localhost:8069> como `admin` y sacar captura de:
 | 4 | `localhost:8069` enseñaba una web de ejemplo ("My Website", "Your Logo") en vez del panel | Se activó a mano la app **Sitio web** desde *Aplicaciones*, y Odoo pasa a usar la web pública como página de inicio | Desinstalar `website` (y sus dependencias `website_sms`, `website_mail` y `website_payment`). La web de la tienda va aparte, en AWS (tareas 27–31), y así no queda una página pública de más. El panel también está siempre en `/odoo`. |
 | 5 | En el login apareció **"¿No tiene una cuenta?"**: cualquiera podía registrarse | Al instalar el Sitio web, Odoo pone `auth_signup.invitation_scope = b2c` (registro libre), y al desinstalarlo se queda así | Puesto a `b2b` (solo por invitación). Ahora `/web/signup` → 404 y se comprobó que nadie se había registrado. Añadido a `configurar-odoo.py`. |
 
-## 6. Decisión pendiente para el equipo: TicketBAI / Veri*Factu
+## 6. Facturación electrónica: TicketBAI (Batuz)
 La ley obliga a que el software de facturación envíe las facturas a Hacienda:
-- En **Euskadi** (Araba, Bizkaia, Gipuzkoa): **TicketBAI**. Odoo tiene el módulo `l10n_es_edi_tbai`.
+- En **Euskadi** (Araba, Bizkaia, Gipuzkoa): **TicketBAI**. En Bizkaia, dentro del sistema **Batuz** de la Hacienda Foral. Odoo tiene el módulo `l10n_es_edi_tbai`.
 - En el resto de España: **Veri\*Factu** (`l10n_es_edi_verifactu`).
 
-Los dos módulos están disponibles en este Odoo, pero **no se han instalado** porque necesitan un certificado digital de la empresa
-y, en las pruebas, el entorno de test de Hacienda. Hay que decidir cuál aplica y si se configura en modo de pruebas
-(preguntárselo al profesor en la tarea 6).
+**Decisión:** el restaurante está en **Bilbao** (web y tarea 41), así que le aplica **TicketBAI (Batuz)**, no Veri\*Factu. Sin TicketBAI el restaurante no podría facturar legalmente.
+
+**Por qué no se configura en el reto:** el módulo pide el **certificado digital de la empresa** (y, para probar, el entorno de pruebas de la Hacienda Foral de Bizkaia, con su propio certificado). No tenemos ninguno, y no se puede inventar. Queda documentado así: en la instalación real, el gerente aporta el certificado, se instala `l10n_es_edi_tbai`, se elige «Bizkaia» como hacienda y se prueba una factura en el entorno de pruebas antes de pasar a producción. Si el profesor quiere verlo, se pregunta en la tarea 6 si hay un certificado de pruebas del centro.
 
 ## 7. Siguientes tareas
-- **35 · Caso de uso automatizado (Adrian):** emitir una factura por la API. Ya están la empresa, el IVA, los diarios y los usuarios.
-- **36 · Importar/exportar (Peio):** importar el catálogo de productos (CSV → `product.template`, con `available_in_pos = True`).
-- **37 · Ticket (Eneko.P):** asociar la impresora de la tarea 14 al TPV 1 (*Punto de Venta → Configuración → TPV 1 → Impresora de recibos*).
+- **35 · Caso de uso automatizado (Iker):** emitir una factura por la API. Ya están la empresa, el IVA, los diarios y los usuarios.
+- **36 · Importar/exportar (Iker):** importar el catálogo de productos (CSV → `product.template`, con `available_in_pos = True`).
+- **37 · Ticket (Peio):** asociar la impresora de la tarea 14 al TPV 1 (*Punto de Venta → Configuración → TPV 1 → Impresora de recibos*).
 
 ## 8. Prueba completa del TPV de barra (23/10/2026)
 
@@ -120,3 +120,15 @@ Script: [`cargar-carta-y-mesas.py`](cargar-carta-y-mesas.py) (log: [`evidencias/
 | 9 | Almacén llamado "Tienda Reto ASIR" y una sala "Almi-Chain" de más en cada TPV | El almacén se creó con el nombre provisional de la empresa; `pos_restaurant` crea una sala por TPV | Almacén renombrado a Almi-Chain (`configurar-odoo.py`) y salas sobrantes archivadas (`cargar-carta-y-mesas.py`) |
 | 10 | En una base nueva, `configurar-odoo.py` fallaba en el paso 1: *Object stock.warehouse doesn't exist* (prueba en limpio del 23/10, Adrian) | El renombrado del almacén se hacía antes de instalar Inventario; en la VM ya estaba instalado y no se notaba | Se renombra después de instalar los módulos |
 | 11 | En una base nueva, `cargar-carta-y-mesas.py` fallaba al crear el primer producto: *unhashable type: 'list'* | En Odoo 19, `copy` devuelve por la API una lista de ids y el script la metía en otra lista al crear el IVA 10 % incluido | Se acepta un id o una lista. Instalación limpia completa repetida: [`evidencias/prueba-instalacion-limpia.txt`](evidencias/prueba-instalacion-limpia.txt) |
+
+## 9. Pendiente: lo que ve el cajero
+
+En la prueba 1 de la sección 8.2, `cajero1` ve **Contactos, Empleados, Conversaciones, Calendario y Tableros**, y puede leer facturas, diarios y usuarios. Para cobrar no le hace falta: ve datos de los clientes y del personal, y eso va contra los mínimos privilegios. Viene de que todo «Usuario interno» (`base.group_user`) tiene esos menús.
+
+Opciones, por orden de preferencia (hay que probarlas en una base de pruebas antes de pasarlas a `configurar-odoo.py`):
+
+1. **Ocultar los menús** a quien no sea gerente: en `ir.ui.menu`, poner en los menús raíz de Contactos, Empleados, Conversaciones, Calendario y Tableros el grupo «Gerencia» (un grupo nuevo que tenga `gerente`). El cajero deja de verlos.
+2. **Quitar las apps que no se usan** (Conversaciones, Calendario, Tableros), si nadie las necesita.
+3. Para lectura de datos (no solo menús), revisar las reglas de acceso de `res.partner` y `hr.employee` para el grupo del cajero.
+
+Comprobarlo repitiendo la prueba 1 con una captura nueva.

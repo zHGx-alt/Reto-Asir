@@ -3,8 +3,7 @@
 **Responsable:** Iker · **Revisa:** Peio · **Fecha de ejecución:** 22/10/2026 · **Depende de:** 32 (elección del ERP)
 **Estado:** ✅ Hecha en máquina virtual
 
-> ⚠️ La tarea 32 (comparativa y elección del ERP, de Eneko.S) todavía no está cerrada. Se ha instalado Odoo porque es el ERP
-> que nombra el backlog (tareas 33–37). Si la 32 eligiera otro, habría que rehacer esta tarea.
+> La tarea 32 (comparativa y elección del ERP, de Eneko.S) está cerrada y eligió **Odoo Community**, el ERP instalado aquí.
 
 ## 1. Resultado
 Odoo **19.0** funcionando en Docker con **PostgreSQL 17**. La base de datos `tienda` está en español, sin datos de demostración
@@ -117,10 +116,10 @@ De [`evidencias/pruebas-odoo.txt`](evidencias/pruebas-odoo.txt):
 | 2 | Duda sobre usar `workers = 2` (multiproceso) | Con workers, el chat y las notificaciones en tiempo real (`/websocket`) necesitan un proxy que los envíe al puerto 8072 | `workers = 0` (multihilo), que basta para una tienda pequeña. Cuando esté el proxy HTTPS se puede pasar a workers. |
 
 ## 8. Para las siguientes tareas
-- **34 · Configurar módulos (Markel):** entrar en <http://localhost:8069> como `admin` e instalar Ventas, Punto de Venta, Inventario y Facturación.
-- **36 · Importar/exportar datos (Peio):** con `list_db = False` no se puede usar el gestor web de bases de datos. Para copias completas hay que usar `pg_dump` (tarea 44).
-- **44 · Backup (Markel):** hay que copiar los volúmenes `odoo-db-data` (`pg_dump` del contenedor `db`) y `odoo-web-data`, además de `/opt/odoo/.env`, **cifrados**.
+- **34 · Configurar módulos (Iker):** entrar en <http://localhost:8069> como `admin` e instalar Ventas, Punto de Venta, Inventario y Facturación.
+- **36 · Importar/exportar datos (Iker):** con `list_db = False` no se puede usar el gestor web de bases de datos. Para copias completas hay que usar `pg_dump` (tarea 44).
+- **44 · Backup (Iker):** hay que copiar los volúmenes `odoo-db-data` (`pg_dump` del contenedor `db`) y `odoo-web-data`, además de `/opt/odoo/.env`, **cifrados**.
 
 ## 9. Pendiente
 - [ ] Revisión de Peio → mover a **Hecho** en el Kanban.
-- [ ] Confirmar con Eneko.S (tarea 32) que el ERP elegido es Odoo.
+- [x] Confirmar con Eneko.S (tarea 32) que el ERP elegido es Odoo.

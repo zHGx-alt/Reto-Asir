@@ -57,6 +57,10 @@ else
   for s in 01-crear-tablas 02-reglas 03-roles; do psql_ -d almi_chain -f "/s/$s.sql" >/dev/null 2>&1 && ok "$s.sql" || mal "$s.sql"; done
   n=$(psql_ -d almi_chain -f /s/05-pruebas.sql 2>&1 | grep -c 'OK ')
   [[ "$n" -eq 33 ]] && ok "05-pruebas.sql: 33/33" || mal "05-pruebas.sql: $n/33"
+  psql_ -d almi_chain -f /s/06-datos.sql >/dev/null 2>&1 && ok "06-datos.sql" || mal "06-datos.sql"
+  n=$(psql_ -d almi_chain -tAc "SELECT count(*) FROM factura")
+  [[ "$n" -eq 8 ]] && ok "06-datos.sql: 8 facturas cargadas" || mal "06-datos.sql: $n facturas (se esperaban 8)"
+  psql_ -d almi_chain -f /s/07-consultas.sql >/dev/null 2>&1 && ok "07-consultas.sql: 12 consultas sin errores" || mal "07-consultas.sql"
   psql_ -d almi_chain -c "CREATE ROLE verif_app LOGIN PASSWORD 'verif'; GRANT rol_aplicacion TO verif_app;" >/dev/null
   if docker exec verif-pg psql -U verif_app -d almi_chain -c "CREATE TABLE intruso(id int)" </dev/null >/dev/null 2>&1; then
     mal "rol_aplicacion puede crear tablas"; else ok "rol_aplicacion no puede hacer DDL"; fi

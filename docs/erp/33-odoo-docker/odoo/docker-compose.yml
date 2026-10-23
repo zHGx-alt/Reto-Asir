@@ -32,6 +32,8 @@ services:
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
+    # Hoy Odoo va por HTTP en la LAN. Cuando esté el proxy HTTPS (tarea 52), publicar solo en el propio
+    # servidor ("127.0.0.1:8069:8069") para que nadie entre sin cifrar saltándose el proxy.
     ports:
       - "8069:8069"
     networks: [interna]

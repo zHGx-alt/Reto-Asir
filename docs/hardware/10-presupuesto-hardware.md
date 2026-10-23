@@ -13,6 +13,7 @@
 | Validez del presupuesto | 15 días |
 | Revisión | Eneko.S, 23/10/2026: ajustado a la tabla de hardware (tarea 8) |
 | Revisión | Equipo, 23/10/2026: la línea WAN pasa a DIGI 1 Gb, el operador elegido en la comparativa (tarea 22) y el que usa el plano de red (tarea 23) |
+| Revisión | Equipo, 24/10/2026: se añaden el servidor, sus discos, el disco de copias, el SAI, el switch, el cable, el adaptador Wi-Fi de la recreativa y la palanca del stick (sección 12); impresoras fuera del rango de gerencia; Windows 10 IoT Enterprise LTSC para los TPV |
 
 > Los precios y la disponibilidad pueden cambiar. Antes de realizar una compra hay que comprobar el precio final, los gastos de envío, el vendedor y la versión exacta del producto.
 
@@ -97,6 +98,7 @@ Es la elección de la tabla de hardware (tarea 8, sección 3.2). Incluye la pant
 - No es un TPV de hostelería especializado: no consta refrigeración sin ventilador ni protección contra salpicaduras (RT-09, incidencia H-05 de la tarea 8).
 - **Windows 10 frente a Windows 11:** el enunciado exige Windows 10 y los equipos traen Windows 11 Pro. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en la licencia. La tarea 9 contempla tres licencias de Windows 10 Pro; si finalmente hubiera que comprarlas, su coste no está incluido en este presupuesto.
 - El equipo no se usará como servidor.
+- **Soporte de Windows 10.** Windows 10 Pro no tiene actualizaciones gratuitas desde el 14/10/2025, y el programa ESU para particulares terminó el 13/10/2026. Para unos TPV de función fija, la opción con soporte es **Windows 10 IoT Enterprise LTSC 2021**, con actualizaciones de seguridad hasta enero de 2032. Es Windows 10, como pide el enunciado, y está pensada para equipos dedicados como un TPV. Solo se vende con el equipo a través de distribuidores OEM, así que su precio hay que pedirlo al proveedor (no está en tiendas). La otra opción es pagar el ESU para empresas de Windows 10 Pro. La decisión queda abierta (tarea 13) y su coste se tiene que añadir aquí cuando se conozca.
 
 ---
 
@@ -149,10 +151,10 @@ La recomendación de la tarea 8 es conectar cada impresora **por USB** directame
 
 | Dispositivo | Dirección prevista |
 |---|---|
-| Impresora TPV 1 | 192.168.10.21 |
-| Impresora TPV 2 | 192.168.10.22 |
+| Impresora TPV 1 | 192.168.10.41 |
+| Impresora TPV 2 | 192.168.10.42 |
 
-Las direcciones definitivas se establecerán durante la configuración de red.
+Las direcciones están en el rango de impresoras (`.40-.49`) del plan de direccionamiento ([tarea 23](../redes/23-plano-direccionamiento.md), apartado 4.2), no en el de gerencia (`.20-.29`). Con la conexión USB elegida no se usan.
 
 > La página de la tienda no indica si el precio incluye IVA ni menciona la salida para cajón (RI-04). Hay que confirmarlo antes de comprar.
 
@@ -274,7 +276,7 @@ De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impreso
 | Conexión WAN durante 12 meses | 360,00 € |
 | **Coste total estimado del primer año** | **2.807,34 €** |
 
-> No se incluyen posibles gastos de envío, instalación del operador, cableado estructurado, canaletas, rollos de papel, teclado y ratón del gerente, SAI, licencias de Windows 10 (si fueran necesarias) ni licencias del ERP. Estos elementos dependerán de las existencias del centro y de las características físicas definitivas del local.
+> Estos totales son los de los puestos y los routers. El servidor, sus discos, el disco de copias, el SAI, el switch, el cable, el adaptador Wi-Fi de la recreativa y la palanca del stick están en la **sección 12**, con su total aparte. No se incluyen gastos de envío, canaletas, rollos de papel, teclado y ratón del gerente, licencias de Windows 10 (si fueran necesarias, ver 4.1) ni licencias del ERP (Odoo Community es gratuito).
 
 ---
 
@@ -311,9 +313,8 @@ De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impreso
       TPV 1           TPV 2     Gerente (despacho)
         |               |
   Impresora 1      Impresora 2          Red Wi-Fi interna
- (USB al TPV;     (USB al TPV;
-  Ethernet:        Ethernet:
-  192.168.10.21)   192.168.10.22)
+ (USB al TPV,     (USB al TPV,
+  sin IP)          sin IP)
 
                             |
                          Enlace WDS
@@ -438,8 +439,53 @@ Si el equipo de la operadora no puede configurarse en modo puente, el Archer C6 
 
 ## 11. Conclusión
 
-La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **2.447,34 €** (2.361,36 € de equipos de la tarea 8 más 85,98 € de routers) y un coste total aproximado durante el primer año de **2.807,34 €**, con la fibra de 1 Gb de DIGI incluida (360 € al año).
+La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **2.447,34 €** (2.361,36 € de equipos de la tarea 8 más 85,98 € de routers) y un coste total aproximado durante el primer año de **2.807,34 €**, con la fibra de 1 Gb de DIGI incluida (360 € al año). Con el servidor, el RAID, las copias, el SAI, el switch y el resto de la sección 12, la inversión completa es de **3.814,74 €** y el primer año, de **4.174,74 €**.
 
 Los TPV táctiles incluyen Windows Pro para aplicar el modo quiosco y mínimos privilegios. Las impresoras Epson TM-T20IV ofrecen USB y Ethernet, velocidad adecuada y cortador automático. La utilización de dos routers TP-Link Archer C6 del mismo modelo permite diseñar una red Gigabit, utilizar WPA3 en las redes compatibles y realizar la práctica de ampliación de cobertura mediante WDS.
 
 Antes de efectuar cualquier compra se deberán confirmar los precios, la disponibilidad (sobre todo del Lenovo Neo 50q), si los precios incluyen IVA, las condiciones de garantía, la licencia de Windows 10 y, especialmente, la versión de hardware y el soporte WDS de los routers.
+
+---
+
+## 12. Elementos que faltaban en el presupuesto
+
+La primera versión solo tenía los puestos y los routers. Faltaba lo que sostiene el ERP, la base de datos y las copias (el servidor, el RAID y el disco USB), además del switch, el cable y piezas de la recreativa y del stick. Los precios son de referencia, consultados el 24/10/2026, y hay que confirmarlos antes de comprar.
+
+| Concepto | Para qué | Modelo de referencia | Uds. | Precio unidad | Subtotal |
+|---|---|---|---:|---:|---:|
+| Servidor | Odoo, PostgreSQL, RAID y copias (tareas 33-45) | HP ProDesk 600 G5 MT reacondicionado, Core i5, 16 GB, SSD de 512 GB (torre con sitio para dos discos de 3,5") | 1 | 366,00 € | 366,00 € |
+| Discos del RAID 1 | Espejo de los datos (tarea 43) | WD Red Plus 2 TB (WD20EFZX), disco para funcionamiento continuo | 2 | 329,11 € | 658,22 € |
+| Disco USB de copias | Copia 3-2-1 fuera del local (tarea 44) | WD Elements Portable 2 TB | 1 | 125,08 € | 125,08 € |
+| SAI del servidor | Que un corte de luz no corrompa la base de datos ni el RAID | APC Back-UPS BX750MI, 750 VA | 1 | 104,99 € | 104,99 € |
+| Switch | Puertos libres (el router solo tiene 4) y VLAN si se elige la opción (a) de la tarea 23 | TP-Link TL-SG108E, 8 puertos gigabit, gestionable con VLAN 802.1Q | 1 | 31,90 € | 31,90 € |
+| Cable de red | Tiradas del plano (unos 50 m, tarea 23) | Bobina Cat6 UTP de 100 m, cobre (Nanocable 10.20.0502) | 1 | 49,49 € | 49,49 € |
+| Adaptador Wi-Fi de la recreativa | Conectarla a la Wi-Fi de invitados (tarea 16, sección 6) | TP-Link TL-WN725N (USB, chip Realtek con driver en Linux) | 1 | 8,99 € | 8,99 € |
+| Palanca del arcade stick | Palanca de 4 microinterruptores, la que lee el modo digital del firmware (tarea 20) | Sanwa JLF-TP-8YT | 1 | 22,73 € | 22,73 € |
+| **Total** | | | | | **1.367,40 €** |
+
+Sin precio verificado: canaletas, conectores RJ45, la bola de la palanca, los botones y la placa Arduino Leonardo (el centro presta las placas, supuesto del bloque de arcade).
+
+**Supuesto S-10.** Si el centro presta el servidor y sus discos para las pruebas (como se ha hecho en VM), el coste de referencia sigue siendo el de la tabla: en una instalación real, el cliente tendría que comprarlos.
+
+| Total con la sección 12 | Importe |
+|---|---:|
+| Inversión inicial (sección 5.1) | 2.447,34 € |
+| Elementos de esta sección | 1.367,40 € |
+| **Inversión inicial completa** | **3.814,74 €** |
+| Fibra de DIGI, 12 meses | 360,00 € |
+| **Primer año completo** | **4.174,74 €** |
+
+**Por qué estos modelos:**
+- **Servidor:** Odoo y PostgreSQL para un solo local no necesitan más que un i5 con 16 GB. Uno reacondicionado de empresa cuesta la mitad que uno nuevo; el formato torre (MT) deja sitio para los dos discos del RAID.
+- **WD Red Plus:** disco pensado para estar encendido siempre y en RAID (tecnología CMR). Son caros en la fecha de consulta; con discos de 1 TB bastaría para varios años de datos de un local.
+- **TL-SG108E:** permite VLAN 802.1Q, así que sirve tanto para la red plana como para segmentarla de verdad (tarea 23, apartado 5.5).
+
+**Fuentes (24/10/2026):**
+- [HP ProDesk 600 G5 MT, Back Market](https://www.backmarket.es/es-es/p/hp-prodesk-600-g5-mt-core-i5-3-ghz-ssd-512-gb-ram-16-gb/cc2d1a92-931c-459c-80e8-0ebc3abadd31)
+- [WD Red Plus 2 TB, PcComponentes](https://www.pccomponentes.com/disco-duro-wd-red-plus-35-2tb-128mb-sata-3)
+- [WD Elements 2 TB, PcComponentes](https://www.pccomponentes.com/disco-duro-wd-elements-2tb-2-5-usb-3-0-negro)
+- [APC BX750MI, PcComponentes](https://www.pccomponentes.com/apc-bx750mi-sai-750va-410w)
+- [TP-Link TL-SG108E, comparador con el precio de PcComponentes (julio de 2026)](https://www.comparateur-gamer.fr/prix/tp-link-tl-sg108e-6935364021856)
+- [Bobina Cat6 Nanocable de 100 m, PcComponentes](https://www.pccomponentes.com/nanocable-cable-utp-cat6-100m-rigido)
+- [TP-Link TL-WN725N, Powerplanet](https://www.powerplanetonline.com/es/tp-link-tl-wn725n-adaptador-y-tarjeta-de-red-wlan-150-mbit-s)
+- [Sanwa JLF-TP-8YT, Arcadexpress](https://www.arcadexpress.com/en/joysticks/9-sanwa-jlf-tp-8y-arcade-joystick.html)

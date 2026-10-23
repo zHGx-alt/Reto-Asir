@@ -54,7 +54,10 @@ Decisiones del preseed, que son las mismas que se tomarían a mano:
 |---|---|
 | Sin contraseña de root | El usuario `tecnico` recibe `sudo`, y la cuenta root no se puede usar para entrar. |
 | Programas: solo **utilidades estándar + servidor SSH** | Sin escritorio. Debian recién instalado ocupa 1,2 GB de disco y usa 206 MB de RAM. |
-| Clave SSH en `/home/tecnico/.ssh/authorized_keys` | Administrar en remoto sin contraseña. |
+| Clave SSH en `/home/tecnico/.ssh/authorized_keys`, que se pasa al instalar (no está fija en el repositorio) | Administrar en remoto sin contraseña. Antes de instalar se crea `preseed-local.cfg` con la clave pública del equipo de administración (ver el comentario del preseed); ese fichero no se sube a Git |
+| SSH sin contraseña y sin root (`/etc/ssh/sshd_config.d/90-recreativa.conf`) | Con la contraseña desactivada no se puede probar contraseñas contra la recreativa. Sin clave instalada, la recreativa solo se administra desde la consola local |
+
+> **Corrección del 24/10/2026.** La primera versión del preseed dejaba fija una clave pública (`recreativa-claude`) del equipo donde se hizo la prueba, y SSH aceptaba contraseña. Se ha quitado la clave del fichero y se ha desactivado la contraseña en SSH. Las recreativas instaladas con la versión anterior tienen que borrar esa línea de `~tecnico/.ssh/authorized_keys`.
 | Particionado guiado, una sola partición | Es una máquina dedicada y no necesita más. |
 
 | | |
@@ -147,13 +150,37 @@ La máquina virtual va sobrada: emula los juegos entre 10 y 15 veces más rápid
 Fichero: [`benchmark-mame-antes.txt`](evidencias/benchmark-mame-antes.txt).
 Ficheros: [`arranque-debian-limpio.txt`](evidencias/arranque-debian-limpio.txt), [`arranque-con-mame.txt`](evidencias/arranque-con-mame.txt).
 
-## 6. Seguridad aplicada (mínimos privilegios)
+## 6. Conexión a la Wi-Fi de invitados
+
+En el local la recreativa no va por cable: va a la **Wi-Fi de invitados** (tarea 23, apartado 5.2). La VM usa la red NAT de VirtualBox, así que este paso solo se hace en el equipo real.
+
+1. **Adaptador.** Si el equipo no trae Wi-Fi, un adaptador USB con driver libre en el núcleo de Linux (por ejemplo, con chip MediaTek MT7601U o Realtek RTL8188EU/RTL8192EU). Va en el presupuesto de la [tarea 10](../../hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto).
+2. **Firmware.** Debian separa el firmware del driver. Comprobar el chip con `lsusb` e instalar su paquete (`firmware-misc-nonfree` para MediaTek, `firmware-realtek` para Realtek; repositorio `non-free-firmware`, que el instalador de Debian 13 ya activa).
+3. **Conexión** con `wpa_supplicant` e `ifupdown`, que ya trae el Debian mínimo (sin instalar NetworkManager). Como `tecnico`:
+   ```bash
+   ip link            # nombre de la interfaz Wi-Fi, por ejemplo wlx00c0ca123456
+   ```
+   ```bash
+   wpa_passphrase 'Restaurante-Almichain-Invitados' | sudo tee /etc/wpa_supplicant/wpa_supplicant-wlan.conf >/dev/null
+   ```
+   `wpa_passphrase` pide la contraseña por la entrada estándar, así que no queda en el historial. Borrar del fichero la línea comentada `#psk="..."` y dejar solo el `psk=` cifrado, con permisos 600.
+4. En `/etc/network/interfaces.d/wifi`:
+   ```
+   allow-hotplug wlx00c0ca123456
+   iface wlx00c0ca123456 inet dhcp
+       wpa-conf /etc/wpa_supplicant/wpa_supplicant-wlan.conf
+   ```
+5. `sudo ifup wlx00c0ca123456` y comprobar con `ip addr` que recibe una IP de la red de invitados. Pruebas de aislamiento: las 4 y 5 de la [tarea 23](../../redes/23-plano-direccionamiento.md#6-cómo-se-comprueba).
+
+**Pendiente:** hacerlo en el equipo real (tarea 53) y apuntar el adaptador y su chip.
+
+## 7. Seguridad aplicada (mínimos privilegios)
 - `arcade` **no** pertenece a `sudo` y su contraseña está bloqueada (`passwd -l`). Solo puede entrar por el autologin de tty1.
 - Las carpetas personales tienen permisos 700. `tecnico` no puede leer `/home/arcade` (comprobado: "Permiso denegado").
-- La administración se hace desde `tecnico` en tty2 (`Ctrl+Alt+F2`) o por SSH con clave.
+- La administración se hace desde `tecnico` en la consola local, tty2 (`Ctrl+Alt+F2`). SSH solo admite clave (sin contraseña ni root). Como la recreativa está en la Wi-Fi de invitados, con aislamiento entre clientes, desde la LAN no se llega a ella: en el local se administra desde la consola (ver [tarea 23, apartado 5.2](../../redes/23-plano-direccionamiento.md#52-lo-que-se-monta-con-el-hardware-actual)).
 - No hay entorno de escritorio: el jugador solo tiene acceso a MAME.
 
-## 7. Incidencias y soluciones
+## 8. Incidencias y soluciones
 
 | # | Incidencia | Causa | Solución |
 |---|---|---|---|
@@ -164,8 +191,8 @@ Ficheros: [`arranque-debian-limpio.txt`](evidencias/arranque-debian-limpio.txt),
 | 5 | "No funciona con el teclado" | Las teclas enviadas a la VM con pulsación instantánea (sin mantenerlas) no las detecta MAME, que lee el estado de las teclas una vez por fotograma. Además, la ventana de VirtualBox tiene que tener el foco (hacer clic dentro). | Con pulsaciones normales (≥ 1 fotograma) funciona: menú, moneda, start y movimiento comprobados. El firmware del stick mantiene el botón HID pulsado mientras se pulsa el botón físico, así que no tiene este problema. |
 | 6 | VirtualBox no puede pasar USB a la VM | El usuario del anfitrión no está en el grupo `vboxusers` | `sudo usermod -aG vboxusers $USER` y volver a iniciar sesión (lo tiene que hacer el propietario del PC). |
 
-## 8. Pendiente
+## 9. Pendiente
 - [x] Jugar una partida (comprobado con teclado y con el stick simulado).
 - [ ] Añadir el usuario del PC a `vboxusers` y probar con el stick real (tabla de pruebas de `STICK-ARDUINO.md`).
-- [ ] Repetir la instalación en la máquina física (mismo preseed y mismo script).
+- [ ] Repetir la instalación en la máquina física (mismo preseed y mismo script) y conectarla a la Wi-Fi de invitados (sección 6).
 - [ ] Revisión de Markel → mover a **Hecho** en el Kanban.

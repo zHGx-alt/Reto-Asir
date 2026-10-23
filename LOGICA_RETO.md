@@ -56,12 +56,12 @@ flowchart LR
     subgraph LOCAL["🏪 Local del restaurante"]
         ONT["Router de DIGI (fibra 1 Gb)"] --- R1["Router 1 · Archer C6<br/>firewall · DHCP · Wi-Fi"]
         R1 -. "WDS" .- R2["Router 2 · Archer C6"]
-        R1 --- SRV["Servidor · 192.168.10.10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · restic"]
+        R1 --- SW["Switch TL-SG108E"] --- SRV["Servidor · 192.168.10.10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · restic"]
         R1 --- GER["PC gerente · .20<br/>Windows 10 / Ubuntu"]
         R1 --- TPV1["TPV 1 · .31"] & TPV2["TPV 2 · .32"]
         TPV1 -- USB --- IMP1["Impresora 1"]
         TPV2 -- USB --- IMP2["Impresora 2"]
-        R1 & R2 -. "Wi-Fi invitados (aislada)" .- INV["Móviles de clientes<br/>Recreativa + stick"]
+        R1 & R2 -. "Wi-Fi invitados 192.168.50.0/24 (aislada)" .- INV["Móviles de clientes<br/>Recreativa + stick"]
         SRV -- USB --- USBK[("Disco USB de copias")]
     end
 
@@ -85,12 +85,12 @@ Diagrama de todos los equipos: [tarea 11](docs/diagramas/11-arquitectura-equipos
 | PC del gerente | Lenovo ThinkCentre Neo 50q Gen 4 + monitor Xiaomi A24i | Windows 10 + Ubuntu LTS (arranque dual) | Gestión y ofimática; entra en Odoo como `gerente` | Cable, LAN 2 | VM de VMware (#12) |
 | TPV 1 y 2 | Iggual AIO B156.88.N100 táctil | Windows 10 Pro restringido | Solo abre el TPV de Odoo en el navegador | Cable, LAN 3 y 4 | Pendiente (#13) |
 | Impresoras de tickets | Epson TM-T20IV | Driver de Windows | Imprime el ticket del TPV | **USB** a su TPV (sin IP: no expone nada en la red) | Pendiente (#14, #37) |
-| Servidor | No presupuestado (supuesto: un equipo del centro) | Debian 13 sin escritorio + Docker | Odoo, PostgreSQL, RAID y copias | Cable, LAN 1 | VM de VirtualBox `ServidorERP` (#33–45) |
-| Recreativa | Equipo de 1 núcleo y 1 GB | Debian 13 mínimo + MAME (o Batocera, #51) | Juegos arcade para clientes | Wi-Fi de invitados | VM (#16, #17); equipo real pendiente (#53) |
-| Arcade stick | Keyestudio Leonardo (ATmega32U4) + 6 botones | Firmware propio | Mando de la recreativa | USB a la recreativa | Compila; placa pendiente (#50) |
+| Servidor | HP ProDesk 600 G5 MT reacondicionado + 2 discos WD Red Plus en RAID 1 + SAI ([tarea 10, sección 12](docs/hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto)) | Debian 13 sin escritorio + Docker | Odoo, PostgreSQL, RAID y copias | Cable, switch (LAN 1) | VM de VirtualBox `ServidorERP` (#33–45) |
+| Recreativa | Equipo de 1 núcleo y 1 GB | Debian 13 mínimo + MAME (o Batocera, #51) | Juegos arcade para clientes | Wi-Fi de invitados (adaptador USB) | VM (#16, #17; faltan las medidas en 1 núcleo y 1 GB); equipo real pendiente (#53) |
+| Arcade stick | Keyestudio Leonardo (ATmega32U4) + 6 botones + palanca Sanwa | Firmware propio (palanca digital) | Mando de la recreativa | USB a la recreativa | Compila; placa pendiente (#50) |
 | Router 1 y 2 | TP-Link Archer C6 V3 (×2) | Firmware de fábrica | Router, firewall, DHCP, Wi-Fi; el 2 amplía por WDS | WAN al router del operador | Probado en un TL-WR841N (#24); WDS pendiente (#25) |
 
-Coste: **2.447,34 €** de inversión y **2.807,34 €** el primer año con la fibra de DIGI (360 € al año) ([tarea 10](docs/hardware/10-presupuesto-hardware.md)). Software: 3 licencias de Windows 10 Pro; todo lo demás es libre o viene incluido ([tarea 9](docs/hardware/09-tabla-software-licencias.md)).
+Coste: **2.447,34 €** los puestos y los routers; con el servidor, el RAID, las copias, el SAI, el switch, el cable y las piezas de la recreativa y del stick, **3.814,74 €** de inversión y **4.174,74 €** el primer año con la fibra de DIGI (360 € al año) ([tarea 10](docs/hardware/10-presupuesto-hardware.md)). Software: Windows 10 Pro para el gerente y, para los TPV, Windows 10 IoT Enterprise LTSC 2021 (soporte hasta 2032, precio a pedir al proveedor); todo lo demás es libre o viene incluido ([tarea 9](docs/hardware/09-tabla-software-licencias.md)).
 
 > **Simulación.** Los equipos no se han comprado: se simulan en máquinas virtuales (supuesto S-07 de la tarea 7). Lo que necesita hardware real (stick, routers, impresora, recreativa) está marcado como **Físico** en el backlog.
 
@@ -104,7 +104,7 @@ Coste: **2.447,34 €** de inversión y **2.807,34 €** el primer año con la f
 Fibra DIGI 1 Gb ─► Router de DIGI (ONT) ─► WAN del Router 1 ─► LAN 192.168.10.0/24
                                            │
                                            ├─ Wi-Fi del personal (WPA3/WPA2)
-                                           ├─ Wi-Fi de invitados (aislada) ◄── clientes y recreativa
+                                           ├─ Wi-Fi de invitados 192.168.50.0/24 (aislada) ◄── clientes y recreativa
                                            └─ WDS (sin cable) ─► Router 2 (amplía las dos Wi-Fi)
 ```
 
@@ -112,7 +112,7 @@ Fibra DIGI 1 Gb ─► Router de DIGI (ONT) ─► WAN del Router 1 ─► LAN 1
 - **Por qué `192.168.10.0/24`:** los routers de operador suelen usar `192.168.1.0/24`; si la LAN usara la misma red, el router 1 tendría la misma red a los dos lados.
 - **IPs fijas por reserva DHCP:** el router da siempre la misma IP a cada MAC, así todo queda en un sitio (servidor `.10`, gerente `.20`, TPV `.31` y `.32`, router 2 `.2`).
 
-Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direccionamiento.md).
+Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direccionamiento.md). Necesidades de la línea y esquema de conectividad: [tarea 22](docs/redes/22-comparativa-wan.md).
 
 ### 4.2 Quién puede hablar con quién
 
@@ -123,14 +123,15 @@ Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direc
 | Clientes | **No** | **No** | **No** | Sí |
 | Recreativa | **No** | **No** | **No** | Sí |
 
-**Con el hardware presupuestado** (Archer C6 de fábrica, sin VLANs) se consigue así: clientes y recreativa en la Wi-Fi de invitados, que solo sale a internet; TPV y gerente en la misma LAN pero en rangos distintos, y protegidos por el modo quiosco y el firewall de Windows.
+**Con el hardware presupuestado** (Archer C6 de fábrica, sin VLANs) se consigue así: clientes y recreativa en la Wi-Fi de invitados, que solo sale a internet; TPV y gerente en la misma LAN pero en rangos distintos, y protegidos por el modo quiosco y el firewall de Windows. **Ojo:** los rangos no aíslan nada (cualquiera puede ponerse una IP fija), así que en la red real las filas «TPV → PC gerente: No» y «PC gerente → TPV: No» solo las cumple el firewall de cada equipo. Montar VLAN de verdad o quedarse con la red plana es una **decisión pendiente** ([tarea 23, apartado 5.5](docs/redes/23-plano-direccionamiento.md#55-decisión-pendiente-red-real-plana-o-con-vlan)).
 
-**Diseño ideal**, simulado y probado en Packet Tracer ([23-segmentacion-vlan.pkt](docs/redes/23-segmentacion-vlan.pkt)): una VLAN por grupo (servidores 10, TPV 20, gerencia 30, arcade 40, invitados 50, gestión 99), router-on-a-stick y ACLs que aplican la tabla de arriba. Las 8 pruebas de ping y la prueba HTTP del TPV al servidor dan lo esperado.
+**Diseño ideal**, simulado y probado en Packet Tracer ([23-segmentacion-vlan.pkt](docs/redes/23-segmentacion-vlan.pkt)): una VLAN por grupo (servidores 10, TPV 20, gerencia 30, arcade 40, invitados 50, gestión 99), router-on-a-stick y ACLs que aplican la tabla de arriba. Las 8 pruebas de ping y la prueba HTTP del TPV al servidor dan lo esperado. **Falta** en la simulación la parte pública (router del operador, NAT, Internet), la Wi-Fi y la seguridad de R1 y SW1: sin eso no demuestra el RA.7 de PAR (conectar redes privadas a públicas). Lo que hay que añadir está en la tarea 23, apartado 5.4.
 
 ### 4.3 Red segura y WDS
 
 - Hecho en un TL-WR841N ([tarea 24](docs/redes/24-red-segura/DOCUMENTACION.md)): administración remota cerrada, WPA2-AES, firewall SPI y protección DoS.
 - Falta: red de invitados aislada con su prueba, y WPA3 (el TL-WR841N no lo tiene; el Archer C6 sí). Después, WDS con medidas de cobertura (#25) y análisis con Wireshark y nmap (#26).
+- **Contraseña Wi-Fi expuesta:** se leía en dos capturas antiguas (ya tapadas, pero siguen en el historial de Git). Hay que cambiarla, y también la de administración del router, que parece la de fábrica.
 
 ---
 
@@ -189,13 +190,13 @@ sequenceDiagram
 [`factura_automatica.py`](docs/erp/35-factura-automatica/factura_automatica.py) hace, con el usuario `gerente` y sin tocar la pantalla, lo mismo que haría el gerente a mano:
 
 ```
-cliente (busca o crea) → producto (busca o crea, IVA 21 % servicios) → pedido de venta confirmado
+cliente (busca o crea) → producto (busca o crea, IVA 10 % de hostelería) → pedido de venta confirmado
    → factura creada y validada (numeración correlativa INV/2026/xxxxx) → cobro registrado ("paid") → PDF descargado
 ```
 
-Es el caso de uso de extremo a extremo que pide el enunciado. Repetido el 23/10 en una instalación limpia. No envía la factura por correo ni descuenta stock (eran ideas de ampliación del plan).
+Es el caso de uso de extremo a extremo que pide el enunciado: una empresa reserva una **comida de grupo** y pide factura completa (el TPV solo da factura simplificada). Se probó el 23/10 en una instalación limpia con la primera versión (otro producto, al 21 %); el 24/10 se cambió al menú de grupo y hay que repetir la ejecución. No envía la factura por correo ni descuenta stock (eran ideas de ampliación del plan).
 
-**Pendiente legal:** TicketBAI (Euskadi) o Veri\*Factu. Los módulos existen en Odoo, pero necesitan un certificado digital; está en las dudas para el profesor (#6).
+**Facturación electrónica:** el restaurante está en Bilbao, así que le aplica **TicketBAI (Batuz, Bizkaia)**, no Veri\*Factu. El módulo existe en Odoo, pero necesita el certificado digital de la empresa, que no tenemos: queda documentado cómo se configuraría ([tarea 34, sección 6](docs/erp/34-configurar-odoo/DOCUMENTACION.md)).
 
 ---
 
@@ -230,10 +231,12 @@ El enunciado pide **diseñar** las bases de datos de cada establecimiento (E/R, 
 | | Base `tienda` (Odoo) | Base `almi_chain` (nuestro diseño) |
 |---|---|---|
 | Quién la diseña | Odoo (cientos de tablas) | Nosotros: E/R → 3FN → DDL (tareas 38–40) |
-| Versión | PostgreSQL 17, en Docker | Probada en PostgreSQL 16 |
+| Versión | PostgreSQL 17, en Docker | Probada en PostgreSQL 16; en el servidor irá en el mismo PostgreSQL 17 |
+| Alcance | Un local | Base **central** de la cadena con los datos de cada establecimiento ([tarea 38, apartado 1.1](docs/bd/38-modelo-er.md#11-una-base-central-para-toda-la-cadena)) |
 | Tablas | Las de Odoo | 13: establecimiento, empleado, cliente, modelo_equipo, equipo, plato, articulo, stock, receta, factura, linea_factura, campana_marketing, envio_campana |
 | Para qué | Funcionamiento real del restaurante | Demostrar el diseño: claves, normalización, reglas y permisos |
-| Copia de seguridad | Sí (restic, tarea 44) | **Pendiente** de añadir a la copia cuando tenga datos (#41, #44) |
+| Datos y consultas | Los del restaurante | `06-datos.sql` (2 locales, 8 ventas) y `07-consultas.sql` (12 consultas), sin ejecutar todavía (#41) |
+| Copia de seguridad | Sí (restic, tarea 44) | `backup-odoo.sh` ya la copia si existe; falta crearla en el servidor (#41, #44) |
 
 Las dos modelan **el mismo negocio**, así que sus entidades se corresponden:
 
@@ -259,7 +262,7 @@ Las reglas de negocio de nuestra base se aplican en el propio gestor ([tarea 40]
 | R-05 | Numeración correlativa y sin huecos por serie | Disparador con bloqueo por serie |
 | R-06 | Cada venta descuenta del stock los artículos de la receta del plato | Disparador |
 
-Odoo aplica las equivalentes por su cuenta (numeración de facturas, no modificar facturas validadas, permisos por grupo). **Decisión pendiente del equipo:** si `almi_chain` va en el mismo PostgreSQL que Odoo (otra base en el mismo servidor y el mismo RAID) o en uno aparte. Lo más sencillo es el mismo servidor, en otra base y con sus propios roles, para que entre en las mismas copias.
+Odoo aplica las equivalentes por su cuenta (numeración de facturas, no modificar facturas validadas, permisos por grupo). **Decisión (24/10):** `almi_chain` va en el mismo PostgreSQL que Odoo, como otra base con sus propios roles, para que esté en el mismo RAID y entre en las mismas copias ([tarea 40, sección 2](docs/bd/40-scripts-ddl.md)).
 
 ---
 
@@ -270,17 +273,17 @@ flowchart LR
     ODOO["Odoo + PostgreSQL<br/>(datos vivos)"] -- "pg_dump + filestore + configuración<br/>cada día a las 02:30 (systemd timer)" --> RESTIC{{"restic<br/>cifra AES-256 · deduplica"}}
     RESTIC --> RAID[("RAID 1 /srv/datos<br/>2 discos en espejo")]
     RESTIC --> USB[("Disco USB BACKUP_USB<br/>el gerente se lo lleva")]
-    USB -- "probar-restauracion.sh<br/>entorno aislado" --> PRUEBA["Odoo temporal en :8070<br/>16 comprobaciones · RTO 46 s"]
+    USB -- "probar-restauracion.sh<br/>entorno aislado" --> PRUEBA["Odoo temporal en :8070<br/>16 comprobaciones · 46 s"]
 ```
 
 | Pieza | Protege contra | No protege contra |
 |---|---|---|
-| **RAID 1** ([#43](docs/backup/43-raid1/DOCUMENTACION.md)) | La avería de un disco: el servidor sigue funcionando y el espejo se reconstruye (27 s en la prueba) | Borrados, virus o un incendio: el RAID copia el error a los dos discos |
-| **Copias 3-2-1** ([#44](docs/backup/44-backup-3-2-1/DOCUMENTACION.md)) | Todo lo anterior: **3** copias (datos vivos, RAID, USB), **2** soportes, **1** fuera del local. Retención 7 diarias, 4 semanales y 6 mensuales | — |
+| **RAID 1** ([#43](docs/backup/43-raid1/DOCUMENTACION.md)) | La avería de un disco: el servidor sigue funcionando y el espejo se reconstruye (27 s en la prueba). **Pero hoy la BD viva no está en el RAID** (está en el disco del sistema): hay que mover los datos de Docker a `/srv/datos` (tarea 43, sección 7) | Borrados, virus o un incendio: el RAID copia el error a los dos discos |
+| **Copias 3-2-1** ([#44](docs/backup/44-backup-3-2-1/DOCUMENTACION.md)) | Todo lo anterior: **3** copias (datos vivos, RAID, USB), **2** soportes, **1** fuera del local (el USB se renueva cada lunes; aviso si pasan más de 7 días). Retención 7 diarias, 4 semanales y 6 mensuales | — |
 | **Prueba de restauración** ([#45](docs/backup/45-restauracion/DOCUMENTACION.md)) | Copias que parecen buenas y no lo son: se restaura de verdad en un entorno aislado y se compara con producción | — |
 
-- **RPO** (datos que se pueden perder): hasta 24 h. **RTO** (tiempo hasta volver a funcionar): 46 s en la prueba.
-- La contraseña de cifrado está en el servidor y **fuera de él** (gestor de contraseñas del gerente). Sin ella, las copias no sirven.
+- **RPO** (datos que se pueden perder): hasta 24 h. **Restauración:** 46 s en la prueba, pero en el mismo servidor; el **RTO real** (servidor perdido: instalar uno nuevo y restaurar) está sin medir (tarea 45, sección 6).
+- La contraseña de cifrado está en el servidor y **fuera de él**, en KeePassXC (durante la prueba se guardó en un fichero de texto del técnico: hay que pasarla a KeePassXC y borrar ese fichero). Sin ella, las copias no sirven.
 - Todo se identifica por UUID o etiqueta, nunca por `/dev/sdX`: al conectar el USB los discos cambiaron de nombre y no se rompió nada.
 
 ---
@@ -294,12 +297,12 @@ Botones y palanca ─► Arduino Leonardo (firmware HID, mapeo en EEPROM)
 Equipo de 1 núcleo y 1 GB ─ Debian 13 sin escritorio
    arranque ─► autologin del usuario "arcade" (sin sudo, contraseña bloqueada) en tty1
             ─► startx ─► MAME a pantalla completa en bucle (4,7 s desde el encendido)
-   red: Wi-Fi de invitados (aislada del TPV y del servidor)
+   red: Wi-Fi de invitados (aislada del TPV y del servidor); se administra desde su consola
 ```
 
 - **Por qué un joystick HID** (decisión del equipo): cualquier emulador y cualquier sistema (Linux, Windows) lo reconoce sin drivers, que es lo que pide el enunciado («compatible con cualquier emulador»), y no interfiere con un teclado de mantenimiento. Moneda y Start se asignan una vez en MAME a los botones 5 y 6 ([STICK-ARDUINO.md](docs/arcade/16-recreativa-mame/STICK-ARDUINO.md)). El mapeo se cambia por el puerto serie (`MAP`, `INV`, `ZM`, `GUARDAR`…) y se guarda en la EEPROM con número de control y checksum: eso es el «input personalizable» ([firmware](arduino/mando-joystick/README.md)).
-- **Optimización** ([tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md)): sin escritorio, arranque a `multi-user.target`, GRUB sin espera, fuera las tareas en segundo plano que dan tirones (actualizaciones automáticas, índices), `swappiness` bajo y menos disco. Se mantienen AppArmor y SSH (seguridad y administración).
-- **Pruebas de rendimiento:** antes y después con `systemd-analyze`, `free`, `ps` y `mame -bench`. **Falta repetirlas en la VM de 1 núcleo y 1 GB** (la del enunciado) y en el equipo real.
+- **Optimización** ([tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md)): sin escritorio, arranque a `multi-user.target`, GRUB sin espera, fuera las tareas en segundo plano que dan tirones (índices, comprobaciones de disco), `swappiness` bajo y menos disco. Las actualizaciones de seguridad **se mantienen**, a las 5:00 con el local cerrado. Se mantienen AppArmor y SSH (solo con clave).
+- **Pruebas de rendimiento:** antes y después con `systemd-analyze`, `free`, `ps` y `mame -bench`, hechas en una VM de 2 núcleos y 1,5 GB. **Falta repetirlas en la VM de 1 núcleo y 1 GB** (la del enunciado), medir jugando (no solo `-bench`) y hacerlo en el equipo real.
 - **Monitorización** ([tarea 18](docs/arcade/18-monitorizacion-recreativa.md)): `monitor-recreativa.sh` toma CPU, carga, RAM, swap, temperatura y consumo de MAME a un CSV mientras se juega, y `resumen-monitorizacion.sh` lo resume.
 - **Alternativa en estudio:** Batocera (#51). Arranca con 1 GB, pero su propia guía pide 2 GB y viene con contraseña de root por defecto.
 - **ROMs:** solo las 5 que el equipo de MAME publica con permiso de sus autores para uso no comercial.
@@ -367,14 +370,14 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 | Capa | Mínimos privilegios | Secretos | Cifrado | Estado |
 |---|---|---|---|---|
 | Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | — | Gerente (con contraseñas robustas, #55) y recreativa hechos; TPV pendiente (#13) |
-| Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi | WPA2-AES; WPA3 pendiente | En curso (#24) |
+| Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi. **La Wi-Fi de prueba estuvo visible en capturas (tapadas el 24/10): hay que cambiarla** | WPA2-AES; WPA3 pendiente | En curso (#24) |
 | Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS pendiente** (#52) | En curso |
 | Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Usuarios con login creados aparte | — | En curso (#42) |
 | Copias | Solo root lee la contraseña | Contraseña de restic fuera del servidor | AES-256 | Hecho |
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
 | Repositorio | Cambios por Pull Request con revisor | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
-Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo, contraseña de root de Batocera, red de invitados y WPA3. Las contraseñas de la VM del gerente ya se cambiaron (#55).
+Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el proxy, publicar 8069 solo en `127.0.0.1`), contraseña de root de Batocera, red de invitados y WPA3, contraseñas Wi-Fi y de administración del router, BD en el RAID, menús que ve el cajero en Odoo y borrar de Drive el `.txt` antiguo de contraseñas. Las contraseñas de la VM del gerente ya se cambiaron (#55).
 
 **Regla para todas las contraseñas del proyecto:** nada de contraseñas por defecto ni en texto plano. Se generan con el gestor (KeePassXC), son distintas en cada cuenta y nunca entran en Git (lo vigilan el `.gitignore` y gitleaks).
 

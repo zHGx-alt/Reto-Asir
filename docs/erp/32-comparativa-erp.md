@@ -23,7 +23,7 @@ Comparamos tres ERP de código abierto con edición gratuita:
 
 | Criterio | Odoo Community | ERPNext | Dolibarr |
 |---|---|---|---|
-| Facturas, CRM, personal, marketing, inventario | Todas disponibles. Contabilidad completa solo en Enterprise (en Community, facturación) | Todas, en una sola edición | Todas mediante módulos; interfaz más básica |
+| Facturas, CRM, personal, marketing, inventario | Todas disponibles. Community trae facturación y la contabilidad básica (asientos, diarios, plan contable, impuestos); Enterprise añade los informes contables completos y la gestión avanzada (ver E-01) | Todas, en una sola edición | Todas mediante módulos; interfaz más básica |
 | TPV | Aplicación de TPV integrada con interfaz táctil | TPV incluido, menos orientado a hostelería | Módulo TakePOS |
 | API | API externa (XML-RPC/JSON-RPC; JSON-2 en Odoo 19) | API REST muy cómoda | API REST, menos completa |
 | España (IVA, plan contable) | Localización española oficial | Hay que configurar impuestos a mano | Soporte parcial por módulos |
@@ -80,7 +80,7 @@ Elegimos **Odoo Community**. Razones:
 
 | Id | Riesgo | Mitigación |
 |---|---|---|
-| E-01 | La contabilidad completa es de Enterprise; Community solo trae facturación | El caso de uso es la factura, que entra en Community. Documentarlo como límite |
+| E-01 | Community **sí** genera asientos con el plan PYMES (se comprobó en la tarea 34: asiento `POSS/2026/10/0001`), pero le faltan funciones de Enterprise: informes contables completos (balance, pérdidas y ganancias, libros), conciliación bancaria avanzada, activos, presupuestos y el módulo de contabilidad completo para el asesor | El caso de uso es la factura, que entra en Community. Los informes legales los puede sacar la gestoría con los datos exportados (tarea 36). Documentarlo como límite |
 | E-02 | Verifactu: calendario incierto y sin módulo oficial confirmado | Documentar como riesgo y revisar el BOE antes de entregar |
 | E-03 | La API cambia entre versiones (JSON-2 en Odoo 19) | Fijar la versión y escribir el automatismo contra ella |
 | E-04 | Pasar de Community a Enterprise no es trivial | Fuera del alcance del reto |

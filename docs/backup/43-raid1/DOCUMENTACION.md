@@ -1,10 +1,10 @@
 # Tarea 43 · RAID 1 y simulación de fallo
 
-**Responsable (Kanban):** Eneko.P · **Hecha por:** Iker · **Revisa:** Iker → *cambiar a otro revisor* · **Fecha:** 22/10/2026
-**Estado:** ✅ Hecha en máquina virtual (`ServidorERP`)
+**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Eneko.P) · **Revisa:** Adrian · **Fecha:** 22/10/2026
+**Estado:** ✅ RAID y simulación de fallo hechos en máquina virtual (`ServidorERP`) · ⚠️ **La base de datos todavía no está en el RAID** (sección 7)
 
 ## 1. Resultado
-- RAID 1 por software (`mdadm`) con dos discos de 5 GB, montado en **`/srv/datos`**. Ahí irán las copias de seguridad de la tarea 44.
+- RAID 1 por software (`mdadm`) con dos discos de 5 GB, montado en **`/srv/datos`**. Ahí van las copias de seguridad de la tarea 44 y **tienen que ir también los datos vivos** de PostgreSQL y Odoo (sección 7: todavía no están).
 - Se simuló la **avería de un disco**: los datos siguieron disponibles y se podía seguir escribiendo.
 - Se **cambió el disco** por uno nuevo y el espejo se **reconstruyó en 27 s**, sin perder ni un byte (comprobado con SHA-256).
 - El servidor **arranca bien con el RAID degradado** y, después de reparado, **vuelve solo** en cada reinicio.
@@ -74,3 +74,40 @@ Log: [`evidencias/02-crear-raid.log`](evidencias/02-crear-raid.log).
 | 1 | No se pudo conectar el primer disco de repuesto en caliente: `The machine is not mutable` | VirtualBox no deja marcar un puerto como "conexión en caliente" con la VM encendida | — |
 | 2 | Después, `medium is already associated` aunque el puerto aparecía vacío | Fallo de VirtualBox 7.0: el disco quedó "a medias" asociado a la VM | Se usó un disco de repuesto **nuevo** (`raid-repuesto.vdi`) en el puerto 3, que sí admite conexión en caliente. Ese mismo fallo sirvió para probar el arranque con el RAID degradado (paso 7). |
 | 3 | `mdadm: stat failed for /dev/sdd` | El disco de la incidencia 2 desapareció del sistema justo antes de añadirlo | Ver la incidencia 2. El RAID siguió degradado y sin perder datos. |
+
+## 7. Pendiente: la base de datos tiene que estar en el RAID
+
+El enunciado dice: «Esta BD **se almacenará en un dispositivo redundante**». Ahora mismo el RAID (`/srv/datos`) solo guarda las copias: PostgreSQL y los adjuntos de Odoo siguen en los volúmenes de Docker (`/var/lib/docker/volumes/...`), que están en `sda`, el disco del sistema, **fuera del RAID**. Si falla `sda`, la base de datos viva se pierde y hay que restaurar la última copia (hasta 24 h de datos). La simulación de la sección 4 no lo detecta porque el disco que se «rompió» era del RAID, no el del sistema.
+
+**Cómo se corrige:** mover el directorio de datos de Docker al RAID. Así quedan en el espejo las bases `tienda` y `almi_chain` y los adjuntos. Con Odoo parado y una copia recién hecha (tarea 44):
+
+```bash
+sudo systemctl start backup-odoo          # copia justo antes del cambio
+cd /opt/odoo && sudo docker compose down
+sudo systemctl stop docker docker.socket
+sudo rsync -aHAX /var/lib/docker/ /srv/datos/docker/
+echo '{ "data-root": "/srv/datos/docker" }' | sudo tee /etc/docker/daemon.json
+```
+
+Docker tiene que arrancar **después** de montar el RAID. En `sudo systemctl edit docker.service`:
+
+```
+[Unit]
+RequiresMountsFor=/srv/datos
+```
+
+```bash
+sudo systemctl daemon-reload && sudo systemctl start docker
+sudo docker info --format '{{.DockerRootDir}}'    # debe decir /srv/datos/docker
+cd /opt/odoo && sudo docker compose up -d
+```
+
+Cuando Odoo funcione igual (login y una venta de prueba), borrar el directorio antiguo con `sudo rm -rf /var/lib/docker.old` (antes, `sudo mv /var/lib/docker /var/lib/docker.old` para tenerlo de respaldo unos días). El script de copias ya busca la ruta del volumen con `docker volume inspect`, así que no hay que cambiarlo.
+
+La otra opción es instalar el sistema entero sobre el RAID 1 (el instalador de Debian lo permite), que protege también el sistema operativo. Para el reto basta con mover los datos.
+
+**Después hay que repetir:**
+- La simulación de fallo (sección 4) **con Odoo funcionando durante el fallo**: hacer una venta con un disco del RAID quitado y comprobar que se guarda.
+- La prueba de la tarea 45.
+
+**Las copias no pueden quedarse solo en el mismo RAID:** si el RAID entero se pierde (fallo de la controladora, borrado, incendio), se pierden a la vez los datos y la copia 2. Por eso la copia 3 (USB fuera del local, y mejor aún S3) es la que de verdad protege; ver la tarea 44.

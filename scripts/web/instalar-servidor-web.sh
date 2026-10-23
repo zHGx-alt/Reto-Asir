@@ -43,6 +43,11 @@ server {
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-Frame-Options "SAMEORIGIN" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    # CSP: solo se cargan los ficheros propios, las fotos de Unsplash, el favicon en línea (data:) y el mapa de OpenStreetMap.
+    # Sin scripts ni estilos en línea ni de otros dominios. Si se añade un recurso externo a la web, hay que añadirlo aquí.
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://images.unsplash.com; frame-src https://www.openstreetmap.org; connect-src 'self'; font-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests" always;
+    # La geolocalización solo la puede pedir la propia web (no el iframe del mapa); cámara, micrófono y pagos, nadie.
+    add_header Permissions-Policy "geolocation=(self), camera=(), microphone=(), payment=(), usb=()" always;
 
     location / {
         try_files \$uri \$uri/ =404;

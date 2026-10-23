@@ -16,25 +16,28 @@ Una cadena de restaurantes contrata el diseño e implantación de su infraestruc
 
 - **Puestos de trabajo:** equipo de gerencia con arranque dual Windows 10 / GNU-Linux; dos TPV Windows de barra con impresoras de tickets, configurados con mínimos privilegios.
 - **Ocio:** máquina recreativa MAME sobre hardware limitado (1 núcleo, 1 GB de RAM) y arcade stick propio basado en Arduino con HID nativo.
-- **Red:** contratación de línea WAN, diseño de red segmentada y segura, y ampliación de la cobertura Wi-Fi mediante WDS.
-- **Presencia web:** sitio informativo responsivo y accesible, alojado en AWS con dominio propio, HTTPS y despliegue como código.
+- **Red:** contratación de línea WAN, esquema de conectividad, plano de red con cableado y Wi-Fi, red configurada de forma segura y ampliación de la cobertura Wi-Fi mediante WDS. (La segmentación por grupos es una decisión del equipo, no del enunciado.)
+- **Presencia web:** sitio informativo responsivo y accesible, alojado en AWS con dominio propio, HTTPS y despliegue reproducible, «a poder ser» automatizado con scripts o infraestructura como código.
 - **Gestión:** ERP con TPV integrado y al menos un proceso de negocio automatizado de extremo a extremo.
-- **Datos:** base de datos por establecimiento sobre almacenamiento redundante, con plan de copias verificado mediante restauración real.
+- **Datos:** base de datos de los establecimientos (una base central con los datos de cada local, [tarea 38](../bd/38-modelo-er.md#11-una-base-central-para-toda-la-cadena)) sobre almacenamiento redundante, con plan de copias verificado mediante restauración real.
 
 Condiciones transversales: seguridad por defecto, reproducibilidad, documentación ejecutable por un técnico ajeno al proyecto y capacidad de cada miembro para defender el conjunto.
 
 ## 2. Requisitos
 
-| Bloque | Requisitos funcionales | Requisitos no funcionales / criterios de aceptación |
+La columna *Enunciado* recoge solo lo que dice el enunciado. Lo que añade el equipo (o venía en el plan de trabajo) va aparte: es opcional y, si no se hace, no se incumple el reto.
+
+| Bloque | Lo pide el enunciado | Lo añade el equipo (criterios propios) |
 |---|---|---|
-| Hardware y presupuesto | Especificación de equipos de gerencia, TPV e impresoras; presupuesto con WAN y router adicional | Precios con fuente enlazada; justificación técnica de cada componente |
-| Sistemas operativos | Dual boot funcional; TPV en modo restringido; impresora operativa | Cuentas separadas usuario/administrador, bloqueo de USB e instalación de software, firewall y actualizaciones activos; configuración scriptada |
-| Arcade | Arranque directo a MAME; stick reconocido como dispositivo HID estándar con mapeo configurable | Mejora de rendimiento medida (FPS, CPU, RAM) antes y después; compatible con al menos dos emuladores |
-| Redes | Esquema lógico y físico; direccionamiento y segmentación por función (TPV, gerencia, clientes, arcade); WDS | WPA2/WPA3, red de invitados aislada, administración no expuesta a Internet; cobertura y throughput medidos |
-| Web | Geolocalización, formulario de contacto (placeholder) y slideshow de platos | HTML/CSS válidos, Lighthouse ≥ 90 en accesibilidad y rendimiento, HTTPS con dominio propio, despliegue por IaC |
-| ERP + TPV | Facturación, CRM, empleados, marketing, inventario y TPV de restauración | Despliegue reproducible; flujo automatizado pedido → factura → envío → descuento de stock; importación/exportación de datos |
-| Base de datos | Modelo E/R, lógico en 3FN y físico con datos y consultas | Usuarios con privilegios mínimos; scripts DDL versionados |
-| Disponibilidad y copias | RAID 1 y plan de backup | Regla 3-2-1, copias cifradas y automatizadas; failover y restauración probados con evidencias |
+| Hardware y presupuesto | Necesidades, configuración y presupuesto de equipos e impresoras; detalles del hardware y del software que se instala | Precios con fuente enlazada; justificación de cada componente; presupuesto con WAN, router adicional, servidor y copias |
+| Sistemas operativos | Arranque dual Windows 10 - GNU/Linux para el gerente; 2 TPV Windows; restringidos al máximo, mínimos privilegios y seguridad por defecto; instalación y configuración de una impresora; documentación reproducible y diagrama que permita repetir la instalación | Cuentas separadas usuario/administrador, bloqueo de USB, firewall y actualizaciones activos; configuración con scripts |
+| Arcade | MAME en un equipo de 1 núcleo y 1 GB, optimizado, con constancia de las pruebas de rendimiento; monitorización; arcade stick con Arduino compatible con cualquier emulador e input personalizable | Medidas de FPS, CPU y RAM antes y después; probar el stick con dos emuladores como muestra de «cualquier emulador» |
+| Redes | Identificar necesidades de comunicación; contratar una línea WAN; esquema de conectividad; plano de red con cableado y Wi-Fi; red configurada de forma segura; segundo router por WDS comprobando que funciona | Segmentación por función (TPV, gerencia, clientes, arcade); WPA3; red de invitados aislada; medidas de cobertura y velocidad |
+| Web | Unidireccional, atractiva, responsiva, accesible y con buen rendimiento; geolocalización, formulario de contacto (placeholder) y slideshow de platos; HTTPS, dominio propio, nube (AWS) y despliegue reproducible, a poder ser automatizado | HTML/CSS válidos en el W3C y Lighthouse ≥ 90 como forma de medir «accesible» y «buen rendimiento»; Terraform |
+| ERP + TPV | ERP para facturas, clientes, personal, marketing, inventario…; al menos un caso de uso real de extremo a extremo automatizado (p. ej. emisión de una factura); importación, integración, aseguramiento y extracción de información (RA.7 de LMSGI) | Envío de la factura por correo y descuento de stock en el caso de uso (ideas del plan, no obligatorias) |
+| Base de datos | Diseño del modelo E/R y tablas; implementación y consulta de sus datos | Normalización a 3FN, reglas con disparadores y usuarios con privilegios mínimos |
+| Disponibilidad y copias | La BD en un dispositivo redundante; plan de copias de seguridad con prueba de restauración; verificar con pruebas (restauración, failover) | Regla 3-2-1, copias cifradas y automatizadas |
+| Transversal | Seguridad por defecto (mínimos privilegios, gestión de credenciales y secretos, comunicaciones cifradas); documentación que un técnico nuevo pueda seguir, con diagramas; seguimiento con Gantt o Kanban y Git; documentación y presentación | KeePassXC para todas las contraseñas; gitleaks; revisión por Pull Request |
 
 ## 3. Investigación
 
@@ -42,9 +45,9 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 
 | Bloque | Fuente |
 |---|---|
-| BD · Modelo E/R | Claude (ver [registro-ia.md](registro-ia.md)) |
-| Arduino · Firmware HID y EEPROM | Claude; librería [mheironimus/ArduinoJoystickLibrary](https://github.com/MHeironimus/ArduinoJoystickLibrary) |
-| Web · Hosting | Claude Code; [documentación de Certbot](https://eff-certbot.readthedocs.io), [DuckDNS](https://www.duckdns.org/spec.jsp), documentación de Amazon S3 y EC2 |
+| BD · Modelo E/R | Apuntes de clase de Gestión de Bases de Datos (modelo E/R, paso a tablas y normalización); [documentación de PostgreSQL](https://www.postgresql.org/docs/) (restricciones, disparadores y roles). El uso de IA está en el [registro de IA](registro-ia.md) |
+| Arduino · Firmware HID y EEPROM | [Documentación de Arduino Leonardo](https://docs.arduino.cc/hardware/leonardo/) (HID nativo del ATmega32U4), [referencia de EEPROM de Arduino](https://docs.arduino.cc/learn/built-in-libraries/eeprom/) y la librería [mheironimus/ArduinoJoystickLibrary](https://github.com/MHeironimus/ArduinoJoystickLibrary). El uso de IA está en el registro de IA |
+| Web · Hosting | [Documentación de Certbot](https://eff-certbot.readthedocs.io), [DuckDNS](https://www.duckdns.org/spec.jsp), documentación de Amazon S3 y EC2 |
 | Web · Validación | [Lighthouse](https://developer.chrome.com/docs/lighthouse), [validador Nu del W3C](https://validator.w3.org/nu/) |
 | ERP · Comparativa | Fuentes de Odoo, Dolibarr y ERPNext consultadas el 22/10 ([tarea 32](../erp/32-comparativa-erp.md)) |
 | ERP · Odoo | Documentación de Odoo 19 y su API XML-RPC ([tareas 33-35](../erp/)) |
@@ -94,6 +97,8 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | 2 | 28/10 – 03/11 | Implantación: SO y TPV, recreativa y stick, red y WDS, web, Odoo, BD y RAID |
 | 3 | 04/11 – 10/11 | AWS e IaC, caso de uso del ERP, backups y restauración, pruebas, documentación y defensa |
 
+> **Pendiente de replanificar.** El enunciado da 285 h repartidas en las **semanas 1-10** (Anexo VIII), y esta planificación las comprime en 3 semanas (15 días laborables). Hay que pedir el Anexo VIII, rehacer las fechas del [CSV](backlog-kanban.csv) sobre las 10 semanas y regenerar el Gantt. Las tareas ya hechas conservan sus fechas reales.
+
 ## 7. Ejecución
 
 | Bloque | Ubicación en el repositorio |
@@ -135,10 +140,10 @@ Incidencias relevantes durante la ejecución:
 | Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | W3C sin errores; Lighthouse móvil 98/100/100/100 y escritorio 99/100/100/100 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
 | Web | Acceso por HTTP | Redirección a HTTPS con certificado válido | `301` a HTTPS; certificado de Let's Encrypt válido hasta el 21/01/2027 | [tarea 30, sección 5](../web/30-hosting-aws.md#5-pruebas) |
 | ERP | Venta en el TPV de barra | Ticket, cobro, cierre de caja y asiento contable | Mesa 3, 35,50 € en efectivo: factura simplificada, caja cuadrada (diferencia 0,00 €) y asiento `POSS/2026/10/0001` validado | [tarea 34, sección 8](../erp/34-configurar-odoo/DOCUMENTACION.md) |
-| ERP | Factura automática de extremo a extremo | Pedido, factura validada, cobro y PDF sin intervención | Repetido el 23/10 en una instalación limpia: `INV/2026/00001` y `00002` cobradas y con PDF. No incluye envío por correo ni descuento de stock (ideas del plan, no exigidas por el enunciado) | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
+| ERP | Factura automática de extremo a extremo | Pedido, factura validada, cobro y PDF sin intervención | Repetido el 23/10 en una instalación limpia: `INV/2026/00001` y `00002` cobradas y con PDF. No incluye envío por correo ni descuento de stock (ideas del plan, no exigidas por el enunciado). El 24/10 el caso de uso pasa a un menú de grupo con IVA del 10 %: hay que repetirlo | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
 | BD | Usuario de aplicación ejecuta DDL | Permiso denegado | `CREATE TABLE`: *permission denied for schema public*; `DROP` y `ALTER`: *must be owner*; `DELETE`/`UPDATE` de facturas denegados; 33 pruebas de reglas correctas (repetido el 23/10) | [verificación](verificacion.md), [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
-| RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
-| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; RTO 46 s | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
+| RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas. **Falta:** la BD viva aún no está en el RAID ([tarea 43, sección 7](../backup/43-raid1/DOCUMENTACION.md#7-pendiente-la-base-de-datos-tiene-que-estar-en-el-raid)) | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
+| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor. **Falta** el RTO real, restaurando en una máquina nueva | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
 
 ## 9. Documentación y presentación
 

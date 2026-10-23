@@ -27,6 +27,21 @@ Referencias usadas:
 - **R5** = «El reto», párrafo 5 («La empresa, que se quiere dar a conocer…»)
 - **T*n*** = «Tareas a realizar», punto *n*
 
+### 1.1 Una base central para toda la cadena
+
+El enunciado habla de «las bases de datos que habrá en cada establecimiento». Hay dos formas de leerlo, y el modelo tiene que ser coherente con una de ellas:
+
+| | Una base por local | **Una base central (elegida)** |
+|---|---|---|
+| ESTABLECIMIENTO | Tendría una sola fila (el propio local): sobra | Una fila por local |
+| Clientes, platos, campañas | Se repiten en cada local y se desincronizan | Comunes a la cadena: se dan de alta una vez |
+| STOCK, empleados, equipos, facturas | De ese local | De cada local, separados por `id_establecimiento` |
+| Informes de la cadena (ventas por local, platos más vendidos) | Hay que juntar varias bases | Una consulta (tarea 41, C-03 y C-04) |
+
+**Decisión:** el modelo es el de una **base central** de la cadena, que guarda los datos de **cada establecimiento** separados por la clave `id_establecimiento` (por eso existen ESTABLECIMIENTO y STOCK por local). Así se cumple la frase del enunciado («los datos de cada establecimiento») sin repetir la carta ni los clientes. Mientras la cadena sea el local piloto, la base está en el servidor de ese local, en el mismo PostgreSQL que Odoo y sobre el RAID (tareas 40 y 43). Si se abren más locales, se movería a un servidor central o a la nube, con acceso por VPN desde cada local.
+
+Si el profesor entiende el enunciado como «una base distinta en cada local», el cambio es pequeño: quitar ESTABLECIMIENTO y las claves `id_establecimiento`, y cargar en cada local solo sus datos.
+
 ## 2. Diagrama
 
 ```mermaid
@@ -149,7 +164,7 @@ erDiagram
     }
 ```
 
-> El diagrama está en notación «pata de gallo» (Mermaid, se ve en GitHub). Si se pide en notación Chen, se pasa a draw.io
+> El diagrama está en notación «pata de gallo» (Mermaid, se ve en GitHub). En la asignatura suele pedirse la notación **Chen**: hay que confirmarlo con el profesor (duda de la tarea 6) y, si la pide, pasarlo a draw.io
 > con las mismas entidades y cardinalidades. `STOCK`, `RECETA`, `ENVIO_CAMPANA` y `LINEA_FACTURA` son relaciones N:M o entidades débiles,
 > no entidades fuertes.
 > Los importes de la factura (base imponible, IVA y total) no se guardan en FACTURA: se calculan a partir de sus líneas. `(marca, modelo)` es única en MODELO_EQUIPO.

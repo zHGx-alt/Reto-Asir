@@ -59,3 +59,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# --- Preseed con la clave SSH real (tarea 16) ---
+preseed-local.cfg

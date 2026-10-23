@@ -4,7 +4,7 @@
 - **Depende de:** tarea 8 (tabla de hardware)
 - **Requisitos que cubre:** RG-01, RG-03, RG-04 y RG-05 (tarea 7, sección 3.1)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** hecha; pendiente de revisión
+- **Estado:** hecha en VM, con pendientes (sección 9: versión de Ubuntu, actualizaciones de Windows y cifrado); pendiente de revisión
 - **Fecha:** 22/10/2026
 
 ## 1. Alcance
@@ -25,7 +25,7 @@ El equipo real (Lenovo ThinkCentre Neo 50q, tarea 8) se simula en una máquina v
 | Disco | 60 GB, NVMe virtual |
 | Red | NAT |
 | Sistema 1 | Windows 10 x64 |
-| Sistema 2 | Ubuntu Desktop LTS (versión exacta: `lsb_release -d`) |
+| Sistema 2 | Ubuntu Desktop LTS. **Versión exacta pendiente de apuntar** (`lsb_release -d` en la VM, y el nombre de la ISO). Lleva GRUB 2.14 y sudo-rs, así que es una versión reciente |
 | Nombre del equipo en Ubuntu | `pc-gerente` |
 
 ## 3. Particiones
@@ -139,7 +139,7 @@ Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una disti
 | RG-04 Windows | `net user`, `net localgroup Administradores` y estado de `Administrador` | OK: solo `admin` y `gerente` como cuentas de uso; en Administradores solo `admin` y la integrada `Administrador`, con «Cuenta activa: No» | [cuentas](../evidencias/12-dual-boot/win-05-cuentas-y-administradores.png) |
 | RG-04 Ubuntu | `administrador` en el grupo `sudo` | OK | [groups](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
 | RG-05 Windows | `netsh advfirewall show allprofiles state` | OK: dominio, privado y público en ACTIVAR | [firewall](../evidencias/12-dual-boot/win-06-firewall.png) |
-| RG-05 Windows | Windows Update funcionando | OK: el 22/10 sincronizó e instaló KB5020683 y un driver. El 23/10 la VM no tenía conexión en esa sesión (errores 0x8024402c y 0x80240438); la configuración de red y los servicios son correctos | [historial](../evidencias/12-dual-boot/win-07-historial-windows-update.txt) |
+| RG-05 Windows | Windows Update funcionando | **Parcial:** el 22/10 sincronizó e instaló KB5020683 (actualización de noviembre de 2022, la del instalador) y un driver. El 23/10 todos los intentos fallan por falta de conexión de la VM (errores 0x8024402c y 0x80240438). **No hay ninguna actualización acumulativa de seguridad instalada.** Pendiente: conectar la VM, instalar las actualizaciones disponibles y repetir la evidencia | [historial](../evidencias/12-dual-boot/win-07-historial-windows-update.txt) |
 | Seguridad (tarea 55) | Contraseñas robustas, solo las cuentas previstas | OK: las 4 contraseñas cambiadas el 23/10 y guardadas en KeePassXC; en Ubuntu solo `administrador` y `gerente`, y solo `administrador` en `sudo`; la cuenta de instalación de Windows ya no existe | [Ubuntu](../evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt), [Windows](../evidencias/12-dual-boot/win-05-cuentas-y-administradores.png) |
 | RG-05 Ubuntu | `ufw status verbose`: activo, deny entrante | OK | [ufw](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
 | RG-05 Ubuntu | `20auto-upgrades` con las dos opciones a `"1"` | OK | [auto-upgrades](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
@@ -151,6 +151,10 @@ Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una disti
 - **`admin` está reservado en Ubuntu.** El instalador lo rechaza («Ese nombre está reservado para uso del sistema», [captura](../evidencias/12-dual-boot/ubu-01-admin-reservado.png)) porque existe un grupo `admin` heredado de versiones antiguas. Por eso la cuenta de mantenimiento se llama `admin` en Windows y `administrador` en Ubuntu ([captura](../evidencias/12-dual-boot/ubu-02-cuenta-administrador.png)).
 - **Mensaje de `sudo` en Ubuntu.** Al intentar `sudo` con `gerente`, aparece «I'm sorry gerente. I'm afraid I can't do that». Las versiones recientes de Ubuntu usan **sudo-rs** (reimplementación de `sudo` en Rust), y ese es su mensaje cuando el usuario no está en sudoers.
 - **Disco de Windows lleno.** Tras instalar, `C:` tenía 13 GB y solo 53 MB libres. Se amplió con «Extender volumen» antes de instalar Ubuntu, porque Windows sin espacio libre no puede instalar actualizaciones.
+- **BitLocker desactivado: el equipo del gerente queda sin cifrar.** Se desactiva para instalar Ubuntu, porque con el disco cifrado Ubuntu no puede reducir ni leer la partición de Windows. Pero dejarlo así va contra la seguridad por defecto: si roban el mini PC, se leen los datos. **Después de instalar los dos sistemas** hay que:
+  1. Activar **BitLocker** en `C:` (Windows 10 Pro lo incluye) y guardar la clave de recuperación en KeePassXC, no en el equipo. GRUB arranca Windows Boot Manager igual; BitLocker solo pedirá la clave de recuperación si cambia la cadena de arranque, así que hay que probar un arranque desde GRUB después de activarlo.
+  2. En Ubuntu, cifrar los datos del gerente: una partición o un contenedor **LUKS** para `/home/gerente`, o reinstalar Ubuntu con «cifrado de disco» si se repite la instalación.
+  En la VM no se ha hecho todavía (pendiente, sección 9).
 - **Inicio rápido.** La opción no aparece en las opciones de energía porque la VM no admite hibernación. Aun así se ejecutó `powercfg /h off` para dejarlo garantizado.
 
 ## 8. Entrega de la máquina virtual
@@ -178,3 +182,10 @@ Para usarla:
 La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM puede no encontrar GRUB al arrancar.
 
 **Si se exporta con `ovftool`** en vez de con el menú de VMware, comprobar que la `.nvram` está en el paquete: la exportación del 23/10 la dejó fuera (el `.ovf` apuntaba a `Windows 10 x64.nvram` sin incluirla). Se añadió a mano: copia de la `.nvram` de la VM como `VM-dualboot-W10-ubuntu-file1.nvram`, una línea `<File>` en `<References>`, `vmw:value="ovf:/file/file2"` en la clave `nvram` y el `.mf` regenerado. `ovftool VM-dualboot-W10-ubuntu.ovf` lo valida sin errores.
+
+## 9. Pendiente
+
+- [ ] Apuntar la versión exacta de Ubuntu y la ISO usada (sección 2).
+- [ ] Conectar la VM a internet, instalar las actualizaciones acumulativas de Windows y repetir la evidencia de Windows Update (RG-05 queda **parcial** hasta entonces).
+- [ ] Cifrar después de instalar: BitLocker en Windows y LUKS en los datos de Ubuntu (sección 7).
+- [ ] Subir a Drive el `.vmdk` y el `.kdbx` nuevos y **borrar de Drive el `.txt` antiguo** con las contraseñas débiles; revisar quién tiene acceso a la carpeta.

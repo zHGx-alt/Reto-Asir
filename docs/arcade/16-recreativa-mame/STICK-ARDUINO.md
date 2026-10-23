@@ -27,7 +27,7 @@ Por qué joystick y no teclado:
 
 | Control del stick | Sale como | Acción en MAME |
 |---|---|---|
-| Palanca (opcional, `USAR_EJES = true`) | Ejes X e Y | Mover (jugador 1), sin configurar nada |
+| Palanca (digital de 4 microinterruptores por defecto; analógica con `PALANCA ANALOGICA`) | Ejes X e Y | Mover (jugador 1), sin configurar nada |
 | Botones físicos 1 a 6 (pines 2 a 7) | Botones HID 1 a 6 (por defecto) | Botones 1 a 6, sin configurar nada |
 | Botones HID 7 y 8 | Libres: se usan con `MAP` | — |
 
