@@ -6,21 +6,22 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 - **Este documento es la lista de lo que queda.** Cada punto dice qué hacer, dónde, quién lo lleva (según el [backlog](docs/gestion/backlog-kanban.csv)) y cuándo se da por terminado. Al terminar uno, se marca `[x]` con la fecha y se actualizan la observación del CSV y el Gantt (`python3 scripts/gantt.py`).
 - La revisión completa original, con la explicación de cada fallo, está en la versión del fichero del commit `215eac7`: `git show 215eac7:CORRECIONES.md`.
 - **Gravedad:** 🔴 grave (incumple el enunciado o es un fallo de seguridad) · 🟠 media (error que un evaluador puede ver) · 🟢 leve.
+- **Actualizado el 24/10/2026** con las decisiones del equipo (sección 6): Drive revisado, equipo de 6, DuckDNS, fechas, base central, TicketBAI, una VM y la impresora que da el centro. Lo que dependa de la rúbrica se revisará cuando se publique.
 
 ---
 
 ## 0. Orden recomendado para el lunes
 
+El PR #41 (`gestion/correcciones`) ya está unido a `main`. El reto va del **lunes 26/10 al jueves 12/11/2026**.
+
 | Orden | Qué | Por qué primero | Quién | Sección |
 |---|---|---|---|---|
-| 1 | **Unir el PR de `gestion/correcciones` a `main`** | Todo lo demás parte de ahí | Revisor del PR | — |
-| 2 | **Cambiar la contraseña Wi-Fi expuesta** y la de administración del router | Está en el historial de Git y se puede leer | Peio | [2.1](#21-urgente-contraseñas) |
-| 3 | Borrar de Drive el `.txt` antiguo de contraseñas y la copia en texto de la de restic | Contraseñas en texto plano | Adrian · Iker | [2.1](#21-urgente-contraseñas) |
-| 4 | Pasar `verificar-repo.sh` en un equipo con Docker | Comprueba los SQL nuevos (tarea 41) y el resto, sin coste | Iker | [3.1](#31-base-de-datos-tareas-41-y-42) |
-| 5 | Dudas al profesor (tarea 6) | Varias decisiones dependen de sus respuestas | Peio | [6](#6-dudas-para-el-profesor-tarea-6) |
-| 6 | Decidir red plana o VLAN | Cambia Packet Tracer, diagramas y presupuesto | Equipo | [4.1](#41-decisión-red-plana-o-vlan) |
-| 7 | Mover la BD al RAID y repetir la prueba | Tal como está, incumple el enunciado | Iker | [3.2](#32-raid-y-copias-tareas-43-45) |
-| 8 | TPV, impresora y stick | Tareas literales del enunciado sin empezar | Iker · Adrian · Markel · Peio | [5](#5-tareas-del-enunciado-sin-empezar) |
+| 1 | **Cambiar la contraseña Wi-Fi expuesta** y la de administración del router | Está en el historial de Git y se puede leer | Peio | [2.1](#21-urgente-contraseñas) |
+| 2 | Pasar la contraseña de restic a KeePassXC y borrar su copia en texto | Contraseña en texto plano | Iker | [2.1](#21-urgente-contraseñas) |
+| 3 | Pasar `verificar-repo.sh` en un equipo con Docker | Comprueba los SQL nuevos (tarea 41) y el resto, sin coste | Iker | [3.1](#31-base-de-datos-tareas-41-y-42) |
+| 4 | Decidir red plana o VLAN | Cambia Packet Tracer, diagramas y presupuesto | Equipo | [4.1](#41-decisión-red-plana-o-vlan) |
+| 5 | Mover la BD al RAID y repetir la prueba | Tal como está, incumple el enunciado | Iker | [3.2](#32-raid-y-copias-tareas-43-45) |
+| 6 | TPV, impresora (cuando la dé el centro) y stick | Tareas literales del enunciado sin empezar | Iker · Adrian · Markel · Peio | [5](#5-tareas-del-enunciado-sin-empezar) |
 
 ---
 
@@ -50,8 +51,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
   - **Quién:** Peio · **Dónde:** [tarea 24, sección 12](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente) · **Hecho cuando:** contraseña cambiada y marcada en la tarea 24 (sin captura de la contraseña).
 - [ ] 🟠 **Contraseña de administración del router** (parece la de fábrica): cambiarla, limitar la administración a la MAC del PC del gerente y hacer captura (sin la contraseña).
   - **Quién:** Peio · **Dónde:** tarea 24, secciones 8 y 12.
-- [ ] 🟠 **Borrar de Drive el `.txt` antiguo** con las contraseñas débiles de la VM del gerente y revisar quién tiene acceso a la carpeta. Subir el `.vmdk` y el `.kdbx` nuevos.
-  - **Quién:** Adrian · **Dónde:** [tarea 12, sección 9](docs/so/12-dual-boot.md#9-pendiente) y tarea 55 del CSV.
+- [x] **Drive revisado (24/10/2026):** la carpeta solo tiene `VM-dualboot-W10-ubuntu-disk1.vmdk`, `Contraseñas.kdbx` (del 23/10) y la librería del joystick; **no hay ningún `.txt`**. El `.kdbx` es una base cifrada de KeePassXC: sin su contraseña maestra, que solo está en local, no sirve de nada. Cerrado.
 - [ ] 🟠 **Contraseña de restic:** pasarla a KeePassXC y borrar `tarea-44/.credenciales-backup` del PC del técnico.
   - **Quién:** Iker · **Dónde:** [tarea 44, sección 5](docs/backup/44-backup-3-2-1/DOCUMENTACION.md).
 - [ ] 🟢 En las recreativas instaladas con el preseed antiguo, borrar la línea `recreativa-claude` de `~tecnico/.ssh/authorized_keys`.
@@ -124,9 +124,9 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
   - **Quién:** Iker · Revisa Markel.
 - [ ] 🔴 **Scripts de Windows (tarea 15):** PowerShell que repita la tarea 13 en los dos TPV (y la configuración del gerente).
   - **Quién:** Iker · Revisa Markel.
-- [ ] 🔴 **Impresora en el TPV (tarea 14):** driver de Epson (apuntar la versión en la tarea 9), cola de impresión y página de prueba en la VM.
+- [ ] 🔴 **Impresora en el TPV (tarea 14)**, cuando el centro dé la impresora: driver de Epson (apuntar la versión en la tarea 9), cola de impresión y página de prueba en la VM.
   - **Quién:** Adrian · Revisa Eneko.S.
-- [ ] 🔴 **Ticket en la impresora real (tarea 37).**
+- [ ] 🔴 **Ticket en la impresora real (tarea 37)**, con la impresora del centro.
   - **Quién:** Peio · Revisa Iker.
 - [ ] 🔴 **Montar el arcade stick (tarea 19)** con la palanca Sanwa (sus 4 microinterruptores a A2-A5 y el común a GND) y los botones. Actualizar el esquema SVG con la palanca digital.
   - **Quién:** Markel · Revisa Peio.
@@ -141,17 +141,22 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ---
 
-## 6. Dudas para el profesor (tarea 6)
+## 6. Dudas y decisiones (tarea 6)
 
-**Quién:** Peio · Revisa Adrian. Apuntar las respuestas, con fecha, en el Anexo II y en la observación de la tarea 6 del CSV.
+Decidido por el equipo el 24/10/2026. Cuando salga la **rúbrica** se revisa todo con un criterio más objetivo; hasta entonces, esto queda cerrado.
 
-- [ ] 🟠 **Equipo de 6 personas** (el enunciado dice 4-5). Si Eneko.P sale, actualizar el [Anexo I](docs/gestion/anexo-I-contrato-equipo.md) y el [reparto](docs/gestion/roles.md).
-- [ ] 🟠 **Dominio propio:** ¿vale `almichain1.duckdns.org`? Si no, un dominio de pago (~10 €/año, al presupuesto) o uno del GitHub Student Pack (tarea 30, sección 8).
-- [ ] 🟠 **Fechas del Anexo VIII** (semanas 1-10), para replanificar el CSV (sección 8).
-- [ ] 🟢 **Notación del E/R:** pata de gallo (la actual) o Chen.
-- [ ] 🟢 **Base central o una por local** (tarea 38, apartado 1.1): se eligió la central; confirmar que vale.
-- [ ] 🟢 ¿Hay un certificado de pruebas para TicketBAI? (tarea 34, sección 6).
-- [ ] 🟢 Dual boot en VM y número de impresoras (dudas que ya estaban abiertas).
+| Duda | Decisión | Estado |
+|---|---|---|
+| Equipo de 6 personas (el enunciado dice 4-5) | El grupo es de **6 personas**. Eneko.P sigue sin tareas asignadas | [x] Cerrado |
+| Dominio propio | **`almichain1.duckdns.org` vale**: no se compra dominio | [x] Cerrado |
+| Fechas del reto | Del **lunes 26/10 al jueves 12/11/2026**. La planificación actual vale; no se replanifica hasta tener la rúbrica | [x] Cerrado |
+| Base central o una por local | **Base central** (tarea 38, apartado 1.1) | [x] Cerrado |
+| TicketBAI | **No hace falta configurarlo.** Se deja documentado como obligación legal (tarea 34, sección 6) | [x] Cerrado |
+| Arranque dual en VM | **Una VM** vale | [x] Cerrado |
+| Impresoras | **La impresora la da el centro.** Las tareas 14 y 37 esperan a tenerla | [x] Cerrado |
+| Notación del E/R (pata de gallo o Chen) | Se mantiene pata de gallo | [ ] Revisar con la rúbrica |
+
+**Pendiente:** Peio apunta estas decisiones en el Anexo II (sección 5) y en la observación de la tarea 6 del CSV, y la pasa a **Hecho**.
 
 ---
 
@@ -193,8 +198,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ## 8. Gestión y documentación
 
-- [ ] 🟠 **Replanificar sobre las 10 semanas** cuando se tengan las fechas del Anexo VIII: fechas del CSV (las tareas hechas conservan las reales), tabla de la sección 6 del Anexo II y Gantt regenerado.
-  - **Quién:** Adrian · Revisa Iker.
+- [x] **Planificación:** el reto va del 26/10 al 12/11/2026 y la planificación actual del CSV vale (decisión del 24/10; se revisa con la rúbrica). Las tareas hechas conservan sus fechas reales.
 - [ ] 🟠 **Revisar las filas del [registro de IA](docs/gestion/registro-ia.md)** que dicen «pendiente de revisar por el equipo»: quien revise pone lo que comprobó y su nombre.
   - **Quién:** cada persona, sus filas.
 - [ ] 🟠 **Regenerar `arquitectura-equipos.svg`** desde el Mermaid de la tarea 11 y, cuando existan, enlazar las guías de los TPV y de las impresoras en su sección 5. Si cambia la red (4.1), dibujar las redes reales y la WAN.
@@ -208,7 +212,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 | Tarea del enunciado | Estado | Qué falta | Sección |
 |---|---|---|---|
-| Necesidades, configuración y presupuesto de equipos e impresoras | Hecho | Precio de la licencia de Windows de los TPV | 5 |
+| Necesidades, configuración y presupuesto de equipos e impresoras | Hecho | Precio de la licencia de Windows de los TPV (la impresora la da el centro) | 5 |
 | Identificar y documentar el hardware necesario | Hecho | — | — |
 | Identificar y documentar el software necesario | Hecho, con huecos | Versión de Ubuntu y del driver de Epson | 7.3, 5 |
 | Instalación, optimización y monitorización de la recreativa | Parcial | Medidas en 1 núcleo y 1 GB; monitorización jugando | 7.1 |
@@ -218,17 +222,17 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Restricción de cuentas y equipos (mínimos privilegios) | Parcial | TPV; menús del cajero | 5, 2.2 |
 | Diseño conceptual de la web | Hecho, a posteriori | — | — |
 | Web accesible y por HTTPS | Hecho | Publicar la versión actual | 7.4 |
-| Hosting en AWS con dominio propio y despliegue reproducible | Parcial | Dominio (profesor); IaC | 6, 5 |
+| Hosting en AWS con dominio propio y despliegue reproducible | Parcial | IaC (DuckDNS vale como dominio) | 5 |
 | ERP + TPV con un caso de uso automatizado | Hecho | Repetirlo con el caso de uso nuevo | 7.2 |
 | Instalación y configuración de una impresora | **Sin empezar** | Tareas 14 y 37 | 5 |
-| Modelo E/R y tablas | Hecho | Confirmar la notación | 6 |
+| Modelo E/R y tablas | Hecho | Notación, a revisar con la rúbrica | 6 |
 | Implementación de la BD y consulta de sus datos | Parcial | Ejecutar los scripts y guardar la evidencia | 3.1 |
 | Configurar disco redundante | Parcial | **La BD no está en el RAID** | 3.2 |
 | Plan de copias y prueba de restauración | Hecho, con huecos | RTO en una máquina nueva | 3.2 |
 | Seguridad por defecto en toda la solución | Parcial | Contraseñas; HTTPS en Odoo; red | 2 |
 | Verificar con pruebas (funcionamiento, restauración, failover) | Parcial | WDS; invitados; TPV; stick; fallo con Odoo en marcha | 3.2, 4.3, 5 |
 | Documentación reproducible con diagramas | Parcial | Guías de los TPV; SVG de la tarea 11 | 5, 8 |
-| Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | 10 semanas; commits de todos | 8, 6 |
+| Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | Commits de Eneko.P | 8 |
 | Documentación y presentación | Pendiente | Tareas 48 y 49 | 8 |
 
 **Redes, en concreto:**

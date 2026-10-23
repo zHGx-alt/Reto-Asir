@@ -228,9 +228,8 @@ def main():
         "",
         "> **Fechas.** En las tareas *Hecho*, Inicio y Fin son las fechas **reales** en que se hicieron "
         "(sacadas de los documentos y del historial de Git); en el resto, las planificadas. "
-        "**Pendiente:** el enunciado reparte las 285 h del reto en las semanas 1-10 (Anexo VIII); "
-        "esta planificación las comprime en 3 semanas y hay que replanificarla sobre las 10 semanas "
-        "cuando se tengan las fechas del Anexo VIII.",
+        "El reto va del lunes 26/10 al jueves 12/11/2026; la planificación actual vale y se "
+        "revisará cuando salga la rúbrica (decisión del 24/10/2026).",
         "",
         "![Diagrama de Gantt](gantt.svg)",
         "",

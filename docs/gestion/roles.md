@@ -2,7 +2,7 @@
 
 **Equipo:** Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio.
 
-> El enunciado dice «Equipos de 4-5 personas» y aquí hay 6. Eneko.P no tiene tareas ni commits; hay que confirmarlo con el profesor (tarea 6) y, si sale, actualizar el [Anexo I](anexo-I-contrato-equipo.md).
+> El enunciado dice «Equipos de 4-5 personas», pero el grupo es de **6 personas** (confirmado el 24/10/2026, [Anexo I](anexo-I-contrato-equipo.md)). Eneko.P sigue sin tareas asignadas.
 
 No hay roles fijos por bloque: las tareas se reparten de forma que cada persona trabaje en varios bloques y revise tareas de los bloques en los que no ha trabajado. El objetivo es que cualquiera pueda defender el proyecto completo.
 

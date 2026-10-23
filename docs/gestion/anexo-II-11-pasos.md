@@ -97,7 +97,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | 2 | 28/10 – 03/11 | Implantación: SO y TPV, recreativa y stick, red y WDS, web, Odoo, BD y RAID |
 | 3 | 04/11 – 10/11 | AWS e IaC, caso de uso del ERP, backups y restauración, pruebas, documentación y defensa |
 
-> **Pendiente de replanificar.** El enunciado da 285 h repartidas en las **semanas 1-10** (Anexo VIII), y esta planificación las comprime en 3 semanas (15 días laborables). Hay que pedir el Anexo VIII, rehacer las fechas del [CSV](backlog-kanban.csv) sobre las 10 semanas y regenerar el Gantt. Las tareas ya hechas conservan sus fechas reales.
+> **Fechas del reto:** del lunes 26/10 al jueves 12/11/2026. La planificación actual vale y se revisará cuando salga la rúbrica (decisión del 24/10/2026). Las tareas ya hechas conservan sus fechas reales.
 
 ## 7. Ejecución
 

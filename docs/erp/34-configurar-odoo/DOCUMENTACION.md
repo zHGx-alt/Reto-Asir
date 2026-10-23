@@ -79,7 +79,7 @@ La ley obliga a que el software de facturación envíe las facturas a Hacienda:
 
 **Decisión:** el restaurante está en **Bilbao** (web y tarea 41), así que le aplica **TicketBAI (Batuz)**, no Veri\*Factu. Sin TicketBAI el restaurante no podría facturar legalmente.
 
-**Por qué no se configura en el reto:** el módulo pide el **certificado digital de la empresa** (y, para probar, el entorno de pruebas de la Hacienda Foral de Bizkaia, con su propio certificado). No tenemos ninguno, y no se puede inventar. Queda documentado así: en la instalación real, el gerente aporta el certificado, se instala `l10n_es_edi_tbai`, se elige «Bizkaia» como hacienda y se prueba una factura en el entorno de pruebas antes de pasar a producción. Si el profesor quiere verlo, se pregunta en la tarea 6 si hay un certificado de pruebas del centro.
+**Por qué no se configura en el reto:** el módulo pide el **certificado digital de la empresa** (y, para probar, el entorno de pruebas de la Hacienda Foral de Bizkaia, con su propio certificado). No tenemos ninguno, y no se puede inventar. Queda documentado así: en la instalación real, el gerente aporta el certificado, se instala `l10n_es_edi_tbai`, se elige «Bizkaia» como hacienda y se prueba una factura en el entorno de pruebas antes de pasar a producción. **Decisión del equipo (24/10/2026):** no hace falta configurarlo en el reto; queda documentado como obligación legal.
 
 ## 7. Siguientes tareas
 - **35 · Caso de uso automatizado (Iker):** emitir una factura por la API. Ya están la empresa, el IVA, los diarios y los usuarios.

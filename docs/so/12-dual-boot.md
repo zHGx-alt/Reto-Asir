@@ -188,4 +188,4 @@ La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM 
 - [ ] Apuntar la versión exacta de Ubuntu y la ISO usada (sección 2).
 - [ ] Conectar la VM a internet, instalar las actualizaciones acumulativas de Windows y repetir la evidencia de Windows Update (RG-05 queda **parcial** hasta entonces).
 - [ ] Cifrar después de instalar: BitLocker en Windows y LUKS en los datos de Ubuntu (sección 7).
-- [ ] Subir a Drive el `.vmdk` y el `.kdbx` nuevos y **borrar de Drive el `.txt` antiguo** con las contraseñas débiles; revisar quién tiene acceso a la carpeta.
+- [x] Drive revisado el 24/10: están el `.vmdk` y el `.kdbx` del 23/10 y no hay ningún `.txt` con contraseñas.
