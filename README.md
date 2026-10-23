@@ -9,6 +9,7 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 | `docs/gestion/` | Anexo I, Anexo II, roles, backlog Kanban y registro de IA |
 | `docs/diagramas/` | Diagramas draw.io (arquitectura, red, AWS, BD) |
 | `docs/web/` | Wireframes (tarea 27) y hosting en AWS (tarea 30) |
+| `docs/redes/` | Plano del local y plan de direccionamiento IP (tarea 23) |
 | `docs/evidencias/` | Capturas y logs de pruebas |
 | `iac/` | Infraestructura como código (Terraform/CloudFormation) |
 | `web/` | Página web del restaurante |
