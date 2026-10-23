@@ -28,7 +28,23 @@ La web se implementó antes que los wireframes. Por eso los wireframes se han sa
 
 ![Wireframe de móvil](../diagramas/27-wireframe-movil.svg)
 
-## 5. Estructura de la página
+## 5. La web implementada
+
+Capturas de la web (tarea 28) a 1440 px de ancho, para comparar con el wireframe de escritorio. Se han generado abriendo `web/index.html` con Chrome.
+
+**Portada** (secciones 1 y 2 del wireframe):
+
+![Portada de la web](../evidencias/27-wireframes/web-01-portada.png)
+
+**Ubicación con el mapa de OpenStreetMap** (sección 5):
+
+![Sección de ubicación con el mapa](../evidencias/27-wireframes/web-02-ubicacion-mapa.png)
+
+**Formulario de contacto** (sección 6):
+
+![Formulario de contacto](../evidencias/27-wireframes/web-03-formulario-contacto.png)
+
+## 6. Estructura de la página
 
 Es una sola página: el menú lleva a cada sección mediante anclas (`#historia`, `#platos`, `#ubicacion` y `#contacto`).
 
@@ -42,7 +58,7 @@ Es una sola página: el menú lleva a cada sección mediante anclas (`#historia`
 | 6 | Contacto | Formulario a dos columnas: nombre, correo y mensaje | Formulario a una columna |
 | 7 | Pie | Logo, ciudad y créditos en una fila | Apilados |
 
-## 6. Decisiones de diseño
+## 7. Decisiones de diseño
 
 - **Una sola página.** La web es de presentación, con poco contenido; las anclas evitan tener que navegar entre páginas.
 - **Un único punto de corte, en 800 px.** Por encima, las secciones van a dos columnas; por debajo, a una.
@@ -50,6 +66,6 @@ Es una sola página: el menú lleva a cada sección mediante anclas (`#historia`
 - **El formulario es de demostración.** No envía datos, así que la web es estática y se puede alojar sin servidor (tarea 30).
 - **Geolocalización.** El botón «Usar mi ubicación» solo funciona con HTTPS, porque los navegadores la bloquean en HTTP. Es otro motivo para que la tarea 30 incluya un certificado.
 
-## 7. Cómo editarlos
+## 8. Cómo editarlos
 
 Los SVG se ven directamente en GitHub. Para cambiar los wireframes, se abre el `.drawio` en [app.diagrams.net](https://app.diagrams.net) o en draw.io Desktop y, al terminar, se exporta cada página a SVG con el mismo nombre (**Archivo → Exportar como → SVG**).
