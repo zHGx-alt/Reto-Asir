@@ -14,7 +14,7 @@
 | Markel | 
 | Peio | 
 
-> **Tamaño del equipo.** El enunciado dice «Equipos de 4-5 personas» y este equipo es de 6. Eneko.P no tiene tareas ni commits (tarea 5). Pendiente de confirmar con el profesor (tarea 6); si Eneko.P sale del equipo, se quita de esta tabla y de la de firmas, con la fecha del cambio.
+> **Tamaño del equipo.** El enunciado dice «Equipos de 4-5 personas», pero el grupo es de **6 personas** (confirmado el 24/10/2026). Eneko.P no tiene tareas ni commits (tarea 5).
 
 ## 2. Objetivo común
 

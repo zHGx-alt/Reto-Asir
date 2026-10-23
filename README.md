@@ -50,7 +50,7 @@ La web está en **<https://almichain1.duckdns.org>**, alojada en AWS (bucket S3 
 
 Lo que no cabe en el repositorio (GitHub no admite archivos de más de 100 MB) o no debe estar en él (contraseñas) está en la [carpeta Reto-Asir de Google Drive](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link):
 
-- Disco de la VM de arranque dual Windows 10 + Ubuntu (`VM-dualboot-W10-ubuntu-disk1.vmdk`, 12,5 GB) y sus credenciales, en una base cifrada de KeePassXC (`.kdbx`). **Pendiente:** borrar de la carpeta el `.txt` antiguo con las contraseñas débiles y revisar quién tiene acceso a ella. Cómo importarla en otro equipo: [docs/so/12-dual-boot.md, sección 8](docs/so/12-dual-boot.md#8-entrega-de-la-máquina-virtual).
+- Disco de la VM de arranque dual Windows 10 + Ubuntu (`VM-dualboot-W10-ubuntu-disk1.vmdk`, 12,5 GB) y sus credenciales, en una base cifrada de KeePassXC (`.kdbx`), que no sirve sin su contraseña maestra (solo en local). Cómo importarla en otro equipo: [docs/so/12-dual-boot.md, sección 8](docs/so/12-dual-boot.md#8-entrega-de-la-máquina-virtual).
 
 ## Contribuir
 

@@ -4,7 +4,7 @@ Del 21/10/2026 al 10/11/2026 (15 días laborables).
 
 > Fichero generado con `python3 scripts/gantt.py` a partir de [backlog-kanban.csv](backlog-kanban.csv). Para cambiar fechas o responsables, edita el CSV y vuelve a generarlo.
 
-> **Fechas.** En las tareas *Hecho*, Inicio y Fin son las fechas **reales** en que se hicieron (sacadas de los documentos y del historial de Git); en el resto, las planificadas. **Pendiente:** el enunciado reparte las 285 h del reto en las semanas 1-10 (Anexo VIII); esta planificación las comprime en 3 semanas y hay que replanificarla sobre las 10 semanas cuando se tengan las fechas del Anexo VIII.
+> **Fechas.** En las tareas *Hecho*, Inicio y Fin son las fechas **reales** en que se hicieron (sacadas de los documentos y del historial de Git); en el resto, las planificadas. El reto va del lunes 26/10 al jueves 12/11/2026; la planificación actual vale y se revisará cuando salga la rúbrica (decisión del 24/10/2026).
 
 ![Diagrama de Gantt](gantt.svg)
 
@@ -61,7 +61,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 42 | Usuarios de BD con mínimos privilegios | Software | Adrian | 03/11 | En curso | Roles de grupo hechos. Probado el 23/10: un usuario con rol_aplicacion no puede CREATE; DROP; ALTER ni borrar facturas. Faltan los usuarios con LOGIN documentados y la evidencia. Pasa de Markel a Adrian. | [03-roles.sql](../../docs/bd/scripts/03-roles.sql) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. El 24/10 el script copia también almi_chain si existe y avisa si el USB lleva más de 7 días sin conectarse; falta probarlo en la VM. Pasa de Markel a Iker, que la hizo. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Faltan las secciones 9 (entrega) y 10 (retrospectiva). | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
-| 6 | Resolver dudas pendientes con el profesor | Gestión | Peio | 27/10 | Pendiente | Sin acta. Dudas abiertas: dual boot en VM; TicketBAI o Veri*Factu; número de impresoras (S-01 de la tarea 7); Anexos VI a IX. | — |
+| 6 | Resolver dudas pendientes con el profesor | Gestión | Peio | 27/10 | Pendiente | Decidido por el equipo el 24/10: grupo de 6; DuckDNS vale; reto del 26/10 al 12/11 con la planificación actual; base central; TicketBAI sin configurar; una VM para el dual boot; la impresora la da el centro. Notación del E/R a revisar con la rúbrica. Falta apuntarlo en el Anexo II. | — |
 | 19 | Montaje del arcade stick (ATmega32U4) | Físico | Markel | 27/10 | Pendiente | Esquema de conexiones hecho; falta cablear la placa y conseguir la palanca. Pasa de Eneko.P a Markel. | [esquema-conexiones.svg](../../arduino/mando-joystick/esquema-conexiones.svg) |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Adrian | 30/10 | Pendiente | Sin empezar. Imprimir en la impresora real es la tarea 37. Pasa de Peio a Adrian. | — |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | Físico | Adrian | 30/10 | Pendiente | Lista de comprobaciones en arduino/mando-joystick/README.md. | — |
@@ -110,7 +110,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | Eneko.S | Peio | — | [39-modelo-logico-3fn.md](../../docs/bd/39-modelo-logico-3fn.md) |
 | 40 | Scripts DDL | 8 BD | Software | Eneko.S | Adrian | Repetido el 23/10 en PostgreSQL 16: 01 a 03 sin errores; 03 repetible; 05-pruebas 33/33 dos veces; 04 borra y se puede recrear. | [40-scripts-ddl.md](../../docs/bd/40-scripts-ddl.md) |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | Iker | Markel | Restaurada la copia del USB en un entorno aislado del mismo servidor (46 s). Falta repetirla en una VM nueva para medir el RTO real. | [DOCUMENTACION.md](../../docs/backup/45-restauracion/DOCUMENTACION.md) |
-| 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | Iker | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Falta subir a Drive el .vmdk y el .kdbx nuevos y borrar el .txt antiguo. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
+| 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | Iker | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Drive revisado el 24/10: .vmdk y .kdbx nuevos y ningún .txt con contraseñas. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
 
 ## Carga por persona
 

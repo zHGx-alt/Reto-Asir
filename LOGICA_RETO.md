@@ -377,7 +377,7 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
 | Repositorio | Cambios por Pull Request con revisor | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
-Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el proxy, publicar 8069 solo en `127.0.0.1`), contraseña de root de Batocera, red de invitados y WPA3, contraseñas Wi-Fi y de administración del router, BD en el RAID, menús que ve el cajero en Odoo y borrar de Drive el `.txt` antiguo de contraseñas. Las contraseñas de la VM del gerente ya se cambiaron (#55).
+Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el proxy, publicar 8069 solo en `127.0.0.1`), contraseña de root de Batocera, red de invitados y WPA3, contraseñas Wi-Fi y de administración del router, BD en el RAID y menús que ve el cajero en Odoo. Las contraseñas de la VM del gerente ya se cambiaron (#55).
 
 **Regla para todas las contraseñas del proyecto:** nada de contraseñas por defecto ni en texto plano. Se generan con el gestor (KeePassXC), son distintas en cada cuenta y nunca entran en Git (lo vigilan el `.gitignore` y gitleaks).
 

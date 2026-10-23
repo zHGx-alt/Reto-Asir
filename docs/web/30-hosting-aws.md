@@ -234,7 +234,7 @@ aws s3 sync web/ s3://almi-chain-web-2026/ --delete --exclude "README.txt" --exc
 
 - **El Learner Lab para las instancias al acabar cada sesión**, así que la web solo está en línea mientras el laboratorio está arrancado. Al volver a pulsar **Start Lab**, la instancia arranca, nginx se inicia solo y la IP elástica sigue siendo la misma, de modo que no hay que tocar DuckDNS. En producción habría que usar una cuenta de AWS normal.
 - **Coste aproximado:** la `t3.micro` cuesta unos 0,01 $ por hora encendida. La IP elástica cuesta unos 0,005 $ por hora, también con la instancia parada: unos 3,6 $ al mes. El bucket cuesta céntimos. Para un mes de reto sale bastante por debajo de los 50 $ del laboratorio. Al terminar el reto, **liberar la IP elástica** para que deje de cobrarse.
-- **El dominio es un subdominio de `duckdns.org`.** El enunciado pide «dominio propio»: hay que **confirmar con el profesor** (tarea 6) si un subdominio gratuito vale. Si no vale, las opciones son un dominio de pago (unos 10 €/año, que se añadiría al presupuesto de la tarea 10) o uno gratuito del GitHub Student Pack. En los dos casos basta con crearle un registro A hacia `52.200.94.167` y volver a ejecutar certbot con el nuevo nombre (`DOMINIO=` del script).
+- **El dominio es un subdominio de `duckdns.org`.** El enunciado pide «dominio propio» y el equipo decidió el 24/10/2026 que **este subdominio vale**: no se compra un dominio. Si la rúbrica dijera lo contrario, basta con crearle un registro A hacia `52.200.94.167` y volver a ejecutar certbot con el nuevo nombre (`DOMINIO=` del script).
 
 ## 9. Para la tarea 31 (Terraform)
 
