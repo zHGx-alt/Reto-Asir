@@ -11,6 +11,7 @@
 | Moneda | Euros |
 | Impuestos | IVA incluido, salvo que se indique lo contrario |
 | Validez del presupuesto | 15 días |
+| Revisión | Eneko.S, 23/10/2026: ajustado a la tabla de hardware (tarea 8) |
 
 > Los precios y la disponibilidad pueden cambiar. Antes de realizar una compra hay que comprobar el precio final, los gastos de envío, el vendedor y la versión exacta del producto.
 
@@ -18,18 +19,16 @@
 
 ## 2. Objetivo
 
-El objetivo de este presupuesto es seleccionar el hardware y los servicios necesarios para instalar dos puestos de barra que funcionarán como terminales punto de venta o TPV en Windows.
+El objetivo de este presupuesto es reunir el hardware y los servicios de los puestos definidos en la tarea 7 y elegidos en la tarea 8:
 
-También se incluye:
-
+- Un equipo para el despacho del gerente, con su monitor.
+- Dos puestos de barra que funcionarán como terminales punto de venta o TPV en Windows, con pantalla táctil.
 - Dos impresoras térmicas de tickets.
-- Dos monitores para los puestos de barra.
 - Un router principal.
 - Un segundo router Wi-Fi para ampliar la cobertura mediante WDS.
 - Una conexión WAN de fibra óptica.
-- La conexión cableada de los TPV y las impresoras a la red local.
 
-La selección se ha realizado buscando un equilibrio entre coste, rendimiento, seguridad, compatibilidad y facilidad de mantenimiento.
+La selección busca un equilibrio entre coste, rendimiento, seguridad, compatibilidad y facilidad de mantenimiento. Los equipos, monitor e impresoras son los de la tabla de hardware (tarea 8); los routers y la WAN se añaden aquí.
 
 ---
 
@@ -41,13 +40,12 @@ Los dos puestos de barra deberán ejecutar Windows y el software TPV o ERP selec
 
 - Procesador de cuatro núcleos.
 - 8 GB de memoria RAM como mínimo.
-- Unidad SSD de 256 GB como mínimo.
-- Windows 11 Pro.
+- Unidad SSD de 128 GB o más (la tarea 7 fija este mínimo).
+- Pantalla táctil de 15" (RT-03 de la tarea 7).
+- Windows Pro (modo quiosco y directivas de seguridad). El enunciado exige Windows 10; ver la nota de la sección 4.1.
 - Puerto Ethernet Gigabit.
-- Conexiones USB para impresora, teclado y ratón.
-- Salida de vídeo HDMI o DisplayPort.
-- Posibilidad de montaje VESA detrás del monitor.
-- Bajo consumo eléctrico y tamaño reducido.
+- Cuatro o más puertos USB.
+- Bajo consumo eléctrico.
 
 ### Requisitos de las impresoras
 
@@ -76,56 +74,49 @@ Los dos puestos de barra deberán ejecutar Windows y el software TPV o ERP selec
 
 ### 4.1. Equipos TPV
 
-Se seleccionan dos unidades del **Blackview MP20**, con procesador Intel N150, 8 GB de RAM, SSD de 256 GB y Windows 11 Pro.
+Se seleccionan dos unidades del **Iggual AIO B156.88.N100**, un todo en uno de 15,6" Full HD con pantalla táctil capacitiva, procesador Intel N100 de cuatro núcleos, 8 GB de RAM, SSD de 256 GB, Windows 11 Pro, Ethernet Gigabit, 8 puertos USB y un RS-232.
 
-El procesador Intel N150 dispone de cuatro núcleos y alcanza hasta 3,6 GHz. El equipo incluye Windows 11 Pro, salida HDMI y DisplayPort, almacenamiento SSD y soporte VESA.
+Es la elección de la tabla de hardware (tarea 8, sección 3.2). Incluye la pantalla táctil que pide la tarea 7 (RT-03), por lo que no hace falta monitor aparte, y tiene puertos suficientes para bloquear los USB por directiva (RT-05).
 
-Este equipo es suficiente para ejecutar aplicaciones de ofimática, navegador, software TPV y acceso al ERP. El uso de Windows 11 Pro facilita la aplicación de medidas de seguridad y la utilización de cuentas sin privilegios administrativos.
-
-**Producto:** Blackview MP20 Intel N150, 8 GB RAM y SSD de 256 GB  
+**Producto:** Iggual AIO B156.88.N100  
 **Cantidad:** 2  
-**Precio unitario:** 155,00 €  
-**Subtotal:** 310,00 €  
-**Fuente:** [PcComponentes - Blackview MP20](https://www.pccomponentes.com/blackview-mp20-mini-pc-intel-n150-8gb-256gb-ssd-windows-11-pro-negro)
+**Precio unitario:** 538,99 €  
+**Subtotal:** 1.077,98 €  
+**Fuente:** [PcComponentes - Iggual AIO B156.88.N100](https://www.pccomponentes.com/ordenador-todo-en-uno-iggual-aio-b15688n100-intel-n100-8gb-256gb-ssd-uhd-156-windows-11-pro-tactil)
 
 #### Motivos de la elección
 
-- Incluye Windows 11 Pro.
-- Dispone de 8 GB de RAM y SSD de 256 GB.
-- Su tamaño reducido permite instalarlo detrás del monitor.
-- Tiene suficiente rendimiento para un puesto TPV.
-- Consume menos energía que un ordenador de sobremesa tradicional.
-- No se paga por componentes innecesarios, como una tarjeta gráfica dedicada.
+- Pantalla táctil integrada (RT-03).
+- Windows 11 Pro incluido, que permite el modo quiosco y las directivas de seguridad local.
+- 4 núcleos, 8 GB de RAM y SSD de 256 GB, suficientes para el punto de venta de Odoo en el navegador.
+- Un solo equipo por puesto: menos cables y menos dispositivos en la barra.
 
-#### Limitaciones
+#### Limitaciones y riesgos
 
-- El equipo no está pensado para trabajos pesados, edición de vídeo o virtualización intensiva.
-- Al tratarse de un equipo económico, antes de la compra se debe comprobar la garantía y que el vendedor emita factura.
-- Para el TPV y el ERP es suficiente, pero no se utilizará como servidor.
+- No es un TPV de hostelería especializado: no consta refrigeración sin ventilador ni protección contra salpicaduras (RT-09, incidencia H-05 de la tarea 8).
+- **Windows 10 frente a Windows 11:** el enunciado exige Windows 10 y los equipos traen Windows 11 Pro. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en la licencia. La tarea 9 contempla tres licencias de Windows 10 Pro; si finalmente hubiera que comprarlas, su coste no está incluido en este presupuesto.
+- El equipo no se usará como servidor.
 
 ---
 
-### 4.2. Monitores
+### 4.2. Equipo y monitor del gerente
 
-Se seleccionan dos monitores **MSI PRO MP225 de 21,5 pulgadas**, con panel IPS y resolución Full HD.
+Para el despacho del gerente, con arranque dual Windows 10 y Linux (tarea 12), se seleccionan el **Lenovo ThinkCentre Neo 50q Gen 4** y el monitor **Xiaomi A24i de 24"**, según la tarea 8 (secciones 3.1 y 3.4).
 
-El tamaño de 21,5 pulgadas es adecuado para una barra porque permite visualizar el TPV sin ocupar demasiado espacio. La resolución Full HD ofrece suficiente superficie de trabajo para el programa de ventas.
+| Producto | Cantidad | Precio unitario | Subtotal |
+|---|---:|---:|---:|
+| Lenovo ThinkCentre Neo 50q Gen 4 (Core i5-13420H, 16 GB, SSD de 512 GB, Windows 11 Pro) | 1 | 792,67 € | 792,67 € |
+| Xiaomi A24i 24", Full HD IPS | 1 | 90,99 € | 90,99 € |
 
-**Producto:** MSI PRO MP225, 21,5 pulgadas, IPS, Full HD  
-**Cantidad:** 2  
-**Precio unitario:** 79,00 €  
-**Subtotal:** 158,00 €  
-**Fuente:** [PcComponentes - Monitores de 22 pulgadas](https://www.pccomponentes.com/monitores-pc/22-pulgadas/altavoces-integrados-monitor)
+**Fuentes:** [PcComponentes - Lenovo ThinkCentre Neo 50q Gen 4](https://www.pccomponentes.com/lenovo-thinkcentre-neo-50q-gen-4-intel-core-i5-13420h-16gb-512gb-ssd) y las referencias de la tarea 8.
 
 #### Motivos de la elección
 
-- Resolución Full HD.
-- Panel IPS con buena visibilidad.
-- Tamaño adecuado para puestos de barra.
-- Precio contenido.
-- Compatible con la salida de vídeo del mini PC.
+- 16 GB de RAM y 512 GB de SSD: espacio para dos sistemas y datos (RG-01, RG-06).
+- Mini PC de 1 litro, que ocupa poco en el despacho.
+- Ethernet Gigabit para la red de oficina (RG-07).
 
-> Antes de comprar se debe comprobar que el monitor incluya un cable compatible con la salida de vídeo del TPV. Si no lo incluye, será necesario añadir el cable correspondiente.
+> A fecha de la tarea 8, la tienda no tenía fecha de entrada del Neo 50q Gen 4 (incidencia H-03). Hay que buscar el mismo modelo en otra tienda o el sucesor antes de comprar.
 
 ---
 
@@ -133,13 +124,13 @@ El tamaño de 21,5 pulgadas es adecuado para una barra porque permite visualizar
 
 Se seleccionan dos impresoras **Epson TM-T20IV**, referencia `C31CL47102`.
 
-La Epson TM-T20IV es una impresora térmica profesional para puntos de venta. Imprime a una velocidad de hasta 250 mm/s, utiliza papel térmico de 80 mm, incorpora cortador automático y permite conexión USB, Ethernet y RS-232.
+La Epson TM-T20IV es una impresora térmica profesional para puntos de venta. Imprime a una velocidad de hasta 250 mm/s, utiliza papel térmico de 80 mm, incorpora cortador automático y permite conexión USB, Ethernet y RS-232. Es el modelo vigente que sustituye a la TM-T20III, descatalogada por Epson, de la primera versión de la tarea 8.
 
 **Producto:** Epson TM-T20IV Ethernet/USB/RS-232  
 **Referencia:** C31CL47102  
 **Cantidad:** 2  
-**Precio unitario:** 203,59 €  
-**Subtotal:** 407,18 €  
+**Precio unitario:** 199,86 € (consultado el 23/10/2026; el 22/10/2026 se consultó a 203,59 €)  
+**Subtotal:** 399,72 €  
 **Fuente:** [PcComponentes - Epson TM-T20IV](https://www.pccomponentes.com/impresora-termica-ethernet-usb-rs-232-epson-tm-t20iv-con-cortador-automatico-y-codigos-de-barras)
 
 #### Motivos de la elección
@@ -148,16 +139,12 @@ La Epson TM-T20IV es una impresora térmica profesional para puntos de venta. Im
 - Utiliza papel térmico, por lo que no necesita tinta ni tóner.
 - Alcanza una velocidad de impresión de 250 mm/s.
 - Incorpora cortador automático.
-- Permite conexión mediante Ethernet y USB.
+- Permite conexión mediante Ethernet y USB (RI-05).
 - Ofrece compatibilidad con Windows.
-- Ethernet permite asignar una dirección IP fija a cada impresora.
-- La conexión USB puede utilizarse como alternativa durante las pruebas.
 
-#### Configuración prevista
+#### Conexión
 
-Cada impresora se conectará preferentemente mediante Ethernet a la red interna. Se configurará una reserva DHCP o una dirección IP fija fuera del rango DHCP.
-
-Ejemplo:
+La recomendación de la tarea 8 es conectar cada impresora **por USB** directamente a su TPV: no necesita IP, ni reglas de cortafuegos, ni deja un panel de administración expuesto en la red (RI-06). La interfaz Ethernet queda disponible. Si el plano de red (tarea 23) decide imprimir por red, se configurará una reserva DHCP o una dirección IP fija fuera del rango DHCP, por ejemplo:
 
 | Dispositivo | Dirección prevista |
 |---|---|
@@ -165,6 +152,8 @@ Ejemplo:
 | Impresora TPV 2 | 192.168.10.22 |
 
 Las direcciones definitivas se establecerán durante la configuración de red.
+
+> La página de la tienda no indica si el precio incluye IVA ni menciona la salida para cajón (RI-04). Hay que confirmarlo antes de comprar.
 
 ---
 
@@ -268,13 +257,14 @@ Antes de contratar la línea se deberá comprobar:
 
 | Concepto | Cantidad | Precio unitario | Subtotal |
 |---|---:|---:|---:|
-| Blackview MP20, Intel N150, 8 GB, SSD 256 GB, Windows 11 Pro | 2 | 155,00 € | 310,00 € |
-| Monitor MSI PRO MP225 de 21,5 pulgadas | 2 | 79,00 € | 158,00 € |
-| Impresora Epson TM-T20IV Ethernet/USB | 2 | 203,59 € | 407,18 € |
+| Lenovo ThinkCentre Neo 50q Gen 4 (gerente) | 1 | 792,67 € | 792,67 € |
+| Monitor Xiaomi A24i 24" (gerente) | 1 | 90,99 € | 90,99 € |
+| Iggual AIO B156.88.N100 táctil, Windows 11 Pro (TPV) | 2 | 538,99 € | 1.077,98 € |
+| Impresora Epson TM-T20IV Ethernet/USB/RS-232 | 2 | 199,86 € | 399,72 € |
 | Router TP-Link Archer C6 V3 AC1200 | 2 | 42,99 € | 85,98 € |
-| **Total de inversión inicial** |  |  | **961,16 €** |
+| **Total de inversión inicial** |  |  | **2.447,34 €** |
 
-Los importes de la inversión inicial incluyen IVA según los precios publicados por las tiendas consultadas.
+De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impresoras) y 85,98 € los routers. Los importes se toman de los precios publicados por las tiendas consultadas; las páginas no indican siempre si incluyen IVA (incidencia H-02 de la tarea 8), así que hay que confirmarlo antes de la compra.
 
 ### 5.2. Costes recurrentes
 
@@ -286,11 +276,11 @@ Los importes de la inversión inicial incluyen IVA según los precios publicados
 
 | Tipo de coste | Total |
 |---|---:|
-| Inversión inicial | 961,16 € |
+| Inversión inicial | 2.447,34 € |
 | Conexión WAN durante 12 meses | 588,12 € |
-| **Coste total estimado del primer año** | **1.549,28 €** |
+| **Coste total estimado del primer año** | **3.035,46 €** |
 
-> No se incluyen posibles gastos de envío, instalación del operador, cableado estructurado, canaletas, rollos de papel, teclado, ratón ni licencias del ERP. Estos elementos dependerán de las existencias del centro y de las características físicas definitivas del local.
+> No se incluyen posibles gastos de envío, instalación del operador, cableado estructurado, canaletas, rollos de papel, teclado y ratón del gerente, SAI, licencias de Windows 10 (si fueran necesarias) ni licencias del ERP. Estos elementos dependerán de las existencias del centro y de las características físicas definitivas del local.
 
 ---
 
@@ -298,8 +288,9 @@ Los importes de la inversión inicial incluyen IVA según los precios publicados
 
 | Elemento | Proveedor o fabricante | Enlace |
 |---|---|---|
-| Equipos TPV | PcComponentes | [Blackview MP20](https://www.pccomponentes.com/blackview-mp20-mini-pc-intel-n150-8gb-256gb-ssd-windows-11-pro-negro) |
-| Monitores | PcComponentes | [Monitores de 22 pulgadas](https://www.pccomponentes.com/monitores-pc/22-pulgadas/altavoces-integrados-monitor) |
+| Equipos TPV | PcComponentes | [Iggual AIO B156.88.N100](https://www.pccomponentes.com/ordenador-todo-en-uno-iggual-aio-b15688n100-intel-n100-8gb-256gb-ssd-uhd-156-windows-11-pro-tactil) |
+| Equipo del gerente | PcComponentes | [Lenovo ThinkCentre Neo 50q Gen 4](https://www.pccomponentes.com/lenovo-thinkcentre-neo-50q-gen-4-intel-core-i5-13420h-16gb-512gb-ssd) |
+| Monitor del gerente | Tarea 8 | Xiaomi A24i, referencias en `08-tabla-hardware.md` |
 | Impresoras | PcComponentes | [Epson TM-T20IV](https://www.pccomponentes.com/impresora-termica-ethernet-usb-rs-232-epson-tm-t20iv-con-cortador-automatico-y-codigos-de-barras) |
 | Especificaciones de impresora | Epson | [Soporte Epson TM-T20](https://www.epson.es/es_ES/support/sc/tm-t20/s/s2405) |
 | Routers | MediaMarkt | [TP-Link Archer C6](https://www.mediamarkt.es/es/product/_router-tp-link-archer-c6-wifi-doble-banda-5xpuertos-gigabit-mu-mimo-wpa3-tecnologia-onemesh-negro-1524001.html) |
@@ -321,12 +312,14 @@ Los importes de la inversión inicial incluyen IVA según los precios publicados
                   Router principal Archer C6
                      192.168.10.1/24
                             |
-             +--------------+--------------+
-             |              |              |
-           TPV 1          TPV 2       Red Wi-Fi interna
-             |              |
-       Impresora 1     Impresora 2
-      192.168.10.21   192.168.10.22
+        +---------------+---+-----------+
+        |               |               |
+      TPV 1           TPV 2     Gerente (despacho)
+        |               |
+  Impresora 1      Impresora 2          Red Wi-Fi interna
+ (USB al TPV;     (USB al TPV;
+  Ethernet:        Ethernet:
+  192.168.10.21)   192.168.10.22)
 
                             |
                          Enlace WDS
@@ -356,7 +349,7 @@ Aunque la seguridad se configurará y documentará con más detalle en las tarea
 9. Conectar los TPV mediante Ethernet.
 10. Asignar direcciones conocidas a las impresoras.
 11. Desactivar DHCP en el router secundario.
-12. Crear cuentas de usuario sin privilegios administrativos en los TPV.
+12. Crear cuentas de usuario sin privilegios administrativos en los TPV y en el equipo del gerente.
 13. Aplicar actualizaciones de seguridad de Windows.
 14. Instalar únicamente el software necesario.
 15. Realizar pruebas de aislamiento y conectividad después de la instalación.
@@ -451,10 +444,8 @@ Si el equipo de la operadora no puede configurarse en modo puente, el Archer C6 
 
 ## 11. Conclusión
 
-La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **961,16 €** y un coste total aproximado durante el primer año de **1.549,28 €**.
+La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **2.447,34 €** (2.361,36 € de equipos de la tarea 8 más 85,98 € de routers) y un coste total aproximado durante el primer año de **3.035,46 €**, con la conexión WAN incluida.
 
-Los mini PC seleccionados ofrecen recursos suficientes para utilizarse como TPV en Windows sin pagar por componentes innecesarios. Las impresoras Epson proporcionan conectividad Ethernet y USB, velocidad adecuada y cortador automático.
+Los TPV táctiles incluyen Windows Pro para aplicar el modo quiosco y mínimos privilegios. Las impresoras Epson TM-T20IV ofrecen USB y Ethernet, velocidad adecuada y cortador automático. La utilización de dos routers TP-Link Archer C6 del mismo modelo permite diseñar una red Gigabit, utilizar WPA3 en las redes compatibles y realizar la práctica de ampliación de cobertura mediante WDS.
 
-La utilización de dos routers TP-Link Archer C6 del mismo modelo permite diseñar una red Gigabit, utilizar WPA3 en las redes compatibles y realizar la práctica de ampliación de cobertura mediante WDS.
-
-Antes de efectuar cualquier compra se deberán confirmar los precios, la disponibilidad, las condiciones de garantía y, especialmente, la versión de hardware y el soporte WDS de los routers.
+Antes de efectuar cualquier compra se deberán confirmar los precios, la disponibilidad (sobre todo del Lenovo Neo 50q), si los precios incluyen IVA, las condiciones de garantía, la licencia de Windows 10 y, especialmente, la versión de hardware y el soporte WDS de los routers.
