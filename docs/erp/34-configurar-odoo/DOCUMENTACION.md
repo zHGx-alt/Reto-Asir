@@ -85,3 +85,36 @@ y, en las pruebas, el entorno de test de Hacienda. Hay que decidir cuál aplica 
 - **35 · Caso de uso automatizado (Adrian):** emitir una factura por la API. Ya están la empresa, el IVA, los diarios y los usuarios.
 - **36 · Importar/exportar (Peio):** importar el catálogo de productos (CSV → `product.template`, con `available_in_pos = True`).
 - **37 · Ticket (Eneko.P):** asociar la impresora de la tarea 14 al TPV 1 (*Punto de Venta → Configuración → TPV 1 → Impresora de recibos*).
+
+## 8. Prueba completa del TPV de barra (23/10/2026)
+
+### 8.1 Carta, salas y mesas de ejemplo
+Script: [`cargar-carta-y-mesas.py`](cargar-carta-y-mesas.py) (log: [`evidencias/salida-carta-y-mesas.log`](evidencias/salida-carta-y-mesas.log)).
+
+| | |
+|---|---|
+| Carta | 15 productos en 5 categorías (Cafés, Bebidas, Entrantes, Platos, Postres). **Es de ejemplo**: la carta real se importa en la tarea 36 |
+| IVA | **10 % de hostelería con el IVA incluido en el precio** (`10% S (IVA incluido)`): el PVP de la carta es exactamente lo que se cobra |
+| Salas | **Sala** (mesas 1-6, 4 comensales) y **Barra** (puestos 11-14), en los dos TPV |
+| Precios en pantalla | Con IVA incluido (`iface_tax_included = total`) |
+
+### 8.2 Venta real desde la pantalla, como `cajero1`
+
+| # | Paso | Resultado | Captura |
+|---|---|---|---|
+| 1 | Entrar como `cajero1` | Solo ve Conversaciones, Calendario, Contactos, Tableros, **Punto de venta**, Empleados y Aplicaciones. **No** ve Ventas, Facturación, Inventario ni Ajustes | [01](evidencias/tpv/01-apps-que-ve-el-cajero.jpg) |
+| 2 | Abrir la caja del TPV Barra 1 con **100 €** de cambio | Sala con las mesas 1-6 | [02](evidencias/tpv/02-caja-abierta-sala.jpg) |
+| 3 | Mesa 3: 2 menús del día, 2 cañas y 1 café | **35,50 €** (IVA incluido 3,23 €) | [03](evidencias/tpv/03-pedido-mesa-3.jpg) |
+| 4 | Cobro en efectivo con 40 € | **Cambio 4,50 €** | [04](evidencias/tpv/04-cobro-efectivo-cambio.jpg) |
+| 5 | Validar | Ticket = **factura simplificada 262-1-000001**, mesa 3, 4 comensales, base 32,27 € + IVA 10 % 3,23 €, QR para pedir factura completa | [05](evidencias/tpv/05-ticket-factura-simplificada.jpg) |
+| 6 | Cierre de caja | Esperado **135,50 €** (100 + 35,50), contado 135,50 €, **diferencia 0,00 €** | [06](evidencias/tpv/06-cierre-de-caja-cuadrado.jpg) |
+| 7 | Comprobación en el servidor | Sesión `TPV Barra 1/00001` cerrada; pedido `done`; **asiento contable `POSS/2026/10/0001` validado**: Clientes (TPV) 35,50 debe / Ventas 32,27 haber / IVA repercutido 3,23 haber | [07](evidencias/tpv/07-comprobacion-servidor.txt) |
+
+### 8.3 Incidencias de la prueba
+
+| # | Incidencia | Causa | Solución |
+|---|---|---|---|
+| 6 | **2 cañas a 2,50 € salían 4,99 €** (total 35,49 € en vez de 35,50 €) | El precio se guardaba **sin IVA** y Odoo lo redondea a 2 decimales: 2,50 / 1,10 = 2,2727 → 2,27; al sumar el IVA a 2 unidades se pierde 1 céntimo | Impuesto **`10% S (IVA incluido)`** (`price_include_override = tax_included`) y precio = PVP. Es lo correcto en hostelería, donde los precios al público llevan el IVA. El pedido erróneo quedó **cancelado** (`261-1-000001`) |
+| 7 | Con la caja abierta, el script no podía cambiar la carta ni las salas (*"Please close and validate the following open PoS Session"*) | Odoo bloquea los cambios de configuración del TPV durante un turno | El script lo detecta y avisa. Con la caja abierta solo actualiza precio e impuesto, y el TPV coge los cambios con **≡ → Volver a cargar datos → Completo** |
+| 8 | Aviso *"Failed to register a ServiceWorker"* al abrir el TPV | El *service worker* es lo que deja al TPV **seguir cobrando sin red**, y los navegadores **solo lo permiten con HTTPS** (o en `localhost`) | El TPV funciona igual, pero **en los TPV reales, que entran por `http://IP:8069`, no habrá modo sin conexión hasta que Odoo tenga HTTPS** (tarea 46). Es otro motivo para el proxy HTTPS |
+| 9 | Almacén llamado "Tienda Reto ASIR" y una sala "Almi-Chain" de más en cada TPV | El almacén se creó con el nombre provisional de la empresa; `pos_restaurant` crea una sala por TPV | Almacén renombrado a Almi-Chain (`configurar-odoo.py`) y salas sobrantes archivadas (`cargar-carta-y-mesas.py`) |

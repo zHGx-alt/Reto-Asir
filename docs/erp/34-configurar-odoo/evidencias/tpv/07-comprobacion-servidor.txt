@@ -1,0 +1,10 @@
+Sesión: TPV Barra 1/00001 | estado: closed | usuario: Cajero TPV 1 | pedidos: 2 | cobrado: 35.5
+   Caja: apertura 100.0 | contado al cierre 135.5 | diferencia 0.0
+   Pedido: 262-1-000001 | estado: done | total 35.5 | IVA 3.2300000000000004 | mesa Sala, 3 | comensales 4
+   Pedido: 261-1-000001 | estado: cancel | total 35.49 | IVA 3.2300000000000004 | mesa Sala, 3 | comensales 4
+   Asiento contable: POSS/2026/10/0001 | estado: posted | diario: Punto de venta
+      Taxation authorities, output VAT                 debe    0.00  haber    3.23
+      Merchandise sold                                 debe    0.00  haber   32.27
+      Trade receivables (euros) (PoS)                  debe   35.50  haber    0.00
+Sesión: / | estado: opening_control | usuario: Cajero TPV 1 | pedidos: 0 | cobrado: 0.0
+   Caja: apertura 135.5 | contado al cierre 0.0 | diferencia -135.5

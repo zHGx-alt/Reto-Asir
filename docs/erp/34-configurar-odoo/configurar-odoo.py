@@ -70,6 +70,10 @@ es = x("res.country", "search", [["code", "=", "ES"]])[0]
 eur = x("res.currency", "search", [["name", "=", "EUR"]], context={"active_test": False})[0]
 x("res.currency", "write", [eur], {"active": True})
 x("res.company", "write", [1], {"name": EMPRESA, "country_id": es, "currency_id": eur})
+# el almacén se crea con el nombre que tuviera la empresa al instalar Inventario
+almacenes = x("stock.warehouse", "search", [])
+if almacenes:
+    x("stock.warehouse", "write", almacenes, {"name": EMPRESA})
 print("   ", x("res.company", "read", [1], fields=["name", "country_id", "currency_id"])[0])
 
 paso("2/4 Instalando módulos (puede tardar unos minutos)")
