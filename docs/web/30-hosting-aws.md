@@ -15,7 +15,7 @@ El enunciado pide que la web se sirva **por HTTPS, con dominio propio, alojada e
 
 ```
                                    EC2 (Ubuntu 24.04, IP elástica)
-Navegador ──HTTPS──▶ almichain.duckdns.org ──▶ nginx + certificado Let's Encrypt
+Navegador ──HTTPS──▶ almichain1.duckdns.org ──▶ nginx + certificado Let's Encrypt
                                                  ▲
                                                  │ aws s3 sync cada 5 min (rol LabInstanceProfile)
                                                  │
@@ -27,7 +27,7 @@ Navegador ──HTTPS──▶ almichain.duckdns.org ──▶ nginx + certifica
 | **Bucket S3** | Guarda la versión publicada de la web. Es **privado**: solo lo leen la EC2 (por su rol) y el equipo (con sus credenciales). |
 | **EC2 + nginx** | Sirve la web por HTTPS y redirige HTTP a HTTPS. Cada 5 minutos descarga del bucket los cambios. |
 | **IP elástica** | Fija la IP pública de la EC2: no cambia aunque la instancia se pare y se vuelva a arrancar. |
-| **DuckDNS** | Dominio gratuito `almichain.duckdns.org`, con un registro A que apunta a la IP elástica. |
+| **DuckDNS** | Dominio gratuito `almichain1.duckdns.org`, con un registro A que apunta a la IP elástica. |
 | **Let's Encrypt (certbot)** | Certificado TLS gratuito que se renueva solo. |
 
 ### Por qué no CloudFront
@@ -45,7 +45,7 @@ Con una EC2 con IP elástica basta un registro A, y Let's Encrypt sí emite cert
 |---|---|
 | Cuenta de AWS | AWS Academy Learner Lab (50 $ de crédito) |
 | Región | `us-east-1` (N. Virginia) |
-| Dominio | `almichain.duckdns.org` (cuenta gratuita en [duckdns.org](https://www.duckdns.org)) |
+| Dominio | `almichain1.duckdns.org` (cuenta gratuita en [duckdns.org](https://www.duckdns.org)) |
 | Herramientas | AWS CLI v2 y un cliente SSH en el equipo de trabajo |
 
 En todo el documento, `<bucket>` es el nombre del bucket (por ejemplo `almi-chain-web-2026`; los nombres de bucket son únicos en todo AWS) y `<ip-elastica>` la IP pública fija de la EC2.
@@ -95,11 +95,11 @@ En todo el documento, `<bucket>` es el nombre del bucket (por ejemplo `almi-chai
 ### 4.5 DuckDNS
 
 1. Entrar en [duckdns.org](https://www.duckdns.org) con una cuenta de GitHub o Google.
-2. Crear el subdominio `almichain`.
+2. Crear el subdominio `almichain1`.
 3. En el campo **current ip**, poner `<ip-elastica>` y pulsar **update ip**.
 4. Comprobar que resuelve a la IP elástica:
    ```
-   nslookup almichain.duckdns.org
+   nslookup almichain1.duckdns.org
    ```
 
 > El **token** de DuckDNS permite cambiar la IP del dominio. No se sube al repositorio ni se pega en capturas.
@@ -115,14 +115,14 @@ scp -i labsuser.pem scripts/web/instalar-servidor-web.sh ubuntu@<ip-elastica>:
 ssh -i labsuser.pem ubuntu@<ip-elastica>
 ```
 ```
-sudo BUCKET=<bucket> DOMINIO=almichain.duckdns.org EMAIL=<correo> ./instalar-servidor-web.sh
+sudo BUCKET=<bucket> DOMINIO=almichain1.duckdns.org EMAIL=<correo> ./instalar-servidor-web.sh
 ```
 
 El script [`scripts/web/instalar-servidor-web.sh`](../../scripts/web/instalar-servidor-web.sh) hace lo siguiente:
 
 1. Instala nginx, certbot y la AWS CLI.
 2. Descarga la web del bucket a `/var/www/almichain`. Crea `/usr/local/bin/actualizar-web` y una tarea de cron que la vuelve a descargar cada 5 minutos.
-3. Configura nginx para `almichain.duckdns.org`. Oculta la versión del servidor (`server_tokens off`) y añade las cabeceras de seguridad: HSTS, `X-Content-Type-Options`, `X-Frame-Options` y `Referrer-Policy`.
+3. Configura nginx para `almichain1.duckdns.org`. Oculta la versión del servidor (`server_tokens off`) y añade las cabeceras de seguridad: HSTS, `X-Content-Type-Options`, `X-Frame-Options` y `Referrer-Policy`.
 4. Pide el certificado a Let's Encrypt con certbot, que también configura la redirección de HTTP a HTTPS. Certbot deja programada la renovación automática (`certbot.timer`).
 
 El correo solo lo usa Let's Encrypt para avisar si un certificado va a caducar sin renovarse.
@@ -131,9 +131,9 @@ El correo solo lo usa Let's Encrypt para avisar si un certificado va a caducar s
 
 | Prueba | Comando o acción | Resultado esperado |
 |---|---|---|
-| HTTP redirige a HTTPS | `curl -I http://almichain.duckdns.org` | `301` con `Location: https://almichain.duckdns.org/` |
-| HTTPS funciona | `curl -I https://almichain.duckdns.org` | `200` y la cabecera `strict-transport-security` |
-| Certificado válido | Abrir la web y pulsar el candado | Emitido por Let's Encrypt para `almichain.duckdns.org` |
+| HTTP redirige a HTTPS | `curl -I http://almichain1.duckdns.org` | `301` con `Location: https://almichain1.duckdns.org/` |
+| HTTPS funciona | `curl -I https://almichain1.duckdns.org` | `200` y la cabecera `strict-transport-security` |
+| Certificado válido | Abrir la web y pulsar el candado | Emitido por Let's Encrypt para `almichain1.duckdns.org` |
 | Renovación automática | En la EC2: `sudo certbot renew --dry-run` | `Congratulations, all simulated renewals succeeded` |
 | Bucket privado | `curl -I https://<bucket>.s3.us-east-1.amazonaws.com/index.html` | `403 Forbidden` |
 | Versión del servidor oculta | Cabecera `server` de `curl -I` | `nginx`, sin número de versión |
