@@ -1,0 +1,11 @@
+evdev-ok
+stick virtual creado: /dev/input/event7
+	SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS     (NULL)
+	SDL_ACCELEROMETER_AS_JOYSTICK            (NULL)
+Input: Adding keyboard #1: System keyboard (device id: System keyboard)
+Input: Adding mouse #1: System mouse (device id: System mouse)
+Input: Adding lightgun #1: System pointer gun 1 (device id: System pointer gun 1)
+Game Controller: LLC Arduino Leonardo [GUID 0300cb9d412300003680000001000000] Vendor ID 2341, Product ID 8036, Revision 0001, Serial <nullptr>
+Game Controller:   ...  mapping [0300cb9d412300003680000001000000,LLC Arduino Leonardo,a:b0,b:b1,x:b2,y:b3,back:b6,start:b7,leftshoulder:b4,rightshoulder:b5,leftx:a0,lefty:a1,crc:9dcb,platform:Linux]
+Input: Adding joystick #1: LLC Arduino Leonardo (device id: 0300cb9d412300003680000001000000)
+Game Controller: Got SDL joystick added event for reconnected game controller LLC Arduino Leonardo [ID 0300cb9d412300003680000001000000]

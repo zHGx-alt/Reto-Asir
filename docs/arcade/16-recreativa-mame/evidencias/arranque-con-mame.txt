@@ -1,0 +1,6 @@
+Startup finished in 2.421s (kernel) + 2.249s (userspace) = 4.670s 
+multi-user.target reached after 2.248s in userspace.
+734 /usr/lib/xorg/Xorg :0 -nocursor vt1 -keeptty -auth /tmp/serverauth.3lpRmGL1Y7
+745 /usr/games/mame -rompath /home/arcade/roms -skip_gameinfo
+               total       usado       libre  compartido   búf/caché  disponible
+Mem:           1,4Gi       406Mi       851Mi       4,5Mi       347Mi       1,0Gi

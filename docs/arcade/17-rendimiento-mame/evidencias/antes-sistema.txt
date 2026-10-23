@@ -1,0 +1,89 @@
+== systemd-analyze
+Startup finished in 9.593s (kernel) + 2.513s (userspace) = 12.106s 
+multi-user.target reached after 2.513s in userspace.
+== blame
+579ms dev-sda1.device
+238ms user@1001.service
+233ms keyboard-setup.service
+202ms user@1000.service
+187ms apparmor.service
+170ms e2scrub_reap.service
+160ms systemd-udev-load-credentials.service
+154ms systemd-udev-trigger.service
+153ms modprobe@drm.service
+141ms systemd-journald.service
+128ms systemd-remount-fs.service
+128ms grub-common.service
+123ms networking.service
+117ms systemd-logind.service
+117ms wtmpdb-update-boot.service
+== critical-chain
+The time when unit became active or started is printed after the "@" character.
+The time the unit took to start is printed after the "+" character.
+
+multi-user.target @2.513s
+└─ssh.service @2.419s +92ms
+  └─network.target @2.412s
+    └─networking.service @2.287s +123ms
+      └─apparmor.service @2.094s +187ms
+        └─local-fs.target @2.091s
+          └─tmp.mount @2.066s +24ms
+            └─swap.target @1.607s
+              └─dev-disk-by\x2duuid-f2590277\x2dae7a\x2d4c86\x2d975c\x2dc68e94959633.swap @1.567s +36ms
+                └─dev-disk-by\x2duuid-f2590277\x2dae7a\x2d4c86\x2d975c\x2dc68e94959633.device @1.542s
+== servicios activos
+cron.service
+dbus.service
+getty@tty1.service
+ssh.service
+systemd-journald.service
+systemd-logind.service
+systemd-timesyncd.service
+systemd-udevd.service
+user@1000.service
+user@1001.service
+== timers
+systemd-tmpfiles-clean.timer
+apt-daily.timer
+dpkg-db-backup.timer
+logrotate.timer
+man-db.timer
+apt-daily-upgrade.timer
+e2scrub_all.timer
+fstrim.timer
+== habilitados
+apparmor.service
+console-setup.service
+cron.service
+e2scrub_reap.service
+getty@.service
+grub-common.service
+keyboard-setup.service
+networking.service
+ssh.service
+sshd-keygen.service
+systemd-pstore.service
+systemd-timesyncd.service
+wtmpdb-update-boot.service
+remote-fs.target
+apt-daily-upgrade.timer
+apt-daily.timer
+dpkg-db-backup.timer
+e2scrub_all.timer
+fstrim.timer
+logrotate.timer
+man-db.timer
+== procesos
+112
+== ram
+               total       usado       libre  compartido   búf/caché  disponible
+Mem:            1469         445         587           4         575        1023
+Inter:          1100           0        1100
+== disco
+/dev/sda1         19G   2,3G   16G  13% /
+== paquetes
+445
+== cpufreq
+ls: no se puede acceder a '/sys/devices/system/cpu/cpu0/cpufreq': No existe el fichero o el directorio
+== cmdline
+BOOT_IMAGE=/boot/vmlinuz-6.12.113+deb13-amd64 root=UUID=b843203f-8a27-4b19-aacf-c31d82f0ee91 ro quiet loglevel=3

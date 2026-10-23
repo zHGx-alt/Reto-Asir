@@ -1,0 +1,7 @@
+instalar=0
+==> 6/6 Comprobación
+Versión de MAME: 0.276 (unknown)
+Usuario: uid=1001(arcade) gid=1001(arcade) grupos=1001(arcade),29(audio),44(video),996(input)
+Destino de arranque: multi-user.target
+Carpeta de ROMs: /home/arcade/roms (0 archivos)
+5 romsets found, 5 were OK.
