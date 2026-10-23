@@ -20,3 +20,4 @@ El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para pod
 | 2026-10-22 | Eneko.S | Claude | 7 ERP | Comparativa de ERP y elección de Odoo Community (tarea 32) | Fuentes consultadas el 22/10; puntuaciones recalculadas con un script; pendiente de revisar por Markel |
 | 2026-10-22 | Eneko.S | Claude | 8 BD | Scripts DDL en PostgreSQL con reglas, roles y pruebas (tarea 40) | Ejecutados en PostgreSQL 16, 33 pruebas correctas; pendiente de revisar por Adrian |
 | 2026-10-23 | Eneko.S | Claude | 1 Hardware | Revisión de la tarea 10 contra la tabla de hardware (tarea 8) y redacción del comentario | Incoherencias comprobadas leyendo ambos documentos |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Montaje guiado en el Learner Lab, pruebas externas y guía final de la tarea 30 con evidencias | Montado y probado a mano en AWS; pruebas con curl y openssl desde fuera |
