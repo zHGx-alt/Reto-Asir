@@ -8,7 +8,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 7,Definir necesidades de equipos (gerente; 2 TPV; impresoras),1 Hardware,Eneko.S,Iker,2026-10-22,2026-10-22,,Hecho
 8,Tabla de hardware con justificación,1 Hardware,Eneko.S,Peio,2026-10-23,2026-10-26,7,Hecho
 9,Tabla de software y licencias,1 Hardware,Markel,Eneko.P,2026-10-23,2026-10-26,7,Hecho
-10,Presupuesto con enlaces (incl. WAN y router extra),1 Hardware,Peio,Eneko.S,2026-10-27,2026-10-27,8 9 22,Pendiente
+10,Presupuesto con enlaces (incl. WAN y router extra),1 Hardware,Peio,Eneko.S,2026-10-27,2026-10-27,8 9 22,Hecho
 11,Diagrama de arquitectura de equipos,1 Hardware,Iker,Adrian,2026-10-27,2026-10-28,8 9,En curso
 12,Dual boot Win10 + Linux en el equipo del gerente,2 SO,Eneko.P,Eneko.S,2026-10-28,2026-10-30,8,Hecho
 13,Bastionado de los 2 TPV Windows (usuario estándar; kiosko; USB),2 SO,Markel,Iker,2026-10-28,2026-11-02,9,Pendiente
@@ -23,7 +23,7 @@ ID,Tarea,Bloque,Responsable,Revisa,Inicio,Fin,Depende de,Estado
 50,Probar el firmware del stick en físico (HID; comandos; EEPROM),4 Arduino,Adrian,Eneko.P,2026-10-28,2026-10-30,19,Pendiente
 22,Comparativa de operadores WAN,5 Redes,Markel,Eneko.S,2026-10-22,2026-10-23,,Hecho
 23,Plano del local y plan de direccionamiento IP,5 Redes,Adrian,Iker,2026-10-22,2026-10-26,,Pendiente
-24,Configurar red segura (WPA3; invitados; firewall),5 Redes,Peio,Adrian,2026-10-28,2026-10-30,23,En curso
+24,Configurar red segura (WPA3; invitados; firewall),5 Redes,Peio,Adrian,2026-10-28,2026-10-30,23,Hecho
 25,WDS con segundo router y pruebas de cobertura,5 Redes,Peio,Iker,2026-11-02,2026-11-03,24,Pendiente
 26,Análisis de conectividad (Wireshark; nmap),5 Redes,Eneko.S,Markel,2026-11-04,2026-11-05,25,Pendiente
 27,Wireframes y diseño conceptual web,6 Web,Peio,Eneko.S,2026-10-22,2026-10-23,,Hecho
