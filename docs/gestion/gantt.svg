@@ -217,10 +217,10 @@
 <line x1="16" y1="776" x2="1202" y2="776" stroke="#f0efeb"/>
 <text x="16" y="769.0" class="s">23</text>
 <text x="44" y="769.0" class="t">Plano del local y plan de direccionamiento IP</text>
-<circle cx="449" cy="765.0" r="4.5" fill="#eb6834"/>
-<text x="458" y="769.0" class="t">Eneko.P</text>
+<circle cx="449" cy="765.0" r="4.5" fill="#2a78d6"/>
+<text x="458" y="769.0" class="t">Adrian</text>
 <text x="528" y="769.0" class="s">—</text>
-<rect x="644" y="758" width="116" height="14" rx="4" fill="#eb6834"><title>23. Plano del local y plan de direccionamiento IP · Eneko.P · 22/10–26/10 · Pendiente</title></rect>
+<rect x="644" y="758" width="116" height="14" rx="4" fill="#2a78d6"><title>23. Plano del local y plan de direccionamiento IP · Adrian · 22/10–26/10 · Pendiente</title></rect>
 <line x1="16" y1="798" x2="1202" y2="798" stroke="#f0efeb"/>
 <text x="16" y="791.0" class="s">24</text>
 <text x="44" y="791.0" class="t">Configurar red segura (WPA3, invitados, firewall)</text>
