@@ -53,6 +53,8 @@ ln -sf /etc/nginx/sites-available/almichain /etc/nginx/sites-enabled/almichain
 rm -f /etc/nginx/sites-enabled/default
 # En el bloque http, para que también se aplique a la redirección que crea certbot.
 echo "server_tokens off;" > /etc/nginx/conf.d/ocultar-version.conf
+# Ubuntu solo comprime el HTML; se añaden el CSS, el JS y el SVG.
+printf 'gzip_vary on;\ngzip_types text/css application/javascript image/svg+xml;\n' > /etc/nginx/conf.d/compresion.conf
 nginx -t
 systemctl reload nginx
 

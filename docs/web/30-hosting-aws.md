@@ -145,7 +145,7 @@ El script [`scripts/web/instalar-servidor-web.sh`](../../scripts/web/instalar-se
 
 1. Instala nginx, certbot y la AWS CLI.
 2. Descarga la web del bucket a `/var/www/almichain`. Crea `/usr/local/bin/actualizar-web` y una tarea de cron que la vuelve a descargar cada 5 minutos.
-3. Configura nginx para el dominio. Oculta la versión del servidor (`server_tokens off`) y añade las cabeceras de seguridad: HSTS, `X-Content-Type-Options`, `X-Frame-Options` y `Referrer-Policy`.
+3. Configura nginx para el dominio. Oculta la versión del servidor (`server_tokens off`), comprime con gzip el CSS y el JavaScript, y añade las cabeceras de seguridad: HSTS, `X-Content-Type-Options`, `X-Frame-Options` y `Referrer-Policy`.
 4. Pide el certificado a Let's Encrypt con certbot, que también configura la redirección de HTTP a HTTPS y deja programada la renovación automática.
 
 Termina con `Listo: https://almichain1.duckdns.org`. El correo solo lo usa Let's Encrypt para avisar si un certificado va a caducar sin renovarse.
