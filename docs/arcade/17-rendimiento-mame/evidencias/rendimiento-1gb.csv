@@ -1,0 +1,4 @@
+etiqueta,fecha,kernel_s,userspace_s,total_s,mame_abierto_s,ram_usada_mb,rss_mame_mb,procesos,servicios,timers,disco_mb,bench_gridlee_pct,bench_robby_pct
+antes,2026-10-23 09:24:55,2.416,3.330,5.746,7.02,408,335,102,10,9,2283,1000.43,671.00
+antes,2026-10-23 09:25:48,2.807,3.462,6.270,7.57,395,326,100,10,9,2283,903.79,685.57
+antes,2026-10-23 09:26:36,2.394,3.171,5.565,6.79,398,323,102,10,9,2283,896.43,698.00

@@ -1,0 +1,44 @@
+
+==> 1/6 Instalando paquetes mínimos (MAME + X11 sin escritorio)
+Obj:1 http://security.debian.org/debian-security trixie-security InRelease
+Obj:2 http://deb.debian.org/debian trixie InRelease
+Obj:3 http://deb.debian.org/debian trixie-updates InRelease
+Leyendo lista de paquetes...
+Leyendo lista de paquetes...
+Creando árbol de dependencias...
+Leyendo la información de estado...
+mame ya está en su versión más reciente (0.276+dfsg.1-1+deb13u1).
+xserver-xorg-core ya está en su versión más reciente (2:21.1.16-1.3+deb13u4).
+xserver-xorg-input-libinput ya está en su versión más reciente (1.5.0-1).
+xinit ya está en su versión más reciente (1.4.2-1).
+x11-xserver-utils ya está en su versión más reciente (7.7+11).
+libgl1-mesa-dri ya está en su versión más reciente (25.0.7-2+deb13u1).
+alsa-utils ya está en su versión más reciente (1.2.14-1).
+0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 0 no actualizados.
+
+==> 2/6 Creando el usuario 'arcade' (sin sudo y sin contraseña de acceso)
+
+==> 3/6 Configurando el inicio de sesión automático en tty1
+
+==> 4/6 Configurando el arranque directo a MAME
+
+==> 5/6 Acelerando el arranque (GRUB sin espera y sin mensajes)
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-6.12.113+deb13-amd64
+Found initrd image: /boot/initrd.img-6.12.113+deb13-amd64
+Found linux image: /boot/vmlinuz-6.12.107+deb13-amd64
+Found initrd image: /boot/initrd.img-6.12.107+deb13-amd64
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+
+==> 6/6 Comprobación
+Versión de MAME: 0.276 (unknown)
+Usuario: uid=1001(arcade) gid=1001(arcade) grupos=1001(arcade),29(audio),44(video),996(input)
+Destino de arranque: multi-user.target
+Carpeta de ROMs: /home/arcade/roms (0 archivos)
+
+Listo. Copia las ROMs (archivos .zip, sin descomprimir) en /home/arcade/roms
+y reinicia con:  sudo reboot
