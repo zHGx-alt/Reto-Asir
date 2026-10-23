@@ -44,13 +44,15 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 |---|---|
 | BD · Modelo E/R | Claude (ver [registro-ia.md](registro-ia.md)) |
 | Arduino · Firmware HID y EEPROM | Claude; librería [mheironimus/ArduinoJoystickLibrary](https://github.com/MHeironimus/ArduinoJoystickLibrary) |
+| Web · Hosting | Claude Code; [documentación de Certbot](https://eff-certbot.readthedocs.io), [DuckDNS](https://www.duckdns.org/spec.jsp), documentación de Amazon S3 y EC2 |
+| Web · Validación | [Lighthouse](https://developer.chrome.com/docs/lighthouse), [validador Nu del W3C](https://validator.w3.org/nu/) |
 
 ## 4. Alternativas evaluadas
 
 | Decisión | Opciones | Criterios |
 |---|---|---|
 | ERP | Odoo Community, Dolibarr, ERPNext | Módulos requeridos, TPV de restauración, coste de licencia, API |
-| Hosting web | S3 + CloudFront, EC2 | Coste, mantenimiento, HTTPS gestionado |
+| Hosting web | S3 + CloudFront + ACM, S3 + EC2 con nginx | Coste, mantenimiento, HTTPS gestionado, dominio gratuito |
 | IaC | Terraform, CloudFormation | Portabilidad, curva de aprendizaje |
 | SO de la recreativa | Debian mínimo, Alpine, Lakka | Consumo de RAM, soporte de MAME, mantenimiento |
 | Firmware de router | OpenWrt, DD-WRT | Soporte WDS, compatibilidad del hardware |
@@ -64,7 +66,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 |---|---|---|---|
 | Gestión de tareas | GitHub Projects + Gantt en el repo | Integrado con el repositorio; el Gantt se regenera desde el CSV | 21/10/2026 |
 | ERP | | | |
-| Hosting web | | | |
+| Hosting web | Bucket S3 privado + EC2 con nginx, IP elástica, dominio `almichain1.duckdns.org` y certificado de Let's Encrypt | Dominio y certificado gratuitos. DuckDNS solo admite registros A, y CloudFront y ACM necesitan CNAME; con una IP elástica basta un registro A ([tarea 30](../web/30-hosting-aws.md)) | 23/10/2026 |
 | IaC | | | |
 | SO de la recreativa | | | |
 | Firmware de router | | | |
@@ -99,7 +101,10 @@ Incidencias relevantes durante la ejecución:
 
 | Fecha | Bloque | Incidencia | Resolución |
 |---|---|---|---|
-| | | | |
+| 23/10/2026 | Web | Sin presupuesto para un dominio de pago; DuckDNS (gratuito) no admite CNAME, así que no puede apuntar a CloudFront ni validar un certificado de ACM | Se cambia a EC2 con IP elástica y Let's Encrypt; S3 sigue guardando la web ([tarea 30](../web/30-hosting-aws.md), sección 2) |
+| 23/10/2026 | Web | La consola de AWS no admite nombres de grupo de seguridad que empiecen por `sg-` | Se llama `web-almichain-sg` |
+| 23/10/2026 | Web | La redirección de HTTP que crea certbot mostraba la versión de nginx | `server_tokens off` en el bloque `http` del script |
+| 23/10/2026 | Web | Lighthouse: contraste insuficiente en tres textos, imágenes de 1600 px en móvil y un error del W3C | Corregido en `web/` (PR #25); Lighthouse 98-100 |
 
 ## 8. Pruebas
 
@@ -111,8 +116,8 @@ Incidencias relevantes durante la ejecución:
 | Arduino | Stick en MAME y en un segundo emulador | Todas las entradas reconocidas y remapeables | | |
 | Redes | Cliente de la red de invitados accede a la red interna | Acceso bloqueado | | |
 | Redes | Roaming y throughput con WDS | Cobertura ampliada; velocidad medida con iperf3 | | |
-| Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | | |
-| Web | Acceso por HTTP | Redirección a HTTPS con certificado válido | | |
+| Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | W3C sin errores; Lighthouse móvil 98/100/100/100 y escritorio 99/100/100/100 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
+| Web | Acceso por HTTP | Redirección a HTTPS con certificado válido | `301` a HTTPS; certificado de Let's Encrypt válido hasta el 21/01/2027 | [tarea 30, sección 5](../web/30-hosting-aws.md#5-pruebas) |
 | ERP | Pedido en TPV | Factura emitida, enviada por correo y stock descontado | | |
 | BD | Usuario de aplicación ejecuta DDL | Permiso denegado | | |
 | RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | | |

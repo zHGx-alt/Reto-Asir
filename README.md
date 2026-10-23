@@ -8,6 +8,7 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 |---|---|
 | `docs/gestion/` | Anexo I, Anexo II, roles, backlog Kanban y registro de IA |
 | `docs/diagramas/` | Diagramas draw.io (arquitectura, red, AWS, BD) |
+| `docs/web/` | Wireframes (tarea 27) y hosting en AWS (tarea 30) |
 | `docs/evidencias/` | Capturas y logs de pruebas |
 | `iac/` | Infraestructura como código (Terraform/CloudFormation) |
 | `web/` | Página web del restaurante |
@@ -22,6 +23,10 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 - Reparto de tareas: [docs/gestion/roles.md](docs/gestion/roles.md)
 - Planificación (fuente del Gantt y del Kanban): [docs/gestion/backlog-kanban.csv](docs/gestion/backlog-kanban.csv)
 - Uso de IA: [docs/gestion/registro-ia.md](docs/gestion/registro-ia.md)
+
+## Web publicada
+
+La web está en **<https://almichain1.duckdns.org>**, alojada en AWS (bucket S3 + EC2 con nginx y certificado de Let's Encrypt). Solo responde mientras el Learner Lab está arrancado. Cómo se montó y cómo se actualiza: [docs/web/30-hosting-aws.md](docs/web/30-hosting-aws.md).
 
 ## Archivos en Google Drive
 

@@ -1,0 +1,29 @@
+# Lighthouse 12.2.1 y validador Nu del W3C (23/10/2026)
+
+Lighthouse se pasó a los archivos de web/ servidos en local, los mismos que se publicaron en
+https://almichain1.duckdns.org. El W3C valida los archivos de web/ de la rama main.
+
+## Lighthouse · Móvil
+  Rendimiento       98
+  Accesibilidad     100
+  Buenas prácticas  100
+  SEO               100
+  FCP               0.8 s
+  LCP               2.4 s
+  TBT               0 ms
+  CLS               0
+
+## Lighthouse · Escritorio
+  Rendimiento       99
+  Accesibilidad     100
+  Buenas prácticas  100
+  SEO               100
+  FCP               0.3 s
+  LCP               1.0 s
+  TBT               0 ms
+  CLS               0
+
+## W3C index.html
+Document checking completed. No errors found.
+## W3C style.css
+Document checking completed. No errors found.

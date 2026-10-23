@@ -21,3 +21,6 @@ El reto permite usar IA (chat y agéntica). Anotamos cada uso relevante para pod
 | 2026-10-22 | Eneko.S | Claude | 8 BD | Scripts DDL en PostgreSQL con reglas, roles y pruebas (tarea 40) | Ejecutados en PostgreSQL 16, 33 pruebas correctas; pendiente de revisar por Adrian |
 | 2026-10-23 | Eneko.S | Claude | 1 Hardware | Revisión de la tarea 10 contra la tabla de hardware (tarea 8) y redacción del comentario | Incoherencias comprobadas leyendo ambos documentos |
 | 2026-10-23 | Adrian | Claude Code | 6 Web | Montaje guiado en el Learner Lab, pruebas externas y guía final de la tarea 30 con evidencias | Montado y probado a mano en AWS; pruebas con curl y openssl desde fuera |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Capturas de la web implementada para el documento de wireframes (tarea 27) | Generadas con Chrome; comprobado que el mapa carga |
+| 2026-10-23 | Adrian | Claude Code | 6 Web | Revisión de la web contra el enunciado y corrección de contraste, imágenes, favicon y validación | Lighthouse 98-100 y W3C sin errores; pendiente de revisar por Eneko.P (tarea 29) |
+| 2026-10-23 | Adrian | Claude Code | 0 Gestión | Estados del backlog (tareas 12 y 30), Anexo II (hosting, incidencias y pruebas web) y README | Pendiente de revisar por el equipo |
