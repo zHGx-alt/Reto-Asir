@@ -51,7 +51,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Iker | 05/11 | Pendiente | iac/ está vacío. Recursos a crear: docs/web/30-hosting-aws.md; sección 9. | — |
 | 36 | Importar y exportar datos en Odoo | Software | Iker | 05/11 | Pendiente | Pasa de Peio a Iker. | — |
 | 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | Físico | Peio | 05/11 | Pendiente | El ticket ya sale en pantalla (tarea 34; sección 8). Falta imprimirlo en la térmica. Pasa de Eneko.P a Peio. | — |
-| 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | Pendiente | Puntos ya conocidos: Odoo sin HTTPS; root de Batocera con contraseña por defecto; red de invitados y WPA3; contraseñas débiles en la VM del gerente. Pasa de Eneko.S a Adrian. | — |
+| 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | Pendiente | Puntos ya conocidos: Odoo sin HTTPS; root de Batocera con contraseña por defecto; red de invitados y WPA3. Pasa de Eneko.S a Adrian. | — |
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 09/11 | Pendiente | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. | [verificacion.md](../../docs/gestion/verificacion.md) |
 | 48 | Documentación final paso a paso | Documentación | Markel | 10/11 | Pendiente | Punto de partida: LOGICA_RETO.md. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente | — | — |
