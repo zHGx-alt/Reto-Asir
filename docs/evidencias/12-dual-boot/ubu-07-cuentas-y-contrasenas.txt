@@ -1,0 +1,14 @@
+# Tarea 12/55 · Cuentas de Ubuntu tras cambiar las contraseñas (23/10/2026)
+# Leído del disco de la VM apagada, en solo lectura, con libguestfs (guestfish --ro, partición /dev/sda4).
+# De /etc/shadow solo se muestran el nombre y la fecha del último cambio: nunca el hash.
+
+== Cuentas humanas (UID >= 1000) en /etc/passwd
+administrador uid=1000 /bin/bash
+gerente uid=1001 /bin/bash
+
+== Último cambio de contraseña (/etc/shadow, campo 3)
+administrador 2026-10-23
+gerente 2026-10-23
+
+== Grupo sudo (/etc/group)
+sudo:x:27:administrador
