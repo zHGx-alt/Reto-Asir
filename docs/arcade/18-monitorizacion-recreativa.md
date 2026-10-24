@@ -34,7 +34,7 @@ Solo leen `/proc` y `/sys`, así que funcionan en Debian y en Batocera sin insta
 
 ## 4. Cómo usarlo en la recreativa (Debian 13 + MAME)
 
-El sistema elegido, de momento, es **Debian 13 con MAME** (tareas 16 y 17); Batocera está en estudio (tarea 51, sección 4.5). La recreativa está en la Wi-Fi de invitados, aislada, así que **no se llega a ella por SSH desde la LAN** ([tarea 23, apartado 5.2](../redes/23-plano-direccionamiento.md#52-lo-que-se-monta-con-el-hardware-actual)): los scripts se ejecutan **en la propia recreativa, desde su consola**.
+El sistema elegido, de momento, es **Debian 13 con MAME** (tareas 16 y 17); Batocera está en estudio (tarea 51, sección 4.5). La recreativa está en la Wi-Fi de invitados, aislada, así que **no se llega a ella por SSH desde la LAN** ([tarea 23, apartado 5.2](../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): los scripts se ejecutan **en la propia recreativa, desde su consola**.
 
 ### 4.1 Copiar los scripts
 

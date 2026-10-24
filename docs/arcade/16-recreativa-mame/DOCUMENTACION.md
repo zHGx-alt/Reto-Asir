@@ -177,7 +177,7 @@ En el local la recreativa no va por cable: va a la **Wi-Fi de invitados** (tarea
 ## 7. Seguridad aplicada (mínimos privilegios)
 - `arcade` **no** pertenece a `sudo` y su contraseña está bloqueada (`passwd -l`). Solo puede entrar por el autologin de tty1.
 - Las carpetas personales tienen permisos 700. `tecnico` no puede leer `/home/arcade` (comprobado: "Permiso denegado").
-- La administración se hace desde `tecnico` en la consola local, tty2 (`Ctrl+Alt+F2`). SSH solo admite clave (sin contraseña ni root). Como la recreativa está en la Wi-Fi de invitados, con aislamiento entre clientes, desde la LAN no se llega a ella: en el local se administra desde la consola (ver [tarea 23, apartado 5.2](../../redes/23-plano-direccionamiento.md#52-lo-que-se-monta-con-el-hardware-actual)).
+- La administración se hace desde `tecnico` en la consola local, tty2 (`Ctrl+Alt+F2`). SSH solo admite clave (sin contraseña ni root). Como la recreativa está en la Wi-Fi de invitados, con aislamiento entre clientes, desde la LAN no se llega a ella: en el local se administra desde la consola (ver [tarea 23, apartado 5.2](../../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)).
 - No hay entorno de escritorio: el jugador solo tiene acceso a MAME.
 
 ## 8. Incidencias y soluciones

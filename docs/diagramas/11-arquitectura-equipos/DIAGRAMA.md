@@ -66,7 +66,7 @@ flowchart TB
 |---|---|---|---|---|---|---|
 | Servidor | ERP + TPV (Odoo), base de datos y copias | Debian 13, Docker, Odoo 19, PostgreSQL 17, mdadm, restic | Cable, switch (LAN 1) | 192.168.10.10 | 33–37, 40–45, 52 | HP ProDesk 600 G5 MT reacondicionado + 2 × WD Red Plus 2 TB en RAID 1 + SAI APC BX750MI (tarea 10, sección 12; en las pruebas, la VM `ServidorERP`) |
 | Disco USB de copias | Copia 3 del 3-2-1; el gerente se lo lleva fuera del local cada semana | ext4, etiqueta `BACKUP_USB` | USB al servidor | — | 44 | WD Elements Portable 2 TB |
-| Switch | Puertos libres en el armario; VLAN si se monta la opción (a) de la tarea 23 | Firmware de fábrica | Cable, LAN 1 del router 1 | — | 23 | TP-Link TL-SG108E |
+| Switch | Puertos libres en el armario (admite VLAN para la mejora del anexo de la tarea 23) | Firmware de fábrica | Cable, LAN 1 del router 1 | — | 23 | TP-Link TL-SG108E |
 | PC del gerente | Gestión, ofimática y administración | Windows 10 + Ubuntu LTS (arranque dual) | Cable, LAN 2 | 192.168.10.20 | 12 | Lenovo ThinkCentre Neo 50q Gen 4 + monitor Xiaomi A24i |
 | TPV 1 y TPV 2 | Caja de la barra | Windows 10 Pro: usuario estándar, modo quiosco con el navegador en el TPV de Odoo, USB bloqueado | Cable, LAN 3 y 4 | 192.168.10.31 y .32 | 13–15 | Iggual AIO B156.88.N100 (táctil de 15,6") |
 | Impresoras de tickets (2) | Ticket de cada TPV | Driver ESC/POS de Windows | USB a su TPV (sin IP) | — | 14, 37 | Epson TM-T20IV |
@@ -86,8 +86,8 @@ flowchart TB
 - **Los TPV no administran nada:** solo abren el TPV de Odoo en el navegador, con el usuario `cajero1` o `cajero2` (tarea 34).
 - **El bucket S3 es privado:** solo lo lee la EC2 con su rol; al público solo llega nginx por HTTPS.
 
-## 4. Diseño ideal con VLANs
-Con un router o switch que admita VLANs, cada grupo iría en su propia red (servidores, TPV, gerencia, arcade, invitados y gestión), con ACLs que solo dejan pasar lo necesario. Está simulado y probado en Packet Tracer en la [tarea 23](../../redes/23-plano-direccionamiento.md#54-simulación-en-packet-tracer).
+## 4. Red plana y anexo con VLAN
+La red del local es **plana con la Wi-Fi de invitados aislada** (decisión de la [tarea 23, apartados 5.2 y 5.3](../../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): lo que la red no separa entre TPV, gerente y servidor lo separa el cortafuegos de cada equipo. El diseño de mejora con una VLAN por grupo y ACL está simulado en el [anexo de Packet Tracer](../../redes/23-anexo-vlan.pkt) (tarea 23, apartado 5.5).
 
 ## 5. Cómo repetir la instalación de cada equipo
 
@@ -107,5 +107,5 @@ El enunciado pide para los TPV y las impresoras «un diagrama de la arquitectura
 ## 6. Pendiente
 - [ ] Revisión de Adrian.
 - [x] Regenerar `arquitectura-equipos.svg` desde el Mermaid de la sección 1 (24/10/2026).
-- [ ] Cuando se decida la opción de la tarea 23 (apartado 5.5), dibujar las redes que haya de verdad y la WAN.
+- [x] Decisión de la tarea 23 (24/10): red plana con invitados aislada. El diagrama ya dibuja esa red y la WAN.
 - [x] Enlazar en la sección 5 las guías de los TPV y de las impresoras (24/10/2026).
