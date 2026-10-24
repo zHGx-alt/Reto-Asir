@@ -3,7 +3,7 @@
 Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx)), la única fuente fiable. El reto va del **lunes 26/10 al jueves 12/11/2026**.
 
 - **Estado (24/10/2026, segunda tanda):** todo lo que se podía hacer sin el hardware, sin las VM y sin AWS **está hecho y comprobado**. Lo que queda es, sobre todo, **ejecutar** lo preparado en las VM y en el hardware, y guardar las evidencias. Cada punto lleva el comando, quién lo hace (según el [backlog](docs/gestion/backlog-kanban.csv)) y cuándo está terminado.
-- Al terminar un punto: marcarlo `[x]` con la fecha, actualizar la observación del CSV y regenerar el Gantt (`python3 scripts/gantt.py`).
+- **Un punto no está corregido hasta que pasa su checklist de la [sección 10](#10-checklist-para-dar-algo-por-corregido)**: la general (10.1) y la de su bloque (10.2). Entonces se marca `[x]` con la fecha.
 - La revisión original, con la explicación de cada fallo: `git show 215eac7:CORRECIONES.md`.
 - **Gravedad:** 🔴 grave (incumple el enunciado o es un fallo de seguridad) · 🟠 media · 🟢 leve.
 
@@ -222,3 +222,101 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Red configurada de forma segura | Parcial: red decidida (4.1); faltan invitados en el router (4.3), cortafuegos del servidor (4.1) y contraseñas (2.1) |
 | Segundo router por WDS, comprobando que funciona | Sin empezar (4.3) |
 | RA.7 de PAR: conectar redes privadas a públicas | Se demuestra al construir la red real en Packet Tracer (NAT y WAN, 4.2) |
+
+---
+
+## 10. Checklist para dar algo por corregido
+
+Un punto de esta lista **no está corregido porque se haya hecho**, sino cuando se puede **demostrar** que está bien. Para cada corrección: primero la checklist general (10.1) y después la de su bloque (10.2). Antes de la entrega, la final (10.3).
+
+Quien revisa el PR repasa estas mismas casillas: si alguna no se cumple, el PR no se aprueba.
+
+### 10.1 Para cualquier corrección
+
+- [ ] **Funciona de verdad:** se ha probado en el equipo, la VM o el servicio real, no solo en el papel. Si algo no se pudo probar, el documento lo dice con esas palabras.
+- [ ] **Hay evidencia guardada** en la carpeta `evidencias/` de la tarea: salida del comando (`… | tee evidencias/NN-que-es.txt`) o captura. El nombre dice qué demuestra.
+- [ ] **Las evidencias no tienen secretos:** en los `.txt`, ni contraseñas ni tokens; las capturas se abren **ampliadas** y se revisa cada campo (gitleaks no mira dentro de las imágenes: es lo que pasó con la contraseña Wi-Fi).
+- [ ] **El documento de la tarea está al día:** estado, fecha, resultado de la prueba con el enlace a la evidencia y la sección «Pendiente» marcada.
+- [ ] **Coherente con el resto:** si cambia un dato que aparece en otros sitios (una IP, un precio, un nombre, un estado), se busca y se cambia en todos con `git grep -n "dato antiguo"`. Sobre todo en LOGICA_RETO, Anexo II, diagramas y README.
+- [ ] **CSV y Gantt:** estado y observación de la tarea en [`backlog-kanban.csv`](docs/gestion/backlog-kanban.csv) (si pasa a **Hecho**, la columna Evidencia apunta a un fichero que existe) y `python3 scripts/gantt.py` sin errores.
+- [ ] **`bash scripts/verificar-repo.sh` termina con «Todo correcto».**
+- [ ] **Si se usó IA,** una fila en el [registro de IA](docs/gestion/registro-ia.md) con lo que se comprobó a mano.
+- [ ] **Pull Request** con su revisor (nunca quien lo hizo), que repasa esta checklist antes de aprobar.
+- [ ] **Marcado en esta lista** con `[x]` y la fecha.
+
+### 10.2 Por bloque: cómo se comprueba que está bien
+
+**Contraseñas (2.1)**
+- [ ] Router: con la contraseña Wi-Fi **antigua** ya no se conecta; con la nueva sí. La contraseña de administración antigua tampoco entra.
+- [ ] La administración del router solo abre desde el PC del gerente (desde otro equipo, rechazada).
+- [ ] Las contraseñas nuevas están en KeePassXC y en ningún otro sitio (ni capturas, ni chats, ni ficheros de texto).
+- [ ] Restic: `ls tarea-44/.credenciales-backup` en el PC del técnico → «No existe».
+- [ ] Restic, prueba de que la copia de KeePassXC es buena: en el servidor, `sudo restic -r /srv/datos/restic snapshots` sin el fichero de contraseña, pegando la de KeePassXC cuando la pida → lista las copias.
+
+**HTTPS y menús del cajero (2.2)**
+- [ ] `activar-https.sh` termina con HTTPS 200, HTTP 301 y 8069 cerrado.
+- [ ] Desde el TPV, `https://192.168.10.10`: candado **sin avisos**, y la huella del certificado coincide con la que dio el script.
+- [ ] Desde otro equipo de la LAN, `http://192.168.10.10:8069` no responde.
+- [ ] Se puede hacer una venta completa en el TPV por HTTPS.
+- [ ] Después del cambio, `sudo systemctl start backup-odoo` sigue terminando bien (`journalctl -u backup-odoo` → «Copia terminada correctamente»).
+- [ ] `cajero1` solo ve **Punto de venta**; `gerente` sigue viendo todas sus aplicaciones. Captura de los dos.
+
+**RAID y copias (3.1)**
+- [ ] `cat /proc/mdstat` → `[UU]`.
+- [ ] `sudo docker info` → *Docker Root Dir* es `/srv/datos/docker`, y en `sudo docker volume inspect odoo_odoo-db-data` el *Mountpoint* está dentro de `/srv/datos`.
+- [ ] Tras `sudo reboot`, Odoo vuelve solo (Docker arranca después de montar el RAID).
+- [ ] Con un disco del RAID quitado, una venta se guarda; tras reconstruir, `[UU]` otra vez y la venta sigue ahí.
+- [ ] `sudo restic -r /srv/datos/restic ls latest | grep -E "tienda.dump|almi_chain.dump"` → salen los dos volcados.
+- [ ] RTO real: está el tiempo cronometrado de una restauración en una **VM nueva**, y aparece en la tarea 45, LOGICA_RETO y el Anexo II.
+
+**Cortafuegos del servidor (4.1)**
+- [ ] `sudo ufw status verbose` → entrada `deny`, 22 solo desde `192.168.10.20`, 80/443 desde `192.168.10.0/24`, y sin la regla temporal de la IP de instalación (si la hubo).
+- [ ] Desde el TPV, `ssh tecnico@192.168.10.10` → rechazado; desde el PC del gerente → entra.
+- [ ] Odoo sigue funcionando por HTTPS desde el TPV.
+
+**Packet Tracer (4.2)**
+- [ ] Existen `docs/redes/23-red-local.pkt` y `23-red-local.png`, y `23-anexo-vlan.pkt` está **sin cambios** (`git status docs/redes/23-anexo-vlan.pkt` no lo muestra como modificado).
+- [ ] Las **16 pruebas** de la guía dan el resultado esperado y están apuntadas en la tabla de la tarea 23, con sus capturas.
+- [ ] Ningún equipo se ha quedado con un hueco de la guía sin rellenar (`<CLAVE-...>`), y las contraseñas están en KeePassXC.
+- [ ] El dibujo coincide con la red real: ISP, R1, SW1, los equipos con cable, las dos Wi-Fi y `ROUTER2-WDS` con su nota.
+
+**Routers reales (4.3)**
+- [ ] Móvil en la Wi-Fi de invitados: navega, pero `ping 192.168.10.10` y abrir Odoo **fallan**.
+- [ ] Dos móviles en la Wi-Fi de invitados no se ven entre sí (aislamiento de clientes).
+- [ ] Captura del panel: WPA3 (o WPA2/WPA3), WPS desactivado y administración remota desactivada.
+- [ ] La lista de clientes DHCP del router tiene las IP reservadas del plan (`.10`, `.20`, `.31` y `.32`).
+- [ ] WDS: un móvil junto al router 2 se conecta a él con buena señal, navega y sigue en la red de invitados (`192.168.50.x`). Medidas de cobertura antes y después.
+
+**TPV (5)**
+- [ ] `comprobar-tpv.ps1 -Salida …` → **16 OK, 0 FALLO**, guardado como evidencia de cada TPV.
+- [ ] Las 7 pruebas manuales de la [guía](docs/so/13-tpv/DOCUMENTACION.md#5-pruebas-manuales-capturas-para-la-evidencia) con su captura (reinicio directo al quiosco, USB que no se monta, Google bloqueado, venta que funciona…).
+- [ ] La edición de Windows elegida está apuntada en la tarea 9.
+
+**Impresora y stick (5)**
+- [ ] Impresora: las 5 pruebas de su [guía](docs/so/14-impresora/DOCUMENTACION.md#4-pruebas), con foto del ticket de una venta de Odoo.
+- [ ] Stick: todas las casillas del [README](arduino/mando-joystick/README.md#pendiente-prueba-en-físico-tarea-50) marcadas; `jstest` o `joy.cpl` con la palanca en las 4 direcciones; una partida en MAME y otra en otro emulador (captura o vídeo corto).
+
+**Web y AWS (6)**
+- [ ] `curl -sI https://almichain1.duckdns.org | grep -i content-length` da el mismo número que `wc -c < web/index.html`.
+- [ ] `curl -sI https://almichain1.duckdns.org` incluye `content-security-policy` y `permissions-policy`.
+- [ ] La web carga **sin errores en la consola** del navegador (la CSP no bloquea las fotos ni el mapa).
+- [ ] Lighthouse **contra la URL pública**: 90 o más en las cuatro categorías; W3C sin errores.
+- [ ] Terraform: salida del `apply` guardada, y `terraform plan` justo después → «No changes».
+- [ ] GitHub Actions: un cambio en `web/` produce una ejecución verde de `desplegar-web` y el cambio se ve en la web en menos de 5 minutos.
+
+**ERP y recreativa (7)**
+- [ ] Importar: `14 nuevos` la primera vez y `0 nuevos, 14 actualizados` la segunda; la carta se ve en el TPV.
+- [ ] Exportar: los 4 CSV se abren bien en Excel, y la carpeta de exportación **no** sale en `git status`.
+- [ ] Factura automática: `660,00 €`, factura validada, cobrada y con PDF.
+- [ ] Recreativa: la evidencia muestra que la VM es de **1 núcleo y 1 GB** (`nproc` → 1; `free -m` → unos 1000 MB en total) en las medidas de antes y de después.
+- [ ] Monitorización: hay CSV de reposo, antes y después, y el resumen de `resumen-monitorizacion.sh`.
+- [ ] VM del gerente: `lsb_release -d` en la tarea 12; historial de Windows Update con una actualización acumulativa; `manage-bde -status` con `C:` cifrada.
+
+### 10.3 Antes de entregar
+
+- [ ] `bash scripts/verificar-repo.sh` **con Docker** (incluye shellcheck, W3C y **gitleaks de todo el historial**) → «Todo correcto».
+- [ ] Ninguna tarea en **Hecho** sin evidencia: `python3 scripts/gantt.py` no da errores y cada evidencia se abre.
+- [ ] `git grep -n -i "pendiente" -- docs LOGICA_RETO.md`: cada «pendiente» que quede es real y está en esta lista.
+- [ ] Todas las capturas del repositorio revisadas ampliadas, una a una, buscando contraseñas, tokens, IP públicas propias o datos personales.
+- [ ] README (número de tareas hechas), LOGICA_RETO y Anexo II dicen lo mismo que el CSV.
+- [ ] Cada persona del equipo sabe explicar el NAT, la red de invitados, el WDS, el porqué de la red plana (tarea 23, apartado 5.3) y cómo se recupera una copia.
