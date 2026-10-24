@@ -14,11 +14,11 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Persona | Primero (la mañana) | Después | Secciones |
 |---|---|---|---|
 | **Peio** | Cambiar la contraseña Wi-Fi expuesta y la de administración del TL-WR841N (15 min) | Archer C6: tarea 24 completa, red de invitados y WDS (tarea 25) | [2.1](#21-urgente-contraseñas), [4.3](#43-routers-reales-tareas-24-26) |
-| **Iker** | Pasar la contraseña de restic a KeePassXC (5 min). En `ServidorERP`: `mover-docker-al-raid.sh` y repetir el fallo del RAID con Odoo en marcha | Crear `almi_chain` en el servidor; VM del TPV con `configurar-tpv.ps1`; `importar-exportar.py`; `restringir-menus-cajero.py`; factura automática nueva; medidas de la recreativa en 1 GB | [2.1](#21-urgente-contraseñas), [3](#3-datos-raid-copias-y-bd), [5](#5-tpv-e-impresora), [7](#7-erp-y-recreativa) |
-| **Adrian** | Packet Tracer con la guía de comandos (1 h) | `activar-https.sh` (tarea 52); `terraform apply` y secretos de GitHub (tarea 31); publicar la web y repetir curl y Lighthouse; VM del gerente | [4.2](#42-packet-tracer-tarea-23), [2.2](#22-https-en-odoo-y-menús-del-cajero), [6](#6-web-y-aws) |
+| **Iker** | Pasar la contraseña de restic a KeePassXC (5 min). En `ServidorERP`: `mover-docker-al-raid.sh`, repetir el fallo del RAID con Odoo en marcha y `cortafuegos-servidor.sh` | Crear `almi_chain` en el servidor; VM del TPV con `configurar-tpv.ps1`; `importar-exportar.py`; `restringir-menus-cajero.py`; factura automática nueva; medidas de la recreativa en 1 GB | [2.1](#21-urgente-contraseñas), [3](#3-datos-raid-copias-y-bd), [5](#5-tpv-e-impresora), [7](#7-erp-y-recreativa) |
+| **Adrian** | Packet Tracer: construir la red real con [la guía](docs/redes/23-packet-tracer-red-local.md) (1 h 30 min) | `activar-https.sh` (tarea 52); `terraform apply` y secretos de GitHub (tarea 31); publicar la web y repetir curl y Lighthouse; VM del gerente | [4.2](#42-packet-tracer-tarea-23), [2.2](#22-https-en-odoo-y-menús-del-cajero), [6](#6-web-y-aws) |
 | **Markel** | Montar el arcade stick con el [esquema nuevo](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5) | Pruebas con MAME y otro emulador (tarea 21) | [5](#5-tpv-e-impresora) |
 | **Eneko.S** | Revisar la tarea 41 (evidencias de la BD) y la 12 | Recreativa real (tarea 53) | [7](#7-erp-y-recreativa) |
-| **Equipo** | Decidir red plana o VLAN (10 min) | Revisar los PR pendientes | [4.1](#41-decisión-red-plana-o-vlan) |
+| **Equipo** | Leer la decisión de red ([tarea 23, 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): afecta a cómo se defiende la seguridad | Revisar los PR pendientes | [4.1](#41-decisión-red-plana-con-invitados-aislada) |
 
 ---
 
@@ -46,7 +46,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Verificación | `scripts/verificar-repo.sh` prueba la BD también **sin Docker**, con un PostgreSQL local en un clúster temporal | Ejecutado: todo correcto |
 | 13 y 15 · TPV | [`configurar-tpv.ps1`](docs/so/13-tpv/configurar-tpv.ps1), [`comprobar-tpv.ps1`](docs/so/13-tpv/comprobar-tpv.ps1) y [guía](docs/so/13-tpv/DOCUMENTACION.md) | Sintaxis comprobada; la comprobación se probó en un Windows 11 y da FALLO donde debe |
 | 14 y 37 · Impresora | [Guía](docs/so/14-impresora/DOCUMENTACION.md) con pasos y pruebas | Espera a la impresora del centro |
-| 23 · Packet Tracer | [Comandos para pegar](docs/redes/23-packet-tracer-completar.md): ISP, NAT, Wi-Fi, seguridad y 9 pruebas nuevas | No se puede editar el `.pkt` fuera de Packet Tracer |
+| 23 · Red y Packet Tracer | **Decisión: red plana con invitados aislada** (VLAN como anexo) y [guía para simular la red real](docs/redes/23-packet-tracer-red-local.md): ISP, NAT, LAN, dos Wi-Fi, router 2 como puente, cortafuegos de cada equipo y 16 pruebas | No se puede editar el `.pkt` fuera de Packet Tracer |
 | 31 · IaC | [Terraform](iac/README.md) (S3, SG, EC2, IP elástica, user_data) y [workflow](.github/workflows/desplegar-web.yml) que publica la web | `terraform validate` y `fmt` correctos; `user_data` generado pasa `bash -n` |
 | 36 · Importar y exportar | [`carta.csv`](docs/erp/36-importar-exportar/carta.csv) e [`importar-exportar.py`](docs/erp/36-importar-exportar/importar-exportar.py) | `py_compile` |
 | 34 · Menús del cajero | [`restringir-menus-cajero.py`](docs/erp/34-configurar-odoo/restringir-menus-cajero.py) (con `--deshacer`) | `py_compile` |
@@ -110,15 +110,16 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ## 4. Redes
 
-### 4.1 Decisión: red plana o VLAN
+### 4.1 Decisión: red plana con invitados aislada
 
-- [ ] 🔴 **Decidir entre la opción (a) y la (b)** ([tarea 23, apartado 5.5](docs/redes/23-plano-direccionamiento.md#55-decisión-pendiente-red-real-plana-o-con-vlan)). Antes de elegir la (a), comprobar en la tabla de hardware de OpenWrt que el Archer C6 v3 está soportado. Apuntarlo en el Anexo II y en la tarea 23.
-  - **Quién:** el equipo (Adrian lo apunta).
+- [x] **Decidido el 24/10/2026:** red plana para el personal y Wi-Fi de invitados aislada; la separación entre TPV, gerente y servidor la hace el cortafuegos de cada equipo. El diseño con VLAN queda como anexo de mejora. Motivos y cómo se cumple cada caso: [tarea 23, apartados 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026). Apuntado en el Anexo II.
+- [ ] 🟠 **Cortafuegos del servidor** (parte de la decisión): `sudo docs/erp/33-odoo-docker/cortafuegos-servidor.sh` en `ServidorERP` y guardar `ufw status verbose`.
+  - **Quién:** Iker · Revisa Adrian.
 
 ### 4.2 Packet Tracer (tarea 23)
 
-- [ ] 🔴 **Seguir [23-packet-tracer-completar.md](docs/redes/23-packet-tracer-completar.md):** ISP e Internet, WAN y NAT en R1, Wi-Fi de invitados y «WDS», seguridad de R1 y SW1 (comandos listos para pegar). Unos 60 minutos.
-- [ ] 🔴 **Las 9 pruebas nuevas** (sección 5 de esa guía) con capturas, la captura nueva de la topología y la tabla de la tarea 23 actualizada.
+- [ ] 🔴 **Construir `23-red-local.pkt`** con [23-packet-tracer-red-local.md](docs/redes/23-packet-tracer-red-local.md), partiendo de una copia del anexo: ISP e Internet, LAN e invitados con NAT en R1, SW1, Wi-Fi del personal y de invitados, router 2 como puente, cortafuegos de los equipos y seguridad (comandos listos para pegar). Hora y media.
+- [ ] 🔴 **Las 16 pruebas** (sección 8 de la guía) con sus capturas, la captura `23-red-local.png` y la tabla de la tarea 23 actualizada.
   - **Quién (los dos):** Adrian · Revisa Iker.
 
 ### 4.3 Routers reales (tareas 24-26)
@@ -217,7 +218,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 |---|---|
 | Contratar una línea WAN | Hecho (DIGI 1 Gb, con análisis de necesidades) |
 | Esquema de conectividad | Hecho ([tarea 22, sección 4](docs/redes/22-comparativa-wan.md#4-esquema-de-conectividad)) |
-| Diagrama de la red (plano), cableado y Wi-Fi | Plano hecho; Packet Tracer con la guía lista para añadir WAN y Wi-Fi (4.2) |
-| Red configurada de forma segura | Parcial: decisión de red (4.1), invitados (4.3) y contraseñas (2.1) |
+| Diagrama de la red (plano), cableado y Wi-Fi | Plano hecho; Packet Tracer de la red real con la guía lista (4.2) |
+| Red configurada de forma segura | Parcial: red decidida (4.1); faltan invitados en el router (4.3), cortafuegos del servidor (4.1) y contraseñas (2.1) |
 | Segundo router por WDS, comprobando que funciona | Sin empezar (4.3) |
-| RA.7 de PAR: conectar redes privadas a públicas | Se demuestra al aplicar la guía de Packet Tracer (NAT y WAN, 4.2) |
+| RA.7 de PAR: conectar redes privadas a públicas | Se demuestra al construir la red real en Packet Tracer (NAT y WAN, 4.2) |

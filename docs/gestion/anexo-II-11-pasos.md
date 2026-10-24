@@ -92,6 +92,8 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Arranque dual | Una VM | Suficiente para demostrar el arranque dual (tarea 12) | 24/10/2026 |
 | Impresora de tickets | La da el centro | Las tareas 14 y 37 esperan a tenerla ([guía](../so/14-impresora/DOCUMENTACION.md)) | 24/10/2026 |
 | Notación del E/R | Pata de gallo (Mermaid) | Se revisa cuando salga la rúbrica | 24/10/2026 |
+| Red del local | Plana (LAN del personal) con la Wi-Fi de invitados aislada; separación entre TPV, gerente y servidor por el cortafuegos de cada equipo | Las VLAN reales exigían OpenWrt en los routers, complicaban el WDS, no se podían probar con el router de prácticas y obligaban a rehacer el plan de IP, los scripts de los TPV, el HTTPS, el presupuesto y los diagramas. Las VLAN quedan como anexo de mejora ([tarea 23, apartados 5.2 y 5.3](../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)) | 24/10/2026 |
+| Simulación de Packet Tracer | Simular la red real (ISP, NAT, LAN, dos Wi-Fi, router 2 como puente) y dejar el diseño con VLAN como anexo | La simulación tiene que coincidir con lo que se monta; el router 2 en WDS es un puente, y en Packet Tracer el aparato equivalente es un punto de acceso ([guía](../redes/23-packet-tracer-red-local.md)) | 24/10/2026 |
 
 ## 6. Planificación
 

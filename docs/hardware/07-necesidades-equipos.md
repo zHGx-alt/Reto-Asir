@@ -60,7 +60,7 @@ La seguridad es un requisito explícito del enunciado: los equipos deben estar �
 | RT-05 | Seguridad | Puertos USB de almacenamiento bloqueados. |
 | RT-06 | Seguridad | Cortafuegos con salida limitada al servidor Odoo, DNS y actualizaciones. |
 | RT-07 | Rendimiento | Arrancar y quedar listo para vender en poco tiempo, con respuesta táctil sin retrasos. |
-| RT-08 | Conexión | Cable Ethernet a la LAN del local, siempre con la misma IP (reserva DHCP, tarea 23). Si se montan las VLAN (tarea 23, apartado 5.5), en la red de los TPV. |
+| RT-08 | Conexión | Cable Ethernet a la LAN del local, siempre con la misma IP (reserva DHCP, tarea 23). |
 | RT-09 | Entorno | Equipo apto para hostelería: preferible sin ventilador y con frontal resistente a salpicaduras. |
 
 ### 3.3 Impresoras de tickets

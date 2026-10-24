@@ -72,7 +72,7 @@ flowchart LR
 
 - **Entrada:** la fibra llega al router de DIGI. Lo ideal es ponerlo en modo puente para que la IP pública la tenga el router 1; si no se puede, el router 1 queda detrás con doble NAT (válido para navegar, no para una VPN entrante).
 - **Una sola salida a internet:** todo el tráfico del local sale por el router 1, que hace de firewall y NAT.
-- **Redes del local:** LAN del personal y Wi-Fi de invitados aislada. El detalle de IPs, el plano y las dos opciones de segmentación están en la [tarea 23](23-plano-direccionamiento.md).
+- **Redes del local:** LAN del personal y Wi-Fi de invitados aislada. El detalle de IPs, el plano y la decisión de red (plana con invitados aislada) están en la [tarea 23](23-plano-direccionamiento.md).
 - **La web no está aquí:** se sirve desde AWS ([tarea 30](../web/30-hosting-aws.md)), así que no se abre ningún puerto del local hacia internet.
 
 ## 5. Criterios de elección
