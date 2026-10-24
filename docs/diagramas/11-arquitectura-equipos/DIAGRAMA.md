@@ -1,7 +1,7 @@
 # Tarea 11 · Diagrama de arquitectura de equipos
 
 **Responsable:** Iker · **Revisa:** Adrian · **Fecha:** 22/10/2026 · **Actualizado:** 23/10/2026 · **Depende de:** 8 (hardware), 9 (software), 23 (red)
-**Estado:** actualizado con los modelos de las tareas 8 y 10, el direccionamiento de la tarea 23 y el hosting real de la tarea 30. El 24/10 el Mermaid y la tabla añaden el switch, el servidor presupuestado y la red de invitados `192.168.50.0/24`; **el SVG está sin regenerar** (sección 6). Pendiente de revisión.
+**Estado:** actualizado con los modelos de las tareas 8 y 10, el direccionamiento de la tarea 23 y el hosting real de la tarea 30. El 24/10 el Mermaid y la tabla añaden el switch, el servidor presupuestado y la red de invitados `192.168.50.0/24`; el SVG se regeneró el mismo día. Pendiente de revisión.
 
 ## 1. Vista general
 
@@ -18,7 +18,7 @@ flowchart TB
         s3 -- "aws s3 sync cada 5 min" --> ec2
     end
     dns["DuckDNS<br/>almichain1.duckdns.org"]
-    gh["GitHub<br/>repositorio"] -- "subida de web/<br/>(Actions: tarea 31, pendiente)" --> s3
+    gh["GitHub<br/>repositorio"] -- "Actions publica web/<br/>(Terraform: iac/, tarea 31)" --> s3
 
     internet -- "HTTPS" --- dns --- ec2
     internet --- ont["Router de DIGI (ONT)<br/>fibra 1 Gb · tarea 22"]
@@ -55,8 +55,8 @@ flowchart TB
         rec -- "USB" --- stick
     end
 
-    tpv1 & tpv2 -- "navegador → TPV de Odoo<br/>:8069 (HTTPS: tarea 52)" --> srv
-    ger -- "navegador → Odoo" --> srv
+    tpv1 & tpv2 -- "navegador → TPV de Odoo<br/>HTTPS 443 (proxy, tarea 52)" --> srv
+    ger -- "navegador → Odoo (HTTPS)" --> srv
     cli & rec -. "✖ sin acceso" .-> srv
 ```
 
@@ -96,16 +96,16 @@ El enunciado pide para los TPV y las impresoras «un diagrama de la arquitectura
 | Equipo | Guía de instalación | Estado |
 |---|---|---|
 | PC del gerente | [Tarea 12: arranque dual](../../so/12-dual-boot.md) | Hecha en VM |
-| TPV 1 y 2 | Tareas 13 (bastionado y quiosco) y 15 (scripts de Windows) | **Pendiente: no hay guía todavía.** Enlazar aquí cuando exista |
-| Impresoras de tickets | Tareas 14 (driver en el TPV) y 37 (ticket desde Odoo) | **Pendiente.** Enlazar aquí cuando exista |
-| Servidor | [Tarea 33: Odoo con Docker](../../erp/33-odoo-docker/DOCUMENTACION.md) → [34: configuración](../../erp/34-configurar-odoo/DOCUMENTACION.md) → [43: RAID](../../backup/43-raid1/DOCUMENTACION.md) → [44: copias](../../backup/44-backup-3-2-1/DOCUMENTACION.md) → [40: BD `almi_chain`](../../bd/40-scripts-ddl.md) | Hecho en VM; falta mover los datos al RAID (tarea 43, sección 7) |
+| TPV 1 y 2 | [Tareas 13 y 15: bastionado, quiosco y scripts de Windows](../../so/13-tpv/DOCUMENTACION.md) | Scripts listos; falta ejecutarlos en la VM |
+| Impresoras de tickets | [Tareas 14 y 37: driver en el TPV y ticket desde Odoo](../../so/14-impresora/DOCUMENTACION.md) | Guía lista; la impresora la da el centro |
+| Servidor | [Tarea 33: Odoo con Docker](../../erp/33-odoo-docker/DOCUMENTACION.md) → [34: configuración](../../erp/34-configurar-odoo/DOCUMENTACION.md) → [43: RAID](../../backup/43-raid1/DOCUMENTACION.md) → [44: copias](../../backup/44-backup-3-2-1/DOCUMENTACION.md) → [40: BD `almi_chain`](../../bd/40-scripts-ddl.md) → [52: HTTPS](../../erp/52-https-odoo/DOCUMENTACION.md) | Hecho en VM; falta mover los datos al RAID (`mover-docker-al-raid.sh`) y activar el HTTPS |
 | Recreativa | [Tarea 16: instalación](../../arcade/16-recreativa-mame/DOCUMENTACION.md) → [17: optimización](../../arcade/17-rendimiento-mame/DOCUMENTACION.md) | Hecha en VM |
 | Arcade stick | [Firmware y conexiones](../../../arduino/mando-joystick/README.md) | Compila; sin montar |
 | Routers | [Tarea 23: plano y direccionamiento](../../redes/23-plano-direccionamiento.md) → [24: red segura](../../redes/24-red-segura/DOCUMENTACION.md) → 25 (WDS) | En curso |
-| Web | [Tarea 30: hosting en AWS](../../web/30-hosting-aws.md) | Hecha |
+| Web | [Tarea 30: hosting en AWS](../../web/30-hosting-aws.md) o [Terraform (tarea 31)](../../../iac/README.md) | Hecha a mano; Terraform validado |
 
 ## 6. Pendiente
 - [ ] Revisión de Adrian.
-- [ ] Regenerar `arquitectura-equipos.svg` desde el Mermaid de la sección 1 (switch, servidor presupuestado y red de invitados `192.168.50.0/24`).
+- [x] Regenerar `arquitectura-equipos.svg` desde el Mermaid de la sección 1 (24/10/2026).
 - [ ] Cuando se decida la opción de la tarea 23 (apartado 5.5), dibujar las redes que haya de verdad y la WAN.
-- [ ] Enlazar en la sección 5 las guías de los TPV y de las impresoras (tareas 13-15).
+- [x] Enlazar en la sección 5 las guías de los TPV y de las impresoras (24/10/2026).

@@ -125,7 +125,9 @@ Script: [`cargar-carta-y-mesas.py`](cargar-carta-y-mesas.py) (log: [`evidencias/
 
 En la prueba 1 de la sección 8.2, `cajero1` ve **Contactos, Empleados, Conversaciones, Calendario y Tableros**, y puede leer facturas, diarios y usuarios. Para cobrar no le hace falta: ve datos de los clientes y del personal, y eso va contra los mínimos privilegios. Viene de que todo «Usuario interno» (`base.group_user`) tiene esos menús.
 
-Opciones, por orden de preferencia (hay que probarlas en una base de pruebas antes de pasarlas a `configurar-odoo.py`):
+**Script preparado:** [`restringir-menus-cajero.py`](restringir-menus-cajero.py) aplica la opción 1 (grupo «Almi-Chain / Gerencia» con admin y gerente en los menús raíz) y se puede deshacer con `--deshacer`. Falta ejecutarlo en una base de pruebas y repetir la prueba 1.
+
+Opciones, por orden de preferencia:
 
 1. **Ocultar los menús** a quien no sea gerente: en `ir.ui.menu`, poner en los menús raíz de Contactos, Empleados, Conversaciones, Calendario y Tableros el grupo «Gerencia» (un grupo nuevo que tenga `gerente`). El cajero deja de verlos.
 2. **Quitar las apps que no se usan** (Conversaciones, Calendario, Tableros), si nadie las necesita.

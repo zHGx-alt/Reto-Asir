@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="720" viewBox="0 0 900 720" font-family="Arial, Helvetica, sans-serif" role="img">
   <title>Esquema de conexiones del arcade stick</title>
-  <desc>Keyestudio Leonardo con 6 botones arcade: cable rojo de cada boton a los pines 2 a 7, cables negros a la fila negativa de la protoboard, que va a GND. Palanca analogica opcional en 5V, GND, A0 y A1.</desc>
+  <desc>Keyestudio Leonardo con 6 botones arcade: cable rojo de cada boton a los pines 2 a 7, cables negros a la fila negativa de la protoboard, que va a GND. Palanca de arcade de 4 microinterruptores en A2 (arriba), A3 (abajo), A4 (izquierda) y A5 (derecha), con el comun a GND. Alternativa analogica en 5V, GND, A0 y A1. Botones 7 y 8 opcionales en los pines 8 y 9.</desc>
   <rect width="900" height="720" fill="#FFFFFF"/>
   <text x="30" y="38" font-size="20" font-weight="bold" fill="#222">Arcade stick · esquema de conexiones</text>
-  <text x="30" y="60" font-size="13" fill="#555">Keyestudio Leonardo (KS0248) · 6 botones arcade de 2 cables · firmware mando_joystick.ino</text>
+  <text x="30" y="60" font-size="13" fill="#555">Keyestudio Leonardo (KS0248) · 6 botones arcade (hasta 8) y palanca digital · firmware mando_joystick.ino</text>
 
   <!-- Placa -->
   <rect x="360" y="72" width="44" height="30" rx="3" fill="#B4B2A9" stroke="#5F5E5A"/>
@@ -45,7 +45,7 @@
     <text x="296" y="376" fill="#FFFFFF" font-weight="bold">5V</text>
     <text x="296" y="400" fill="#FFFFFF" font-weight="bold">GND</text><text x="296" y="424">GND</text><text x="296" y="448">Vin</text>
     <text x="296" y="486" fill="#FFFFFF" font-weight="bold">A0</text><text x="296" y="510" fill="#FFFFFF" font-weight="bold">A1</text>
-    <text x="296" y="534">A2</text><text x="296" y="558">A3</text><text x="296" y="582">A4</text><text x="296" y="606">A5</text>
+    <text x="296" y="534" fill="#FFFFFF" font-weight="bold">A2</text><text x="296" y="558" fill="#FFFFFF" font-weight="bold">A3</text><text x="296" y="582" fill="#FFFFFF" font-weight="bold">A4</text><text x="296" y="606" fill="#FFFFFF" font-weight="bold">A5</text>
   </g>
   <g fill="#222">
     <rect x="276" y="296" width="8" height="8"/><rect x="276" y="320" width="8" height="8"/><rect x="276" y="344" width="8" height="8"/>
@@ -106,22 +106,27 @@
     <text x="680" y="498">Botón 2 · pin 3</text><text x="680" y="562">Botón 1 · pin 2</text>
   </g>
 
-  <!-- Palanca analogica (opcional) -->
-  <text x="40" y="340" font-size="13" font-weight="bold" fill="#222">Palanca analógica</text>
-  <text x="40" y="356" font-size="11" fill="#666">Opcional · aún no la hay</text>
-  <rect x="40" y="362" width="150" height="160" rx="8" fill="#F7F7F7" stroke="#888" stroke-dasharray="6 4"/>
+  <!-- Palanca digital de arcade (Sanwa JLF: 4 microinterruptores), modo por defecto del firmware -->
+  <text x="40" y="340" font-size="13" font-weight="bold" fill="#222">Palanca de arcade</text>
+  <text x="40" y="356" font-size="11" fill="#666">Sanwa JLF · 4 microinterruptores · pendiente</text>
+  <rect x="40" y="362" width="150" height="256" rx="8" fill="#F7F7F7" stroke="#888" stroke-dasharray="6 4"/>
+  <circle cx="92" cy="466" r="26" fill="#D62828" stroke="#7a1010"/>
+  <rect x="88" y="490" width="8" height="34" fill="#555"/>
   <g font-size="11" fill="#444" text-anchor="end">
-    <text x="182" y="376">+5V</text><text x="182" y="400">GND</text>
-    <text x="182" y="486">VRx</text><text x="182" y="510">VRy</text>
+    <text x="182" y="400">Común (GND)</text>
+    <text x="182" y="534">Arriba</text><text x="182" y="558">Abajo</text>
+    <text x="182" y="582">Izquierda</text><text x="182" y="606">Derecha</text>
   </g>
   <g fill="none" stroke-width="2.5" stroke-dasharray="7 4">
-    <line x1="190" y1="372" x2="276" y2="372" stroke="#E08A00"/>
     <line x1="190" y1="396" x2="276" y2="396" stroke="#222"/>
-    <line x1="190" y1="482" x2="276" y2="482" stroke="#1D9E75"/>
-    <line x1="190" y1="506" x2="276" y2="506" stroke="#1D9E75"/>
+    <line x1="190" y1="530" x2="276" y2="530" stroke="#1D9E75"/>
+    <line x1="190" y1="554" x2="276" y2="554" stroke="#1D9E75"/>
+    <line x1="190" y1="578" x2="276" y2="578" stroke="#1D9E75"/>
+    <line x1="190" y1="602" x2="276" y2="602" stroke="#1D9E75"/>
   </g>
-  <text x="115" y="545" font-size="11" fill="#666" text-anchor="middle">Al conectarla, poner</text>
-  <text x="115" y="560" font-size="11" fill="#666" text-anchor="middle">USAR_EJES = true</text>
+  <text x="40" y="640" font-size="11" fill="#666">Alternativa analógica (comando PALANCA ANALOGICA):</text>
+  <text x="40" y="655" font-size="11" fill="#666">VRx → A0, VRy → A1, +5V → 5V, GND → GND</text>
+  <text x="560" y="622" font-size="11" fill="#666">Botones 7 y 8 (opcionales): pines 8 y 9</text>
 
   <!-- Leyenda -->
   <line x1="40" y1="684" x2="70" y2="684" stroke="#D62828" stroke-width="3"/>

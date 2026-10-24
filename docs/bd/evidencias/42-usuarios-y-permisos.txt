@@ -1,0 +1,38 @@
+# Tarea 42 · Usuarios con LOGIN y pruebas de mínimos privilegios
+# Ejecutado el 24/10/2026 en PostgreSQL 18.3 local, sobre la base de 41-datos-y-consultas.txt.
+# Las contraseñas se pasaron como variables de psql (-v pass_tpv=... -v pass_informes=...): no aparecen aquí.
+
+===== 08-usuarios.sql (primera vez)
+Cuentas y grupos:
+  cuenta  | login | max_conexiones |     grupos     
+----------+-------+----------------+----------------
+ informes | t     |              3 | rol_lectura
+ tpv_app  | t     |             10 | rol_aplicacion
+(2 rows)
+
+
+===== 09-pruebas-usuarios.sql como tpv_app
+== Pruebas con la cuenta tpv_app (conectado como tpv_app )
+  OK     leer la carta  (permitido)
+  OK     crear una tabla (DDL)  (rechazado: permission denied for schema public)
+  OK     borrar la tabla factura (DDL)  (rechazado: must be owner of table factura)
+  OK     modificar una factura emitida (R-04)  (rechazado: permission denied for table factura)
+  OK     borrar facturas (R-04)  (rechazado: permission denied for table linea_factura)
+  OK     dar de alta un local  (rechazado: permission denied for table establecimiento)
+  OK     emitir una factura  (permitido)
+  OK     dar de alta un cliente  (permitido)
+  OK     cambiar la IP de un equipo  (rechazado: permission denied for table equipo)
+== Fin: todas las pruebas de tpv_app son correctas
+
+===== 09-pruebas-usuarios.sql como informes
+== Pruebas con la cuenta informes (conectado como informes )
+  OK     leer la carta  (permitido)
+  OK     crear una tabla (DDL)  (rechazado: permission denied for schema public)
+  OK     borrar la tabla factura (DDL)  (rechazado: must be owner of table factura)
+  OK     modificar una factura emitida (R-04)  (rechazado: permission denied for table factura)
+  OK     borrar facturas (R-04)  (rechazado: permission denied for table linea_factura)
+  OK     dar de alta un local  (rechazado: permission denied for table establecimiento)
+  OK     consultar el total de ventas  (permitido)
+  OK     emitir una factura  (rechazado: permission denied for table factura)
+  OK     dar de alta un cliente  (rechazado: permission denied for table cliente)
+== Fin: todas las pruebas de informes son correctas

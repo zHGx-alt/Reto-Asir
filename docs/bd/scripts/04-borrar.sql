@@ -19,5 +19,6 @@ DROP FUNCTION IF EXISTS fn_linea_descuenta_stock();
 -- Los roles son globales del servidor: se eliminan solo si no los usa otra base.
 -- DROP ROLE IF EXISTS rol_aplicacion;
 -- DROP ROLE IF EXISTS rol_lectura;
+-- Cuentas de 08-usuarios.sql (antes que los grupos): DROP ROLE IF EXISTS tpv_app, informes;
 
 COMMIT;

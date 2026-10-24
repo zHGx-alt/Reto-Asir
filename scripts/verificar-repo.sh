@@ -37,34 +37,62 @@ for f in $(git ls-files '*.sh'); do bash -n "$f" 2>/dev/null && ok "$f" || mal "
 
 echo "== Firmware del arcade stick"
 PIO=$(command -v pio || echo "$HOME/.platformio/penv/bin/pio")
-if [[ -x "$PIO" ]]; then
-  (cd arduino/mando-joystick && "$PIO" run -s) >/dev/null 2>&1 && ok "compila para Leonardo" || mal "no compila"
+if [[ -x "$PIO" ]]; then pio_() { "$PIO" "$@"; }
+else
+  for py in python3 python; do                    # instalado con pip (pip install platformio)
+    if $py -m platformio --version >/dev/null 2>&1; then PY_PIO=$py; pio_() { "$PY_PIO" -m platformio "$@"; }; break; fi
+  done
+fi
+if declare -F pio_ >/dev/null; then
+  (cd arduino/mando-joystick && pio_ run -s) >/dev/null 2>&1 && ok "compila para Leonardo" || mal "no compila"
 else salta "compilación" "no hay PlatformIO"; fi
 
+# Pruebas de la BD (tareas 40-42). psql_ <usuario> <argumentos de psql>; $S = carpeta de los scripts.
+probar_bd() {
+  psql_ postgres -c "CREATE DATABASE almi_chain" >/dev/null
+  for s in 01-crear-tablas 02-reglas 03-roles; do psql_ postgres -d almi_chain -f "$S/$s.sql" >/dev/null 2>&1 && ok "$s.sql" || mal "$s.sql"; done
+  n=$(psql_ postgres -d almi_chain -f "$S/05-pruebas.sql" 2>&1 | grep -c 'OK ')
+  [[ "$n" -eq 33 ]] && ok "05-pruebas.sql: 33/33" || mal "05-pruebas.sql: $n/33"
+  psql_ postgres -d almi_chain -f "$S/06-datos.sql" >/dev/null 2>&1 && ok "06-datos.sql" || mal "06-datos.sql"
+  n=$(psql_ postgres -d almi_chain -tAc "SELECT count(*) FROM factura")
+  [[ "$n" -eq 8 ]] && ok "06-datos.sql: 8 facturas cargadas" || mal "06-datos.sql: $n facturas (se esperaban 8)"
+  psql_ postgres -d almi_chain -f "$S/07-consultas.sql" >/dev/null 2>&1 && ok "07-consultas.sql: 12 consultas sin errores" || mal "07-consultas.sql"
+  psql_ postgres -d almi_chain -v pass_tpv=verif -v pass_informes=verif -f "$S/08-usuarios.sql" >/dev/null 2>&1     && ok "08-usuarios.sql" || mal "08-usuarios.sql"
+  for u in tpv_app informes; do
+    n=$(psql_ "$u" -d almi_chain -v cuenta="$u" -f "$S/09-pruebas-usuarios.sql" 2>&1 | grep -c 'OK  ')
+    [[ "$n" -eq 9 ]] && ok "09-pruebas-usuarios.sql como $u: 9/9" || mal "09-pruebas-usuarios.sql como $u: $n/9"
+  done
+}
+
+echo "== Base de datos"
+if hay docker; then
+  docker rm -f verif-pg >/dev/null 2>&1
+  docker run -d --name verif-pg -e POSTGRES_PASSWORD=verif -v "$PWD/docs/bd/scripts:/s:ro" postgres:16 >/dev/null
+  until docker exec verif-pg pg_isready -U postgres -q 2>/dev/null; do sleep 1; done; sleep 2
+  S=/s
+  psql_() { local u=$1; shift; docker exec verif-pg psql -U "$u" -v ON_ERROR_STOP=1 -q "$@" </dev/null; }
+  probar_bd
+  docker rm -f verif-pg >/dev/null
+else
+  # Sin Docker: un clúster temporal de PostgreSQL en otro puerto (no toca el servidor que haya instalado).
+  PGBIN=$(dirname "$(command -v initdb 2>/dev/null || ls -d /c/Program\ Files/PostgreSQL/*/bin/initdb.exe 2>/dev/null | tail -1)")
+  if [[ -x "$PGBIN/initdb" || -x "$PGBIN/initdb.exe" ]]; then
+    TMPPG=$(mktemp -d)
+    "$PGBIN/initdb" -D "$TMPPG/datos" -U postgres -A trust -E UTF8 --locale=C >/dev/null 2>&1
+    "$PGBIN/pg_ctl" -D "$TMPPG/datos" -o "-p 55433" -l "$TMPPG/log" -w start >/dev/null
+    S=docs/bd/scripts
+    psql_() { local u=$1; shift; "$PGBIN/psql" -h localhost -p 55433 -U "$u" -v ON_ERROR_STOP=1 -q "$@" </dev/null; }
+    probar_bd
+    "$PGBIN/pg_ctl" -D "$TMPPG/datos" -m fast -w stop >/dev/null; rm -rf "$TMPPG"
+  else salta "SQL" "no hay Docker ni PostgreSQL"; fi
+fi
+
 if ! hay docker; then
-  salta "shellcheck, SQL, W3C y gitleaks" "no hay Docker"
+  salta "shellcheck, W3C y gitleaks" "no hay Docker"
 else
   echo "== shellcheck (errores)"
   if docker run --rm -v "$PWD:/m:ro" -w /m koalaman/shellcheck:v0.10.0 -S error $(git ls-files '*.sh') >/dev/null; then
     ok "sin errores"; else mal "shellcheck encuentra errores"; fi
-
-  echo "== Base de datos (PostgreSQL 16)"
-  docker rm -f verif-pg >/dev/null 2>&1
-  docker run -d --name verif-pg -e POSTGRES_PASSWORD=verif -v "$PWD/docs/bd/scripts:/s:ro" postgres:16 >/dev/null
-  until docker exec verif-pg pg_isready -U postgres -q 2>/dev/null; do sleep 1; done; sleep 2
-  psql_() { docker exec verif-pg psql -U postgres -v ON_ERROR_STOP=1 -q "$@" </dev/null; }
-  psql_ -c "CREATE DATABASE almi_chain" >/dev/null
-  for s in 01-crear-tablas 02-reglas 03-roles; do psql_ -d almi_chain -f "/s/$s.sql" >/dev/null 2>&1 && ok "$s.sql" || mal "$s.sql"; done
-  n=$(psql_ -d almi_chain -f /s/05-pruebas.sql 2>&1 | grep -c 'OK ')
-  [[ "$n" -eq 33 ]] && ok "05-pruebas.sql: 33/33" || mal "05-pruebas.sql: $n/33"
-  psql_ -d almi_chain -f /s/06-datos.sql >/dev/null 2>&1 && ok "06-datos.sql" || mal "06-datos.sql"
-  n=$(psql_ -d almi_chain -tAc "SELECT count(*) FROM factura")
-  [[ "$n" -eq 8 ]] && ok "06-datos.sql: 8 facturas cargadas" || mal "06-datos.sql: $n facturas (se esperaban 8)"
-  psql_ -d almi_chain -f /s/07-consultas.sql >/dev/null 2>&1 && ok "07-consultas.sql: 12 consultas sin errores" || mal "07-consultas.sql"
-  psql_ -d almi_chain -c "CREATE ROLE verif_app LOGIN PASSWORD 'verif'; GRANT rol_aplicacion TO verif_app;" >/dev/null
-  if docker exec verif-pg psql -U verif_app -d almi_chain -c "CREATE TABLE intruso(id int)" </dev/null >/dev/null 2>&1; then
-    mal "rol_aplicacion puede crear tablas"; else ok "rol_aplicacion no puede hacer DDL"; fi
-  docker rm -f verif-pg >/dev/null
 
   echo "== Web (validador Nu del W3C)"
   docker run --rm -v "$PWD/web:/w:ro" ghcr.io/validator/validator:latest vnu --errors-only /w/index.html >/dev/null 2>&1 \

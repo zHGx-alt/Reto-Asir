@@ -8,7 +8,7 @@
 
 ## 1. Qué se entrega
 
-Siete scripts SQL. Los cinco primeros convierten el modelo lógico de la tarea 39 en una base de datos real. Se guardan en `docs/bd/scripts/` (o la carpeta que use el equipo).
+Nueve scripts SQL. Los cinco primeros convierten el modelo lógico de la tarea 39 en una base de datos real. Se guardan en `docs/bd/scripts/` (o la carpeta que use el equipo).
 
 | Script | Qué hace |
 |---|---|
@@ -19,6 +19,8 @@ Siete scripts SQL. Los cinco primeros convierten el modelo lógico de la tarea 3
 | `05-pruebas.sql` | 33 pruebas de restricciones y reglas; termina en `ROLLBACK` |
 | `06-datos.sql` | **Tarea 41.** Datos de prueba: 2 locales, personal, equipos, carta, almacén, clientes, campaña y 8 ventas |
 | `07-consultas.sql` | **Tarea 41.** 12 consultas del negocio (JOIN, agregados, HAVING, subconsultas) |
+| `08-usuarios.sql` | **Tarea 42.** Cuentas con `LOGIN`: `tpv_app` (rol_aplicacion) e `informes` (rol_lectura); contraseñas por variable, nunca en el repositorio |
+| `09-pruebas-usuarios.sql` | **Tarea 42.** 9 pruebas de mínimos privilegios con cada cuenta |
 
 ## 2. Cómo ejecutarlos
 
@@ -119,4 +121,27 @@ psql -d almi_chain -f 07-consultas.sql > ../evidencias/41-consultas.txt
 
 `scripts/verificar-repo.sh` ya lo incluye: carga los datos, comprueba que hay 8 facturas y ejecuta las 12 consultas.
 
-**Pendiente:** ejecutarlo en un PostgreSQL de verdad (no se ha podido en el equipo donde se escribió, sin PostgreSQL ni Docker), guardar la salida en `docs/bd/evidencias/41-consultas.txt` como evidencia, revisar que cada resultado tiene sentido (por ejemplo, que C-08 devuelve la chuleta de Abando) y crear la base en el servidor (sección 2).
+**Ejecutado el 24/10/2026** en un PostgreSQL 18.3 vacío: 13 tablas con datos (8 facturas, 26 líneas) y las 12 consultas sin errores. Salida completa: [`evidencias/41-datos-y-consultas.txt`](evidencias/41-datos-y-consultas.txt). Los resultados tienen sentido: C-05 devuelve el plato sin ventas (Pimientos de Gernika), C-08 la chuleta de Abando por debajo del mínimo, C-11 las tres impresoras con su TPV.
+
+**Pendiente:** crear la base en el servidor (sección 2).
+
+## 8. Tarea 42: usuarios con acceso y mínimos privilegios
+
+Los roles de `03-roles.sql` son grupos sin `LOGIN`. [`08-usuarios.sql`](scripts/08-usuarios.sql) crea las cuentas que de verdad se conectan:
+
+| Cuenta | Grupo | Puede | No puede | Límite de conexiones |
+|---|---|---|---|---|
+| `tpv_app` | `rol_aplicacion` | Leer todo, vender (INSERT de facturas), dar de alta clientes | DDL, modificar o borrar facturas (R-04), tocar locales y equipos | 10 |
+| `informes` | `rol_lectura` | Leer todo (gerente, gestoría) | Escribir nada | 3 |
+
+- Las contraseñas se generan en KeePassXC y se pasan al ejecutar (`-v pass_tpv=... -v pass_informes=...`): no se escriben en ningún fichero. El script es repetible (si la cuenta existe, solo cambia la contraseña).
+- Solo esas dos cuentas y el propietario pueden **conectarse** a la base (`REVOKE CONNECT ... FROM PUBLIC`).
+- [`09-pruebas-usuarios.sql`](scripts/09-pruebas-usuarios.sql) se ejecuta con cada cuenta y comprueba 9 casos; todo termina en `ROLLBACK`.
+
+```
+psql -d almi_chain -v ON_ERROR_STOP=1 -v pass_tpv='...' -v pass_informes='...' -f 08-usuarios.sql
+psql -d almi_chain -U tpv_app  -v cuenta=tpv_app  -f 09-pruebas-usuarios.sql
+psql -d almi_chain -U informes -v cuenta=informes -f 09-pruebas-usuarios.sql
+```
+
+**Resultado (24/10/2026):** 9/9 con cada cuenta. Evidencia: [`evidencias/42-usuarios-y-permisos.txt`](evidencias/42-usuarios-y-permisos.txt). `scripts/verificar-repo.sh` repite todo (con Docker o, si no hay, con un PostgreSQL local en un clúster temporal).

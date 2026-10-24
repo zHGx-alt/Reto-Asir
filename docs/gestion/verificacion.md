@@ -123,3 +123,17 @@ Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los
 | BD: implementación **y consulta de sus datos** | 41 | Pendiente |
 | Comunicaciones cifradas en toda la solución | 52, 46 | Pendiente (Odoo va por HTTP) |
 | Tabla de pruebas, documentación y presentación | 47, 48, 49 | Pendiente |
+
+## 8. Comprobaciones del 24/10/2026
+
+Hechas al preparar lo que queda ([CORRECIONES.md](../../CORRECIONES.md)), en un Windows 11 sin Docker. `bash scripts/verificar-repo.sh` da **todo correcto** (sin shellcheck, W3C ni gitleaks, que necesitan Docker).
+
+| # | Tarea | Prueba | Resultado |
+|---|---|---|---|
+| 1 | 40-42 | Scripts 01 a 09 en un PostgreSQL 18.3 local (clúster temporal en otro puerto, sin tocar el servidor instalado) | ✅ 05-pruebas 33/33; 06 carga 8 facturas y 26 líneas; 07, 12 consultas sin errores; 09, 9/9 con `tpv_app` y con `informes`. Evidencias en `docs/bd/evidencias/` |
+| 2 | 20 | `pio run` del firmware con la palanca digital y 8 botones | ✅ Compila. Flash 39,9 %, RAM 19,3 % |
+| 3 | 13, 15 | Analizador de PowerShell sobre `configurar-tpv.ps1` y `comprobar-tpv.ps1`; `comprobar-tpv.ps1` ejecutado en un Windows 11 sin bastionar | ✅ 0 errores de sintaxis. La comprobación encontró un fallo de precedencia propio (`@(cond, texto)`) y la falta de BOM (acentos en PowerShell 5.1); corregidos. Da FALLO donde corresponde en un equipo que no es un TPV |
+| 4 | 31 | `terraform fmt -check`, `terraform validate` (Terraform 1.16, proveedor AWS 5.x) y `bash -n` del `user_data` generado con y sin token | ✅ Tras corregir un apóstrofo que AWS no admite en la descripción del grupo de seguridad |
+| 5 | 34, 36, 43, 52 | `py_compile` y `bash -n` de los scripts nuevos | ✅ Sin ejecutar contra Odoo ni en la VM (no hay aquí) |
+| 6 | 29 | Geolocalización de la web con una posición simulada | ✅ Muestra la distancia («1,1 km») y el enlace a la ruta a pie |
+| 7 | 11, 19 | SVG regenerados (diagrama de arquitectura y esquema del stick) | ✅ XML válido y revisados a ojo |

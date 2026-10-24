@@ -74,7 +74,8 @@ INSERT INTO plato (nombre, descripcion, categoria, precio, tipo_iva, es_estrella
   ('Croquetas de jamón',    '6 unidades',                                  'entrante',   7.27, 10, TRUE),
   ('Bacalao al pil-pil',    'Lomo de bacalao con su emulsión',             'principal', 19.09, 10, TRUE),
   ('Txuleta a la brasa',    'Para dos personas, 1 kg',                     'principal', 45.45, 10, TRUE),
-  ('Marmitako',             'Guiso de bonito y patata',                    'principal', 14.55, 10, FALSE),
+  ('Marmitako',             'Guiso de bonito y patata',                    'principal', 13.64, 10, FALSE),
+  ('Pimientos de Gernika',  'Fritos, con sal en escamas (plato nuevo, sin ventas: C-05)', 'entrante', 6.36, 10, FALSE),
   ('Tarta de queso',        'Al horno, cremosa',                           'postre',     5.91, 10, TRUE),
   ('Pantxineta',            'Hojaldre con crema y almendra',               'postre',     5.45, 10, FALSE),
   ('Caña',                  'Cerveza de barril',                           'bebida',     2.27, 10, FALSE),
@@ -169,22 +170,25 @@ BEGIN
 END $$;
 
 -- Abando, TPV 1 (serie A1) y TPV 2 (serie A2); Deusto, TPV 1 (serie D1).
-SELECT pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000002W', NULL, 'efectivo', '2026-10-19 13:40',
+DO $$
+BEGIN
+PERFORM pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000002W', NULL, 'efectivo', '2026-10-19 13:40',
        ARRAY['Gilda','Caña','Café'], ARRAY[4,4,2]);
-SELECT pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000002W', NULL, 'tarjeta', '2026-10-19 14:25',
+PERFORM pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000002W', NULL, 'tarjeta', '2026-10-19 14:25',
        ARRAY['Croquetas de jamón','Bacalao al pil-pil','Tarta de queso','Agua mineral'], ARRAY[1,2,2,2]);
-SELECT pg_temp.venta('A2', 'Almi-Chain Abando', '192.168.10.32', '00000003A', 'Eventos Ejemplo S.L.', 'tarjeta', '2026-10-19 15:10',
+PERFORM pg_temp.venta('A2', 'Almi-Chain Abando', '192.168.10.32', '00000003A', 'Eventos Ejemplo S.L.', 'tarjeta', '2026-10-19 15:10',
        ARRAY['Txuleta a la brasa','Marmitako','Txakoli (copa)','Pantxineta','Café'], ARRAY[1,2,4,2,4]);
-SELECT pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000003A', 'Maite Ejemplo', 'efectivo', '2026-10-20 21:05',
+PERFORM pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000003A', 'Maite Ejemplo', 'efectivo', '2026-10-20 21:05',
        ARRAY['Txuleta a la brasa','Tarta de queso','Txakoli (copa)'], ARRAY[1,1,2]);
-SELECT pg_temp.venta('A2', 'Almi-Chain Abando', '192.168.10.32', '00000002W', NULL, 'tarjeta', '2026-10-20 21:40',
+PERFORM pg_temp.venta('A2', 'Almi-Chain Abando', '192.168.10.32', '00000002W', NULL, 'tarjeta', '2026-10-20 21:40',
        ARRAY['Gilda','Croquetas de jamón','Caña'], ARRAY[2,1,3]);
-SELECT pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000002W', 'Koldo Ejemplo', 'tarjeta', '2026-10-21 14:00',
+PERFORM pg_temp.venta('A1', 'Almi-Chain Abando', '192.168.10.31', '00000002W', 'Koldo Ejemplo', 'tarjeta', '2026-10-21 14:00',
        ARRAY['Bacalao al pil-pil','Txuleta a la brasa','Agua mineral'], ARRAY[1,1,1]);
-SELECT pg_temp.venta('D1', 'Almi-Chain Deusto', '192.168.10.31', '00000006Y', NULL, 'efectivo', '2026-10-20 12:30',
+PERFORM pg_temp.venta('D1', 'Almi-Chain Deusto', '192.168.10.31', '00000006Y', NULL, 'efectivo', '2026-10-20 12:30',
        ARRAY['Gilda','Caña','Café'], ARRAY[6,5,3]);
-SELECT pg_temp.venta('D1', 'Almi-Chain Deusto', '192.168.10.31', '00000006Y', 'Iñaki Ejemplo', 'tarjeta', '2026-10-21 13:15',
+PERFORM pg_temp.venta('D1', 'Almi-Chain Deusto', '192.168.10.31', '00000006Y', 'Iñaki Ejemplo', 'tarjeta', '2026-10-21 13:15',
        ARRAY['Croquetas de jamón','Caña'], ARRAY[2,2]);
+END $$;
 
 COMMIT;
 

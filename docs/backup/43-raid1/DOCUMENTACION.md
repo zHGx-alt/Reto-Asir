@@ -79,7 +79,15 @@ Log: [`evidencias/02-crear-raid.log`](evidencias/02-crear-raid.log).
 
 El enunciado dice: «Esta BD **se almacenará en un dispositivo redundante**». Ahora mismo el RAID (`/srv/datos`) solo guarda las copias: PostgreSQL y los adjuntos de Odoo siguen en los volúmenes de Docker (`/var/lib/docker/volumes/...`), que están en `sda`, el disco del sistema, **fuera del RAID**. Si falla `sda`, la base de datos viva se pierde y hay que restaurar la última copia (hasta 24 h de datos). La simulación de la sección 4 no lo detecta porque el disco que se «rompió» era del RAID, no el del sistema.
 
-**Cómo se corrige:** mover el directorio de datos de Docker al RAID. Así quedan en el espejo las bases `tienda` y `almi_chain` y los adjuntos. Con Odoo parado y una copia recién hecha (tarea 44):
+**Cómo se corrige:** mover el directorio de datos de Docker al RAID. Así quedan en el espejo las bases `tienda` y `almi_chain` y los adjuntos.
+
+**Con el script (recomendado):** [`mover-docker-al-raid.sh`](mover-docker-al-raid.sh) hace todo lo de abajo y lo comprueba: mira que el RAID esté sano y tenga sitio, hace una copia antes, mueve los datos, configura Docker para que arranque después del RAID y verifica que Odoo responde. Si ya está movido, solo comprueba (sintaxis comprobada con `bash -n`; falta ejecutarlo en la VM).
+
+```bash
+sudo ./mover-docker-al-raid.sh
+```
+
+**A mano**, con Odoo parado y una copia recién hecha (tarea 44):
 
 ```bash
 sudo systemctl start backup-odoo          # copia justo antes del cambio

@@ -24,7 +24,7 @@ Una cadena de restaurantes nos contrata para montar la informática de un local.
 | 6 | Línea WAN, esquema de conectividad y plano de red, cableado y Wi-Fi, red segura | Fibra DIGI 1 Gb, router principal + router WDS, plan de IP y segmentación, simulación en Packet Tracer | 22–26 | [docs/redes](docs/redes/) |
 | 7 | Segundo router Wi-Fi por WDS, comprobando que funciona | Dos TP-Link Archer C6 | 25 | [docs/redes](docs/redes/) |
 | 8 | Web unidireccional, atractiva, responsiva, accesible y rápida, con geolocalización, formulario placeholder y slideshow | HTML, CSS y JavaScript sin frameworks; mapa de OpenStreetMap incrustado | 27–29 | [web](web/), [docs/web](docs/web/) |
-| 9 | Web por HTTPS, dominio propio, en la nube y con despliegue reproducible (a poder ser automatizado) | AWS: bucket S3 privado + EC2 con nginx, Let's Encrypt y `almichain1.duckdns.org`; Terraform pendiente | 30, 31 | [docs/web](docs/web/), [scripts/web](scripts/web/), [iac](iac/) |
+| 9 | Web por HTTPS, dominio propio, en la nube y con despliegue reproducible (a poder ser automatizado) | AWS: bucket S3 privado + EC2 con nginx, Let's Encrypt y `almichain1.duckdns.org`; Terraform en [`iac/`](iac/) y publicación con GitHub Actions (validado, falta el `apply`) | 30, 31 | [docs/web](docs/web/), [scripts/web](scripts/web/), [iac](iac/) |
 | 10 | ERP para facturas, clientes, personal, marketing, inventario… con un caso de uso automatizado de extremo a extremo | Odoo 19 Community con TPV de restaurante; emisión automática de facturas por API | 32–37 | [docs/erp](docs/erp/) |
 | 11 | Bases de datos de cada establecimiento: E/R, tablas, implementación y consultas | Modelo E/R → 3FN → PostgreSQL con reglas y roles | 38–42 | [docs/bd](docs/bd/) |
 | 12 | BD en un dispositivo redundante, plan de copias y prueba de restauración | RAID 1 con mdadm, restic cifrado 3-2-1, restauración aislada | 43–45 | [docs/backup](docs/backup/) |
@@ -68,7 +68,7 @@ flowchart LR
     subgraph REPO["🐙 GitHub · Reto-Asir"]
         CODE["web/ · scripts/ · docs/ · arduino/"]
     end
-    CODE -- "se sube a mano o con aws s3 sync<br/>(GitHub Actions: tarea 31)" --> S3
+    CODE -- "GitHub Actions: aws s3 sync<br/>(Terraform crea la infraestructura, tarea 31)" --> S3
     CODE -- "scripts que montan cada pieza" --> LOCAL
 ```
 
@@ -183,7 +183,7 @@ sequenceDiagram
 
 - La carta de ejemplo (15 productos, salas y mesas) la carga [`cargar-carta-y-mesas.py`](docs/erp/34-configurar-odoo/cargar-carta-y-mesas.py). La carta real se importará en la tarea 36.
 - **Stock:** los productos de la carta no tienen activado el seguimiento de inventario, así que una venta **no descuenta stock** en Odoo. Se puede activar si el cliente lo quiere; el descuento por receta sí está en la BD de la tarea 40 (sección 7).
-- **HTTPS:** Odoo responde por HTTP dentro de la LAN. Falta el proxy HTTPS (#52), que además permite al TPV seguir cobrando si se cae la red (el *service worker* solo funciona con HTTPS).
+- **HTTPS:** Odoo responde por HTTP dentro de la LAN. El proxy HTTPS (#52) está preparado en [`docs/erp/52-https-odoo`](docs/erp/52-https-odoo/DOCUMENTACION.md) (nginx con certificado propio; Odoo deja de escuchar en la LAN) y falta activarlo en el servidor. Además permite al TPV seguir cobrando si se cae la red (el *service worker* solo funciona con HTTPS).
 
 ### 5.4 El caso de uso automatizado: emitir una factura
 
@@ -210,7 +210,7 @@ Es el caso de uso de extremo a extremo que pide el enunciado: una empresa reserv
 | Dónde está | AWS (EC2 + S3) | Servidor del local |
 | Qué datos tiene | Solo texto e imágenes públicas | Clientes, ventas, facturas, empleados, contabilidad |
 | Accesible desde internet | Sí, por HTTPS | **No**: solo desde la LAN |
-| Dirección | `https://almichain1.duckdns.org` | `http://192.168.10.10:8069` (HTTPS pendiente, #52) |
+| Dirección | `https://almichain1.duckdns.org` | `http://192.168.10.10:8069`; con el proxy de la tarea 52, `https://192.168.10.10` |
 
 Por qué:
 
@@ -235,7 +235,7 @@ El enunciado pide **diseñar** las bases de datos de cada establecimiento (E/R, 
 | Alcance | Un local | Base **central** de la cadena con los datos de cada establecimiento ([tarea 38, apartado 1.1](docs/bd/38-modelo-er.md#11-una-base-central-para-toda-la-cadena)) |
 | Tablas | Las de Odoo | 13: establecimiento, empleado, cliente, modelo_equipo, equipo, plato, articulo, stock, receta, factura, linea_factura, campana_marketing, envio_campana |
 | Para qué | Funcionamiento real del restaurante | Demostrar el diseño: claves, normalización, reglas y permisos |
-| Datos y consultas | Los del restaurante | `06-datos.sql` (2 locales, 8 ventas) y `07-consultas.sql` (12 consultas), sin ejecutar todavía (#41) |
+| Datos y consultas | Los del restaurante | `06-datos.sql` (2 locales, 8 ventas) y `07-consultas.sql` (12 consultas), ejecutados el 24/10 ([evidencia](docs/bd/evidencias/41-datos-y-consultas.txt)); usuarios `tpv_app` e `informes` con sus pruebas (#42, [evidencia](docs/bd/evidencias/42-usuarios-y-permisos.txt)) |
 | Copia de seguridad | Sí (restic, tarea 44) | `backup-odoo.sh` ya la copia si existe; falta crearla en el servidor (#41, #44) |
 
 Las dos modelan **el mismo negocio**, así que sus entidades se corresponden:
@@ -322,15 +322,15 @@ Primero Windows y después Ubuntu (si se hace al revés, Windows borra el arranq
 
 [Guía y evidencias (tarea 12)](docs/so/12-dual-boot.md). La VM está en Google Drive; sus contraseñas, nunca en el repositorio.
 
-### 10.2 TPV (pendiente, #13 y #15)
+### 10.2 TPV (#13 y #15: scripts listos, falta la VM)
 
-Lo previsto en la tarea 7: usuario estándar para el cajero y otro de administración; **modo quiosco** (Acceso asignado de Windows 10 Pro) con el navegador abriendo solo el TPV de Odoo; USB de almacenamiento bloqueado; firewall con salida solo al servidor, DNS y actualizaciones; actualizaciones activas. Todo con un script de PowerShell para repetirlo en los dos TPV.
+[`configurar-tpv.ps1`](docs/so/13-tpv/configurar-tpv.ps1) deja cada TPV con usuario estándar `cajero`, UAC que no deja elevar, USB de almacenamiento bloqueado, firewall con entrada y salida bloqueadas salvo Odoo, DNS, DHCP y actualizaciones, Edge limitado a Odoo y actualizaciones a las 3:00. El **modo quiosco** (Acceso asignado con Edge) se pone a mano en 6 clics. [`comprobar-tpv.ps1`](docs/so/13-tpv/comprobar-tpv.ps1) comprueba los 16 puntos y guarda la evidencia ([guía](docs/so/13-tpv/DOCUMENTACION.md)).
 
 **Riesgo conocido:** Windows 10 dejó de tener actualizaciones gratuitas el 14/10/2025. El enunciado lo exige, así que se compensa aislando y restringiendo los TPV.
 
-### 10.3 Impresoras (pendiente, #14 y #37)
+### 10.3 Impresoras (#14 y #37: guía lista, la impresora la da el centro)
 
-Por USB al TPV: el ticket que genera Odoo en el navegador se imprime con el driver de Windows de la Epson. Así la impresora no tiene IP ni panel de administración en la red.
+Por USB al TPV: el ticket que genera Odoo en el navegador se imprime con el driver de Windows de la impresora. Así la impresora no tiene IP ni panel de administración en la red. Pasos y pruebas: [guía](docs/so/14-impresora/DOCUMENTACION.md).
 
 ---
 
@@ -360,7 +360,7 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 ```
 
 - **Por qué no CloudFront + ACM:** el dominio gratuito (DuckDNS) solo admite registros A, y CloudFront y ACM necesitan CNAME. Con una IP elástica basta un registro A y Let's Encrypt emite el certificado gratis (renovación automática).
-- **Reproducible:** [`instalar-servidor-web.sh`](scripts/web/instalar-servidor-web.sh) monta el servidor en una EC2 nueva. Falta automatizar la creación de la infraestructura con Terraform y la publicación con GitHub Actions (#31).
+- **Reproducible:** [`instalar-servidor-web.sh`](scripts/web/instalar-servidor-web.sh) monta el servidor en una EC2 nueva. La infraestructura se crea con Terraform ([`iac/`](iac/README.md)) y la publicación va con GitHub Actions ([`desplegar-web.yml`](.github/workflows/desplegar-web.yml)); falta ejecutar el `apply` en el Learner Lab (#31).
 - **Learner Lab:** la EC2 se apaga al terminar cada sesión, así que la web solo responde con el laboratorio arrancado. Al terminar el reto hay que **liberar la IP elástica**.
 
 ---
@@ -371,8 +371,8 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 |---|---|---|---|---|
 | Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | — | Gerente (con contraseñas robustas, #55) y recreativa hechos; TPV pendiente (#13) |
 | Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi. **La Wi-Fi de prueba estuvo visible en capturas (tapadas el 24/10): hay que cambiarla** | WPA2-AES; WPA3 pendiente | En curso (#24) |
-| Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS pendiente** (#52) | En curso |
-| Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Usuarios con login creados aparte | — | En curso (#42) |
+| Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS preparado** (#52, falta activarlo) | En curso |
+| Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Cuentas `tpv_app` e `informes` con login; contraseñas por variable, nunca en el repositorio (#42) | — | Hecho (probado 9/9 con cada cuenta) |
 | Copias | Solo root lee la contraseña | Contraseña de restic fuera del servidor | AES-256 | Hecho |
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
 | Repositorio | Cambios por Pull Request con revisor | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
@@ -420,7 +420,7 @@ flowchart LR
 | `arduino/` | Firmware y esquema del arcade stick |
 | `web/` | La web publicada |
 | `scripts/` | Gantt, verificación, hooks, servidor web y monitorización de la recreativa |
-| `iac/` | Infraestructura como código (vacía, tarea 31) |
+| `iac/` | Infraestructura como código: Terraform de la web (tarea 31) |
 
 ---
 
