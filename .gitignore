@@ -62,3 +62,6 @@ Thumbs.db
 
 # --- Preseed con la clave SSH real (tarea 16) ---
 preseed-local.cfg
+
+# --- Exportaciones de Odoo (tarea 36): llevan datos personales ---
+exportaciones-*/

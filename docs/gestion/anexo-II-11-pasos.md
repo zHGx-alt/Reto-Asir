@@ -78,12 +78,20 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Reparto tras la revisión del estado | Software pendiente para Adrian e Iker; tareas físicas para cualquiera salvo Eneko.P; las tareas con parte en VM y parte física se separan | Eneko.P está pendiente de confirmar si sigue; Adrian e Iker son quienes han hecho casi todo el software ([roles.md](roles.md), [verificacion.md](verificacion.md)) | 23/10/2026 |
 | ERP | Odoo Community | Cubre las funciones del enunciado con un TPV táctil integrado, usa PostgreSQL, tiene más documentación en español y es gratuito ([tarea 32](../erp/32-comparativa-erp.md), sección 6) | 22/10/2026 |
 | Hosting web | Bucket S3 privado + EC2 con nginx, IP elástica, dominio `almichain1.duckdns.org` y certificado de Let's Encrypt | Dominio y certificado gratuitos. DuckDNS solo admite registros A, y CloudFront y ACM necesitan CNAME; con una IP elástica basta un registro A ([tarea 30](../web/30-hosting-aws.md)) | 23/10/2026 |
-| IaC | | | |
+| IaC | Terraform (proveedor AWS) + GitHub Actions para publicar | Lo nombra el plan y es portable; `terraform validate` lo comprueba sin credenciales. CloudFormation ataría el código a AWS ([iac/](../../iac/README.md)) | 24/10/2026 |
 | SO de la recreativa | *Provisional:* Debian 13 mínimo con arranque directo a MAME | Arranca a MAME en 4,7 s sin escritorio ([tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md)). Se está probando Batocera para compararlas con datos en una VM de 1 núcleo y 1 GB ([notas](../arcade/16-batocera/NOTAS.md)) | 23/10/2026 |
 | Firmware de router | | | |
 | SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 ([tarea 40](../bd/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
 | Backup | restic sobre RAID 1 (`mdadm`) y disco USB externo | Copias cifradas con AES-256, deduplicadas y automatizadas; cumple la regla 3-2-1 ([tarea 44](../backup/44-backup-3-2-1/DOCUMENTACION.md)) | 22/10/2026 |
 | Placa del arcade stick | Arduino Leonardo (ATmega32U4) | HID nativo por USB sin drivers; compatible con la librería Joystick; EEPROM para guardar el mapeo | 22/10/2026 |
+| Tamaño del equipo | 6 personas | El grupo es de 6 aunque el enunciado diga 4-5; Eneko.P sigue sin tareas | 24/10/2026 |
+| Dominio de la web | `almichain1.duckdns.org` | Vale como dominio propio; no se compra ninguno | 24/10/2026 |
+| Fechas del reto | Del 26/10 al 12/11/2026 | Se mantiene la planificación actual hasta que salga la rúbrica | 24/10/2026 |
+| Base de datos de los establecimientos | Base central con los datos de cada local | Evita repetir carta y clientes en cada local ([tarea 38](../bd/38-modelo-er.md#11-una-base-central-para-toda-la-cadena)) | 24/10/2026 |
+| TicketBAI | No se configura | Queda documentado como obligación legal (tarea 34, sección 6) | 24/10/2026 |
+| Arranque dual | Una VM | Suficiente para demostrar el arranque dual (tarea 12) | 24/10/2026 |
+| Impresora de tickets | La da el centro | Las tareas 14 y 37 esperan a tenerla ([guía](../so/14-impresora/DOCUMENTACION.md)) | 24/10/2026 |
+| Notación del E/R | Pata de gallo (Mermaid) | Se revisa cuando salga la rúbrica | 24/10/2026 |
 
 ## 6. Planificación
 

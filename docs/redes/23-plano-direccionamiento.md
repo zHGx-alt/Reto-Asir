@@ -216,7 +216,7 @@ El primer ping de cada pareja pierde 1 o 2 paquetes mientras se resuelve la dire
 
 La configuración se ha leído del propio `.pkt`, no solo de la captura. La simulación tiene **una red interna con 6 VLAN, pero ninguna red pública**: `Gi0/1` y `Gi0/2` de R1 están apagadas y sin IP, no hay ruta por defecto ni NAT, no hay ningún punto de acceso (el CLIENTE es un portátil con cable) y R1 y SW1 no tienen contraseñas ni SSH; los puertos Fa0/7-24 de SW1 están encendidos en la VLAN 1 y los pools DHCP no reparten DNS. Así no demuestra la línea WAN, la Wi-Fi, el WDS ni la red segura que pide el enunciado, ni el RA.7 de PAR («conecta redes privadas a redes públicas»). Las ACL acaban en `permit ip any any` («internet sí»), pero no hay internet que probar.
 
-Hay que añadir al `.pkt` (pendiente: el fichero solo se puede editar con Packet Tracer):
+Hay que añadir al `.pkt` (pendiente: el fichero solo se puede editar con Packet Tracer). **Los comandos listos para pegar, equipo por equipo, y las pruebas nuevas están en [23-packet-tracer-completar.md](23-packet-tracer-completar.md).** Resumen:
 
 1. **ISP e Internet:** un router `ISP` (el de DIGI) y detrás un servidor `INTERNET` con HTTP y DNS en `198.51.100.10`.
 2. **WAN y NAT con sobrecarga en R1:**

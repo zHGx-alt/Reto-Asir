@@ -1,45 +1,60 @@
 # Correcciones del reto Almi-Chain · Lista para el lunes 26/10/2026
 
-Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx)), la única fuente fiable. El plan ([almi-chain-plan.pdf](almi-chain-plan.pdf)) lo hizo el equipo y no cuenta como requisito.
+Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx)), la única fuente fiable. El reto va del **lunes 26/10 al jueves 12/11/2026**.
 
-- **Revisión:** 24/10/2026. El mismo día se corrigió todo lo que se podía arreglar desde el repositorio (commit `215eac7`, rama `gestion/correcciones`; sección 1).
-- **Este documento es la lista de lo que queda.** Cada punto dice qué hacer, dónde, quién lo lleva (según el [backlog](docs/gestion/backlog-kanban.csv)) y cuándo se da por terminado. Al terminar uno, se marca `[x]` con la fecha y se actualizan la observación del CSV y el Gantt (`python3 scripts/gantt.py`).
-- La revisión completa original, con la explicación de cada fallo, está en la versión del fichero del commit `215eac7`: `git show 215eac7:CORRECIONES.md`.
-- **Gravedad:** 🔴 grave (incumple el enunciado o es un fallo de seguridad) · 🟠 media (error que un evaluador puede ver) · 🟢 leve.
-- **Actualizado el 24/10/2026** con las decisiones del equipo (sección 6): Drive revisado, equipo de 6, DuckDNS, fechas, base central, TicketBAI, una VM y la impresora que da el centro. Lo que dependa de la rúbrica se revisará cuando se publique.
-
----
-
-## 0. Orden recomendado para el lunes
-
-El PR #41 (`gestion/correcciones`) ya está unido a `main`. El reto va del **lunes 26/10 al jueves 12/11/2026**.
-
-| Orden | Qué | Por qué primero | Quién | Sección |
-|---|---|---|---|---|
-| 1 | **Cambiar la contraseña Wi-Fi expuesta** y la de administración del router | Está en el historial de Git y se puede leer | Peio | [2.1](#21-urgente-contraseñas) |
-| 2 | Pasar la contraseña de restic a KeePassXC y borrar su copia en texto | Contraseña en texto plano | Iker | [2.1](#21-urgente-contraseñas) |
-| 3 | Pasar `verificar-repo.sh` en un equipo con Docker | Comprueba los SQL nuevos (tarea 41) y el resto, sin coste | Iker | [3.1](#31-base-de-datos-tareas-41-y-42) |
-| 4 | Decidir red plana o VLAN | Cambia Packet Tracer, diagramas y presupuesto | Equipo | [4.1](#41-decisión-red-plana-o-vlan) |
-| 5 | Mover la BD al RAID y repetir la prueba | Tal como está, incumple el enunciado | Iker | [3.2](#32-raid-y-copias-tareas-43-45) |
-| 6 | TPV, impresora (cuando la dé el centro) y stick | Tareas literales del enunciado sin empezar | Iker · Adrian · Markel · Peio | [5](#5-tareas-del-enunciado-sin-empezar) |
+- **Estado (24/10/2026, segunda tanda):** todo lo que se podía hacer sin el hardware, sin las VM y sin AWS **está hecho y comprobado**. Lo que queda es, sobre todo, **ejecutar** lo preparado en las VM y en el hardware, y guardar las evidencias. Cada punto lleva el comando, quién lo hace (según el [backlog](docs/gestion/backlog-kanban.csv)) y cuándo está terminado.
+- Al terminar un punto: marcarlo `[x]` con la fecha, actualizar la observación del CSV y regenerar el Gantt (`python3 scripts/gantt.py`).
+- La revisión original, con la explicación de cada fallo: `git show 215eac7:CORRECIONES.md`.
+- **Gravedad:** 🔴 grave (incumple el enunciado o es un fallo de seguridad) · 🟠 media · 🟢 leve.
 
 ---
 
-## 1. Ya corregido el 24/10/2026 (no hay que repetirlo)
+## 0. El lunes, por persona
+
+| Persona | Primero (la mañana) | Después | Secciones |
+|---|---|---|---|
+| **Peio** | Cambiar la contraseña Wi-Fi expuesta y la de administración del TL-WR841N (15 min) | Archer C6: tarea 24 completa, red de invitados y WDS (tarea 25) | [2.1](#21-urgente-contraseñas), [4.3](#43-routers-reales-tareas-24-26) |
+| **Iker** | Pasar la contraseña de restic a KeePassXC (5 min). En `ServidorERP`: `mover-docker-al-raid.sh` y repetir el fallo del RAID con Odoo en marcha | Crear `almi_chain` en el servidor; VM del TPV con `configurar-tpv.ps1`; `importar-exportar.py`; `restringir-menus-cajero.py`; factura automática nueva; medidas de la recreativa en 1 GB | [2.1](#21-urgente-contraseñas), [3](#3-datos-raid-copias-y-bd), [5](#5-tpv-e-impresora), [7](#7-erp-y-recreativa) |
+| **Adrian** | Packet Tracer con la guía de comandos (1 h) | `activar-https.sh` (tarea 52); `terraform apply` y secretos de GitHub (tarea 31); publicar la web y repetir curl y Lighthouse; VM del gerente | [4.2](#42-packet-tracer-tarea-23), [2.2](#22-https-en-odoo-y-menús-del-cajero), [6](#6-web-y-aws) |
+| **Markel** | Montar el arcade stick con el [esquema nuevo](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5) | Pruebas con MAME y otro emulador (tarea 21) | [5](#5-tpv-e-impresora) |
+| **Eneko.S** | Revisar la tarea 41 (evidencias de la BD) y la 12 | Recreativa real (tarea 53) | [7](#7-erp-y-recreativa) |
+| **Equipo** | Decidir red plana o VLAN (10 min) | Revisar los PR pendientes | [4.1](#41-decisión-red-plana-o-vlan) |
+
+---
+
+## 1. Ya hecho (no hay que repetirlo)
+
+### 1.1 Primera tanda (24/10)
 
 | Bloque | Qué se hizo |
 |---|---|
-| Seguridad | Contraseña Wi-Fi y RADIUS tapadas en las capturas 07 y 08 de la tarea 24; preseed de la recreativa sin la clave SSH fija (`preseed-local.cfg`, en `.gitignore`); SSH de la recreativa sin contraseña ni root; actualizaciones de seguridad de la recreativa a las 04:30 y 05:00 |
-| Redes | Tarea 22 en Markdown con análisis de necesidades, esquema de conectividad y fuentes; tarea 23 con la cita literal del enunciado, invitados en `192.168.50.0/24`, switch en el armario, lista de lo que falta en Packet Tracer (apartado 5.4) y opciones red plana / VLAN (5.5); tarea 24 con cabecera, aviso de contraseñas y fallos de configuración |
-| Hardware | Presupuesto con servidor, discos del RAID, disco USB, SAI, switch, cable, adaptador Wi-Fi y palanca ([tarea 10, sección 12](docs/hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto)); Windows 10 IoT Enterprise LTSC 2021 para los TPV; tarea 9 con versiones; impresoras en `.41` y `.42` |
-| SO | Tarea 12: RG-05 de Windows como parcial y justificación del cifrado |
-| Arcade | Tarea 17 marcada en curso con la advertencia de los 2 núcleos; tarea 18 reescrita para Debian; tarea 16 con la conexión a la Wi-Fi de invitados; administración desde la consola local |
-| Arduino | Firmware con palanca digital de 4 microinterruptores (modo por defecto) y botones 7-8; compila (`pio run`: Flash 39,9 %, RAM 19,3 %) |
-| ERP | Tarea 35 con menú de grupo al 10 % (`--iva`); TicketBAI decidido; tareas 32 y 33 al día; menús del cajero documentados |
-| BD | [`06-datos.sql`](docs/bd/scripts/06-datos.sql) y [`07-consultas.sql`](docs/bd/scripts/07-consultas.sql); base central de la cadena; `almi_chain` en el mismo PostgreSQL y en las copias |
-| Copias | Procedimiento para mover la BD al RAID; USB fuera del local cada lunes con aviso a los 7 días; RTO real marcado como sin medir |
-| Web | CSP y Permissions-Policy en nginx; distancia y ruta a pie al local; créditos de las imágenes; diseño conceptual en la tarea 27 |
-| Gestión | Fechas reales en las tareas hechas; responsables y revisores coherentes; Anexo II con requisitos separados; registro de IA ordenado |
+| Seguridad | Contraseñas Wi-Fi y RADIUS tapadas en las capturas; preseed de la recreativa sin clave SSH fija y SSH sin contraseña; actualizaciones de seguridad de la recreativa a las 5:00 |
+| Redes | Tarea 22 con análisis de necesidades y esquema de conectividad; tarea 23 con cita literal, invitados en `192.168.50.0/24`, switch y opciones plana / VLAN; tarea 24 al día |
+| Hardware | Presupuesto completo (3.814,74 €); Windows 10 IoT LTSC para los TPV; versiones del software |
+| Arduino | Firmware con palanca digital y botones 7-8; compila |
+| ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido |
+| Copias | Procedimiento para la BD en el RAID; aviso del USB; RTO real marcado como pendiente |
+| Web | CSP y Permissions-Policy; distancia al local; créditos |
+| Gestión | Fechas reales; responsables coherentes; Anexo II con requisitos separados; decisiones del equipo (equipo de 6, DuckDNS, base central, TicketBAI, una VM, impresora del centro) |
+
+### 1.2 Segunda tanda (24/10): todo listo para ejecutar
+
+| Tarea | Qué hay | Cómo se ha comprobado |
+|---|---|---|
+| 41 · Datos y consultas | [`06-datos.sql`](docs/bd/scripts/06-datos.sql) y [`07-consultas.sql`](docs/bd/scripts/07-consultas.sql) | **Ejecutados** en PostgreSQL 18.3: 8 facturas, 12 consultas con resultados coherentes. [Evidencia](docs/bd/evidencias/41-datos-y-consultas.txt). Tarea en **Hecho** |
+| 42 · Usuarios de BD | [`08-usuarios.sql`](docs/bd/scripts/08-usuarios.sql) y [`09-pruebas-usuarios.sql`](docs/bd/scripts/09-pruebas-usuarios.sql) | **Ejecutados**: 9/9 pruebas con `tpv_app` y con `informes`. [Evidencia](docs/bd/evidencias/42-usuarios-y-permisos.txt). Tarea en **Hecho** |
+| Verificación | `scripts/verificar-repo.sh` prueba la BD también **sin Docker**, con un PostgreSQL local en un clúster temporal | Ejecutado: todo correcto |
+| 13 y 15 · TPV | [`configurar-tpv.ps1`](docs/so/13-tpv/configurar-tpv.ps1), [`comprobar-tpv.ps1`](docs/so/13-tpv/comprobar-tpv.ps1) y [guía](docs/so/13-tpv/DOCUMENTACION.md) | Sintaxis comprobada; la comprobación se probó en un Windows 11 y da FALLO donde debe |
+| 14 y 37 · Impresora | [Guía](docs/so/14-impresora/DOCUMENTACION.md) con pasos y pruebas | Espera a la impresora del centro |
+| 23 · Packet Tracer | [Comandos para pegar](docs/redes/23-packet-tracer-completar.md): ISP, NAT, Wi-Fi, seguridad y 9 pruebas nuevas | No se puede editar el `.pkt` fuera de Packet Tracer |
+| 31 · IaC | [Terraform](iac/README.md) (S3, SG, EC2, IP elástica, user_data) y [workflow](.github/workflows/desplegar-web.yml) que publica la web | `terraform validate` y `fmt` correctos; `user_data` generado pasa `bash -n` |
+| 36 · Importar y exportar | [`carta.csv`](docs/erp/36-importar-exportar/carta.csv) e [`importar-exportar.py`](docs/erp/36-importar-exportar/importar-exportar.py) | `py_compile` |
+| 34 · Menús del cajero | [`restringir-menus-cajero.py`](docs/erp/34-configurar-odoo/restringir-menus-cajero.py) (con `--deshacer`) | `py_compile` |
+| 52 · HTTPS en Odoo | [Proxy nginx](docs/erp/52-https-odoo/DOCUMENTACION.md) con certificado propio; Odoo deja de escuchar en la LAN | `bash -n` |
+| 43 · BD en el RAID | [`mover-docker-al-raid.sh`](docs/backup/43-raid1/mover-docker-al-raid.sh) | `bash -n` |
+| 11 · Diagrama | Mermaid y **SVG regenerados**; tabla de guías de instalación por equipo | SVG válido y revisado a ojo |
+| 19 · Stick | [Esquema](arduino/mando-joystick/esquema-conexiones.svg) con la palanca digital y los botones 7-8 | Revisado a ojo |
+| 6 · Dudas | Decisiones apuntadas en el Anexo II (sección 5); tarea en **Hecho** | — |
 
 ---
 
@@ -47,47 +62,49 @@ El PR #41 (`gestion/correcciones`) ya está unido a `main`. El reto va del **lun
 
 ### 2.1 Urgente: contraseñas
 
-- [ ] 🔴 **Cambiar la contraseña Wi-Fi del TL-WR841N.** Tenía 8 cifras y se leía en las capturas antiguas, que siguen en el historial de Git. La nueva, una frase de KeePassXC de 20 caracteres o más. Si el router ya no se usa, apuntarlo.
-  - **Quién:** Peio · **Dónde:** [tarea 24, sección 12](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente) · **Hecho cuando:** contraseña cambiada y marcada en la tarea 24 (sin captura de la contraseña).
-- [ ] 🟠 **Contraseña de administración del router** (parece la de fábrica): cambiarla, limitar la administración a la MAC del PC del gerente y hacer captura (sin la contraseña).
-  - **Quién:** Peio · **Dónde:** tarea 24, secciones 8 y 12.
-- [x] **Drive revisado (24/10/2026):** la carpeta solo tiene `VM-dualboot-W10-ubuntu-disk1.vmdk`, `Contraseñas.kdbx` (del 23/10) y la librería del joystick; **no hay ningún `.txt`**. El `.kdbx` es una base cifrada de KeePassXC: sin su contraseña maestra, que solo está en local, no sirve de nada. Cerrado.
-- [ ] 🟠 **Contraseña de restic:** pasarla a KeePassXC y borrar `tarea-44/.credenciales-backup` del PC del técnico.
-  - **Quién:** Iker · **Dónde:** [tarea 44, sección 5](docs/backup/44-backup-3-2-1/DOCUMENTACION.md).
-- [ ] 🟢 En las recreativas instaladas con el preseed antiguo, borrar la línea `recreativa-claude` de `~tecnico/.ssh/authorized_keys`.
+- [ ] 🔴 **Cambiar la contraseña Wi-Fi del TL-WR841N** (se leía en las capturas antiguas, que siguen en el historial de Git). Conectarse por cable, `http://192.168.1.1` → *Wireless → Wireless Security* → contraseña nueva de KeePassXC (20 caracteres o más) → *Save*. Si el router ya no se usa, apuntarlo y listo.
+  - **Quién:** Peio · **Hecho cuando:** marcado en la [tarea 24, sección 12](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente), sin captura de la contraseña.
+- [ ] 🟠 **Contraseña de administración del router:** *System Tools → Password*, otra de KeePassXC; limitar la administración a la MAC del PC del gerente; captura sin la contraseña.
+  - **Quién:** Peio.
+- [ ] 🟠 **Contraseña de restic:** copiarla de `tarea-44/.credenciales-backup` (o `sudo cat /root/.config/backup-odoo/restic.pass` en el servidor) a una entrada de KeePassXC y **borrar** `.credenciales-backup`. La del servidor se queda: la necesita la copia nocturna.
+  - **Quién:** Iker (con quien tenga la contraseña maestra del `.kdbx`).
+- [ ] 🟢 Recreativas instaladas con el preseed antiguo: borrar la línea `recreativa-claude` de `~tecnico/.ssh/authorized_keys`.
   - **Quién:** Iker.
+- [x] Drive revisado: no hay ningún `.txt` con contraseñas; el `.kdbx` no sirve sin su contraseña maestra (24/10).
 
-### 2.2 Resto de seguridad
+### 2.2 HTTPS en Odoo y menús del cajero
 
-- [ ] 🔴 **HTTPS en Odoo (tarea 52):** proxy HTTPS delante de Odoo y, entonces, publicar el puerto como `"127.0.0.1:8069:8069"` en [`docker-compose.yml`](docs/erp/33-odoo-docker/odoo/docker-compose.yml) (ya hay un comentario). **Hecho cuando:** `https://192.168.10.10` abre el TPV y `http://192.168.10.10:8069` no responde desde otro equipo.
+- [ ] 🔴 **Activar HTTPS (tarea 52)** en `ServidorERP`, después de mover la BD al RAID (3.1):
+  ```bash
+  cd docs/erp/52-https-odoo && mkdir -p evidencias && sudo ./activar-https.sh 192.168.10.10 | tee evidencias/01-activar-https.txt
+  ```
+  **Hecho cuando:** el script dice HTTPS 200, HTTP 301 y 8069 cerrado, y se hacen las pruebas de la [sección 4 de la guía](docs/erp/52-https-odoo/DOCUMENTACION.md).
   - **Quién:** Adrian · Revisa Iker.
-- [ ] 🟠 **Menús del cajero en Odoo:** ocultar Contactos, Empleados, Conversaciones, Calendario y Tableros al grupo del cajero (opciones en la [tarea 34, sección 9](docs/erp/34-configurar-odoo/DOCUMENTACION.md)). Probarlo en una base de pruebas, pasarlo a `configurar-odoo.py` y repetir la prueba 1 de la sección 8.2 con captura nueva.
+- [ ] 🟠 **Menús del cajero:** `ODOO_ADMIN_PASSWORD=... python3 docs/erp/34-configurar-odoo/restringir-menus-cajero.py`; entrar como `cajero1` y hacer la captura nueva (solo ve Punto de venta).
   - **Quién:** Iker · Revisa Adrian.
-- [ ] 🟢 Batocera: cambiar la contraseña de root y desactivar SSH si se elige (tarea 51).
-- [ ] 🟢 Revisión de seguridad transversal (tarea 46) con todo lo anterior hecho.
-  - **Quién:** Adrian · Revisa Markel.
+- [ ] 🟢 Revisión de seguridad transversal (tarea 46) cuando esté lo anterior. **Quién:** Adrian · Revisa Markel.
 
 ---
 
-## 3. Datos: BD, RAID y copias
+## 3. Datos: RAID, copias y BD
 
-### 3.1 Base de datos (tareas 41 y 42)
+### 3.1 RAID y copias (tareas 43-45)
 
-- [ ] 🔴 **Ejecutar los scripts nuevos** en un equipo con Docker: `bash scripts/verificar-repo.sh`. Tiene que dar OK en `06-datos.sql`, `8 facturas cargadas` y `07-consultas.sql: 12 consultas sin errores`. Si algo falla, corregir el script.
-  - **Quién:** Iker · Revisa Eneko.S.
-- [ ] 🔴 **Guardar la evidencia:** `psql -d almi_chain -f 07-consultas.sql > docs/bd/evidencias/41-consultas.txt` y revisar que los resultados tienen sentido (por ejemplo, C-08 devuelve la chuleta de Abando por debajo del mínimo; C-05, los platos sin ventas). Cambiar la evidencia de la tarea 41 en el CSV y pasarla a **Hecho**.
-- [ ] 🔴 **Crear `almi_chain` en el servidor** (en el mismo PostgreSQL que Odoo) con los comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md), y comprobar que la siguiente copia nocturna incluye `almi_chain.dump`.
-- [ ] 🟠 **Usuarios con `LOGIN` (tarea 42):** crear un usuario de aplicación y uno de lectura con contraseñas de KeePassXC, documentarlos (sin contraseña) y guardar la evidencia de que no pueden hacer DDL ni borrar facturas.
-  - **Quién:** Adrian · Revisa Iker.
-
-### 3.2 RAID y copias (tareas 43-45)
-
-- [ ] 🔴 **Mover la BD al RAID:** seguir la [tarea 43, sección 7](docs/backup/43-raid1/DOCUMENTACION.md#7-pendiente-la-base-de-datos-tiene-que-estar-en-el-raid) (`data-root` de Docker en `/srv/datos/docker`, y Docker arrancando después de montar el RAID). **Hecho cuando:** `docker info` dice `/srv/datos/docker` y Odoo funciona igual.
+- [ ] 🔴 **Mover la BD al RAID** en `ServidorERP`:
+  ```bash
+  sudo docs/backup/43-raid1/mover-docker-al-raid.sh | tee docs/backup/43-raid1/evidencias/10-docker-en-el-raid.txt
+  ```
+  **Hecho cuando:** termina con «Listo» (data-root `/srv/datos/docker` y login de Odoo 200).
   - **Quién:** Iker · Revisa Adrian.
-- [ ] 🔴 **Repetir la simulación de fallo con Odoo funcionando:** quitar un disco del RAID, hacer una venta y comprobar que se guarda. Evidencia nueva en `docs/backup/43-raid1/evidencias/`. Después, la tarea 43 pasa a **Hecho**.
-- [ ] 🟠 **Probar el `backup-odoo.sh` nuevo** en la VM: la copia incluye las dos bases y, si el USB lleva más de 7 días sin conectarse, el servicio sale con error (`systemctl --failed`).
-- [ ] 🟠 **RTO real:** restaurar en una VM nueva desde cero (preseed + `desplegar-odoo.sh` + restic) y cronometrar, como dice la [tarea 45, sección 6](docs/backup/45-restauracion/DOCUMENTACION.md). Poner ese tiempo en la tarea 45, en LOGICA_RETO y en el Anexo II.
+- [ ] 🔴 **Repetir el fallo del RAID con Odoo funcionando:** quitar un disco (sección 4 de la [tarea 43](docs/backup/43-raid1/DOCUMENTACION.md)), hacer una venta en el TPV y comprobar que se guarda; reconstruir. Evidencia `11-fallo-con-odoo.txt`. Después, tarea 43 a **Hecho**.
+- [ ] 🔴 **Crear `almi_chain` en el servidor** (comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md)), cargar `08-usuarios.sql` con contraseñas de KeePassXC y lanzar `sudo systemctl start backup-odoo`: el log tiene que decir `Volcado almi_chain`.
+- [ ] 🟠 **RTO real:** restaurar en una VM nueva desde cero ([tarea 45, sección 6](docs/backup/45-restauracion/DOCUMENTACION.md)) y cronometrar.
 - [ ] 🟢 Aviso por correo si la copia falla (`OnFailure=`). Mejora: tercer repositorio en S3.
+
+### 3.2 Base de datos (tareas 41 y 42)
+
+- [x] Datos, consultas, usuarios y pruebas ejecutados con evidencias (24/10). Solo falta crear la base en el servidor (3.1).
+- [ ] 🟢 Pasar `bash scripts/verificar-repo.sh` en un equipo con Docker para tener también shellcheck, W3C y gitleaks.
 
 ---
 
@@ -95,143 +112,102 @@ El PR #41 (`gestion/correcciones`) ya está unido a `main`. El reto va del **lun
 
 ### 4.1 Decisión: red plana o VLAN
 
-- [ ] 🔴 **Decidir entre la opción (a) y la (b)** de la [tarea 23, apartado 5.5](docs/redes/23-plano-direccionamiento.md#55-decisión-pendiente-red-real-plana-o-con-vlan). Antes de elegir la (a), comprobar en la tabla de hardware de OpenWrt que el Archer C6 v3 está soportado. Apuntar la decisión en el Anexo II (sección 5) y en la tarea 23.
+- [ ] 🔴 **Decidir entre la opción (a) y la (b)** ([tarea 23, apartado 5.5](docs/redes/23-plano-direccionamiento.md#55-decisión-pendiente-red-real-plana-o-con-vlan)). Antes de elegir la (a), comprobar en la tabla de hardware de OpenWrt que el Archer C6 v3 está soportado. Apuntarlo en el Anexo II y en la tarea 23.
   - **Quién:** el equipo (Adrian lo apunta).
 
 ### 4.2 Packet Tracer (tarea 23)
 
-- [ ] 🔴 **Añadir al `.pkt` la parte pública:** router ISP, servidor INTERNET (`198.51.100.10`), WAN `203.0.113.0/30`, NAT con sobrecarga en R1 y `dns-server` en los pools. La configuración está en la tarea 23, apartado 5.4. Si se elige la opción (b), simular la red plana y dejar el `.pkt` de VLAN como anexo.
-  - **Quién:** Adrian · Revisa Iker.
-- [ ] 🔴 **Wi-Fi en el `.pkt`:** punto de acceso de invitados (y otro del personal) y el portátil CLIENTE con tarjeta inalámbrica; un segundo punto de acceso hace de «WDS», explicando que la prueba real es la tarea 25.
-- [ ] 🟠 **Seguridad de R1 y SW1:** `enable secret`, usuario local, SSH v2 en las `vty`, `service password-encryption`, y Fa0/7-24 apagados y en una VLAN sin uso.
-- [ ] 🟠 **Pruebas nuevas y captura:** ping y HTTP a INTERNET desde cada VLAN, `show ip nat translations`, comprobar que desde INTERNET no se llega a ninguna IP interna y SSH a R1 y SW1. Rehacer `23-segmentacion-vlan.png` y la tabla de pruebas.
+- [ ] 🔴 **Seguir [23-packet-tracer-completar.md](docs/redes/23-packet-tracer-completar.md):** ISP e Internet, WAN y NAT en R1, Wi-Fi de invitados y «WDS», seguridad de R1 y SW1 (comandos listos para pegar). Unos 60 minutos.
+- [ ] 🔴 **Las 9 pruebas nuevas** (sección 5 de esa guía) con capturas, la captura nueva de la topología y la tabla de la tarea 23 actualizada.
+  - **Quién (los dos):** Adrian · Revisa Iker.
 
 ### 4.3 Routers reales (tareas 24-26)
 
-- [ ] 🟠 **Repetir la tarea 24 en el Archer C6:** LAN `192.168.10.0/24`, reservas DHCP, WPA3 (o WPA2/WPA3), WPS desactivado, clave de grupo con renovación y modo sin 802.11b. Lista en la [tarea 24, sección 12](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente).
+- [ ] 🟠 **Tarea 24 en el Archer C6:** LAN `192.168.10.0/24`, reservas DHCP, WPA3 (o WPA2/WPA3), WPS desactivado, renovación de la clave de grupo y modo sin 802.11b ([lista](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente)).
   - **Quién:** Peio · Revisa Adrian.
-- [ ] 🟠 **Red de invitados aislada** y pruebas 3 a 5 de la [tarea 23, sección 6](docs/redes/23-plano-direccionamiento.md#6-cómo-se-comprueba). Apuntar qué subred da el router de verdad.
-- [ ] 🔴 **WDS (tarea 25):** segundo router, medidas de cobertura y velocidad, y comprobar si la red de invitados pasa por el enlace WDS. Si no pasa, documentarlo y corregir los diagramas (tarea 11 y LOGICA_RETO).
+- [ ] 🟠 **Red de invitados aislada** y pruebas 3 a 5 de la [tarea 23, sección 6](docs/redes/23-plano-direccionamiento.md#6-cómo-se-comprueba).
+- [ ] 🔴 **WDS (tarea 25):** segundo router, cobertura, velocidad y si la red de invitados pasa por el enlace. Si no pasa, corregir los diagramas.
   - **Quién:** Peio · Revisa Iker.
-- [ ] 🟢 Análisis con Wireshark y nmap (tarea 26). **Quién:** Eneko.S · Revisa Markel.
-- [ ] 🟢 Apuntar las MAC de los equipos en la tabla 4.3 de la tarea 23 al montarlos.
+- [ ] 🟢 Wireshark y nmap (tarea 26). **Quién:** Eneko.S · Revisa Markel.
 
 ---
 
-## 5. Tareas del enunciado sin empezar
+## 5. TPV e impresora
 
-- [ ] 🔴 **Bastionado de los TPV en VM (tarea 13):** usuario estándar, modo quiosco con el navegador en el TPV de Odoo, USB de almacenamiento bloqueado y firewall con salida solo a Odoo, DNS y actualizaciones. Decidir la edición: Windows 10 IoT Enterprise LTSC 2021 o Windows 10 Pro + ESU (tarea 10, apartado 4.1). Pruebas RT-01, RT-04, RT-05 y RT-06 de la tarea 7.
+- [ ] 🔴 **VM del TPV y bastionado (tareas 13 y 15):** Windows 10 (Pro o IoT Enterprise LTSC), red hacia `ServidorERP`, y los pasos 1 a 7 de la [guía](docs/so/13-tpv/DOCUMENTACION.md#4-procedimiento-unos-15-minutos-por-tpv). **Hecho cuando:** `comprobar-tpv.ps1` da **16 OK** y están las capturas de la sección 5 de la guía.
   - **Quién:** Iker · Revisa Markel.
-- [ ] 🔴 **Scripts de Windows (tarea 15):** PowerShell que repita la tarea 13 en los dos TPV (y la configuración del gerente).
-  - **Quién:** Iker · Revisa Markel.
-- [ ] 🔴 **Impresora en el TPV (tarea 14)**, cuando el centro dé la impresora: driver de Epson (apuntar la versión en la tarea 9), cola de impresión y página de prueba en la VM.
-  - **Quién:** Adrian · Revisa Eneko.S.
-- [ ] 🔴 **Ticket en la impresora real (tarea 37)**, con la impresora del centro.
-  - **Quién:** Peio · Revisa Iker.
-- [ ] 🔴 **Montar el arcade stick (tarea 19)** con la palanca Sanwa (sus 4 microinterruptores a A2-A5 y el común a GND) y los botones. Actualizar el esquema SVG con la palanca digital.
+- [ ] 🟠 **Decidir la edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y apuntarla en la tarea 9.
+- [ ] 🔴 **Impresora (tareas 14 y 37)** cuando el centro la dé: [guía](docs/so/14-impresora/DOCUMENTACION.md), pasos 1 a 7.
+  - **Quién:** Adrian (14) · Peio (37).
+- [ ] 🔴 **Montar el arcade stick (tarea 19):** [esquema](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5 y común a GND; botones en 2-7).
   - **Quién:** Markel · Revisa Peio.
-- [ ] 🔴 **Probar el firmware en la placa (tarea 50):** lista del [README del stick](arduino/mando-joystick/README.md#pendiente-prueba-en-físico-tarea-50), con las pruebas nuevas de la palanca digital.
+- [ ] 🔴 **Firmware en la placa (tarea 50):** lista del [README](arduino/mando-joystick/README.md#pendiente-prueba-en-físico-tarea-50).
   - **Quién:** Adrian · Revisa Markel.
-- [ ] 🔴 **Stick con MAME y otro emulador (tarea 21).**
-  - **Quién:** Markel · Revisa Iker.
-- [ ] 🟠 **Importar y exportar datos en Odoo (tarea 36):** importar la carta por CSV y exportar clientes o ventas (RA.7 de LMSGI).
+- [ ] 🔴 **Stick con MAME y otro emulador (tarea 21).** **Quién:** Markel · Revisa Iker.
+
+---
+
+## 6. Web y AWS
+
+**Quién:** Adrian · Revisa Iker. Con el Learner Lab arrancado.
+
+- [ ] 🟠 **IaC (tarea 31):** decidir si se recrea todo con Terraform (borrar antes el montaje manual) o se deja el manual y Terraform queda probado en otra región o con otro nombre de bucket. Ejecutar `terraform apply` ([iac/README.md](iac/README.md), sección 4) y guardar la salida.
+- [ ] 🟠 **Secretos de GitHub** (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) para que `desplegar-web.yml` publique la web. Con eso, el próximo cambio en `web/` se publica solo.
+- [ ] 🟠 **Publicar la versión actual** y volver a ejecutar `instalar-servidor-web.sh` (cabeceras nuevas), si no se usa Terraform.
+- [ ] 🟠 **Pruebas contra la URL pública:** `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con `web/index.html` y salgan CSP y Permissions-Policy), Lighthouse y W3C. Sustituir `08-pruebas-curl.txt` y `lighthouse-w3c.txt`.
+- [ ] 🟢 Copiar las imágenes de Unsplash a `web/` (con su autor) y cambiar la primera foto del carrusel, que repite la de la portada.
+
+---
+
+## 7. ERP y recreativa
+
+- [ ] 🟠 **Importar y exportar (tarea 36):** pasos 1 a 6 de la [guía](docs/erp/36-importar-exportar/DOCUMENTACION.md) contra `ServidorERP`, con evidencias.
   - **Quién:** Iker · Revisa Peio.
-- [ ] 🟠 **IaC (tarea 31):** Terraform para el bucket S3, la EC2, la IP elástica y el grupo de seguridad (recursos en la tarea 30, sección 9) y publicación con GitHub Actions.
+- [ ] 🟠 **Repetir la factura automática** con el menú de grupo (660,00 €) y cambiar las evidencias de la [tarea 35](docs/erp/35-factura-automatica/DOCUMENTACION.md).
   - **Quién:** Iker · Revisa Adrian.
-
----
-
-## 6. Dudas y decisiones (tarea 6)
-
-Decidido por el equipo el 24/10/2026. Cuando salga la **rúbrica** se revisa todo con un criterio más objetivo; hasta entonces, esto queda cerrado.
-
-| Duda | Decisión | Estado |
-|---|---|---|
-| Equipo de 6 personas (el enunciado dice 4-5) | El grupo es de **6 personas**. Eneko.P sigue sin tareas asignadas | [x] Cerrado |
-| Dominio propio | **`almichain1.duckdns.org` vale**: no se compra dominio | [x] Cerrado |
-| Fechas del reto | Del **lunes 26/10 al jueves 12/11/2026**. La planificación actual vale; no se replanifica hasta tener la rúbrica | [x] Cerrado |
-| Base central o una por local | **Base central** (tarea 38, apartado 1.1) | [x] Cerrado |
-| TicketBAI | **No hace falta configurarlo.** Se deja documentado como obligación legal (tarea 34, sección 6) | [x] Cerrado |
-| Arranque dual en VM | **Una VM** vale | [x] Cerrado |
-| Impresoras | **La impresora la da el centro.** Las tareas 14 y 37 esperan a tenerla | [x] Cerrado |
-| Notación del E/R (pata de gallo o Chen) | Se mantiene pata de gallo | [ ] Revisar con la rúbrica |
-
-**Pendiente:** Peio apunta estas decisiones en el Anexo II (sección 5) y en la observación de la tarea 6 del CSV, y la pasa a **Hecho**.
-
----
-
-## 7. Repetir pruebas en las VM y en AWS
-
-### 7.1 Recreativa (tareas 17, 18, 51, 53 y 54)
-
-- [ ] 🔴 **Rendimiento en la VM `Recreativa-1GB` (1 núcleo, 1 GB):** 3 medidas antes y 3 después con la versión nueva de `optimizar-arcade.sh` (`medir-rendimiento.sh --bench`). Sustituir las tablas de la [tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) y pasarla a **Hecho**.
+- [ ] 🔴 **Recreativa en 1 núcleo y 1 GB (tarea 17):** 3 medidas antes y 3 después en `Recreativa-1GB` con el `optimizar-arcade.sh` nuevo; sustituir las tablas.
   - **Quién:** Iker · Revisa Adrian.
-- [ ] 🟠 **Medir jugando:** `monitor-recreativa.sh` durante una partida de 10 minutos (protocolo de la [tarea 18, sección 5](docs/arcade/18-monitorizacion-recreativa.md)) y guardar los CSV en `docs/evidencias/18-monitorizacion/`.
+- [ ] 🟠 **Medir jugando (tarea 18):** `monitor-recreativa.sh` 10 minutos de partida ([protocolo](docs/arcade/18-monitorizacion-recreativa.md)), CSV a `docs/evidencias/18-monitorizacion/`.
   - **Quién:** Adrian · Revisa Markel.
-- [ ] 🟠 **Decidir entre Debian y Batocera (tarea 51)** con esas medidas y apuntarlo en el Anexo II.
-  - **Quién:** Iker · Revisa Markel.
-- [ ] 🟠 **Recreativa real (tarea 53):** mismo preseed (con `preseed-local.cfg`) y conexión a la Wi-Fi de invitados ([tarea 16, sección 6](docs/arcade/16-recreativa-mame/DOCUMENTACION.md#6-conexión-a-la-wi-fi-de-invitados)); después, las medidas reales (tarea 54).
-  - **Quién:** Eneko.S · Revisa Iker.
-
-### 7.2 ERP
-
-- [ ] 🟠 **Repetir la factura automática** con el caso de uso nuevo (menú de grupo: 20 × 30 € + 10 % = 660,00 €) y sustituir los PDF y las salidas de `evidencias/` en la [tarea 35](docs/erp/35-factura-automatica/DOCUMENTACION.md).
-  - **Quién:** Iker · Revisa Adrian.
-
-### 7.3 Gerente (tarea 12)
-
-**Quién (los tres puntos):** Adrian · Revisa Eneko.S.
-
-- [ ] 🟠 **Versión exacta de Ubuntu** (`lsb_release -d`) y nombre de la ISO, en la tarea 12 y en la tarea 9.
-- [ ] 🟠 **Windows Update:** conectar la VM, instalar las actualizaciones acumulativas y repetir la evidencia de RG-05.
-- [ ] 🟢 **Cifrado:** BitLocker en `C:` (clave de recuperación en KeePassXC) y LUKS para los datos de Ubuntu; después, probar el arranque desde GRUB.
-
-### 7.4 Web (tareas 29 y 30)
-
-**Quién (los dos primeros puntos):** Adrian · Revisa Iker.
-
-- [ ] 🟠 **Publicar la versión actual:** con el Learner Lab arrancado, `aws s3 sync web/ s3://almi-chain-web-2026/ --delete --exclude "README.txt" --exclude ".gitkeep"`, y volver a ejecutar `instalar-servidor-web.sh` para que nginx tenga las cabeceras CSP y Permissions-Policy.
-- [ ] 🟠 **Repetir las pruebas contra la URL pública:** `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con el tamaño de `web/index.html` y que salgan las cabeceras nuevas), Lighthouse y W3C. Sustituir `08-pruebas-curl.txt` y `lighthouse-w3c.txt`.
-- [ ] 🟢 Copiar las imágenes de Unsplash a `web/` (con su autor) y cambiar la foto del primer plato del carrusel, que es la misma que la de la portada.
+- [ ] 🟠 **Debian o Batocera (tarea 51)** con esas medidas; apuntarlo en el Anexo II. **Quién:** Iker.
+- [ ] 🟠 **Recreativa real (tarea 53)** y sus medidas (54). **Quién:** Eneko.S · Revisa Iker.
+- [ ] 🟠 **VM del gerente (tarea 12):** versión exacta de Ubuntu (`lsb_release -d`) en las tareas 12 y 9; actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS. **Quién:** Adrian · Revisa Eneko.S.
 
 ---
 
-## 8. Gestión y documentación
+## 8. Gestión
 
-- [x] **Planificación:** el reto va del 26/10 al 12/11/2026 y la planificación actual del CSV vale (decisión del 24/10; se revisa con la rúbrica). Las tareas hechas conservan sus fechas reales.
-- [ ] 🟠 **Revisar las filas del [registro de IA](docs/gestion/registro-ia.md)** que dicen «pendiente de revisar por el equipo»: quien revise pone lo que comprobó y su nombre.
-  - **Quién:** cada persona, sus filas.
-- [ ] 🟠 **Regenerar `arquitectura-equipos.svg`** desde el Mermaid de la tarea 11 y, cuando existan, enlazar las guías de los TPV y de las impresoras en su sección 5. Si cambia la red (4.1), dibujar las redes reales y la WAN.
-  - **Quién:** Iker · Revisa Adrian.
-- [ ] 🟢 Revisar los documentos que siguen «pendiente de revisión» (tareas 7, 8, 11, 12, 23, 27, 30…): el revisor del CSV aprueba el PR y la tarea pasa a **Hecho** si tiene evidencias.
-- [ ] 🟢 Documentación final y presentación (tareas 48 y 49), cuando esté lo anterior.
+- [ ] 🟠 **Registro de IA:** cada persona cambia «pendiente de revisar por el equipo» en sus filas por lo que comprobó.
+- [ ] 🟢 Revisar y aprobar los PR y documentos «pendiente de revisión» (tareas 7, 8, 11, 12, 23, 27, 30…).
+- [ ] 🟢 Notación del E/R: revisar cuando salga la rúbrica.
+- [ ] 🟢 Documentación final y presentación (tareas 48 y 49).
 
 ---
 
-## 9. Cumplimiento del enunciado (estado tras el 24/10)
+## 9. Cumplimiento del enunciado (24/10, tras la segunda tanda)
 
 | Tarea del enunciado | Estado | Qué falta | Sección |
 |---|---|---|---|
-| Necesidades, configuración y presupuesto de equipos e impresoras | Hecho | Precio de la licencia de Windows de los TPV (la impresora la da el centro) | 5 |
+| Necesidades, configuración y presupuesto de equipos e impresoras | Hecho | Edición y precio de Windows de los TPV | 5 |
 | Identificar y documentar el hardware necesario | Hecho | — | — |
-| Identificar y documentar el software necesario | Hecho, con huecos | Versión de Ubuntu y del driver de Epson | 7.3, 5 |
-| Instalación, optimización y monitorización de la recreativa | Parcial | Medidas en 1 núcleo y 1 GB; monitorización jugando | 7.1 |
-| Montaje y programación del arcade stick | Parcial | Montaje y prueba en placa | 5 |
+| Identificar y documentar el software necesario | Hecho, con huecos | Versión de Ubuntu y del driver de la impresora | 7, 5 |
+| Instalación, optimización y monitorización de la recreativa | Parcial | Medidas en 1 núcleo y 1 GB; monitorización jugando | 7 |
+| Montaje y programación del arcade stick | Parcial | Montaje y prueba en placa (firmware y esquema listos) | 5 |
 | Identificar necesidades de comunicación | Hecho | — | — |
-| Implementación y configuración de sistemas operativos | Parcial | TPV | 5 |
-| Restricción de cuentas y equipos (mínimos privilegios) | Parcial | TPV; menús del cajero | 5, 2.2 |
+| Implementación y configuración de sistemas operativos | Parcial | Ejecutar los scripts del TPV en la VM | 5 |
+| Restricción de cuentas y equipos (mínimos privilegios) | Parcial | Ejecutar TPV y menús del cajero | 5, 2.2 |
 | Diseño conceptual de la web | Hecho, a posteriori | — | — |
-| Web accesible y por HTTPS | Hecho | Publicar la versión actual | 7.4 |
-| Hosting en AWS con dominio propio y despliegue reproducible | Parcial | IaC (DuckDNS vale como dominio) | 5 |
-| ERP + TPV con un caso de uso automatizado | Hecho | Repetirlo con el caso de uso nuevo | 7.2 |
-| Instalación y configuración de una impresora | **Sin empezar** | Tareas 14 y 37 | 5 |
-| Modelo E/R y tablas | Hecho | Notación, a revisar con la rúbrica | 6 |
-| Implementación de la BD y consulta de sus datos | Parcial | Ejecutar los scripts y guardar la evidencia | 3.1 |
-| Configurar disco redundante | Parcial | **La BD no está en el RAID** | 3.2 |
-| Plan de copias y prueba de restauración | Hecho, con huecos | RTO en una máquina nueva | 3.2 |
-| Seguridad por defecto en toda la solución | Parcial | Contraseñas; HTTPS en Odoo; red | 2 |
-| Verificar con pruebas (funcionamiento, restauración, failover) | Parcial | WDS; invitados; TPV; stick; fallo con Odoo en marcha | 3.2, 4.3, 5 |
-| Documentación reproducible con diagramas | Parcial | Guías de los TPV; SVG de la tarea 11 | 5, 8 |
+| Web accesible y por HTTPS | Hecho | Publicar la versión actual | 6 |
+| Hosting en AWS con dominio propio y despliegue reproducible | Casi hecho | `terraform apply` y secretos de GitHub | 6 |
+| ERP + TPV con un caso de uso automatizado | Hecho | Repetirlo con el caso de uso nuevo | 7 |
+| Instalación y configuración de una impresora | Guía lista | Impresora del centro | 5 |
+| Modelo E/R y tablas | Hecho | Notación, con la rúbrica | 8 |
+| Implementación de la BD y consulta de sus datos | **Hecho** | Crear la base en el servidor | 3.1 |
+| Configurar disco redundante | Parcial | **Ejecutar `mover-docker-al-raid.sh`** y repetir el fallo | 3.1 |
+| Plan de copias y prueba de restauración | Hecho, con huecos | RTO en una máquina nueva | 3.1 |
+| Seguridad por defecto en toda la solución | Parcial | Contraseñas del router; activar HTTPS en Odoo; red | 2, 4 |
+| Verificar con pruebas (funcionamiento, restauración, failover) | Parcial | WDS; invitados; TPV; stick; fallo con Odoo en marcha | 3.1, 4.3, 5 |
+| Documentación reproducible con diagramas | Casi hecho | Evidencias de lo que se ejecute | — |
 | Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | Commits de Eneko.P | 8 |
 | Documentación y presentación | Pendiente | Tareas 48 y 49 | 8 |
 
@@ -241,7 +217,7 @@ Decidido por el equipo el 24/10/2026. Cuando salga la **rúbrica** se revisa tod
 |---|---|
 | Contratar una línea WAN | Hecho (DIGI 1 Gb, con análisis de necesidades) |
 | Esquema de conectividad | Hecho ([tarea 22, sección 4](docs/redes/22-comparativa-wan.md#4-esquema-de-conectividad)) |
-| Diagrama de la red (plano), cableado y Wi-Fi | Plano hecho; Packet Tracer sin WAN ni Wi-Fi (4.2) |
-| Red configurada de forma segura | Parcial: decisión de red (4.1), invitados sin configurar y contraseñas (2.1) |
+| Diagrama de la red (plano), cableado y Wi-Fi | Plano hecho; Packet Tracer con la guía lista para añadir WAN y Wi-Fi (4.2) |
+| Red configurada de forma segura | Parcial: decisión de red (4.1), invitados (4.3) y contraseñas (2.1) |
 | Segundo router por WDS, comprobando que funciona | Sin empezar (4.3) |
-| RA.7 de PAR: conectar redes privadas a públicas | Sin demostrar hasta añadir NAT y WAN a Packet Tracer (4.2) |
+| RA.7 de PAR: conectar redes privadas a públicas | Se demuestra al aplicar la guía de Packet Tracer (NAT y WAN, 4.2) |

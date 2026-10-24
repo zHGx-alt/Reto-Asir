@@ -6,7 +6,7 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 
 ## Estado
 
-**26 de 55 tareas hechas** (revisión del 24/10/2026, tras aplicar las [correcciones](CORRECIONES.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
+**29 de 55 tareas hechas** (24/10/2026; lo que queda, en [CORRECIONES.md](CORRECIONES.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
 
 ```bash
 bash scripts/verificar-repo.sh
@@ -19,15 +19,15 @@ bash scripts/verificar-repo.sh
 | `docs/gestion/` | Anexo I, Anexo II, reparto, backlog, Gantt, registro de IA y verificación |
 | `docs/hardware/` | Necesidades, hardware, software y presupuesto (tareas 7-10) |
 | `docs/diagramas/` | Diagrama de arquitectura (tarea 11) y wireframes (tarea 27) |
-| `docs/so/` | Arranque dual del gerente (tarea 12) |
+| `docs/so/` | Arranque dual del gerente (tarea 12), bastionado de los TPV (13 y 15) e impresora (14 y 37) |
 | `docs/arcade/` | Recreativa MAME, rendimiento, Batocera y monitorización (tareas 16-18) |
 | `docs/redes/` | Comparativa WAN, plano y direccionamiento, red segura (tareas 22-24) |
 | `docs/web/` | Wireframes (tarea 27) y hosting en AWS (tarea 30) |
-| `docs/erp/` | Comparativa de ERP, Odoo con Docker, configuración y factura automática (tareas 32-35) |
-| `docs/bd/` | Modelo E/R, modelo lógico 3FN, DDL y scripts SQL (tareas 38-40) |
+| `docs/erp/` | Comparativa de ERP, Odoo con Docker, configuración, factura automática, importar y exportar, y HTTPS (tareas 32-36 y 52) |
+| `docs/bd/` | Modelo E/R, modelo lógico 3FN, DDL, datos, consultas y usuarios, con evidencias (tareas 38-42) |
 | `docs/backup/` | RAID 1, copias 3-2-1 y prueba de restauración (tareas 43-45) |
 | `docs/evidencias/` | Capturas del arranque dual, la web y el hosting |
-| `iac/` | Infraestructura como código (vacía: tarea 31) |
+| `iac/` | Infraestructura como código: Terraform de la web en AWS (tarea 31) |
 | `web/` | Página web del restaurante |
 | `arduino/` | Firmware y esquema del arcade stick |
 | `scripts/` | Gantt, verificación, hooks de Git, servidor web y monitorización de la recreativa |

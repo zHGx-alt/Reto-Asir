@@ -1,0 +1,154 @@
+# Tarea 41 · Datos de prueba y consultas de almi_chain
+# Ejecutado el 24/10/2026 en un PostgreSQL 18.3 local y vacío (clúster temporal), tras 01, 02 y 03:
+#   psql -d almi_chain -v ON_ERROR_STOP=1 -f 06-datos.sql
+#   psql -d almi_chain -v ON_ERROR_STOP=1 -f 07-consultas.sql
+
+===== 06-datos.sql
+       tabla       | filas 
+-------------------+-------
+ establecimiento   |     2
+ empleado          |     6
+ modelo_equipo     |     4
+ equipo            |     8
+ plato             |    12
+ articulo          |    13
+ stock             |    19
+ receta            |    13
+ cliente           |     4
+ campana_marketing |     2
+ envio_campana     |     1
+ factura           |     8
+ linea_factura     |    26
+(13 rows)
+
+
+===== 07-consultas.sql
+== C-01 Carta con el precio al público (IVA incluido) · SELECT con expresión y ORDER BY
+ categoria |        nombre        | base  |  pvp  | estrella 
+-----------+----------------------+-------+-------+----------
+ entrante  | Croquetas de jamón   |  7.27 |  8.00 | sí
+ entrante  | Gilda                |  2.27 |  2.50 | 
+ entrante  | Pimientos de Gernika |  6.36 |  7.00 | 
+ principal | Bacalao al pil-pil   | 19.09 | 21.00 | sí
+ principal | Marmitako            | 13.64 | 15.00 | 
+ principal | Txuleta a la brasa   | 45.45 | 50.00 | sí
+ postre    | Pantxineta           |  5.45 |  6.00 | 
+ postre    | Tarta de queso       |  5.91 |  6.50 | sí
+ bebida    | Agua mineral         |  1.82 |  2.00 | 
+ bebida    | Café                 |  1.45 |  1.60 | 
+ bebida    | Caña                 |  2.27 |  2.50 | 
+ bebida    | Txakoli (copa)       |  3.18 |  3.50 | 
+(12 rows)
+
+== C-02 Facturas con su local, TPV, empleado, cliente y total · JOIN de 5 tablas y vista
+ factura |    fecha    |       local       |      tpv      | empleado |        cliente        | forma_pago | total  
+---------+-------------+-------------------+---------------+----------+-----------------------+------------+--------
+ A1-1    | 19/10 13:40 | Almi-Chain Abando | 192.168.10.31 | Jon      | (ticket simplificado) | efectivo   |  23.17
+ A1-2    | 19/10 14:25 | Almi-Chain Abando | 192.168.10.31 | Jon      | (ticket simplificado) | tarjeta    |  67.00
+ A2-1    | 19/10 15:10 | Almi-Chain Abando | 192.168.10.32 | Ane      | Eventos Ejemplo S.L.  | tarjeta    | 112.37
+ D1-1    | 20/10 12:30 | Almi-Chain Deusto | 192.168.10.31 | Unai     | (ticket simplificado) | efectivo   |  32.25
+ A1-3    | 20/10 21:05 | Almi-Chain Abando | 192.168.10.31 | Ane      | Maite Ejemplo         | efectivo   |  63.49
+ A2-2    | 20/10 21:40 | Almi-Chain Abando | 192.168.10.32 | Jon      | (ticket simplificado) | tarjeta    |  20.48
+ D1-2    | 21/10 13:15 | Almi-Chain Deusto | 192.168.10.31 | Unai     | Iñaki Ejemplo         | tarjeta    |  20.99
+ A1-4    | 21/10 14:00 | Almi-Chain Abando | 192.168.10.31 | Jon      | Koldo Ejemplo         | tarjeta    |  73.00
+(8 rows)
+
+== C-03 Ventas por local y día · GROUP BY con SUM y COUNT
+       local       |    dia     | facturas |  base  |  iva  | total  
+-------------------+------------+----------+--------+-------+--------
+ Almi-Chain Abando | 2026-10-19 |        3 | 184.12 | 18.42 | 202.54
+ Almi-Chain Abando | 2026-10-20 |        2 |  76.34 |  7.63 |  83.97
+ Almi-Chain Abando | 2026-10-21 |        1 |  66.36 |  6.64 |  73.00
+ Almi-Chain Deusto | 2026-10-20 |        1 |  29.32 |  2.93 |  32.25
+ Almi-Chain Deusto | 2026-10-21 |        1 |  19.08 |  1.91 |  20.99
+(5 rows)
+
+== C-04 Los 5 platos más vendidos de la cadena · JOIN, GROUP BY, ORDER BY y LIMIT
+       nombre       | categoria | unidades | base_vendida 
+--------------------+-----------+----------+--------------
+ Caña               | bebida    |       14 |        31.78
+ Gilda              | entrante  |       12 |        27.24
+ Café               | bebida    |        9 |        13.05
+ Txakoli (copa)     | bebida    |        6 |        19.08
+ Croquetas de jamón | entrante  |        4 |        29.08
+(5 rows)
+
+== C-05 Platos que no se han vendido nunca · subconsulta con NOT EXISTS
+        nombre        | categoria 
+----------------------+-----------
+ Pimientos de Gernika | entrante
+(1 row)
+
+== C-06 Facturas por encima del importe medio · subconsulta escalar
+ factura | total  | media 
+---------+--------+-------
+ A2-1    | 112.37 | 51.59
+ A1-4    |  73.00 | 51.59
+ A1-2    |  67.00 | 51.59
+ A1-3    |  63.49 | 51.59
+(4 rows)
+
+== C-07 Ventas por empleado, solo quien ha vendido más de 100 € · GROUP BY con HAVING
+    empleado     |  puesto  | facturas | total_vendido 
+-----------------+----------+----------+---------------
+ Jon Agirre Sanz | barra    |        4 |        183.65
+ Ane Lopez Uribe | camarero |        2 |        175.86
+(2 rows)
+
+== C-08 Artículos por debajo del stock mínimo (lista de la compra) · JOIN y comparación entre columnas
+       local       |    articulo     | cantidad | stock_minimo | unidad_medida 
+-------------------+-----------------+----------+--------------+---------------
+ Almi-Chain Abando | Chuleta de vaca |    1.000 |        3.000 | kg
+(1 row)
+
+== C-09 Consumo de materia prima por las ventas, por local · JOIN de 5 tablas con receta
+       local       |     articulo      | consumido | unidad_medida 
+-------------------+-------------------+-----------+---------------
+ Almi-Chain Abando | Guindilla         |    12.000 | ud
+ Almi-Chain Abando | Aceituna          |     6.000 | ud
+ Almi-Chain Abando | Anchoa            |     6.000 | ud
+ Almi-Chain Abando | Chuleta de vaca   |     3.000 | kg
+ Almi-Chain Abando | Cerveza de barril |     1.400 | l
+ Almi-Chain Abando | Bacalao           |     0.750 | kg
+ Almi-Chain Abando | Txakoli           |     0.720 | l
+ Almi-Chain Abando | Patata            |     0.500 | kg
+ Almi-Chain Abando | Bonito            |     0.400 | kg
+ Almi-Chain Abando | Queso crema       |     0.360 | kg
+ Almi-Chain Abando | Masa de croqueta  |     0.360 | kg
+ Almi-Chain Abando | Aceite de oliva   |     0.300 | l
+ Almi-Chain Abando | Café en grano     |     0.048 | kg
+ Almi-Chain Deusto | Guindilla         |    12.000 | ud
+ Almi-Chain Deusto | Anchoa            |     6.000 | ud
+ Almi-Chain Deusto | Aceituna          |     6.000 | ud
+ Almi-Chain Deusto | Cerveza de barril |     1.400 | l
+ Almi-Chain Deusto | Masa de croqueta  |     0.360 | kg
+ Almi-Chain Deusto | Café en grano     |     0.024 | kg
+(19 rows)
+
+== C-10 Clientes que aceptan publicidad y aún no han recibido la campaña de otoño · subconsulta con NOT IN
+        nombre        |             email             
+----------------------+-------------------------------
+ Eventos Ejemplo S.L. | reservas@eventos.ejemplo.test
+(1 row)
+
+== C-11 Cada impresora con su TPV · autocombinación (equipo consigo mismo)
+       local       |   impresora    |      tpv      |       modelo_tpv        
+-------------------+----------------+---------------+-------------------------
+ Almi-Chain Abando | Epson TM-T20IV | 192.168.10.31 | Iggual AIO B156.88.N100
+ Almi-Chain Abando | Epson TM-T20IV | 192.168.10.32 | Iggual AIO B156.88.N100
+ Almi-Chain Deusto | Epson TM-T20IV | 192.168.10.31 | Iggual AIO B156.88.N100
+(3 rows)
+
+== C-12 Inventario de equipos y su coste por local · LEFT JOIN, GROUP BY y COALESCE
+       local       |       tipo        | equipos |  coste  
+-------------------+-------------------+---------+---------
+ Almi-Chain Abando | despacho          |       1 |  792.67
+ Almi-Chain Abando | impresora_tickets |       2 |  399.72
+ Almi-Chain Abando | recreativa        |       1 |       0
+ Almi-Chain Abando | tpv               |       2 | 1077.98
+ Almi-Chain Deusto | despacho          |       0 |       0
+ Almi-Chain Deusto | impresora_tickets |       1 |  199.86
+ Almi-Chain Deusto | recreativa        |       0 |       0
+ Almi-Chain Deusto | tpv               |       1 |  538.99
+(8 rows)
+

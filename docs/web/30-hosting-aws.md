@@ -238,7 +238,7 @@ aws s3 sync web/ s3://almi-chain-web-2026/ --delete --exclude "README.txt" --exc
 
 ## 9. Para la tarea 31 (Terraform)
 
-Recursos que tiene que crear la infraestructura como código para reproducir este montaje:
+**Hecho el 24/10/2026** en [`iac/`](../../iac/README.md) (Terraform validado; falta el `apply` en el Learner Lab) y en [`desplegar-web.yml`](../../.github/workflows/desplegar-web.yml). Recursos que crea:
 
 | Recurso de Terraform | Sección |
 |---|---|

@@ -10,7 +10,7 @@ Tareas relacionadas en el [backlog](../../docs/gestion/backlog-kanban.csv): #19 
 |---|---|
 | Firmware HID (2 ejes, hasta 8 botones físicos → 8 HID) | Hecho, compila |
 | Palanca digital de arcade (4 microinterruptores) y analógica | Hecho (24/10): modo `PALANCA`, por defecto digital |
-| Esquema de conexiones | [esquema-conexiones.svg](esquema-conexiones.svg) |
+| Esquema de conexiones | [esquema-conexiones.svg](esquema-conexiones.svg), con la palanca digital (24/10) |
 | Palanca | Pendiente de comprar: Sanwa JLF-TP-8YT, ya en el presupuesto ([tarea 10](../../docs/hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto)). Sin ella, en modo digital los ejes se quedan en el centro |
 | Mapeo configurable guardado en EEPROM | Hecho, compila |
 | Comandos por puerto serie | Hecho, compila |
