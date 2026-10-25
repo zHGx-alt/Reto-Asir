@@ -26,7 +26,7 @@ El enunciado no da el plano ni las medidas del local. Se trabaja con estos supue
 | S-02 | La fibra de DIGI entra por el despacho del gerente y ahí va el armario de red | El despacho es la única estancia que se cierra con llave, así que el router y el servidor quedan fuera del alcance de los clientes |
 | S-03 | Internet: DIGI 1 Gb con su router, que hace de ONT ([tarea 22](22-comparativa-wan.md)) | Operador elegido en la tarea 22 |
 | S-04 | Router principal y router WDS: 2 × TP-Link Archer C6 V3 ([tarea 10](../hardware/10-presupuesto-hardware.md), apartado 4.4) | Equipos elegidos en el presupuesto |
-| S-05 | Switch TP-Link TL-SG108E de 8 puertos en el armario, en el puerto LAN 1 del router 1; el servidor se conecta al switch ([tarea 10](../hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto), sección 12) | Sin switch, los 4 puertos LAN del router quedaban todos ocupados. Además admite VLAN (apartado 5.5) |
+| S-05 | Switch TP-Link TL-SG108E de 8 puertos en el armario, en el puerto LAN 1 del router 1; el servidor se conecta al switch ([tarea 10](../hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto), sección 12) | Sin switch, los 4 puertos LAN del router quedaban todos ocupados |
 | S-06 | Las impresoras de tickets van por USB a su TPV, así que no llevan IP ([tarea 8](../hardware/08-tabla-hardware.md), apartado 3.3) | Decisión de la tarea 8 |
 | S-07 | El cable va por canaleta a ras de techo o por falso techo y se usa Cat6 | Soporta 1 Gb/s con margen y es barato |
 
@@ -82,7 +82,8 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 |---|---|
 | .1 | Router 1 (puerta de enlace, DHCP y DNS) |
 | .2 | Router 2 (WDS) |
-| .3–.9 | Reservado para red (por ejemplo, un switch en el futuro) |
+| .3 | Switch del armario (TL-SG108E) |
+| .4–.9 | Reservado para red |
 | .10–.19 | Servidores |
 | .20–.29 | Gerencia |
 | .30–.39 | TPV |
@@ -97,6 +98,7 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 |---|---|---|---|---|
 | Router 1 (Archer C6) | 192.168.10.1 | Fija en el router | — | *(apuntar al montarlo)* |
 | Router 2 (Archer C6, WDS) | 192.168.10.2 | Fija en el router, con su DHCP apagado | WDS | *(apuntar)* |
+| Switch TL-SG108E | 192.168.10.3 | Fija en el switch | Cable, LAN 1 | *(apuntar)* |
 | Servidor Odoo | 192.168.10.10 | Reserva DHCP | Cable, switch (LAN 1) | *(apuntar)* |
 | PC del gerente | 192.168.10.20 | Reserva DHCP | Cable, LAN 2 | *(apuntar)* |
 | TPV 1 | 192.168.10.31 | Reserva DHCP | Cable, LAN 3 | *(apuntar)* |
@@ -118,24 +120,24 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 
 Se mantienen los nombres de la [tarea 24](24-red-segura/DOCUMENTACION.md).
 
-**A comprobar en la tarea 24:** no está confirmado que la red de invitados del Archer C6 use una subred propia (`192.168.50.0/24`, la misma que la VLAN 50 de invitados del apartado 5.3, para que una red no signifique cosas distintas en los dos diseños). Algunos routers domésticos dan a los invitados IPs del mismo rango que la LAN y los aíslan solo con reglas internas. Lo importante es el aislamiento, que se prueba igual en los dos casos (apartado 6). La subred que asigne el router de verdad se apunta en esta tabla.
+**A comprobar en la tarea 24:** no está confirmado que la red de invitados del Archer C6 use una subred propia (`192.168.50.0/24`, la de la simulación de Packet Tracer). Algunos routers domésticos dan a los invitados IPs del mismo rango que la LAN y los aíslan solo con reglas internas. Lo importante es el aislamiento, que se prueba igual en los dos casos (apartado 6). La subred que asigne el router de verdad se apunta en esta tabla.
 
 ## 5. Segmentación
 
-El enunciado pide separar **TPV, gerente, clientes y arcade**.
+El enunciado pide la red «configurada de forma segura». El equipo decidió separar **TPV, gerente, clientes y arcade** (apartado 1).
 
 ### 5.1 Quién puede hablar con quién
 
 | Desde ↓ / Hacia → | Servidor Odoo | TPV | PC gerente | Internet |
 |---|---|---|---|---|
-| **TPV** | Sí (TPV de Odoo, puerto 8069) | — | No hace falta | Sí |
+| **TPV** | Sí (TPV de Odoo por HTTPS, tarea 52) | — | No hace falta | Sí |
 | **PC gerente** | Sí (Odoo y administración) | No hace falta | — | Sí |
 | **Clientes** | **No** | **No** | **No** | Sí |
 | **Recreativa** | **No** | **No** | **No** | Sí (actualizaciones) |
 
 ### 5.2 Decisión: red plana con red de invitados aislada (24/10/2026)
 
-**Se monta la opción (b): una sola red para el personal (`192.168.10.0/24`) y la Wi-Fi de invitados aislada (`192.168.50.0/24`) para clientes y recreativa.** Lo que la red no separa (TPV, gerente y servidor comparten red) lo separa **cada equipo**, con su cortafuegos y sus cuentas. El diseño con una VLAN por grupo queda como **anexo de mejora** (apartado 5.5).
+**Se monta la opción (b): una sola red para el personal (`192.168.10.0/24`) y la Wi-Fi de invitados aislada (`192.168.50.0/24`) para clientes y recreativa.** Lo que la red no separa (TPV, gerente y servidor comparten red) lo separa **cada equipo**, con su cortafuegos y sus cuentas.
 
 Cómo se cumple cada casilla de la tabla 5.1 (defensa en profundidad: ninguna medida depende de una sola pieza):
 
@@ -170,11 +172,9 @@ Montar las VLAN de verdad (opción a) separaría mejor la red, pero **empeora el
 
 **Lo que se pierde, y cómo se compensa:** en la red plana, un equipo del personal comprometido podría intentar llegar a otro. Eso lo frenan los cortafuegos de cada equipo (TPV con entrada y salida bloqueadas; gerente y servidor con la entrada bloqueada) y el cifrado de Odoo. Ningún equipo del personal es de uso público: los clientes, que son el riesgo real, están en otra red.
 
-**Camino de mejora:** el switch del presupuesto (TL-SG108E) ya admite VLAN 802.1Q. Si la cadena crece o se cambia de router, el diseño del anexo (apartado 5.5) se puede montar sin cambiar el plan de direcciones de la LAN.
-
 ### 5.4 Simulación en Packet Tracer de la red real
 
-La simulación tiene que representar **la red que se monta**, no otra. Se construye a partir del `.pkt` del anexo (se reutilizan R1, SW1 y los equipos) siguiendo [23-packet-tracer-red-local.md](23-packet-tracer-red-local.md), que tiene los comandos listos para pegar y las pruebas.
+La simulación representa **la red que se monta**, no otra. Se construye desde un fichero vacío siguiendo [23-packet-tracer-red-local.md](23-packet-tracer-red-local.md), que tiene los equipos, los comandos listos para pegar, las pruebas y lo que cambia respecto al local.
 
 ```
 INTERNET (servidor de prueba 198.51.100.10: web y DNS)
@@ -191,7 +191,6 @@ SW1 · switch del armario
 | Fichero | Qué es | Estado |
 |---|---|---|
 | [23-red-local.pkt](23-red-local.pkt) | La red real | **Hecha el 25/10/2026** con el MCP de Packet Tracer y dos pasos a mano. 16 de 16 pruebas correctas. [Configuración y pruebas](evidencias/23-red-local-configuracion-y-pruebas.txt) |
-| [23-anexo-vlan.pkt](23-anexo-vlan.pkt) | El diseño de mejora con una VLAN por grupo (apartado 5.5) | Hecho el 23/10 |
 
 ![Red del local en Packet Tracer](23-red-local.png)
 
@@ -220,71 +219,8 @@ Lo que la simulación no puede probar, el aislamiento entre clientes de la Wi-Fi
 
 **Dos decisiones de la simulación:**
 
-- **Las dos VLAN de la simulación no son «el diseño con VLAN».** Representan lo que el Archer C6 hace por dentro: su red de invitados es una red aparte de la LAN. El resto de la separación (TPV, gerente, servidor) se ve en la simulación igual que en el local: con el cortafuegos de cada equipo (Packet Tracer tiene cortafuegos en los PC).
+- **Las dos VLAN de la simulación (10 y 50) no separan al personal.** Representan lo que el Archer C6 hace por dentro: su red de invitados es una red aparte de la LAN. El resto de la separación (TPV, gerente, servidor) se ve en la simulación igual que en el local: con el cortafuegos de cada equipo (Packet Tracer tiene cortafuegos en los PC).
 - **El router 2 se dibuja como un punto de acceso (AccessPoint-PT) rotulado «ROUTER2-WDS».** Un router en modo WDS funciona como un **puente**: no enruta ni reparte IP; une su Wi-Fi a la del router principal. Packet Tracer no simula WDS, y el aparato que se comporta igual es el punto de acceso. Un router doméstico de Packet Tracer (WRT300N) haría NAT y DHCP propios (otra red, que no es lo que hay en el local) o, puesto como puente en la red de invitados, dejaría su panel de administración al alcance de los clientes. El cable entre SW1 y ROUTER2-WDS representa el enlace por radio; la prueba real del WDS es la tarea 25.
-
-### 5.5 Anexo: diseño de mejora con una VLAN por grupo
-
-Con un router que admita VLAN y el switch TL-SG108E, cada grupo tendría su propia red y el router solo dejaría pasar lo que marca la tabla 5.1:
-
-| VLAN | Nombre | Subred | Equipos |
-|---|---|---|---|
-| 10 | Servidores | 192.168.10.0/24 | Servidor Odoo |
-| 20 | TPV | 192.168.20.0/24 | TPV 1 y 2 (e impresoras si van por red) |
-| 30 | Gerencia | 192.168.30.0/24 | PC del gerente |
-| 40 | Arcade | 192.168.40.0/24 | Recreativa |
-| 50 | Invitados | 192.168.50.0/24 | Móviles de clientes |
-| 99 | Gestión | 192.168.99.0/24 | Panel de administración de routers y switch |
-
-Está simulado y probado en [23-anexo-vlan.pkt](23-anexo-vlan.pkt) (Packet Tracer 9.0.1). Es una simulación **solo de la red interna** (sin Internet ni Wi-Fi): sirve para enseñar la segmentación con *router-on-a-stick* y ACL, no para representar el local.
-
-![Topología del anexo con VLAN](23-anexo-vlan.png)
-
-**Montaje:**
-- Router **R1** (Cisco 2911) y switch **SW1** (2960-24TT) unidos por un *trunk* (`R1 Gi0/0` ↔ `SW1 Gi0/1`).
-- R1 tiene una subinterfaz por VLAN (`Gi0/0.10` … `Gi0/0.99`), que hace de puerta de enlace `.1` de cada red. Este montaje se llama *router-on-a-stick*.
-- R1 reparte las IPs por DHCP, con un pool por VLAN que empieza en `.10`. El servidor tiene IP fija: `192.168.10.10`.
-- SW1 se administra desde la VLAN 99 (`192.168.99.2`).
-
-| Puerto de SW1 | VLAN | Equipo | IP obtenida |
-|---|---|---|---|
-| Fa0/1 | 10 Servidores | SRV-ODOO | 192.168.10.10 (fija) |
-| Fa0/2 | 20 TPV | TPV1 | 192.168.20.10 |
-| Fa0/3 | 20 TPV | TPV2 | 192.168.20.11 |
-| Fa0/4 | 30 Gerencia | GERENTE | 192.168.30.10 |
-| Fa0/5 | 40 Arcade | RECREATIVA | 192.168.40.10 |
-| Fa0/6 | 50 Invitados | CLIENTE | 192.168.50.10 |
-
-**ACLs en R1** (de entrada en cada subinterfaz; aplican la tabla 5.1):
-
-| ACL | Subinterfaz | Qué deja pasar |
-|---|---|---|
-| `TPV-IN` | Gi0/0.20 | DHCP; HTTP (80) y ping al servidor; nada más hacia redes internas; resto (internet) sí |
-| `GERENCIA-IN` | Gi0/0.30 | DHCP; todo hacia el servidor y hacia la VLAN de gestión; nada más hacia redes internas; resto sí |
-| `AISLADA-IN` | Gi0/0.40 y Gi0/0.50 | DHCP; ninguna red interna (`192.168.0.0/16`); resto sí |
-
-En Packet Tracer no existe Odoo. El servidor responde por HTTP en el puerto 80 en lugar del 8069 del local real.
-
-**Pruebas** (ping desde cada equipo, 23/10/2026):
-
-| # | Desde → hasta | Esperado | Resultado |
-|---|---|---|---|
-| 1 | TPV1 → servidor (192.168.10.10) | Llega | 4/4 ✔ |
-| 2 | GERENTE → servidor | Llega | 4/4 ✔ |
-| 3 | GERENTE → SW1, gestión (192.168.99.2) | Llega | 4/4 ✔ |
-| 4 | TPV1 → GERENTE (192.168.30.10) | Bloqueado | 0/4 ✔ |
-| 5 | GERENTE → TPV1 (192.168.20.10) | Bloqueado | 0/4 ✔ |
-| 6 | CLIENTE → servidor | Bloqueado | 0/4 ✔ |
-| 7 | CLIENTE → RECREATIVA (192.168.40.10) | Bloqueado | 0/4 ✔ |
-| 8 | RECREATIVA → TPV1 | Bloqueado | 0/4 ✔ |
-
-El primer ping de cada pareja pierde 1 o 2 paquetes mientras se resuelve la dirección MAC (ARP). En las tablas se pone el resultado de la repetición.
-
-`show access-lists` en R1 confirma que los bloqueos los hacen las ACLs y no un fallo de red: suben los contadores de las líneas `deny ip any 192.168.0.0 0.0.255.255` de `TPV-IN`, `GERENCIA-IN` y `AISLADA-IN`.
-
-**Acceso web del TPV al servidor:** desde TPV1, *Desktop → Web Browser* con `http://192.168.10.10`, se abre la página del servidor. En `show access-lists TPV-IN`, la línea `permit tcp … host 192.168.10.10 eq www` registra 5 coincidencias, así que el tráfico pasa por la regla prevista.
-
-![Navegador del TPV1 abriendo el servidor](23-anexo-vlan-http-tpv1.png)
 
 ## 6. Cómo se comprueba
 
@@ -307,7 +243,7 @@ En el local se hacen en las tareas 24 y 25, con el router montado; en Packet Tra
 | Tarea | Qué hay que cambiar |
 |---|---|
 | 24 · Red segura (Peio) | Las capturas son de un TL-WR841N con la LAN en `192.168.1.0/24`. Al montar los Archer C6 hay que poner la LAN en `192.168.10.0/24`, configurar las reservas de la tabla 4.3 y documentar la red de invitados |
-| 25 · WDS | Router 2 en 192.168.10.2, DHCP apagado y colocado donde marca el plano; comprobar que amplía la red de invitados (apartado 5.2) |
+| 25 · WDS | Router 2 en 192.168.10.2, DHCP apagado y colocado donde marca el plano; comprobar que amplía la red de invitados (apartado 5.2). [Guía](25-wds/DOCUMENTACION.md) |
 | 13 · TPV | Ninguno: `configurar-tpv.ps1` ya usa esta red (router y DNS en `192.168.10.1`) |
 | 33 · Servidor | Ejecutar [`cortafuegos-servidor.sh`](../erp/33-odoo-docker/cortafuegos-servidor.sh) (SSH solo desde el gerente; HTTPS desde la LAN) |
 | 11 · Diagrama de arquitectura (Iker) | Pasar el direccionamiento de "propuesta" a definitivo. La recreativa va por la Wi-Fi de invitados, no por cable |
@@ -316,12 +252,9 @@ En el local se hacen en las tareas 24 y 25, con el router montado; en Packet Tra
 
 ## 8. Pendiente
 
-- [ ] Revisión de Iker.
 - [ ] Apuntar las MAC de los equipos cuando estén montados.
 - [ ] Confirmar en la tarea 24 qué subred da el Archer C6 a la red de invitados.
 - [ ] Confirmar si el PC de la recreativa tiene Wi-Fi (el adaptador USB ya está presupuestado).
 - [x] Decidir red plana o VLAN: red plana con invitados aislada (apartados 5.2 y 5.3, 24/10/2026).
 - [x] Construir `23-red-local.pkt` con [la guía](23-packet-tracer-red-local.md) (25/10/2026, con el MCP de Packet Tracer).
 - [x] Conectar CLIENTE y RECREATIVA a la Wi-Fi, cortafuegos de los PC, las 16 pruebas y la captura `23-red-local.png` (25/10/2026).
-- [x] Simular el diseño con VLAN en Packet Tracer (anexo, apartado 5.5).
-- [x] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador (anexo).
