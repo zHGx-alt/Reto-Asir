@@ -71,7 +71,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | Físico | Adrian | 30/10 | Pendiente | Lista de comprobaciones en arduino/mando-joystick/README.md. | — |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16) o Batocera si se elige en la 51. | — |
 | 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. | — |
-| 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 03/11 | Pendiente | — | — |
+| 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 03/11 | Pendiente | Guía lista (docs/redes/25-wds/DOCUMENTACION.md): WDS en el Archer C6, pruebas W1-W10 (sobre todo que los clientes del router 2 sigan aislados de la LAN) y cobertura y velocidad antes y después en 5 puntos. | — |
 | 54 | Medir rendimiento y recursos en el equipo real | Físico | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. | — |
 | 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 05/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. | — |
 | 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | Físico | Peio | 05/11 | Pendiente | El ticket ya sale en pantalla (tarea 34; sección 8). Pasos en docs/so/14-impresora/DOCUMENTACION.md (paso 6). Espera a la impresora del centro. | — |

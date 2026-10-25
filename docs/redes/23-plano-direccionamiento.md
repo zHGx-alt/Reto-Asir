@@ -243,7 +243,7 @@ En el local se hacen en las tareas 24 y 25, con el router montado; en Packet Tra
 | Tarea | Qué hay que cambiar |
 |---|---|
 | 24 · Red segura (Peio) | Las capturas son de un TL-WR841N con la LAN en `192.168.1.0/24`. Al montar los Archer C6 hay que poner la LAN en `192.168.10.0/24`, configurar las reservas de la tabla 4.3 y documentar la red de invitados |
-| 25 · WDS | Router 2 en 192.168.10.2, DHCP apagado y colocado donde marca el plano; comprobar que amplía la red de invitados (apartado 5.2) |
+| 25 · WDS | Router 2 en 192.168.10.2, DHCP apagado y colocado donde marca el plano; comprobar que amplía la red de invitados (apartado 5.2). [Guía](25-wds/DOCUMENTACION.md) |
 | 13 · TPV | Ninguno: `configurar-tpv.ps1` ya usa esta red (router y DNS en `192.168.10.1`) |
 | 33 · Servidor | Ejecutar [`cortafuegos-servidor.sh`](../erp/33-odoo-docker/cortafuegos-servidor.sh) (SSH solo desde el gerente; HTTPS desde la LAN) |
 | 11 · Diagrama de arquitectura (Iker) | Pasar el direccionamiento de "propuesta" a definitivo. La recreativa va por la Wi-Fi de invitados, no por cable |

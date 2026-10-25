@@ -130,7 +130,7 @@ Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt
 - [ ] 🟠 **Tarea 24 en el Archer C6:** LAN `192.168.10.0/24`, reservas DHCP, WPA3 (o WPA2/WPA3), WPS desactivado, renovación de la clave de grupo y modo sin 802.11b ([lista](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente)).
   - **Quién:** Peio.
 - [ ] 🟠 **Red de invitados aislada** y pruebas 3 a 5 de la [tarea 23, sección 6](docs/redes/23-plano-direccionamiento.md#6-cómo-se-comprueba).
-- [ ] 🔴 **WDS (tarea 25):** segundo router, cobertura, velocidad y si la red de invitados pasa por el enlace. Si no pasa, corregir los diagramas.
+- [ ] 🔴 **WDS (tarea 25):** segundo router, cobertura, velocidad y si la red de invitados pasa por el enlace, con la [guía](docs/redes/25-wds/DOCUMENTACION.md). Si no pasa, corregir los diagramas.
   - **Quién:** Peio.
 - [ ] 🟢 Wireshark y nmap (tarea 26). **Quién:** Eneko.S.
 
