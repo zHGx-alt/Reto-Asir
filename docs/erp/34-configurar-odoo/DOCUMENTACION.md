@@ -1,6 +1,6 @@
 # Tarea 34 · Configurar módulos de Odoo
 
-**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Markel) · **Revisa:** Adrian · **Fecha:** 22/10/2026 · **Depende de:** 33
+**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Markel) · **Fecha:** 22/10/2026 · **Depende de:** 33
 **Estado:** ✅ Hecha en máquina virtual
 
 ## 1. Resultado
@@ -55,7 +55,7 @@ El cajero puede **leer** la contabilidad porque el TPV la necesita para hacer fa
 ni precios, ni facturas, ni permisos.
 Ni el gerente ni los cajeros pueden crear usuarios: solo `admin`.
 
-## 4. Comprobación visual (para el revisor)
+## 4. Comprobación visual
 Entrar en <http://localhost:8069> como `admin` y sacar captura de:
 1. **Punto de Venta**: aparecen las tarjetas *TPV 1* y *TPV 2*.
 2. **Ajustes → Usuarios**: aparecen `gerente`, `cajero1` y `cajero2`.

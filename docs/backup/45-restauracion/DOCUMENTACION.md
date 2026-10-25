@@ -1,6 +1,6 @@
 # Tarea 45 · Prueba de restauración con evidencias
 
-**Responsable:** Iker · **Revisa:** Markel · **Fecha:** 22/10/2026 · **Depende de:** 44
+**Responsable:** Iker · **Fecha:** 22/10/2026 · **Depende de:** 44
 **Estado:** ✅ Restauración aislada hecha en máquina virtual (`ServidorERP`) · ⏳ Falta la restauración en una máquina nueva (sección 6)
 
 ## 1. Resultado

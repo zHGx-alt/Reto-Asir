@@ -4,7 +4,7 @@
 - **Depende de:** tarea 8 (tabla de hardware)
 - **Requisitos que cubre:** RG-01, RG-03, RG-04 y RG-05 (tarea 7, sección 3.1)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** hecha en VM, con pendientes (sección 9: versión de Ubuntu, actualizaciones de Windows y cifrado); pendiente de revisión
+- **Estado:** hecha en VM, con pendientes (sección 9: versión de Ubuntu, actualizaciones de Windows y cifrado)
 - **Fecha:** 22/10/2026
 
 ## 1. Alcance

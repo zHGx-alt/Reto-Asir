@@ -1,6 +1,6 @@
 # Tarea 44 · Plan de backup 3-2-1 cifrado y automatizado
 
-**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Markel) · **Revisa:** Eneko.S · **Fecha:** 22/10/2026 · **Depende de:** 41, 43
+**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Markel) · **Fecha:** 22/10/2026 · **Depende de:** 41, 43
 **Estado:** ✅ Hecha para Odoo en máquina virtual (`ServidorERP`) · 🔧 El script ya copia `almi_chain` si existe (24/10, sin probar en la VM) · ⏳ Falta crear `almi_chain` en el servidor y repetir la prueba
 
 ## 1. Resultado

@@ -1,6 +1,6 @@
 # Tarea 17 · Pruebas de rendimiento de MAME antes y después
 
-**Responsable:** Iker · **Revisa:** Adrian · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
+**Responsable:** Iker · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
 **Estado:** ⏳ En curso: hecha en una VM de 2 núcleos y 1,5 GB; **falta en la de 1 núcleo y 1 GB** que pide el enunciado, y en la máquina física
 
 > ⚠️ **PENDIENTE DE REPETIR.** Estas medidas se hicieron en una VM con **2 núcleos y 1,5 GB**, pero el enunciado dice que la recreativa

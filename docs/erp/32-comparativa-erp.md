@@ -2,7 +2,7 @@
 
 - **Bloque:** 7 ERP
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** pendiente de revisión (revisa: Markel)
+- **Estado:** hecha
 - **Fecha:** 22/10/2026
 
 ## 1. Qué tiene que hacer el ERP

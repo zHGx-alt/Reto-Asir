@@ -1,7 +1,7 @@
 # Tarea 24: Configurar red segura (WPA3; invitados; firewall)
 
 - **Bloque:** 5 Redes
-- **Responsable:** Peio · **Revisa:** Adrian
+- **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Estado:** en curso (faltan la red de invitados, WPA3, WPS y la contraseña de administración, sección 12)
 - **Fecha:** 23/10/2026 · **Revisión:** 24/10/2026

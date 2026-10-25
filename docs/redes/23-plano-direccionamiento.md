@@ -1,9 +1,9 @@
 # Tarea 23: Plano del local y plan de direccionamiento IP
 
 - **Bloque:** 5 Redes
-- **Responsable:** Adrian · **Revisa:** Iker
+- **Responsable:** Adrian
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** borrador, pendiente de revisión
+- **Estado:** hecha
 - **Fecha:** 23/10/2026
 - **La necesitan:** tarea 24 (red segura), tarea 25 (WDS) y tarea 11 (diagrama de arquitectura)
 

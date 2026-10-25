@@ -28,7 +28,7 @@ Las que necesitan Docker o PlatformIO se saltan si no están instalados. Resulta
 
 | # | Qué se comprueba | Cómo | Resultado |
 |---|---|---|---|
-| 1 | El backlog es coherente (dependencias, fechas, tipos, evidencias que existen, nadie se revisa a sí mismo) | `python3 scripts/gantt.py` | ✅ |
+| 1 | El backlog es coherente (dependencias, fechas, tipos, evidencias que existen) | `python3 scripts/gantt.py` | ✅ |
 | 2 | Ningún enlace relativo roto en los `.md` | Script de enlaces | ✅ 0 rotos (antes: 14, ver sección 4) |
 | 3 | Sintaxis de los scripts de Python y de shell | `py_compile` y `bash -n` | ✅ |
 | 4 | Errores de shellcheck | `koalaman/shellcheck:v0.10.0` | ✅ 0 errores. Un único aviso menor (variable `i` sin usar en `medir-batocera.sh`) |

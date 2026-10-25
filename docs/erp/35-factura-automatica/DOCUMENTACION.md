@@ -1,6 +1,6 @@
 # Tarea 35 · Caso de uso de principio a fin automatizado: emitir una factura
 
-**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Adrian) · **Revisa:** Adrian · **Fecha:** 22/10/2026 · **Depende de:** 34
+**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Adrian) · **Fecha:** 22/10/2026 · **Depende de:** 34
 **Estado:** ✅ Hecha en máquina virtual
 
 > El reto pide *"Elección e implementación del ERP + TPV, automatizando al menos un caso de uso real (p. ej. emisión de una factura)"*.

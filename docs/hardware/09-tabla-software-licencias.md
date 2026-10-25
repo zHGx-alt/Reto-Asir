@@ -1,7 +1,7 @@
 # Tarea 9: Tabla de software y licencias
 
 - **Bloque:** 1 Hardware
-- **Responsable:** Markel · **Revisa:** Iker
+- **Responsable:** Markel
 - **Depende de:** tarea 7 (necesidades de equipos)
 - **Revisión:** 24/10/2026: versiones, software del servidor y de la recreativa, y licencia de Windows de los TPV
 

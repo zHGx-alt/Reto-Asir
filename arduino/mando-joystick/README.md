@@ -99,7 +99,7 @@ Al arrancar se lee la EEPROM. Si está vacía o los datos no son válidos (no co
 
 ## Pendiente: prueba en físico (tarea #50)
 
-Responsable: **Adrian**. Revisa: Markel. Necesita el stick montado (#19).
+Responsable: **Adrian**. Necesita el stick montado (#19).
 
 Para cada punto, guardar captura o foto como evidencia.
 

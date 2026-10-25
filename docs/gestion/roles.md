@@ -4,7 +4,7 @@
 
 > El enunciado dice «Equipos de 4-5 personas», pero el grupo es de **6 personas** (confirmado el 24/10/2026, [Anexo I](anexo-I-contrato-equipo.md)). Eneko.P sigue sin tareas asignadas.
 
-No hay roles fijos por bloque: las tareas se reparten de forma que cada persona trabaje en varios bloques y revise tareas de los bloques en los que no ha trabajado. El objetivo es que cualquiera pueda defender el proyecto completo.
+No hay roles fijos por bloque: las tareas se reparten de forma que cada persona trabaje en varios bloques. El objetivo es que cualquiera pueda defender el proyecto completo.
 
 El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), generado desde [backlog-kanban.csv](backlog-kanban.csv).
 
@@ -12,10 +12,10 @@ El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), 
 
 - **Tipo de tarea:** cada tarea es *Software* (se hace en un ordenador o una VM), *Físico* (necesita el equipo real), *Documentación* o *Gestión*. Columna `Tipo` del CSV.
 - **Responsable:** ejecuta la tarea, la documenta y deja las evidencias en `docs/evidencias/`.
-- **Revisor:** valida la tarea en el Pull Request antes de unirla a `main`. Nunca coincide con el responsable.
+- **Pull Request:** cada tarea entra en `main` por PR con el CI en verde (gitleaks); lo une el propio responsable. No hay revisor asignado (decisión del 25/10/2026: en la práctica no se revisaba, y es mejor que el reparto diga lo que se hace).
 - **Equipo:** las tareas marcadas así (contrato, presentación) las valida el equipo completo.
 - **Coordinación:** Adrian mantiene el Anexo II y la planificación.
-- **Seguridad transversal:** cada responsable aplica el bloque 10 en su tarea; Eneko.S hace la revisión final.
+- **Seguridad transversal:** cada responsable aplica el bloque 10 en su tarea; Adrian hace la revisión de seguridad final (tarea 46).
 
 ## Cambios en el reparto
 
@@ -25,8 +25,8 @@ Tras revisar el estado real de cada tarea ([verificacion.md](verificacion.md)):
 
 - Las tareas con una parte en VM y otra con hardware real se separan: la recreativa en el equipo real (53) y sus medidas (54); el ticket en la impresora real (37) queda aparte del driver en la VM (14). Batocera pasa a ser su propia tarea (51) y el HTTPS de Odoo también (52).
 - **El software pendiente lo llevan Adrian e Iker.**
-- **Las tareas físicas, cualquiera salvo Eneko.P**, que no tiene tareas ni revisiones hasta que se confirme si sigue en el equipo.
-- Las tareas que hizo otra persona pasan a su nombre (34, 35, 43 y 44 a Iker; 12 y 29 a Adrian), para que el revisor no sea quien la hizo.
+- **Las tareas físicas, cualquiera salvo Eneko.P**, que no tiene tareas hasta que se confirme si sigue en el equipo.
+- Las tareas que hizo otra persona pasan a su nombre (34, 35, 43 y 44 a Iker; 12 y 29 a Adrian), para que el responsable sea quien la hizo.
 
 | # | Tarea | Antes | Ahora |
 |---|---|---|---|
@@ -53,7 +53,6 @@ Tras revisar el estado real de cada tarea ([verificacion.md](verificacion.md)):
 | 54 | Medidas en el equipo real (nueva, físico) | — | Eneko.S |
 | 55 | Contraseñas robustas en la VM del gerente (nueva) | — | Adrian |
 
-Las revisiones que tenía Eneko.P pasan a otras personas (columna `Revisa` del CSV).
 
 ### Cómo se cambia
 

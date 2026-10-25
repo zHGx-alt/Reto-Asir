@@ -11,14 +11,16 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ## 0. El lunes, por persona
 
-| Persona | Primero (la mañana) | Después | Secciones |
-|---|---|---|---|
-| **Peio** | Cambiar la contraseña Wi-Fi expuesta y la de administración del TL-WR841N (15 min) | Archer C6: tarea 24 completa, red de invitados y WDS (tarea 25) | [2.1](#21-urgente-contraseñas), [4.3](#43-routers-reales-tareas-24-26) |
-| **Iker** | Pasar la contraseña de restic a KeePassXC (5 min). En `ServidorERP`: `mover-docker-al-raid.sh`, repetir el fallo del RAID con Odoo en marcha y `cortafuegos-servidor.sh` | Crear `almi_chain` en el servidor; VM del TPV con `configurar-tpv.ps1`; `importar-exportar.py`; `restringir-menus-cajero.py`; factura automática nueva; medidas de la recreativa en 1 GB | [2.1](#21-urgente-contraseñas), [3](#3-datos-raid-copias-y-bd), [5](#5-tpv-e-impresora), [7](#7-erp-y-recreativa) |
-| **Adrian** | ~~Packet Tracer de la red real~~: hecho el 25/10/2026, 16 de 16 pruebas ([guía](docs/redes/23-packet-tracer-red-local.md)) | `activar-https.sh` (tarea 52); `terraform apply` y secretos de GitHub (tarea 31); publicar la web y repetir curl y Lighthouse; VM del gerente | [4.2](#42-packet-tracer-tarea-23), [2.2](#22-https-en-odoo-y-menús-del-cajero), [6](#6-web-y-aws) |
-| **Markel** | Montar el arcade stick con el [esquema nuevo](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5) | Pruebas con MAME y otro emulador (tarea 21) | [5](#5-tpv-e-impresora) |
-| **Eneko.S** | Revisar la tarea 41 (evidencias de la BD) y la 12 | Recreativa real (tarea 53) | [7](#7-erp-y-recreativa) |
-| **Equipo** | Leer la decisión de red ([tarea 23, 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): afecta a cómo se defiende la seguridad | Revisar los PR pendientes | [4.1](#41-decisión-red-plana-con-invitados-aislada) |
+Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt.md)**, que es donde se mira lo que tiene que hacer cada persona.
+
+| Persona | Primero (la mañana) | Secciones |
+|---|---|---|
+| **Peio** | Cambiar la contraseña Wi-Fi expuesta y la de administración del TL-WR841N (15 min) | [2.1](#21-urgente-contraseñas), [4.3](#43-routers-reales-tareas-24-26) |
+| **Iker** | Pasar la contraseña de restic a KeePassXC (5 min). En `ServidorERP`: `mover-docker-al-raid.sh`, repetir el fallo del RAID con Odoo en marcha y `cortafuegos-servidor.sh` | [2.1](#21-urgente-contraseñas), [3](#3-datos-raid-copias-y-bd) |
+| **Adrian** | `activar-https.sh` en el servidor (tarea 52) | [2.2](#22-https-en-odoo-y-menús-del-cajero) |
+| **Markel** | Montar el arcade stick con el [esquema nuevo](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5) | [5](#5-tpv-e-impresora) |
+| **Eneko.S** | Recreativa real (tarea 53) | [7](#7-erp-y-recreativa) |
+| **Equipo** | Leer la decisión de red ([tarea 23, 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): afecta a cómo se defiende la seguridad | [4.1](#41-decisión-red-plana-con-invitados-aislada) |
 
 ---
 
@@ -79,10 +81,10 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
   cd docs/erp/52-https-odoo && mkdir -p evidencias && sudo ./activar-https.sh 192.168.10.10 | tee evidencias/01-activar-https.txt
   ```
   **Hecho cuando:** el script dice HTTPS 200, HTTP 301 y 8069 cerrado, y se hacen las pruebas de la [sección 4 de la guía](docs/erp/52-https-odoo/DOCUMENTACION.md).
-  - **Quién:** Adrian · Revisa Iker.
+  - **Quién:** Adrian.
 - [ ] 🟠 **Menús del cajero:** `ODOO_ADMIN_PASSWORD=... python3 docs/erp/34-configurar-odoo/restringir-menus-cajero.py`; entrar como `cajero1` y hacer la captura nueva (solo ve Punto de venta).
-  - **Quién:** Iker · Revisa Adrian.
-- [ ] 🟢 Revisión de seguridad transversal (tarea 46) cuando esté lo anterior. **Quién:** Adrian · Revisa Markel.
+  - **Quién:** Iker.
+- [ ] 🟢 Revisión de seguridad transversal (tarea 46) cuando esté lo anterior. **Quién:** Adrian.
 
 ---
 
@@ -95,7 +97,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
   sudo docs/backup/43-raid1/mover-docker-al-raid.sh | tee docs/backup/43-raid1/evidencias/10-docker-en-el-raid.txt
   ```
   **Hecho cuando:** termina con «Listo» (data-root `/srv/datos/docker` y login de Odoo 200).
-  - **Quién:** Iker · Revisa Adrian.
+  - **Quién:** Iker.
 - [ ] 🔴 **Repetir el fallo del RAID con Odoo funcionando:** quitar un disco (sección 4 de la [tarea 43](docs/backup/43-raid1/DOCUMENTACION.md)), hacer una venta en el TPV y comprobar que se guarda; reconstruir. Evidencia `11-fallo-con-odoo.txt`. Después, tarea 43 a **Hecho**.
 - [ ] 🔴 **Crear `almi_chain` en el servidor** (comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md)), cargar `08-usuarios.sql` con contraseñas de KeePassXC y lanzar `sudo systemctl start backup-odoo`: el log tiene que decir `Volcado almi_chain`.
 - [ ] 🟠 **RTO real:** restaurar en una VM nueva desde cero ([tarea 45, sección 6](docs/backup/45-restauracion/DOCUMENTACION.md)) y cronometrar.
@@ -114,44 +116,44 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 - [x] **Decidido el 24/10/2026:** red plana para el personal y Wi-Fi de invitados aislada; la separación entre TPV, gerente y servidor la hace el cortafuegos de cada equipo. El diseño con VLAN queda como anexo de mejora. Motivos y cómo se cumple cada caso: [tarea 23, apartados 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026). Apuntado en el Anexo II.
 - [ ] 🟠 **Cortafuegos del servidor** (parte de la decisión): `sudo docs/erp/33-odoo-docker/cortafuegos-servidor.sh` en `ServidorERP` y guardar `ufw status verbose`.
-  - **Quién:** Iker · Revisa Adrian.
+  - **Quién:** Iker.
 
 ### 4.2 Packet Tracer (tarea 23)
 
 - [x] **`23-red-local.pkt` construido** (25/10/2026, con el MCP de Packet Tracer): ISP e Internet, LAN e invitados con NAT, SW1, IP, servicios, los tres puntos de acceso con WPA2-PSK/AES y la seguridad de R1 y SW1. [Evidencia](docs/redes/evidencias/23-red-local-configuracion-y-pruebas.txt).
 - [x] **Wi-Fi de CLIENTE y RECREATIVA y cortafuegos de los PC**, hechos a mano en la interfaz (25/10/2026).
 - [x] **16 de 16 pruebas correctas**, captura `23-red-local.png` y tabla de la tarea 23 (25/10/2026).
-  - **Quién (los dos):** Adrian · Revisa Iker.
+  - **Quién (los dos):** Adrian.
 
 ### 4.3 Routers reales (tareas 24-26)
 
 - [ ] 🟠 **Tarea 24 en el Archer C6:** LAN `192.168.10.0/24`, reservas DHCP, WPA3 (o WPA2/WPA3), WPS desactivado, renovación de la clave de grupo y modo sin 802.11b ([lista](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente)).
-  - **Quién:** Peio · Revisa Adrian.
+  - **Quién:** Peio.
 - [ ] 🟠 **Red de invitados aislada** y pruebas 3 a 5 de la [tarea 23, sección 6](docs/redes/23-plano-direccionamiento.md#6-cómo-se-comprueba).
 - [ ] 🔴 **WDS (tarea 25):** segundo router, cobertura, velocidad y si la red de invitados pasa por el enlace. Si no pasa, corregir los diagramas.
-  - **Quién:** Peio · Revisa Iker.
-- [ ] 🟢 Wireshark y nmap (tarea 26). **Quién:** Eneko.S · Revisa Markel.
+  - **Quién:** Peio.
+- [ ] 🟢 Wireshark y nmap (tarea 26). **Quién:** Eneko.S.
 
 ---
 
 ## 5. TPV e impresora
 
 - [ ] 🔴 **VM del TPV y bastionado (tareas 13 y 15):** Windows 10 (Pro o IoT Enterprise LTSC), red hacia `ServidorERP`, y los pasos 1 a 7 de la [guía](docs/so/13-tpv/DOCUMENTACION.md#4-procedimiento-unos-15-minutos-por-tpv). **Hecho cuando:** `comprobar-tpv.ps1` da **16 OK** y están las capturas de la sección 5 de la guía.
-  - **Quién:** Iker · Revisa Markel.
+  - **Quién:** Iker.
 - [ ] 🟠 **Decidir la edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y apuntarla en la tarea 9.
 - [ ] 🔴 **Impresora (tareas 14 y 37)** cuando el centro la dé: [guía](docs/so/14-impresora/DOCUMENTACION.md), pasos 1 a 7.
   - **Quién:** Adrian (14) · Peio (37).
 - [ ] 🔴 **Montar el arcade stick (tarea 19):** [esquema](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5 y común a GND; botones en 2-7).
-  - **Quién:** Markel · Revisa Peio.
+  - **Quién:** Markel.
 - [ ] 🔴 **Firmware en la placa (tarea 50):** lista del [README](arduino/mando-joystick/README.md#pendiente-prueba-en-físico-tarea-50).
-  - **Quién:** Adrian · Revisa Markel.
-- [ ] 🔴 **Stick con MAME y otro emulador (tarea 21).** **Quién:** Markel · Revisa Iker.
+  - **Quién:** Adrian.
+- [ ] 🔴 **Stick con MAME y otro emulador (tarea 21).** **Quién:** Markel.
 
 ---
 
 ## 6. Web y AWS
 
-**Quién:** Adrian · Revisa Iker. Con el Learner Lab arrancado.
+**Quién:** Adrian. Con el Learner Lab arrancado.
 
 - [ ] 🟠 **IaC (tarea 31):** decidir si se recrea todo con Terraform (borrar antes el montaje manual) o se deja el manual y Terraform queda probado en otra región o con otro nombre de bucket. Ejecutar `terraform apply` ([iac/README.md](iac/README.md), sección 4) y guardar la salida.
 - [ ] 🟠 **Secretos de GitHub** (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) para que `desplegar-web.yml` publique la web. Con eso, el próximo cambio en `web/` se publica solo.
@@ -164,24 +166,23 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 ## 7. ERP y recreativa
 
 - [ ] 🟠 **Importar y exportar (tarea 36):** pasos 1 a 6 de la [guía](docs/erp/36-importar-exportar/DOCUMENTACION.md) contra `ServidorERP`, con evidencias.
-  - **Quién:** Iker · Revisa Peio.
+  - **Quién:** Iker.
 - [ ] 🟠 **Repetir la factura automática** con el menú de grupo (660,00 €) y cambiar las evidencias de la [tarea 35](docs/erp/35-factura-automatica/DOCUMENTACION.md).
-  - **Quién:** Iker · Revisa Adrian.
+  - **Quién:** Iker.
 - [ ] 🔴 **Recreativa en 1 núcleo y 1 GB (tarea 17):** 3 medidas antes y 3 después en `Recreativa-1GB` con el `optimizar-arcade.sh` nuevo; sustituir las tablas.
-  - **Quién:** Iker · Revisa Adrian.
+  - **Quién:** Iker.
 - [ ] 🟠 **Medir jugando (tarea 18):** `monitor-recreativa.sh` 10 minutos de partida ([protocolo](docs/arcade/18-monitorizacion-recreativa.md)), CSV a `docs/evidencias/18-monitorizacion/`.
-  - **Quién:** Adrian · Revisa Markel.
+  - **Quién:** Adrian.
 - [ ] 🟠 **Debian o Batocera (tarea 51)** con esas medidas; apuntarlo en el Anexo II. **Quién:** Iker.
-- [ ] 🟠 **Recreativa real (tarea 53)** y sus medidas (54). **Quién:** Eneko.S · Revisa Iker.
-- [ ] 🟠 **VM del gerente (tarea 12):** versión exacta de Ubuntu (`lsb_release -d`) en las tareas 12 y 9; actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS. **Quién:** Adrian · Revisa Eneko.S.
+- [ ] 🟠 **Recreativa real (tarea 53)** y sus medidas (54). **Quién:** Eneko.S.
+- [ ] 🟠 **VM del gerente (tarea 12):** versión exacta de Ubuntu (`lsb_release -d`) en las tareas 12 y 9; actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS. **Quién:** Adrian.
 
 ---
 
 ## 8. Gestión
 
-- [ ] 🟠 **Registro de IA:** cada persona cambia «pendiente de revisar por el equipo» en sus filas por lo que comprobó.
-- [ ] 🟢 Revisar y aprobar los PR y documentos «pendiente de revisión» (tareas 7, 8, 11, 12, 23, 27, 30…).
-- [ ] 🟢 Notación del E/R: revisar cuando salga la rúbrica.
+- [ ] 🟠 **Registro de IA:** cada persona pone en sus filas qué comprobó a mano, en vez de «pendiente de revisar por el equipo».
+- [ ] 🟢 Notación del E/R: comprobarla con la rúbrica cuando salga.
 - [ ] 🟢 Documentación final y presentación (tareas 48 y 49).
 
 ---
@@ -230,7 +231,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 Un punto de esta lista **no está corregido porque se haya hecho**, sino cuando se puede **demostrar** que está bien. Para cada corrección: primero la checklist general (10.1) y después la de su bloque (10.2). Antes de la entrega, la final (10.3).
 
-Quien revisa el PR repasa estas mismas casillas: si alguna no se cumple, el PR no se aprueba.
+Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna no se cumple, no se une.
 
 ### 10.1 Para cualquier corrección
 
@@ -242,7 +243,7 @@ Quien revisa el PR repasa estas mismas casillas: si alguna no se cumple, el PR n
 - [ ] **CSV y Gantt:** estado y observación de la tarea en [`backlog-kanban.csv`](docs/gestion/backlog-kanban.csv) (si pasa a **Hecho**, la columna Evidencia apunta a un fichero que existe) y `python3 scripts/gantt.py` sin errores.
 - [ ] **`bash scripts/verificar-repo.sh` termina con «Todo correcto».**
 - [ ] **Si se usó IA,** una fila en el [registro de IA](docs/gestion/registro-ia.md) con lo que se comprobó a mano.
-- [ ] **Pull Request** con su revisor (nunca quien lo hizo), que repasa esta checklist antes de aprobar.
+- [ ] **Pull Request** con el CI en verde (gitleaks y comprobaciones).
 - [ ] **Marcado en esta lista** con `[x]` y la fecha.
 
 ### 10.2 Por bloque: cómo se comprueba que está bien

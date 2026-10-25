@@ -1,7 +1,7 @@
 # Tarea 36: Importar y exportar datos en Odoo
 
 - **Bloque:** 7 ERP
-- **Responsable:** Iker · **Revisa:** Peio
+- **Responsable:** Iker
 - **Depende de:** tarea 34 (Odoo configurado, usuario `gerente`)
 - **Resultado de aprendizaje:** RA.7 de LMSGI, «trabaja con sistemas empresariales de gestión de información realizando tareas de **importación, integración, aseguramiento y extracción** de la información»
 - **Estado (24/10/2026):** script y CSV listos (`py_compile` correcto). **Falta ejecutarlo contra Odoo** y guardar las evidencias (sección 4).

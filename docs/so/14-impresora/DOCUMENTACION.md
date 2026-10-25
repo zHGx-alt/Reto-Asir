@@ -1,7 +1,7 @@
 # Tareas 14 y 37: Impresora de tickets en el TPV y ticket desde Odoo
 
 - **Bloque:** 2 SO (14) y 7 ERP (37)
-- **Responsables:** Adrian (14, revisa Eneko.S) · Peio (37, revisa Iker)
+- **Responsables:** Adrian (14) · Peio (37)
 - **Requisitos que cubre:** RI-01 a RI-07 y RT-02 de la [tarea 7](../../hardware/07-necesidades-equipos.md)
 - **Estado:** guía preparada el 24/10/2026. **La impresora la da el centro**: hasta entonces solo se puede hacer la parte de la VM (sección 3, pasos 1-3 con la impresora en modo «Microsoft Print to PDF»).
 

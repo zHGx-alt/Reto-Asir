@@ -1,6 +1,6 @@
 # Tarea 11 · Diagrama de arquitectura de equipos
 
-**Responsable:** Iker · **Revisa:** Adrian · **Fecha:** 22/10/2026 · **Actualizado:** 23/10/2026 · **Depende de:** 8 (hardware), 9 (software), 23 (red)
+**Responsable:** Iker · **Fecha:** 22/10/2026 · **Actualizado:** 23/10/2026 · **Depende de:** 8 (hardware), 9 (software), 23 (red)
 **Estado:** actualizado con los modelos de las tareas 8 y 10, el direccionamiento de la tarea 23 y el hosting real de la tarea 30. El 24/10 el Mermaid y la tabla añaden el switch, el servidor presupuestado y la red de invitados `192.168.50.0/24`; el SVG se regeneró el mismo día. Pendiente de revisión.
 
 ## 1. Vista general

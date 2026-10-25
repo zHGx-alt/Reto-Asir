@@ -4,7 +4,7 @@
 - **Depende de:** tarea 38 (modelo E/R, Adrian)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Resultado de aprendizaje:** Gestión de BD, RA.2: «Diseña modelos lógicos normalizados interpretando diagramas entidad/relación»
-- **Estado:** pendiente de revisión
+- **Estado:** hecha
 
 ## 1. Resumen
 

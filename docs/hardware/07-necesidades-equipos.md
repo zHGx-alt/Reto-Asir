@@ -2,7 +2,7 @@
 
 - **Bloque:** 1 Hardware
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** pendiente de revisión
+- **Estado:** hecha
 - **Fecha:** 22/10/2026
 
 ## 1. Alcance

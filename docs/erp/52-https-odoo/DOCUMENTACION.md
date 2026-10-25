@@ -1,7 +1,7 @@
 # Tarea 52: Proxy HTTPS delante de Odoo
 
 - **Bloque:** 7 ERP
-- **Responsable:** Adrian · **Revisa:** Iker
+- **Responsable:** Adrian
 - **Depende de:** tarea 33 (Odoo con Docker)
 - **Estado (24/10/2026):** ficheros listos; `activar-https.sh` pasa `bash -n`. **Falta ejecutarlo en la VM `ServidorERP`** y guardar las evidencias (sección 4).
 

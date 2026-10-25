@@ -85,8 +85,6 @@ def validar(tareas):
             errores.append(f"#{t['ID']}: Fin anterior a Inicio")
         if ini.weekday() >= 5 or fin.weekday() >= 5:
             errores.append(f"#{t['ID']}: empieza o acaba en fin de semana")
-        if t["Responsable"] == t["Revisa"]:
-            errores.append(f"#{t['ID']}: el responsable no puede revisarse a sí mismo")
         if t["Estado"] not in ESTADOS:
             errores.append(f"#{t['ID']}: estado desconocido '{t['Estado']}'")
         if t["Tipo"] not in TIPOS:
@@ -277,25 +275,22 @@ def main():
     lineas.append("")
 
     lineas += ["## Tareas hechas", "",
-               "| # | Tarea | Bloque | Tipo | Responsable | Revisa | Comprobación | Evidencia |",
-               "|---|---|---|---|---|---|---|---|"]
+               "| # | Tarea | Bloque | Tipo | Responsable | Comprobación | Evidencia |",
+               "|---|---|---|---|---|---|---|"]
     for t in sorted(hechas, key=lambda t: int(t["ID"])):
         lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | {t['Tipo']} | {t['Responsable']} | "
-                      f"{t['Revisa']} | {t['Observaciones'] or '—'} | {enlace(t)} |")
+                      f"{t['Observaciones'] or '—'} | {enlace(t)} |")
     lineas.append("")
 
     por_persona = defaultdict(list)
-    revisiones = defaultdict(int)
     for t in tareas:
         por_persona[t["Responsable"]].append(t)
-        if t["Revisa"] != "Equipo":
-            revisiones[t["Revisa"]] += 1
 
     lineas += [
         "## Carga por persona",
         "",
-        "| Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Revisiones | Bloques que toca |",
-        "|---|---|---|---|---|---|---|---|",
+        "| Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |",
+        "|---|---|---|---|---|---|---|",
     ]
     for persona, ts in sorted(por_persona.items()):
         dias = sum(dias_laborables(fecha(t["Inicio"]), fecha(t["Fin"])) for t in ts)
@@ -303,20 +298,20 @@ def main():
         abiertas = [t for t in ts if t["Estado"] != "Hecho"]
         lineas.append(f"| {persona} | {len(ts)} | {len(abiertas)} | "
                       f"{sum(t['Tipo'] == 'Software' for t in abiertas)} | "
-                      f"{sum(t['Tipo'] == 'Físico' for t in abiertas)} | {dias} | {revisiones[persona]} | "
+                      f"{sum(t['Tipo'] == 'Físico' for t in abiertas)} | {dias} | "
                       f"{', '.join(bloques)} |")
     lineas.append("")
 
     lineas += ["## Tareas por persona", ""]
     for persona, ts in sorted(por_persona.items()):
         lineas += [f"### {persona}", "",
-                   "| # | Tarea | Bloque | Tipo | Fechas | Depende de | Revisa | Estado |",
-                   "|---|---|---|---|---|---|---|---|"]
+                   "| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |",
+                   "|---|---|---|---|---|---|---|"]
         for t in ts:
             deps = ", ".join(f"#{d} ({por_id[d]['Responsable']})" for d in dependencias(t))
             lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | {t['Tipo']} | "
                           f"{fecha(t['Inicio']):%d/%m}–{fecha(t['Fin']):%d/%m} | "
-                          f"{deps or '—'} | {t['Revisa']} | {t['Estado']} |")
+                          f"{deps or '—'} | {t['Estado']} |")
         lineas.append("")
 
     SALIDA.write_text("\n".join(lineas), encoding="utf-8")
