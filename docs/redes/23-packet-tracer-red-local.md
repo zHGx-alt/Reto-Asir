@@ -300,6 +300,20 @@ Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23
 
 **No se puede probar en Packet Tracer:** el aislamiento entre clientes de la Wi-Fi de invitados (un móvil no ve a otro). Se prueba en el Archer C6 (tarea 24).
 
+## 10. Estado (25/10/2026): construida con el MCP, faltan dos pasos a mano
+
+`23-red-local.pkt` ya está construido con el MCP de Packet Tracer: secciones 1 a 6 de esta guía (ISP e Internet, R1, SW1, IP de los equipos, servicios del servidor y los tres puntos de acceso con WPA2-PSK/AES), las notas del lienzo y las tarjetas inalámbricas de CLIENTE y RECREATIVA. Configuración y resultados: [`evidencias/23-red-local-configuracion-y-pruebas.txt`](evidencias/23-red-local-configuracion-y-pruebas.txt).
+
+**Pruebas ya hechas:** 1, 5, 11, 12, 13 y 14, más DNS y NAT desde la LAN (ping a `internet.test`).
+
+**Lo que la API de Packet Tracer 9.0.1 no deja hacer por script** (falta hacerlo en la interfaz, unos 10 minutos):
+
+1. **Wi-Fi de CLIENTE y RECREATIVA** (2 min). En cada uno: *Desktop → PC Wireless → Connect* → `Restaurante-Almichain-Invitados` → *Connect* → *Pre-shared Key* = la clave de la Wi-Fi de invitados (KeePassXC) → *Connect*. Comprobar en *IP Configuration* que tiene **DHCP** y una IP `192.168.50.x`.
+2. **Cortafuegos** de TPV1, TPV2, GERENTE y SRV-ODOO (8 min): las reglas de la sección 7, en *Desktop → Firewall*.
+3. **Pruebas que faltan:** 2 (navegador), 3, 4, 6 a 10, 15 y 16, y la captura `23-red-local.png`. Se pueden hacer a mano o pedírselas al MCP (pings, `show` y SSH sí los hace).
+
+**Notas para repetirla con el MCP:** la función `configureIosDevice` necesita `exit` entre bloques de interfaz (si no, se pierde la línea `interface` siguiente); en los PC, la IP fija se guarda con `configurePcIp` más la puerta de enlace del equipo (`setDefaultGateway`), porque solo con el puerto no queda guardada; el módulo inalámbrico de PC se llama `Linksys-WMP300N`.
+
 ## 9. Al terminar
 
 - [ ] Guardar `23-red-local.pkt` y la captura de la topología como `23-red-local.png` en `docs/redes/`.

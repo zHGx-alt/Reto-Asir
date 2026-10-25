@@ -190,7 +190,7 @@ SW1 · switch del armario
 
 | Fichero | Qué es | Estado |
 |---|---|---|
-| `23-red-local.pkt` | La red real | **Pendiente** de construir con la guía |
+| [23-red-local.pkt](23-red-local.pkt) | La red real | **Construida el 25/10/2026** con el MCP de Packet Tracer; faltan la conexión Wi-Fi de dos equipos y los cortafuegos de los PC (a mano, [guía, sección 10](23-packet-tracer-red-local.md#10-estado-25102026-construida-con-el-mcp-faltan-dos-pasos-a-mano)). [Configuración y pruebas](evidencias/23-red-local-configuracion-y-pruebas.txt) |
 | [23-anexo-vlan.pkt](23-anexo-vlan.pkt) | El diseño de mejora con una VLAN por grupo (apartado 5.5) | Hecho el 23/10 |
 
 **Dos decisiones de la simulación:**
@@ -296,6 +296,7 @@ En el local se hacen en las tareas 24 y 25, con el router montado; en Packet Tra
 - [ ] Confirmar en la tarea 24 qué subred da el Archer C6 a la red de invitados.
 - [ ] Confirmar si el PC de la recreativa tiene Wi-Fi (el adaptador USB ya está presupuestado).
 - [x] Decidir red plana o VLAN: red plana con invitados aislada (apartados 5.2 y 5.3, 24/10/2026).
-- [ ] Construir `23-red-local.pkt` con [la guía](23-packet-tracer-red-local.md), hacer sus 16 pruebas y la captura `23-red-local.png`.
+- [x] Construir `23-red-local.pkt` con [la guía](23-packet-tracer-red-local.md) (25/10/2026, con el MCP de Packet Tracer).
+- [ ] Conectar CLIENTE y RECREATIVA a la Wi-Fi y poner los cortafuegos de los PC (a mano, guía sección 10); terminar las 16 pruebas y la captura `23-red-local.png`.
 - [x] Simular el diseño con VLAN en Packet Tracer (anexo, apartado 5.5).
 - [x] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador (anexo).
