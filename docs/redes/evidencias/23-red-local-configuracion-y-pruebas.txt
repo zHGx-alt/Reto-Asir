@@ -1,0 +1,201 @@
+# Tarea 23 · Simulación de la red real en Packet Tracer (23-red-local.pkt)
+# Construida el 25/10/2026 con el MCP de Packet Tracer (packet-tracer-mcp 0.9.0, Packet Tracer 9.0.1),
+# siguiendo docs/redes/23-packet-tracer-red-local.md. Las salidas son las de los propios equipos (show, ping, ssh).
+# Los hashes de las contraseñas (secret 5) se han sustituido por <oculto>. Las contraseñas están en KeePassXC.
+
+==================================================================================================
+1. PRUEBAS (25/10/2026)
+==================================================================================================
+
+| # | Desde → hasta | Esperado | Resultado (25/10/2026) |
+|---|---|---|---|
+| 1 | TPV1 → IP | `192.168.10.31`, puerta de enlace `.1` | ✅ (se mantiene al guardar y reabrir) |
+| 2 | TPV1 → navegador `https://192.168.10.10` | Abre la página del servidor | ✅ abre «Odoo · Almi-Chain (simulado)» por HTTPS (captura 23-prueba2-navegador-tpv1.png) |
+| 3 | TPV1 → `ping 192.168.10.20` (gerente) | Falla | ✅ 0/4 (cortafuegos del gerente) |
+| 4 | GERENTE → `ping 192.168.10.31` (TPV1) | Falla | ✅ 0/4 (cortafuegos del TPV) |
+| 5 | GERENTE y TPV1 → `ping 192.168.10.10` | Llega | ✅ 4/4 los dos |
+| 6 | CLIENTE (Wi-Fi) → IP | `192.168.50.x` | ✅ `192.168.50.10` por DHCP (recreativa: `192.168.50.12`) |
+| 7 | CLIENTE → `ping internet.test` | Llega | ✅ 4/4 (DNS y NAT por la Wi-Fi de invitados) |
+| 8 | CLIENTE → `ping 192.168.10.10` | Falla | ✅ 0/4 |
+| 9 | RECREATIVA → `ping 192.168.10.31` | Falla | ✅ 0/4 |
+| 10 | CLIENTE → `ping 192.168.50.1` | Falla | ✅ 0/4 |
+| 11 | R1 → `show ip nat translations` | `192.168.x.x` → `203.0.113.2` | ✅ ICMP de `.20`, `.31` y `.32` y DNS del gerente |
+| 12 | INTERNET → `ping 192.168.10.10` | Falla | ✅ 0/4 |
+| 13 | GERENTE → `ssh -l admin` a R1 y a SW1 | Entra | ✅ aviso de acceso y prompt `R1#` / `SW1#` |
+| 14 | TPV1 → SSH a R1; TPV2 → SSH a SW1 | Rechazado | ✅ «Connection refused by remote host» |
+| 15 | Apagar la radio de `ROUTER2-WDS` con el CLIENTE asociado a él | Pasa a `AP-INVITADOS` y sigue navegando | ✅ cambió de punto de acceso, conservó su IP y 4/4 a Internet |
+| 16 | R1 → `show access-lists INVITADOS-IN` | Suben los contadores del `deny` | ✅ `deny ip any 192.168.0.0 0.0.255.255 (12 match(es))` |
+
+R1 · show access-lists INVITADOS-IN (después de las pruebas 6 a 10)
+    permit udp any eq bootpc any eq bootps (8 match(es))
+    deny ip any 192.168.0.0 0.0.255.255 (12 match(es))
+    permit ip any any (5 match(es))
+
+R1 · show ip dhcp binding
+    192.168.50.10    0060.47A5.C5BB    Automatic     (CLIENTE)
+    192.168.50.12    00D0.5844.1210    Automatic     (RECREATIVA)
+
+Pasos hechos a mano en la interfaz de Packet Tracer (la API no los permite): conexión de CLIENTE y RECREATIVA
+con PC Wireless, y reglas del cortafuegos de TPV1, TPV2, GERENTE y SRV-ODOO. Reglas que quedaron:
+    TPV1 y TPV2: Deny ICMP 192.168.10.20 · Deny TCP 192.168.10.20 · Allow IP any
+    GERENTE:     Deny ICMP .31 · Deny ICMP .32 · Deny TCP .31 · Deny TCP .32 · Allow IP any
+    SRV-ODOO:    Allow TCP 192.168.10.0/24 · Allow ICMP 192.168.10.0/24 · Deny IP any
+
+==================================================================================================
+2. ISP · show running-config (lo relevante)
+==================================================================================================
+hostname ISP
+no ip domain-lookup
+interface GigabitEthernet0/0
+ description Enlace con el cliente Almi-Chain (R1)
+ ip address 203.0.113.1 255.255.255.252
+interface GigabitEthernet0/1
+ description Red de Internet de prueba
+ ip address 198.51.100.1 255.255.255.0
+interface GigabitEthernet0/2
+ shutdown
+! Sin ninguna ruta hacia 192.168.0.0/16
+
+==================================================================================================
+3. R1 · show running-config
+==================================================================================================
+service password-encryption
+hostname R1
+enable secret 5 <oculto>
+ip dhcp excluded-address 192.168.10.1 192.168.10.99
+ip dhcp excluded-address 192.168.10.200 192.168.10.254
+ip dhcp excluded-address 192.168.50.1 192.168.50.9
+ip dhcp pool LAN-PERSONAL
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 198.51.100.10
+ip dhcp pool INVITADOS
+ network 192.168.50.0 255.255.255.0
+ default-router 192.168.50.1
+ dns-server 198.51.100.10
+username admin privilege 15 secret 5 <oculto>
+ip ssh version 2
+no ip domain-lookup
+ip domain-name almichain.local
+interface GigabitEthernet0/0
+ no ip address
+interface GigabitEthernet0/0.10
+ description LAN del personal
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+ ip nat inside
+interface GigabitEthernet0/0.50
+ description Wi-Fi de invitados (clientes y recreativa)
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.0
+ ip nat inside
+ ip access-group INVITADOS-IN in
+interface GigabitEthernet0/1
+ description WAN hacia el ISP (DIGI)
+ ip address 203.0.113.2 255.255.255.252
+ ip nat outside
+interface GigabitEthernet0/2
+ shutdown
+ip nat inside source list 1 interface GigabitEthernet0/1 overload
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+ip access-list extended INVITADOS-IN
+ remark Invitados y recreativa: DHCP e Internet; nada de la red privada ni el router
+ permit udp any eq bootpc any eq bootps
+ deny ip any 192.168.0.0 0.0.255.255
+ permit ip any any
+access-list 1 remark Redes del local que salen a Internet
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 permit 192.168.50.0 0.0.0.255
+ip access-list standard ADMIN-GERENTE
+ permit host 192.168.10.20
+banner motd ^C Acceso solo para personal autorizado de Almi-Chain ^C
+line con 0
+ login local
+line vty 0 4
+ access-class ADMIN-GERENTE in
+ login local
+ transport input ssh
+
+==================================================================================================
+4. R1 · show ip nat translations
+==================================================================================================
+Pro  Inside global     Inside local       Outside local      Outside global
+icmp 203.0.113.2:1     192.168.10.20:1    198.51.100.10:1    198.51.100.10:1
+icmp 203.0.113.2:2     192.168.10.20:2    198.51.100.10:2    198.51.100.10:2
+icmp 203.0.113.2:5     192.168.10.32:5    198.51.100.10:5    198.51.100.10:5
+icmp 203.0.113.2:6     192.168.10.32:6    198.51.100.10:6    198.51.100.10:6
+udp 203.0.113.2:1025   192.168.10.20:1025 198.51.100.10:53   198.51.100.10:53
+udp 203.0.113.2:1026   192.168.10.20:1026 198.51.100.10:53   198.51.100.10:53
+(y el resto de traducciones ICMP de la misma prueba; antes de reabrir se vieron también las de 192.168.10.31)
+
+==================================================================================================
+5. SW1 · show running-config (lo relevante) · show vlan brief · show interfaces trunk
+==================================================================================================
+service password-encryption
+hostname SW1
+enable secret 5 <oculto>
+ip ssh version 2
+no ip domain-lookup
+ip domain-name almichain.local
+username admin secret 5 <oculto>
+interface FastEthernet0/1   (igual Fa0/2 a Fa0/5)
+ description LAN del personal: servidor, TPV, gerente y AP del personal
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+interface FastEthernet0/6   (igual Fa0/7)
+ description Invitados: AP de invitados y router 2 (WDS)
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+interface FastEthernet0/8   (igual Fa0/9 a Fa0/24)
+ description Libre: apagado
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+interface GigabitEthernet0/1
+ description Trunk hacia R1
+ switchport trunk allowed vlan 10,50
+ switchport mode trunk
+interface GigabitEthernet0/2
+ shutdown
+interface Vlan1
+ shutdown
+interface Vlan10
+ ip address 192.168.10.3 255.255.255.0
+ip default-gateway 192.168.10.1
+banner motd ^C Acceso solo para personal autorizado de Almi-Chain ^C
+ip access-list standard ADMIN-GERENTE
+ permit host 192.168.10.20
+line con 0
+ login local
+line vty 0 4   (igual 5 15)
+ access-class ADMIN-GERENTE in
+ login local
+ transport input ssh
+
+VLAN Name                             Status    Ports
+1    default                          active    Gig0/2
+10   LAN-PERSONAL                     active    Fa0/1, Fa0/2, Fa0/3, Fa0/4, Fa0/5
+50   INVITADOS                        active    Fa0/6, Fa0/7
+999  SIN-USO                          active    Fa0/8 … Fa0/24
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,50
+
+==================================================================================================
+6. EQUIPOS Y SERVICIOS
+==================================================================================================
+SRV-ODOO   192.168.10.10/24 gw .1 DNS 198.51.100.10 · HTTP apagado · HTTPS encendido
+GERENTE    192.168.10.20/24 gw .1 DNS 198.51.100.10
+TPV1       192.168.10.31/24 gw .1 DNS 198.51.100.10
+TPV2       192.168.10.32/24 gw .1 DNS 198.51.100.10
+INTERNET   198.51.100.10/24 gw 198.51.100.1 · HTTP con página de prueba · DNS: A internet.test → 198.51.100.10
+AP-PERSONAL   SSID Restaurante-Almichain            · WPA2-PSK (4) · AES (4) · 802.11g (sin 802.11b)
+AP-INVITADOS  SSID Restaurante-Almichain-Invitados  · WPA2-PSK (4) · AES (4) · 802.11g
+ROUTER2-WDS   SSID Restaurante-Almichain-Invitados  · WPA2-PSK (4) · AES (4) · 802.11g
+CLIENTE    tarjeta inalámbrica Linksys-WPC300N · DHCP · 192.168.50.10
+RECREATIVA tarjeta inalámbrica Linksys-WMP300N · DHCP · 192.168.50.12
+(Valores de seguridad según la API de Packet Tracer, WirelessCommon: eAuthenWPA2_PSK = 4, eEncryptAES = 4.)

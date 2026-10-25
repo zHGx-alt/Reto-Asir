@@ -300,6 +300,20 @@ Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23
 
 **No se puede probar en Packet Tracer:** el aislamiento entre clientes de la Wi-Fi de invitados (un móvil no ve a otro). Se prueba en el Archer C6 (tarea 24).
 
+## 10. Estado (25/10/2026): hecha
+
+`23-red-local.pkt` ya está construido con el MCP de Packet Tracer: secciones 1 a 6 de esta guía (ISP e Internet, R1, SW1, IP de los equipos, servicios del servidor y los tres puntos de acceso con WPA2-PSK/AES), las notas del lienzo y las tarjetas inalámbricas de CLIENTE y RECREATIVA. Configuración y resultados: [`evidencias/23-red-local-configuracion-y-pruebas.txt`](evidencias/23-red-local-configuracion-y-pruebas.txt).
+
+**Hecha y probada:** 16 de 16 pruebas correctas. Resultados en la [tarea 23, apartado 5.4](23-plano-direccionamiento.md#54-simulación-en-packet-tracer-de-la-red-real).
+
+**Lo que la API de Packet Tracer 9.0.1 no deja hacer por script** (se hizo en la interfaz, unos 10 minutos):
+
+1. **Wi-Fi de CLIENTE y RECREATIVA** (2 min). En cada uno: *Desktop → PC Wireless → Connect* → `Restaurante-Almichain-Invitados` → *Connect* → *Pre-shared Key* = la clave de la Wi-Fi de invitados (KeePassXC) → *Connect*. Comprobar en *IP Configuration* que tiene **DHCP** y una IP `192.168.50.x`.
+2. **Cortafuegos** de TPV1, TPV2, GERENTE y SRV-ODOO (8 min): las reglas de la sección 7, en *Desktop → Firewall*.
+3. En el SRV-ODOO, **el orden de las reglas importa**: `Add` las pone al final, así que el `Deny IP` tiene que ser la última (si no, bloquea el ICMP que va detrás).
+
+**Notas para repetirla con el MCP:** la función `configureIosDevice` necesita `exit` entre bloques de interfaz (si no, se pierde la línea `interface` siguiente); en los PC, la IP fija se guarda con `configurePcIp` más la puerta de enlace del equipo (`setDefaultGateway`), porque solo con el puerto no queda guardada; el módulo inalámbrico de PC se llama `Linksys-WMP300N` y el de portátil `Linksys-WPC300N`. La función `swapLaptopToWireless` de PTBuilder pone una tarjeta genérica (`PT-LAPTOP-NM-1W`) con la que *PC Wireless* no deja conectar: hay que cambiarla por la `Linksys-WPC300N`. Para la prueba 15, la radio del punto de acceso se apaga con `getPort('Port 1').setPower(false)`.
+
 ## 9. Al terminar
 
 - [ ] Guardar `23-red-local.pkt` y la captura de la topología como `23-red-local.png` en `docs/redes/`.
