@@ -118,14 +118,14 @@ Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direc
 
 | Desde ↓ / hacia → | Servidor Odoo | TPV | PC gerente | Internet |
 |---|---|---|---|---|
-| TPV | Sí (Odoo, puerto 8069) | — | No | Sí |
+| TPV | Sí (Odoo por HTTPS) | — | No | Sí |
 | PC gerente | Sí (Odoo y administración) | No | — | Sí |
 | Clientes | **No** | **No** | **No** | Sí |
 | Recreativa | **No** | **No** | **No** | Sí |
 
 **Decisión (24/10/2026): red plana con la Wi-Fi de invitados aislada** ([tarea 23, apartados 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)). Clientes y recreativa van a la red de invitados, que solo sale a internet. TPV, gerente y servidor comparten la LAN, y lo que la red no separa lo separa **cada equipo**: el TPV tiene la entrada y la salida bloqueadas salvo Odoo (`configurar-tpv.ps1`), el gerente y el servidor tienen la entrada bloqueada (Firewall de Windows, `ufw`, [`cortafuegos-servidor.sh`](docs/erp/33-odoo-docker/cortafuegos-servidor.sh)), Odoo va por HTTPS y la administración (router, switch y servidor) solo se hace desde el PC del gerente. Se eligió así porque las VLAN de verdad exigían cambiar el firmware de los routers, complicaban el WDS, no se podían probar con el router de prácticas y obligaban a rehacer casi todo lo demás.
 
-**Packet Tracer.** La simulación representa la red real: Internet y el router del operador, NAT, la LAN del personal, las dos Wi-Fi y el router 2 que amplía la de invitados, con 16 pruebas. Se construye con [la guía](docs/redes/23-packet-tracer-red-local.md) (pendiente). **Anexo de mejora:** el diseño con una VLAN por grupo (servidores 10, TPV 20, gerencia 30, arcade 40, invitados 50, gestión 99), con router-on-a-stick y ACL, está simulado y probado en [23-anexo-vlan.pkt](docs/redes/23-anexo-vlan.pkt) para cuando haya hardware que lo admita; el switch del presupuesto ya admite VLAN.
+**Packet Tracer.** La simulación representa la red real: Internet y el router del operador, NAT, la LAN del personal, las dos Wi-Fi y el router 2 que amplía la de invitados. Hecha el 25/10/2026 con [la guía](docs/redes/23-packet-tracer-red-local.md): [23-red-local.pkt](docs/redes/23-red-local.pkt), 16 de 16 pruebas ([tarea 23, apartado 5.4](docs/redes/23-plano-direccionamiento.md#54-simulación-en-packet-tracer-de-la-red-real)).
 
 ### 4.3 Red segura y WDS
 

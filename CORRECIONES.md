@@ -48,7 +48,7 @@ Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt
 | Verificación | `scripts/verificar-repo.sh` prueba la BD también **sin Docker**, con un PostgreSQL local en un clúster temporal | Ejecutado: todo correcto |
 | 13 y 15 · TPV | [`configurar-tpv.ps1`](docs/so/13-tpv/configurar-tpv.ps1), [`comprobar-tpv.ps1`](docs/so/13-tpv/comprobar-tpv.ps1) y [guía](docs/so/13-tpv/DOCUMENTACION.md) | Sintaxis comprobada; la comprobación se probó en un Windows 11 y da FALLO donde debe |
 | 14 y 37 · Impresora | [Guía](docs/so/14-impresora/DOCUMENTACION.md) con pasos y pruebas | Espera a la impresora del centro |
-| 23 · Red y Packet Tracer | **Decisión: red plana con invitados aislada** (VLAN como anexo) y [guía para simular la red real](docs/redes/23-packet-tracer-red-local.md): ISP, NAT, LAN, dos Wi-Fi, router 2 como puente, cortafuegos de cada equipo y 16 pruebas | No se puede editar el `.pkt` fuera de Packet Tracer |
+| 23 · Red y Packet Tracer | **Decisión: red plana con invitados aislada** y [guía para simular la red real](docs/redes/23-packet-tracer-red-local.md): ISP, NAT, LAN, dos Wi-Fi, router 2 como puente, cortafuegos de cada equipo y 16 pruebas | No se puede editar el `.pkt` fuera de Packet Tracer |
 | 31 · IaC | [Terraform](iac/README.md) (S3, SG, EC2, IP elástica, user_data) y [workflow](.github/workflows/desplegar-web.yml) que publica la web | `terraform validate` y `fmt` correctos; `user_data` generado pasa `bash -n` |
 | 36 · Importar y exportar | [`carta.csv`](docs/erp/36-importar-exportar/carta.csv) e [`importar-exportar.py`](docs/erp/36-importar-exportar/importar-exportar.py) | `py_compile` |
 | 34 · Menús del cajero | [`restringir-menus-cajero.py`](docs/erp/34-configurar-odoo/restringir-menus-cajero.py) (con `--deshacer`) | `py_compile` |
@@ -114,7 +114,7 @@ Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt
 
 ### 4.1 Decisión: red plana con invitados aislada
 
-- [x] **Decidido el 24/10/2026:** red plana para el personal y Wi-Fi de invitados aislada; la separación entre TPV, gerente y servidor la hace el cortafuegos de cada equipo. El diseño con VLAN queda como anexo de mejora. Motivos y cómo se cumple cada caso: [tarea 23, apartados 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026). Apuntado en el Anexo II.
+- [x] **Decidido el 24/10/2026:** red plana para el personal y Wi-Fi de invitados aislada; la separación entre TPV, gerente y servidor la hace el cortafuegos de cada equipo. El diseño antiguo con una VLAN por grupo se quitó el 25/10/2026. Motivos y cómo se cumple cada caso: [tarea 23, apartados 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026). Apuntado en el Anexo II.
 - [ ] 🟠 **Cortafuegos del servidor** (parte de la decisión): `sudo docs/erp/33-odoo-docker/cortafuegos-servidor.sh` en `ServidorERP` y guardar `ufw status verbose`.
   - **Quién:** Iker.
 
@@ -277,7 +277,7 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] Odoo sigue funcionando por HTTPS desde el TPV.
 
 **Packet Tracer (4.2)**
-- [x] Existen `docs/redes/23-red-local.pkt` y `23-red-local.png`, y `23-anexo-vlan.pkt` está **sin cambios** (`git status docs/redes/23-anexo-vlan.pkt` no lo muestra como modificado).
+- [x] Existen `docs/redes/23-red-local.pkt` y `23-red-local.png`, y no queda nada del diseño antiguo con VLAN por grupo (quitado el 25/10/2026).
 - [x] Las **16 pruebas** de la guía dan el resultado esperado y están apuntadas en la tabla de la tarea 23, con sus capturas.
 - [x] Ningún equipo se ha quedado con un hueco de la guía sin rellenar (`<CLAVE-...>`), y las contraseñas están fuera de Git (Drive del grupo).
 - [x] El dibujo coincide con la red real: ISP, R1, SW1, los equipos con cable, las dos Wi-Fi y `ROUTER2-WDS` con su nota.

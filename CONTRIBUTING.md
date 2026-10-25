@@ -112,7 +112,7 @@ git add .
 ```
 
 ```bash
-git commit -m "redes: añade plan de direccionamiento IP por VLAN"
+git commit -m "redes: añade plan de direccionamiento IP"
 ```
 
 **6. Subirlo a GitHub**

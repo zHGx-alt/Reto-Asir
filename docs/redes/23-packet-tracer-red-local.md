@@ -2,7 +2,7 @@
 
 - **Responsable:** Adrian
 - **Qué se construye:** `23-red-local.pkt`, la simulación de **la red que se monta de verdad** (decisión del [apartado 5.2 de la tarea 23](23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): Internet y el router del operador, el router 1 con NAT, la LAN del personal, la Wi-Fi del personal, la Wi-Fi de invitados aislada y el router 2 que la amplía.
-- **De dónde se parte:** del [`23-anexo-vlan.pkt`](23-anexo-vlan.pkt) (se reutilizan R1, SW1 y los equipos). El anexo no se toca: se guarda con otro nombre.
+- **De dónde se parte:** de un fichero vacío de Packet Tracer 9.0.1.
 - **Tiempo estimado:** 1 h 30 min, con las pruebas y las capturas.
 - **Resultado de aprendizaje que demuestra:** RA.7 de PAR («conecta redes privadas a redes públicas»): NAT, red pública y red privada. Además, RA.2 de PAR (equipos cableados e inalámbricos) y la red configurada de forma segura del enunciado.
 
@@ -29,22 +29,30 @@ SW1 (2960) · gestión 192.168.10.3
 
 | En el local | En Packet Tracer | Por qué |
 |---|---|---|
-| Archer C6 con LAN y red de invitados | R1 con dos subinterfaces (VLAN 10 y 50) y la ACL `INVITADOS-IN` | Es lo que el Archer hace por dentro: dos redes y la de invitados sin acceso a la LAN |
+| Archer C6 con LAN y red de invitados (un solo aparato) | R1 con dos subinterfaces (VLAN 10 y 50) y la ACL `INVITADOS-IN` | Es lo que el Archer hace por dentro: dos redes y la de invitados sin acceso a la LAN |
 | Router 2 en modo WDS | AccessPoint-PT `ROUTER2-WDS` con el mismo SSID | En WDS el router 2 es un **puente**, no enruta ni reparte IP; Packet Tracer no tiene WDS y el punto de acceso es el aparato que se comporta igual. El cable representa el enlace por radio |
+| Gerente y TPV a los puertos LAN 2-4 del router 1; servidor al switch | Todos los equipos a SW1 | El R1 de Packet Tracer tiene un solo enlace con el switch (*router-on-a-stick*); los puertos LAN del Archer son un switch por dentro |
+| La Wi-Fi del personal la emite el router 1 | `AP-PERSONAL` en SW1 | El 2911 de Packet Tracer no tiene Wi-Fi |
 | IP fijas por reserva DHCP | IP fijas configuradas en cada equipo | Las reservas por MAC en IOS son engorrosas; el resultado (siempre la misma IP) es el mismo |
 | DNS: el router 1 | DNS: el servidor INTERNET | R1 no hace de DNS en Packet Tracer |
 | Windows Firewall con entrada **y salida** limitadas (TPV) | Cortafuegos de los PC de Packet Tracer (solo entrada) | Packet Tracer no filtra la salida en los PC; la entrada basta para probar que TPV y gerente no se ven |
 | Odoo por HTTPS (tarea 52) | Servicio HTTPS del Server-PT | Mismo puerto y mismo resultado |
 
-## 1. Preparar el fichero
+## 1. Equipos y cables
 
-1. Abrir `23-anexo-vlan.pkt` y **guardarlo como** `docs/redes/23-red-local.pkt` (*File → Save As*). Desde aquí se trabaja solo en el nuevo.
-2. En R1, apuntar los pools de DHCP y las exclusiones del diseño anterior (hacen falta en el paso 3.1):
-   ```
-   enable
-   show running-config | include ip dhcp
-   ```
-3. Borrar los cables de **RECREATIVA** (a `SW1 Fa0/5`) y de **CLIENTE** (a `SW1 Fa0/6`): los dos pasan a ir por Wi-Fi.
+En un fichero nuevo, añadir y renombrar:
+
+| Nombre | Modelo | Conexión (cable de cobre directo) |
+|---|---|---|
+| `R1` | Router 2911 | `R1 Gi0/0` ↔ `SW1 Gi0/1` |
+| `SW1` | Switch 2960-24TT | — |
+| `SRV-ODOO` | Server-PT | `SW1 Fa0/1` |
+| `TPV1` · `TPV2` | PC-PT | `SW1 Fa0/2` · `SW1 Fa0/3` |
+| `GERENTE` | PC-PT | `SW1 Fa0/4` |
+| `CLIENTE` | Laptop-PT | Wi-Fi (sección 6) |
+| `RECREATIVA` | PC-PT | Wi-Fi (sección 6) |
+
+El ISP, el servidor INTERNET y los puntos de acceso se añaden en las secciones 2 y 6. Guardar como `docs/redes/23-red-local.pkt`.
 
 ## 2. Red pública: ISP e Internet
 
@@ -79,24 +87,15 @@ El ISP **no tiene ninguna ruta** hacia `192.168.0.0/16`: desde Internet no se ll
 
 ## 3. R1 (router 1)
 
-### 3.1 Quitar el diseño con VLAN por grupo
+### 3.1 LAN del personal, red de invitados y DHCP
 
 ```
+enable
 configure terminal
-no interface GigabitEthernet0/0.20
-no interface GigabitEthernet0/0.30
-no interface GigabitEthernet0/0.40
-no interface GigabitEthernet0/0.99
-no ip access-list extended TPV-IN
-no ip access-list extended GERENCIA-IN
-no ip access-list extended AISLADA-IN
-```
-
-Y, con lo apuntado en el paso 1.2, cada pool y cada exclusión: `no ip dhcp pool <nombre>` y `no ip dhcp excluded-address <inicio> <fin>`. Si Packet Tracer no deja borrar una subinterfaz, basta con `interface GigabitEthernet0/0.20` → `shutdown` → `no ip address`.
-
-### 3.2 LAN del personal, red de invitados y DHCP
-
-```
+interface GigabitEthernet0/0
+ no ip address
+ no shutdown
+exit
 ip access-list extended INVITADOS-IN
  remark Invitados y recreativa: DHCP e Internet; nada de la red privada, ni el propio router
  permit udp any eq bootpc any eq bootps
@@ -127,7 +126,7 @@ ip dhcp pool INVITADOS
 
 Los rangos son los del [plan de direccionamiento](23-plano-direccionamiento.md#42-rangos-dentro-de-la-lan): `.1-.99` para equipos fijos y red, `.100-.199` dinámico para el personal.
 
-### 3.3 WAN y NAT con sobrecarga (PAT)
+### 3.2 WAN y NAT con sobrecarga (PAT)
 
 ```
 interface GigabitEthernet0/1
@@ -147,7 +146,7 @@ access-list 1 permit 192.168.50.0 0.0.0.255
 ip nat inside source list 1 interface GigabitEthernet0/1 overload
 ```
 
-### 3.4 Seguridad: solo SSH y solo desde el PC del gerente
+### 3.3 Seguridad: solo SSH y solo desde el PC del gerente
 
 Es lo mismo que la tarea 24 pide en el router real («administración limitada al PC del gerente»):
 
@@ -185,10 +184,6 @@ vlan 50
 vlan 999
  name SIN-USO
 exit
-no vlan 20
-no vlan 30
-no vlan 40
-no vlan 99
 interface range FastEthernet0/1 - 5
  description LAN del personal: servidor, TPV, gerente y AP del personal
  switchport mode access
@@ -210,7 +205,8 @@ interface GigabitEthernet0/1
  description Trunk hacia R1
  switchport mode trunk
  switchport trunk allowed vlan 10,50
-no interface Vlan99
+interface Vlan1
+ shutdown
 interface Vlan10
  ip address 192.168.10.3 255.255.255.0
  no shutdown
@@ -277,7 +273,7 @@ En el local, esto lo hacen `configurar-tpv.ps1` (tareas 13 y 15), el Firewall de
 
 ## 8. Pruebas
 
-Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23-plano-direccionamiento.md#6-cómo-se-comprueba). Las marcadas con 📷 llevan captura. El primer ping de cada pareja puede perder 1 o 2 paquetes por ARP: se apunta el de la repetición.
+Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23-plano-direccionamiento.md#6-cómo-se-comprueba). La marcada con 📷 lleva captura; del resto, la salida se copia en la [evidencia](evidencias/23-red-local-configuracion-y-pruebas.txt). El primer ping de cada pareja puede perder 1 o 2 paquetes por ARP: se apunta el de la repetición.
 
 | # | Desde → hasta | Esperado | Qué demuestra |
 |---|---|---|---|
@@ -285,22 +281,22 @@ Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23
 | 2 | TPV1 → navegador `https://192.168.10.10` 📷 | Abre la página del servidor | El TPV llega a Odoo cifrado |
 | 3 | TPV1 → `ping 192.168.10.20` (gerente) | Falla | Cortafuegos del gerente |
 | 4 | GERENTE → `ping 192.168.10.31` (TPV1) | Falla | Cortafuegos del TPV |
-| 5 | GERENTE → `ping 192.168.10.10` | Llega | El gerente sí llega al servidor |
+| 5 | GERENTE y TPV1 → `ping 192.168.10.10` | Llega | El personal sí llega al servidor |
 | 6 | CLIENTE (Wi-Fi) → `ipconfig` | `192.168.50.x`, puerta de enlace `192.168.50.1` | DHCP de invitados |
-| 7 | CLIENTE → navegador `http://internet.test` 📷 | Abre la página del ISP | DNS y NAT: red privada → pública (RA.7) |
+| 7 | CLIENTE → `ping internet.test` | Llega | DNS y NAT: red privada → pública (RA.7) |
 | 8 | CLIENTE → `ping 192.168.10.10` | Falla | Invitados aislados de la LAN (`INVITADOS-IN`) |
 | 9 | RECREATIVA → `ping 192.168.10.31` | Falla | La recreativa no ve la caja |
 | 10 | CLIENTE → `ping 192.168.50.1` | Falla | Los invitados no llegan ni al router |
-| 11 | R1 → `show ip nat translations` 📷 | Traducciones de `192.168.x.x` a `203.0.113.2` | NAT con sobrecarga |
+| 11 | R1 → `show ip nat translations` | Traducciones de `192.168.x.x` a `203.0.113.2` | NAT con sobrecarga |
 | 12 | INTERNET → `ping 192.168.10.10` | Falla | Desde Internet no se llega a la red privada |
-| 13 | GERENTE → *Command Prompt* `ssh -l admin 192.168.10.1` y `ssh -l admin 192.168.10.3` 📷 | Pide la contraseña y entra | Administración solo por SSH |
-| 14 | TPV1 → `ssh -l admin 192.168.10.1` | Rechazado | Administración solo desde el gerente (`ADMIN-GERENTE`) |
-| 15 | Apagar `AP-INVITADOS` (*Config → Port 1 → Port Status: Off*) 📷 | CLIENTE pasa a `ROUTER2-WDS` y sigue navegando (si no se asocia solo, *PC Wireless → Connect*) | El router 2 amplía la Wi-Fi de clientes |
+| 13 | GERENTE → *Command Prompt* `ssh -l admin 192.168.10.1` y `ssh -l admin 192.168.10.3` | Pide la contraseña y entra | Administración solo por SSH |
+| 14 | TPV1 → `ssh -l admin 192.168.10.1`; TPV2 → `ssh -l admin 192.168.10.3` | Rechazado | Administración solo desde el gerente (`ADMIN-GERENTE`) |
+| 15 | Con CLIENTE asociado a `ROUTER2-WDS`, apagar su radio (*Config → Port 1 → Port Status: Off*) | CLIENTE pasa a `AP-INVITADOS`, conserva la IP y sigue navegando (si no se asocia solo, *PC Wireless → Connect*) | Las dos radios dan la misma red de clientes, sin cortes |
 | 16 | R1 → `show access-lists INVITADOS-IN` | Suben los contadores de la línea `deny ip any 192.168.0.0 0.0.255.255` | Los bloqueos los hace la ACL, no un fallo de red |
 
 **No se puede probar en Packet Tracer:** el aislamiento entre clientes de la Wi-Fi de invitados (un móvil no ve a otro). Se prueba en el Archer C6 (tarea 24).
 
-## 10. Estado (25/10/2026): hecha
+## 9. Estado (25/10/2026): hecha
 
 `23-red-local.pkt` ya está construido con el MCP de Packet Tracer: secciones 1 a 6 de esta guía (ISP e Internet, R1, SW1, IP de los equipos, servicios del servidor y los tres puntos de acceso con WPA2-PSK/AES), las notas del lienzo y las tarjetas inalámbricas de CLIENTE y RECREATIVA. Configuración y resultados: [`evidencias/23-red-local-configuracion-y-pruebas.txt`](evidencias/23-red-local-configuracion-y-pruebas.txt).
 
@@ -314,9 +310,4 @@ Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23
 
 **Notas para repetirla con el MCP:** la función `configureIosDevice` necesita `exit` entre bloques de interfaz (si no, se pierde la línea `interface` siguiente); en los PC, la IP fija se guarda con `configurePcIp` más la puerta de enlace del equipo (`setDefaultGateway`), porque solo con el puerto no queda guardada; el módulo inalámbrico de PC se llama `Linksys-WMP300N` y el de portátil `Linksys-WPC300N`. La función `swapLaptopToWireless` de PTBuilder pone una tarjeta genérica (`PT-LAPTOP-NM-1W`) con la que *PC Wireless* no deja conectar: hay que cambiarla por la `Linksys-WPC300N`. Para la prueba 15, la radio del punto de acceso se apaga con `getPort('Port 1').setPower(false)`.
 
-## 9. Al terminar
-
-- [ ] Guardar `23-red-local.pkt` y la captura de la topología como `23-red-local.png` en `docs/redes/`.
-- [ ] Pasar la tabla de pruebas al apartado 5.4 de la [tarea 23](23-plano-direccionamiento.md#54-simulación-en-packet-tracer-de-la-red-real) y enlazar el `.pkt` y la captura (sustituyen al «Pendiente» de la tabla de ficheros).
-- [ ] Guardar en KeePassXC las contraseñas de R1, SW1 y las Wi-Fi de prueba.
-- [ ] Marcar el punto en [CORRECIONES.md](../../CORRECIONES.md#42-packet-tracer-tarea-23) y en el CSV (tarea 23).
+Queda pendiente pasar a KeePassXC (o a donde decida el equipo) las contraseñas de R1, SW1 y las Wi-Fi de prueba ([CORRECIONES, 2.1](../../CORRECIONES.md)).

@@ -390,7 +390,7 @@ La red de clientes no deberá tener acceso a:
 - Servidores o bases de datos.
 - Otros dispositivos conectados a la red interna.
 
-Si el Archer C6 no permite mantener correctamente el aislamiento de invitados a través de WDS, la limitación se documentará y se propondrá una separación mediante VLAN y puntos de acceso profesionales como mejora futura.
+Si el Archer C6 no permite mantener correctamente el aislamiento de invitados a través de WDS, la limitación se documentará y el router 2 emitirá solo la red de invitados, con su propio aislamiento (tarea 23, apartado 5.2).
 
 ### 9.5. Equipo del operador
 
@@ -457,7 +457,7 @@ La primera versión solo tenía los puestos y los routers. Faltaba lo que sostie
 | Discos del RAID 1 | Espejo de los datos (tarea 43) | WD Red Plus 2 TB (WD20EFZX), disco para funcionamiento continuo | 2 | 329,11 € | 658,22 € |
 | Disco USB de copias | Copia 3-2-1 fuera del local (tarea 44) | WD Elements Portable 2 TB | 1 | 125,08 € | 125,08 € |
 | SAI del servidor | Que un corte de luz no corrompa la base de datos ni el RAID | APC Back-UPS BX750MI, 750 VA | 1 | 104,99 € | 104,99 € |
-| Switch | Puertos libres (el router solo tiene 4); admite VLAN para la mejora del anexo de la tarea 23 | TP-Link TL-SG108E, 8 puertos gigabit, gestionable con VLAN 802.1Q | 1 | 31,90 € | 31,90 € |
+| Switch | Puertos libres (el router solo tiene 4) | TP-Link TL-SG108E, 8 puertos gigabit, gestionable | 1 | 31,90 € | 31,90 € |
 | Cable de red | Tiradas del plano (unos 50 m, tarea 23) | Bobina Cat6 UTP de 100 m, cobre (Nanocable 10.20.0502) | 1 | 49,49 € | 49,49 € |
 | Adaptador Wi-Fi de la recreativa | Conectarla a la Wi-Fi de invitados (tarea 16, sección 6) | TP-Link TL-WN725N (USB, chip Realtek con driver en Linux) | 1 | 8,99 € | 8,99 € |
 | Palanca del arcade stick | Palanca de 4 microinterruptores, la que lee el modo digital del firmware (tarea 20) | Sanwa JLF-TP-8YT | 1 | 22,73 € | 22,73 € |
@@ -478,7 +478,7 @@ Sin precio verificado: canaletas, conectores RJ45, la bola de la palanca, los bo
 **Por qué estos modelos:**
 - **Servidor:** Odoo y PostgreSQL para un solo local no necesitan más que un i5 con 16 GB. Uno reacondicionado de empresa cuesta la mitad que uno nuevo; el formato torre (MT) deja sitio para los dos discos del RAID.
 - **WD Red Plus:** disco pensado para estar encendido siempre y en RAID (tecnología CMR). Son caros en la fecha de consulta; con discos de 1 TB bastaría para varios años de datos de un local.
-- **TL-SG108E:** la red elegida es plana (tarea 23, apartado 5.2), pero el switch admite VLAN 802.1Q: si la cadena crece, permite montar el diseño del anexo (tarea 23, apartado 5.5) sin cambiarlo.
+- **TL-SG108E:** da los puertos que le faltan al router 1 (tiene 4) y deja 6 libres para ampliar. Es gestionable: se administra en `192.168.10.3` (tarea 23).
 
 **Fuentes (24/10/2026):**
 - [HP ProDesk 600 G5 MT, Back Market](https://www.backmarket.es/es-es/p/hp-prodesk-600-g5-mt-core-i5-3-ghz-ssd-512-gb-ram-16-gb/cc2d1a92-931c-459c-80e8-0ebc3abadd31)
