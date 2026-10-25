@@ -1,6 +1,6 @@
 # Tarea 16 · Instalar SO ligero y MAME con arranque directo — Registro de ejecución
 
-**Responsable:** Iker · **Revisa:** Markel · **Fecha de ejecución:** 22/10/2026
+**Responsable:** Iker · **Fecha de ejecución:** 22/10/2026
 **Estado:** ✅ Hecha en máquina virtual (con 5 juegos legales funcionando) · ⏳ Pendiente: pasarla a la máquina física
 
 ## 1. Resultado

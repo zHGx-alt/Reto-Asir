@@ -3,7 +3,7 @@
 - **Bloque:** 8 BD
 - **Depende de:** tarea 39 (modelo lógico 3FN)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** pendiente de revisión (revisa: Adrian)
+- **Estado:** hecha
 - **Gestor:** PostgreSQL 16 (probado en esa versión)
 
 ## 1. Qué se entrega

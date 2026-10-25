@@ -1,6 +1,6 @@
 # Tarea 33 · Instalar Odoo + PostgreSQL con Docker
 
-**Responsable:** Iker · **Revisa:** Peio · **Fecha de ejecución:** 22/10/2026 · **Depende de:** 32 (elección del ERP)
+**Responsable:** Iker · **Fecha de ejecución:** 22/10/2026 · **Depende de:** 32 (elección del ERP)
 **Estado:** ✅ Hecha en máquina virtual
 
 > La tarea 32 (comparativa y elección del ERP, de Eneko.S) está cerrada y eligió **Odoo Community**, el ERP instalado aquí.

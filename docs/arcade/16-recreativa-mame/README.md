@@ -1,6 +1,6 @@
 # Tarea 16 · SO ligero y MAME con arranque directo
 
-**Responsable:** Iker · **Revisa:** Markel · **Fechas:** 26–28 oct
+**Responsable:** Iker · **Fechas:** 26–28 oct
 
 Objetivo: al encender la recreativa arranca directamente MAME a pantalla completa, sin escritorio,
 sin pedir usuario ni contraseña y sin dar privilegios de administrador al usuario que juega.

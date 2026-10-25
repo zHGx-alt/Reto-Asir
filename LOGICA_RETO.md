@@ -375,7 +375,7 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 | Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Cuentas `tpv_app` e `informes` con login; contraseñas por variable, nunca en el repositorio (#42) | — | Hecho (probado 9/9 con cada cuenta) |
 | Copias | Solo root lee la contraseña | Contraseña de restic fuera del servidor | AES-256 | Hecho |
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
-| Repositorio | Cambios por Pull Request con revisor | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
+| Repositorio | Cambios por Pull Request con CI (gitleaks); nadie escribe en `main` | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
 Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el proxy, publicar 8069 solo en `127.0.0.1`), contraseña de root de Batocera, red de invitados y WPA3, contraseñas Wi-Fi y de administración del router, BD en el RAID y menús que ve el cajero en Odoo. Las contraseñas de la VM del gerente ya se cambiaron (#55).
 
@@ -389,15 +389,14 @@ Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el 
 flowchart LR
     CSV["backlog-kanban.csv<br/>(fuente única)"] -- "python3 scripts/gantt.py" --> G["gantt.md + gantt.svg"]
     CSV -.-> A2["Anexo II · 11 pasos"]
-    RAMA["rama por tarea"] --> PR["Pull Request"] --> REV["revisor ≠ responsable"] --> MAIN["main"]
-    PR -- "CI" --> GL["gitleaks"]
+    RAMA["rama por tarea"] --> PR["Pull Request"] -- "CI" --> GL["gitleaks en verde"] --> MAIN["main"]
     MAIN --> VER["scripts/verificar-repo.sh"]
 ```
 
 - **Seguimiento:** el enunciado pide Gantt o Kanban; se usa el Gantt. El tablero de GitHub Projects existe pero no se usa.
-- **Planificación:** cada tarea tiene responsable, revisor (nunca el mismo), fechas, dependencias, **tipo** (Software, Físico, Documentación, Gestión), estado, evidencia y observaciones en el [CSV](docs/gestion/backlog-kanban.csv). El script valida el CSV (ciclos, fechas, fines de semana, evidencias que existen) y genera el [Gantt](docs/gestion/gantt.md) con las tareas hechas separadas de las que faltan.
+- **Planificación:** cada tarea tiene responsable, fechas, dependencias, **tipo** (Software, Físico, Documentación, Gestión), estado, evidencia y observaciones en el [CSV](docs/gestion/backlog-kanban.csv). El script valida el CSV (ciclos, fechas, fines de semana, evidencias que existen) y genera el [Gantt](docs/gestion/gantt.md) con las tareas hechas separadas de las que faltan.
 - **Reparto** ([roles.md](docs/gestion/roles.md)): el software pendiente lo llevan Adrian e Iker; las tareas físicas, cualquiera salvo Eneko.P (pendiente de confirmar si sigue en el equipo).
-- **Git** ([CONTRIBUTING.md](CONTRIBUTING.md)): una rama por tarea, Pull Request y revisión. Los secretos nunca entran (`.gitignore`, gitleaks en CI y hook de pre-commit con `bash scripts/instalar-hooks.sh`).
+- **Git** ([CONTRIBUTING.md](CONTRIBUTING.md)): una rama por tarea y Pull Request con el CI en verde (gitleaks). Los secretos nunca entran (`.gitignore`, gitleaks en CI y hook de pre-commit con `bash scripts/instalar-hooks.sh`).
 - **Anexos:** [I, contrato de equipo](docs/gestion/anexo-I-contrato-equipo.md) y [II, 11 pasos](docs/gestion/anexo-II-11-pasos.md) (análisis, requisitos, decisiones, incidencias y pruebas).
 - **IA:** permitida por el enunciado; cada uso se anota en el [registro de IA](docs/gestion/registro-ia.md) con lo que se comprobó a mano.
 - **Comprobaciones:** `bash scripts/verificar-repo.sh` repite las pruebas automáticas (enlaces, Gantt, sintaxis, firmware, SQL, W3C, gitleaks).

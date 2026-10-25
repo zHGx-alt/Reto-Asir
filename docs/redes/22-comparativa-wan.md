@@ -1,7 +1,7 @@
 # Tarea 22: Comparativa de operadores WAN
 
 - **Bloque:** 5 Redes
-- **Responsable:** Markel · **Revisa:** Eneko.S
+- **Responsable:** Markel
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Fecha de consulta de precios:** 22/10/2026 · **Revisión:** 24/10/2026 (análisis de necesidades, esquema de conectividad y tabla en Markdown)
 - **La necesitan:** tarea 23 (plano), tarea 10 (presupuesto) y tarea 11 (diagrama)

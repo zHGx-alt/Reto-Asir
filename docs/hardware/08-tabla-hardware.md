@@ -4,7 +4,7 @@
 - **Depende de:** tarea 7 (necesidades de equipos)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Fecha de consulta de precios y disponibilidad:** 22/10/2026 (impresora actualizada el 23/10/2026)
-- **Estado:** pendiente de revisión
+- **Estado:** hecha
 
 ## 1. Alcance y criterios
 

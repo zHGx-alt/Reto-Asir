@@ -1,6 +1,6 @@
 # Tarea 43 · RAID 1 y simulación de fallo
 
-**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Eneko.P) · **Revisa:** Adrian · **Fecha:** 22/10/2026
+**Responsable:** Iker (hecha por Iker; antes estaba a nombre de Eneko.P) · **Fecha:** 22/10/2026
 **Estado:** ✅ RAID y simulación de fallo hechos en máquina virtual (`ServidorERP`) · ⚠️ **La base de datos todavía no está en el RAID** (sección 7)
 
 ## 1. Resultado

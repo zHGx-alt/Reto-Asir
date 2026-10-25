@@ -11,7 +11,7 @@ Cómo trabajar en este repositorio sin pisarnos y sin complicarnos. Si solo vas 
 | **Push / Pull** | `push` sube tus commits a GitHub. `pull` baja los commits de los demás. |
 | **Rama** (*branch*) | Una copia paralela del proyecto donde haces tu tarea sin tocar la versión buena. |
 | **`main`** | La rama principal. Siempre debe funcionar. **Nadie trabaja directamente en ella.** |
-| **Pull Request (PR)** | La petición en GitHub para unir tu rama a `main`. Otra persona la revisa y la aprueba. |
+| **Pull Request (PR)** | La petición en GitHub para unir tu rama a `main`. El CI (gitleaks) comprueba que no lleva secretos y, si está en verde, la une quien la abrió. |
 
 Por qué lo hacemos así: el profesor evalúa que **todos** tengan commits propios (Anexo IX), y las ramas + PR evitan que alguien rompa el trabajo de otro.
 
@@ -72,7 +72,7 @@ La primera vez que hagas `push`, Git te pedirá iniciar sesión en GitHub: en Wi
 
 1. **Una rama por tarea**, con el nombre `bloque/descripcion-corta`: `redes/plan-ip`, `web/slideshow`, `bd/modelo-er`.
 2. **Nunca** se hace commit ni push directamente a `main`.
-3. Todo entra en `main` mediante **Pull Request**, aprobado por el revisor que indica el [Gantt](docs/gestion/gantt.md).
+3. Todo entra en `main` mediante **Pull Request** con el **CI en verde** (gitleaks). Antes de unirlo, `bash scripts/verificar-repo.sh` tiene que terminar con «Todo correcto».
 4. Commits **pequeños y frecuentes**, mejor varios al día que uno enorme al final.
 5. Mensajes con el formato `bloque: qué cambia` (ver [5. Mensajes de commit](#5-mensajes-de-commit)).
 6. **Nada de contraseñas, claves ni tokens** en el repositorio.
@@ -135,14 +135,13 @@ Repite 3-6 tantas veces como quieras mientras dure la tarea.
 
 1. Entra en el repo en GitHub. Aparecerá un aviso amarillo *"redes/plan-ip had recent pushes"* → **Compare & pull request**.
 2. Título: el nombre de la tarea. Descripción: qué has hecho y dónde están las evidencias.
-3. A la derecha, en **Reviewers**, añade a tu revisor (columna *Revisa* del Gantt).
-4. **Create pull request**.
+3. **Create pull request**.
 
-**8. Revisión y merge**
+**8. CI y merge**
 
-- El revisor abre el PR, mira la pestaña **Files changed**, y pulsa **Review changes → Approve** o deja comentarios.
-- Si hay comentarios, el autor corrige en su rama, hace commit y push: el PR se actualiza solo.
-- Una vez aprobado: **Merge pull request** → **Delete branch**.
+- Espera a que el check de **gitleaks** salga en verde en el PR.
+- Si sale en rojo, corrige en tu rama, haz commit y push: el PR se actualiza solo y el CI vuelve a pasar. Si lo que encontró es una contraseña de verdad, además hay que cambiarla.
+- Con el CI en verde: **Merge pull request** → **Delete branch**.
 
 **9. Volver a `main` para la siguiente tarea**
 

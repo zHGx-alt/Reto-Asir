@@ -1,6 +1,6 @@
 # Tarea 23 · Simulación en Packet Tracer de la red del local
 
-- **Responsable:** Adrian · **Revisa:** Iker
+- **Responsable:** Adrian
 - **Qué se construye:** `23-red-local.pkt`, la simulación de **la red que se monta de verdad** (decisión del [apartado 5.2 de la tarea 23](23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): Internet y el router del operador, el router 1 con NAT, la LAN del personal, la Wi-Fi del personal, la Wi-Fi de invitados aislada y el router 2 que la amplía.
 - **De dónde se parte:** del [`23-anexo-vlan.pkt`](23-anexo-vlan.pkt) (se reutilizan R1, SW1 y los equipos). El anexo no se toca: se guarda con otro nombre.
 - **Tiempo estimado:** 1 h 30 min, con las pruebas y las capturas.

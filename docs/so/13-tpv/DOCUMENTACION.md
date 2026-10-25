@@ -1,7 +1,7 @@
 # Tareas 13 y 15: Bastionado de los TPV y scripts de Windows
 
 - **Bloque:** 2 SO
-- **Responsable:** Iker · **Revisa:** Markel
+- **Responsable:** Iker
 - **Requisitos que cubre:** RT-01, RT-04, RT-05 y RT-06 de la [tarea 7](../../hardware/07-necesidades-equipos.md)
 - **Estado:** scripts listos (24/10/2026): sintaxis comprobada y `comprobar-tpv.ps1` probado en un Windows 11 sin bastionar (da FALLO donde debe). **Falta ejecutarlos en la VM del TPV** (sección 6).
 

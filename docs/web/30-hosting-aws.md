@@ -2,9 +2,9 @@
 
 - **Bloque:** 6 Web
 - **Depende de:** tarea 28 (web implementada)
-- **Responsable:** Adrian · **Revisa:** Iker
+- **Responsable:** Adrian
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** montado y probado; pendiente de revisión
+- **Estado:** montado y probado
 - **Fecha:** 23/10/2026
 - **Web:** <https://almichain1.duckdns.org> (solo con el Learner Lab arrancado; ver sección 8)
 

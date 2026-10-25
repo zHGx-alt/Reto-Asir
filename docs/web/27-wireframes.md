@@ -1,9 +1,9 @@
 # Tarea 27: Wireframes y diseño conceptual de la web
 
 - **Bloque:** 6 Web
-- **Responsable:** Peio · **Revisa:** Eneko.S
+- **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** pendiente de revisión
+- **Estado:** hecha
 - **Fecha:** 23/10/2026
 
 ## 1. Alcance
