@@ -4,31 +4,42 @@
 # Los hashes de las contraseñas (secret 5) se han sustituido por <oculto>. Las contraseñas están en KeePassXC.
 
 ==================================================================================================
-1. PRUEBAS HECHAS (25/10/2026)
+1. PRUEBAS (25/10/2026)
 ==================================================================================================
 
-| # guía | Desde → hasta                              | Esperado                       | Resultado                                  |
-|--------|--------------------------------------------|--------------------------------|--------------------------------------------|
-| 1      | TPV1 · IP                                  | 192.168.10.31, gw .1           | OK: 192.168.10.31/24, gw 192.168.10.1, DNS 198.51.100.10 (se mantiene al guardar y reabrir) |
-| 5      | GERENTE → ping 192.168.10.10               | Llega                          | OK: 4/4                                    |
-| 7*     | GERENTE → ping internet.test (DNS + NAT)   | Llega                          | OK: 4/4 (y 4/4 otra vez tras reabrir)      |
-| 7*     | TPV1 y TPV2 → ping 198.51.100.10           | Llega                          | OK: 4/4 (el primero pierde 1 por ARP)      |
-| 11     | R1 → show ip nat translations              | 192.168.x.x → 203.0.113.2      | OK (abajo): ICMP de .20, .31 y .32, y DNS (UDP 53) del gerente |
-| 12     | INTERNET → ping 192.168.10.10              | Falla                          | OK: 0/4 (el ISP no tiene ruta a la red privada) |
-| 13     | GERENTE → ssh -l admin 192.168.10.1 (R1)   | Pide contraseña y entra        | OK: aviso «Acceso solo para personal autorizado» y prompt R1# |
-| 13     | GERENTE → ssh -l admin 192.168.10.3 (SW1)  | Pide contraseña y entra        | OK: prompt SW1#                            |
-| 14     | TPV1 → ssh -l admin 192.168.10.1 (R1)      | Rechazado                      | OK: «% Connection refused by remote host»  |
-| 14     | TPV2 → ssh -l admin 192.168.10.3 (SW1)     | Rechazado                      | OK: «% Connection refused by remote host»  |
+| # | Desde → hasta | Esperado | Resultado (25/10/2026) |
+|---|---|---|---|
+| 1 | TPV1 → IP | `192.168.10.31`, puerta de enlace `.1` | ✅ (se mantiene al guardar y reabrir) |
+| 2 | TPV1 → navegador `https://192.168.10.10` | Abre la página del servidor | ⏳ Pendiente de captura |
+| 3 | TPV1 → `ping 192.168.10.20` (gerente) | Falla | ✅ 0/4 (cortafuegos del gerente) |
+| 4 | GERENTE → `ping 192.168.10.31` (TPV1) | Falla | ✅ 0/4 (cortafuegos del TPV) |
+| 5 | GERENTE y TPV1 → `ping 192.168.10.10` | Llega | ✅ 4/4 los dos |
+| 6 | CLIENTE (Wi-Fi) → IP | `192.168.50.x` | ✅ `192.168.50.10` por DHCP (recreativa: `192.168.50.12`) |
+| 7 | CLIENTE → `ping internet.test` | Llega | ✅ 4/4 (DNS y NAT por la Wi-Fi de invitados) |
+| 8 | CLIENTE → `ping 192.168.10.10` | Falla | ✅ 0/4 |
+| 9 | RECREATIVA → `ping 192.168.10.31` | Falla | ✅ 0/4 |
+| 10 | CLIENTE → `ping 192.168.50.1` | Falla | ✅ 0/4 |
+| 11 | R1 → `show ip nat translations` | `192.168.x.x` → `203.0.113.2` | ✅ ICMP de `.20`, `.31` y `.32` y DNS del gerente |
+| 12 | INTERNET → `ping 192.168.10.10` | Falla | ✅ 0/4 |
+| 13 | GERENTE → `ssh -l admin` a R1 y a SW1 | Entra | ✅ aviso de acceso y prompt `R1#` / `SW1#` |
+| 14 | TPV1 → SSH a R1; TPV2 → SSH a SW1 | Rechazado | ✅ «Connection refused by remote host» |
+| 15 | Apagar la radio de `ROUTER2-WDS` con el CLIENTE asociado a él | Pasa a `AP-INVITADOS` y sigue navegando | ✅ cambió de punto de acceso, conservó su IP y 4/4 a Internet |
+| 16 | R1 → `show access-lists INVITADOS-IN` | Suben los contadores del `deny` | ✅ `deny ip any 192.168.0.0 0.0.255.255 (12 match(es))` |
 
-* La prueba 7 de la guía es desde el CLIENTE (Wi-Fi). Desde la LAN del personal ya se comprueba que DNS y NAT funcionan.
+R1 · show access-lists INVITADOS-IN (después de las pruebas 6 a 10)
+    permit udp any eq bootpc any eq bootps (8 match(es))
+    deny ip any 192.168.0.0 0.0.255.255 (12 match(es))
+    permit ip any any (5 match(es))
 
-PENDIENTES (necesitan dos pasos manuales en Packet Tracer; ver la sección 10 de la guía):
-- Conectar CLIENTE y RECREATIVA a la Wi-Fi de invitados (PC Wireless): la API de Packet Tracer 9.0.1 no deja crear
-  el perfil inalámbrico por script (setCurrentProfileStringIPs y addProfile fallan con «invalid vector subscript»).
-  Después: pruebas 6, 7, 8, 9, 10, 15 y 16.
-- Reglas del cortafuegos de TPV1, TPV2, GERENTE y SRV-ODOO (Desktop → Firewall): la API no acepta reglas
-  (addStatement y addExtStatement devuelven false). Después: pruebas 3 y 4.
-- Prueba 2 (navegador del TPV1 a https://192.168.10.10) y las capturas.
+R1 · show ip dhcp binding
+    192.168.50.10    0060.47A5.C5BB    Automatic     (CLIENTE)
+    192.168.50.12    00D0.5844.1210    Automatic     (RECREATIVA)
+
+Pasos hechos a mano en la interfaz de Packet Tracer (la API no los permite): conexión de CLIENTE y RECREATIVA
+con PC Wireless, y reglas del cortafuegos de TPV1, TPV2, GERENTE y SRV-ODOO. Reglas que quedaron:
+    TPV1 y TPV2: Deny ICMP 192.168.10.20 · Deny TCP 192.168.10.20 · Allow IP any
+    GERENTE:     Deny ICMP .31 · Deny ICMP .32 · Deny TCP .31 · Deny TCP .32 · Allow IP any
+    SRV-ODOO:    Allow TCP 192.168.10.0/24 · Allow ICMP 192.168.10.0/24 · Deny IP any
 
 ==================================================================================================
 2. ISP · show running-config (lo relevante)
@@ -185,6 +196,6 @@ INTERNET   198.51.100.10/24 gw 198.51.100.1 · HTTP con página de prueba · DNS
 AP-PERSONAL   SSID Restaurante-Almichain            · WPA2-PSK (4) · AES (4) · 802.11g (sin 802.11b)
 AP-INVITADOS  SSID Restaurante-Almichain-Invitados  · WPA2-PSK (4) · AES (4) · 802.11g
 ROUTER2-WDS   SSID Restaurante-Almichain-Invitados  · WPA2-PSK (4) · AES (4) · 802.11g
-CLIENTE    tarjeta inalámbrica Linksys-WPC300N · DHCP
-RECREATIVA tarjeta inalámbrica Linksys-WMP300N · DHCP
+CLIENTE    tarjeta inalámbrica Linksys-WPC300N · DHCP · 192.168.50.10
+RECREATIVA tarjeta inalámbrica Linksys-WMP300N · DHCP · 192.168.50.12
 (Valores de seguridad según la API de Packet Tracer, WirelessCommon: eAuthenWPA2_PSK = 4, eEncryptAES = 4.)

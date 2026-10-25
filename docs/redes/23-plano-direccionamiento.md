@@ -190,8 +190,33 @@ SW1 · switch del armario
 
 | Fichero | Qué es | Estado |
 |---|---|---|
-| [23-red-local.pkt](23-red-local.pkt) | La red real | **Construida el 25/10/2026** con el MCP de Packet Tracer; faltan la conexión Wi-Fi de dos equipos y los cortafuegos de los PC (a mano, [guía, sección 10](23-packet-tracer-red-local.md#10-estado-25102026-construida-con-el-mcp-faltan-dos-pasos-a-mano)). [Configuración y pruebas](evidencias/23-red-local-configuracion-y-pruebas.txt) |
+| [23-red-local.pkt](23-red-local.pkt) | La red real | **Hecha el 25/10/2026** con el MCP de Packet Tracer y dos pasos a mano. 15 de 16 pruebas correctas (falta la captura del navegador). [Configuración y pruebas](evidencias/23-red-local-configuracion-y-pruebas.txt) |
 | [23-anexo-vlan.pkt](23-anexo-vlan.pkt) | El diseño de mejora con una VLAN por grupo (apartado 5.5) | Hecho el 23/10 |
+
+![Red del local en Packet Tracer](23-red-local.png)
+
+**Pruebas** (detalle y salidas en la [evidencia](evidencias/23-red-local-configuracion-y-pruebas.txt)):
+
+| # | Desde → hasta | Esperado | Resultado (25/10/2026) |
+|---|---|---|---|
+| 1 | TPV1 → IP | `192.168.10.31`, puerta de enlace `.1` | ✅ (se mantiene al guardar y reabrir) |
+| 2 | TPV1 → navegador `https://192.168.10.10` | Abre la página del servidor | ⏳ Pendiente de captura |
+| 3 | TPV1 → `ping 192.168.10.20` (gerente) | Falla | ✅ 0/4 (cortafuegos del gerente) |
+| 4 | GERENTE → `ping 192.168.10.31` (TPV1) | Falla | ✅ 0/4 (cortafuegos del TPV) |
+| 5 | GERENTE y TPV1 → `ping 192.168.10.10` | Llega | ✅ 4/4 los dos |
+| 6 | CLIENTE (Wi-Fi) → IP | `192.168.50.x` | ✅ `192.168.50.10` por DHCP (recreativa: `192.168.50.12`) |
+| 7 | CLIENTE → `ping internet.test` | Llega | ✅ 4/4 (DNS y NAT por la Wi-Fi de invitados) |
+| 8 | CLIENTE → `ping 192.168.10.10` | Falla | ✅ 0/4 |
+| 9 | RECREATIVA → `ping 192.168.10.31` | Falla | ✅ 0/4 |
+| 10 | CLIENTE → `ping 192.168.50.1` | Falla | ✅ 0/4 |
+| 11 | R1 → `show ip nat translations` | `192.168.x.x` → `203.0.113.2` | ✅ ICMP de `.20`, `.31` y `.32` y DNS del gerente |
+| 12 | INTERNET → `ping 192.168.10.10` | Falla | ✅ 0/4 |
+| 13 | GERENTE → `ssh -l admin` a R1 y a SW1 | Entra | ✅ aviso de acceso y prompt `R1#` / `SW1#` |
+| 14 | TPV1 → SSH a R1; TPV2 → SSH a SW1 | Rechazado | ✅ «Connection refused by remote host» |
+| 15 | Apagar la radio de `ROUTER2-WDS` con el CLIENTE asociado a él | Pasa a `AP-INVITADOS` y sigue navegando | ✅ cambió de punto de acceso, conservó su IP y 4/4 a Internet |
+| 16 | R1 → `show access-lists INVITADOS-IN` | Suben los contadores del `deny` | ✅ `deny ip any 192.168.0.0 0.0.255.255 (12 match(es))` |
+
+Lo que la simulación no puede probar, el aislamiento entre clientes de la Wi-Fi de invitados (un móvil no ve a otro), se prueba en el Archer C6 (tarea 24).
 
 **Dos decisiones de la simulación:**
 
@@ -297,6 +322,7 @@ En el local se hacen en las tareas 24 y 25, con el router montado; en Packet Tra
 - [ ] Confirmar si el PC de la recreativa tiene Wi-Fi (el adaptador USB ya está presupuestado).
 - [x] Decidir red plana o VLAN: red plana con invitados aislada (apartados 5.2 y 5.3, 24/10/2026).
 - [x] Construir `23-red-local.pkt` con [la guía](23-packet-tracer-red-local.md) (25/10/2026, con el MCP de Packet Tracer).
-- [ ] Conectar CLIENTE y RECREATIVA a la Wi-Fi y poner los cortafuegos de los PC (a mano, guía sección 10); terminar las 16 pruebas y la captura `23-red-local.png`.
+- [x] Conectar CLIENTE y RECREATIVA a la Wi-Fi, cortafuegos de los PC, 15 de 16 pruebas y la captura `23-red-local.png` (25/10/2026).
+- [ ] Prueba 2: captura del navegador del TPV1 abriendo `https://192.168.10.10`.
 - [x] Simular el diseño con VLAN en Packet Tracer (anexo, apartado 5.5).
 - [x] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador (anexo).

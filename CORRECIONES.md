@@ -119,8 +119,9 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 ### 4.2 Packet Tracer (tarea 23)
 
 - [x] **`23-red-local.pkt` construido** (25/10/2026, con el MCP de Packet Tracer): ISP e Internet, LAN e invitados con NAT, SW1, IP, servicios, los tres puntos de acceso con WPA2-PSK/AES y la seguridad de R1 y SW1. [Evidencia](docs/redes/evidencias/23-red-local-configuracion-y-pruebas.txt).
-- [ ] 🔴 **Dos pasos a mano** (10 min, [guía, sección 10](docs/redes/23-packet-tracer-red-local.md#10-estado-25102026-construida-con-el-mcp-faltan-dos-pasos-a-mano)): conectar CLIENTE y RECREATIVA a la Wi-Fi de invitados y poner los cortafuegos de TPV1, TPV2, GERENTE y SRV-ODOO. La API de Packet Tracer no deja hacerlo por script.
-- [ ] 🔴 **Las pruebas que faltan** (2, 3, 4, 6 a 10, 15 y 16; las 1, 5, 11, 12, 13 y 14 ya están hechas), la captura `23-red-local.png` y la tabla de la tarea 23 actualizada.
+- [x] **Wi-Fi de CLIENTE y RECREATIVA y cortafuegos de los PC**, hechos a mano en la interfaz (25/10/2026).
+- [x] **15 de 16 pruebas correctas**, captura `23-red-local.png` y tabla de la tarea 23 (25/10/2026).
+- [ ] 🟢 **Prueba 2:** captura del navegador del TPV1 abriendo `https://192.168.10.10`.
   - **Quién (los dos):** Adrian · Revisa Iker.
 
 ### 4.3 Routers reales (tareas 24-26)
