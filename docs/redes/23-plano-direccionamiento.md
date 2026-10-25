@@ -190,7 +190,7 @@ SW1 · switch del armario
 
 | Fichero | Qué es | Estado |
 |---|---|---|
-| [23-red-local.pkt](23-red-local.pkt) | La red real | **Hecha el 25/10/2026** con el MCP de Packet Tracer y dos pasos a mano. 15 de 16 pruebas correctas (falta la captura del navegador). [Configuración y pruebas](evidencias/23-red-local-configuracion-y-pruebas.txt) |
+| [23-red-local.pkt](23-red-local.pkt) | La red real | **Hecha el 25/10/2026** con el MCP de Packet Tracer y dos pasos a mano. 16 de 16 pruebas correctas. [Configuración y pruebas](evidencias/23-red-local-configuracion-y-pruebas.txt) |
 | [23-anexo-vlan.pkt](23-anexo-vlan.pkt) | El diseño de mejora con una VLAN por grupo (apartado 5.5) | Hecho el 23/10 |
 
 ![Red del local en Packet Tracer](23-red-local.png)
@@ -200,7 +200,7 @@ SW1 · switch del armario
 | # | Desde → hasta | Esperado | Resultado (25/10/2026) |
 |---|---|---|---|
 | 1 | TPV1 → IP | `192.168.10.31`, puerta de enlace `.1` | ✅ (se mantiene al guardar y reabrir) |
-| 2 | TPV1 → navegador `https://192.168.10.10` | Abre la página del servidor | ⏳ Pendiente de captura |
+| 2 | TPV1 → navegador `https://192.168.10.10` | Abre la página del servidor | ✅ abre «Odoo · Almi-Chain (simulado)» por HTTPS ([captura](evidencias/23-prueba2-navegador-tpv1.png)) |
 | 3 | TPV1 → `ping 192.168.10.20` (gerente) | Falla | ✅ 0/4 (cortafuegos del gerente) |
 | 4 | GERENTE → `ping 192.168.10.31` (TPV1) | Falla | ✅ 0/4 (cortafuegos del TPV) |
 | 5 | GERENTE y TPV1 → `ping 192.168.10.10` | Llega | ✅ 4/4 los dos |
@@ -322,7 +322,6 @@ En el local se hacen en las tareas 24 y 25, con el router montado; en Packet Tra
 - [ ] Confirmar si el PC de la recreativa tiene Wi-Fi (el adaptador USB ya está presupuestado).
 - [x] Decidir red plana o VLAN: red plana con invitados aislada (apartados 5.2 y 5.3, 24/10/2026).
 - [x] Construir `23-red-local.pkt` con [la guía](23-packet-tracer-red-local.md) (25/10/2026, con el MCP de Packet Tracer).
-- [x] Conectar CLIENTE y RECREATIVA a la Wi-Fi, cortafuegos de los PC, 15 de 16 pruebas y la captura `23-red-local.png` (25/10/2026).
-- [ ] Prueba 2: captura del navegador del TPV1 abriendo `https://192.168.10.10`.
+- [x] Conectar CLIENTE y RECREATIVA a la Wi-Fi, cortafuegos de los PC, las 16 pruebas y la captura `23-red-local.png` (25/10/2026).
 - [x] Simular el diseño con VLAN en Packet Tracer (anexo, apartado 5.5).
 - [x] Probar en Packet Tracer el acceso HTTP del TPV al servidor desde el navegador (anexo).

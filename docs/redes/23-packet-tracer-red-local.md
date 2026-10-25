@@ -304,7 +304,7 @@ Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23
 
 `23-red-local.pkt` ya está construido con el MCP de Packet Tracer: secciones 1 a 6 de esta guía (ISP e Internet, R1, SW1, IP de los equipos, servicios del servidor y los tres puntos de acceso con WPA2-PSK/AES), las notas del lienzo y las tarjetas inalámbricas de CLIENTE y RECREATIVA. Configuración y resultados: [`evidencias/23-red-local-configuracion-y-pruebas.txt`](evidencias/23-red-local-configuracion-y-pruebas.txt).
 
-**Hecha y probada:** 15 de 16 pruebas correctas; falta solo la captura de la prueba 2 (navegador). Resultados en la [tarea 23, apartado 5.4](23-plano-direccionamiento.md#54-simulación-en-packet-tracer-de-la-red-real).
+**Hecha y probada:** 16 de 16 pruebas correctas. Resultados en la [tarea 23, apartado 5.4](23-plano-direccionamiento.md#54-simulación-en-packet-tracer-de-la-red-real).
 
 **Lo que la API de Packet Tracer 9.0.1 no deja hacer por script** (se hizo en la interfaz, unos 10 minutos):
 

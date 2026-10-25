@@ -10,7 +10,7 @@
 | # | Desde → hasta | Esperado | Resultado (25/10/2026) |
 |---|---|---|---|
 | 1 | TPV1 → IP | `192.168.10.31`, puerta de enlace `.1` | ✅ (se mantiene al guardar y reabrir) |
-| 2 | TPV1 → navegador `https://192.168.10.10` | Abre la página del servidor | ⏳ Pendiente de captura |
+| 2 | TPV1 → navegador `https://192.168.10.10` | Abre la página del servidor | ✅ abre «Odoo · Almi-Chain (simulado)» por HTTPS (captura 23-prueba2-navegador-tpv1.png) |
 | 3 | TPV1 → `ping 192.168.10.20` (gerente) | Falla | ✅ 0/4 (cortafuegos del gerente) |
 | 4 | GERENTE → `ping 192.168.10.31` (TPV1) | Falla | ✅ 0/4 (cortafuegos del TPV) |
 | 5 | GERENTE y TPV1 → `ping 192.168.10.10` | Llega | ✅ 4/4 los dos |

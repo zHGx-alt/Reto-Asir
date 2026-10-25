@@ -15,7 +15,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 |---|---|---|---|
 | **Peio** | Cambiar la contraseña Wi-Fi expuesta y la de administración del TL-WR841N (15 min) | Archer C6: tarea 24 completa, red de invitados y WDS (tarea 25) | [2.1](#21-urgente-contraseñas), [4.3](#43-routers-reales-tareas-24-26) |
 | **Iker** | Pasar la contraseña de restic a KeePassXC (5 min). En `ServidorERP`: `mover-docker-al-raid.sh`, repetir el fallo del RAID con Odoo en marcha y `cortafuegos-servidor.sh` | Crear `almi_chain` en el servidor; VM del TPV con `configurar-tpv.ps1`; `importar-exportar.py`; `restringir-menus-cajero.py`; factura automática nueva; medidas de la recreativa en 1 GB | [2.1](#21-urgente-contraseñas), [3](#3-datos-raid-copias-y-bd), [5](#5-tpv-e-impresora), [7](#7-erp-y-recreativa) |
-| **Adrian** | Packet Tracer: construir la red real con [la guía](docs/redes/23-packet-tracer-red-local.md) (1 h 30 min) | `activar-https.sh` (tarea 52); `terraform apply` y secretos de GitHub (tarea 31); publicar la web y repetir curl y Lighthouse; VM del gerente | [4.2](#42-packet-tracer-tarea-23), [2.2](#22-https-en-odoo-y-menús-del-cajero), [6](#6-web-y-aws) |
+| **Adrian** | ~~Packet Tracer de la red real~~: hecho el 25/10/2026, 16 de 16 pruebas ([guía](docs/redes/23-packet-tracer-red-local.md)) | `activar-https.sh` (tarea 52); `terraform apply` y secretos de GitHub (tarea 31); publicar la web y repetir curl y Lighthouse; VM del gerente | [4.2](#42-packet-tracer-tarea-23), [2.2](#22-https-en-odoo-y-menús-del-cajero), [6](#6-web-y-aws) |
 | **Markel** | Montar el arcade stick con el [esquema nuevo](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5) | Pruebas con MAME y otro emulador (tarea 21) | [5](#5-tpv-e-impresora) |
 | **Eneko.S** | Revisar la tarea 41 (evidencias de la BD) y la 12 | Recreativa real (tarea 53) | [7](#7-erp-y-recreativa) |
 | **Equipo** | Leer la decisión de red ([tarea 23, 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): afecta a cómo se defiende la seguridad | Revisar los PR pendientes | [4.1](#41-decisión-red-plana-con-invitados-aislada) |
@@ -120,8 +120,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 - [x] **`23-red-local.pkt` construido** (25/10/2026, con el MCP de Packet Tracer): ISP e Internet, LAN e invitados con NAT, SW1, IP, servicios, los tres puntos de acceso con WPA2-PSK/AES y la seguridad de R1 y SW1. [Evidencia](docs/redes/evidencias/23-red-local-configuracion-y-pruebas.txt).
 - [x] **Wi-Fi de CLIENTE y RECREATIVA y cortafuegos de los PC**, hechos a mano en la interfaz (25/10/2026).
-- [x] **15 de 16 pruebas correctas**, captura `23-red-local.png` y tabla de la tarea 23 (25/10/2026).
-- [ ] 🟢 **Prueba 2:** captura del navegador del TPV1 abriendo `https://192.168.10.10`.
+- [x] **16 de 16 pruebas correctas**, captura `23-red-local.png` y tabla de la tarea 23 (25/10/2026).
   - **Quién (los dos):** Adrian · Revisa Iker.
 
 ### 4.3 Routers reales (tareas 24-26)
@@ -220,10 +219,10 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 |---|---|
 | Contratar una línea WAN | Hecho (DIGI 1 Gb, con análisis de necesidades) |
 | Esquema de conectividad | Hecho ([tarea 22, sección 4](docs/redes/22-comparativa-wan.md#4-esquema-de-conectividad)) |
-| Diagrama de la red (plano), cableado y Wi-Fi | Plano hecho; Packet Tracer de la red real con la guía lista (4.2) |
+| Diagrama de la red (plano), cableado y Wi-Fi | Plano hecho; Packet Tracer de la red real hecho y probado (4.2) |
 | Red configurada de forma segura | Parcial: red decidida (4.1); faltan invitados en el router (4.3), cortafuegos del servidor (4.1) y contraseñas (2.1) |
 | Segundo router por WDS, comprobando que funciona | Sin empezar (4.3) |
-| RA.7 de PAR: conectar redes privadas a públicas | Se demuestra al construir la red real en Packet Tracer (NAT y WAN, 4.2) |
+| RA.7 de PAR: conectar redes privadas a públicas | Demostrado en la red real de Packet Tracer: NAT, WAN e Internet sin acceso a la LAN (pruebas 11 y 12, 4.2) |
 
 ---
 
@@ -277,10 +276,10 @@ Quien revisa el PR repasa estas mismas casillas: si alguna no se cumple, el PR n
 - [ ] Odoo sigue funcionando por HTTPS desde el TPV.
 
 **Packet Tracer (4.2)**
-- [ ] Existen `docs/redes/23-red-local.pkt` y `23-red-local.png`, y `23-anexo-vlan.pkt` está **sin cambios** (`git status docs/redes/23-anexo-vlan.pkt` no lo muestra como modificado).
-- [ ] Las **16 pruebas** de la guía dan el resultado esperado y están apuntadas en la tabla de la tarea 23, con sus capturas.
-- [ ] Ningún equipo se ha quedado con un hueco de la guía sin rellenar (`<CLAVE-...>`), y las contraseñas están en KeePassXC.
-- [ ] El dibujo coincide con la red real: ISP, R1, SW1, los equipos con cable, las dos Wi-Fi y `ROUTER2-WDS` con su nota.
+- [x] Existen `docs/redes/23-red-local.pkt` y `23-red-local.png`, y `23-anexo-vlan.pkt` está **sin cambios** (`git status docs/redes/23-anexo-vlan.pkt` no lo muestra como modificado).
+- [x] Las **16 pruebas** de la guía dan el resultado esperado y están apuntadas en la tabla de la tarea 23, con sus capturas.
+- [x] Ningún equipo se ha quedado con un hueco de la guía sin rellenar (`<CLAVE-...>`), y las contraseñas están fuera de Git (Drive del grupo).
+- [x] El dibujo coincide con la red real: ISP, R1, SW1, los equipos con cable, las dos Wi-Fi y `ROUTER2-WDS` con su nota.
 
 **Routers reales (4.3)**
 - [ ] Móvil en la Wi-Fi de invitados: navega, pero `ping 192.168.10.10` y abrir Odoo **fallan**.
