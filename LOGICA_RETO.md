@@ -86,8 +86,8 @@ Diagrama de todos los equipos: [tarea 11](docs/diagramas/11-arquitectura-equipos
 | TPV 1 y 2 | Iggual AIO B156.88.N100 táctil | Windows 10 Pro restringido | Solo abre el TPV de Odoo en el navegador | Cable, LAN 3 y 4 | Pendiente (#13) |
 | Impresoras de tickets | Epson TM-T20IV | Driver de Windows | Imprime el ticket del TPV | **USB** a su TPV (sin IP: no expone nada en la red) | Pendiente (#14, #37) |
 | Servidor | HP ProDesk 600 G5 MT reacondicionado + 2 discos WD Red Plus en RAID 1 + SAI ([tarea 10, sección 12](docs/hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto)) | Debian 13 sin escritorio + Docker | Odoo, PostgreSQL, RAID y copias | Cable, switch (LAN 1) | VM de VirtualBox `ServidorERP` (#33–45) |
-| Recreativa | Equipo de 1 núcleo y 1 GB | Debian 13 mínimo + MAME (o Batocera, #51) | Juegos arcade para clientes | Wi-Fi de invitados (adaptador USB) | VM (#16, #17; faltan las medidas en 1 núcleo y 1 GB); equipo real pendiente (#53) |
-| Arcade stick | Keyestudio Leonardo (ATmega32U4) + 6 botones + palanca Sanwa | Firmware propio (palanca digital) | Mando de la recreativa | USB a la recreativa | Compila; placa pendiente (#50) |
+| Recreativa | Equipo de 1 núcleo y 1 GB | Debian 13 mínimo + MAME (Batocera descartada en la #51) | Juegos arcade para clientes | Wi-Fi de invitados (adaptador USB) | VM (#16, #17; faltan las medidas en 1 núcleo y 1 GB); equipo real pendiente (#53) |
+| Arcade stick | Keyestudio Leonardo (ATmega32U4) + 4 botones + palanca Sanwa | Firmware propio (palanca digital) | Mando de la recreativa | USB a la recreativa | Compila; placa pendiente (#50) |
 | Router 1 y 2 | TP-Link Archer C6 V3 (×2) | Firmware de fábrica | Router, firewall, DHCP, Wi-Fi; el 2 amplía por WDS | WAN al router del operador | Probado en un TL-WR841N (#24); WDS pendiente (#25) |
 
 Coste: **2.447,34 €** los puestos y los routers; con el servidor, el RAID, las copias, el SAI, el switch, el cable y las piezas de la recreativa y del stick, **3.814,74 €** de inversión y **4.174,74 €** el primer año con la fibra de DIGI (360 € al año) ([tarea 10](docs/hardware/10-presupuesto-hardware.md)). Software: Windows 10 Pro para el gerente y, para los TPV, Windows 10 IoT Enterprise LTSC 2021 (soporte hasta 2032, precio a pedir al proveedor); todo lo demás es libre o viene incluido ([tarea 9](docs/hardware/09-tabla-software-licencias.md)).
@@ -300,11 +300,11 @@ Equipo de 1 núcleo y 1 GB ─ Debian 13 sin escritorio
    red: Wi-Fi de invitados (aislada del TPV y del servidor); se administra desde su consola
 ```
 
-- **Por qué un joystick HID** (decisión del equipo): cualquier emulador y cualquier sistema (Linux, Windows) lo reconoce sin drivers, que es lo que pide el enunciado («compatible con cualquier emulador»), y no interfiere con un teclado de mantenimiento. Moneda y Start se asignan una vez en MAME a los botones 5 y 6 ([STICK-ARDUINO.md](docs/arcade/16-recreativa-mame/STICK-ARDUINO.md)). El mapeo se cambia por el puerto serie (`MAP`, `INV`, `ZM`, `GUARDAR`…) y se guarda en la EEPROM con número de control y checksum: eso es el «input personalizable» ([firmware](arduino/mando-joystick/README.md)).
+- **Por qué un joystick HID** (decisión del equipo): cualquier emulador y cualquier sistema (Linux, Windows) lo reconoce sin drivers, que es lo que pide el enunciado («compatible con cualquier emulador»), y no interfiere con un teclado de mantenimiento. El mando tiene 4 botones (indicación del profesor); Moneda y Start se asignan una vez en MAME a los botones 3 y 4 ([STICK-ARDUINO.md](docs/arcade/16-recreativa-mame/STICK-ARDUINO.md)). El mapeo se cambia por el puerto serie (`MAP`, `INV`, `GUARDAR`…) y se guarda en la EEPROM con número de control y checksum: eso es el «input personalizable» ([firmware](arduino/mando-joystick/README.md)).
 - **Optimización** ([tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md)): sin escritorio, arranque a `multi-user.target`, GRUB sin espera, fuera las tareas en segundo plano que dan tirones (índices, comprobaciones de disco), `swappiness` bajo y menos disco. Las actualizaciones de seguridad **se mantienen**, a las 5:00 con el local cerrado. Se mantienen AppArmor y SSH (solo con clave).
 - **Pruebas de rendimiento:** antes y después con `systemd-analyze`, `free`, `ps` y `mame -bench`, hechas en una VM de 2 núcleos y 1,5 GB. **Falta repetirlas en la VM de 1 núcleo y 1 GB** (la del enunciado), medir jugando (no solo `-bench`) y hacerlo en el equipo real.
 - **Monitorización** ([tarea 18](docs/arcade/18-monitorizacion-recreativa.md)): `monitor-recreativa.sh` toma CPU, carga, RAM, swap, temperatura y consumo de MAME a un CSV mientras se juega, y `resumen-monitorizacion.sh` lo resume.
-- **Alternativa en estudio:** Batocera (#51). Arranca con 1 GB, pero su propia guía pide 2 GB y viene con contraseña de root por defecto.
+- **Alternativa descartada:** Batocera (#51, 26/10). Medida en 1 núcleo y 1 GB: 554 MB solo con el menú (ya con swap), 12,9 s hasta el menú, su guía pide 2 GB y guarda la contraseña de root en claro. Debian llega a la partida en 7,1 s con 400 MB.
 - **ROMs:** solo las 5 que el equipo de MAME publica con permiso de sus autores para uso no comercial.
 
 ---
@@ -377,7 +377,7 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
 | Repositorio | Cambios por Pull Request con CI (gitleaks); nadie escribe en `main` | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
-Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el proxy, publicar 8069 solo en `127.0.0.1`), contraseña de root de Batocera, red de invitados y WPA3, contraseñas Wi-Fi y de administración del router, BD en el RAID y menús que ve el cajero en Odoo. Las contraseñas de la VM del gerente ya se cambiaron (#55).
+Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el proxy, publicar 8069 solo en `127.0.0.1`), red de invitados y WPA3, contraseñas Wi-Fi y de administración del router, BD en el RAID y menús que ve el cajero en Odoo. Las contraseñas de la VM del gerente ya se cambiaron (#55).
 
 **Regla para todas las contraseñas del proyecto:** nada de contraseñas por defecto ni en texto plano. Se generan con el gestor (KeePassXC), son distintas en cada cuenta y nunca entran en Git (lo vigilan el `.gitignore` y gitleaks).
 

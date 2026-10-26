@@ -1,0 +1,24 @@
+== antes
+system.security.enabled=
+kodi.enabled=1
+splash.screen.enabled=1
+audio.bgmusic=1
+controllers.bluetooth.enabled=1
+controllers.ps3.enabled=1
+wifi.enabled=0
+zramswap;-
+== aplicar
+Setting up swapspace version 1, size = 482 MiB (505405440 bytes)
+no label, UUID=fa09fc73-a32d-46b5-8e84-9dbb38522a62
+Hecho. Falta: poner la contraseña de root (ver cabecera) y reiniciar.
+== después
+system.security.enabled=1
+kodi.enabled=0
+splash.screen.enabled=0
+audio.bgmusic=0
+controllers.bluetooth.enabled=0
+controllers.ps3.enabled=0
+wifi.enabled=0
+zramswap;*
+Filename				Type		Size		Used		Priority
+/dev/zram0                              partition	493560		0		1000

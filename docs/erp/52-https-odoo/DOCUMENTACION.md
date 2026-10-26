@@ -3,7 +3,7 @@
 - **Bloque:** 7 ERP
 - **Responsable:** Adrian
 - **Depende de:** tarea 33 (Odoo con Docker)
-- **Estado (26/10/2026):** ✅ Hecha en máquina virtual (una `ServidorERP` nueva, montada con la tarea 33 en el PC de Adrian). Faltan las pruebas 5 y 6, que necesitan el TPV de la tarea 13 (sección 4).
+- **Estado (26/10/2026):** ✅ Hecha en máquina virtual, con las 15 pruebas correctas. Las pruebas 5 y 6 se hicieron con un TPV provisional (sección 4.2). Falta activarla en la `ServidorERP` del equipo cuando la BD esté en el RAID (tarea 43), siguiendo el [runbook](RUNBOOK.md).
 
 ## 1. Por qué
 
@@ -21,6 +21,7 @@ Odoo en el servidor: solo 127.0.0.1:8069 (ya no escucha en la LAN)
 |---|---|
 | [`docker-compose.https.yml`](docker-compose.https.yml) | Añade el servicio `proxy` (nginx 1.27) y deja el puerto de Odoo solo en `127.0.0.1`. No cambia el `docker-compose.yml` de la tarea 33 |
 | [`nginx.conf`](nginx.conf) | TLS 1.2/1.3, redirección de 80 a 443, cabeceras de seguridad, `/websocket` para el chat y los avisos |
+| [`fijar-url-y-qr.sh`](fijar-url-y-qr.sh) | Fija la URL de Odoo y quita el QR de factura del ticket (tarea 46, S-19) |
 | [`activar-https.sh`](activar-https.sh) | Genera el certificado, copia los ficheros, activa `proxy_mode` en Odoo, fija `COMPOSE_FILE` y levanta todo. Idempotente |
 
 **Certificado propio.** La IP del servidor es privada, así que Let's Encrypt no puede emitir un certificado para ella. El script crea uno propio (válido 825 días, para `IP:192.168.10.10` y `odoo.almichain.local`) y hay que instalarlo como raíz de confianza en los TPV y en el PC del gerente. Así el navegador no da avisos y el *service worker* funciona. Desde el 26/10 lleva `nameConstraints`: solo vale para esa IP y ese nombre, así que aunque robaran `odoo.key` no serviría para suplantar otras webs ([tarea 46, S-01](../../seguridad/46-revision-seguridad/DOCUMENTACION.md#41-s-01-el-certificado-de-odoo-podía-firmar-cualquier-web-corregido)).
@@ -48,8 +49,8 @@ Huella SHA-256 del certificado de la VM: `80:59:38:33:4F:3E:43:DA:8A:C2:B3:7B:35
 | 2 | HTTPS validando el certificado, como un TPV con la raíz instalada | Sin avisos, login de Odoo | ✅ HTTP 200, verificación TLS correcta (`curl --cacert`, sin `-k`). Sin la raíz: `self-signed certificate`, que es lo que verá un navegador al que no se le ha instalado | [02](evidencias/02-pruebas-desde-la-lan.txt) |
 | 3 | Desde otro equipo, `http://<servidor>:8069` | No responde | ✅ 000: Odoo solo escucha en `127.0.0.1` | [02](evidencias/02-pruebas-desde-la-lan.txt) |
 | 4 | `curl -I http://<servidor>` | `301` a `https://` | ✅ `301 Moved Permanently` | [02](evidencias/02-pruebas-desde-la-lan.txt) |
-| 5 | Venta completa en el TPV por HTTPS (tarea 34, sección 8.2) | Funciona igual | ⏳ Pendiente: hace falta el TPV (tarea 13) con el `.crt` instalado | — |
-| 6 | TPV sin red durante una venta (desconectar el cable), y volver a conectar | La venta se guarda y se sincroniza al volver la red | ⏳ Pendiente, igual que la 5 | — |
+| 5 | Venta completa en el TPV por HTTPS (tarea 34, sección 8.2) | Funciona igual | ✅ Edge con candado y sin avisos; `cajero1` solo ve Punto de venta; mesa 3, 7,30 € en efectivo, factura simplificada `261-1-000003` (sección 4.2) | [06](evidencias/06-ventas-en-el-servidor.txt), [07](evidencias/07-certificado-instalado-tpv.webp), [08](evidencias/08-tpv-cajero1-https.png), [09](evidencias/09-ticket-venta-https.webp) |
+| 6 | TPV sin red durante una venta (desconectar el cable), y volver a conectar | La venta se guarda y se sincroniza al volver la red | ✅ Con el cable quitado, «Conexión perdida» y aun así «Pago exitoso» (mesa 4, 5,00 €). Al reconectar, el pedido `261-1-000004` aparece en el servidor como `paid` | [06](evidencias/06-ventas-en-el-servidor.txt), [10](evidencias/10-venta-sin-red.png), [11](evidencias/11-reconectado.png) |
 | 7 | Backup después del cambio | Sigue funcionando | ✅ `pg_dump` con `-f docker-compose.yml` y el servicio `db`, como en `backup-odoo.sh`: copia válida (cabecera `PGDMP`, 134 tablas con datos) y el proxy sigue en marcha. El backup completo no se pudo lanzar: en esta VM no hay RAID ni USB (tareas 43 y 44) | [03](evidencias/03-reejecucion-y-backup.txt) |
 | 8 | TLS 1.0 y 1.1 | Rechazados | ✅ Rechazados; 1.2 y 1.3 aceptados | [02](evidencias/02-pruebas-desde-la-lan.txt) |
 | 9 | Cabeceras de seguridad | Cada una, una vez | ✅ `nosniff`, `SAMEORIGIN`, `strict-origin-when-cross-origin` (incidencia 3) | [02](evidencias/02-pruebas-desde-la-lan.txt) |
@@ -69,6 +70,22 @@ Huella SHA-256 del certificado de la VM: `80:59:38:33:4F:3E:43:DA:8A:C2:B3:7B:35
 | 3 | `X-Frame-Options` y `X-Content-Type-Options` llegaban duplicadas | Odoo ya las manda y nginx las volvía a añadir | `proxy_hide_header` de las dos en `nginx.conf` |
 | 4 | La cookie `session_id` iba sin `Secure` | Odoo no la marca, aunque sepa que va detrás de HTTPS. Si alguien teclea `http://` con la sesión abierta, el navegador la mandaría en claro antes del 301 | `proxy_cookie_flags session_id secure;` en `nginx.conf` |
 | 5 | Al cambiar `nginx.conf` y volver a ejecutar el script, el proxy seguía con la configuración vieja | `install` deja el fichero como uno nuevo, el contenedor seguía con el antiguo montado y `docker compose up` no lo recrea si el compose no cambia | El script recrea el proxy al final (`up -d --force-recreate --no-deps proxy`) |
+| 6 | El QR «¿Necesita una factura?» del ticket apunta a `https://10.0.2.15/pos/ticket`, la IP antigua de la VM | Odoo guarda `web.base.url` la primera vez que entra el administrador y no la cambia aunque cambie la IP. Además, el cliente está en la Wi-Fi de invitados, que no llega al servidor | Hallazgo S-19 de la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md). [`fijar-url-y-qr.sh`](fijar-url-y-qr.sh): fija `web.base.url` (con `freeze`) y quita el QR. Probado en la VM: con una sesión de caja nueva el ticket ya no lleva QR ([13](evidencias/13-fijar-url-y-qr.txt), [14](evidencias/14-recibo-misma-sesion-con-qr.png), [15](evidencias/15-recibo-sesion-nueva-sin-qr.png)). En el servidor del equipo, paso 2.1 del runbook |
+| 7 | `certutil -hashfile odoo.crt SHA256` no coincidía con la huella del certificado | Calcula la suma del fichero (texto PEM), no la del certificado | Runbook corregido: la huella se mira con `Get-PfxCertificate` |
+
+## 4.2 Pruebas 5 y 6 con un TPV provisional (26/10/2026)
+
+Los TPV de la tarea 13 están en el PC de Markel y todavía no se han conectado a Odoo. Para no esperar, las pruebas se hicieron en el PC de Adrian con la misma red que el plano (tarea 23):
+
+| Pieza | Montaje |
+|---|---|
+| Red | Red NAT de VirtualBox `reto-lan`, `192.168.10.0/24`, puerta de enlace `192.168.10.1` (como el router). DHCP con reserva para el servidor |
+| Servidor | La misma VM `ServidorERP`, ahora en `192.168.10.10`. Certificado regenerado para esa IP con `nameConstraints` (huella SHA-256 `04:3E:61:A7:61:1F:6E:BC:83:A9:1C:EC:1A:1C:D5:29:B6:72:84:0B:7B:86:E4:E5:79:4D:2F:8E:45:EF:9B:DE`) y Odoo configurado con los scripts de la tarea 34 |
+| TPV | VM `win-11` en `192.168.10.60`, con el `.crt` como raíz de confianza (`certutil -addstore Root`, en un PowerShell de administrador) |
+
+No es el TPV definitivo (Windows 11 y sin el bastionado de `configurar-tpv.ps1`), así que **se repiten en los TPV reales** al activar el proxy en el servidor del equipo ([runbook](RUNBOOK.md), paso 5). Lo que demuestran ya: Edge acepta el certificado con `nameConstraints`, el TPV de Odoo funciona igual por HTTPS y cobra sin red.
+
+**Impresión.** La impresora USB (una Samsung ML-1660 láser, en lugar de la térmica del centro) se pasó a la VM, pero Windows no creó el puerto `USB001` y el trabajo falló ([12](evidencias/12-impresora-en-la-vm-error.png)). El ticket de la foto [09](evidencias/09-ticket-venta-https.webp) es el de la venta por HTTPS, pero salió por el CUPS del PC anfitrión: no cuenta para las tareas 14 y 37, que siguen pendientes con la impresora del centro.
 
 ## 5. Volver atrás
 
