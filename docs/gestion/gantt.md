@@ -93,7 +93,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | Documentación | Peio | Sumas comprobadas el 23/10. El 24/10 se añaden servidor, discos del RAID, disco USB, SAI, switch, cable, adaptador Wi-Fi y palanca (sección 12): 3.814,74 € de inversión completa y 4.174,74 € el primer año. | [10-presupuesto-hardware.md](../../docs/hardware/10-presupuesto-hardware.md) |
 | 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | Iker | Actualizado el 24/10: switch; servidor presupuestado; red de invitados 192.168.50.0/24; Actions y HTTPS; SVG regenerado; tabla de guías de instalación por equipo. | [DIAGRAMA.md](../../docs/diagramas/11-arquitectura-equipos/DIAGRAMA.md) |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | Adrian | Hecho en VMware (23/10). Pendiente: versión exacta de Ubuntu; RG-05 de Windows queda parcial (ninguna actualización acumulativa instalada); cifrado después de instalar. | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | Markel | Scripts listos el 24/10 (configurar-tpv.ps1 y comprobar-tpv.ps1; sintaxis comprobada y la comprobación probada en un Windows 11). Falta crear la VM del TPV; ejecutar; poner el quiosco y guardar la evidencia. Hecho cuando comprobar-tpv.ps1 da 16 OK en cada TPV y están las capturas de la sección 5 de la guía. El 26/10 pasa de Iker a Markel. | [DOCUMENTACION.md](../../docs/so/13-tpv/DOCUMENTACION.md) |
+| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | Markel | Hecha a mano por Markel el 26/10 en dos VM con Windows 11 Pro (TPV2 clonado de TPV1 con MAC nuevas): usuario estándar UsuarioTPV; quiosco QuioscoTPV con Edge; USB bloqueado por directiva; firewall y Defender activos; capturas en la guía. Queda: el quiosco apunta a http://localhost:8069 provisional y hay que cambiarlo por la dirección del servidor (tarea 52); comprobar-tpv.ps1 no se ha ejecutado (tarea 15). El 26/10 pasa de Iker a Markel. | [13-bastionado-tpv-windows.md](../../docs/so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | Iker | Debian 13 + MAME 0.276 en VM: arranque directo en 4,7 s y 5 ROMs legales verificadas. El 24/10: preseed sin clave SSH fija y SSH sin contraseña; conexión a la Wi-Fi de invitados documentada. La instalación en el equipo real es la tarea 53. | [DOCUMENTACION.md](../../docs/arcade/16-recreativa-mame/DOCUMENTACION.md) |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | Adrian | Compila (pio run del 26/10: Flash 37,4 %; RAM 17,4 %). 26/10: 4 botones por indicación del profesor y solo palanca digital (fuera el modo analógico; la zona muerta y el modo NINGUNA). Probarlo en la placa es la tarea 50. | [README.md](../../arduino/mando-joystick/README.md) |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
@@ -122,7 +122,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 5 | 5 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 7 | 3 | 0 | 2 | 17 | 1, 2, 4, 5, 6, 11 |
+| Markel | 7 | 3 | 0 | 2 | 14 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
 
 ## Tareas por persona
@@ -193,7 +193,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
 |---|---|---|---|---|---|---|
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 28/10–02/11 | #9 (Markel) | Hecho |
+| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 26/10–26/10 | #9 (Markel) | Hecho |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Pendiente |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |

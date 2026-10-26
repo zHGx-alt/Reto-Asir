@@ -113,7 +113,7 @@ Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los
 
 | Requisito del enunciado | Tarea | Estado |
 |---|---|---|
-| TPV restringidos con mínimos privilegios | 13, 15 | Pendiente |
+| TPV restringidos con mínimos privilegios | 13, 15 | Hecho a mano en VM (26/10, tarea 13); falta comprobar-tpv.ps1 (tarea 15) |
 | Instalación y configuración de una impresora | 14, 37 | Pendiente |
 | Arcade stick montado y probado con dos emuladores | 19, 50, 21 | Pendiente |
 | Recreativa de 1 núcleo y 1 GB con pruebas de rendimiento | 17, 18, 51, 53, 54 | En curso / pendiente |
