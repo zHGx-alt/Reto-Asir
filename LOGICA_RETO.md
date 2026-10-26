@@ -183,7 +183,7 @@ sequenceDiagram
 
 - La carta de ejemplo (15 productos, salas y mesas) la carga [`cargar-carta-y-mesas.py`](docs/erp/34-configurar-odoo/cargar-carta-y-mesas.py). La carta real se importará en la tarea 36.
 - **Stock:** los productos de la carta no tienen activado el seguimiento de inventario, así que una venta **no descuenta stock** en Odoo. Se puede activar si el cliente lo quiere; el descuento por receta sí está en la BD de la tarea 40 (sección 7).
-- **HTTPS:** Odoo responde por HTTP dentro de la LAN. El proxy HTTPS (#52) está preparado en [`docs/erp/52-https-odoo`](docs/erp/52-https-odoo/DOCUMENTACION.md) (nginx con certificado propio; Odoo deja de escuchar en la LAN) y falta activarlo en el servidor. Además permite al TPV seguir cobrando si se cae la red (el *service worker* solo funciona con HTTPS).
+- **HTTPS:** Odoo responde por HTTP dentro de la LAN. El proxy HTTPS (#52) está preparado en [`docs/erp/52-https-odoo`](docs/erp/52-https-odoo/DOCUMENTACION.md) (nginx con certificado propio; Odoo deja de escuchar en la LAN). Se probó el 26/10 en una VM nueva y funciona; falta activarlo en el servidor del equipo. Además permite al TPV seguir cobrando si se cae la red (el *service worker* solo funciona con HTTPS).
 
 ### 5.4 El caso de uso automatizado: emitir una factura
 

@@ -1,0 +1,7 @@
+### Login por HTTPS (JSON-RPC /web/session/authenticate), desde el servidor contra el proxy
+admin + contraseña del .env: uid=2
+cookie de sesión: set-cookie: session_id=<oculta>; Expires=Tue, 26 Oct 2027 07:18:33 GMT; Max-Age=604800; HttpOnly; Path=/; Secure
+admin/admin: "name": "odoo.exceptions.AccessDenied"
+
+### proxy_mode: Odoo genera las redirecciones con https://
+/odoo sin sesión → 303 https://10.0.2.15/web/login?redirect=%2Fodoo%3F

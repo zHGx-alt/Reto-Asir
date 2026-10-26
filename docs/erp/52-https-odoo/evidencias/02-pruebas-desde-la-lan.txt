@@ -1,0 +1,41 @@
+## Pruebas de la tarea 52 desde el PC anfitrión (26/10/2026 08:18)
+## El anfitrión hace de "otro equipo de la LAN". Reenvío NAT de VirtualBox: 127.0.0.1:8443→443, :8080→80, :8069→8069 de ServidorERP (10.0.2.15)
+
+### Certificado
+subject=CN = Odoo Almi-Chain, O = Almi-Chain
+notBefore=Oct 26 07:15:52 2026 GMT
+notAfter=Jan 28 07:15:52 2029 GMT
+sha256 Fingerprint=DE:72:15:A3:B4:A8:59:6D:A9:3F:AC:6E:C1:10:5F:1B:B3:1D:8E:84:13:46:21:19:05:5E:B6:BD:8F:53:0B:82
+X509v3 Subject Alternative Name: 
+    IP Address:10.0.2.15, DNS:odoo.almichain.local
+X509v3 Basic Constraints: critical
+    CA:TRUE
+
+### Prueba 2: HTTPS validando el certificado (sin -k), como un TPV que ya tiene instalada la raíz
+HTTP 200 · verificación TLS 0 (0 = correcta)
+Sin la raíz instalada:
+curl: (60) SSL certificate problem: self-signed certificate
+
+### Prueba 3: Odoo directo por 8069
+HTTP 000
+(sin respuesta: cerrado)
+
+### Prueba 4: curl -I por HTTP
+HTTP/1.1 301 Moved Permanently
+Location: https://127.0.0.1/web/login
+
+### Versiones de TLS
+tls1    rechazado (New, (NONE), Cipher is (NONE))
+tls1_1  rechazado (New, (NONE), Cipher is (NONE))
+tls1_2  aceptado: New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+tls1_3  aceptado: New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+
+### Cabeceras de seguridad (una sola vez cada una)
+HTTP/2 200 
+server: nginx
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+
+### Websocket (chat y avisos en tiempo real) a través del proxy
+HTTP 101 (esperado 101 Switching Protocols)

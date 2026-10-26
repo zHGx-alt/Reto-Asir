@@ -3,7 +3,7 @@
 - **Bloque:** 7 ERP
 - **Responsable:** Adrian
 - **Depende de:** tarea 33 (Odoo con Docker)
-- **Estado (24/10/2026):** ficheros listos; `activar-https.sh` pasa `bash -n`. **Falta ejecutarlo en la VM `ServidorERP`** y guardar las evidencias (sección 4).
+- **Estado (26/10/2026):** ✅ Hecha en máquina virtual (una `ServidorERP` nueva, montada con la tarea 33 en el PC de Adrian). Faltan las pruebas 5 y 6, que necesitan el TPV de la tarea 13 (sección 4).
 
 ## 1. Por qué
 
@@ -36,17 +36,39 @@ Odoo en el servidor: solo 127.0.0.1:8069 (ya no escucha en la LAN)
 3. **TPV:** `.\configurar-tpv.ps1 -NumeroTpv 1 -CertificadoOdoo .\odoo.crt` ([tarea 13](../../so/13-tpv/DOCUMENTACION.md)) y cambiar la URL del quiosco a `https://192.168.10.10/pos/ui`. **Gerente:** en Windows, doble clic en el `.crt` → *Instalar certificado* → *Equipo local* → *Entidades de certificación raíz de confianza*; en Ubuntu, `sudo cp odoo.crt /usr/local/share/ca-certificates/ && sudo update-ca-certificates` (Firefox: importarlo en *Ajustes → Certificados*).
 4. Comprobar que la huella que muestra el navegador coincide con la del paso 1.
 
-## 4. Pruebas (evidencias en `docs/erp/52-https-odoo/evidencias/`)
+## 4. Pruebas (26/10/2026)
 
-| # | Prueba | Esperado |
-|---|---|---|
-| 1 | Salida de `activar-https.sh` | HTTPS 200, HTTP 301, 8069 cerrado |
-| 2 | Desde el TPV, `https://192.168.10.10` | Candado sin avisos, login de Odoo |
-| 3 | Desde otro equipo de la LAN, `http://192.168.10.10:8069` | No responde |
-| 4 | `curl -I http://192.168.10.10` | `301` a `https://` |
-| 5 | Venta completa en el TPV por HTTPS (tarea 34, sección 8.2) | Funciona igual |
-| 6 | TPV sin red durante una venta (desconectar el cable), y volver a conectar | La venta se guarda y se sincroniza al volver la red |
-| 7 | `backup-odoo.sh` y `probar-restauracion.sh` después del cambio | Siguen funcionando (usan `-f docker-compose.yml` y el servicio `db`, que no cambia) |
+**Montaje.** VM `ServidorERP` nueva, hecha con la [tarea 33](../33-odoo-docker/DOCUMENTACION.md): Debian 13.7, Odoo 19.0-20261015 y PostgreSQL 17. Tiene red NAT de VirtualBox, así que su IP es `10.0.2.15` y el script se ejecutó con `sudo ./activar-https.sh 10.0.2.15`. El PC anfitrión hace de «otro equipo de la LAN» con los reenvíos `127.0.0.1:8443 → 443`, `:8080 → 80` y `:8069 → 8069`. En el local se usa `192.168.10.10`, igual que en la sección 3.
+
+Huella SHA-256 del certificado de la VM: `DE:72:15:A3:B4:A8:59:6D:A9:3F:AC:6E:C1:10:5F:1B:B3:1D:8E:84:13:46:21:19:05:5E:B6:BD:8F:53:0B:82`. En el servidor del local saldrá otra, porque el certificado se genera allí.
+
+| # | Prueba | Esperado | Resultado | Evidencia |
+|---|---|---|---|---|
+| 1 | Salida de `activar-https.sh` | HTTPS 200, HTTP 301, 8069 cerrado | ✅ 200 · 301 a `https://10.0.2.15/web/login` · 000 | [01](evidencias/01-activar-https.txt) |
+| 2 | HTTPS validando el certificado, como un TPV con la raíz instalada | Sin avisos, login de Odoo | ✅ HTTP 200, verificación TLS correcta (`curl --cacert`, sin `-k`). Sin la raíz: `self-signed certificate`, que es lo que verá un navegador al que no se le ha instalado | [02](evidencias/02-pruebas-desde-la-lan.txt) |
+| 3 | Desde otro equipo, `http://<servidor>:8069` | No responde | ✅ 000: Odoo solo escucha en `127.0.0.1` | [02](evidencias/02-pruebas-desde-la-lan.txt) |
+| 4 | `curl -I http://<servidor>` | `301` a `https://` | ✅ `301 Moved Permanently` | [02](evidencias/02-pruebas-desde-la-lan.txt) |
+| 5 | Venta completa en el TPV por HTTPS (tarea 34, sección 8.2) | Funciona igual | ⏳ Pendiente: hace falta el TPV (tarea 13) con el `.crt` instalado | — |
+| 6 | TPV sin red durante una venta (desconectar el cable), y volver a conectar | La venta se guarda y se sincroniza al volver la red | ⏳ Pendiente, igual que la 5 | — |
+| 7 | Backup después del cambio | Sigue funcionando | ✅ `pg_dump` con `-f docker-compose.yml` y el servicio `db`, como en `backup-odoo.sh`: copia válida (cabecera `PGDMP`, 134 tablas con datos) y el proxy sigue en marcha. El backup completo no se pudo lanzar: en esta VM no hay RAID ni USB (tareas 43 y 44) | [03](evidencias/03-reejecucion-y-backup.txt) |
+| 8 | TLS 1.0 y 1.1 | Rechazados | ✅ Rechazados; 1.2 y 1.3 aceptados | [02](evidencias/02-pruebas-desde-la-lan.txt) |
+| 9 | Cabeceras de seguridad | Cada una, una vez | ✅ `nosniff`, `SAMEORIGIN`, `strict-origin-when-cross-origin` (incidencia 3) | [02](evidencias/02-pruebas-desde-la-lan.txt) |
+| 10 | `/websocket` (chat y avisos) a través del proxy | `101 Switching Protocols` | ✅ 101 | [02](evidencias/02-pruebas-desde-la-lan.txt) |
+| 11 | Login por HTTPS | `admin` entra; `admin/admin` no | ✅ uid 2; `admin/admin` da `AccessDenied` | [04](evidencias/04-login-https.txt) |
+| 12 | Cookie de sesión | `HttpOnly` y `Secure` | ✅ Las dos (incidencia 4) | [04](evidencias/04-login-https.txt) |
+| 13 | `proxy_mode` | Odoo redirige a `https://` | ✅ `/odoo` sin sesión → `303 https://10.0.2.15/web/login` | [04](evidencias/04-login-https.txt) |
+| 14 | Volver a ejecutar el script | Idempotente; mantiene el certificado | ✅ «Ya existe: se mantiene», misma huella | [03](evidencias/03-reejecucion-y-backup.txt) |
+| 15 | Permisos | Clave privada no legible por otros | ✅ `odoo.key` 640 root, carpeta `certs` 750, `.env` 600 | [03](evidencias/03-reejecucion-y-backup.txt) |
+
+## 4.1 Incidencias
+
+| # | Incidencia | Causa | Solución |
+|---|---|---|---|
+| 1 | `sudo ./activar-https.sh`: *command not found* | El script estaba en git sin permiso de ejecución (`100644`) | `git update-index --chmod=+x` |
+| 2 | Al desplegar Odoo (tarea 33), `apt` no conectaba con `deb.debian.org` | La VM resuelve `deb.debian.org` solo por IPv6, y la red NAT de VirtualBox no tiene salida IPv6 | En la VM: `Acquire::ForceIPv4 "true";` en `/etc/apt/apt.conf.d/99ipv4`. Es cosa del laboratorio; en el local, con IPv4 e IPv6 o solo IPv4, no hace falta |
+| 3 | `X-Frame-Options` y `X-Content-Type-Options` llegaban duplicadas | Odoo ya las manda y nginx las volvía a añadir | `proxy_hide_header` de las dos en `nginx.conf` |
+| 4 | La cookie `session_id` iba sin `Secure` | Odoo no la marca, aunque sepa que va detrás de HTTPS. Si alguien teclea `http://` con la sesión abierta, el navegador la mandaría en claro antes del 301 | `proxy_cookie_flags session_id secure;` en `nginx.conf` |
+| 5 | Al cambiar `nginx.conf` y volver a ejecutar el script, el proxy seguía con la configuración vieja | `install` deja el fichero como uno nuevo, el contenedor seguía con el antiguo montado y `docker compose up` no lo recrea si el compose no cambia | El script recrea el proxy al final (`up -d --force-recreate --no-deps proxy`) |
 
 ## 5. Volver atrás
 
