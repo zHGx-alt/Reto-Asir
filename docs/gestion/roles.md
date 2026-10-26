@@ -19,6 +19,17 @@ El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), 
 
 ## Cambios en el reparto
 
+### 26/10/2026 (tarde)
+
+Markel e Iker se cambian una tarea; Markel lo cambió en el backlog.
+
+| # | Tarea | Antes | Ahora |
+|---|---|---|---|
+| 13 | Bastionado de los 2 TPV en VM | Iker | Markel |
+| 14 | Driver de la impresora en la VM del TPV | Markel | Iker |
+
+La 14 y la 15 (scripts de configuración de Windows) siguen con Iker y se hacen en los TPV de la 13, así que Markel e Iker tienen que coordinarse. Tareas abiertas por persona tras el cambio: Adrian 5 (2 de gestión), Iker 5, Eneko.P 4, Eneko.S 4, Markel 4, Peio 4.
+
 ### 26/10/2026
 
 Eneko.P vuelve al equipo. Iker y Adrian llevaban más tareas abiertas que el resto (8 y 7, frente a 3-4), así que se reparte para que todos queden en 4-5:
