@@ -42,7 +42,7 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 0 | 3 | 14 |
-| Software | 14 | 10 | 2 | 26 |
+| Software | 14 | 11 | 1 | 26 |
 | Físico | 0 | 1 | 8 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -62,10 +62,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 43 | RAID 1 y simulación de fallo | Software | Iker | 02/11 | En curso | RAID y simulación de fallo hechos por Iker en VM (22-23/10). Falta lo principal: la BD sigue en el disco del sistema. mover-docker-al-raid.sh preparado el 24/10 (sección 7); falta ejecutarlo y repetir el fallo con Odoo funcionando. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. El 24/10 el script copia también almi_chain si existe y avisa si el USB lleva más de 7 días sin conectarse; falta probarlo en la VM. Pasa de Markel a Iker, que la hizo. Mejora: aviso por correo si la copia falla (OnFailure=) y tercer repositorio en S3. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
-| 52 | Proxy HTTPS delante de Odoo | Software | Adrian | 04/11 | En curso | Proxy nginx con certificado propio preparado el 24/10 (docker-compose.https.yml; nginx.conf; activar-https.sh); Odoo deja de escuchar en la LAN. Probado el 26/10 en una ServidorERP nueva: 13 de 15 pruebas correctas y 4 arreglos del proxy. Falta activarlo en la ServidorERP del equipo (después de mover la BD al RAID; tarea 43) e instalar el certificado en los TPV (configurar-tpv.ps1 -CertificadoOdoo) para las pruebas 5 y 6. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
+| 52 | Proxy HTTPS delante de Odoo | Software | Adrian | 04/11 | En curso | Proxy nginx con certificado propio preparado el 24/10 (docker-compose.https.yml; nginx.conf; activar-https.sh); Odoo deja de escuchar en la LAN. Probado el 26/10 en una ServidorERP nueva: 13 de 15 pruebas correctas y 4 arreglos del proxy. Falta activarlo en la ServidorERP del equipo (después de mover la BD al RAID; tarea 43) e instalar el certificado en los TPV (configurar-tpv.ps1 -CertificadoOdoo) para las pruebas 5 y 6. Pasos que faltan en RUNBOOK.md (26/10); el certificado lleva nameConstraints (tarea 46). | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
-| 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Faltan las secciones 9 (entrega) y 10 (retrospectiva). | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
+| 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | Revisión del repositorio hecha el 26/10: 18 hallazgos (5 altos) con responsable; S-01 (certificado de Odoo sin nameConstraints) corregido y probado. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 19 | Montaje del arcade stick (ATmega32U4) | Físico | Markel | 27/10 | Pendiente | Esquema de conexiones con la palanca digital (A2-A5) y botones 7-8 actualizado el 24/10. Falta cablear la placa y conseguir la palanca. | [esquema-conexiones.svg](../../arduino/mando-joystick/esquema-conexiones.svg) |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | Físico | Adrian | 30/10 | Pendiente | Lista de comprobaciones en arduino/mando-joystick/README.md. | — |
@@ -75,7 +76,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 54 | Medir rendimiento y recursos en el equipo real | Físico | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. | — |
 | 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 05/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. | — |
 | 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | Físico | Peio | 05/11 | Pendiente | El ticket ya sale en pantalla (tarea 34; sección 8). Pasos en docs/so/14-impresora/DOCUMENTACION.md (paso 6). Espera a la impresora del centro. | — |
-| 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | Pendiente | Puntos ya conocidos: Odoo sin HTTPS; root de Batocera con contraseña por defecto; red de invitados y WPA3. Pasa de Eneko.S a Adrian. | — |
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 09/11 | Pendiente | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. | [verificacion.md](../../docs/gestion/verificacion.md) |
 | 48 | Documentación final paso a paso | Documentación | Markel | 10/11 | Pendiente | Punto de partida: LOGICA_RETO.md. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente | — | — |
@@ -145,7 +145,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 03/11–04/11 | #33 (Iker) | En curso |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 05/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | Pendiente |
+| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 05/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
 
 ### Eneko.P
 

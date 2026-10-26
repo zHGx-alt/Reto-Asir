@@ -23,7 +23,7 @@ Odoo en el servidor: solo 127.0.0.1:8069 (ya no escucha en la LAN)
 | [`nginx.conf`](nginx.conf) | TLS 1.2/1.3, redirección de 80 a 443, cabeceras de seguridad, `/websocket` para el chat y los avisos |
 | [`activar-https.sh`](activar-https.sh) | Genera el certificado, copia los ficheros, activa `proxy_mode` en Odoo, fija `COMPOSE_FILE` y levanta todo. Idempotente |
 
-**Certificado propio.** La IP del servidor es privada, así que Let's Encrypt no puede emitir un certificado para ella. El script crea uno propio (válido 825 días, para `IP:192.168.10.10` y `odoo.almichain.local`) y hay que instalarlo como raíz de confianza en los TPV y en el PC del gerente. Así el navegador no da avisos y el *service worker* funciona.
+**Certificado propio.** La IP del servidor es privada, así que Let's Encrypt no puede emitir un certificado para ella. El script crea uno propio (válido 825 días, para `IP:192.168.10.10` y `odoo.almichain.local`) y hay que instalarlo como raíz de confianza en los TPV y en el PC del gerente. Así el navegador no da avisos y el *service worker* funciona. Desde el 26/10 lleva `nameConstraints`: solo vale para esa IP y ese nombre, así que aunque robaran `odoo.key` no serviría para suplantar otras webs ([tarea 46, S-01](../../seguridad/46-revision-seguridad/DOCUMENTACION.md#41-s-01-el-certificado-de-odoo-podía-firmar-cualquier-web-corregido)).
 
 ## 3. Procedimiento
 

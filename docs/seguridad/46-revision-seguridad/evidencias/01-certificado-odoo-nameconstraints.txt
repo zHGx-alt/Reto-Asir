@@ -1,0 +1,29 @@
+## Tarea 46 · Hallazgo S-01: el certificado de Odoo (tarea 52) es una CA sin límites (26/10/2026 10:09)
+## Se generan dos certificados con la misma orden que activar-https.sh: el de antes (sin nameConstraints) y el de ahora (con).
+## Después, con la clave privada de cada uno, se firma un certificado falso para otro sitio, como haría quien robara odoo.key.
+## OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
+
+### Certificado de antes
+X509v3 Basic Constraints: critical
+    CA:TRUE
+--- El servidor de Odoo (192.168.10.10), con el certificado de antes como raíz de confianza:
+odoo-antes.crt: OK
+--- Certificado falso de www.bancoejemplo.es firmado con la clave de antes:
+falso-antes.crt: OK
+
+### Certificado de ahora
+X509v3 Basic Constraints: critical
+    CA:TRUE
+X509v3 Name Constraints: critical
+    Permitted:
+      IP:192.168.10.10/255.255.255.255
+      DNS:odoo.almichain.local
+--- El servidor de Odoo (192.168.10.10), con el certificado de ahora como raíz de confianza:
+odoo-ahora.crt: OK
+--- Certificado falso de www.bancoejemplo.es firmado con la clave de ahora:
+CN = www.bancoejemplo.es
+error 47 at 0 depth lookup: permitted subtree violation
+error falso-ahora.crt: verification failed
+
+## Resultado: antes, un TPV con la raíz instalada aceptaría el certificado falso (OK). Ahora lo rechaza (permitted subtree violation)
+## y el de Odoo sigue siendo válido. Pendiente: confirmarlo en Edge del TPV (prueba 5 de la tarea 52).

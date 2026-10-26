@@ -2,6 +2,7 @@
 # Tarea 52 · Pone Odoo detrás de un proxy HTTPS (nginx) en el servidor de la tarea 33.
 #
 #   1. Genera un certificado propio para la IP del servidor (válido 825 días; la CA es el propio servidor).
+#      Con nameConstraints: aunque robaran odoo.key, no serviría para firmar certificados de otros sitios (tarea 46).
 #   2. Copia nginx.conf y docker-compose.https.yml a /opt/odoo.
 #   3. Activa proxy_mode en odoo.conf (Odoo confía en las cabeceras X-Forwarded-* del proxy).
 #   4. Fija COMPOSE_FILE en /opt/odoo/.env para que cualquier "docker compose up" incluya el proxy.
@@ -30,7 +31,8 @@ if [[ ! -f $DIR/https/certs/odoo.crt ]]; then
     -addext "subjectAltName=IP:$IP,DNS:odoo.almichain.local" \
     -addext "basicConstraints=critical,CA:TRUE" \
     -addext "keyUsage=critical,digitalSignature,keyEncipherment,keyCertSign" \
-    -addext "extendedKeyUsage=serverAuth" 2>/dev/null
+    -addext "extendedKeyUsage=serverAuth" \
+    -addext "nameConstraints=critical,permitted;IP:$IP/255.255.255.255,permitted;DNS:odoo.almichain.local" 2>/dev/null
   chmod 640 "$DIR/https/certs/odoo.key"
   echo "  Creado. Huella SHA-256 (para comprobarla al instalarlo en los TPV):"
 else

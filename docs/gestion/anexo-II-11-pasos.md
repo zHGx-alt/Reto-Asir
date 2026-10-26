@@ -136,6 +136,7 @@ Incidencias relevantes durante la ejecución:
 | 23/10/2026 | ERP | En una instalación limpia de Odoo, `configurar-odoo.py` y `cargar-carta-y-mesas.py` fallaban (almacén buscado antes de instalar Inventario; `copy` devuelve una lista en Odoo 19) | Corregidos y repetida toda la instalación hasta la factura ([verificación](verificacion.md), sección 4) |
 | 23/10/2026 | Gestión | 14 enlaces rotos y documentos fuera de la carpeta de su bloque | Movidos a `docs/redes/` y `docs/bd/` y enlaces corregidos; `scripts/verificar-repo.sh` lo comprueba |
 | 23/10/2026 | Seguridad | Contraseñas débiles de la VM del gerente en un fichero de texto sin seguimiento | No se sube (añadido al `.gitignore`); se cambian y se guardan en KeePassXC (tarea 55) |
+| 26/10/2026 | Seguridad | El certificado propio de Odoo (tarea 52) era una CA sin límites: con su clave se podían firmar certificados de cualquier web, y los TPV se los creerían | `nameConstraints` limitado a la IP del servidor y a `odoo.almichain.local`; probado con un certificado falso, que ahora se rechaza ([tarea 46, S-01](../seguridad/46-revision-seguridad/DOCUMENTACION.md#41-s-01-el-certificado-de-odoo-podía-firmar-cualquier-web-corregido)) |
 
 ## 8. Pruebas
 
@@ -154,21 +155,61 @@ Incidencias relevantes durante la ejecución:
 | BD | Usuario de aplicación ejecuta DDL | Permiso denegado | `CREATE TABLE`: *permission denied for schema public*; `DROP` y `ALTER`: *must be owner*; `DELETE`/`UPDATE` de facturas denegados; 33 pruebas de reglas correctas (repetido el 23/10) | [verificación](verificacion.md), [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
 | RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas. **Falta:** la BD viva aún no está en el RAID ([tarea 43, sección 7](../backup/43-raid1/DOCUMENTACION.md#7-pendiente-la-base-de-datos-tiene-que-estar-en-el-raid)) | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
 | Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor. **Falta** el RTO real, restaurando en una máquina nueva | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
+| Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 18 hallazgos (5 altos); S-01 corregido y probado. Faltan las comprobaciones en los equipos (nmap, router, SSH, cifrado) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
 ## 9. Documentación y presentación
 
-| Entregable | Responsable | Estado |
-|---|---|---|
-| Documentación técnica paso a paso | Markel | Pendiente (base: [LOGICA_RETO.md](../../LOGICA_RETO.md)) |
-| Diagramas (sistemas, red, AWS, BD) | Responsable de cada bloque | Pendiente |
-| Tabla de pruebas | Eneko.S | Pendiente (base: [verificacion.md](verificacion.md)) |
-| Presentación y ensayo | Peio | Pendiente |
+> **Borrador del 26/10/2026** (Adrian). Lo que existe hoy y lo que falta para la entrega. Cada responsable actualiza su fila.
+
+### 9.1 Entregables
+
+| Entregable | Tarea | Responsable | Qué hay ya | Qué falta | Estado |
+|---|---|---|---|---|---|
+| Documentación técnica paso a paso | 48 | Markel | [LOGICA_RETO.md](../../LOGICA_RETO.md) (visión de conjunto) y un `DOCUMENTACION.md` por tarea, con procedimiento, pruebas e incidencias | Un índice único que lleve a un técnico nuevo por las tareas en orden de montaje: red → servidor → TPV → gerente → recreativa → web | Pendiente |
+| Diagramas | Cada bloque | Responsable de cada bloque | Arquitectura de equipos ([tarea 11](../diagramas/11-arquitectura-equipos/DIAGRAMA.md)), plano y red ([tarea 23](../redes/23-plano-direccionamiento.md)), E/R y 3FN ([tareas 38](../bd/38-modelo-er.md) y [39](../bd/39-modelo-logico-3fn.md)), wireframes ([tarea 27](../web/27-wireframes.md)), Gantt ([gantt.md](gantt.md)) | **AWS:** no hay diagrama (S3, EC2, IP elástica, DuckDNS, Let's Encrypt, GitHub Actions). **Copias:** un esquema de la regla 3-2-1 (datos → RAID → USB fuera del local) | Parcial |
+| Tabla de pruebas por bloque | 47 | Eneko.S | Sección 8 de este anexo y [verificacion.md](verificacion.md) (pruebas repetibles con `scripts/verificar-repo.sh`) | Completar las filas vacías de la sección 8 (TPV, stick, WDS) y añadir las de seguridad de la [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md#5-comprobaciones-manuales-capturas) | Pendiente |
+| Presentación y ensayo | 49 | Peio | — | Ver 9.2 | Pendiente |
+| Anexo I (contrato de equipo) | 1 | Adrian | [Firmado el 21/10](anexo-I-contrato-equipo.md) | — | Hecho |
+| Anexo II (este documento) | 2 | Adrian | Secciones 1 a 8 | Cerrar la 9 y la 10 después de la presentación | En curso |
+| Commits de todos (Anexo IX) | 5 | Adrian | 5 de 6 personas con commits propios | Un commit de Eneko.P | En curso |
+| Máquinas virtuales | 12, 13, 33 | Responsable de cada tarea | VM del gerente exportada en OVF ([tarea 12](../so/12-dual-boot.md#8-entrega-de-la-máquina-virtual), disco en Drive) | Exportar las VM de los TPV y de la `ServidorERP` con la misma tabla de sumas SHA-256 | Parcial |
+| Registro de uso de IA | — | Todos | [registro-ia.md](registro-ia.md) | Que cada persona revise sus entradas | En curso |
+
+### 9.2 Presentación (propuesta)
+
+Una parte por bloque. Cada persona presenta **lo que no ha hecho**, para demostrar que puede defender el conjunto (condición transversal de la sección 1). Duración orientativa, a ajustar con la rúbrica:
+
+| # | Parte | Qué enseñar en directo o en captura | Min |
+|---|---|---|---|
+| 1 | El encargo y cómo nos organizamos | Requisitos (sección 2), Gantt, flujo de ramas y PR con gitleaks | 2 |
+| 2 | Red | Plano, plan de IP, Packet Tracer y la decisión de red plana con invitados aislada | 3 |
+| 3 | Puestos de trabajo | GRUB con los dos sistemas; TPV en quiosco intentando abrir otra cosa o un USB | 3 |
+| 4 | ERP | Venta en el TPV por HTTPS y la factura automática (`factura_automatica.py`) | 4 |
+| 5 | Datos y copias | E/R, usuario sin permisos de DDL, quitar un disco del RAID y restaurar una copia | 3 |
+| 6 | Web | `https://almichain1.duckdns.org`, Lighthouse y `terraform plan` | 2 |
+| 7 | Recreativa y stick | MAME arrancando sin escritorio, medidas antes y después y el stick en dos emuladores | 3 |
+| 8 | Seguridad | Hallazgos de la tarea 46 y cómo se cerraron | 2 |
+| 9 | Retrospectiva | Sección 10 | 1 |
+
+**Plan B para la demo:** si falla la red del aula o el Learner Lab está parado, cada demo tiene su captura o su `.txt` en `evidencias/`. Se llevan abiertas en pestañas.
+
+### 9.3 Lista de entrega
+
+- [ ] `main` con todas las PR unidas y el CI en verde.
+- [ ] `bash scripts/verificar-repo.sh` sin errores y `python3 scripts/gantt.py` regenerado.
+- [ ] Backlog al día: ninguna tarea «En curso» sin explicar en *Observaciones*.
+- [ ] Ninguna captura con contraseñas (revisar ampliadas: gitleaks no mira imágenes).
+- [ ] Enlaces de Drive (VM y `.kdbx`) accesibles para el profesor; la contraseña maestra del `.kdbx` se entrega aparte, nunca en el repositorio.
+- [ ] Liberar la IP elástica de AWS cuando el profesor haya visto la web.
 
 ## 10. Evaluación y retrospectiva
 
+> **Borrador del 26/10/2026** (Adrian): puntos sacados del backlog, del historial y de las incidencias. **Hay que completarlo entre todos** en una reunión de 20 minutos después de la presentación. Cada uno añade al menos un punto en cada fila.
+
 | | |
 |---|---|
-| **Qué ha funcionado** | |
-| **Qué mejorar** | |
-| **Desviaciones respecto a la planificación** | |
-| **Uso de IA y validación** | Ver [registro-ia.md](registro-ia.md) |
+| **Qué ha funcionado** | Scripts idempotentes y probados en una máquina limpia (Odoo, TPV, HTTPS, copias): repetir una instalación cuesta minutos. · Ramas, PR y gitleaks: ningún secreto en el código (81 commits revisados el 23/10). · La revisión del 23/10 ([verificacion.md](verificacion.md)) encontró 14 enlaces rotos y 2 scripts que fallaban en una instalación limpia antes de la entrega. · Las decisiones se apuntan con fecha (sección 5), así que no se repiten discusiones. |
+| **Qué mejorar** | Reparto: la mayoría del software cayó en dos personas ([roles.md](roles.md)). · Las tareas físicas (stick, router, recreativa real) se dejaron para el final y dependen de material que no teníamos. · Probar con el equipo que pide el enunciado: las medidas de MAME se hicieron en una VM de 2 núcleos y 1,5 GB (tarea 17) y la red con un router sin WPA3 (tarea 24). · Revisar las capturas antes de subirlas: dos dejaban ver la contraseña Wi-Fi (tarea 24). · Hacer la revisión de seguridad antes, no al final: el hallazgo S-01 de la [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) se habría evitado al escribir la tarea 52. |
+| **Desviaciones respecto a la planificación** | Fechas del reto movidas al 26/10 – 12/11 (decisión del 24/10). · Eneko.P sigue sin commits propios; las tareas 43 y 47 pasaron de él a otras personas. · Varias tareas cambiaron de responsable (13, 14, 43, 46). · La BD viva sigue fuera del RAID (tarea 43), lo que retrasa el HTTPS en el servidor del equipo (tarea 52). · *Completar con la comparación final del Gantt: tareas acabadas tarde y cuántos días.* |
+| **Uso de IA y validación** | Ver [registro-ia.md](registro-ia.md). Todo lo hecho con IA se ha ejecutado y comprobado (evidencias en cada tarea); los scripts se probaron en máquinas limpias. |
+| **Nota del equipo (1-10) y por qué** | *A rellenar en la reunión* |
