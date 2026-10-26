@@ -67,7 +67,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Faltan las secciones 9 (entrega) y 10 (retrospectiva). | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 19 | Montaje del arcade stick (ATmega32U4) | Físico | Markel | 27/10 | Pendiente | Esquema de conexiones con la palanca digital (A2-A5) y botones 7-8 actualizado el 24/10. Falta cablear la placa y conseguir la palanca. | [esquema-conexiones.svg](../../arduino/mando-joystick/esquema-conexiones.svg) |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Markel | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
+| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | Físico | Adrian | 30/10 | Pendiente | Lista de comprobaciones en arduino/mando-joystick/README.md. | — |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16) o Batocera si se elige en la 51. | — |
 | 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. | — |
@@ -121,8 +121,8 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Adrian | 15 | 5 | 2 | 1 | 38 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
-| Iker | 12 | 4 | 4 | 0 | 30 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 8 | 5 | 2 | 2 | 19 | 1, 2, 4, 5, 6, 11 |
+| Iker | 13 | 5 | 5 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
+| Markel | 7 | 4 | 1 | 2 | 17 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
 
 ## Tareas por persona
@@ -176,6 +176,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 4 | Herramienta de seguimiento (Gantt en el repo) | 0 Gestión | Gestión | 21/10–23/10 | — | Hecho |
 | 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | 23/10–23/10 | #8 (Eneko.S), #9 (Markel) | Hecho |
+| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Pendiente |
 | 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–04/11 | #12 (Adrian), #13 (Markel) | En curso |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | 22/10–23/10 | — | Hecho |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | 26/10–28/10 | — | En curso |
@@ -193,7 +194,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 28/10–02/11 | #9 (Markel) | En curso |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Pendiente |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Pendiente |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
@@ -209,5 +209,5 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | 28/10–30/10 | #23 (Adrian) | En curso |
 | 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–03/11 | #24 (Peio) | Pendiente |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | 22/10–23/10 | — | Hecho |
-| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 04/11–05/11 | #14 (Markel), #34 (Iker) | Pendiente |
+| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 04/11–05/11 | #14 (Iker), #34 (Iker) | Pendiente |
 | 49 | Presentación y ensayo | 11 Entrega | Documentación | 09/11–10/11 | #46 (Adrian) | Pendiente |

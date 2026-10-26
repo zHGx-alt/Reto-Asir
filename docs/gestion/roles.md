@@ -21,13 +21,14 @@ El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), 
 
 ### 26/10/2026 (tarde)
 
-Markel se queda con la tarea 13; él mismo lo cambió en el backlog.
+Markel e Iker se cambian una tarea; Markel lo cambió en el backlog.
 
 | # | Tarea | Antes | Ahora |
 |---|---|---|---|
 | 13 | Bastionado de los 2 TPV en VM | Iker | Markel |
+| 14 | Driver de la impresora en la VM del TPV | Markel | Iker |
 
-La 15 (scripts de configuración de Windows) sigue con Iker: se ejecutan en los TPV de la 13, así que tienen que coordinarse. Tareas abiertas por persona tras el cambio: Adrian 5 (2 de gestión), Markel 5, Iker 4, Eneko.P 4, Eneko.S 4, Peio 4.
+La 14 y la 15 (scripts de configuración de Windows) siguen con Iker y se hacen en los TPV de la 13, así que Markel e Iker tienen que coordinarse. Tareas abiertas por persona tras el cambio: Adrian 5 (2 de gestión), Iker 5, Eneko.P 4, Eneko.S 4, Markel 4, Peio 4.
 
 ### 26/10/2026
 
