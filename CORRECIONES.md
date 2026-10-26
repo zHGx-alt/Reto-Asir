@@ -13,7 +13,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 | Persona | Correcciones |
 |---|---|
-| **Adrian** | [2.2](#22-https-en-odoo-tarea-52) HTTPS en Odoo · [2.1](#21-contraseñas) contraseñas de Packet Tracer · [3.4](#34-evidencias-de-la-web-tarea-30) evidencias de la web · [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente, imágenes de la web, notación del E/R |
+| **Adrian** | [3.4](#34-evidencias-de-la-web-tarea-30) evidencias de la web · [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente, imágenes de la web, notación del E/R |
 | **Iker** | [2.1](#21-contraseñas) restic y clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.1](#31-la-bd-no-está-en-el-raid-tarea-43) RAID · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
 | **Peio** | [2.1](#21-contraseñas) contraseña Wi-Fi y de administración del router |
 | **Eneko.P** | [3.2](#32-recreativa-medida-en-una-vm-que-no-es-la-del-enunciado-tarea-17) medidas de la recreativa en 1 núcleo y 1 GB |
@@ -48,15 +48,14 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
   - **Quién:** Peio.
 - [ ] 🟠 **Contraseña de restic en texto plano:** copiarla de `tarea-44/.credenciales-backup` (o `sudo cat /root/.config/backup-odoo/restic.pass` en el servidor) a una entrada de KeePassXC y **borrar** `.credenciales-backup`. La del servidor se queda: la necesita la copia nocturna.
   - **Quién:** Iker (con quien tenga la contraseña maestra del `.kdbx`).
-- [ ] 🟢 **Contraseñas de Packet Tracer** (R1, SW1 y las Wi-Fi de prueba) en el Drive del grupo: pasarlas a KeePassXC ([guía de la tarea 23](docs/redes/23-packet-tracer-red-local.md)).
-  - **Quién:** Adrian.
+- [x] 🟢 **Contraseñas de Packet Tracer** (R1, SW1 y las Wi-Fi de prueba) en el Drive del grupo: pasadas a KeePassXC ([guía de la tarea 23](docs/redes/23-packet-tracer-red-local.md)). Adrian, 26/10.
 - [ ] 🟢 **Recreativas instaladas con el preseed antiguo:** borrar la línea `recreativa-claude` de `~tecnico/.ssh/authorized_keys`.
   - **Quién:** Iker.
 - [x] Drive revisado: no hay ningún `.txt` con contraseñas; el `.kdbx` no sirve sin su contraseña maestra (24/10).
 
 ### 2.2 HTTPS en Odoo (tarea 52)
 
-- [ ] 🔴 **Odoo va por HTTP en la LAN** (usuario y contraseña del cajero en claro). Activar el proxy en `ServidorERP`, después de mover la BD al RAID (3.1):
+- [x] 🔴 **Odoo va por HTTP en la LAN** (usuario y contraseña del cajero en claro). Corregido el 26/10: el proxy HTTPS funciona y está probado. Lo que queda (activarlo en la `ServidorERP` del equipo, después de mover la BD al RAID, y las pruebas 5 y 6 con el TPV) es trabajo de la tarea 52, en el [Gantt](docs/gestion/gantt.md):
   ```bash
   cd docs/erp/52-https-odoo && mkdir -p evidencias && sudo ./activar-https.sh 192.168.10.10 | tee evidencias/01-activar-https.txt
   ```
@@ -191,9 +190,9 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] Restic, prueba de que la copia de KeePassXC es buena: en el servidor, `sudo restic -r /srv/datos/restic snapshots` sin el fichero de contraseña, pegando la de KeePassXC cuando la pida → lista las copias.
 
 **HTTPS y menús del cajero (2.2 y 2.3)**
-- [ ] `activar-https.sh` termina con HTTPS 200, HTTP 301 y 8069 cerrado.
+- [x] `activar-https.sh` termina con HTTPS 200, HTTP 301 y 8069 cerrado (VM de prueba, 26/10).
 - [ ] Desde el TPV, `https://192.168.10.10`: candado **sin avisos**, y la huella del certificado coincide con la que dio el script.
-- [ ] Desde otro equipo de la LAN, `http://192.168.10.10:8069` no responde.
+- [x] Desde otro equipo de la LAN, `http://192.168.10.10:8069` no responde (VM de prueba, 26/10).
 - [ ] Se puede hacer una venta completa en el TPV por HTTPS.
 - [ ] Después del cambio, `sudo systemctl start backup-odoo` sigue terminando bien (`journalctl -u backup-odoo` → «Copia terminada correctamente»).
 - [ ] `cajero1` solo ve **Punto de venta**; `gerente` sigue viendo todas sus aplicaciones. Captura de los dos.
