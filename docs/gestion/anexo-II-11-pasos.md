@@ -61,7 +61,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | ERP | Odoo Community, Dolibarr, ERPNext | Módulos requeridos, TPV de restauración, coste de licencia, API |
 | Hosting web | S3 + CloudFront + ACM, S3 + EC2 con nginx | Coste, mantenimiento, HTTPS gestionado, dominio gratuito |
 | IaC | Terraform, CloudFormation | Portabilidad, curva de aprendizaje |
-| SO de la recreativa | Debian mínimo, Alpine, Lakka | Consumo de RAM, soporte de MAME, mantenimiento |
+| SO de la recreativa | Debian mínimo, Batocera (medidas en la [tarea 51](../arcade/16-batocera/NOTAS.md)); Alpine y Lakka solo en papel | Consumo de RAM, soporte de MAME, mantenimiento |
 | Firmware de router | OpenWrt, DD-WRT | Soporte WDS, compatibilidad del hardware |
 | SGBD | MariaDB, PostgreSQL | Herramientas de la asignatura, integración con Odoo |
 | Backup | restic, borg, rsync + cron | Cifrado, deduplicación, destino S3 |
@@ -79,7 +79,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | ERP | Odoo Community | Cubre las funciones del enunciado con un TPV táctil integrado, usa PostgreSQL, tiene más documentación en español y es gratuito ([tarea 32](../erp/32-comparativa-erp.md), sección 6) | 22/10/2026 |
 | Hosting web | Bucket S3 privado + EC2 con nginx, IP elástica, dominio `almichain1.duckdns.org` y certificado de Let's Encrypt | Dominio y certificado gratuitos. DuckDNS solo admite registros A, y CloudFront y ACM necesitan CNAME; con una IP elástica basta un registro A ([tarea 30](../web/30-hosting-aws.md)) | 23/10/2026 |
 | IaC | Terraform (proveedor AWS) + GitHub Actions para publicar | Lo nombra el plan y es portable; `terraform validate` lo comprueba sin credenciales. CloudFormation ataría el código a AWS ([iac/](../../iac/README.md)) | 24/10/2026 |
-| SO de la recreativa | *Provisional:* Debian 13 mínimo con arranque directo a MAME | Arranca a MAME en 4,7 s sin escritorio ([tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md)). Se está probando Batocera para compararlas con datos en una VM de 1 núcleo y 1 GB ([notas](../arcade/16-batocera/NOTAS.md)) | 23/10/2026 |
+| SO de la recreativa | Debian 13 mínimo con arranque directo a MAME (descartada Batocera) | Medido en VM de 1 núcleo y 1 GB: llega a la partida en 7,1 s con 400 MB usados y MAME a 934 %/685 %; Batocera usa 554 MB solo con el menú (ya con swap), tarda 12,9 s al menú optimizado, pide 2 GB según su guía y guarda la contraseña de root en claro ([tarea 51](../arcade/16-batocera/NOTAS.md)) | 26/10/2026 |
 | Firmware de router | | | |
 | SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 ([tarea 40](../bd/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
 | Backup | restic sobre RAID 1 (`mdadm`) y disco USB externo | Copias cifradas con AES-256, deduplicadas y automatizadas; cumple la regla 3-2-1 ([tarea 44](../backup/44-backup-3-2-1/DOCUMENTACION.md)) | 22/10/2026 |
