@@ -55,19 +55,19 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|---|
 | 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 22/10 | En curso | Estructura, .gitignore y gitleaks hechos: CI en verde y gitleaks local sin fugas en 81 commits (23/10). Tienen commits 5 de 6 personas; falta Eneko.P (Anexo IX). | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | Software | Iker | 28/10 | En curso | Batocera arranca con 1 GB (565 MB usados solo con el menú). Faltan medidas; endurecimiento (root con contraseña por defecto) y la decisión en el Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
-| 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Iker | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la del enunciado) solo hay 3 medidas de antes; faltan las de después y medir jugando. El 24/10 optimizar-arcade.sh mantiene las actualizaciones de seguridad (a las 5:00). | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
+| 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Eneko.P | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la del enunciado) solo hay 3 medidas de antes; faltan las de después y medir jugando. El 24/10 optimizar-arcade.sh mantiene las actualizaciones de seguridad (a las 5:00). El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS. Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; cambiar la contraseña de administración y la Wi-Fi (estaba visible en las capturas antiguas; tapadas el 24/10). | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | Software | Iker | 02/11 | En curso | Scripts listos el 24/10 (configurar-tpv.ps1 y comprobar-tpv.ps1; sintaxis comprobada y la comprobación probada en un Windows 11). Falta crear la VM del TPV; ejecutar; poner el quiosco y guardar la evidencia. | [DOCUMENTACION.md](../../docs/so/13-tpv/DOCUMENTACION.md) |
-| 18 | Monitorización de recursos de la recreativa | Software | Adrian | 02/11 | En curso | Scripts hechos y probados en Linux; documento reescrito para Debian el 24/10 (antes era para Batocera). Falta ejecutarlos en la VM de 1 GB durante una partida y guardar los CSV. Pasa de Eneko.S a Adrian. | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
+| 18 | Monitorización de recursos de la recreativa | Software | Eneko.P | 02/11 | En curso | Scripts hechos y probados en Linux; documento reescrito para Debian el 24/10 (antes era para Batocera). Falta ejecutarlos en la VM de 1 GB durante una partida y guardar los CSV. El 26/10 pasa de Adrian a Eneko.P (reparto de carga). | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
 | 43 | RAID 1 y simulación de fallo | Software | Iker | 02/11 | En curso | RAID y simulación de fallo hechos por Iker en VM (22-23/10). Falta lo principal: la BD sigue en el disco del sistema. mover-docker-al-raid.sh preparado el 24/10 (sección 7); falta ejecutarlo y repetir el fallo con Odoo funcionando. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. El 24/10 el script copia también almi_chain si existe y avisa si el USB lleva más de 7 días sin conectarse; falta probarlo en la VM. Pasa de Markel a Iker, que la hizo. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 52 | Proxy HTTPS delante de Odoo | Software | Adrian | 04/11 | En curso | Proxy nginx con certificado propio preparado el 24/10 (docker-compose.https.yml; nginx.conf; activar-https.sh); Odoo deja de escuchar en la LAN. Falta ejecutarlo en la VM e instalar el certificado en los TPV (configurar-tpv.ps1 -CertificadoOdoo). | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
-| 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Iker | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. | [README.md](../../iac/README.md) |
-| 36 | Importar y exportar datos en Odoo | Software | Iker | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
+| 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [README.md](../../iac/README.md) |
+| 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Faltan las secciones 9 (entrega) y 10 (retrospectiva). | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 19 | Montaje del arcade stick (ATmega32U4) | Físico | Markel | 27/10 | Pendiente | Esquema de conexiones con la palanca digital (A2-A5) y botones 7-8 actualizado el 24/10. Falta cablear la placa y conseguir la palanca. | [esquema-conexiones.svg](../../arduino/mando-joystick/esquema-conexiones.svg) |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Adrian | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
+| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Markel | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | Físico | Adrian | 30/10 | Pendiente | Lista de comprobaciones en arduino/mando-joystick/README.md. | — |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16) o Batocera si se elige en la 51. | — |
 | 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. | — |
@@ -118,10 +118,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 17 | 7 | 4 | 1 | 42 | 0, 2, 3, 4, 5, 6, 7, 8, 10 |
+| Adrian | 15 | 5 | 2 | 1 | 38 | 0, 2, 4, 5, 6, 7, 8, 10 |
+| Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
-| Iker | 16 | 8 | 8 | 0 | 42 | 0, 1, 2, 3, 6, 7, 8, 9 |
-| Markel | 6 | 3 | 0 | 2 | 13 | 1, 4, 5, 6, 11 |
+| Iker | 13 | 5 | 5 | 0 | 34 | 0, 1, 2, 3, 7, 8, 9 |
+| Markel | 7 | 4 | 1 | 2 | 15 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
 
 ## Tareas por persona
@@ -135,9 +136,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 3 | Repartir tareas y responsables | 0 Gestión | Gestión | 21/10–21/10 | — | Hecho |
 | 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–22/10 | — | En curso |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | 22/10–23/10 | #8 (Eneko.S) | Hecho |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Pendiente |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | 23/10–23/10 | — | Hecho |
-| 18 | Monitorización de recursos de la recreativa | 3 Arcade | Software | 30/10–02/11 | #16 (Iker) | En curso |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | 22/10–23/10 | — | Hecho |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | 28/10–30/10 | #19 (Markel) | Pendiente |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
@@ -148,6 +147,15 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
 | 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 05/11–06/11 | #13 (Iker), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | Pendiente |
 
+### Eneko.P
+
+| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
+|---|---|---|---|---|---|---|
+| 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | 3 Arcade | Software | 29/10–30/10 | #16 (Iker) | En curso |
+| 18 | Monitorización de recursos de la recreativa | 3 Arcade | Software | 30/10–02/11 | #16 (Iker) | En curso |
+| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 02/11–05/11 | #28 (Markel) | En curso |
+| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 04/11–05/11 | #34 (Iker) | En curso |
+
 ### Eneko.S
 
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
@@ -155,7 +163,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 7 | Definir necesidades de equipos (gerente; 2 TPV; impresoras) | 1 Hardware | Documentación | 22/10–22/10 | — | Hecho |
 | 8 | Tabla de hardware con justificación | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | 3 Arcade | Físico | 29/10–30/10 | #16 (Iker), #51 (Iker) | Pendiente |
-| 54 | Medir rendimiento y recursos en el equipo real | 3 Arcade | Físico | 03/11–04/11 | #17 (Iker), #18 (Adrian), #53 (Eneko.S) | Pendiente |
+| 54 | Medir rendimiento y recursos en el equipo real | 3 Arcade | Físico | 03/11–04/11 | #17 (Eneko.P), #18 (Eneko.P), #53 (Eneko.S) | Pendiente |
 | 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | 04/11–05/11 | #25 (Peio) | Pendiente |
 | 32 | Comparativa y elección de ERP | 7 ERP | Documentación | 22/10–23/10 | — | Hecho |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | 22/10–23/10 | #38 (Adrian) | Hecho |
@@ -172,12 +180,9 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–04/11 | #12 (Adrian), #13 (Iker) | En curso |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | 22/10–23/10 | — | Hecho |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | 26/10–28/10 | — | En curso |
-| 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | 3 Arcade | Software | 29/10–30/10 | #16 (Iker) | En curso |
-| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 02/11–05/11 | #28 (Markel) | En curso |
 | 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | 22/10–23/10 | #32 (Eneko.S) | Hecho |
 | 34 | Configurar módulos de Odoo | 7 ERP | Software | 22/10–23/10 | #33 (Iker) | Hecho |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | Software | 22/10–23/10 | #34 (Iker) | Hecho |
-| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 04/11–05/11 | #34 (Iker) | En curso |
 | 41 | Datos de prueba y consultas | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
 | 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–02/11 | — | En curso |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | Software | 03/11–04/11 | #41 (Iker), #43 (Iker) | En curso |
@@ -188,6 +193,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
 |---|---|---|---|---|---|---|
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
+| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Pendiente |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Pendiente |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
@@ -203,5 +209,5 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | 28/10–30/10 | #23 (Adrian) | En curso |
 | 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–03/11 | #24 (Peio) | Pendiente |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | 22/10–23/10 | — | Hecho |
-| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 04/11–05/11 | #14 (Adrian), #34 (Iker) | Pendiente |
+| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 04/11–05/11 | #14 (Markel), #34 (Iker) | Pendiente |
 | 49 | Presentación y ensayo | 11 Entrega | Documentación | 09/11–10/11 | #46 (Adrian) | Pendiente |

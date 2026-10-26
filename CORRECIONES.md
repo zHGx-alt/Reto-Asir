@@ -20,6 +20,7 @@ Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt
 | **Adrian** | `activar-https.sh` en el servidor (tarea 52) | [2.2](#22-https-en-odoo-y-menús-del-cajero) |
 | **Markel** | Montar el arcade stick con el [esquema nuevo](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5) | [5](#5-tpv-e-impresora) |
 | **Eneko.S** | Recreativa real (tarea 53) | [7](#7-erp-y-recreativa) |
+| **Eneko.P** | Montar `Recreativa-1GB` con el preseed y hacer las 3 medidas de después (tarea 17). Invitación al repo y primer commit | [7](#7-erp-y-recreativa) |
 | **Equipo** | Leer la decisión de red ([tarea 23, 5.2 y 5.3](docs/redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): afecta a cómo se defiende la seguridad | [4.1](#41-decisión-red-plana-con-invitados-aislada) |
 
 ---
@@ -142,7 +143,7 @@ Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt
   - **Quién:** Iker.
 - [ ] 🟠 **Decidir la edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y apuntarla en la tarea 9.
 - [ ] 🔴 **Impresora (tareas 14 y 37)** cuando el centro la dé: [guía](docs/so/14-impresora/DOCUMENTACION.md), pasos 1 a 7.
-  - **Quién:** Adrian (14) · Peio (37).
+  - **Quién:** Markel (14) · Peio (37).
 - [ ] 🔴 **Montar el arcade stick (tarea 19):** [esquema](arduino/mando-joystick/esquema-conexiones.svg) (palanca en A2-A5 y común a GND; botones en 2-7).
   - **Quién:** Markel.
 - [ ] 🔴 **Firmware en la placa (tarea 50):** lista del [README](arduino/mando-joystick/README.md#pendiente-prueba-en-físico-tarea-50).
@@ -153,9 +154,9 @@ Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt
 
 ## 6. Web y AWS
 
-**Quién:** Adrian. Con el Learner Lab arrancado.
+**Quién:** Adrian, salvo la IaC (Eneko.P). Con el Learner Lab arrancado.
 
-- [ ] 🟠 **IaC (tarea 31):** decidir si se recrea todo con Terraform (borrar antes el montaje manual) o se deja el manual y Terraform queda probado en otra región o con otro nombre de bucket. Ejecutar `terraform apply` ([iac/README.md](iac/README.md), sección 4) y guardar la salida.
+- [ ] 🟠 **IaC (tarea 31, Eneko.P):** decidir si se recrea todo con Terraform (borrar antes el montaje manual) o se deja el manual y Terraform queda probado en otra región o con otro nombre de bucket. Ejecutar `terraform apply` ([iac/README.md](iac/README.md), sección 4) y guardar la salida.
 - [ ] 🟠 **Secretos de GitHub** (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) para que `desplegar-web.yml` publique la web. Con eso, el próximo cambio en `web/` se publica solo.
 - [ ] 🟠 **Publicar la versión actual** y volver a ejecutar `instalar-servidor-web.sh` (cabeceras nuevas), si no se usa Terraform.
 - [ ] 🟠 **Pruebas contra la URL pública:** `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con `web/index.html` y salgan CSP y Permissions-Policy), Lighthouse y W3C. Sustituir `08-pruebas-curl.txt` y `lighthouse-w3c.txt`.
@@ -166,13 +167,13 @@ Lo primero de cada uno. **El resto del trabajo, en el [Gantt](docs/gestion/gantt
 ## 7. ERP y recreativa
 
 - [ ] 🟠 **Importar y exportar (tarea 36):** pasos 1 a 6 de la [guía](docs/erp/36-importar-exportar/DOCUMENTACION.md) contra `ServidorERP`, con evidencias.
-  - **Quién:** Iker.
+  - **Quién:** Eneko.P.
 - [ ] 🟠 **Repetir la factura automática** con el menú de grupo (660,00 €) y cambiar las evidencias de la [tarea 35](docs/erp/35-factura-automatica/DOCUMENTACION.md).
   - **Quién:** Iker.
 - [ ] 🔴 **Recreativa en 1 núcleo y 1 GB (tarea 17):** 3 medidas antes y 3 después en `Recreativa-1GB` con el `optimizar-arcade.sh` nuevo; sustituir las tablas.
-  - **Quién:** Iker.
+  - **Quién:** Eneko.P.
 - [ ] 🟠 **Medir jugando (tarea 18):** `monitor-recreativa.sh` 10 minutos de partida ([protocolo](docs/arcade/18-monitorizacion-recreativa.md)), CSV a `docs/evidencias/18-monitorizacion/`.
-  - **Quién:** Adrian.
+  - **Quién:** Eneko.P.
 - [ ] 🟠 **Debian o Batocera (tarea 51)** con esas medidas; apuntarlo en el Anexo II. **Quién:** Iker.
 - [ ] 🟠 **Recreativa real (tarea 53)** y sus medidas (54). **Quién:** Eneko.S.
 - [ ] 🟠 **VM del gerente (tarea 12):** versión exacta de Ubuntu (`lsb_release -d`) en las tareas 12 y 9; actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS. **Quién:** Adrian.

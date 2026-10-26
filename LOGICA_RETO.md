@@ -395,7 +395,7 @@ flowchart LR
 
 - **Seguimiento:** el enunciado pide Gantt o Kanban; se usa el Gantt. El tablero de GitHub Projects existe pero no se usa.
 - **Planificación:** cada tarea tiene responsable, fechas, dependencias, **tipo** (Software, Físico, Documentación, Gestión), estado, evidencia y observaciones en el [CSV](docs/gestion/backlog-kanban.csv). El script valida el CSV (ciclos, fechas, fines de semana, evidencias que existen) y genera el [Gantt](docs/gestion/gantt.md) con las tareas hechas separadas de las que faltan.
-- **Reparto** ([roles.md](docs/gestion/roles.md)): el software pendiente lo llevan Adrian e Iker; las tareas físicas, cualquiera salvo Eneko.P (pendiente de confirmar si sigue en el equipo).
+- **Reparto** ([roles.md](docs/gestion/roles.md)): reparto revisado el 26/10 al volver Eneko.P, para que cada persona tenga 4-5 tareas abiertas; las tareas físicas, cualquiera.
 - **Git** ([CONTRIBUTING.md](CONTRIBUTING.md)): una rama por tarea y Pull Request con el CI en verde (gitleaks). Los secretos nunca entran (`.gitignore`, gitleaks en CI y hook de pre-commit con `bash scripts/instalar-hooks.sh`).
 - **Anexos:** [I, contrato de equipo](docs/gestion/anexo-I-contrato-equipo.md) y [II, 11 pasos](docs/gestion/anexo-II-11-pasos.md) (análisis, requisitos, decisiones, incidencias y pruebas).
 - **IA:** permitida por el enunciado; cada uso se anota en el [registro de IA](docs/gestion/registro-ia.md) con lo que se comprobó a mano.
