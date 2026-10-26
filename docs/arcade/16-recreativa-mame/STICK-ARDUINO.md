@@ -22,28 +22,28 @@ Game Controller: Got SDL joystick added event for reconnected game controller LL
 Por qué joystick y no teclado:
 - Cualquier emulador y cualquier sistema lo reconoce como **mando**, sin drivers, y en los menús de configuración de mandos aparece como tal («compatible con cualquier emulador», como pide el enunciado).
 - No interfiere con el teclado: si se conecta un teclado para mantenimiento, sus teclas siguen siendo suyas.
-- El **input personalizable** lo da el propio firmware: cada botón físico se asigna a un botón HID por el puerto serie (`MAP`, `INV`, `ZM`) y se guarda en la EEPROM. Además, cada emulador permite reasignar los botones del mando.
+- El **input personalizable** lo da el propio firmware: cada botón físico se asigna a un botón HID por el puerto serie (`MAP`; `INV` invierte un eje) y se guarda en la EEPROM. Además, cada emulador permite reasignar los botones del mando.
 - MAME ya lo detecta con la identidad USB del Leonardo (prueba de arriba).
 
 | Control del stick | Sale como | Acción en MAME |
 |---|---|---|
-| Palanca (digital de 4 microinterruptores por defecto; analógica con `PALANCA ANALOGICA`) | Ejes X e Y | Mover (jugador 1), sin configurar nada |
-| Botones físicos 1 a 6 (pines 2 a 7) | Botones HID 1 a 6 (por defecto) | Botones 1 a 6, sin configurar nada |
-| Botones HID 7 y 8 | Libres: se usan con `MAP` | — |
+| Palanca de arcade (4 microinterruptores) | Ejes X e Y | Mover (jugador 1), sin configurar nada |
+| Botones físicos 1 y 2 (pines 2 y 3) | Botones HID 1 y 2 (por defecto) | Botones 1 y 2 de juego, sin configurar nada |
+| Botones físicos 3 y 4 (pines 4 y 5) | Botones HID 3 y 4 (por defecto) | Moneda y Start (se asignan una vez, abajo) |
 
 ### Moneda y Start
 
-Con un joystick, MAME asigna solo la palanca y los botones de juego; **Moneda y Start hay que asignarlos una vez**. Con 6 botones, la propuesta es usar los botones físicos 5 y 6 (los juegos instalados usan como mucho 2 botones de disparo):
+Con un joystick, MAME asigna solo la palanca y los botones de juego; **Moneda y Start hay que asignarlos una vez**. El mando tiene 4 botones (indicación del profesor, 26/10): se usan los botones 3 y 4 para Moneda y Start y quedan el 1 y el 2 para jugar (los juegos instalados usan como mucho 2 botones de disparo):
 
-- En MAME: `Tab` → *Input Settings* → *Input Assignments (general)* → *Other Controls* → *Coin 1* = botón 5 y *1 Player Start* = botón 6. MAME lo guarda en `/home/arcade/.mame/cfg/default.cfg`.
+- En MAME: `Tab` → *Input Settings* → *Input Assignments (general)* → *Other Controls* → *Coin 1* = botón 3 y *1 Player Start* = botón 4. MAME lo guarda en `/home/arcade/.mame/cfg/default.cfg`.
 - O directamente en ese fichero, junto al `UI_SELECT` que ya crea `instalar-arcade.sh`:
 
 ```xml
 <port type="COIN1">
-    <newseq type="standard">KEYCODE_5 OR JOYCODE_1_BUTTON5</newseq>
+    <newseq type="standard">KEYCODE_5 OR JOYCODE_1_BUTTON3</newseq>
 </port>
 <port type="START1">
-    <newseq type="standard">KEYCODE_1 OR JOYCODE_1_BUTTON6</newseq>
+    <newseq type="standard">KEYCODE_1 OR JOYCODE_1_BUTTON4</newseq>
 </port>
 ```
 

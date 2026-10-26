@@ -1,0 +1,11 @@
+## Tarea 52 · Pruebas 5 y 6: pedidos del TPV guardados en Odoo (26/10/2026 12:44, hora de la VM en UTC)
+## Laboratorio: red NAT de VirtualBox «reto-lan» 192.168.10.0/24 (puerta de enlace .1, como el router del plano).
+## ServidorERP 192.168.10.10 (certificado con nameConstraints, huella SHA-256 04:3E:61:A7:…:45:EF:9B:DE); TPV provisional: VM win-11 en 192.168.10.60.
+## Consulta de solo lectura por XML-RPC desde el servidor (ver-ventas.sh). 000001-000003: la misma venta de la prueba 5, repetida al probar la impresora.
+## 000004: prueba 6, cobrada con el cable de red de la VM desconectado y sincronizada al reconectar.
+
+### Pedidos del TPV en el servidor ( https://10.0.2.15 )
+261-1-000001 · 2026-10-26 10:59:37 UTC · TPV Barra 1 · mesa Sala, 3 · 7.30 € · paid · Camarero barra 1 · 1 Café con leche, 1 Patatas bravas
+261-1-000002 · 2026-10-26 11:22:09 UTC · TPV Barra 1 · mesa Sala, 3 · 7.30 € · paid · Camarero barra 1 · 1 Café con leche, 1 Patatas bravas
+261-1-000003 · 2026-10-26 11:26:10 UTC · TPV Barra 1 · mesa Sala, 3 · 7.30 € · paid · Camarero barra 1 · 1 Café con leche, 1 Patatas bravas
+261-1-000004 · 2026-10-26 11:41:43 UTC · TPV Barra 1 · mesa Sala, 4 · 5.00 € · paid · Camarero barra 1 · 1 Caña, 1 Refresco
