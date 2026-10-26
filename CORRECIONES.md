@@ -100,6 +100,8 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 - [ ] 🟠 **`08-pruebas-curl.txt` y `lighthouse-w3c.txt` son de una versión anterior** de la web, sin las cabeceras nuevas. Publicar la versión actual (con `desplegar-web.yml` si ya hay secretos, o a mano) y volver a ejecutar `instalar-servidor-web.sh`. Después, contra la URL pública: `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con `web/index.html` y salgan CSP y Permissions-Policy), Lighthouse y W3C. Sustituir las dos evidencias.
   - **Quién:** Adrian. Con el Learner Lab arrancado.
+  - [x] Publicada la versión actual y evidencias sustituidas (26/10): lo publicado es idéntico al repositorio, salen CSP y Permissions-Policy, W3C sin errores y escritorio 98-100 en Lighthouse.
+  - [ ] 🟠 **Lighthouse en móvil da 70 de rendimiento** (mediana de 5; hace falta 90): el iframe del mapa de OpenStreetMap trae unos 1,3 MB de JavaScript y se carga dentro de la medida. Arreglo propuesto: que el mapa se cargue al pulsar un botón, y repetir Lighthouse en móvil.
 
 ### 3.5 RTO medido en el mismo servidor (tarea 45)
 
@@ -217,10 +219,10 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] `660,00 €`, factura validada, cobrada y con PDF.
 
 **Web (3.4 y 4)**
-- [ ] `curl -sI https://almichain1.duckdns.org | grep -i content-length` da el mismo número que `wc -c < web/index.html`.
-- [ ] `curl -sI https://almichain1.duckdns.org` incluye `content-security-policy` y `permissions-policy`.
-- [ ] La web carga **sin errores en la consola** del navegador (la CSP no bloquea las fotos ni el mapa).
-- [ ] Lighthouse **contra la URL pública**: 90 o más en las cuatro categorías; W3C sin errores.
+- [x] `curl -sI https://almichain1.duckdns.org | grep -i content-length` da el mismo número que `wc -c < web/index.html`. (26/10)
+- [x] `curl -sI https://almichain1.duckdns.org` incluye `content-security-policy` y `permissions-policy`. (26/10)
+- [x] La web carga **sin errores en la consola** del navegador (la CSP no bloquea las fotos ni el mapa). (26/10)
+- [ ] Lighthouse **contra la URL pública**: 90 o más en las cuatro categorías; W3C sin errores. (26/10: W3C y escritorio, bien; móvil, 70 de rendimiento)
 
 **VM del gerente (4)**
 - [ ] `lsb_release -d` en la tarea 12; historial de Windows Update con una actualización acumulativa; `manage-bde -status` con `C:` cifrada.

@@ -1,29 +1,40 @@
-# Lighthouse 12.2.1 y validador Nu del W3C (23/10/2026)
+# Lighthouse 12.2.1 y validadores del W3C contra la URL pública (26/10/2026)
 
-Lighthouse se pasó a los archivos de web/ servidos en local, los mismos que se publicaron en
-https://almichain1.duckdns.org. El W3C valida los archivos de web/ de la rama main.
+Todo contra https://almichain1.duckdns.org, después de publicar la versión actual de web/
+(index.html, style.css y script.js idénticos a los del repositorio: 08-pruebas-curl.txt).
+Lighthouse desde la línea de comandos (npx lighthouse@12.2.1, Chrome sin interfaz), 5 pasadas
+por modo como recomienda Lighthouse; se da la mediana porque el resultado varía con la red.
 
-## Lighthouse · Móvil
-  Rendimiento       98
-  Accesibilidad     100
-  Buenas prácticas  100
-  SEO               100
-  FCP               0.8 s
-  LCP               2.4 s
-  TBT               0 ms
-  CLS               0
+## Lighthouse · Móvil (5 pasadas)
+  Pasada  Rendimiento  Accesibilidad  Buenas prácticas  SEO   FCP    LCP    TBT   CLS  Mapa cargado
+  1       68           100            100               100   3.6 s  6.1 s  0 ms  0    sí
+  2       95           100            100               100   1.3 s  2.9 s  0 ms  0    no
+  3       70           100            100               100   3.6 s  6.0 s  0 ms  0    sí
+  4       71           100            100               100   3.5 s  6.1 s  0 ms  0    sí
+  5       70           100            100               100   3.6 s  6.0 s  0 ms  0    sí
+  Mediana 70           100            100               100   3.6 s  6.0 s  0 ms  0
 
-## Lighthouse · Escritorio
-  Rendimiento       99
-  Accesibilidad     100
-  Buenas prácticas  100
-  SEO               100
-  FCP               0.3 s
-  LCP               1.0 s
-  TBT               0 ms
-  CLS               0
+  Rendimiento por debajo de 90. Causa: el iframe del mapa de OpenStreetMap (loading="lazy") se
+  carga dentro de la medida en 4 de 5 pasadas y trae unos 1,3 MB de JavaScript y las teselas.
+  En la única pasada en la que no se cargó, 95. En local (23/10) daba 98 porque no había red real.
 
-## W3C index.html
-Document checking completed. No errors found.
-## W3C style.css
-Document checking completed. No errors found.
+## Lighthouse · Escritorio (5 pasadas)
+  Pasada  Rendimiento  Accesibilidad  Buenas prácticas  SEO   FCP    LCP    TBT   CLS
+  1       98           100            100               100   0.6 s  1.0 s  0 ms  0
+  2       98           100            100               100   0.7 s  1.1 s  0 ms  0
+  3       99           100            100               100   0.6 s  1.0 s  0 ms  0
+  4       98           100            100               100   0.7 s  1.0 s  0 ms  0
+  5       99           100            100               100   0.6 s  1.0 s  0 ms  0
+  Mediana 98           100            100               100   0.6 s  1.0 s  0 ms  0
+
+## Consola del navegador
+  Sin errores en las 10 pasadas (auditoría errors-in-console): la CSP no bloquea las fotos ni el mapa.
+
+## W3C · https://almichain1.duckdns.org/ (validador Nu, vnu 26.10.18)
+  Document checking completed. No errors or warnings to show.
+
+## W3C · https://almichain1.duckdns.org/style.css (validador CSS, perfil CSS3 + SVG)
+  ¡Enhorabuena! No error encontrado. 0 errores y 11 advertencias, ninguna es un fallo:
+  - 9 × «Due to their dynamic nature, CSS variables are currently not statically checked»:
+    el validador no comprueba las variables CSS (--color...).
+  - 2 × «-webkit-text-stroke is a vendor extension»: propiedad con prefijo de navegador, a propósito.

@@ -170,10 +170,8 @@ Las pruebas con `curl` y `openssl` se hicieron desde un equipo externo; su salid
 
 La validación W3C, Lighthouse y la accesibilidad son la tarea 29.
 
-> [!WARNING]
-> **La web publicada no es la del repositorio.** En [`08-pruebas-curl.txt`](../evidencias/30-hosting-aws/08-pruebas-curl.txt) el servidor devuelve `Content-Length: 7143`, que es el `index.html` del 22/10. El del repositorio es posterior (commit `87a8b65`, 9.167 bytes, y el 24/10 se le añadieron los créditos de las imágenes, la distancia al local en la geolocalización y dos cabeceras nuevas, sección 7). Además, Lighthouse se pasó **en local** ([tarea 29](../evidencias/web/lighthouse-w3c.txt)), no contra la URL pública.
->
-> **Pendiente:** con el laboratorio arrancado, subir la versión actual (`aws s3 sync`, sección 6), volver a ejecutar `instalar-servidor-web.sh` para que nginx tenga las cabeceras nuevas, y repetir el `curl` y Lighthouse **contra `https://almichain1.duckdns.org`**. Comprobar que `Content-Length` coincide con el tamaño de `web/index.html` del repositorio y sustituir las evidencias.
+> [!NOTE]
+> **Publicada la versión actual (26/10/2026).** Hasta ese día el servidor daba el `index.html` del 22/10 (`Content-Length: 7143`) y nginx no tenía la CSP ni la Permissions-Policy. Se subió la web actual al bucket y se volvió a ejecutar `instalar-servidor-web.sh`. Ahora `index.html`, `style.css` y `script.js` publicados son idénticos a los del repositorio y salen las dos cabeceras ([`08-pruebas-curl.txt`](../evidencias/30-hosting-aws/08-pruebas-curl.txt)). Lighthouse y W3C, contra la URL pública ([`lighthouse-w3c.txt`](../evidencias/web/lighthouse-w3c.txt)): escritorio 98-100 y W3C sin errores. **En móvil el rendimiento da 70** (mediana de 5) porque el mapa de OpenStreetMap se carga dentro de la medida.
 
 ### Capturas
 
