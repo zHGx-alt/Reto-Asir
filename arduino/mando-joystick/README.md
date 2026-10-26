@@ -59,7 +59,7 @@ Compila, sube y avisa de lo que falte. La primera vez saca `arduino-cli` del App
 `old_scheme_first` (sin él, en algunos PC no se reconoce el bootloader; pide la contraseña del usuario y se pierde al
 reiniciar el PC). Con `./subir.sh monitor`, al acabar abre el monitor serie para los comandos de la sección siguiente.
 
-Probado el 26/10/2026 sin placa: compila (Flash 39 %, RAM 19 %) y se para con el aviso de conectar la placa.
+Probado el 26/10/2026 sin placa, con el firmware de 4 botones: compila (Flash 37 %, RAM 17 %) y se para con el aviso de conectar la placa.
 
 ### Arduino IDE
 
