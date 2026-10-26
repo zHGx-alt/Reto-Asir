@@ -36,13 +36,13 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 
 ## Resumen
 
-**29 de 55 tareas hechas (52 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**30 de 55 tareas hechas (54 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 0 | 3 | 14 |
-| Software | 14 | 11 | 1 | 26 |
+| Software | 15 | 10 | 1 | 26 |
 | Físico | 0 | 1 | 8 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -57,12 +57,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | Software | Iker | 28/10 | En curso | Batocera arranca con 1 GB (565 MB usados solo con el menú). Faltan medidas; endurecimiento (root con contraseña por defecto) y la decisión en el Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
 | 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Eneko.P | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la del enunciado) solo hay 3 medidas de antes; faltan las de después y medir jugando. El 24/10 optimizar-arcade.sh mantiene las actualizaciones de seguridad (a las 5:00). El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; limitar la administración a la MAC del gerente. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | Software | Markel | 02/11 | En curso | Scripts listos el 24/10 (configurar-tpv.ps1 y comprobar-tpv.ps1; sintaxis comprobada y la comprobación probada en un Windows 11). Falta crear la VM del TPV; ejecutar; poner el quiosco y guardar la evidencia. Hecho cuando comprobar-tpv.ps1 da 16 OK en cada TPV y están las capturas de la sección 5 de la guía. El 26/10 pasa de Iker a Markel. | [DOCUMENTACION.md](../../docs/so/13-tpv/DOCUMENTACION.md) |
 | 18 | Monitorización de recursos de la recreativa | Software | Eneko.P | 02/11 | En curso | Scripts hechos y probados en Linux; documento reescrito para Debian el 24/10 (antes era para Batocera). Falta ejecutarlos en la VM de 1 GB durante una partida y guardar los CSV. El 26/10 pasa de Adrian a Eneko.P (reparto de carga). | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
 | 43 | RAID 1 y simulación de fallo | Software | Iker | 02/11 | En curso | RAID y simulación de fallo hechos por Iker en VM (22-23/10). Falta lo principal: la BD sigue en el disco del sistema. mover-docker-al-raid.sh preparado el 24/10 (sección 7); falta ejecutarlo y repetir el fallo con Odoo funcionando. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. El 24/10 el script copia también almi_chain si existe y avisa si el USB lleva más de 7 días sin conectarse; falta probarlo en la VM. Pasa de Markel a Iker, que la hizo. Mejora: aviso por correo si la copia falla (OnFailure=) y tercer repositorio en S3. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
-| 52 | Proxy HTTPS delante de Odoo | Software | Adrian | 04/11 | En curso | Proxy nginx con certificado propio preparado el 24/10 (docker-compose.https.yml; nginx.conf; activar-https.sh); Odoo deja de escuchar en la LAN. Probado el 26/10 en una ServidorERP nueva: 13 de 15 pruebas correctas y 4 arreglos del proxy. Falta activarlo en la ServidorERP del equipo (después de mover la BD al RAID; tarea 43) e instalar el certificado en los TPV (configurar-tpv.ps1 -CertificadoOdoo) para las pruebas 5 y 6. Pasos que faltan en RUNBOOK.md (26/10); el certificado lleva nameConstraints (tarea 46). | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
+| 52 | Proxy HTTPS delante de Odoo | Software | Adrian | 04/11 | En curso | Proxy nginx con certificado propio (con nameConstraints; tarea 46). Probado en VM el 26/10: las 15 pruebas correctas; la 5 (venta por HTTPS) y la 6 (venta sin red) con un TPV provisional (win-11) en la red 192.168.10.0/24 del plano. Falta activarlo en la ServidorERP del equipo cuando la BD esté en el RAID (tarea 43) y repetir 5 y 6 en los TPV reales: RUNBOOK.md (incluye fijar web.base.url y quitar el QR del ticket; S-19). | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | Revisión del repositorio hecha el 26/10: 18 hallazgos (5 altos) con responsable; S-01 (certificado de Odoo sin nameConstraints) corregido y probado. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
@@ -94,6 +93,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | Documentación | Peio | Sumas comprobadas el 23/10. El 24/10 se añaden servidor, discos del RAID, disco USB, SAI, switch, cable, adaptador Wi-Fi y palanca (sección 12): 3.814,74 € de inversión completa y 4.174,74 € el primer año. | [10-presupuesto-hardware.md](../../docs/hardware/10-presupuesto-hardware.md) |
 | 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | Iker | Actualizado el 24/10: switch; servidor presupuestado; red de invitados 192.168.50.0/24; Actions y HTTPS; SVG regenerado; tabla de guías de instalación por equipo. | [DIAGRAMA.md](../../docs/diagramas/11-arquitectura-equipos/DIAGRAMA.md) |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | Adrian | Hecho en VMware (23/10). Pendiente: versión exacta de Ubuntu; RG-05 de Windows queda parcial (ninguna actualización acumulativa instalada); cifrado después de instalar. | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
+| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | Markel | Scripts listos el 24/10 (configurar-tpv.ps1 y comprobar-tpv.ps1; sintaxis comprobada y la comprobación probada en un Windows 11). Falta crear la VM del TPV; ejecutar; poner el quiosco y guardar la evidencia. Hecho cuando comprobar-tpv.ps1 da 16 OK en cada TPV y están las capturas de la sección 5 de la guía. El 26/10 pasa de Iker a Markel. | [DOCUMENTACION.md](../../docs/so/13-tpv/DOCUMENTACION.md) |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | Iker | Debian 13 + MAME 0.276 en VM: arranque directo en 4,7 s y 5 ROMs legales verificadas. El 24/10: preseed sin clave SSH fija y SSH sin contraseña; conexión a la Wi-Fi de invitados documentada. La instalación en el equipo real es la tarea 53. | [DOCUMENTACION.md](../../docs/arcade/16-recreativa-mame/DOCUMENTACION.md) |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | Adrian | Compila (pio run del 24/10: Flash 39,9 %; RAM 19,3 %). Añadidos el modo de palanca digital de 4 microinterruptores y los botones 7-8. Probarlo en la placa es la tarea 50. | [README.md](../../arduino/mando-joystick/README.md) |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
@@ -122,7 +122,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 5 | 5 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 7 | 4 | 1 | 2 | 17 | 1, 2, 4, 5, 6, 11 |
+| Markel | 7 | 3 | 0 | 2 | 17 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
 
 ## Tareas por persona
@@ -193,7 +193,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
 |---|---|---|---|---|---|---|
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 28/10–02/11 | #9 (Markel) | En curso |
+| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 28/10–02/11 | #9 (Markel) | Hecho |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Pendiente |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |

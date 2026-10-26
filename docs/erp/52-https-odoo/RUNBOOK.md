@@ -39,6 +39,15 @@ Esperado al final: `HTTPS: 200`, `HTTP → 443: 301`, `8069 en la LAN: 000`.
 
 Si algo va mal: sección 5 de [DOCUMENTACION.md](DOCUMENTACION.md) (volver atrás en dos órdenes).
 
+## 2.1 URL de Odoo y QR del ticket
+
+Odoo apunta su dirección (`web.base.url`) la primera vez que entra el administrador. Si fue antes de cambiar la IP o el proxy, los enlaces (y el QR del ticket) salen con la dirección vieja (incidencia 6). En Odoo como `admin`, con el modo desarrollador (`?debug=1`): *Ajustes → Técnico → Parámetros del sistema*:
+
+- `web.base.url` = `https://192.168.10.10`
+- Crear `web.base.url.freeze` = `True`, para que no se vuelva a cambiar sola.
+
+Y en *Punto de venta → Configuración → Ajustes*, quitar el QR de factura del recibo: el cliente está en la Wi-Fi de invitados y no llega al servidor (tarea 46, S-19).
+
 ## 3. Cortafuegos del servidor
 
 Si ya se ejecutó en la tarea 33, se vuelve a ejecutar sin problema (es idempotente):
@@ -60,7 +69,7 @@ cd ~/Reto-Asir/docs/erp/33-odoo-docker && sudo ./cortafuegos-servidor.sh
    ```powershell
    .\configurar-tpv.ps1 -NumeroTpv 1 -PuertosOdoo 443 -CertificadoOdoo .\odoo.crt
    ```
-   La huella que muestra es SHA-1 (`Thumbprint`). Para comparar con la SHA-256 del paso 2: `certutil -hashfile .\odoo.crt SHA256`.
+   La huella que muestra es SHA-1 (`Thumbprint`). Para comparar con la SHA-256 del paso 2: `(Get-PfxCertificate .\odoo.crt).GetCertHashString('SHA256')`. **No** vale `certutil -hashfile`: da la suma del fichero, no la del certificado (incidencia 7).
 3. Cambiar la URL del quiosco a `https://192.168.10.10/pos/ui` (tarea 13, paso 4.5: *Configurar un quiosco* → elegir el existente → URL).
 4. Comprobar:
    ```powershell

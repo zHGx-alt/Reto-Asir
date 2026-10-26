@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (26/10/2026):** 🟡 Revisión del repositorio hecha: 18 hallazgos y 2 ya corregidos (S-01 y S-05). Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
+- **Estado (26/10/2026):** 🟡 Revisión del repositorio hecha: 19 hallazgos y 2 ya corregidos (S-01 y S-05). Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -36,7 +36,7 @@ Lo que no se puede ver en el repositorio (la configuración real del router, los
 |---|---|---|
 | Alta | 5 (S-01 a S-05) | 2 (S-01 y S-05) |
 | Media | 7 (S-06 a S-12) | 0 |
-| Baja | 6 (S-13 a S-18) | 0 |
+| Baja | 7 (S-13 a S-19) | 0 |
 
 Lo más urgente, por este orden:
 
@@ -48,8 +48,8 @@ Lo más urgente, por este orden:
 
 | ID | Gravedad | Dónde | Qué pasa | Qué hacer | Responsable | Estado |
 |---|---|---|---|---|---|---|
-| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script y probado en la VM de la tarea 52 (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
-| S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Esperando a la tarea 43 (guía en [`RUNBOOK.md` de la tarea 52](../../erp/52-https-odoo/RUNBOOK.md)) |
+| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script y probado en la VM de la tarea 52, también en Edge (candado sin avisos) (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
+| S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Probado entero en VM, con TPV provisional y venta sin red (tarea 52, sección 4.2). Falta en el servidor del equipo: espera a la tarea 43 ([runbook](../../erp/52-https-odoo/RUNBOOK.md)) |
 | S-03 | Alta | Tarea 16, Batocera | Con *Enforce security* desactivado, root tiene siempre la contraseña `linux`, se ve en el menú y sirve también para SSH y Samba | `batocera-settings-set system.security.enabled 1` y contraseña de root aleatoria en KeePassXC. O quedarse con la versión Debian, que ya está endurecida (S-08 lo compara) | Iker | ⏳ Pendiente (solo si se elige Batocera) |
 | S-04 | Alta | Tarea 24, router | Se entra al panel como `Admin` con una contraseña de 5 caracteres que parece la de fábrica. El panel va por HTTP y está abierto a toda la LAN. No hay evidencia de que WPS esté apagado | Contraseña de KeePassXC, administración solo desde la MAC del gerente y por cable, y WPS desactivado | Peio | 🟡 Contraseña cambiada y en KeePassXC (26/10). Faltan la MAC y WPS |
 | S-05 | Alta | Tarea 24, Wi-Fi | La contraseña Wi-Fi tiene 8 cifras y se leía en dos capturas que siguen en el historial de Git (commits `532c87a` y `215eac7`). El repositorio es privado, lo que lo atenúa, pero el profesor y cualquiera con acceso las pueden ver | Cambiarla por una frase de 20 caracteres o más. No hace falta reescribir el historial si se cambia la contraseña | Peio | ✅ Cambiada y en KeePassXC (26/10). Comprobar que la RADIUS de las mismas capturas tampoco sigue en uso |
@@ -66,6 +66,7 @@ Lo más urgente, por este orden:
 | S-16 | Baja | Tarea 31, `user-data.sh.tftpl` | El token de DuckDNS va en el `user_data`. Lo puede leer cualquier proceso de la EC2 (IMDS) y queda en claro en `terraform.tfstate`. `.gitignore` excluye el `tfstate`, así que no llega al repositorio | Aceptable en el laboratorio. En producción: guardarlo en SSM Parameter Store y leerlo desde la instancia | Eneko.P | Aceptado |
 | S-17 | Baja | Tarea 30 | `LabInstanceProfile` tiene más permisos de los que necesita la EC2 (solo leer un bucket). Ya está documentado como limitación del Learner Lab | Nada en el laboratorio. En producción, un rol con `s3:GetObject` y `s3:ListBucket` | Adrian | Aceptado (limitación) |
 | S-18 | Baja | `.github/workflows/` | Las acciones se referencian por etiqueta (`actions/checkout@v4`), no por SHA. Si alguien moviera la etiqueta, se ejecutaría otro código con los secretos de AWS | Fijarlas por SHA en `desplegar-web.yml`, que es el que usa secretos | Eneko.P | ⏳ Pendiente |
+| S-19 | Baja | Tareas 34 y 52, ticket del TPV | El QR «¿Necesita una factura?» del ticket apunta a la IP vieja del servidor (`web.base.url` no se actualiza). Aunque apuntara bien, el cliente está en la Wi-Fi de invitados, que no llega al servidor: el QR invita a una dirección interna que no le sirve | Fijar `web.base.url` y `web.base.url.freeze` y quitar el QR del recibo (runbook de la tarea 52, paso 2.1) | Adrian | ⏳ Con la tarea 52 |
 
 ## 4. Detalle
 
