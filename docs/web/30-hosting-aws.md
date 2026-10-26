@@ -171,7 +171,7 @@ Las pruebas con `curl` y `openssl` se hicieron desde un equipo externo; su salid
 La validación W3C, Lighthouse y la accesibilidad son la tarea 29.
 
 > [!NOTE]
-> **Publicada la versión actual (26/10/2026).** Hasta ese día el servidor daba el `index.html` del 22/10 (`Content-Length: 7143`) y nginx no tenía la CSP ni la Permissions-Policy. Se subió la web actual al bucket y se volvió a ejecutar `instalar-servidor-web.sh`. Ahora `index.html`, `style.css` y `script.js` publicados son idénticos a los del repositorio y salen las dos cabeceras ([`08-pruebas-curl.txt`](../evidencias/30-hosting-aws/08-pruebas-curl.txt)). Lighthouse y W3C, contra la URL pública ([`lighthouse-w3c.txt`](../evidencias/web/lighthouse-w3c.txt)): escritorio 98-100 y W3C sin errores. **En móvil el rendimiento da 70** (mediana de 5) porque el mapa de OpenStreetMap se carga dentro de la medida.
+> **Publicada la versión actual (26/10/2026).** Hasta ese día el servidor daba el `index.html` del 22/10 (`Content-Length: 7143`) y nginx no tenía la CSP ni la Permissions-Policy. Se subió la web actual al bucket y se volvió a ejecutar `instalar-servidor-web.sh`. Ahora `index.html`, `style.css` y `script.js` publicados son idénticos a los del repositorio y salen las dos cabeceras ([`08-pruebas-curl.txt`](../evidencias/30-hosting-aws/08-pruebas-curl.txt)). Lighthouse y W3C, contra la URL pública ([`lighthouse-w3c.txt`](../evidencias/web/lighthouse-w3c.txt)): móvil 94/100/100/100, escritorio 99/100/100/100 (medianas de 5) y W3C sin errores. En móvil daba 70 hasta que el mapa de OpenStreetMap pasó a cargarse al pulsar «Ver el mapa».
 
 ### Capturas
 

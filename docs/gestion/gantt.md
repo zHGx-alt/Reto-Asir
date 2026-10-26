@@ -57,7 +57,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | Software | Iker | 28/10 | En curso | Batocera arranca con 1 GB (565 MB usados solo con el menú). Faltan medidas; endurecimiento (root con contraseña por defecto) y la decisión en el Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
 | 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Eneko.P | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la del enunciado) solo hay 3 medidas de antes; faltan las de después y medir jugando. El 24/10 optimizar-arcade.sh mantiene las actualizaciones de seguridad (a las 5:00). El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS. Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; cambiar la contraseña de administración y la Wi-Fi (estaba visible en las capturas antiguas; tapadas el 24/10). | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | Software | Iker | 02/11 | En curso | Scripts listos el 24/10 (configurar-tpv.ps1 y comprobar-tpv.ps1; sintaxis comprobada y la comprobación probada en un Windows 11). Falta crear la VM del TPV; ejecutar; poner el quiosco y guardar la evidencia. Hecho cuando comprobar-tpv.ps1 da 16 OK en cada TPV y están las capturas de la sección 5 de la guía. | [DOCUMENTACION.md](../../docs/so/13-tpv/DOCUMENTACION.md) |
+| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | Software | Markel | 02/11 | En curso | Scripts listos el 24/10 (configurar-tpv.ps1 y comprobar-tpv.ps1; sintaxis comprobada y la comprobación probada en un Windows 11). Falta crear la VM del TPV; ejecutar; poner el quiosco y guardar la evidencia. Hecho cuando comprobar-tpv.ps1 da 16 OK en cada TPV y están las capturas de la sección 5 de la guía. | [DOCUMENTACION.md](../../docs/so/13-tpv/DOCUMENTACION.md) |
 | 18 | Monitorización de recursos de la recreativa | Software | Eneko.P | 02/11 | En curso | Scripts hechos y probados en Linux; documento reescrito para Debian el 24/10 (antes era para Batocera). Falta ejecutarlos en la VM de 1 GB durante una partida y guardar los CSV. El 26/10 pasa de Adrian a Eneko.P (reparto de carga). | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
 | 43 | RAID 1 y simulación de fallo | Software | Iker | 02/11 | En curso | RAID y simulación de fallo hechos por Iker en VM (22-23/10). Falta lo principal: la BD sigue en el disco del sistema. mover-docker-al-raid.sh preparado el 24/10 (sección 7); falta ejecutarlo y repetir el fallo con Odoo funcionando. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
@@ -100,7 +100,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | Peio | — | [27-wireframes.md](../../docs/web/27-wireframes.md) |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | Markel | Mapa de OpenStreetMap; geolocalización; formulario de ejemplo y slideshow. | [index.html](../../web/index.html) |
-| 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | Adrian | Lighthouse 98-100 en local (23/10). Contra la URL pública (26/10): escritorio 98-100; móvil 70 de rendimiento por el mapa de OpenStreetMap (CORRECIONES 3.4); el mapa pasa a cargarse al pulsar un botón (en local; móvil 98) y falta medirlo publicado. W3C contra la URL pública: 0 errores en HTML y en CSS. Pasa de Eneko.P a Adrian, que la hizo. | [lighthouse-w3c.txt](../../docs/evidencias/web/lighthouse-w3c.txt) |
+| 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | Adrian | Lighthouse 98-100 en local (23/10). Contra la URL pública (26/10; medianas de 5): móvil 94/100/100/100 y escritorio 99/100/100/100. Móvil daba 70 hasta que el mapa pasó a cargarse al pulsar un botón. W3C contra la URL pública: 0 errores en HTML y en CSS. Pasa de Eneko.P a Adrian, que la hizo. | [lighthouse-w3c.txt](../../docs/evidencias/web/lighthouse-w3c.txt) |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | Adrian | Probado con el laboratorio encendido (evidencias del 23/10). Fuera de sesión no responde porque el Learner Lab apaga la EC2. Configuración de nginx comprobada con nginx -t. | [30-hosting-aws.md](../../docs/web/30-hosting-aws.md) |
 | 32 | Comparativa y elección de ERP | 7 ERP | Documentación | Eneko.S | Elige Odoo Community. | [32-comparativa-erp.md](../../docs/erp/32-comparativa-erp.md) |
 | 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | Iker | Repetido el 23/10 en Docker limpio con el mismo docker-compose.yml: login 200; gestor de BD desactivado; 5432 sin publicar; admin/admin rechazado. | [DOCUMENTACION.md](../../docs/erp/33-odoo-docker/DOCUMENTACION.md) |
@@ -121,8 +121,8 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Adrian | 15 | 5 | 2 | 1 | 38 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
-| Iker | 13 | 5 | 5 | 0 | 34 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 7 | 4 | 1 | 2 | 15 | 1, 2, 4, 5, 6, 11 |
+| Iker | 12 | 4 | 4 | 0 | 30 | 0, 1, 2, 3, 7, 8, 9 |
+| Markel | 8 | 5 | 2 | 2 | 19 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
 
 ## Tareas por persona
@@ -145,7 +145,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 03/11–04/11 | #33 (Iker) | En curso |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 05/11–06/11 | #13 (Iker), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | Pendiente |
+| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 05/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | Pendiente |
 
 ### Eneko.P
 
@@ -176,8 +176,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 4 | Herramienta de seguimiento (Gantt en el repo) | 0 Gestión | Gestión | 21/10–23/10 | — | Hecho |
 | 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | 23/10–23/10 | #8 (Eneko.S), #9 (Markel) | Hecho |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 28/10–02/11 | #9 (Markel) | En curso |
-| 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–04/11 | #12 (Adrian), #13 (Iker) | En curso |
+| 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–04/11 | #12 (Adrian), #13 (Markel) | En curso |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | 22/10–23/10 | — | Hecho |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | 26/10–28/10 | — | En curso |
 | 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | 22/10–23/10 | #32 (Eneko.S) | Hecho |
@@ -193,6 +192,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
 |---|---|---|---|---|---|---|
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
+| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 28/10–02/11 | #9 (Markel) | En curso |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Pendiente |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Pendiente |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
