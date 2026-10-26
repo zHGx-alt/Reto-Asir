@@ -91,7 +91,7 @@ Lo que hace el script (log completo en [`evidencias/salida-desplegar-odoo.log`](
 | Reinicio automático | `restart: unless-stopped` en los dos contenedores |
 | Cortafuegos del servidor | [`cortafuegos-servidor.sh`](cortafuegos-servidor.sh) (`ufw`): entrada bloqueada; SSH solo desde el PC del gerente; 80/443 solo desde la LAN. Hace falta porque la red del local es plana ([tarea 23, apartado 5.2](../../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)). Pendiente de ejecutar en la VM |
 
-**Comunicaciones cifradas:** Odoo responde por **HTTP**. El proxy HTTPS está preparado en la [tarea 52](../52-https-odoo/DOCUMENTACION.md) (nginx delante y Odoo solo en `127.0.0.1:8069`); falta activarlo.
+**Comunicaciones cifradas:** Odoo responde por **HTTP**. El proxy HTTPS está preparado en la [tarea 52](../52-https-odoo/DOCUMENTACION.md) (nginx delante y Odoo solo en `127.0.0.1:8069`). Se probó el 26/10 en una VM nueva; falta activarlo en esta.
 
 ## 6. Pruebas
 De [`evidencias/pruebas-odoo.txt`](evidencias/pruebas-odoo.txt):

@@ -1,0 +1,52 @@
+### Re-ejecución tras corregir nginx.conf (idempotencia)
+==> 1/5 Certificado para 10.0.2.15
+  Ya existe: se mantiene. Huella SHA-256:
+  sha256 Fingerprint=DE:72:15:A3:B4:A8:59:6D:A9:3F:AC:6E:C1:10:5F:1B:B3:1D:8E:84:13:46:21:19:05:5E:B6:BD:8F:53:0B:82
+
+==> 2/5 Configuración de nginx y del proxy
+
+==> 3/5 proxy_mode en odoo.conf
+  proxy_mode = True
+
+==> 4/5 COMPOSE_FILE en .env
+
+==> 5/5 Levantando Odoo y el proxy
+ Container odoo-db-1  Running
+ Container odoo-odoo-1  Running
+ Container odoo-proxy-1  Running
+ Container odoo-db-1  Healthy
+ Container odoo-proxy-1  Recreate
+ Container odoo-proxy-1  Recreated
+ Container odoo-proxy-1  Starting
+ Container odoo-proxy-1  Started
+NAME           IMAGE               COMMAND                  SERVICE   CREATED              STATUS                   PORTS
+odoo-db-1      postgres:17         "docker-entrypoint.s…"   db        3 minutes ago        Up 3 minutes (healthy)   5432/tcp
+odoo-odoo-1    odoo:19.0           "/entrypoint.sh odoo"    odoo      About a minute ago   Up About a minute        127.0.0.1:8069->8069/tcp, 8071-8072/tcp
+odoo-proxy-1   nginx:1.27-alpine   "/docker-entrypoint.…"   proxy     5 seconds ago        Up 5 seconds             0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp
+
+==> Comprobación
+  HTTPS:      200 (esperado 200)
+  HTTP → 443: 301 https://10.0.2.15/web/login (esperado 301)
+  8069 en la LAN: 000 (esperado 000: cerrado)
+
+Listo. Falta instalar /opt/odoo/https/certs/odoo.crt como raíz de confianza en los TPV y en el PC del gerente
+(configurar-tpv.ps1 -CertificadoOdoo, tarea 13) y cambiar la URL del quiosco a https://10.0.2.15/pos/ui.
+
+### Prueba 7: comandos del backup (tarea 44) con el proxy activo
+COMPOSE_FILE=docker-compose.yml:docker-compose.https.yml
+pg_dump -f docker-compose.yml: 1326269 bytes
+  cabecera: PGDMP (formato custom de pg_dump)
+  tablas con datos en la copia: 134
+volumen de adjuntos: /var/lib/docker/volumes/odoo_odoo-web-data/_data
+proxy sigue en marcha: db=running odoo=running proxy=running 
+
+### Secretos y permisos
+750 root /opt/odoo
+600 root /opt/odoo/.env
+750 root /opt/odoo/https/certs
+640 root /opt/odoo/https/certs/odoo.key
+644 root /opt/odoo/https/certs/odoo.crt
+list_db = False
+dbfilter = ^tienda$
+workers = 0
+proxy_mode = True

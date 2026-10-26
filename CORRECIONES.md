@@ -62,6 +62,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
   ```
   **Hecho cuando:** el script dice HTTPS 200, HTTP 301 y 8069 cerrado, y se hacen las pruebas de la [sección 4 de la guía](docs/erp/52-https-odoo/DOCUMENTACION.md).
   - **Quién:** Adrian.
+  - [x] Probado el 26/10 en una `ServidorERP` nueva (VM en el PC de Adrian): pasan todas las pruebas menos las del TPV (5 y 6). De paso se corrigieron el permiso de ejecución del script, las cabeceras duplicadas, la cookie de sesión sin `Secure` y el proxy que no cogía un `nginx.conf` nuevo ([incidencias](docs/erp/52-https-odoo/DOCUMENTACION.md#41-incidencias)). Falta ejecutarlo en la `ServidorERP` del equipo.
 
 ### 2.3 Menús del cajero (tarea 34)
 

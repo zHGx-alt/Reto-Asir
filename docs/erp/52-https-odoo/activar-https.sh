@@ -57,6 +57,8 @@ echo "COMPOSE_FILE=docker-compose.yml:docker-compose.https.yml" >> "$DIR/.env"
 log "5/5 Levantando Odoo y el proxy"
 cd "$DIR"
 docker compose up -d --remove-orphans
+# install deja nginx.conf como fichero nuevo y el contenedor seguiría con el antiguo montado: se recrea el proxy
+docker compose up -d --force-recreate --no-deps proxy
 sleep 5
 docker compose ps
 
