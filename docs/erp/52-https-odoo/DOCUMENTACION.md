@@ -40,7 +40,7 @@ Odoo en el servidor: solo 127.0.0.1:8069 (ya no escucha en la LAN)
 
 **Montaje.** VM `ServidorERP` nueva, hecha con la [tarea 33](../33-odoo-docker/DOCUMENTACION.md): Debian 13.7, Odoo 19.0-20261015 y PostgreSQL 17. Tiene red NAT de VirtualBox, así que su IP es `10.0.2.15` y el script se ejecutó con `sudo ./activar-https.sh 10.0.2.15`. El PC anfitrión hace de «otro equipo de la LAN» con los reenvíos `127.0.0.1:8443 → 443`, `:8080 → 80` y `:8069 → 8069`. En el local se usa `192.168.10.10`, igual que en la sección 3.
 
-Huella SHA-256 del certificado de la VM: `DE:72:15:A3:B4:A8:59:6D:A9:3F:AC:6E:C1:10:5F:1B:B3:1D:8E:84:13:46:21:19:05:5E:B6:BD:8F:53:0B:82`. En el servidor del local saldrá otra, porque el certificado se genera allí.
+Huella SHA-256 del certificado de la VM: `80:59:38:33:4F:3E:43:DA:8A:C2:B3:7B:35:E0:57:7E:EA:C0:52:3A:E6:52:29:C7:2E:64:49:9A:FE:71:11:F8`. Es el regenerado a las 10:25 con `nameConstraints` ([tarea 46, S-01](../../seguridad/46-revision-seguridad/DOCUMENTACION.md)); con él se repitieron las pruebas 2, 3, 4, 8, 9 y 12, todas correctas ([05](evidencias/05-certificado-con-nameconstraints.txt)). El de las 07:15 (`DE:72:15:…:0B:82`) ya no existe. En el servidor del local saldrá otra, porque el certificado se genera allí.
 
 | # | Prueba | Esperado | Resultado | Evidencia |
 |---|---|---|---|---|

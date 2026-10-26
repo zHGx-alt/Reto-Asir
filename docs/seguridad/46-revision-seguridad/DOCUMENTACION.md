@@ -48,7 +48,7 @@ Lo más urgente, por este orden:
 
 | ID | Gravedad | Dónde | Qué pasa | Qué hacer | Responsable | Estado |
 |---|---|---|---|---|---|---|
-| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
+| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script y probado en la VM de la tarea 52 (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
 | S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Esperando a la tarea 43 (guía en [`RUNBOOK.md` de la tarea 52](../../erp/52-https-odoo/RUNBOOK.md)) |
 | S-03 | Alta | Tarea 16, Batocera | Con *Enforce security* desactivado, root tiene siempre la contraseña `linux`, se ve en el menú y sirve también para SSH y Samba | `batocera-settings-set system.security.enabled 1` y contraseña de root aleatoria en KeePassXC. O quedarse con la versión Debian, que ya está endurecida (S-08 lo compara) | Iker | ⏳ Pendiente (solo si se elige Batocera) |
 | S-04 | Alta | Tarea 24, router | Se entra al panel como `Admin` con una contraseña de 5 caracteres que parece la de fábrica. El panel va por HTTP y está abierto a toda la LAN. No hay evidencia de que WPS esté apagado | Contraseña de KeePassXC, administración solo desde la MAC del gerente y por cable, y WPS desactivado | Peio | ⏳ Pendiente |
@@ -91,7 +91,7 @@ La CA solo puede firmar para la IP del servidor y para `odoo.almichain.local`. E
 **Qué queda:**
 
 - Comprobar en Edge, en el TPV, que Odoo carga sin avisos con el certificado nuevo. Es la prueba 5 de la tarea 52.
-- El certificado de la VM de pruebas del 26/10 es el antiguo. Si se reutiliza esa VM, borrar `/opt/odoo/https/certs/` y volver a ejecutar el script. El script no regenera un certificado que ya existe.
+- ✅ Hecho el 26/10 a las 10:25 en la VM de pruebas de la tarea 52: se borró el certificado viejo y se volvió a ejecutar el script. El proxy sirve el certificado con `nameConstraints`, un cliente con la raíz lo valida (HTTP 200, verificación 0) y el resto de las pruebas sigue igual ([evidencia 05 de la tarea 52](../../erp/52-https-odoo/evidencias/05-certificado-con-nameconstraints.txt)).
 
 ### 4.2 S-08 y S-09: endurecer el servidor ERP
 
