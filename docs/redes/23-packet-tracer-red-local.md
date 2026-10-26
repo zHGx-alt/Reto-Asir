@@ -310,4 +310,4 @@ Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23
 
 **Notas para repetirla con el MCP:** la función `configureIosDevice` necesita `exit` entre bloques de interfaz (si no, se pierde la línea `interface` siguiente); en los PC, la IP fija se guarda con `configurePcIp` más la puerta de enlace del equipo (`setDefaultGateway`), porque solo con el puerto no queda guardada; el módulo inalámbrico de PC se llama `Linksys-WMP300N` y el de portátil `Linksys-WPC300N`. La función `swapLaptopToWireless` de PTBuilder pone una tarjeta genérica (`PT-LAPTOP-NM-1W`) con la que *PC Wireless* no deja conectar: hay que cambiarla por la `Linksys-WPC300N`. Para la prueba 15, la radio del punto de acceso se apaga con `getPort('Port 1').setPower(false)`.
 
-Queda pendiente pasar a KeePassXC (o a donde decida el equipo) las contraseñas de R1, SW1 y las Wi-Fi de prueba ([CORRECIONES, 2.1](../../CORRECIONES.md)).
+Las contraseñas de R1, SW1 y las Wi-Fi de prueba están en KeePassXC desde el 26/10/2026 ([CORRECIONES, 2.1](../../CORRECIONES.md)).
