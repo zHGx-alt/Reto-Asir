@@ -116,6 +116,12 @@ La otra opción es instalar el sistema entero sobre el RAID 1 (el instalador de 
 
 **Después hay que repetir:**
 - La simulación de fallo (sección 4) **con Odoo funcionando durante el fallo**: hacer una venta con un disco del RAID quitado y comprobar que se guarda.
+  Script: [`simular-fallo-con-odoo.sh`](simular-fallo-con-odoo.sh). Comprueba que la BD está en el RAID, marca como averiado
+  un disco, mira que Odoo responde, **espera a que se haga una venta** y comprueba que se ha guardado (recuento de pedidos y
+  facturas en `tienda` + `CHECKPOINT` de PostgreSQL), vuelve a añadir el disco y espera a que el espejo vuelva a `[UU]`.
+  ```bash
+  sudo ./simular-fallo-con-odoo.sh 2>&1 | tee fallo-con-odoo.log
+  ```
 - La prueba de la tarea 45.
 
 **Las copias no pueden quedarse solo en el mismo RAID:** si el RAID entero se pierde (fallo de la controladora, borrado, incendio), se pierden a la vez los datos y la copia 2. Por eso la copia 3 (USB fuera del local, y mejor aún S3) es la que de verdad protege; ver la tarea 44.
