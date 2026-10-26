@@ -78,6 +78,7 @@ Es una sola página: el menú lleva a cada sección mediante anclas (`#historia`
 - **Una sola página.** La web es de presentación, con poco contenido; las anclas evitan tener que navegar entre páginas.
 - **Un único punto de corte, en 800 px.** Por encima, las secciones van a dos columnas; por debajo, a una.
 - **Mapa de OpenStreetMap en lugar de Google Maps.** No necesita clave de API ni cuenta.
+- **El mapa se carga al pulsar «Ver el mapa»** (26/10/2026). Trae más de 1 MB de JavaScript y bajaba Lighthouse en móvil a 70 contra la URL pública; mientras tanto se ve un fondo de cuadrícula con la insignia. Sin JavaScript, el botón es un enlace a OpenStreetMap.
 - **El formulario es de demostración.** No envía datos, así que la web es estática y se puede alojar sin servidor (tarea 30).
 - **Geolocalización.** El botón «Usar mi ubicación» solo funciona con HTTPS, porque los navegadores la bloquean en HTTP. Es otro motivo para que la tarea 30 incluya un certificado.
 

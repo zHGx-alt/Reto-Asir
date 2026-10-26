@@ -17,6 +17,8 @@ por modo como recomienda Lighthouse; se da la mediana porque el resultado varía
   Rendimiento por debajo de 90. Causa: el iframe del mapa de OpenStreetMap (loading="lazy") se
   carga dentro de la medida en 4 de 5 pasadas y trae unos 1,3 MB de JavaScript y las teselas.
   En la única pasada en la que no se cargó, 95. En local (23/10) daba 98 porque no había red real.
+  Corregido en el repositorio el 26/10 (el mapa se carga al pulsar «Ver el mapa»): en local, 3 pasadas
+  con 98/100/100/100 y sin peticiones a OpenStreetMap. Falta repetirlo contra la URL pública.
 
 ## Lighthouse · Escritorio (5 pasadas)
   Pasada  Rendimiento  Accesibilidad  Buenas prácticas  SEO   FCP    LCP    TBT   CLS

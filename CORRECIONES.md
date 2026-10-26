@@ -101,7 +101,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 - [ ] 🟠 **`08-pruebas-curl.txt` y `lighthouse-w3c.txt` son de una versión anterior** de la web, sin las cabeceras nuevas. Publicar la versión actual (con `desplegar-web.yml` si ya hay secretos, o a mano) y volver a ejecutar `instalar-servidor-web.sh`. Después, contra la URL pública: `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con `web/index.html` y salgan CSP y Permissions-Policy), Lighthouse y W3C. Sustituir las dos evidencias.
   - **Quién:** Adrian. Con el Learner Lab arrancado.
   - [x] Publicada la versión actual y evidencias sustituidas (26/10): lo publicado es idéntico al repositorio, salen CSP y Permissions-Policy, W3C sin errores y escritorio 98-100 en Lighthouse.
-  - [ ] 🟠 **Lighthouse en móvil da 70 de rendimiento** (mediana de 5; hace falta 90): el iframe del mapa de OpenStreetMap trae unos 1,3 MB de JavaScript y se carga dentro de la medida. Arreglo propuesto: que el mapa se cargue al pulsar un botón, y repetir Lighthouse en móvil.
+  - [ ] 🟠 **Lighthouse en móvil da 70 de rendimiento** (mediana de 5; hace falta 90): el iframe del mapa de OpenStreetMap trae unos 1,3 MB de JavaScript y se carga dentro de la medida. Arreglado en el repositorio (26/10): el mapa se carga al pulsar «Ver el mapa»; en local, móvil 98. Falta publicarlo y repetir Lighthouse en móvil contra la URL pública.
 
 ### 3.5 RTO medido en el mismo servidor (tarea 45)
 
