@@ -106,6 +106,24 @@ La versión de la configuración pasó a 4 al dejar 4 botones y quitar el tipo d
 
 Al arrancar se lee la EEPROM. Si está vacía o los datos no son válidos (no coincide el número de control, la versión o el checksum), se usan los valores por defecto.
 
+## Prueba guiada (Linux)
+
+Con la placa conectada y el firmware subido:
+
+```bash
+python3 probar-stick.py
+```
+
+Sin instalar nada. Va pidiendo pulsar cada botón y mover la palanca, y comprueba lo que llega al PC
+(`/dev/input/jsN`): reposo sin nada pulsado y ejes en el centro; cada botón sale con su número y se suelta;
+arriba/abajo/izquierda/derecha y una diagonal llegan a tope y vuelven al centro. Después prueba por el puerto serie
+`VER`, `MAP 1 3` (el botón 1 pasa a salir como el 3), `INV X` y `RESET`. No hace `GUARDAR`, para no tocar la EEPROM:
+eso se prueba a mano. El resultado queda en `evidencias/prueba-stick-<fecha>.txt` (evidencia de la tarea #50).
+
+Si la palanca aún no ha llegado, se responde "n" y esa parte se salta.
+
+Comprobado el 26/10/2026 sin placa: se para avisando de que no ve el mando; la lectura de eventos se probó con eventos simulados.
+
 ## Pendiente: prueba en físico (tarea #50)
 
 Responsable: **Adrian**. Necesita el stick montado (#19).
