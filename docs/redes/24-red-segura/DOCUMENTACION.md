@@ -3,7 +3,7 @@
 - **Bloque:** 5 Redes
 - **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** en curso (faltan la red de invitados, WPA3, WPS y la contraseña de administración, sección 12)
+- **Estado:** en curso (faltan la red de invitados, WPA3, WPS y limitar la administración a la MAC del gerente, sección 12). Contraseñas Wi-Fi y de administración cambiadas el 26/10/2026
 - **Fecha:** 23/10/2026 · **Revisión:** 24/10/2026
 - **Depende de:** tarea 23 (plano y direccionamiento)
 
@@ -143,8 +143,8 @@ El menú incluye **Guest Network**, pero las once capturas no muestran la págin
 | Protección DoS | Disponible y revisada |
 | Red de invitados aislada | Pendiente de configuración y evidencia |
 | WPS | Sin evidencia de que esté desactivado |
-| Contraseña de administración | Parece la de fábrica; pendiente de cambiar y de limitar a la MAC del gerente |
-| Contraseña Wi-Fi | Expuesta en las capturas antiguas y débil: **pendiente de cambiar** |
+| Contraseña de administración | Cambiada por Peio el 26/10/2026 y guardada en KeePassXC. Falta limitar la administración a la MAC del gerente |
+| Contraseña Wi-Fi | Cambiada por Peio el 26/10/2026 y guardada en KeePassXC: la de las capturas antiguas ya no vale |
 
 ## 11. Conclusión
 
@@ -155,8 +155,9 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 
 ## 12. Pendiente
 
-- [ ] Cambiar la contraseña Wi-Fi expuesta del TL-WR841N (frase de KeePassXC de 20 caracteres o más).
-- [ ] Cambiar la contraseña de administración y limitar la administración a la MAC del PC del gerente; captura.
+- [x] Cambiar la contraseña Wi-Fi expuesta del TL-WR841N (26/10/2026, guardada en KeePassXC).
+- [x] Cambiar la contraseña de administración (26/10/2026, guardada en KeePassXC).
+- [ ] Limitar la administración a la MAC del PC del gerente; captura.
 - [ ] Desactivar WPS; captura.
 - [ ] Repetir la configuración en el Archer C6: LAN `192.168.10.0/24`, reservas de la tarea 23, WPA3 (o WPA2/WPA3), clave de grupo con renovación y modo sin 802.11b.
 - [ ] Configurar la red de invitados (`192.168.50.0/24` si el router lo permite) con aislamiento entre clientes y hacer las pruebas 3 a 5 de la [tarea 23, sección 6](../23-plano-direccionamiento.md#6-cómo-se-comprueba).
