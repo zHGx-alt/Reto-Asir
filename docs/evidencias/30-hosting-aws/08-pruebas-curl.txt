@@ -1,9 +1,9 @@
-# Pruebas de la tarea 30 desde un equipo externo (23/10/2026 09:41)
+# Pruebas de la tarea 30 desde un equipo externo (26/10/2026 08:57)
 
 $ curl -I http://almichain1.duckdns.org
 HTTP/1.1 301 Moved Permanently
 Server: nginx
-Date: Fri, 23 Oct 2026 07:41:29 GMT
+Date: Mon, 26 Oct 2026 07:57:12 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -12,17 +12,23 @@ Location: https://almichain1.duckdns.org/
 $ curl -I https://almichain1.duckdns.org
 HTTP/1.1 200 OK
 Server: nginx
-Date: Fri, 23 Oct 2026 07:41:30 GMT
+Date: Mon, 26 Oct 2026 07:57:12 GMT
 Content-Type: text/html
-Content-Length: 7143
-Last-Modified: Fri, 23 Oct 2026 07:19:34 GMT
+Content-Length: 9482
+Last-Modified: Mon, 26 Oct 2026 07:54:27 GMT
 Connection: keep-alive
-ETag: "6adb0a86-1be7"
+Vary: Accept-Encoding
+ETag: "6adf0733-250a"
 Strict-Transport-Security: max-age=31536000
 X-Content-Type-Options: nosniff
 X-Frame-Options: SAMEORIGIN
 Referrer-Policy: strict-origin-when-cross-origin
+Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://images.unsplash.com; frame-src https://www.openstreetmap.org; connect-src 'self'; font-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests
+Permissions-Policy: geolocation=(self), camera=(), microphone=(), payment=(), usb=()
 Accept-Ranges: bytes
+
+$ wc -c < web/index.html
+9482
 
 $ openssl s_client -connect almichain1.duckdns.org:443 | openssl x509 -noout -subject -issuer -dates
 subject=CN = almichain1.duckdns.org
@@ -39,3 +45,8 @@ index.html  200
 style.css   200
 script.js   200
 README.txt  404
+
+$ curl -s https://almichain1.duckdns.org/<archivo> | cmp - web/<archivo>   (lo publicado es lo del repositorio)
+index.html  idéntico
+style.css   idéntico
+script.js   idéntico

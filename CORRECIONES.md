@@ -13,7 +13,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 | Persona | Correcciones |
 |---|---|
-| **Adrian** | [3.4](#34-evidencias-de-la-web-tarea-30) evidencias de la web · [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente, imágenes de la web, notación del E/R |
+| **Adrian** | [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente, imágenes de la web, notación del E/R |
 | **Iker** | [2.1](#21-contraseñas) restic y clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.1](#31-la-bd-no-está-en-el-raid-tarea-43) RAID · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
 | **Peio** | [2.1](#21-contraseñas) contraseña Wi-Fi y de administración del router |
 | **Eneko.P** | [3.2](#32-recreativa-medida-en-una-vm-que-no-es-la-del-enunciado-tarea-17) medidas de la recreativa en 1 núcleo y 1 GB |
@@ -98,8 +98,10 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ### 3.4 Evidencias de la web (tarea 30)
 
-- [ ] 🟠 **`08-pruebas-curl.txt` y `lighthouse-w3c.txt` son de una versión anterior** de la web, sin las cabeceras nuevas. Publicar la versión actual (con `desplegar-web.yml` si ya hay secretos, o a mano) y volver a ejecutar `instalar-servidor-web.sh`. Después, contra la URL pública: `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con `web/index.html` y salgan CSP y Permissions-Policy), Lighthouse y W3C. Sustituir las dos evidencias.
+- [x] 🟠 **`08-pruebas-curl.txt` y `lighthouse-w3c.txt` son de una versión anterior** de la web, sin las cabeceras nuevas. Publicar la versión actual (con `desplegar-web.yml` si ya hay secretos, o a mano) y volver a ejecutar `instalar-servidor-web.sh`. Después, contra la URL pública: `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con `web/index.html` y salgan CSP y Permissions-Policy), Lighthouse y W3C. Sustituir las dos evidencias.
   - **Quién:** Adrian. Con el Learner Lab arrancado.
+  - [x] Publicada la versión actual y evidencias sustituidas (26/10): lo publicado es idéntico al repositorio, salen CSP y Permissions-Policy, W3C sin errores y escritorio 98-100 en Lighthouse.
+  - [x] 🟠 **Lighthouse en móvil daba 70 de rendimiento** (mediana de 5; hace falta 90): el iframe del mapa de OpenStreetMap trae unos 1,3 MB de JavaScript y se carga dentro de la medida. Arreglado y publicado (26/10): el mapa se carga al pulsar «Ver el mapa»; contra la URL pública, móvil 94 y escritorio 99 (mediana de 5).
 
 ### 3.5 RTO medido en el mismo servidor (tarea 45)
 
@@ -134,7 +136,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Implementación y configuración de sistemas operativos | Parcial | Tareas 13 y 15 |
 | Restricción de cuentas y equipos (mínimos privilegios) | Parcial | Corr. 2.3; tarea 13 |
 | Diseño conceptual de la web | Hecho, a posteriori | — |
-| Web accesible y por HTTPS | Hecho | Corr. 3.4 |
+| Web accesible y por HTTPS | Hecho | — |
 | Hosting en AWS con dominio propio y despliegue reproducible | Casi hecho | Tarea 31 |
 | ERP + TPV con un caso de uso automatizado | Hecho | Corr. 3.3; tarea 36 |
 | Instalación y configuración de una impresora | Guía lista | Tareas 14 y 37 (impresora del centro) |
@@ -217,10 +219,10 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] `660,00 €`, factura validada, cobrada y con PDF.
 
 **Web (3.4 y 4)**
-- [ ] `curl -sI https://almichain1.duckdns.org | grep -i content-length` da el mismo número que `wc -c < web/index.html`.
-- [ ] `curl -sI https://almichain1.duckdns.org` incluye `content-security-policy` y `permissions-policy`.
-- [ ] La web carga **sin errores en la consola** del navegador (la CSP no bloquea las fotos ni el mapa).
-- [ ] Lighthouse **contra la URL pública**: 90 o más en las cuatro categorías; W3C sin errores.
+- [x] `curl -sI https://almichain1.duckdns.org | grep -i content-length` da el mismo número que `wc -c < web/index.html`. (26/10)
+- [x] `curl -sI https://almichain1.duckdns.org` incluye `content-security-policy` y `permissions-policy`. (26/10)
+- [x] La web carga **sin errores en la consola** del navegador (la CSP no bloquea las fotos ni el mapa). (26/10)
+- [x] Lighthouse **contra la URL pública**: 90 o más en las cuatro categorías; W3C sin errores (26/10: móvil 94/100/100/100, escritorio 99/100/100/100).
 
 **VM del gerente (4)**
 - [ ] `lsb_release -d` en la tarea 12; historial de Windows Update con una actualización acumulativa; `manage-bde -status` con `C:` cifrada.
