@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (26/10/2026):** 🟡 Revisión del repositorio hecha: 18 hallazgos y 1 ya corregido (S-01). Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
+- **Estado (26/10/2026):** 🟡 Revisión del repositorio hecha: 18 hallazgos y 2 ya corregidos (S-01 y S-05). Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -34,13 +34,13 @@ Lo que no se puede ver en el repositorio (la configuración real del router, los
 
 | Gravedad | Hallazgos | Corregidos |
 |---|---|---|
-| Alta | 5 (S-01 a S-05) | 1 (S-01) |
+| Alta | 5 (S-01 a S-05) | 2 (S-01 y S-05) |
 | Media | 7 (S-06 a S-12) | 0 |
 | Baja | 6 (S-13 a S-18) | 0 |
 
 Lo más urgente, por este orden:
 
-1. **Router:** contraseña de administración de fábrica, Wi-Fi débil y expuesta, y red de invitados sin hacer (S-04, S-05, S-06). La segmentación de la tarea 23 depende de esto.
+1. **Router:** red de invitados sin hacer, y administración abierta a toda la LAN y WPS (S-06, S-04). Las contraseñas ya están cambiadas (26/10). La segmentación de la tarea 23 depende de esto.
 2. **Odoo sigue por HTTP en la LAN** hasta activar la tarea 52 en el servidor del equipo (S-02).
 3. **Batocera con la contraseña de root `linux`**, si se queda Batocera (S-03).
 
@@ -48,11 +48,11 @@ Lo más urgente, por este orden:
 
 | ID | Gravedad | Dónde | Qué pasa | Qué hacer | Responsable | Estado |
 |---|---|---|---|---|---|---|
-| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
+| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script y probado en la VM de la tarea 52 (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
 | S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Esperando a la tarea 43 (guía en [`RUNBOOK.md` de la tarea 52](../../erp/52-https-odoo/RUNBOOK.md)) |
 | S-03 | Alta | Tarea 16, Batocera | Con *Enforce security* desactivado, root tiene siempre la contraseña `linux`, se ve en el menú y sirve también para SSH y Samba | `batocera-settings-set system.security.enabled 1` y contraseña de root aleatoria en KeePassXC. O quedarse con la versión Debian, que ya está endurecida (S-08 lo compara) | Iker | ⏳ Pendiente (solo si se elige Batocera) |
-| S-04 | Alta | Tarea 24, router | Se entra al panel como `Admin` con una contraseña de 5 caracteres que parece la de fábrica. El panel va por HTTP y está abierto a toda la LAN. No hay evidencia de que WPS esté apagado | Contraseña de KeePassXC, administración solo desde la MAC del gerente y por cable, y WPS desactivado | Peio | ⏳ Pendiente |
-| S-05 | Alta | Tarea 24, Wi-Fi | La contraseña Wi-Fi tiene 8 cifras y se leía en dos capturas que siguen en el historial de Git (commits `532c87a` y `215eac7`). El repositorio es privado, lo que lo atenúa, pero el profesor y cualquiera con acceso las pueden ver | Cambiarla por una frase de 20 caracteres o más. No hace falta reescribir el historial si se cambia la contraseña | Peio | ⏳ Pendiente |
+| S-04 | Alta | Tarea 24, router | Se entra al panel como `Admin` con una contraseña de 5 caracteres que parece la de fábrica. El panel va por HTTP y está abierto a toda la LAN. No hay evidencia de que WPS esté apagado | Contraseña de KeePassXC, administración solo desde la MAC del gerente y por cable, y WPS desactivado | Peio | 🟡 Contraseña cambiada y en KeePassXC (26/10). Faltan la MAC y WPS |
+| S-05 | Alta | Tarea 24, Wi-Fi | La contraseña Wi-Fi tiene 8 cifras y se leía en dos capturas que siguen en el historial de Git (commits `532c87a` y `215eac7`). El repositorio es privado, lo que lo atenúa, pero el profesor y cualquiera con acceso las pueden ver | Cambiarla por una frase de 20 caracteres o más. No hace falta reescribir el historial si se cambia la contraseña | Peio | ✅ Cambiada y en KeePassXC (26/10). Comprobar que la RADIUS de las mismas capturas tampoco sigue en uso |
 | S-06 | Media | Tareas 23 y 24 | La red de invitados no está configurada. La tabla 5.2 de la tarea 23 confía en ella para que clientes y recreativa no lleguen al servidor ni a los TPV | Red `192.168.50.0/24` sin acceso a la LAN y con aislamiento entre clientes; pruebas 3 a 5 de la tarea 23 | Peio | ⏳ Pendiente |
 | S-07 | Media | Tarea 24 | El TL-WR841N no tiene WPA3. Queda WPA2-AES, con la clave de grupo sin renovar (`0`) y modo `11bgn` | WPA3 (o WPA2/WPA3) en el Archer C6, renovación de la clave de grupo cada 3600 s y sin 802.11b. Si no se compra, dejarlo como limitación | Peio | ⏳ Pendiente |
 | S-08 | Media | Tarea 33, `preseed-servidor.cfg` | El SSH del servidor admite contraseña (el preseed de la recreativa sí lo cierra y el del servidor no). Además, la única clave autorizada es la del laboratorio (`recreativa-claude`), no la del PC del gerente | Ver sección 4.2 | Iker | ⏳ Pendiente |
@@ -91,7 +91,7 @@ La CA solo puede firmar para la IP del servidor y para `odoo.almichain.local`. E
 **Qué queda:**
 
 - Comprobar en Edge, en el TPV, que Odoo carga sin avisos con el certificado nuevo. Es la prueba 5 de la tarea 52.
-- El certificado de la VM de pruebas del 26/10 es el antiguo. Si se reutiliza esa VM, borrar `/opt/odoo/https/certs/` y volver a ejecutar el script. El script no regenera un certificado que ya existe.
+- ✅ Hecho el 26/10 a las 10:25 en la VM de pruebas de la tarea 52: se borró el certificado viejo y se volvió a ejecutar el script. El proxy sirve el certificado con `nameConstraints`, un cliente con la raíz lo valida (HTTP 200, verificación 0) y el resto de las pruebas sigue igual ([evidencia 05 de la tarea 52](../../erp/52-https-odoo/evidencias/05-certificado-con-nameconstraints.txt)).
 
 ### 4.2 S-08 y S-09: endurecer el servidor ERP
 
