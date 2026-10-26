@@ -46,6 +46,21 @@ Cada botón arcade trae dos cables: **rojo** y **negro**. Son las dos patas del 
 
 ## Compilar y subir
 
+### En un paso (Linux, recomendado)
+
+Conecta la placa por USB y, desde esta carpeta:
+
+```bash
+./subir.sh
+```
+
+Compila, sube y avisa de lo que falte. La primera vez saca `arduino-cli` del AppImage del Arduino IDE que haya en
+`~/Descargas` e instala el núcleo de la Leonardo y la librería Joystick. Si hace falta, aplica también el ajuste USB
+`old_scheme_first` (sin él, en algunos PC no se reconoce el bootloader; pide la contraseña del usuario y se pierde al
+reiniciar el PC). Con `./subir.sh monitor`, al acabar abre el monitor serie para los comandos de la sección siguiente.
+
+Probado el 26/10/2026 sin placa: compila (Flash 39 %, RAM 19 %) y se para con el aviso de conectar la placa.
+
 ### Arduino IDE
 
 1. Descargar el ZIP de la librería desde <https://github.com/MHeironimus/ArduinoJoystickLibrary> (*Code → Download ZIP*). No está en el gestor de librerías.
