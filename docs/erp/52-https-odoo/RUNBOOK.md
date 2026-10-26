@@ -41,12 +41,13 @@ Si algo va mal: sección 5 de [DOCUMENTACION.md](DOCUMENTACION.md) (volver atrá
 
 ## 2.1 URL de Odoo y QR del ticket
 
-Odoo apunta su dirección (`web.base.url`) la primera vez que entra el administrador. Si fue antes de cambiar la IP o el proxy, los enlaces (y el QR del ticket) salen con la dirección vieja (incidencia 6). En Odoo como `admin`, con el modo desarrollador (`?debug=1`): *Ajustes → Técnico → Parámetros del sistema*:
+Odoo apunta su dirección (`web.base.url`) la primera vez que entra el administrador. Si fue antes de cambiar la IP o el proxy, los enlaces salen con la dirección vieja, también el QR «¿Necesita una factura?» del ticket (incidencia 6). Ese QR, además, no le sirve al cliente: está en la Wi-Fi de invitados, que no llega al servidor (tarea 46, S-19).
 
-- `web.base.url` = `https://192.168.10.10`
-- Crear `web.base.url.freeze` = `True`, para que no se vuelva a cambiar sola.
+```bash
+cd ~/Reto-Asir/docs/erp/52-https-odoo && sudo ./fijar-url-y-qr.sh https://192.168.10.10 | tee ~/52-fijar-url-y-qr.txt
+```
 
-Y en *Punto de venta → Configuración → Ajustes*, quitar el QR de factura del recibo: el cliente está en la Wi-Fi de invitados y no llega al servidor (tarea 46, S-19).
+Fija `web.base.url` y `web.base.url.freeze = True` (para que Odoo no la vuelva a cambiar) y pone a `False` el ajuste de la empresa `point_of_sale_use_ticket_qr_code` (*Facturación de autoservicio* en los ajustes del TPV). **Se aplica al abrir una sesión de caja nueva:** si hay una caja abierta, cerrarla y volver a abrirla; con F5 el TPV sigue con la configuración que cargó al abrir ([evidencias 13 a 15](evidencias/13-fijar-url-y-qr.txt)).
 
 ## 3. Cortafuegos del servidor
 
