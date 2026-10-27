@@ -14,10 +14,10 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Persona | Correcciones |
 |---|---|
 | **Adrian** | [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente, imágenes de la web, notación del E/R |
-| **Iker** | [2.1](#21-contraseñas) restic y clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.1](#31-la-bd-no-está-en-el-raid-tarea-43) RAID · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
-| **Peio** | [2.1](#21-contraseñas) contraseña Wi-Fi y de administración del router |
+| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.1](#31-la-bd-no-está-en-el-raid-tarea-43) RAID · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
+| **Peio** | Nada en esta lista: sus tareas abiertas (24 y 25) están en el Gantt |
 | **Eneko.P** | [3.2](#32-recreativa-medida-en-una-vm-que-no-es-la-del-enunciado-tarea-17) medidas de la recreativa en 1 núcleo y 1 GB |
-| **Markel** | [4](#4-datos-que-faltan-en-tareas-hechas) edición de Windows de los TPV y versión del driver |
+| **Markel** | [4](#4-datos-que-faltan-en-tareas-hechas) edición de Windows de los TPV |
 | **Todos** | [4](#4-datos-que-faltan-en-tareas-hechas) sus filas del registro de IA |
 
 ---
@@ -26,14 +26,14 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 | Bloque | Qué se corrigió |
 |---|---|
-| Seguridad | Contraseñas Wi-Fi y RADIUS tapadas en las capturas; preseed de la recreativa sin clave SSH fija y SSH sin contraseña; actualizaciones de seguridad de la recreativa a las 5:00; contraseñas robustas en la VM del gerente (tarea 55) |
+| Seguridad | Contraseñas Wi-Fi y RADIUS tapadas en las capturas; preseed de la recreativa sin clave SSH fija y SSH sin contraseña; actualizaciones de seguridad de la recreativa a las 5:00; contraseñas robustas en la VM del gerente (tarea 55); contraseñas Wi-Fi y de administración del router cambiadas y en KeePassXC (26/10); contraseñas de Packet Tracer en KeePassXC (26/10); Drive sin ficheros de contraseñas (24/10); contraseña de restic en KeePassXC y borrada del PC del técnico (27/10); **Odoo por HTTPS** hecho y probado en VM (26/10; activarlo en el servidor del equipo es la tarea 52) |
 | Redes | Tarea 22 con análisis de necesidades y esquema de conectividad; tarea 23 con cita literal, invitados en `192.168.50.0/24` y switch; **red plana con invitados aislada** decidida (24/10) y diseño antiguo con VLAN quitado (25/10); Packet Tracer de la red real con 16 de 16 pruebas ([evidencia](docs/redes/evidencias/23-red-local-configuracion-y-pruebas.txt)) |
 | Hardware | Presupuesto completo; Windows 10 IoT LTSC para los TPV; versiones del software; WAN unificada en DIGI 1 Gb |
 | Arduino | Firmware con palanca digital y botones 7-8; esquema con la palanca en A2-A5 |
 | ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido; 2 fallos de los scripts de Odoo que impedían instalar en limpio |
 | BD | Datos, consultas y usuarios de `almi_chain` ejecutados con evidencias ([41](docs/bd/evidencias/41-datos-y-consultas.txt), [42](docs/bd/evidencias/42-usuarios-y-permisos.txt)) |
 | Copias | Procedimiento para la BD en el RAID; aviso del USB; RTO real marcado como pendiente |
-| Web | CSP y Permissions-Policy; distancia al local; créditos; contraste, favicon y W3C |
+| Web | CSP y Permissions-Policy; distancia al local; créditos; contraste, favicon y W3C; evidencias repetidas contra la versión publicada y Lighthouse móvil de 70 a 94 cargando el mapa al pulsar (26/10) |
 | Gestión | Fechas reales; responsables coherentes; Anexo II con requisitos separados; decisiones del equipo apuntadas; 14 enlaces rotos |
 
 ---
@@ -42,26 +42,14 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ### 2.1 Contraseñas
 
-- [ ] 🔴 **Contraseña Wi-Fi del TL-WR841N:** se leía en las capturas antiguas, que siguen en el historial de Git. Conectarse por cable, `http://192.168.1.1` → *Wireless → Wireless Security* → contraseña nueva de KeePassXC (20 caracteres o más) → *Save*. Si el router ya no se usa, apuntarlo y listo.
-  - **Quién:** Peio · **Hecho cuando:** marcado en la [tarea 24, sección 12](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente), sin captura de la contraseña.
-- [ ] 🟠 **Contraseña de administración del router:** *System Tools → Password*, otra de KeePassXC; limitar la administración a la MAC del PC del gerente; captura sin la contraseña.
-  - **Quién:** Peio.
-- [x] 🟠 **Contraseña de restic en texto plano:** copiarla de `tarea-44/.credenciales-backup` (o `sudo cat /root/.config/backup-odoo/restic.pass` en el servidor) a una entrada de KeePassXC y **borrar** `.credenciales-backup`. La del servidor se queda: la necesita la copia nocturna. Hecho el 27/10: en el KeePassXC del proyecto y `.credenciales-backup` ya no está en el PC de Adrian.
-  - **Quién:** Iker (con quien tenga la contraseña maestra del `.kdbx`).
-- [x] 🟢 **Contraseñas de Packet Tracer** (R1, SW1 y las Wi-Fi de prueba) en el Drive del grupo: pasadas a KeePassXC ([guía de la tarea 23](docs/redes/23-packet-tracer-red-local.md)). Adrian, 26/10.
 - [ ] 🟢 **Recreativas instaladas con el preseed antiguo:** borrar la línea `recreativa-claude` de `~tecnico/.ssh/authorized_keys`.
   - **Quién:** Iker.
-- [x] Drive revisado: no hay ningún `.txt` con contraseñas; el `.kdbx` no sirve sin su contraseña maestra (24/10).
+
+Lo demás de este apartado está corregido (sección 1). Limitar la administración del router a la MAC del gerente y apagar WPS es trabajo de la tarea 24, en el Gantt.
 
 ### 2.2 HTTPS en Odoo (tarea 52)
 
-- [x] 🔴 **Odoo va por HTTP en la LAN** (usuario y contraseña del cajero en claro). Corregido el 26/10: el proxy HTTPS funciona y está probado. Lo que queda (activarlo en la `ServidorERP` del equipo, después de mover la BD al RAID, y las pruebas 5 y 6 con el TPV) es trabajo de la tarea 52, en el [Gantt](docs/gestion/gantt.md):
-  ```bash
-  cd docs/erp/52-https-odoo && mkdir -p evidencias && sudo ./activar-https.sh 192.168.10.10 | tee evidencias/01-activar-https.txt
-  ```
-  **Hecho cuando:** el script dice HTTPS 200, HTTP 301 y 8069 cerrado, y se hacen las pruebas de la [sección 4 de la guía](docs/erp/52-https-odoo/DOCUMENTACION.md).
-  - **Quién:** Adrian.
-  - [x] Probado el 26/10 en una `ServidorERP` nueva (VM en el PC de Adrian): pasan todas las pruebas menos las del TPV (5 y 6). De paso se corrigieron el permiso de ejecución del script, las cabeceras duplicadas, la cookie de sesión sin `Secure` y el proxy que no cogía un `nginx.conf` nuevo ([incidencias](docs/erp/52-https-odoo/DOCUMENTACION.md#41-incidencias)). Falta ejecutarlo en la `ServidorERP` del equipo.
+Corregido el 26/10 (sección 1). Activarlo en la `ServidorERP` del equipo es trabajo de la tarea 52 ([runbook](docs/erp/52-https-odoo/RUNBOOK.md)), en el Gantt.
 
 ### 2.3 Menús del cajero (tarea 34)
 
@@ -98,10 +86,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ### 3.4 Evidencias de la web (tarea 30)
 
-- [x] 🟠 **`08-pruebas-curl.txt` y `lighthouse-w3c.txt` son de una versión anterior** de la web, sin las cabeceras nuevas. Publicar la versión actual (con `desplegar-web.yml` si ya hay secretos, o a mano) y volver a ejecutar `instalar-servidor-web.sh`. Después, contra la URL pública: `curl -I https://almichain1.duckdns.org` (que `Content-Length` coincida con `web/index.html` y salgan CSP y Permissions-Policy), Lighthouse y W3C. Sustituir las dos evidencias.
-  - **Quién:** Adrian. Con el Learner Lab arrancado.
-  - [x] Publicada la versión actual y evidencias sustituidas (26/10): lo publicado es idéntico al repositorio, salen CSP y Permissions-Policy, W3C sin errores y escritorio 98-100 en Lighthouse.
-  - [x] 🟠 **Lighthouse en móvil daba 70 de rendimiento** (mediana de 5; hace falta 90): el iframe del mapa de OpenStreetMap trae unos 1,3 MB de JavaScript y se carga dentro de la medida. Arreglado y publicado (26/10): el mapa se carga al pulsar «Ver el mapa»; contra la URL pública, móvil 94 y escritorio 99 (mediana de 5).
+Corregido el 26/10 (sección 1).
 
 ### 3.5 RTO medido en el mismo servidor (tarea 45)
 
@@ -113,7 +98,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 ## 4. Datos que faltan en tareas hechas
 
 - [ ] 🟠 **VM del gerente (tarea 12):** versión exacta de Ubuntu (`lsb_release -d`) en las tareas 12 y 9; actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS. **Quién:** Adrian.
-- [ ] 🟠 **Edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y su precio en las tareas 9 y 10; versión del driver de Epson en la 9 cuando llegue la impresora. **Quién:** Markel.
+- [ ] 🟠 **Edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y su precio en las tareas 9 y 10. **Quién:** Markel. (El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660, decisión del 27/10.)
 - [ ] 🟠 **`almi_chain` en el servidor (tareas 40-42):** la base está probada pero no existe en `ServidorERP`. Crearla (comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md)), cargar `08-usuarios.sql` con contraseñas de KeePassXC y lanzar `sudo systemctl start backup-odoo`: el log tiene que decir `Volcado almi_chain`. **Quién:** Iker.
 - [ ] 🟠 **Registro de IA:** cada persona pone en sus filas qué comprobó a mano, en vez de «pendiente de revisar por el equipo». **Quién:** todos.
 - [ ] 🟢 **Imágenes de la web:** copiar las de Unsplash a `web/` (con su autor) y cambiar la primera foto del carrusel, que repite la de la portada. **Quién:** Adrian.
@@ -121,7 +106,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 ---
 
-## 5. Cumplimiento del enunciado (26/10)
+## 5. Cumplimiento del enunciado (27/10)
 
 «Tarea» es una tarea pendiente del [Gantt](docs/gestion/gantt.md); «corr.» es una corrección de esta lista.
 
@@ -130,22 +115,22 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Necesidades, configuración y presupuesto de equipos e impresoras | Hecho, con huecos | Corr. 4 (edición de Windows de los TPV) |
 | Identificar y documentar el hardware necesario | Hecho | — |
 | Identificar y documentar el software necesario | Hecho, con huecos | Corr. 4 (versión de Ubuntu y del driver) |
-| Instalación, optimización y monitorización de la recreativa | Parcial | Corr. 3.2; tareas 18, 51, 53 y 54 |
-| Montaje y programación del arcade stick | Parcial | Tareas 19, 50 y 21 |
+| Instalación, optimización y monitorización de la recreativa | Parcial | Corr. 3.2; tareas 18, 53 y 54 (la 51 decidió Debian + MAME) |
+| Montaje y programación del arcade stick | Casi hecho: montado y probado en la placa, en Batocera y con la EEPROM (27/10) | Tarea 21 (MAME y otro emulador) |
 | Identificar necesidades de comunicación | Hecho | — |
-| Implementación y configuración de sistemas operativos | Parcial | Tareas 13 y 15 |
-| Restricción de cuentas y equipos (mínimos privilegios) | Parcial | Corr. 2.3; tarea 13 |
+| Implementación y configuración de sistemas operativos | Casi hecho: TPV bastionados a mano (tarea 13) | Tarea 15 (`comprobar-tpv.ps1`) y S-20 de la tarea 46 |
+| Restricción de cuentas y equipos (mínimos privilegios) | Parcial | Corr. 2.3; tarea 15 y S-20 |
 | Diseño conceptual de la web | Hecho, a posteriori | — |
 | Web accesible y por HTTPS | Hecho | — |
 | Hosting en AWS con dominio propio y despliegue reproducible | Casi hecho | Tarea 31 |
 | ERP + TPV con un caso de uso automatizado | Hecho | Corr. 3.3; tarea 36 |
-| Instalación y configuración de una impresora | Ticket de Odoo impreso (Samsung por IPP, 27/10) | Tarea 14: cola en los TPV reales |
+| Instalación y configuración de una impresora | Hecho: ticket de Odoo impreso desde el TPV (Samsung por IPP, tarea 37, 27/10) | Tarea 14: cola en los TPV reales |
 | Modelo E/R y tablas | Hecho | Corr. 4 (notación) |
 | Implementación de la BD y consulta de sus datos | Hecho | Corr. 4 (`almi_chain` en el servidor) |
 | Configurar disco redundante | Parcial | Corr. 3.1 |
 | Plan de copias y prueba de restauración | Hecho, con huecos | Corr. 3.5; tarea 44 |
 | Seguridad por defecto en toda la solución | Parcial | Corr. 2; tareas 24 y 46 |
-| Verificar con pruebas (funcionamiento, restauración, failover) | Parcial | Corr. 3.1; tareas 13, 19-21, 24, 25 y 47 |
+| Verificar con pruebas (funcionamiento, restauración, failover) | Parcial | Corr. 3.1; tareas 15, 21, 24, 25 y 47 |
 | Documentación reproducible con diagramas | Casi hecho | Evidencias de lo que se ejecute |
 | Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | Commits de Eneko.P (tarea 5) |
 | Documentación y presentación | Pendiente | Tareas 48 y 49 |
@@ -157,8 +142,8 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Contratar una línea WAN | Hecho (DIGI 1 Gb, con análisis de necesidades) |
 | Esquema de conectividad | Hecho ([tarea 22, sección 4](docs/redes/22-comparativa-wan.md#4-esquema-de-conectividad)) |
 | Diagrama de la red (plano), cableado y Wi-Fi | Hecho: plano y Packet Tracer de la red real probado |
-| Red configurada de forma segura | Parcial: red decidida; faltan corr. 2.1 y 2.4 y la tarea 24 (invitados en el router) |
-| Segundo router por WDS, comprobando que funciona | Sin empezar (tarea 25) |
+| Red configurada de forma segura | Parcial: contraseñas del router cambiadas; faltan corr. 2.4 y la tarea 24 (red de invitados, WPS y administración por MAC) |
+| Segundo router por WDS, comprobando que funciona | Prueba de laboratorio hecha (27/10): el enlace WDS funciona. Falta con la red del proyecto y el aislamiento de invitados (tarea 25) |
 | RA.7 de PAR: conectar redes privadas a públicas | Demostrado en Packet Tracer: NAT, WAN e Internet sin acceso a la LAN (pruebas 11 y 12) |
 
 ---
