@@ -36,13 +36,13 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 
 ## Resumen
 
-**32 de 55 tareas hechas (58 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**33 de 55 tareas hechas (60 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 0 | 3 | 14 |
-| Software | 17 | 8 | 1 | 26 |
+| Software | 18 | 7 | 1 | 26 |
 | Físico | 0 | 1 | 8 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -57,7 +57,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Eneko.P | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la del enunciado) solo hay 3 medidas de antes; faltan las de después y medir jugando. El 24/10 optimizar-arcade.sh mantiene las actualizaciones de seguridad (a las 5:00). El 26/10 pasa de Iker a Eneko.P (reparto de carga). El 26/10 (tarea 51) se ve que no se conoce la contraseña de tecnico en Recreativa-1GB: hay que ponerle una nueva desde la consola antes de medir. | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; limitar la administración a la MAC del gerente. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
 | 18 | Monitorización de recursos de la recreativa | Software | Eneko.P | 02/11 | En curso | Scripts hechos y probados en Linux; documento reescrito para Debian el 24/10 (antes era para Batocera). Falta ejecutarlos en la VM de 1 GB durante una partida y guardar los CSV. El 26/10 pasa de Adrian a Eneko.P (reparto de carga). | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
-| 43 | RAID 1 y simulación de fallo | Software | Iker | 02/11 | En curso | RAID y simulación de fallo hechos por Iker en VM (22-23/10). Falta lo principal: la BD sigue en el disco del sistema. mover-docker-al-raid.sh preparado el 24/10 (sección 7); falta ejecutarlo y repetir el fallo con Odoo funcionando. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. El 24/10 el script copia también almi_chain si existe y avisa si el USB lleva más de 7 días sin conectarse; falta probarlo en la VM. Pasa de Markel a Iker, que la hizo. Mejora: aviso por correo si la copia falla (OnFailure=) y tercer repositorio en S3. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
@@ -109,6 +108,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 40 | Scripts DDL | 8 BD | Software | Eneko.S | Repetido el 23/10 en PostgreSQL 16: 01 a 03 sin errores; 03 repetible; 05-pruebas 33/33 dos veces; 04 borra y se puede recrear. | [40-scripts-ddl.md](../../docs/bd/40-scripts-ddl.md) |
 | 41 | Datos de prueba y consultas | 8 BD | Software | Iker | 06-datos.sql (2 locales; 8 ventas) y 07-consultas.sql (12 consultas) ejecutados el 24/10 en PostgreSQL 18.3 sin errores; evidencia guardada. Falta crear almi_chain en el servidor (tarea 40; sección 2). | [41-datos-y-consultas.txt](../../docs/bd/evidencias/41-datos-y-consultas.txt) |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | Adrian | 08-usuarios.sql (tpv_app e informes con LOGIN; contraseñas por variable) y 09-pruebas-usuarios.sql: 9/9 con cada cuenta el 24/10. Pasa de Markel a Adrian. | [42-usuarios-y-permisos.txt](../../docs/bd/evidencias/42-usuarios-y-permisos.txt) |
+| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | Iker | RAID y simulación de fallo (22-23/10). 27/10: la BD y los adjuntos de Odoo pasan al RAID (solo los volúmenes de Docker: todo /var/lib/docker no cabía, 6097 MB frente a 4454 MB libres) con mover-docker-al-raid.sh; avería repetida con Odoo funcionando (venta S00007 guardada con [U_]; reconstruido en 30 s) y reinicio comprobado. Falta repetir la restauración (45) con la BD en el RAID. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | Iker | Restaurada la copia del USB en un entorno aislado del mismo servidor (46 s). Falta repetirla en una VM nueva para medir el RTO real. | [DOCUMENTACION.md](../../docs/backup/45-restauracion/DOCUMENTACION.md) |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | Iker | 26/10: medidas en VM de 1 núcleo y 1 GB (3 antes y 3 después en Batocera; Debian del 23/10). Decidido Debian 13 + MAME: llega antes a jugar (7,1 s frente a 12,9 s), usa menos RAM (400 MB con el juego frente a 554 MB solo con el menú) y MAME va igual o más rápido. Batocera endurecido (security.enabled) y optimizado; incidencias y decisión en NOTAS.md y Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | Adrian | Hecha en VM el 26/10: proxy nginx con certificado propio (con nameConstraints; tarea 46) y las 15 pruebas correctas, con venta por HTTPS (5) y venta sin red (6) en un TPV provisional (win-11) de la red 192.168.10.0/24; fijar-url-y-qr.sh quita el QR del ticket (S-19). El 27/10 se da por hecha y ese mismo día el ticket se imprime desde la VM win-11, por IPP a la cola CUPS del PC (la Samsung ML-1660 no crea el puerto USB001 si se pasa por USB), ya sin QR. RUNBOOK.md queda para pasarla al servidor del equipo. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
@@ -121,7 +121,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Adrian | 15 | 4 | 1 | 1 | 38 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
-| Iker | 13 | 4 | 4 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
+| Iker | 13 | 3 | 3 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 7 | 3 | 0 | 2 | 14 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
 
@@ -184,7 +184,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 34 | Configurar módulos de Odoo | 7 ERP | Software | 22/10–23/10 | #33 (Iker) | Hecho |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | Software | 22/10–23/10 | #34 (Iker) | Hecho |
 | 41 | Datos de prueba y consultas | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–02/11 | — | En curso |
+| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–02/11 | — | Hecho |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | Software | 03/11–04/11 | #41 (Iker), #43 (Iker) | En curso |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | 22/10–23/10 | #44 (Iker) | Hecho |
 
