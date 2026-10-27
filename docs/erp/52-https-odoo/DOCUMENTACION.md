@@ -97,7 +97,7 @@ El 27/10 se imprimió desde la VM sin pasar el USB: la `win-11` manda el trabajo
 
 El mapeo de loopback de `reto-lan` (`192.168.10.2` → `127.0.0.1`) no sirve: a una conexión desde `127.0.0.1` CUPS solo le acepta `localhost` como nombre y ignora `ServerAlias`. En Windows, *Agregar impresora → Seleccionar una impresora compartida por nombre* → `http://172.17.0.1:631/printers/ML-1660-Series`, con el controlador **Microsoft PS Class Driver** (el filtro de la ML-1660 lo aplica CUPS). Venta de la Mesa 6 en *TPV Barra 1* (factura simplificada `261-1-000007`), *Imprimir recibo* en Edge: el ticket sale en papel y ya **sin el QR** (S-19, [16](evidencias/16-ticket-impreso-desde-vm.webp)). En el registro de CUPS el trabajo es del usuario de Windows de la VM, no del PC ([17](evidencias/17-cups-trabajo-desde-vm.txt)).
 
-Esto no cuenta para las tareas 14 y 37: allí la impresora térmica del centro va por USB al TPV (tarea 8), sin cola compartida en otro equipo.
+Con este ticket se da por hecha la **tarea 37**: el equipo decidió el 27/10 que la impresora de las pruebas es la Samsung, porque las térmicas del centro no llegan para todos los grupos. En la tienda real sigue siendo la térmica por USB al TPV (tarea 8); con ella solo cambian el driver y el puerto (tarea 14).
 
 ## 4.3 Cómo conectarse al laboratorio
 
