@@ -10,41 +10,15 @@ Del 21/10/2026 al 10/11/2026 (15 días laborables).
 
 Cada barra tiene el color de su responsable. La columna *Necesita* indica qué tareas tienen que estar terminadas antes de empezar.
 
-## ⚠️ Avisos de dependencias
-
-Tareas que empiezan antes de que acabe una tarea que necesitan:
-
-- #8 (Tabla de hardware con justificación) empieza el 22/10 y necesita #7 (Definir necesidades de equipos (gerente; 2 TPV; impresoras)), que acaba el 22/10
-- #9 (Tabla de software y licencias) empieza el 22/10 y necesita #7 (Definir necesidades de equipos (gerente; 2 TPV; impresoras)), que acaba el 22/10
-- #10 (Presupuesto con enlaces (incl. WAN y router extra)) empieza el 22/10 y necesita #8 (Tabla de hardware con justificación), que acaba el 23/10
-- #10 (Presupuesto con enlaces (incl. WAN y router extra)) empieza el 22/10 y necesita #9 (Tabla de software y licencias), que acaba el 23/10
-- #10 (Presupuesto con enlaces (incl. WAN y router extra)) empieza el 22/10 y necesita #22 (Comparativa de operadores WAN), que acaba el 23/10
-- #11 (Diagrama de arquitectura de equipos) empieza el 23/10 y necesita #8 (Tabla de hardware con justificación), que acaba el 23/10
-- #11 (Diagrama de arquitectura de equipos) empieza el 23/10 y necesita #9 (Tabla de software y licencias), que acaba el 23/10
-- #12 (Dual boot Win10 + Linux en el equipo del gerente (VM)) empieza el 22/10 y necesita #8 (Tabla de hardware con justificación), que acaba el 23/10
-- #50 (Probar el firmware del stick en la placa (HID; comandos; EEPROM)) empieza el 27/10 y necesita #19 (Montaje del arcade stick (ATmega32U4)), que acaba el 27/10
-- #28 (Implementar web (mapa; formulario; slideshow)) empieza el 21/10 y necesita #27 (Wireframes y diseño conceptual web), que acaba el 23/10
-- #29 (Validación W3C; Lighthouse y accesibilidad) empieza el 23/10 y necesita #28 (Implementar web (mapa; formulario; slideshow)), que acaba el 23/10
-- #30 (Hosting AWS con dominio y HTTPS) empieza el 23/10 y necesita #28 (Implementar web (mapa; formulario; slideshow)), que acaba el 23/10
-- #33 (Instalar Odoo + PostgreSQL con Docker) empieza el 22/10 y necesita #32 (Comparativa y elección de ERP), que acaba el 23/10
-- #34 (Configurar módulos de Odoo) empieza el 22/10 y necesita #33 (Instalar Odoo + PostgreSQL con Docker), que acaba el 23/10
-- #35 (Caso de uso end-to-end automatizado) empieza el 22/10 y necesita #34 (Configurar módulos de Odoo), que acaba el 23/10
-- #37 (Imprimir ticket desde el TPV de Odoo en la impresora real) empieza el 27/10 y necesita #14 (Driver y cola de la impresora de tickets en el TPV (VM) y prueba), que acaba el 30/10
-- #39 (Modelo lógico normalizado (3FN)) empieza el 22/10 y necesita #38 (Modelo E/R), que acaba el 23/10
-- #40 (Scripts DDL) empieza el 22/10 y necesita #39 (Modelo lógico normalizado (3FN)), que acaba el 23/10
-- #41 (Datos de prueba y consultas) empieza el 23/10 y necesita #40 (Scripts DDL), que acaba el 23/10
-- #42 (Usuarios de BD con mínimos privilegios) empieza el 23/10 y necesita #40 (Scripts DDL), que acaba el 23/10
-- #45 (Prueba de restauración con evidencias) empieza el 22/10 y necesita #44 (Plan de backup 3-2-1 cifrado y automatizado), que acaba el 04/11
-
 ## Resumen
 
-**36 de 55 tareas hechas (65 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**37 de 55 tareas hechas (67 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 0 | 3 | 14 |
-| Software | 18 | 7 | 1 | 26 |
+| Software | 19 | 6 | 1 | 26 |
 | Físico | 3 | 2 | 4 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -59,7 +33,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Eneko.P | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la del enunciado) solo hay 3 medidas de antes; faltan las de después y medir jugando. El 24/10 optimizar-arcade.sh mantiene las actualizaciones de seguridad (a las 5:00). El 26/10 pasa de Iker a Eneko.P (reparto de carga). El 26/10 (tarea 51) se ve que no se conoce la contraseña de tecnico en Recreativa-1GB: hay que ponerle una nueva desde la consola antes de medir. | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; limitar la administración a la MAC del gerente. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
 | 18 | Monitorización de recursos de la recreativa | Software | Eneko.P | 02/11 | En curso | Scripts hechos y probados en Linux; documento reescrito para Debian el 24/10 (antes era para Batocera). Falta ejecutarlos en la VM de 1 GB durante una partida y guardar los CSV. El 26/10 pasa de Adrian a Eneko.P (reparto de carga). | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
-| 43 | RAID 1 y simulación de fallo | Software | Iker | 02/11 | En curso | RAID y simulación de fallo hechos por Iker en VM (22-23/10). Falta lo principal: la BD sigue en el disco del sistema. mover-docker-al-raid.sh preparado el 24/10 (sección 7); falta ejecutarlo y repetir el fallo con Odoo funcionando. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 03/11 | En curso | Guía lista (docs/redes/25-wds/DOCUMENTACION.md): WDS en el Archer C6, pruebas W1-W10 (sobre todo que los clientes del router 2 sigan aislados de la LAN) y cobertura y velocidad antes y después en 5 puntos. Si la red de invitados no pasa por el enlace WDS: corregir los diagramas (tareas 11 y 23). 27/10 (Peio): prueba de laboratorio con dos TL-WR841N en una red de pruebas (TP-Link_AF60; 192.168.1.0/24): el enlace WDS funciona (el PC del router 2 recibe IP del router 1 y le hace ping) y el DHCP del router 2 está apagado. Falta repetirlo con la red del proyecto y la de invitados (tarea 24), las pruebas W3-W10 y las medidas de antes y después. | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
@@ -85,13 +58,13 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 6 | Resolver dudas pendientes con el profesor | 0 Gestión | Gestión | Peio | Decidido el 24/10 y apuntado en el Anexo II (sección 5): grupo de 6; DuckDNS vale; reto del 26/10 al 12/11; base central; TicketBAI sin configurar; una VM; la impresora la da el centro. La notación del E/R se revisa con la rúbrica. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 7 | Definir necesidades de equipos (gerente; 2 TPV; impresoras) | 1 Hardware | Documentación | Eneko.S | Requisitos RG, RT y RI con su prueba prevista. | [07-necesidades-equipos.md](../../docs/hardware/07-necesidades-equipos.md) |
 | 8 | Tabla de hardware con justificación | 1 Hardware | Documentación | Eneko.S | Total de 2.361,36 € comprobado el 23/10. | [08-tabla-hardware.md](../../docs/hardware/08-tabla-hardware.md) |
-| 9 | Tabla de software y licencias | 1 Hardware | Documentación | Markel | Revisada el 24/10: versión de cada programa y software del servidor, la recreativa y la web. Faltan la versión exacta de Ubuntu (tarea 12) y la del driver de Epson (tarea 14). | [09-tabla-software-licencias.md](../../docs/hardware/09-tabla-software-licencias.md) |
+| 9 | Tabla de software y licencias | 1 Hardware | Documentación | Markel | Revisada el 24/10: versión de cada programa y software del servidor, la recreativa y la web. Falta la versión exacta de Ubuntu (tarea 12). El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660 (27/10). | [09-tabla-software-licencias.md](../../docs/hardware/09-tabla-software-licencias.md) |
 | 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | Documentación | Peio | Sumas comprobadas el 23/10. El 24/10 se añaden servidor, discos del RAID, disco USB, SAI, switch, cable, adaptador Wi-Fi y palanca (sección 12): 3.814,74 € de inversión completa y 4.174,74 € el primer año. | [10-presupuesto-hardware.md](../../docs/hardware/10-presupuesto-hardware.md) |
 | 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | Iker | Actualizado el 24/10: switch; servidor presupuestado; red de invitados 192.168.50.0/24; Actions y HTTPS; SVG regenerado; tabla de guías de instalación por equipo. | [DIAGRAMA.md](../../docs/diagramas/11-arquitectura-equipos/DIAGRAMA.md) |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | Adrian | Hecho en VMware (23/10). Pendiente: versión exacta de Ubuntu; RG-05 de Windows queda parcial (ninguna actualización acumulativa instalada); cifrado después de instalar. | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | Markel | Hecha a mano por Markel el 26/10 en dos VM con Windows 11 Pro (TPV2 clonado de TPV1 con MAC nuevas): usuario estándar UsuarioTPV; quiosco QuioscoTPV con Edge; USB bloqueado por directiva; firewall y Defender activos; capturas en la guía. Queda: el quiosco apunta a http://localhost:8069 provisional y hay que cambiarlo por la dirección del servidor (tarea 52); comprobar-tpv.ps1 no se ha ejecutado (tarea 15). El 26/10 pasa de Iker a Markel. | [13-bastionado-tpv-windows.md](../../docs/so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
+| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | Markel | Hecha a mano por Markel el 26/10 en dos VM con Windows 11 Pro (TPV2 clonado de TPV1 con MAC nuevas): usuario estándar UsuarioTPV; quiosco QuioscoTPV con Edge; USB bloqueado por directiva; firewall y Defender activos; capturas en la guía. Queda (hallazgo S-20 de la tarea 46): el quiosco apunta a http://localhost:8069 provisional y hay que cambiarlo por la dirección del servidor (tarea 52); comprobar-tpv.ps1 no se ha ejecutado (tarea 15). El 26/10 pasa de Iker a Markel. | [13-bastionado-tpv-windows.md](../../docs/so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | Iker | Debian 13 + MAME 0.276 en VM: arranque directo en 4,7 s y 5 ROMs legales verificadas. El 24/10: preseed sin clave SSH fija y SSH sin contraseña; conexión a la Wi-Fi de invitados documentada. La instalación en el equipo real es la tarea 53. | [DOCUMENTACION.md](../../docs/arcade/16-recreativa-mame/DOCUMENTACION.md) |
-| 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | Markel | Esquema de conexiones con 4 botones (pines 2-5) y la palanca digital (A2-A5); actualizado el 26/10. Falta cablear la placa y conseguir la palanca. 27/10 (Iker): cableado y probado en la placa real; el común de la palanca es el cable blanco a GND. Ver arduino/mando-joystick/evidencias/prueba-placa-2026-10-27.txt. 27/10 (Adrian): montado en la caja con la palanca y los botones (foto). La caja tiene 6 botones; el firmware lee 4 (pines 2-5). | [stick-montado-2026-10-27.webp](../../arduino/mando-joystick/evidencias/stick-montado-2026-10-27.webp) |
+| 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | Markel | Esquema de conexiones con 4 botones (pines 2-5) y la palanca digital (A2-A5); actualizado el 26/10. 27/10 (Iker): cableado y probado en la placa real; el común de la palanca es el cable blanco a GND. Ver arduino/mando-joystick/evidencias/prueba-placa-2026-10-27.txt. 27/10 (Adrian): montado en la caja con la palanca y los botones (foto). La caja tiene 6 botones; el firmware lee 4 (pines 2-5). | [stick-montado-2026-10-27.webp](../../arduino/mando-joystick/evidencias/stick-montado-2026-10-27.webp) |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | Adrian | Compila (pio run del 26/10: Flash 37,4 %; RAM 17,4 %). 26/10: 4 botones por indicación del profesor y solo palanca digital (fuera el modo analógico; la zona muerta y el modo NINGUNA). Probarlo en la placa es la tarea 50. | [README.md](../../arduino/mando-joystick/README.md) |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
@@ -109,6 +82,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 40 | Scripts DDL | 8 BD | Software | Eneko.S | Repetido el 23/10 en PostgreSQL 16: 01 a 03 sin errores; 03 repetible; 05-pruebas 33/33 dos veces; 04 borra y se puede recrear. | [40-scripts-ddl.md](../../docs/bd/40-scripts-ddl.md) |
 | 41 | Datos de prueba y consultas | 8 BD | Software | Iker | 06-datos.sql (2 locales; 8 ventas) y 07-consultas.sql (12 consultas) ejecutados el 24/10 en PostgreSQL 18.3 sin errores; evidencia guardada. Falta crear almi_chain en el servidor (tarea 40; sección 2). | [41-datos-y-consultas.txt](../../docs/bd/evidencias/41-datos-y-consultas.txt) |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | Adrian | 08-usuarios.sql (tpv_app e informes con LOGIN; contraseñas por variable) y 09-pruebas-usuarios.sql: 9/9 con cada cuenta el 24/10. Pasa de Markel a Adrian. | [42-usuarios-y-permisos.txt](../../docs/bd/evidencias/42-usuarios-y-permisos.txt) |
+| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | Iker | RAID y simulación de fallo (22-23/10). 27/10: la BD y los adjuntos de Odoo pasan al RAID (solo los volúmenes de Docker: todo /var/lib/docker no cabía, 6097 MB frente a 4454 MB libres) con mover-docker-al-raid.sh; avería repetida con Odoo funcionando (venta S00007 guardada con [U_]; reconstruido en 30 s) y reinicio comprobado. Falta repetir la restauración (45) con la BD en el RAID. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | Software | Iker | Copia diaria cifrada en RAID y USB. 27/10: almi_chain creada en el servidor y la copia lleva las dos bases; aviso si la copia falla (OnFailure=) instalado y probado con un fallo provocado. Mejora preparada sin probar: tercer repositorio en S3 (falta crear el bucket y el usuario IAM). | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | Iker | Restaurada la copia del USB en un entorno aislado del mismo servidor (46 s). Falta repetirla en una VM nueva para medir el RTO real. | [DOCUMENTACION.md](../../docs/backup/45-restauracion/DOCUMENTACION.md) |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | Adrian | Lista de comprobaciones en arduino/mando-joystick/README.md. 27/10 (Iker): firmware subido y verificado; los 4 botones y las 4 direcciones llegan al PC y a Batocera. 27/10 (Adrian): ver-mando.py registra la entrada y deja evidencia: 2 registros con los 4 botones y las 4 direcciones, sin pulsaciones fantasma (el botón 3 ya no se pulsa solo); MAP + GUARDAR sobrevive al reinicio de la placa y RESET + GUARDAR deja los valores por defecto. Sin comprobar: el efecto de MAP e INV pulsando (probar-stick.py). | [README.md](../../arduino/mando-joystick/README.md) |
@@ -123,7 +97,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Adrian | 16 | 3 | 1 | 0 | 37 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
-| Iker | 13 | 3 | 3 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
+| Iker | 13 | 2 | 2 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 7 | 2 | 0 | 1 | 14 | 1, 2, 4, 5, 6, 11 |
 | Peio | 6 | 3 | 0 | 2 | 12 | 0, 1, 5, 6, 11 |
 
@@ -144,7 +118,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
-| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 27/10–27/10 | #14 (Iker), #34 (Iker) | Hecho |
+| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 27/10–27/10 | #34 (Iker) | Hecho |
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 03/11–04/11 | #33 (Iker) | Hecho |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
@@ -187,7 +161,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 34 | Configurar módulos de Odoo | 7 ERP | Software | 22/10–23/10 | #33 (Iker) | Hecho |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | Software | 22/10–23/10 | #34 (Iker) | Hecho |
 | 41 | Datos de prueba y consultas | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–02/11 | — | En curso |
+| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–02/11 | — | Hecho |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | Software | 03/11–04/11 | #41 (Iker), #43 (Iker) | Hecho |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | 22/10–23/10 | #44 (Iker) | Hecho |
 

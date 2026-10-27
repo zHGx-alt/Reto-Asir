@@ -1,0 +1,48 @@
+
+==> 1/5 Comprobaciones
+  RAID [UU] montado en /srv/datos
+  Volúmenes de Docker: 339 MB · libre en el RAID: 4454 MB
+
+==> 2/5 Copia de seguridad antes del cambio
+  Copia hecha (journalctl -u backup-odoo)
+
+==> 3/5 Parando Odoo y Docker y copiando los volúmenes
+ Container odoo-odoo-1  Stopping
+ Container odoo-odoo-1  Stopped
+ Container odoo-odoo-1  Removing
+ Container odoo-odoo-1  Removed
+ Container odoo-db-1  Stopping
+ Container odoo-db-1  Stopped
+ Container odoo-db-1  Removing
+ Container odoo-db-1  Removed
+ Network odoo_interna  Removing
+ Network odoo_interna  Removed
+
+  Copiado. Los volúmenes antiguos quedan en /var/lib/docker/volumes.antiguo
+
+==> 4/5 Montaje en el RAID
+ Network odoo_interna  Creating
+ Network odoo_interna  Created
+ Container odoo-db-1  Creating
+ Container odoo-db-1  Created
+ Container odoo-odoo-1  Creating
+ Container odoo-odoo-1  Created
+ Container odoo-db-1  Starting
+ Container odoo-db-1  Started
+ Container odoo-db-1  Waiting
+ Container odoo-db-1  Healthy
+ Container odoo-odoo-1  Starting
+ Container odoo-odoo-1  Started
+
+==> 5/5 Comprobación
+TARGET                  SOURCE                    FSTYPE
+/var/lib/docker/volumes /dev/md0[/docker-volumes] ext4
+  odoo_odoo-db-data: /var/lib/docker/volumes/odoo_odoo-db-data/_data
+  odoo_odoo-web-data: /var/lib/docker/volumes/odoo_odoo-web-data/_data
+db: Up 20 seconds (healthy)
+odoo: Up 15 seconds
+  Login de Odoo: 200 (esperado 200)
+
+Listo: la base de datos y los adjuntos están en el RAID.
+Siguiente: sudo ./simular-fallo-con-odoo.sh (sección 7) y, cuando todo vaya bien unos días,
+borrar /var/lib/docker/volumes.antiguo.

@@ -57,6 +57,16 @@ Si ya se ejecutó en la tarea 33, se vuelve a ejecutar sin problema (es idempote
 cd ~/Reto-Asir/docs/erp/33-odoo-docker && sudo ./cortafuegos-servidor.sh
 ```
 
+## 3.1 Menús del cajero (corrección 2.3)
+
+Que `cajero1` y `cajero2` solo vean *Punto de venta*. Es idempotente. La contraseña de `admin` se lee del `.env` como root y no queda en el historial (tarea 46, S-15):
+
+```bash
+sudo bash -c 'set -a; . /opt/odoo/.env; python3 ~tecnico/Reto-Asir/docs/erp/34-configurar-odoo/restringir-menus-cajero.py' | tee ~/52-menus-cajero.txt
+```
+
+**Evidencia:** captura del menú de aplicaciones (el icono de la cuadrícula) como `cajero1`, donde solo sale *Punto de venta*, y como `gerente`, donde siguen saliendo todas. Se guardan en `docs/erp/34-configurar-odoo/evidencias/`.
+
 ## 4. Los dos TPV
 
 1. Copiar `/opt/odoo/https/certs/odoo.crt` (**nunca** el `.key`) a un USB **antes** de que el TPV bloquee los USB, o por `scp` al PC del gerente y de ahí al TPV.

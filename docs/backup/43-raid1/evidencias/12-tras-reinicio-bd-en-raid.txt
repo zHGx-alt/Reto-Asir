@@ -1,0 +1,9 @@
+== tras reiniciar: up 0 minutes
+md0 : active raid1 sdc[2] sdb[0]
+      5237760 blocks super 1.2 [2/2] [UU]
+TARGET     SOURCE
+/srv/datos /dev/md0
+TARGET                  SOURCE
+/var/lib/docker/volumes /dev/md0[/docker-volumes]
+active
+Login de Odoo: 200

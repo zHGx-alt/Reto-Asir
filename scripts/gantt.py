@@ -70,6 +70,8 @@ def validar(tareas):
                 errores.append(f"#{t['ID']}: depende de sí misma")
             elif d not in por_id:
                 errores.append(f"#{t['ID']}: depende de #{d}, que no existe")
+            elif t["Estado"] == por_id[d]["Estado"] == "Hecho":
+                continue  # las dos hechas: son fechas reales, no hay nada que replanificar
             elif fecha(t["Inicio"]) <= fecha(por_id[d]["Fin"]):
                 avisos.append(f"#{t['ID']} ({t['Tarea']}) empieza el "
                               f"{fecha(t['Inicio']):%d/%m} y necesita #{d} "

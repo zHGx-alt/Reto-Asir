@@ -1,10 +1,10 @@
 # Tarea 43 · RAID 1 y simulación de fallo
 
 **Responsable:** Iker (hecha por Iker; antes estaba a nombre de Eneko.P) · **Fecha:** 22/10/2026
-**Estado:** ✅ RAID y simulación de fallo hechos en máquina virtual (`ServidorERP`) · ⚠️ **La base de datos todavía no está en el RAID** (sección 7)
+**Estado:** ✅ Hecha en máquina virtual (`ServidorERP`): RAID, simulación de fallo y, desde el 27/10/2026, **la base de datos en el RAID**, con la avería repetida con Odoo funcionando (sección 7)
 
 ## 1. Resultado
-- RAID 1 por software (`mdadm`) con dos discos de 5 GB, montado en **`/srv/datos`**. Ahí van las copias de seguridad de la tarea 44 y **tienen que ir también los datos vivos** de PostgreSQL y Odoo (sección 7: todavía no están).
+- RAID 1 por software (`mdadm`) con dos discos de 5 GB, montado en **`/srv/datos`**. Ahí están las copias de seguridad de la tarea 44 y **los datos vivos**: la base de datos de PostgreSQL y los adjuntos de Odoo (sección 7).
 - Se simuló la **avería de un disco**: los datos siguieron disponibles y se podía seguir escribiendo.
 - Se **cambió el disco** por uno nuevo y el espejo se **reconstruyó en 27 s**, sin perder ni un byte (comprobado con SHA-256).
 - El servidor **arranca bien con el RAID degradado** y, después de reparado, **vuelve solo** en cada reinicio.
@@ -75,47 +75,43 @@ Log: [`evidencias/02-crear-raid.log`](evidencias/02-crear-raid.log).
 | 2 | Después, `medium is already associated` aunque el puerto aparecía vacío | Fallo de VirtualBox 7.0: el disco quedó "a medias" asociado a la VM | Se usó un disco de repuesto **nuevo** (`raid-repuesto.vdi`) en el puerto 3, que sí admite conexión en caliente. Ese mismo fallo sirvió para probar el arranque con el RAID degradado (paso 7). |
 | 3 | `mdadm: stat failed for /dev/sdd` | El disco de la incidencia 2 desapareció del sistema justo antes de añadirlo | Ver la incidencia 2. El RAID siguió degradado y sin perder datos. |
 
-## 7. Pendiente: la base de datos tiene que estar en el RAID
+## 7. La base de datos en el RAID (27/10/2026)
 
-El enunciado dice: «Esta BD **se almacenará en un dispositivo redundante**». Ahora mismo el RAID (`/srv/datos`) solo guarda las copias: PostgreSQL y los adjuntos de Odoo siguen en los volúmenes de Docker (`/var/lib/docker/volumes/...`), que están en `sda`, el disco del sistema, **fuera del RAID**. Si falla `sda`, la base de datos viva se pierde y hay que restaurar la última copia (hasta 24 h de datos). La simulación de la sección 4 no lo detecta porque el disco que se «rompió» era del RAID, no el del sistema.
+El enunciado dice: «Esta BD **se almacenará en un dispositivo redundante**». Hasta el 27/10 el RAID solo guardaba las copias:
+PostgreSQL y los adjuntos de Odoo estaban en los volúmenes de Docker, en `sda`, el disco del sistema, **fuera del RAID**.
 
-**Cómo se corrige:** mover el directorio de datos de Docker al RAID. Así quedan en el espejo las bases `tienda` y `almi_chain` y los adjuntos.
+### 7.1 Qué se mueve y por qué solo los volúmenes
+La primera idea era mover todo `/var/lib/docker` al RAID, pero **no cabe**: ocupaba **6097 MB** y el RAID tenía **4454 MB**
+libres (son discos de 5 GB). Casi todo eran **imágenes** de Docker (Odoo, PostgreSQL), que se vuelven a descargar y no hace
+falta proteger. Lo que hay que proteger son los **volúmenes**: la base de datos (`odoo_odoo-db-data`) y los adjuntos
+(`odoo_odoo-web-data`), que ocupaban **339 MB**.
 
-**Con el script (recomendado):** [`mover-docker-al-raid.sh`](mover-docker-al-raid.sh) hace todo lo de abajo y lo comprueba: mira que el RAID esté sano y tenga sitio, hace una copia antes, mueve los datos, configura Docker para que arranque después del RAID y verifica que Odoo responde. Si ya está movido, solo comprueba (sintaxis comprobada con `bash -n`; falta ejecutarlo en la VM).
-
+Script: [`mover-docker-al-raid.sh`](mover-docker-al-raid.sh). Si ya está hecho, solo comprueba.
 ```bash
 sudo ./mover-docker-al-raid.sh
 ```
+1. Comprueba que el RAID está montado, sano (`[UU]`) y con el doble del sitio que ocupan los volúmenes.
+2. Hace una copia de seguridad justo antes (`backup-odoo`, tarea 44).
+3. Para Odoo y Docker y copia `/var/lib/docker/volumes` a `/srv/datos/docker-volumes` con `rsync -aHAX`.
+4. Monta esa carpeta sobre `/var/lib/docker/volumes` (montaje *bind* en `/etc/fstab`, que exige `/srv/datos`), y Docker
+   tiene `RequiresMountsFor=/srv/datos /var/lib/docker/volumes`: **si el RAID no está, Docker no arranca**, en vez de
+   arrancar Odoo con una base de datos vacía.
+5. Arranca y comprueba. Los volúmenes antiguos quedan en `/var/lib/docker/volumes.antiguo` (se borran a mano pasados unos días).
 
-**A mano**, con Odoo parado y una copia recién hecha (tarea 44):
+El script de copias busca la ruta con `docker volume inspect`, así que no hay que cambiarlo: la ruta es la misma.
 
-```bash
-sudo systemctl start backup-odoo          # copia justo antes del cambio
-cd /opt/odoo && sudo docker compose down
-sudo systemctl stop docker docker.socket
-sudo rsync -aHAX /var/lib/docker/ /srv/datos/docker/
-echo '{ "data-root": "/srv/datos/docker" }' | sudo tee /etc/docker/daemon.json
-```
+### 7.2 Resultados
+| # | Prueba | Resultado | Evidencia |
+|---|---|---|---|
+| 1 | Mover los volúmenes | ✅ `/var/lib/docker/volumes` → `/dev/md0[/docker-volumes]`; contenedores en marcha; login de Odoo **200** | [10](evidencias/10-bd-al-raid.log) |
+| 2 | **Avería con Odoo funcionando** ([`simular-fallo-con-odoo.sh`](simular-fallo-con-odoo.sh)) | ✅ `sdc` marcado como averiado → `[U_]`, `clean, degraded`. Odoo sigue respondiendo (200) | [11](evidencias/11-fallo-con-odoo.log) |
+| 3 | ¿Se guardan ventas con un disco roto? | ✅ El script crea una venta con el propio Odoo (`odoo shell`): **S00007** confirmada; pedidos de venta de 6 a 7; `CHECKPOINT` de PostgreSQL sin errores | [11](evidencias/11-fallo-con-odoo.log) |
+| 4 | Cambio de disco y reconstrucción | ✅ `--remove`, `--add` y **reconstruido en 30 s** → `[UU]`, `clean`; la venta sigue ahí | [11](evidencias/11-fallo-con-odoo.log) |
+| 5 | Reinicio del servidor | ✅ RAID `[UU]`, `/srv/datos` y los volúmenes montados desde `md0`, Docker activo, Odoo 200, ningún servicio fallido | [12](evidencias/12-tras-reinicio-bd-en-raid.txt) |
 
-Docker tiene que arrancar **después** de montar el RAID. En `sudo systemctl edit docker.service`:
+**Pendiente:** repetir la prueba de la tarea 45 (restauración) ahora que la BD está en el RAID, y borrar
+`/var/lib/docker/volumes.antiguo` cuando haya pasado una semana sin problemas.
 
-```
-[Unit]
-RequiresMountsFor=/srv/datos
-```
-
-```bash
-sudo systemctl daemon-reload && sudo systemctl start docker
-sudo docker info --format '{{.DockerRootDir}}'    # debe decir /srv/datos/docker
-cd /opt/odoo && sudo docker compose up -d
-```
-
-Cuando Odoo funcione igual (login y una venta de prueba), borrar el directorio antiguo con `sudo rm -rf /var/lib/docker.old` (antes, `sudo mv /var/lib/docker /var/lib/docker.old` para tenerlo de respaldo unos días). El script de copias ya busca la ruta del volumen con `docker volume inspect`, así que no hay que cambiarlo.
-
-La otra opción es instalar el sistema entero sobre el RAID 1 (el instalador de Debian lo permite), que protege también el sistema operativo. Para el reto basta con mover los datos.
-
-**Después hay que repetir:**
-- La simulación de fallo (sección 4) **con Odoo funcionando durante el fallo**: hacer una venta con un disco del RAID quitado y comprobar que se guarda.
-- La prueba de la tarea 45.
-
-**Las copias no pueden quedarse solo en el mismo RAID:** si el RAID entero se pierde (fallo de la controladora, borrado, incendio), se pierden a la vez los datos y la copia 2. Por eso la copia 3 (USB fuera del local, y mejor aún S3) es la que de verdad protege; ver la tarea 44.
+**Las copias no pueden quedarse solo en el mismo RAID:** si el RAID entero se pierde (fallo de la controladora, borrado,
+incendio), se pierden a la vez los datos y la copia 2. Por eso la copia 3 (USB fuera del local, y mejor aún S3) es la que de
+verdad protege; ver la tarea 44.
