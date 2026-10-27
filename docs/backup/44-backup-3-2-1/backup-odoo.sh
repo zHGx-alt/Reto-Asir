@@ -4,6 +4,7 @@
 #   Copia 1: los datos vivos (PostgreSQL: bases de Odoo y almi_chain + adjuntos de Odoo + configuración)
 #   Copia 2: repositorio restic en el RAID 1          → /srv/datos/restic
 #   Copia 3: repositorio restic en el disco USB externo → /mnt/usb-backup/restic (si está conectado)
+#   Copia 3b (opcional): repositorio restic en AWS S3, si existe /root/.config/backup-odoo/s3.env (ver s3.env.example)
 #
 # restic cifra con AES-256 y deduplica: cada copia diaria solo ocupa lo que ha cambiado.
 set -euo pipefail
@@ -18,6 +19,7 @@ ESTADO=/var/lib/backup-odoo          # fecha de la última copia en el USB
 DIAS_MAX_SIN_USB=7                   # el USB se renueva fuera del local cada lunes (tarea 44, sección 4)
 TEMP=/srv/datos/temp-backup
 RETENCION=(--keep-daily 7 --keep-weekly 4 --keep-monthly 6)
+S3_ENV=/root/.config/backup-odoo/s3.env   # REPO_S3 y las claves de un usuario IAM limitado al bucket (fuera de Git)
 
 log() { echo "[backup-odoo] $*"; }
 
@@ -63,15 +65,32 @@ else
   log "AVISO: USB externo no conectado → hoy solo hay copia en el RAID (no se cumple el 3-2-1)"
 fi
 
+# 3b. Copia en AWS S3 (opcional): fuera del local todos los días, sin depender de que alguien se lleve el USB
+COPIA_S3_HOY=0
+if [[ -r $S3_ENV ]]; then
+  set -a; source "$S3_ENV"; set +a
+  if ! restic -r "$REPO_S3" cat config >/dev/null 2>&1; then
+    log "Creando el repositorio en S3 ($REPO_S3)"
+    restic -r "$REPO_S3" init --from-repo "$REPO_RAID" --from-password-file "$RESTIC_PASSWORD_FILE" --copy-chunker-params
+  fi
+  log "Copia 3b → AWS S3 ($REPO_S3)"
+  restic -r "$REPO_S3" copy --from-repo "$REPO_RAID" --from-password-file "$RESTIC_PASSWORD_FILE" --tag odoo
+  restic -r "$REPO_S3" forget --tag odoo "${RETENCION[@]}" --prune
+  restic -r "$REPO_S3" check
+  install -d -m 700 "$ESTADO"; date +%s > "$ESTADO/ultima-copia-s3"
+  COPIA_S3_HOY=1
+fi
+
 rm -rf "$TEMP"
 log "Instantáneas en el RAID:"
 restic -r "$REPO_RAID" snapshots --tag odoo --compact
 
 # Aviso si la copia fuera del local lleva demasiado sin renovarse: el servicio termina con error
-# y aparece en "systemctl --failed" (y en OnFailure= cuando se configure el correo).
+# y aparece en "systemctl --failed"; OnFailure= lanza aviso-fallo-backup.sh. Con copia en S3 hoy, ya hay copia
+# fuera del local aunque el USB no venga.
 ultima=$(cat "$ESTADO/ultima-copia-usb" 2>/dev/null || echo 0)
 dias=$(( ($(date +%s) - ultima) / 86400 ))
-if (( dias > DIAS_MAX_SIN_USB )); then
+if (( dias > DIAS_MAX_SIN_USB && COPIA_S3_HOY == 0 )); then
   log "ERROR: la última copia en el USB es de hace $dias días (máximo $DIAS_MAX_SIN_USB): hay que traer el USB"
   exit 2
 fi
