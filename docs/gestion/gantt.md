@@ -29,6 +29,7 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 - #33 (Instalar Odoo + PostgreSQL con Docker) empieza el 22/10 y necesita #32 (Comparativa y elección de ERP), que acaba el 23/10
 - #34 (Configurar módulos de Odoo) empieza el 22/10 y necesita #33 (Instalar Odoo + PostgreSQL con Docker), que acaba el 23/10
 - #35 (Caso de uso end-to-end automatizado) empieza el 22/10 y necesita #34 (Configurar módulos de Odoo), que acaba el 23/10
+- #37 (Imprimir ticket desde el TPV de Odoo en la impresora real) empieza el 27/10 y necesita #14 (Driver y cola de la impresora de tickets en el TPV (VM) y prueba), que acaba el 30/10
 - #39 (Modelo lógico normalizado (3FN)) empieza el 22/10 y necesita #38 (Modelo E/R), que acaba el 23/10
 - #40 (Scripts DDL) empieza el 22/10 y necesita #39 (Modelo lógico normalizado (3FN)), que acaba el 23/10
 - #41 (Datos de prueba y consultas) empieza el 23/10 y necesita #40 (Scripts DDL), que acaba el 23/10
@@ -37,14 +38,14 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 
 ## Resumen
 
-**34 de 55 tareas hechas (61 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**35 de 55 tareas hechas (63 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 0 | 3 | 14 |
 | Software | 17 | 8 | 1 | 26 |
-| Físico | 2 | 2 | 5 | 9 |
+| Físico | 3 | 2 | 4 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
 
@@ -66,12 +67,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | Revisión del repositorio hecha el 26/10 y repasada el 27/10 (PR #57-65): 21 hallazgos (5 altos) con responsable; S-03 no aplica (se descarta Batocera); nuevos S-20 (TPV hechos a mano sin el bastionado completo; Markel) y S-21 (versión de la librería del stick; corregido). Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge), S-05 (Wi-Fi cambiada) y S-21. S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). 26/10: intento con una Samsung ML-1660 USB pasada a la VM win-11 (tarea 52): Windows instala el driver pero no crea el puerto USB001 y el trabajo falla; queda para la impresora del centro. | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
+| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). 26/10: intento con una Samsung ML-1660 USB pasada a la VM win-11 (tarea 52): Windows instala el driver pero no crea el puerto USB001 y el trabajo falla; queda para la impresora del centro. 27/10: la impresora de pruebas es la Samsung ML-1660 (decisión del equipo; no hay térmicas para todos). Pasada por USB a la VM no crea USB001; por IPP a la cola CUPS del PC de Adrian sí imprime (tarea 52, sección 4.2). Falta la cola en los TPV de la tarea 13. | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16): la 51 decidió Debian el 26/10. | — |
 | 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. 27/10: en Batocera ya se reconoce (evtest con los 4 botones y los ejes; es_input.cfg). | — |
 | 54 | Medir rendimiento y recursos en el equipo real | Físico | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. | — |
 | 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 05/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. | — |
-| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | Físico | Peio | 05/11 | Pendiente | El ticket ya sale en pantalla (tarea 34; sección 8). Pasos en docs/so/14-impresora/DOCUMENTACION.md (paso 6). Espera a la impresora del centro. 26/10: el recibo de una venta por HTTPS se genera e imprime desde Edge (tarea 52, evidencia 09), pero salió por el CUPS del PC, no desde el TPV. 27/10: ya sale desde la VM win-11 por IPP a la Samsung del PC (tarea 52, evidencia 16); sigue pendiente con la térmica del centro por USB. | — |
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 09/11 | Pendiente | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. | [verificacion.md](../../docs/gestion/verificacion.md) |
 | 48 | Documentación final paso a paso | Documentación | Markel | 10/11 | Pendiente | Punto de partida: LOGICA_RETO.md. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente | — | — |
@@ -104,6 +104,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | Iker | Repetido el 23/10 en Docker limpio con el mismo docker-compose.yml: login 200; gestor de BD desactivado; 5432 sin publicar; admin/admin rechazado. | [DOCUMENTACION.md](../../docs/erp/33-odoo-docker/DOCUMENTACION.md) |
 | 34 | Configurar módulos de Odoo | 7 ERP | Software | Iker | Hecha por Iker (estaba a nombre de Markel). La prueba en limpio del 23/10 encontró 2 fallos que impedían repetirla desde cero; corregidos (evidencias/prueba-instalacion-limpia.txt). TPV de barra probado con una venta real. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | Software | Iker | Pedido; factura; cobro y PDF (23/10 en limpio). El 24/10 el caso de uso pasa a un menú de grupo con IVA del 10 % (antes: partida recreativa al 21 %): hay que repetir la ejecución y cambiar las evidencias. | [DOCUMENTACION.md](../../docs/erp/35-factura-automatica/DOCUMENTACION.md) |
+| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | Adrian | El ticket ya sale en pantalla (tarea 34; sección 8). Pasos en docs/so/14-impresora/DOCUMENTACION.md (paso 6). Espera a la impresora del centro. 26/10: el recibo de una venta por HTTPS se genera e imprime desde Edge (tarea 52, evidencia 09), pero salió por el CUPS del PC, no desde el TPV. 27/10: ya sale desde la VM win-11 por IPP a la Samsung del PC (tarea 52, evidencia 16). Decisión del 27/10: la impresora de tickets de las pruebas es la Samsung ML-1660 (las térmicas del centro no llegan para todos los grupos), así que la tarea se da por hecha con ese ticket (evidencias 16 y 17 de la 52). Pasa de Peio a Adrian, que la hizo. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 38 | Modelo E/R | 8 BD | Documentación | Adrian | — | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | Eneko.S | — | [39-modelo-logico-3fn.md](../../docs/bd/39-modelo-logico-3fn.md) |
 | 40 | Scripts DDL | 8 BD | Software | Eneko.S | Repetido el 23/10 en PostgreSQL 16: 01 a 03 sin errores; 03 repetible; 05-pruebas 33/33 dos veces; 04 borra y se puede recrear. | [40-scripts-ddl.md](../../docs/bd/40-scripts-ddl.md) |
@@ -119,12 +120,12 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 15 | 3 | 1 | 0 | 36 | 0, 2, 4, 5, 6, 7, 8, 10 |
+| Adrian | 16 | 3 | 1 | 0 | 37 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 4 | 4 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 7 | 2 | 0 | 1 | 14 | 1, 2, 4, 5, 6, 11 |
-| Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
+| Peio | 6 | 3 | 0 | 2 | 12 | 0, 1, 5, 6, 11 |
 
 ## Tareas por persona
 
@@ -143,6 +144,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
+| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 27/10–27/10 | #14 (Iker), #34 (Iker) | Hecho |
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 03/11–04/11 | #33 (Iker) | Hecho |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
@@ -210,5 +212,4 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | 28/10–30/10 | #23 (Adrian) | En curso |
 | 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–03/11 | #24 (Peio) | En curso |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | 22/10–23/10 | — | Hecho |
-| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 04/11–05/11 | #14 (Iker), #34 (Iker) | Pendiente |
 | 49 | Presentación y ensayo | 11 Entrega | Documentación | 09/11–10/11 | #46 (Adrian) | Pendiente |

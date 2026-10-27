@@ -346,11 +346,11 @@
 <rect x="1004" y="1184" width="76" height="14" rx="4" fill="#eb6834" stroke="#0b0b0b" stroke-width="1.5"><title>36. Importar y exportar datos en Odoo · Eneko.P · 04/11–05/11 · En curso</title></rect>
 <line x1="16" y1="1224" x2="1202" y2="1224" stroke="#f0efeb"/>
 <text x="16" y="1217.0" class="s">37</text>
-<text x="44" y="1217.0" class="t">Imprimir ticket desde el TPV de Odoo en la impresora real<tspan class="s"> · físico</tspan></text>
-<circle cx="449" cy="1213.0" r="4.5" fill="#008300"/>
-<text x="458" y="1217.0" class="t">Peio</text>
+<text x="44" y="1217.0" class="m">Imprimir ticket desde el TPV de Odoo en la impresora real ✓<tspan class="s"> · físico</tspan></text>
+<circle cx="449" cy="1213.0" r="4.5" fill="#2a78d6"/>
+<text x="458" y="1217.0" class="t">Adrian</text>
 <text x="528" y="1217.0" class="s">14, 34</text>
-<rect x="1004" y="1206" width="76" height="14" rx="4" fill="#008300"><title>37. Imprimir ticket desde el TPV de Odoo en la impresora real · Peio · 04/11–05/11 · Pendiente</title></rect>
+<rect x="764" y="1206" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>37. Imprimir ticket desde el TPV de Odoo en la impresora real · Adrian · 27/10–27/10 · Hecho</title></rect>
 <line x1="16" y1="1246" x2="1202" y2="1246" stroke="#f0efeb"/>
 <text x="16" y="1239.0" class="s">52</text>
 <text x="44" y="1239.0" class="m">Proxy HTTPS delante de Odoo ✓</text>
