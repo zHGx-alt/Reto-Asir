@@ -1,0 +1,8 @@
+[1/6] Cliente: Eventos Ejemplo S.L. (id 11)
+[2/6] Producto: Menú de grupo (evento) a 30.00 € + IVA 10% S (id 22)
+[3/6] Pedido S00005 confirmado (sale), total 654.55 €
+[4/6] Factura INV/2026/00003 validada el 2026-10-27: base 545.45 € + IVA 109.10 € = 654.55 €
+[5/6] Cobro registrado: estado de pago 'paid'
+[6/6] PDF guardado en evidencias/INV_2026_00003.pdf (25 KB)
+
+OK · S00005 → INV/2026/00003 · 654.55 € · paid
