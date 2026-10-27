@@ -1,0 +1,13 @@
+               total        used        free      shared  buff/cache   available
+Mem:             963         621          67           3         415         342
+Swap:            481          31         450
+Filename				Type		Size		Used		Priority
+/dev/zram0                              partition	493560		32048		1000
+206364 emulationstation --exit-on-reboot-required --windowed
+54200 python3 /usr/bin/batocera-controlcenter-app --hidden 20
+24184 python3 /usr/bin/wsdd -w WORKGROUP
+20324 python3 /usr/bin/hotkeygen --permanent
+13436 openbox --config-file /etc/openbox/rc.xml --startup emulationstation-standalone
+10284 /usr/bin/wireplumber
+ 8752 /usr/sbin/syslog-ng
+ 7928 /usr/bin/pipewire

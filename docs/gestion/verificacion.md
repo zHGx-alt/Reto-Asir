@@ -113,7 +113,7 @@ Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los
 
 | Requisito del enunciado | Tarea | Estado |
 |---|---|---|
-| TPV restringidos con mínimos privilegios | 13, 15 | Pendiente |
+| TPV restringidos con mínimos privilegios | 13, 15 | Hecho a mano en VM (26/10, tarea 13); falta comprobar-tpv.ps1 (tarea 15) |
 | Instalación y configuración de una impresora | 14, 37 | Pendiente |
 | Arcade stick montado y probado con dos emuladores | 19, 50, 21 | Pendiente |
 | Recreativa de 1 núcleo y 1 GB con pruebas de rendimiento | 17, 18, 51, 53, 54 | En curso / pendiente |
@@ -121,7 +121,7 @@ Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los
 | Despliegue reproducible automatizado (IaC) | 31 | Pendiente (el enunciado lo pide «a poder ser») |
 | ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | Pendiente |
 | BD: implementación **y consulta de sus datos** | 41 | Pendiente |
-| Comunicaciones cifradas en toda la solución | 52, 46 | Pendiente (Odoo va por HTTP) |
+| Comunicaciones cifradas en toda la solución | 52, 46 | Odoo por HTTPS hecho en VM (tarea 52, con el ticket impreso desde el TPV provisional); la revisión de la 46 sigue en curso |
 | Tabla de pruebas, documentación y presentación | 47, 48, 49 | Pendiente |
 
 ## 8. Comprobaciones del 24/10/2026

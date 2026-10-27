@@ -71,7 +71,7 @@ flowchart TB
 | TPV 1 y TPV 2 | Caja de la barra | Windows 10 Pro: usuario estándar, modo quiosco con el navegador en el TPV de Odoo, USB bloqueado | Cable, LAN 3 y 4 | 192.168.10.31 y .32 | 13–15 | Iggual AIO B156.88.N100 (táctil de 15,6") |
 | Impresoras de tickets (2) | Ticket de cada TPV | Driver ESC/POS de Windows | USB a su TPV (sin IP) | — | 14, 37 | Epson TM-T20IV |
 | Recreativa | Máquina arcade para clientes | Debian 13 sin escritorio + MAME (o Batocera, tarea 51) | Wi-Fi de invitados (adaptador USB TP-Link TL-WN725N) | DHCP de invitados | 16–18, 51, 53, 54 | Equipo de 1 núcleo y 1 GB (lo pone el cliente) |
-| Arcade stick | Mando de la recreativa | Firmware propio: joystick HID, palanca digital, mapeo en EEPROM | USB a la recreativa | — | 19–21, 50 | Keyestudio Leonardo (ATmega32U4) + 6 botones (hasta 8) + palanca Sanwa JLF-TP-8YT |
+| Arcade stick | Mando de la recreativa | Firmware propio: joystick HID, palanca digital, mapeo en EEPROM | USB a la recreativa | — | 19–21, 50 | Keyestudio Leonardo (ATmega32U4) + 4 botones + palanca Sanwa JLF-TP-8YT |
 | Router de DIGI (ONT) | Llega la fibra de 1 Gb | Firmware de la operadora | Fibra; cable al WAN del router 1 | La de DIGI | 22 | Incluido con la línea |
 | Router 1 | Salida a internet, firewall, DHCP, Wi-Fi del personal y de invitados | Firmware de fábrica | WAN al router del operador | 192.168.10.1 | 24 | TP-Link Archer C6 V3 |
 | Router 2 | Amplía la Wi-Fi por WDS | Firmware de fábrica, DHCP apagado | WDS | 192.168.10.2 | 25 | TP-Link Archer C6 V3 |

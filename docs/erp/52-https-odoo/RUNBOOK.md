@@ -39,6 +39,16 @@ Esperado al final: `HTTPS: 200`, `HTTP → 443: 301`, `8069 en la LAN: 000`.
 
 Si algo va mal: sección 5 de [DOCUMENTACION.md](DOCUMENTACION.md) (volver atrás en dos órdenes).
 
+## 2.1 URL de Odoo y QR del ticket
+
+Odoo apunta su dirección (`web.base.url`) la primera vez que entra el administrador. Si fue antes de cambiar la IP o el proxy, los enlaces salen con la dirección vieja, también el QR «¿Necesita una factura?» del ticket (incidencia 6). Ese QR, además, no le sirve al cliente: está en la Wi-Fi de invitados, que no llega al servidor (tarea 46, S-19).
+
+```bash
+cd ~/Reto-Asir/docs/erp/52-https-odoo && sudo ./fijar-url-y-qr.sh https://192.168.10.10 | tee ~/52-fijar-url-y-qr.txt
+```
+
+Fija `web.base.url` y `web.base.url.freeze = True` (para que Odoo no la vuelva a cambiar) y pone a `False` el ajuste de la empresa `point_of_sale_use_ticket_qr_code` (*Facturación de autoservicio* en los ajustes del TPV). **Se aplica al abrir una sesión de caja nueva:** si hay una caja abierta, cerrarla y volver a abrirla; con F5 el TPV sigue con la configuración que cargó al abrir ([evidencias 13 a 15](evidencias/13-fijar-url-y-qr.txt)).
+
 ## 3. Cortafuegos del servidor
 
 Si ya se ejecutó en la tarea 33, se vuelve a ejecutar sin problema (es idempotente):
@@ -60,7 +70,7 @@ cd ~/Reto-Asir/docs/erp/33-odoo-docker && sudo ./cortafuegos-servidor.sh
    ```powershell
    .\configurar-tpv.ps1 -NumeroTpv 1 -PuertosOdoo 443 -CertificadoOdoo .\odoo.crt
    ```
-   La huella que muestra es SHA-1 (`Thumbprint`). Para comparar con la SHA-256 del paso 2: `certutil -hashfile .\odoo.crt SHA256`.
+   La huella que muestra es SHA-1 (`Thumbprint`). Para comparar con la SHA-256 del paso 2: `(Get-PfxCertificate .\odoo.crt).GetCertHashString('SHA256')`. **No** vale `certutil -hashfile`: da la suma del fichero, no la del certificado (incidencia 7).
 3. Cambiar la URL del quiosco a `https://192.168.10.10/pos/ui` (tarea 13, paso 4.5: *Configurar un quiosco* → elegir el existente → URL).
 4. Comprobar:
    ```powershell

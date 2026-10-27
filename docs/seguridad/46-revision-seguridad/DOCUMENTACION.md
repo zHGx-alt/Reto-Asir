@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (26/10/2026):** 🟡 Revisión del repositorio hecha: 18 hallazgos y 2 ya corregidos (S-01 y S-05). Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
+- **Estado (27/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 con lo que entró después (sección 1.1): 21 hallazgos; 3 corregidos (S-01, S-05 y S-21) y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -30,27 +30,38 @@ El enunciado pide que todo el sistema esté «configurado de forma segura». Cad
 
 Lo que no se puede ver en el repositorio (la configuración real del router, los equipos encendidos) queda en la sección 5 como comprobación manual.
 
+### 1.1 Repaso del 27/10/2026
+
+Se leyó lo que entró en `main` después de la revisión (PR #57 a #65):
+
+| Qué | Resultado |
+|---|---|
+| Tarea 13 hecha a mano por Markel ([guía](../../so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md)) | Hallazgo nuevo **S-20**: los TPV no tienen todo lo que da `configurar-tpv.ps1`. Corregida la sección 6, que lo daba por hecho |
+| Tarea 51 (Debian + MAME; `optimizar-batocera.sh`) | Se descarta Batocera: **S-03 ya no aplica**. El script, por si se usara, activa la seguridad y no guarda la contraseña |
+| Stick (`mando_joystick.ino`, `subir.sh`) | Firmware bien: comandos con límites, búfer acotado y la EEPROM se valida (firma, versión, suma y rango). Hallazgo nuevo **S-21** en `subir.sh`, corregido |
+| Tarea 52 (`fijar-url-y-qr.sh`, impresión por IPP) | Sin hallazgos. El script lee `/opt/odoo/.env` como root y no muestra la contraseña. El CUPS compartido es solo del laboratorio del PC de Adrian, no del proyecto |
+
 ## 2. Resumen
 
 | Gravedad | Hallazgos | Corregidos |
 |---|---|---|
-| Alta | 5 (S-01 a S-05) | 2 (S-01 y S-05) |
-| Media | 7 (S-06 a S-12) | 0 |
-| Baja | 6 (S-13 a S-18) | 0 |
+| Alta | 5 (S-01 a S-05) | 2 (S-01 y S-05); S-03 no aplica |
+| Media | 8 (S-06 a S-12 y S-20) | 0 |
+| Baja | 8 (S-13 a S-19 y S-21) | 1 (S-21) |
 
 Lo más urgente, por este orden:
 
 1. **Router:** red de invitados sin hacer, y administración abierta a toda la LAN y WPS (S-06, S-04). Las contraseñas ya están cambiadas (26/10). La segmentación de la tarea 23 depende de esto.
 2. **Odoo sigue por HTTP en la LAN** hasta activar la tarea 52 en el servidor del equipo (S-02).
-3. **Batocera con la contraseña de root `linux`**, si se queda Batocera (S-03).
+3. **Los TPV reales no tienen el bastionado completo** (S-20): sin bloqueo de salida en el firewall ni lista blanca en Edge.
 
 ## 3. Hallazgos
 
 | ID | Gravedad | Dónde | Qué pasa | Qué hacer | Responsable | Estado |
 |---|---|---|---|---|---|---|
-| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script y probado en la VM de la tarea 52 (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
-| S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Esperando a la tarea 43 (guía en [`RUNBOOK.md` de la tarea 52](../../erp/52-https-odoo/RUNBOOK.md)) |
-| S-03 | Alta | Tarea 16, Batocera | Con *Enforce security* desactivado, root tiene siempre la contraseña `linux`, se ve en el menú y sirve también para SSH y Samba | `batocera-settings-set system.security.enabled 1` y contraseña de root aleatoria en KeePassXC. O quedarse con la versión Debian, que ya está endurecida (S-08 lo compara) | Iker | ⏳ Pendiente (solo si se elige Batocera) |
+| S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script y probado en la VM de la tarea 52, también en Edge (candado sin avisos) (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
+| S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Probado entero en VM, con TPV provisional y venta sin red (tarea 52, sección 4.2). Falta en el servidor del equipo: espera a la tarea 43 ([runbook](../../erp/52-https-odoo/RUNBOOK.md)) |
+| S-03 | Alta | Tarea 16, Batocera | Con *Enforce security* desactivado, root tiene siempre la contraseña `linux`, se ve en el menú y sirve también para SSH y Samba | `batocera-settings-set system.security.enabled 1` y contraseña de root aleatoria en KeePassXC. O quedarse con la versión Debian, que ya está endurecida (S-08 lo compara) | Iker | ➖ No aplica: la tarea 51 elige Debian, ya endurecida (27/10) |
 | S-04 | Alta | Tarea 24, router | Se entra al panel como `Admin` con una contraseña de 5 caracteres que parece la de fábrica. El panel va por HTTP y está abierto a toda la LAN. No hay evidencia de que WPS esté apagado | Contraseña de KeePassXC, administración solo desde la MAC del gerente y por cable, y WPS desactivado | Peio | 🟡 Contraseña cambiada y en KeePassXC (26/10). Faltan la MAC y WPS |
 | S-05 | Alta | Tarea 24, Wi-Fi | La contraseña Wi-Fi tiene 8 cifras y se leía en dos capturas que siguen en el historial de Git (commits `532c87a` y `215eac7`). El repositorio es privado, lo que lo atenúa, pero el profesor y cualquiera con acceso las pueden ver | Cambiarla por una frase de 20 caracteres o más. No hace falta reescribir el historial si se cambia la contraseña | Peio | ✅ Cambiada y en KeePassXC (26/10). Comprobar que la RADIUS de las mismas capturas tampoco sigue en uso |
 | S-06 | Media | Tareas 23 y 24 | La red de invitados no está configurada. La tabla 5.2 de la tarea 23 confía en ella para que clientes y recreativa no lleguen al servidor ni a los TPV | Red `192.168.50.0/24` sin acceso a la LAN y con aislamiento entre clientes; pruebas 3 a 5 de la tarea 23 | Peio | ⏳ Pendiente |
@@ -66,6 +77,9 @@ Lo más urgente, por este orden:
 | S-16 | Baja | Tarea 31, `user-data.sh.tftpl` | El token de DuckDNS va en el `user_data`. Lo puede leer cualquier proceso de la EC2 (IMDS) y queda en claro en `terraform.tfstate`. `.gitignore` excluye el `tfstate`, así que no llega al repositorio | Aceptable en el laboratorio. En producción: guardarlo en SSM Parameter Store y leerlo desde la instancia | Eneko.P | Aceptado |
 | S-17 | Baja | Tarea 30 | `LabInstanceProfile` tiene más permisos de los que necesita la EC2 (solo leer un bucket). Ya está documentado como limitación del Learner Lab | Nada en el laboratorio. En producción, un rol con `s3:GetObject` y `s3:ListBucket` | Adrian | Aceptado (limitación) |
 | S-18 | Baja | `.github/workflows/` | Las acciones se referencian por etiqueta (`actions/checkout@v4`), no por SHA. Si alguien moviera la etiqueta, se ejecutaría otro código con los secretos de AWS | Fijarlas por SHA en `desplegar-web.yml`, que es el que usa secretos | Eneko.P | ⏳ Pendiente |
+| S-19 | Baja | Tareas 34 y 52, ticket del TPV | El QR «¿Necesita una factura?» del ticket apunta a la IP vieja del servidor (`web.base.url` no se actualiza). Aunque apuntara bien, el cliente está en la Wi-Fi de invitados, que no llega al servidor: el QR invita a una dirección interna que no le sirve | [`fijar-url-y-qr.sh`](../../erp/52-https-odoo/fijar-url-y-qr.sh): fija `web.base.url` y `web.base.url.freeze` y quita el QR del recibo | Adrian | 🟡 Probado en la VM (el ticket sale sin QR con una sesión de caja nueva). Falta en el servidor del equipo, paso 2.1 del runbook de la 52 |
+| S-20 | Media | Tarea 13, TPV hechos a mano | Los TPV se configuraron a mano, no con `configurar-tpv.ps1`. Tienen usuario estándar, quiosco, USB bloqueado, firewall y Defender, pero el firewall solo está «activado» (por defecto Windows deja salir todo), no consta que la UAC deniegue la elevación ni que Edge tenga lista blanca y descargas bloqueadas, y el quiosco apunta a `http://localhost:8069`. Un cajero podría navegar a otras webs o sacar datos por la red | Ejecutar `configurar-tpv.ps1 -CertificadoOdoo .\odoo.crt -PuertosOdoo 443` en los dos TPV (o aplicar a mano lo que falta) y comprobarlo con `comprobar-tpv.ps1` (tarea 15) | Markel | ⏳ Pendiente |
+| S-21 | Baja | Tarea 19, `arduino/mando-joystick/subir.sh` | Instalaba la librería Joystick desde la rama principal de GitHub (con `ENABLE_UNSAFE_INSTALL`), sin fijar versión: cualquier cambio en esa rama entraría en el firmware sin revisar | Fijar la versión con la que se probó (`#v2.1.1`) | Adrian | ✅ Corregido el 27/10 (`LIB_VERSION`). La instalación no se pudo repetir: este PC no tiene `arduino-cli` |
 
 ## 4. Detalle
 
@@ -145,7 +159,7 @@ Para no repetirlo en otras tareas y para la presentación:
 
 - **Secretos fuera del repositorio:** contraseñas aleatorias en `.env` (600), KeePassXC, `.gitignore` con `.env`, `*.key`, `*.kdbx`, `*.tfvars` y `*.tfstate`, y gitleaks en el CI y en el hook local. La búsqueda de esta revisión no encontró ninguna contraseña en los scripts.
 - **Odoo:** sin gestor ni listado de bases de datos (`list_db = False`, `dbfilter`), contraseña de `admin` cambiada al instalar, PostgreSQL sin publicar y, con la tarea 52, TLS 1.2/1.3, cookie `Secure` y `HttpOnly`, y 8069 cerrado en la LAN.
-- **TPV:** cajero sin administrador, UAC que deniega la elevación, USB de almacenamiento bloqueado, firewall que bloquea la **salida** por defecto, Edge con lista blanca y sin descargas.
+- **TPV:** cajero sin administrador, USB de almacenamiento bloqueado, firewall y Defender activos (comprobado en los TPV de la tarea 13). `configurar-tpv.ps1` añade la UAC que deniega la elevación, el firewall que bloquea la **salida** por defecto y Edge con lista blanca y sin descargas, pero eso aún no está en los TPV (S-20).
 - **Base de datos:** roles de grupo `NOLOGIN`, facturas sin `UPDATE` ni `DELETE`, `REVOKE CONNECT … FROM PUBLIC` y límite de conexiones.
 - **Copias:** restic cifrado (AES-256), contraseña en un fichero 600 y recordatorio de guardarla fuera, comprobación (`check`) en cada copia y aviso si el USB no se renueva.
 - **Recreativa (Debian):** SSH solo con clave y sin root, usuario de juego sin `sudo` y con la contraseña bloqueada, `unattended-upgrades`.
@@ -155,4 +169,4 @@ Para no repetirlo en otras tareas y para la presentación:
 
 - [ ] Hacer las comprobaciones de la sección 5 y guardar las capturas.
 - [ ] Pasar cada hallazgo a su responsable (columna de la sección 3) y marcarlo aquí cuando lo cierre.
-- [ ] Repetir la revisión rápida antes de la entrega (10/11), con los hallazgos abiertos.
+- [ ] Repetir la revisión rápida antes de la entrega (10/11), con los hallazgos abiertos. El 27/10 se repasó lo que entró hasta el PR #65 (sección 1.1).

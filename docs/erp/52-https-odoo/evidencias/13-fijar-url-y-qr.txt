@@ -1,0 +1,14 @@
+## Tarea 46, S-19 · fijar-url-y-qr.sh en la VM ServidorERP (26/10/2026 12:49)
+## Ejecutado con el nombre provisional arreglar-qr.sh (el mismo código que fijar-url-y-qr.sh, solo cambia la cabecera)
+
+### 1. URL base
+antes: https://10.0.2.15 · freeze: False
+ahora: https://192.168.10.10 · freeze: True
+
+### 2. QR de factura en el ticket
+res.company.qr_code (Display QR-code on invoices) · Almi-Chain: False
+res.company.link_qr_code (Display Link QR-code) · Almi-Chain: False
+res.company.point_of_sale_use_ticket_qr_code (Self-service invoicing) · Almi-Chain: True → False
+
+## Comprobación en el TPV (win-11): el recibo de la venta 261-1-000005, en la misma sesión de caja, sigue con el QR y la IP vieja (14).
+## Tras cerrar la caja y abrir una sesión nueva, el recibo de 261-1-000006 ya no lleva QR (15).
