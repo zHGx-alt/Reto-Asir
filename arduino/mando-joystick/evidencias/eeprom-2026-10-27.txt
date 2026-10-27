@@ -1,0 +1,56 @@
+Prueba de la EEPROM del stick · 27/10/2026 · Adrian (con Claude Code) · /dev/ttyACM0 a 9600 baudios
+Pasos: VER → MAP 1 2 y MAP 2 1 → GUARDAR → reinicio de la placa → VER (el cambio tiene que seguir) → RESET + GUARDAR → VER
+El reinicio se hace con el toque a 1200 baudios (la placa salta al bootloader y vuelve al firmware): la RAM se pierde, la EEPROM no.
+
+>>> VER
+--- Configuracion (numeracion desde 1) ---
+Boton fisico 1 (pin 2) -> HID 1
+Boton fisico 2 (pin 3) -> HID 2
+Boton fisico 3 (pin 4) -> HID 3
+Boton fisico 4 (pin 5) -> HID 4
+Invertir X: no
+Invertir Y: no
+
+>>> MAP 1 2
+OK
+
+>>> MAP 2 1
+OK
+
+>>> GUARDAR
+OK: guardado
+
+### Reinicio de la placa (toque a 1200 baudios → bootloader → vuelve el firmware)
+### Tras el reinicio: el mapa 1<->2 tiene que seguir
+>>> VER
+--- Configuracion (numeracion desde 1) ---
+Boton fisico 1 (pin 2) -> HID 2
+Boton fisico 2 (pin 3) -> HID 1
+Boton fisico 3 (pin 4) -> HID 3
+Boton fisico 4 (pin 5) -> HID 4
+Invertir X: no
+Invertir Y: no
+
+>>> RESET
+OK: por defecto (usa GUARDAR para mantenerlo)
+
+>>> GUARDAR
+OK: guardado
+
+>>> VER
+--- Configuracion (numeracion desde 1) ---
+Boton fisico 1 (pin 2) -> HID 1
+Boton fisico 2 (pin 3) -> HID 2
+Boton fisico 3 (pin 4) -> HID 3
+Boton fisico 4 (pin 5) -> HID 4
+Invertir X: no
+Invertir Y: no
+
+## Kernel (journalctl -k): la placa se desconecta y vuelve a enumerarse
+oct 27 11:26:28 kernel: usb 1-9: USB disconnect, device number 8
+oct 27 11:26:28 kernel: usb 1-9: New USB device found, idVendor=2341, idProduct=0036, bcdDevice= 0.01
+oct 27 11:26:28 kernel: cdc_acm 1-9:1.0: ttyACM0: USB ACM device
+oct 27 11:26:36 kernel: usb 1-9: USB disconnect, device number 9
+oct 27 11:26:36 kernel: usb 1-9: New USB device found, idVendor=2341, idProduct=8036, bcdDevice= 1.00
+oct 27 11:26:36 kernel: cdc_acm 1-9:1.0: ttyACM0: USB ACM device
+oct 27 11:26:36 kernel: hid-generic 0003:2341:8036.0005: input,hidraw3: USB HID v1.01 Joystick [Arduino LLC Arduino Leonardo] on usb-0000:00:14.0-9/input2

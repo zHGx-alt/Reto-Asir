@@ -207,11 +207,11 @@
 <text x="22" y="697" class="t b">4 Arduino</text>
 <line x1="16" y1="728" x2="1202" y2="728" stroke="#f0efeb"/>
 <text x="16" y="721.0" class="s">19</text>
-<text x="44" y="721.0" class="t">Montaje del arcade stick (ATmega32U4)<tspan class="s"> · físico</tspan></text>
+<text x="44" y="721.0" class="m">Montaje del arcade stick (ATmega32U4) ✓<tspan class="s"> · físico</tspan></text>
 <circle cx="449" cy="717.0" r="4.5" fill="#e87ba4"/>
 <text x="458" y="721.0" class="t">Markel</text>
 <text x="528" y="721.0" class="s">—</text>
-<rect x="724" y="710" width="76" height="14" rx="4" fill="#e87ba4"><title>19. Montaje del arcade stick (ATmega32U4) · Markel · 26/10–27/10 · Pendiente</title></rect>
+<rect x="724" y="710" width="76" height="14" rx="4" fill="#e87ba4" fill-opacity="0.4"><title>19. Montaje del arcade stick (ATmega32U4) · Markel · 26/10–27/10 · Hecho</title></rect>
 <line x1="16" y1="750" x2="1202" y2="750" stroke="#f0efeb"/>
 <text x="16" y="743.0" class="s">20</text>
 <text x="44" y="743.0" class="m">Firmware HID y mapeo configurable (EEPROM) ✓</text>
@@ -221,11 +221,11 @@
 <rect x="644" y="732" width="76" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>20. Firmware HID y mapeo configurable (EEPROM) · Adrian · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="772" x2="1202" y2="772" stroke="#f0efeb"/>
 <text x="16" y="765.0" class="s">50</text>
-<text x="44" y="765.0" class="t">Probar el firmware del stick en la placa (HID, comandos, EEPROM)<tspan class="s"> · físico</tspan></text>
+<text x="44" y="765.0" class="m">Probar el firmware del stick en la placa (HID, comandos, EEPROM) ✓<tspan class="s"> · físico</tspan></text>
 <circle cx="449" cy="761.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="765.0" class="t">Adrian</text>
 <text x="528" y="765.0" class="s">19</text>
-<rect x="804" y="754" width="116" height="14" rx="4" fill="#2a78d6"><title>50. Probar el firmware del stick en la placa (HID, comandos, EEPROM) · Adrian · 28/10–30/10 · Pendiente</title></rect>
+<rect x="764" y="754" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>50. Probar el firmware del stick en la placa (HID, comandos, EEPROM) · Adrian · 27/10–27/10 · Hecho</title></rect>
 <line x1="16" y1="794" x2="1202" y2="794" stroke="#f0efeb"/>
 <text x="16" y="787.0" class="s">21</text>
 <text x="44" y="787.0" class="t">Pruebas del stick con MAME y otro emulador<tspan class="s"> · físico</tspan></text>
@@ -262,7 +262,7 @@
 <circle cx="449" cy="897.0" r="4.5" fill="#008300"/>
 <text x="458" y="901.0" class="t">Peio</text>
 <text x="528" y="901.0" class="s">24</text>
-<rect x="924" y="890" width="76" height="14" rx="4" fill="#008300"><title>25. WDS con segundo router y pruebas de cobertura · Peio · 02/11–03/11 · Pendiente</title></rect>
+<rect x="924" y="890" width="76" height="14" rx="4" fill="#008300" stroke="#0b0b0b" stroke-width="1.5"><title>25. WDS con segundo router y pruebas de cobertura · Peio · 02/11–03/11 · En curso</title></rect>
 <line x1="16" y1="930" x2="1202" y2="930" stroke="#f0efeb"/>
 <text x="16" y="923.0" class="s">26</text>
 <text x="44" y="923.0" class="t">Análisis de conectividad (Wireshark, nmap)<tspan class="s"> · físico</tspan></text>
@@ -346,11 +346,11 @@
 <rect x="1004" y="1184" width="76" height="14" rx="4" fill="#eb6834" stroke="#0b0b0b" stroke-width="1.5"><title>36. Importar y exportar datos en Odoo · Eneko.P · 04/11–05/11 · En curso</title></rect>
 <line x1="16" y1="1224" x2="1202" y2="1224" stroke="#f0efeb"/>
 <text x="16" y="1217.0" class="s">37</text>
-<text x="44" y="1217.0" class="t">Imprimir ticket desde el TPV de Odoo en la impresora real<tspan class="s"> · físico</tspan></text>
-<circle cx="449" cy="1213.0" r="4.5" fill="#008300"/>
-<text x="458" y="1217.0" class="t">Peio</text>
+<text x="44" y="1217.0" class="m">Imprimir ticket desde el TPV de Odoo en la impresora real ✓<tspan class="s"> · físico</tspan></text>
+<circle cx="449" cy="1213.0" r="4.5" fill="#2a78d6"/>
+<text x="458" y="1217.0" class="t">Adrian</text>
 <text x="528" y="1217.0" class="s">14, 34</text>
-<rect x="1004" y="1206" width="76" height="14" rx="4" fill="#008300"><title>37. Imprimir ticket desde el TPV de Odoo en la impresora real · Peio · 04/11–05/11 · Pendiente</title></rect>
+<rect x="764" y="1206" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>37. Imprimir ticket desde el TPV de Odoo en la impresora real · Adrian · 27/10–27/10 · Hecho</title></rect>
 <line x1="16" y1="1246" x2="1202" y2="1246" stroke="#f0efeb"/>
 <text x="16" y="1239.0" class="s">52</text>
 <text x="44" y="1239.0" class="m">Proxy HTTPS delante de Odoo ✓</text>

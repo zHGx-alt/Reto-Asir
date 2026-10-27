@@ -46,5 +46,7 @@ TPV (Edge en quiosco, TPV de Odoo) ── ticket ──► cola de Windows ─�
 
 ## 5. Limitaciones
 
+- **Impresora de las pruebas (decisión del 27/10/2026).** Las térmicas del centro no llegan para todos los grupos, así que las pruebas se hacen con una **Samsung ML-1660** láser (A4, sin corte ni cajón). Pasada por USB a una VM, Windows instala el driver pero no crea el puerto `USB001`. Por IPP a la cola CUPS del equipo que la tiene enchufada sí imprime el ticket de Odoo: así se hizo la tarea 37 ([tarea 52, sección 4.2](../../erp/52-https-odoo/DOCUMENTACION.md#42-pruebas-5-y-6-con-un-tpv-provisional-26102026)). Las pruebas 1, 2 y 4 de la sección 4 son de la térmica y no se pueden hacer con ella.
+
 - **Diálogo de impresión.** Con Edge en el modo quiosco de Windows 10 Pro, cada ticket muestra el diálogo de impresión (un toque en *Imprimir*). Imprimir sin diálogo necesita lanzar Edge con `--kiosk-printing`, que se puede en Windows 10 IoT Enterprise con Shell Launcher, o una IoT Box de Odoo (de pago). Se deja así y se documenta.
 - **ESC/POS directo** (comandos de corte y cajón desde Odoo) solo funciona con la IoT Box. Con el driver de Windows, el corte y el cajón los hace el driver (paso 3).
