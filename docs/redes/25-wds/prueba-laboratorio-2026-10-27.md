@@ -1,4 +1,6 @@
-# WDS con segundo router y pruebas de cobertura
+# Tarea 25 · Prueba de laboratorio del WDS (27/10/2026)
+
+> **Autor:** Peio. **Qué es:** una primera prueba del WDS con dos TL-WR841N en una red de pruebas (`TP-Link_AF60`, `192.168.1.0/24`), no con la red del proyecto. Demuestra que el enlace WDS funciona y que el router 2 no reparte IP. Lo que falta para cerrar la tarea (red del proyecto, aislamiento de invitados y medidas de antes y después) está en la [guía de la tarea](DOCUMENTACION.md#12-prueba-de-laboratorio-del-27102026).
 
 ## 1. Introducción
 
