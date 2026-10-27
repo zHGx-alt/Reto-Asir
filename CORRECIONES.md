@@ -14,7 +14,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Persona | Correcciones |
 |---|---|
 | **Adrian** | [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente, imágenes de la web, notación del E/R |
-| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.1](#31-la-bd-no-está-en-el-raid-tarea-43) RAID · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
+| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.1](#31-la-bd-no-está-en-el-raid-tarea-43) RAID · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura rectificativa · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
 | **Peio** | Nada en esta lista: sus tareas abiertas (24 y 25) están en el Gantt |
 | **Eneko.P** | [3.2](#32-recreativa-medida-en-una-vm-que-no-es-la-del-enunciado-tarea-17) medidas de la recreativa en 1 núcleo y 1 GB |
 | **Markel** | [4](#4-datos-que-faltan-en-tareas-hechas) edición de Windows de los TPV |
@@ -30,7 +30,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Redes | Tarea 22 con análisis de necesidades y esquema de conectividad; tarea 23 con cita literal, invitados en `192.168.50.0/24` y switch; **red plana con invitados aislada** decidida (24/10) y diseño antiguo con VLAN quitado (25/10); Packet Tracer de la red real con 16 de 16 pruebas ([evidencia](docs/redes/evidencias/23-red-local-configuracion-y-pruebas.txt)) |
 | Hardware | Presupuesto completo; Windows 10 IoT LTSC para los TPV; versiones del software; WAN unificada en DIGI 1 Gb |
 | Arduino | Firmware con palanca digital y botones 7-8; esquema con la palanca en A2-A5 |
-| ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido; 2 fallos de los scripts de Odoo que impedían instalar en limpio |
+| ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido; 2 fallos de los scripts de Odoo que impedían instalar en limpio; **factura de la tarea 35 repetida con el menú de grupo: `INV/2026/00004` = 660,00 €**, y el script fija el IVA en la línea y comprueba el total (Iker, 27/10) |
 | BD | Datos, consultas y usuarios de `almi_chain` ejecutados con evidencias ([41](docs/bd/evidencias/41-datos-y-consultas.txt), [42](docs/bd/evidencias/42-usuarios-y-permisos.txt)) |
 | Copias | Procedimiento para la BD en el RAID; aviso del USB; RTO real marcado como pendiente |
 | Web | CSP y Permissions-Policy; distancia al local; créditos; contraste, favicon y W3C; evidencias repetidas contra la versión publicada y Lighthouse móvil de 70 a 94 cargando el mapa al pulsar (26/10) |
@@ -81,7 +81,9 @@ Corregido el 26/10 (sección 1). Activarlo en la `ServidorERP` del equipo es tra
 
 ### 3.3 Factura automática con el caso de uso antiguo (tarea 35)
 
-- [ ] 🟠 **Las evidencias son de la partida recreativa al 21 %**, y el caso de uso es ahora el menú de grupo al 10 %. Repetir la ejecución (660,00 €) y cambiar las evidencias de la [tarea 35](docs/erp/35-factura-automatica/DOCUMENTACION.md).
+Corregido el 27/10 (sección 1). Queda un resto:
+
+- [ ] 🟢 **`INV/2026/00003` salió por 654,55 €** (dos IVA en la línea) y está validada y cobrada: anularla con una **factura rectificativa** y guardar el PDF en las evidencias de la [tarea 35](docs/erp/35-factura-automatica/DOCUMENTACION.md).
   - **Quién:** Iker.
 
 ### 3.4 Evidencias de la web (tarea 30)
@@ -123,7 +125,7 @@ Corregido el 26/10 (sección 1).
 | Diseño conceptual de la web | Hecho, a posteriori | — |
 | Web accesible y por HTTPS | Hecho | — |
 | Hosting en AWS con dominio propio y despliegue reproducible | Casi hecho | Tarea 31 |
-| ERP + TPV con un caso de uso automatizado | Hecho | Corr. 3.3; tarea 36 |
+| ERP + TPV con un caso de uso automatizado | Hecho: factura de 660,00 € (27/10) | Tarea 36 |
 | Instalación y configuración de una impresora | Hecho: ticket de Odoo impreso desde el TPV (Samsung por IPP, tarea 37, 27/10) | Tarea 14: cola en los TPV reales |
 | Modelo E/R y tablas | Hecho | Corr. 4 (notación) |
 | Implementación de la BD y consulta de sus datos | Hecho | Corr. 4 (`almi_chain` en el servidor) |
@@ -201,7 +203,7 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] La evidencia muestra que la VM es de **1 núcleo y 1 GB** (`nproc` → 1; `free -m` → unos 1000 MB en total) en las medidas de antes y de después.
 
 **Factura automática (3.3)**
-- [ ] `660,00 €`, factura validada, cobrada y con PDF.
+- [x] `660,00 €`, factura validada, cobrada y con PDF (`INV/2026/00004`, 27/10).
 
 **Web (3.4 y 4)**
 - [x] `curl -sI https://almichain1.duckdns.org | grep -i content-length` da el mismo número que `wc -c < web/index.html`. (26/10)
