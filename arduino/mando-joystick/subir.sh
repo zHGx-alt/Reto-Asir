@@ -9,6 +9,7 @@ cd "$(dirname "$0")"
 FQBN=arduino:avr:leonardo
 SKETCH=mando_joystick
 LIB_URL=https://github.com/MHeironimus/ArduinoJoystickLibrary
+LIB_VERSION=v2.1.1   # fijada (tarea 46, S-21): la misma con la que se probó; no la rama principal
 falla() { echo "ERROR: $*" >&2; exit 1; }
 
 # 1. arduino-cli
@@ -30,7 +31,7 @@ fi
 "$CLI" core list | grep -q '^arduino:avr ' || { "$CLI" core update-index; "$CLI" core install arduino:avr; }
 if ! "$CLI" lib list 2>/dev/null | grep -q '^Joystick '; then
   echo "==> Instalando la librería Joystick"
-  ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL=true "$CLI" lib install --git-url "$LIB_URL.git"
+  ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL=true "$CLI" lib install --git-url "$LIB_URL.git#$LIB_VERSION"
 fi
 
 # 3. Compilar
