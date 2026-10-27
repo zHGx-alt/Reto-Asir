@@ -68,5 +68,53 @@ journalctl -u backup-odoo               # ver qué ha pasado
 - [ ] Crear `almi_chain` en el PostgreSQL del servidor (tarea 40, sección 2) y repetir las pruebas 2 y 6 con las dos bases.
 - [x] Pasar la contraseña de restic a KeePassXC y borrar `.credenciales-backup` del PC del técnico (27/10).
 - [x] Fijar cada cuánto se renueva la copia fuera del local: cada lunes, con aviso a los 7 días (sección 1).
-- [ ] (Mejora) Tercer repositorio en AWS S3, en vez del USB o además de él, para que la copia fuera del local sea automática.
-- [ ] Avisar por correo si la copia falla (`OnFailure=` en el servicio).
+- [ ] (Mejora) Tercer repositorio en AWS S3: **preparado el 27/10** (sección 8); falta crear el bucket y el usuario IAM y probarlo.
+- [ ] Avisar si la copia falla (`OnFailure=`): **preparado el 27/10** (sección 8); falta instalarlo en la VM y provocar un fallo.
+
+## 8. Mejoras del 27/10/2026 (preparadas, sin probar en la VM)
+
+Se instalan con el mismo `sudo ./instalar-backup.sh`, que es idempotente. Si no se configuran, la copia funciona igual que antes.
+
+### 8.1 Aviso si la copia falla
+`backup-odoo.service` tiene `OnFailure=backup-odoo-fallo.service`, que ejecuta [`aviso-fallo-backup.sh`](aviso-fallo-backup.sh):
+
+| Aviso | Siempre | Cómo verlo |
+|---|---|---|
+| Error en el journal (prioridad `err`) | Sí | `journalctl -t backup-odoo -p err` |
+| Fichero con el motivo y las últimas 40 líneas | Sí | `sudo cat /var/lib/backup-odoo/ULTIMO-FALLO` |
+| Mensaje a las sesiones abiertas (`wall`) | Sí | Lo ve quien esté conectado al servidor |
+| Correo | Solo con `AVISO_CORREO=...` en `/etc/default/backup-odoo` **y** un MTA con `mail` | Bandeja del gerente |
+
+El correo necesita un servidor de correo saliente (por ejemplo `msmtp` con la cuenta del local), que el servidor aún no tiene: hasta
+entonces el aviso queda en el journal y en `ULTIMO-FALLO`, que se revisa en la comprobación semanal. Cuenta también como fallo
+el USB sin renovar más de 7 días (salida 2 del script).
+
+Probado el 27/10 en el PC del técnico con un log simulado: escribe el motivo (`Fatal: unable to open repository…`) y las líneas
+del log en `ULTIMO-FALLO`. **Falta:** instalarlo en el `ServidorERP` y provocar un fallo de verdad (por ejemplo, desmontar
+`/srv/datos` y lanzar `systemctl start backup-odoo`).
+
+### 8.2 Tercer repositorio en AWS S3 (copia 3b)
+Si existe `/root/.config/backup-odoo/s3.env` (plantilla: [`s3.env.example`](s3.env.example), **sin claves reales en Git**),
+`backup-odoo.sh` copia cada noche las instantáneas del RAID a S3 con `restic copy`: cifradas igual (la misma contraseña),
+deduplicadas y con la misma retención. Con copia en S3 ese día, el aviso de "USB sin renovar" no salta, porque ya hay copia
+fuera del local.
+
+Usuario IAM solo para esto (mínimos privilegios: nada más que su bucket):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    { "Effect": "Allow", "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+      "Resource": "arn:aws:s3:::almi-chain-backup" },
+    { "Effect": "Allow", "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+      "Resource": "arn:aws:s3:::almi-chain-backup/*" }
+  ]
+}
+```
+
+`DeleteObject` hace falta para el `forget --prune`. Para que un atacante con esas claves no pueda borrar las copias, se puede
+activar el **versionado** del bucket con una regla de ciclo de vida que borre las versiones antiguas a los 30 días.
+
+**Falta:** crear el bucket y el usuario IAM en la cuenta de AWS del equipo (la de la web, tarea 30), copiar `s3.env` al servidor
+con `chmod 600` y lanzar una copia. El script solo tiene la sintaxis comprobada (`bash -n`): no se ha probado contra S3.

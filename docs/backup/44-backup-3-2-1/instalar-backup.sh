@@ -57,13 +57,24 @@ else
   echo "  (sin disco indicado: se usará cualquier disco con la etiqueta BACKUP_USB que esté conectado)"
 fi
 
-log "5/5 Script y timer diario (02:30)"
+log "5/5 Script, aviso de fallo y timer diario (02:30)"
 install -m 750 "$ORIGEN/backup-odoo.sh" /usr/local/sbin/backup-odoo.sh
+install -m 750 "$ORIGEN/aviso-fallo-backup.sh" /usr/local/sbin/aviso-fallo-backup.sh
+[[ -f /etc/default/backup-odoo ]] || printf '# Correo para avisar si la copia falla (necesita un MTA y el comando mail)\n#AVISO_CORREO=gerente@ejemplo.com\n' > /etc/default/backup-odoo
+cat > /etc/systemd/system/backup-odoo-fallo.service <<'EOF'
+[Unit]
+Description=Aviso de fallo de la copia de seguridad de Odoo
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/aviso-fallo-backup.sh
+EOF
 cat > /etc/systemd/system/backup-odoo.service <<'EOF'
 [Unit]
 Description=Copia de seguridad 3-2-1 cifrada de Odoo
 After=docker.service srv-datos.mount
 Requires=docker.service
+OnFailure=backup-odoo-fallo.service
 
 [Service]
 Type=oneshot
