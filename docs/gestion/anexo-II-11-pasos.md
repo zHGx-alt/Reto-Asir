@@ -4,7 +4,7 @@
 |---|---|
 | **Reto** | 1 · Almi-Chain |
 | **Grupo** | ASIR1 2026-2027 |
-| **Equipo** | Adrian, Iker, Eneko.S, Eneko.P (pendiente de confirmar si sigue), Markel, Peio |
+| **Equipo** | Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio |
 | **Periodo** | 21/10/2026 – 10/11/2026 |
 | **Responsable del documento** | Adrian |
 
@@ -137,13 +137,15 @@ Incidencias relevantes durante la ejecución:
 | 23/10/2026 | Gestión | 14 enlaces rotos y documentos fuera de la carpeta de su bloque | Movidos a `docs/redes/` y `docs/bd/` y enlaces corregidos; `scripts/verificar-repo.sh` lo comprueba |
 | 23/10/2026 | Seguridad | Contraseñas débiles de la VM del gerente en un fichero de texto sin seguimiento | No se sube (añadido al `.gitignore`); se cambian y se guardan en KeePassXC (tarea 55) |
 | 26/10/2026 | Seguridad | El certificado propio de Odoo (tarea 52) era una CA sin límites: con su clave se podían firmar certificados de cualquier web, y los TPV se los creerían | `nameConstraints` limitado a la IP del servidor y a `odoo.almichain.local`; probado con un certificado falso, que ahora se rechaza ([tarea 46, S-01](../seguridad/46-revision-seguridad/DOCUMENTACION.md#41-s-01-el-certificado-de-odoo-podía-firmar-cualquier-web-corregido)) |
+| 27/10/2026 | ERP | La impresora USB pasada a la VM del TPV no creaba el puerto `USB001` y el ticket no salía desde la VM | El TPV imprime por IPP en la cola CUPS del equipo que tiene la impresora; probado con el ticket en papel y ya sin QR ([tarea 52, sección 4.2](../erp/52-https-odoo/DOCUMENTACION.md#42-pruebas-5-y-6-con-un-tpv-provisional-26102026)) |
+| 27/10/2026 | Seguridad | Los TPV se bastionaron a mano y no tienen el bloqueo de salida del firewall ni la lista blanca de Edge que da `configurar-tpv.ps1`; `subir.sh` instalaba la librería del stick sin versión fija | Hallazgos S-20 (Markel) y S-21 (corregido: versión 2.1.1 fijada) ([tarea 46, sección 1.1](../seguridad/46-revision-seguridad/DOCUMENTACION.md#11-repaso-del-27102026)) |
 
 ## 8. Pruebas
 
 | Bloque | Prueba | Resultado esperado | Resultado obtenido | Evidencia |
 |---|---|---|---|---|
 | SO | Arranque de ambos sistemas desde GRUB | Ambos arrancan y GRUB muestra las dos entradas | GRUB 2.14 muestra Ubuntu y Windows Boot Manager; particiones, EFI compartida, cuentas, firewall y Windows Update comprobados; contraseñas robustas en KeePassXC (23/10) | [tarea 12](../so/12-dual-boot.md) |
-| SO | Cajero intenta instalar software / usar USB | Operación denegada | | |
+| SO | Cajero intenta instalar software / usar USB | Operación denegada | Memoria USB sin acceso (directiva *denegar todo acceso*) y usuario de caja sin administrador, en las dos VM (26/10). Falta pasar `comprobar-tpv.ps1` (16 OK) | [tarea 13](../so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
 | Arcade | Rendimiento MAME antes y después de optimizar | Aumento de FPS y menor consumo de RAM | Robby Roto +27 % y más estable, Gridlee +6 %, timers de 8 a 3, −277 MB de disco; la RAM no cambia. Medido en una VM de 2 núcleos y 1,5 GB: falta repetirlo con 1 núcleo y 1 GB | [tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | Arduino | Stick en MAME y en un segundo emulador | Todas las entradas reconocidas y remapeables | | |
 | Redes | Cliente de la red de invitados accede a la red interna | Acceso bloqueado | Pendiente: la red de invitados aún no está configurada | [red segura](../redes/24-red-segura/DOCUMENTACION.md) |
@@ -151,11 +153,12 @@ Incidencias relevantes durante la ejecución:
 | Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | W3C sin errores; Lighthouse móvil 98/100/100/100 y escritorio 99/100/100/100 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
 | Web | Acceso por HTTP | Redirección a HTTPS con certificado válido | `301` a HTTPS; certificado de Let's Encrypt válido hasta el 21/01/2027 | [tarea 30, sección 5](../web/30-hosting-aws.md#5-pruebas) |
 | ERP | Venta en el TPV de barra | Ticket, cobro, cierre de caja y asiento contable | Mesa 3, 35,50 € en efectivo: factura simplificada, caja cuadrada (diferencia 0,00 €) y asiento `POSS/2026/10/0001` validado | [tarea 34, sección 8](../erp/34-configurar-odoo/DOCUMENTACION.md) |
+| ERP | Venta por HTTPS y venta sin red (tarea 52) | Candado sin avisos; la venta sin red se guarda y se sincroniza | Edge sin avisos con el certificado propio; venta de 7,30 € y, con el cable quitado, venta de 5,00 € que aparece en el servidor como `paid` al reconectar. Hecho con un TPV provisional (VM win-11) en la red 192.168.10.0/24. El 27/10 el ticket se imprime desde esa VM por IPP, sin QR | [tarea 52, sección 4.2](../erp/52-https-odoo/DOCUMENTACION.md#42-pruebas-5-y-6-con-un-tpv-provisional-26102026) |
 | ERP | Factura automática de extremo a extremo | Pedido, factura validada, cobro y PDF sin intervención | Repetido el 23/10 en una instalación limpia: `INV/2026/00001` y `00002` cobradas y con PDF. No incluye envío por correo ni descuento de stock (ideas del plan, no exigidas por el enunciado). El 24/10 el caso de uso pasa a un menú de grupo con IVA del 10 %: hay que repetirlo | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
 | BD | Usuario de aplicación ejecuta DDL | Permiso denegado | `CREATE TABLE`: *permission denied for schema public*; `DROP` y `ALTER`: *must be owner*; `DELETE`/`UPDATE` de facturas denegados; 33 pruebas de reglas correctas (repetido el 23/10) | [verificación](verificacion.md), [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
 | RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas. **Falta:** la BD viva aún no está en el RAID ([tarea 43, sección 7](../backup/43-raid1/DOCUMENTACION.md#7-pendiente-la-base-de-datos-tiene-que-estar-en-el-raid)) | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
 | Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor. **Falta** el RTO real, restaurando en una máquina nueva | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
-| Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 19 hallazgos (5 altos); S-01 y S-05 corregidos. Faltan las comprobaciones en los equipos (nmap, router, SSH, cifrado) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 21 hallazgos (5 altos); S-01, S-05 y S-21 corregidos y S-03 sin aplicar (se descarta Batocera). Faltan las comprobaciones en los equipos (nmap, router, SSH, cifrado) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
 ## 9. Documentación y presentación
 

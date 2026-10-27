@@ -1,0 +1,37 @@
+Prueba del stick en la placa real · 27/10/2026 · Keyestudio Leonardo (KS0248) · firmware de 4 botones
+(Iker, con Claude Code; lecturas de /dev/input/js0 en el PC y de evtest dentro de la VM Batocera)
+
+1. Detección USB
+   - Los dos primeros cables micro-USB solo daban corriente (LED ON encendido, nada en lsusb ni en el kernel).
+   - Con un cable de datos: "2341:8036 Arduino SA Leonardo (CDC ACM, HID)", /dev/ttyACM0 y /dev/input/js0.
+   - El usuario no estaba en el grupo dialout: sin permiso de escritura en /dev/ttyACM0 (se añadió).
+
+2. Subida del firmware
+   - La placa llevaba un firmware antiguo: 8 botones y ejes en X=-28311, Y=-28635 (palanca analógica al aire).
+   - arduino-cli upload fallaba con "butterfly_recv failed": llegaba antes que el bootloader (USB 2341:0036, ~8 s).
+   - subir.sh reinicia la placa a 1200 baudios, espera al bootloader y graba con avrdude:
+     "10722 bytes of flash verified".
+   - Después: 4 botones, ejes en el centro (X=0, Y=0) y el comando VER responde por el puerto serie.
+
+3. Botones (pines 2-5)
+   - Los 4 llegan al PC, cada uno con su pulsado y soltado.
+   - El orden físico de izquierda a derecha no es 1-2-3-4 (sale 2, 3, 1, 4): se puede reordenar con MAP + GUARDAR.
+
+4. Palanca (A2-A5)
+   - Al principio solo llegaba una dirección: el común de la palanca (cable blanco) estaba pinchado en un pin A
+     y un cable de dirección en GND.
+   - Con el blanco en GND llegan las 4, pero cambiadas de pin. Se ajustan PIN_ARRIBA...PIN_DERECHA en el .ino
+     (izquierda A2, derecha A3, abajo A4, arriba A5) y se vuelve a subir.
+   - Resultado: ARRIBA OK, ABAJO OK, IZQUIERDA OK, DERECHA OK.
+
+5. Batocera (VM con el stick pasado por USB; el usuario tiene que estar en vboxusers)
+   - sdl2-jstest: 'Arduino LLC Arduino Leonardo', GUID 03000000412300003680000001010000, 2 ejes y 4 botones.
+   - Configuración escrita en es_input.cfg (batocera/); el menú la carga sin pasar por "Configure a controller".
+   - evtest (40 s): llegan los 4 botones (BTN_TRIGGER, BTN_THUMB, BTN_THUMB2, BTN_TOP) y los dos ejes.
+   - Al principio no llegaban los botones: el cable de GND de la protoboard (la fila − de los botones) estaba suelto.
+
+6. Incidencia abierta
+   - Sin tocar nada, el botón 3 (pin 4, BTN_THUMB2 = Select/Hotkey) se pulsó solo 21 veces en 20 s: su cable de
+     señal toca GND a ratos. En Batocera abre menús solos. Falta revisar ese cable.
+
+Pendiente de la tarea 50: GUARDAR + desenchufar + VER (persistencia en EEPROM) y repetir sin pulsaciones fantasma.

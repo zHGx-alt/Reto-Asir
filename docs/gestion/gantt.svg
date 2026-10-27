@@ -353,11 +353,11 @@
 <rect x="1004" y="1206" width="76" height="14" rx="4" fill="#008300"><title>37. Imprimir ticket desde el TPV de Odoo en la impresora real · Peio · 04/11–05/11 · Pendiente</title></rect>
 <line x1="16" y1="1246" x2="1202" y2="1246" stroke="#f0efeb"/>
 <text x="16" y="1239.0" class="s">52</text>
-<text x="44" y="1239.0" class="t">Proxy HTTPS delante de Odoo</text>
+<text x="44" y="1239.0" class="m">Proxy HTTPS delante de Odoo ✓</text>
 <circle cx="449" cy="1235.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="1239.0" class="t">Adrian</text>
 <text x="528" y="1239.0" class="s">33</text>
-<rect x="964" y="1228" width="76" height="14" rx="4" fill="#2a78d6" stroke="#0b0b0b" stroke-width="1.5"><title>52. Proxy HTTPS delante de Odoo · Adrian · 03/11–04/11 · En curso</title></rect>
+<rect x="964" y="1228" width="76" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>52. Proxy HTTPS delante de Odoo · Adrian · 03/11–04/11 · Hecho</title></rect>
 <rect x="16" y="1246" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="1263" class="t b">8 BD</text>
 <line x1="16" y1="1294" x2="1202" y2="1294" stroke="#f0efeb"/>
