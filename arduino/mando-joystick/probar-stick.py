@@ -106,7 +106,7 @@ def probar_palanca(m):
 
 class Serie:
     def __init__(self, ruta):
-        subprocess.run(["stty", "-F", ruta, "9600", "raw", "-echo", "-hupcl"], check=True)
+        subprocess.run(["stty", "-F", ruta, "9600", "raw", "-echo"], check=True)
         self.fd = os.open(ruta, os.O_RDWR | os.O_NOCTTY | os.O_NONBLOCK)
         time.sleep(1)
         self.leer(0.5)

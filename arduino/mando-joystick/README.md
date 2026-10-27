@@ -59,7 +59,7 @@ Compila, sube y avisa de lo que falte. La primera vez saca `arduino-cli` del App
 `old_scheme_first` (sin él, en algunos PC no se reconoce el bootloader; pide la contraseña del usuario y se pierde al
 reiniciar el PC). Con `./subir.sh monitor`, al acabar abre el monitor serie para los comandos de la sección siguiente.
 
-Probado el 26/10/2026 sin placa, con el firmware de 4 botones: compila (Flash 37 %, RAM 17 %) y se para con el aviso de conectar la placa.
+Probado el 27/10/2026 en la placa real (Keyestudio Leonardo): 10 722 bytes grabados y verificados; después el PC la ve con 4 botones, la palanca en el centro y `VER` responde. Como `arduino-cli upload` a veces llega antes que el bootloader (`butterfly_recv failed`), el script reinicia la placa en modo de carga, espera a verla (USB `2341:0036`) y graba con `avrdude`. Si el usuario se acaba de añadir a `dialout`, se relanza solo con `sg dialout`.
 
 ### Arduino IDE
 
