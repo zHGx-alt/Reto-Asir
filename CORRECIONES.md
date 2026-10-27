@@ -53,8 +53,9 @@ Corregido el 26/10 (sección 1). Activarlo en la `ServidorERP` del equipo es tra
 
 ### 2.3 Menús del cajero (tarea 34)
 
-- [ ] 🟠 **El cajero ve más aplicaciones de las que necesita** (la tarea 34 está en Hecho). `ODOO_ADMIN_PASSWORD=... python3 docs/erp/34-configurar-odoo/restringir-menus-cajero.py`; entrar como `cajero1` y hacer la captura nueva (solo ve Punto de venta).
+- [ ] 🟠 **El cajero ve más aplicaciones de las que necesita** (la tarea 34 está en Hecho). `restringir-menus-cajero.py`; entrar como `cajero1` y hacer la captura nueva (solo ve Punto de venta).
   - **Quién:** Iker.
+  - 26/10: en la VM de la tarea 52, `cajero1` entra directo en *Punto de venta* por HTTPS ([evidencia 08](docs/erp/52-https-odoo/evidencias/08-tpv-cajero1-https.png)), pero la captura no enseña el menú de aplicaciones, que es lo que hay que demostrar. 27/10: añadido al [runbook de la 52](docs/erp/52-https-odoo/RUNBOOK.md#31-menús-del-cajero-corrección-23) (paso 3.1), con la contraseña leída del `.env` y las dos capturas que faltan.
 
 ### 2.4 Cortafuegos del servidor
 
@@ -76,7 +77,7 @@ Corregido el 26/10 (sección 1). Activarlo en la `ServidorERP` del equipo es tra
 
 ### 3.2 Recreativa medida en una VM que no es la del enunciado (tarea 17)
 
-- [ ] 🔴 **Las medidas de antes y después son de una VM de 2 núcleos y 1,5 GB**; el enunciado pide 1 núcleo y 1 GB. En `Recreativa-1GB` solo hay 3 medidas de antes. Hacer las 3 de después con el `optimizar-arcade.sh` nuevo y sustituir las tablas de la [tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md).
+- [ ] 🔴 **Las medidas de antes y después son de una VM de 2 núcleos y 1,5 GB**; el enunciado pide 1 núcleo y 1 GB. En `Recreativa-1GB` solo hay 3 medidas de antes (las de la tarea 51 también son sin optimizar). Hacer las 3 de después con el `optimizar-arcade.sh` nuevo y sustituir las tablas de la [tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md).
   - **Quién:** Eneko.P.
 
 ### 3.3 Factura automática con el caso de uso antiguo (tarea 35)
@@ -100,7 +101,7 @@ Corregido el 26/10 (sección 1).
 ## 4. Datos que faltan en tareas hechas
 
 - [ ] 🟠 **VM del gerente (tarea 12):** versión exacta de Ubuntu (`lsb_release -d`) en las tareas 12 y 9; actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS. **Quién:** Adrian.
-- [ ] 🟠 **Edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y su precio en las tareas 9 y 10. **Quién:** Markel. (El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660, decisión del 27/10.)
+- [ ] 🟠 **Edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y su precio en las tareas 9 y 10. Las VM de la tarea 13 se hicieron con **Windows 11 Pro**, que no coincide con lo presupuestado: o se dice que la VM simula la edición elegida, o se cambian las tareas 9 y 10. **Quién:** Markel. (El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660, decisión del 27/10.)
 - [ ] 🟠 **`almi_chain` en el servidor (tareas 40-42):** la base está probada pero no existe en `ServidorERP`. Crearla (comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md)), cargar `08-usuarios.sql` con contraseñas de KeePassXC y lanzar `sudo systemctl start backup-odoo`: el log tiene que decir `Volcado almi_chain`. **Quién:** Iker.
 - [ ] 🟠 **Registro de IA:** cada persona pone en sus filas qué comprobó a mano, en vez de «pendiente de revisar por el equipo». **Quién:** todos.
 - [ ] 🟢 **Imágenes de la web:** copiar las de Unsplash a `web/` (con su autor) y cambiar la primera foto del carrusel, que repite la de la portada. **Quién:** Adrian.
