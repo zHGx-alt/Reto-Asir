@@ -33,14 +33,14 @@ Cada botón arcade trae dos cables: **rojo** y **negro**. Son las dos patas del 
 | Botón 4 (azul) | rojo | pin 5 |
 | Los 4 botones | negro | fila − (azul) de la protoboard |
 | Fila − de la protoboard | — | GND del Leonardo |
-| **Palanca de arcade** | arriba / abajo / izquierda / derecha / común | A2 / A3 / A4 / A5 / GND |
+| **Palanca de arcade** | izquierda / derecha / abajo / arriba / común (cable blanco) | A2 / A3 / A4 / A5 / GND |
 
 - Sin resistencias: el código activa la resistencia interna de cada pin (`INPUT_PULLUP`).
 - Los cables que acaban en **conector blanco JST** no entran en la placa ni en la protoboard: se mete un cable dupont macho en cada agujero del conector.
 - Algunas protoboards largas tienen la fila − **cortada por la mitad**. En ese caso, todos los negros en la misma mitad o un puente entre las dos.
 - No usar los pines 0 y 1 (RX/TX).
 - Si un botón trae 4 patas, dos son del LED. Los cables van a las del microswitch.
-- **Qué palanca:** una palanca de arcade normal (Sanwa, Zippy, Seimitsu…) **no es un potenciómetro**: son 4 microinterruptores, uno por dirección. Es la que se ha presupuestado y la única que lee el firmware. Cada microinterruptor tiene dos patas: una a su pin (A2-A5) y la otra a GND (en las Sanwa, el conector de 5 cables trae un común). Si es una palanca de 8 direcciones, las diagonales salen solas al cerrarse dos microinterruptores a la vez.
+- **Qué palanca:** una palanca de arcade normal (Sanwa, Zippy, Seimitsu…) **no es un potenciómetro**: son 4 microinterruptores, uno por dirección. Es la que se ha presupuestado y la única que lee el firmware. Cada microinterruptor tiene dos patas: una a su pin (A2-A5) y la otra a GND. **Ojo con el común:** en la palanca montada es el cable **blanco**; si se pincha en A2-A5 y una dirección en GND, solo funciona una dirección (pasó en la prueba del 27/10). El orden de las direcciones se ajusta en `PIN_ARRIBA`…`PIN_DERECHA` del `.ino`, sin recablear (en las Sanwa, el conector de 5 cables trae un común). Si es una palanca de 8 direcciones, las diagonales salen solas al cerrarse dos microinterruptores a la vez.
 - Las palancas analógicas (de potenciómetros, como las de los mandos de consola) no están soportadas: no hacen falta para un arcade y complicaban el firmware.
 - **Moneda y Start:** de los 4 botones, el 3 y el 4 se asignan en MAME a Moneda y Start, y el 1 y el 2 quedan para jugar (los juegos instalados usan como mucho 2 botones de disparo). Cómo asignarlos: [STICK-ARDUINO.md](../../docs/arcade/16-recreativa-mame/STICK-ARDUINO.md#moneda-y-start).
 

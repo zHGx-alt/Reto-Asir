@@ -80,21 +80,25 @@ class Mando:
 
 
 def probar_botones(m, mapa=None):
-    """mapa: botón físico -> botón HID esperado (por defecto, el mismo número)."""
+    """mapa: botón físico -> botón HID esperado (por defecto, el mismo número). No hace falta pulsar Enter."""
     for fisico in range(1, NUM_BOTONES + 1):
         esperado = (mapa or {}).get(fisico, fisico)
-        input(f"\n>> Pulsa y MANTÉN el botón {fisico} (pin {fisico + 1}) y dale a Enter con la otra mano... ")
-        m.leer(0.3)
+        print(f"\n>> Pulsa el botón {fisico} (pin {fisico + 1})... (tienes {ESPERA} s)")
+        if not m.esperar(lambda: m.pulsados()):
+            apunta(f"Botón físico {fisico} -> HID {esperado}", False, f"no llega ninguna pulsación en {ESPERA} s")
+            continue
+        m.leer(0.2)
         ok = m.pulsados() == [esperado]
-        apunta(f"Botón físico {fisico} -> HID {esperado}", ok, f"llegan pulsados: {m.pulsados() or 'ninguno'}")
+        apunta(f"Botón físico {fisico} -> HID {esperado}", ok, f"llega: {m.pulsados()}")
         print("   Suéltalo...")
         apunta(f"Botón {fisico} se suelta", m.esperar(lambda: not m.pulsados()))
+        m.leer(0.3)  # rebotes del pulsador
 
 
 def probar_palanca(m):
-    pruebas = [("ARRIBA", "A2", lambda: m.y() < -LEJOS), ("ABAJO", "A3", lambda: m.y() > LEJOS),
-               ("IZQUIERDA", "A4", lambda: m.x() < -LEJOS), ("DERECHA", "A5", lambda: m.x() > LEJOS),
-               ("ARRIBA-DERECHA (diagonal)", "A2+A5", lambda: m.y() < -LEJOS and m.x() > LEJOS)]
+    pruebas = [("ARRIBA", "A5", lambda: m.y() < -LEJOS), ("ABAJO", "A4", lambda: m.y() > LEJOS),
+               ("IZQUIERDA", "A2", lambda: m.x() < -LEJOS), ("DERECHA", "A3", lambda: m.x() > LEJOS),
+               ("ARRIBA-DERECHA (diagonal)", "A5+A3", lambda: m.y() < -LEJOS and m.x() > LEJOS)]
     for direccion, pin, cond in pruebas:
         print(f"\n>> Mueve la palanca a {direccion} ({pin}) y mantenla")
         apunta(f"Palanca {direccion}", m.esperar(cond), f"X={m.x()} Y={m.y()}")
@@ -143,7 +147,9 @@ def main():
     probar_botones(m)
 
     print("\n--- 3. Palanca ---")
-    if input("\n¿Tienes la palanca conectada? (s/n) ").strip().lower().startswith("s"):
+    print(f"\n>> Mueve la palanca en cualquier dirección (si no la tienes conectada, espera {ESPERA} s)")
+    if m.esperar(lambda: not m.centrado()):
+        m.esperar(m.centrado)
         probar_palanca(m)
     else:
         apunta("Palanca", True, "no conectada: se prueba cuando llegue (los ejes se quedan en el centro)")

@@ -4,7 +4,8 @@
 #   ./subir.sh monitor    después abre el monitor serie (para VER, MAP, GUARDAR...; salir con Ctrl+C)
 # Usa arduino-cli: si no está instalado, lo saca del AppImage del Arduino IDE que haya en ~/Descargas.
 set -euo pipefail
-cd "$(dirname "$0")"
+YO=$(readlink -f "$0")
+cd "$(dirname "$YO")"
 
 FQBN=arduino:avr:leonardo
 SKETCH=mando_joystick
@@ -44,7 +45,7 @@ PUERTO=$(ls /dev/ttyACM* 2>/dev/null | head -1 || true)
 if [[ ! -w $PUERTO ]]; then
   # Recién añadido al grupo dialout y sin cerrar sesión: se vuelve a lanzar con el grupo nuevo
   if id -nG "$USER" | grep -qw dialout || getent group dialout | grep -qw "$USER"; then
-    [[ -z ${CON_DIALOUT:-} ]] && exec sg dialout -c "CON_DIALOUT=1 $(printf '%q ' "$0" "$@")"
+    [[ -z ${CON_DIALOUT:-} ]] && exec sg dialout -c "CON_DIALOUT=1 $(printf '%q ' "$YO" "$@")"
   fi
   falla "sin permiso en $PUERTO: sudo usermod -aG dialout $USER (y vuelve a ejecutar)"
 fi
