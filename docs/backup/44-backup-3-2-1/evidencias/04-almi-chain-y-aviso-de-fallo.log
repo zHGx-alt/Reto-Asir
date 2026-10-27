@@ -1,0 +1,37 @@
+
+==> 1/4 Base almi_chain (tarea 40)  (12:10:26)
+Creada
+  01-crear-tablas.sql OK
+  02-reglas.sql OK
+  03-roles.sql OK
+  06-datos.sql OK
+Tablas en almi_chain: 14
+
+==> 2/4 Instalar el backup nuevo (aviso de fallo)  (12:10:28)
+==> 5/5 Script, aviso de fallo y timer diario (02:30)
+NEXT                        LEFT LAST                        PASSED UNIT              ACTIVATES
+Wed 2026-10-28 02:35:48 CET  14h Tue 2026-10-27 02:38:12 CET      - backup-odoo.timer backup-odoo.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.
+5:OnFailure=backup-odoo-fallo.service
+
+==> 3/4 Copia ahora (debe llevar almi_chain)  (12:10:30)
+Resultado: success
+[backup-odoo] Copia terminada correctamente
+Finished backup-odoo.service - Copia de seguridad 3-2-1 cifrada de Odoo.
+/srv/datos/temp-backup/almi_chain.dump
+/srv/datos/temp-backup/tienda.dump
+
+==> 4/4 Fallo provocado: ¿salta el aviso?  (12:10:41)
+Job for backup-odoo.service failed because the control process exited with error code.
+See "systemctl status backup-odoo.service" and "journalctl -xeu backup-odoo.service" for details.
+backup-odoo ha fallado (a propósito)
+--- journalctl -t backup-odoo -p err:
+La copia de seguridad de Odoo ha FALLADO el 27/10/2026 a las 12:10 en servidor-erp. ERROR: fallo provocado para probar el aviso
+--- /var/lib/backup-odoo/ULTIMO-FALLO:
+La copia de seguridad de Odoo ha FALLADO el 27/10/2026 a las 12:10 en servidor-erp. ERROR: fallo provocado para probar el aviso
+
+to delete:            23 blobs / 20.846 KiB
+
+Servicio restaurado: 0 líneas de prueba (debe ser 0)
