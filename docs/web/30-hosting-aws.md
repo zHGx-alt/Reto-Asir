@@ -223,7 +223,7 @@ aws s3 sync web/ s3://almi-chain-web-2026/ --delete --exclude "README.txt" --exc
 - Todo el tráfico va por HTTPS. HSTS hace que el navegador no vuelva a intentarlo por HTTP.
 - SSH solo está abierto a nuestra IP. Los puertos 80 y 443 son los únicos públicos.
 - nginx no muestra su versión.
-- **Content-Security-Policy** (añadida el 24/10/2026): el navegador solo carga los ficheros de la propia web, las fotos de `images.unsplash.com` y el mapa de `www.openstreetmap.org`; ningún script de otro dominio ni en línea. Si alguien consiguiera inyectar HTML en la página, sus scripts no se ejecutarían.
+- **Content-Security-Policy** (añadida el 24/10/2026): el navegador solo carga los ficheros de la propia web, las fotos (copiadas en `web/img/` desde el 27/10; antes venían de `images.unsplash.com`) y el mapa de `www.openstreetmap.org`; ningún script de otro dominio ni en línea. Si alguien consiguiera inyectar HTML en la página, sus scripts no se ejecutarían.
 - **Permissions-Policy** (24/10/2026): solo la propia web puede pedir la ubicación (`geolocation=(self)`); el iframe del mapa, no. Cámara, micrófono, pagos y USB, bloqueados.
 - El token de DuckDNS y las credenciales del Learner Lab no se suben al repositorio.
 - **Mínimos privilegios en AWS: limitación del laboratorio.** La instancia usa `LabInstanceProfile`, el único rol que deja usar el Learner Lab, y ese rol tiene **permisos amplios** (mucho más que leer un bucket). En una cuenta normal se crearía un rol propio con una sola política: `s3:GetObject` y `s3:ListBucket` sobre `almi-chain-web-2026`. Queda escrito como limitación y como recurso para la tarea 31.

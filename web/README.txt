@@ -7,5 +7,6 @@ ALMI CHAIN - WEB DE DEMOSTRACION
 
 Archivos:
 - index.html: estructura, contenido y mapa.
+- img/: fotos de la web en WebP; autores en img/CREDITOS.txt.
 - style.css: diseno editorial, responsive y accesible.
 - script.js: menu movil, slideshow, geolocalizacion y formulario demo.

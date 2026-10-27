@@ -10,7 +10,8 @@ Tarea 34 (ampliación) · Carta de ejemplo, salas y mesas para los TPV de barra 
 Es una carta DE EJEMPLO para probar el TPV: la carta real se importa en la tarea 36.
 
 Uso:
-  ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_ADMIN_PASSWORD=... python3 cargar-carta-y-mesas.py
+  read -rs ODOO_ADMIN_PASSWORD && export ODOO_ADMIN_PASSWORD     (la pide sin mostrarla ni dejarla en el historial)
+  ODOO_URL=http://localhost:8069 ODOO_DB=tienda python3 cargar-carta-y-mesas.py
 Idempotente: lo que ya existe (por nombre) no se duplica.
 """
 import os

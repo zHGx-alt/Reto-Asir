@@ -10,7 +10,8 @@ Así el cajero solo ve el Punto de venta. Ocultar el menú no quita el permiso d
 (eso lo dan las reglas de acceso del grupo «Usuario interno»), pero cierra el camino normal para verlos.
 
 Uso:
-  ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_ADMIN_PASSWORD=... python3 restringir-menus-cajero.py
+  read -rs ODOO_ADMIN_PASSWORD && export ODOO_ADMIN_PASSWORD     (la pide sin mostrarla ni dejarla en el historial)
+  ODOO_URL=http://localhost:8069 ODOO_DB=tienda python3 restringir-menus-cajero.py
   ... python3 restringir-menus-cajero.py --deshacer      (quita el grupo de los menús)
 Idempotente. Los menús que no existan en esta versión de Odoo se saltan y se avisa.
 """

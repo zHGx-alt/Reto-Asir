@@ -13,8 +13,8 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 | Persona | Correcciones |
 |---|---|
-| **Adrian** | [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente, imágenes de la web, notación del E/R |
-| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.1](#31-la-bd-no-está-en-el-raid-tarea-43) RAID · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura rectificativa · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
+| **Adrian** | [4](#4-datos-que-faltan-en-tareas-hechas) VM del gerente (Windows Update y cifrado), publicar la web con las fotos locales, notación del E/R |
+| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura rectificativa · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
 | **Peio** | Nada en esta lista: sus tareas abiertas (24 y 25) están en el Gantt |
 | **Eneko.P** | [3.2](#32-recreativa-medida-en-una-vm-que-no-es-la-del-enunciado-tarea-17) medidas de la recreativa en 1 núcleo y 1 GB |
 | **Markel** | [4](#4-datos-que-faltan-en-tareas-hechas) edición de Windows de los TPV |
@@ -32,7 +32,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Arduino | Firmware con palanca digital y botones 7-8; esquema con la palanca en A2-A5 |
 | ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido; 2 fallos de los scripts de Odoo que impedían instalar en limpio; **factura de la tarea 35 repetida con el menú de grupo: `INV/2026/00004` = 660,00 €**, y el script fija el IVA en la línea y comprueba el total (Iker, 27/10) |
 | BD | Datos, consultas y usuarios de `almi_chain` ejecutados con evidencias ([41](docs/bd/evidencias/41-datos-y-consultas.txt), [42](docs/bd/evidencias/42-usuarios-y-permisos.txt)) |
-| Copias | Procedimiento para la BD en el RAID; aviso del USB; RTO real marcado como pendiente |
+| Copias | Procedimiento para la BD en el RAID; aviso del USB; RTO real marcado como pendiente; **BD de Odoo en el RAID** y fallo repetido con Odoo funcionando: con un disco quitado se guarda la venta `S00007`, el espejo vuelve a `[UU]` y tras reiniciar Odoo responde (Iker, 27/10, [evidencias 10-12](docs/backup/43-raid1/evidencias/)) |
 | Web | CSP y Permissions-Policy; distancia al local; créditos; contraste, favicon y W3C; evidencias repetidas contra la versión publicada y Lighthouse móvil de 70 a 94 cargando el mapa al pulsar (26/10) |
 | Gestión | Fechas reales; responsables coherentes; Anexo II con requisitos separados; decisiones del equipo apuntadas; 14 enlaces rotos |
 
@@ -68,12 +68,7 @@ Corregido el 26/10 (sección 1). Activarlo en la `ServidorERP` del equipo es tra
 
 ### 3.1 La BD no está en el RAID (tarea 43)
 
-- [ ] 🔴 **El RAID 1 no protege nada:** Docker (y la BD de Odoo) sigue en el disco del sistema, y el fallo se simuló sin Odoo funcionando. Mover la BD:
-  ```bash
-  sudo docs/backup/43-raid1/mover-docker-al-raid.sh | tee docs/backup/43-raid1/evidencias/10-docker-en-el-raid.txt
-  ```
-  Termina con «Listo» (data-root `/srv/datos/docker` y login de Odoo 200). Después, **repetir el fallo con Odoo funcionando**: quitar un disco (sección 4 de la [tarea 43](docs/backup/43-raid1/DOCUMENTACION.md)), hacer una venta en el TPV, comprobar que se guarda y reconstruir. Evidencia `11-fallo-con-odoo.txt`.
-  - **Quién:** Iker.
+Corregido el 27/10 (sección 1).
 
 ### 3.2 Recreativa medida en una VM que no es la del enunciado (tarea 17)
 
@@ -100,11 +95,12 @@ Corregido el 26/10 (sección 1).
 
 ## 4. Datos que faltan en tareas hechas
 
-- [ ] 🟠 **VM del gerente (tarea 12):** versión exacta de Ubuntu (`lsb_release -d`) en las tareas 12 y 9; actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS. **Quién:** Adrian.
 - [ ] 🟠 **Edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y su precio en las tareas 9 y 10. Las VM de la tarea 13 se hicieron con **Windows 11 Pro**, que no coincide con lo presupuestado: o se dice que la VM simula la edición elegida, o se cambian las tareas 9 y 10. **Quién:** Markel. (El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660, decisión del 27/10.)
+- [ ] 🟠 **VM del gerente (tarea 12):** actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS (el disco confirma que no hay nada cifrado: no existe `/etc/crypttab`). Hacen falta la VM encendida y con red. **Quién:** Adrian.
+  - [x] Versión de Ubuntu: **26.04.1 LTS**, imagen del 26/08/2026, leída del disco de la VM sin arrancarla y puesta en las tareas 12 y 9 (27/10, [evidencia](docs/evidencias/12-dual-boot/ubu-08-version-desde-disco.txt)).
 - [ ] 🟠 **`almi_chain` en el servidor (tareas 40-42):** la base está probada pero no existe en `ServidorERP`. Crearla (comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md)), cargar `08-usuarios.sql` con contraseñas de KeePassXC y lanzar `sudo systemctl start backup-odoo`: el log tiene que decir `Volcado almi_chain`. **Quién:** Iker.
 - [ ] 🟠 **Registro de IA:** cada persona pone en sus filas qué comprobó a mano, en vez de «pendiente de revisar por el equipo». **Quién:** todos.
-- [ ] 🟢 **Imágenes de la web:** copiar las de Unsplash a `web/` (con su autor) y cambiar la primera foto del carrusel, que repite la de la portada. **Quién:** Adrian.
+- [x] 🟢 **Imágenes de la web:** copiadas a `web/img/` en WebP, con su autor en los créditos y en `web/img/CREDITOS.txt`; la txuleta del carrusel ya no repite la portada (que eran costillas) y la tarta de queso es otra foto de autor conocido. La CSP del servidor deja de admitir `images.unsplash.com` (se aplica al reinstalar). Adrian, 27/10. **Falta publicarlo:** se sube solo al fusionar si los secretos del Learner Lab están al día; si no, con el laboratorio arrancado.
 - [ ] 🟢 **Notación del E/R:** comprobarla con la rúbrica cuando salga. **Quién:** Adrian.
 
 ---
@@ -130,10 +126,10 @@ Corregido el 26/10 (sección 1).
 | Instalación y configuración de una impresora | Hecho: ticket de Odoo impreso desde el TPV (Samsung por IPP, tarea 37, 27/10) | Tarea 14: cola en los TPV reales |
 | Modelo E/R y tablas | Hecho | Corr. 4 (notación) |
 | Implementación de la BD y consulta de sus datos | Hecho | Corr. 4 (`almi_chain` en el servidor) |
-| Configurar disco redundante | Parcial | Corr. 3.1 |
+| Configurar disco redundante | Hecho: BD de Odoo en el RAID 1 y fallo probado con Odoo funcionando (27/10) | — |
 | Plan de copias y prueba de restauración | Hecho, con huecos | Corr. 3.5; tarea 44 |
 | Seguridad por defecto en toda la solución | Parcial | Corr. 2; tareas 24 y 46 |
-| Verificar con pruebas (funcionamiento, restauración, failover) | Parcial | Corr. 3.1; tareas 15, 21, 24, 25 y 47 |
+| Verificar con pruebas (funcionamiento, restauración, failover) | Parcial: el failover del RAID ya está probado | Tareas 15, 21, 24, 25 y 47 |
 | Documentación reproducible con diagramas | Casi hecho | Evidencias de lo que se ejecute |
 | Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | Commits de Eneko.P (tarea 5) |
 | Documentación y presentación | Pendiente | Tareas 48 y 49 |
@@ -193,10 +189,10 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] Odoo sigue funcionando por HTTPS desde el TPV.
 
 **RAID, copias y BD (3.1, 3.5 y 4)**
-- [ ] `cat /proc/mdstat` → `[UU]`.
+- [x] `cat /proc/mdstat` → `[UU]` (27/10, evidencia 12 de la tarea 43).
 - [ ] `sudo docker info` → *Docker Root Dir* es `/srv/datos/docker`, y en `sudo docker volume inspect odoo_odoo-db-data` el *Mountpoint* está dentro de `/srv/datos`.
-- [ ] Tras `sudo reboot`, Odoo vuelve solo (Docker arranca después de montar el RAID).
-- [ ] Con un disco del RAID quitado, una venta se guarda; tras reconstruir, `[UU]` otra vez y la venta sigue ahí.
+- [x] Tras `sudo reboot`, Odoo vuelve solo (Docker arranca después de montar el RAID) (27/10, evidencia 12).
+- [x] Con un disco del RAID quitado, una venta se guarda; tras reconstruir, `[UU]` otra vez y la venta sigue ahí (27/10, `S00007`, evidencia 11).
 - [ ] `sudo restic -r /srv/datos/restic ls latest | grep -E "tienda.dump|almi_chain.dump"` → salen los dos volcados.
 - [ ] RTO real: está el tiempo cronometrado de una restauración en una **VM nueva**, y aparece en la tarea 45, LOGICA_RETO y el Anexo II.
 

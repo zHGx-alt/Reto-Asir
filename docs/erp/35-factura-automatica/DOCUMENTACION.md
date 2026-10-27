@@ -21,7 +21,7 @@ El script [`factura_automatica.py`](factura_automatica.py) emite una factura com
 OK · S00006 → INV/2026/00004 · 660.00 € · paid
 ```
 
-![Factura generada](evidencias/factura-2-1.png)
+![Factura generada: INV/2026/00004, 660,00 €](evidencias/factura-4-1.png)
 
 PDF: [`evidencias/INV_2026_00004.pdf`](evidencias/INV_2026_00004.pdf). Salida completa: [`ejecucion-menu-grupo-2.txt`](evidencias/ejecucion-menu-grupo-2.txt).
 
@@ -38,7 +38,8 @@ PDF: [`evidencias/INV_2026_00004.pdf`](evidencias/INV_2026_00004.pdf). Salida co
 
 ## 3. Cómo se usa
 ```bash
-ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente ODOO_PASSWORD=<contraseña de gerente> \
+read -rs ODOO_PASSWORD && export ODOO_PASSWORD   # la de gerente, de KeePassXC; no se ve ni queda en el historial
+ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente \
 python3 factura_automatica.py --cliente "Eventos Ejemplo S.L." --producto "Menú de grupo (evento)" --precio 30 --cantidad 20
 ```
 Opciones: `--cliente`, `--email`, `--producto`, `--precio` (sin IVA), `--cantidad`, `--iva` (10 o 21, por defecto 10) y `--pdf-dir`.
@@ -56,7 +57,7 @@ Resultado esperado con esos valores: 20 × 30,00 € = 600,00 € + IVA 10 % 60,
 |---|---|---|
 | 1 | Ejecución completa | ✅ Pedido confirmado, factura validada y cobrada, PDF descargado |
 | 2 | Importes | ✅ Menú de grupo (27/10): 20 × 30,00 € = 600,00 € + IVA 10 % 60,00 € = **660,00 €**. Primera versión: 12,10 € con IVA 21 % |
-| 3 | Numeración | ✅ Correlativa: `INV/2026/00001`, `INV/2026/00002` |
+| 3 | Numeración | ✅ Correlativa: `INV/2026/00001` a `INV/2026/00004` |
 | 4 | Ejecución repetida | ✅ Reutiliza el cliente y el producto y crea un pedido y una factura nuevos |
 | 5 | Permisos | ✅ Con `gerente` funciona. Sin el grupo *Productos / Crear*, Odoo lo impide (ver incidencia 1) |
 
