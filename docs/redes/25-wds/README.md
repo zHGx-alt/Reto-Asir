@@ -94,11 +94,11 @@ Se realizó un escaneo de las redes inalámbricas disponibles y se seleccionó l
 | Seguridad | `WPA2-PSK` |
 | Cifrado | `AES` |
 
-![Selección de la red principal](images/01-seleccion-red-wds.png)
+![Selección de la red principal](evidencias/01-seleccion-red-wds.png)
 
 Después se introdujo la contraseña Wi-Fi de la red principal y se guardó la configuración.
 
-![Configuración del enlace WDS](images/02-configuracion-wds.png)
+![Configuración del enlace WDS](evidencias/02-configuracion-wds.png)
 
 > **Seguridad:** la contraseña debe estar completamente tapada en la captura antes de publicar el repositorio.
 
@@ -136,7 +136,7 @@ El servidor DHCP se dejó desactivado:
 DHCP Server: Disable
 ```
 
-![DHCP desactivado](images/03-dhcp-desactivado.png)
+![DHCP desactivado](evidencias/03-dhcp-desactivado.png)
 
 Solo debe existir un servidor DHCP en esta red. Al desactivar DHCP en el secundario, el router principal mantiene la asignación centralizada de direcciones y se evitan conflictos de IP, puerta de enlace y DNS.
 
@@ -191,7 +191,7 @@ El resultado fue:
 0% packet loss
 ```
 
-![Ping al router principal](images/04-ping-router-principal.png)
+![Ping al router principal](evidencias/04-ping-router-principal.png)
 
 Los cuatro paquetes enviados recibieron respuesta y no hubo pérdidas. Esto confirma que el equipo conectado al router secundario podía comunicarse correctamente con `192.168.1.1`.
 
@@ -226,7 +226,7 @@ Sin embargo, el PC no tenía una interfaz Wi-Fi disponible o detectada. Por este
 
 Cerca de los routers, el móvil se conectó correctamente a `TP-Link_AF60`.
 
-![Cobertura cerca de los routers](images/05-cobertura-cerca.png)
+![Cobertura cerca de los routers](evidencias/05-cobertura-cerca.png)
 
 Los detalles mostrados fueron:
 
@@ -242,7 +242,7 @@ Los detalles mostrados fueron:
 | Router | `192.168.1.1` |
 | Configuración IP | DHCP |
 
-![Detalles de la conexión Wi-Fi](images/06-detalles-conexion-wifi.png)
+![Detalles de la conexión Wi-Fi](evidencias/06-detalles-conexion-wifi.png)
 
 La dirección `192.168.1.100` confirma que el teléfono estaba integrado en la red `192.168.1.0/24`. La puerta de enlace era `192.168.1.1`.
 
@@ -250,7 +250,7 @@ La dirección `192.168.1.100` confirma que el teléfono estaba integrado en la r
 
 Se aumentó progresivamente la distancia respecto a los routers. El teléfono mantuvo inicialmente la conexión, pero al continuar alejándose terminó desconectándose completamente de la red Wi-Fi.
 
-![Prueba del límite de cobertura](images/07-limite-cobertura.png)
+![Prueba del límite de cobertura](evidencias/07-limite-cobertura.png)
 
 No se obtuvo una captura intermedia con señal débil, ya que el teléfono pasó de mantener la conexión a desconectarse. La observación permite establecer el comportamiento práctico de la cobertura:
 
