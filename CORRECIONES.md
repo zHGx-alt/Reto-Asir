@@ -139,7 +139,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Web accesible y por HTTPS | Hecho | — |
 | Hosting en AWS con dominio propio y despliegue reproducible | Casi hecho | Tarea 31 |
 | ERP + TPV con un caso de uso automatizado | Hecho | Corr. 3.3; tarea 36 |
-| Instalación y configuración de una impresora | Guía lista | Tareas 14 y 37 (impresora del centro) |
+| Instalación y configuración de una impresora | Ticket de Odoo impreso (Samsung por IPP, 27/10) | Tarea 14: cola en los TPV reales |
 | Modelo E/R y tablas | Hecho | Corr. 4 (notación) |
 | Implementación de la BD y consulta de sus datos | Hecho | Corr. 4 (`almi_chain` en el servidor) |
 | Configurar disco redundante | Parcial | Corr. 3.1 |

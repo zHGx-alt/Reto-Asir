@@ -1,0 +1,35 @@
+Registro de entrada del stick · 27/10/2026 11:25 · Arduino LLC Arduino Leonardo (/dev/input/js0)
+Generado con ver-mando.py (tarea 50)
+
+## Resumen
+Duración: 45 s
+Botón 1 (pin 2): 2 pulsaciones, 0 de menos de 30 ms -> OK
+Botón 2 (pin 3): 2 pulsaciones, 0 de menos de 30 ms -> OK
+Botón 3 (pin 4): 2 pulsaciones, 0 de menos de 30 ms -> OK
+Botón 4 (pin 5): 1 pulsaciones, 0 de menos de 30 ms -> OK
+Palanca: las 4 direcciones -> OK
+RESULTADO: todo llega bien
+
+## Todo lo que llegó
+  1.577 s  PALANCA ARRIBA
+  1.711 s  PALANCA centro
+  2.253 s  PALANCA IZQUIERDA
+  2.367 s  PALANCA centro
+  2.837 s  PALANCA ABAJO
+  2.981 s  PALANCA centro
+  3.435 s  PALANCA DERECHA
+  3.538 s  PALANCA centro
+  4.512 s  BOTÓN 1 (pin 2) pulsado
+  4.616 s  BOTÓN 1 suelto tras 103 ms
+  4.739 s  BOTÓN 4 (pin 5) pulsado
+  4.853 s  BOTÓN 4 suelto tras 113 ms
+  4.997 s  BOTÓN 3 (pin 4) pulsado
+  5.049 s  BOTÓN 3 suelto tras 51 ms
+  6.863 s  BOTÓN 3 (pin 4) pulsado
+  6.977 s  BOTÓN 3 suelto tras 113 ms
+  7.121 s  BOTÓN 2 (pin 3) pulsado
+  7.152 s  BOTÓN 2 suelto tras 31 ms
+  8.418 s  BOTÓN 2 (pin 3) pulsado
+  8.475 s  BOTÓN 2 suelto tras 61 ms
+  9.526 s  BOTÓN 1 (pin 2) pulsado
+  9.608 s  BOTÓN 1 suelto tras 82 ms

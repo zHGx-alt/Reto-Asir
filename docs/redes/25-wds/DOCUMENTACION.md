@@ -3,10 +3,20 @@
 - **Bloque:** 5 Redes
 - **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** guía lista; falta hacerlo con los routers y rellenar las tablas (sección 9)
+- **Estado (27/10/2026):** 🟡 Prueba de laboratorio hecha por Peio (sección 1.2): el enlace WDS funciona. Falta repetirlo con la red del proyecto, con la red de invitados, y hacer las pruebas W3 a W10 y las medidas de la sección 8
 - **Fechas:** 02/11 – 03/11/2026
 - **Depende de:** tarea 24 (router 1 configurado) y tarea 23 (plano y plan de IP)
 - **La necesita:** tarea 26 (Wireshark y nmap)
+
+> [!IMPORTANT]
+> **Peio, lo que falta para cerrar la tarea** (tu prueba del 27/10 está en la sección 1.2 y vale como ensayo):
+> 1. **Red de invitados en el router 1** (tu tarea 24, hallazgo S-06). Sin ella no se pueden hacer los pasos 4 y 5.
+> 2. **Repetir el WDS con la red del proyecto:** router 1 en `192.168.10.1`, router 2 en `192.168.10.2`, SSID `Restaurante-Almichain` y `Restaurante-Almichain-Invitados` (secciones 3, 4 y 6). No con `TP-Link_AF60`.
+> 3. **Captura de *WDS Status: Run*** en el router 2 (W1) y `ping 192.168.10.2` desde el PC del gerente (W2).
+> 4. **Aislamiento de invitados** (W3 a W7): móvil en la Wi-Fi de invitados junto al router 2, **con el BSSID del router 2** (WiFi Analyzer), que navega pero **no** llega a Odoo, a los TPV ni a los paneles de los routers.
+> 5. **Medidas de antes y después** en los 5 puntos (sección 8): señal en dBm, velocidad de internet e iperf3, primero con el router 2 apagado y luego encendido.
+> 6. Evidencias con los nombres de la sección 9 (desde `10-`), con las contraseñas tapadas, y subirlo **por rama y PR** (CONTRIBUTING), no directamente a `main`.
+> 7. Tu informe es [prueba-laboratorio-2026-10-27.md](prueba-laboratorio-2026-10-27.md): si quieres cambiarlo, **edítalo** (lápiz de GitHub) en vez de borrarlo y subir otro. Al borrarlo se rompen los enlaces de esta guía.
 
 ## 1. Qué pide el enunciado y qué hay que demostrar
 
@@ -26,6 +36,24 @@ Hay que demostrar cuatro cosas, con evidencia:
 El punto 3 es el más importante para este proyecto: la red es plana con la Wi-Fi de invitados aislada ([tarea 23, 5.2](../23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)). Si el router 2 deja a los clientes en la LAN, se rompe la seguridad de todo el diseño.
 
 También demuestra el **RA.2 de PAR** («evaluando su funcionamiento y prestaciones»): las medidas de la sección 8.
+
+### 1.2 Prueba de laboratorio del 27/10/2026
+
+Peio montó el WDS con dos TL-WR841N antes de tener la red del proyecto. El informe completo, con los problemas que encontró y cómo los resolvió, está en [prueba-laboratorio-2026-10-27.md](prueba-laboratorio-2026-10-27.md).
+
+| Qué se hizo | Resultado | Evidencia |
+|---|---|---|
+| Router 2 enlazado por WDS (*Connect to Network*) al router 1, en WPA2-PSK/AES | ✅ El enlace funciona: un PC enchufado al router 2 recibe por DHCP una IP del router 1 (`192.168.1.102`, puerta de enlace `192.168.1.1`) y le hace `ping` con 0 % de pérdida | [01](evidencias/01-seleccion-y-configuracion-wds.png), [02](evidencias/02-wds-y-dhcp-desactivado.png) (contraseña tapada), [03](evidencias/03-ping-y-estado-interfaz.png), [04](evidencias/04-ping-router-principal.png) |
+| DHCP del router 2 | ✅ Apagado: las IP las da solo el router 1 | [02](evidencias/02-wds-y-dhcp-desactivado.png) |
+| Móvil en la Wi-Fi | ✅ Se conecta, recibe IP del router 1 (`192.168.1.100`), señal excelente y enlace de 72 Mbit/s cerca de los routers. Lejos, sigue conectado cuando ya no ve ninguna otra red ([07](evidencias/07-limite-cobertura.png)); más allá se desconecta (sin captura) | [05](evidencias/05-cobertura-cerca.png), [06](evidencias/06-detalles-conexion-wifi.png) |
+
+**En qué se queda corta** (por eso la tarea sigue en curso):
+
+1. **No es la red del proyecto.** El router 1 era uno de pruebas con el nombre de fábrica (`TP-Link_AF60`) en `192.168.1.0/24`, y el router 2 quedó en `192.168.1.101`. El plan es `192.168.10.1` y `192.168.10.2` con `Restaurante-Almichain` (sección 3).
+2. **Sin red de invitados**, así que no se pudo comprobar lo más importante: que los clientes del router 2 siguen aislados de la LAN (W3 a W7). Depende de la tarea 24 (hallazgo S-06 de la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md)).
+3. **La cobertura no demuestra que el router 2 la amplíe.** No se miró el BSSID, así que no se sabe a qué router estaba conectado el móvil, y no hay medidas de antes y después (sección 8).
+4. **Sin salida a internet:** el móvil marcaba «Sin acceso a Internet».
+5. El router 2 fue un TL-WR841N y no el Archer C6 de la sección 6: en el TL-WR841N el WDS está en *Wireless → Connect to Network*. Vale igual, pero el WR841N no tiene WPA3 (S-07).
 
 ## 2. Material
 
@@ -161,15 +189,16 @@ En [`evidencias/`](evidencias/), con nombres que digan qué demuestran:
 
 | Fichero | Qué demuestra |
 |---|---|
-| `01-router1-canal-fijo.png` | Canal fijo en el router 1 |
-| `02-router2-lan-y-dhcp.png` | Router 2 en `192.168.10.2` y DHCP apagado |
-| `03-router2-wds-run.png` | WDS Status: Run (W1) |
-| `04-ping-gerente-router2.txt` | W2 |
-| `05-movil-bssid-router2.png` | El móvil está en el router 2 (W3) |
-| `06-movil-ip-invitados.png` | IP del móvil por el router 2 (W4) |
-| `07-movil-sin-acceso-lan.png` | W5 y W6 |
-| `08-cobertura-antes.png` y `09-cobertura-despues.png` | Pantallas de WiFi Analyzer en P3 |
-| `10-iperf3-p3-antes.txt` y `11-iperf3-p3-despues.txt` | Velocidad en la barra |
+| `01` a `07` | Prueba de laboratorio del 27/10 (sección 1.2). Revisadas: no se lee ninguna contraseña. El 27/10 Peio cambió las fotos del monitor por capturas de pantalla (01, 02, 03, 06 y 07); la 04 se queda porque es la única con `ip route` |
+| `10-router1-canal-fijo.png` | Canal fijo en el router 1 |
+| `11-router2-lan-y-dhcp.png` | Router 2 en `192.168.10.2` y DHCP apagado |
+| `12-router2-wds-run.png` | WDS Status: Run (W1) |
+| `13-ping-gerente-router2.txt` | W2 |
+| `14-movil-bssid-router2.png` | El móvil está en el router 2 (W3) |
+| `15-movil-ip-invitados.png` | IP del móvil por el router 2 (W4) |
+| `16-movil-sin-acceso-lan.png` | W5 y W6 |
+| `17-cobertura-antes.png` y `18-cobertura-despues.png` | Pantallas de WiFi Analyzer en P3 |
+| `19-iperf3-p3-antes.txt` y `20-iperf3-p3-despues.txt` | Velocidad en la barra |
 
 > [!WARNING]
 > Antes de subir cada captura, ábrela **ampliada** y comprueba que no se lee ninguna contraseña (Wi-Fi, administración, WDS). gitleaks no mira dentro de las imágenes: es lo que pasó en la tarea 24.
@@ -180,6 +209,8 @@ En [`evidencias/`](evidencias/), con nombres que digan qué demuestran:
 
 ## 11. Pendiente
 
+- [x] Prueba de laboratorio del enlace WDS y del DHCP del router 2 (27/10, Peio; sección 1.2).
+- [ ] Red de invitados en el router 1 (tarea 24): sin ella no se pueden hacer W3 a W7.
 - [ ] Router 1 con el canal fijo (sección 4).
 - [ ] Medidas «antes» (sección 5).
 - [ ] Router 2 configurado y WDS en *Run* (sección 6).

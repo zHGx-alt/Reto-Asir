@@ -4,7 +4,7 @@
 // Conexiones (esquema en ../esquema-conexiones.svg):
 //   Botones 1-4: cable rojo -> pines 2..5, cable negro -> GND comun (fila - de la protoboard)
 //   Palanca de arcade (Sanwa, Zippy...: 4 microinterruptores):
-//     arriba -> A2, abajo -> A3, izquierda -> A4, derecha -> A5, comun -> GND
+//     izquierda -> A2, derecha -> A3, abajo -> A4, arriba -> A5, comun (cable blanco) -> GND
 //
 // Necesita la libreria Joystick de MHeironimus:
 // https://github.com/MHeironimus/ArduinoJoystickLibrary
@@ -14,10 +14,12 @@
 #include <Joystick.h>
 
 // Con INPUT_PULLUP, si no hay palanca los pines leen HIGH (sin pulsar) y los ejes se quedan en el centro
-const int PIN_ARRIBA = A2;
-const int PIN_ABAJO = A3;
-const int PIN_IZQUIERDA = A4;
-const int PIN_DERECHA = A5;
+// Pines según el cableado real de la palanca (prueba del 27/10/2026 con probar-stick.py): en este conector
+// los colores no siguen el orden arriba/abajo/izquierda/derecha, así que se ajusta aquí en vez de recablear.
+const int PIN_ARRIBA = A5;
+const int PIN_ABAJO = A4;
+const int PIN_IZQUIERDA = A2;
+const int PIN_DERECHA = A3;
 
 // Botones 1-4 en el orden del esquema: rojo, azul, rojo, azul.
 // No usar los pines 0 y 1 (RX/TX).
