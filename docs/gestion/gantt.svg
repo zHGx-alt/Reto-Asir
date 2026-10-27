@@ -399,11 +399,11 @@
 <text x="22" y="1399" class="t b">9 Backup</text>
 <line x1="16" y1="1430" x2="1202" y2="1430" stroke="#f0efeb"/>
 <text x="16" y="1423.0" class="s">43</text>
-<text x="44" y="1423.0" class="t">RAID 1 y simulación de fallo</text>
+<text x="44" y="1423.0" class="m">RAID 1 y simulación de fallo ✓</text>
 <circle cx="449" cy="1419.0" r="4.5" fill="#eda100"/>
 <text x="458" y="1423.0" class="t">Iker</text>
 <text x="528" y="1423.0" class="s">—</text>
-<rect x="644" y="1412" width="316" height="14" rx="4" fill="#eda100" stroke="#0b0b0b" stroke-width="1.5"><title>43. RAID 1 y simulación de fallo · Iker · 22/10–02/11 · En curso</title></rect>
+<rect x="644" y="1412" width="316" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>43. RAID 1 y simulación de fallo · Iker · 22/10–02/11 · Hecho</title></rect>
 <line x1="16" y1="1452" x2="1202" y2="1452" stroke="#f0efeb"/>
 <text x="16" y="1445.0" class="s">44</text>
 <text x="44" y="1445.0" class="t">Plan de backup 3-2-1 cifrado y automatizado</text>
