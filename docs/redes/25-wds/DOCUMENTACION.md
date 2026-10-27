@@ -8,6 +8,15 @@
 - **Depende de:** tarea 24 (router 1 configurado) y tarea 23 (plano y plan de IP)
 - **La necesita:** tarea 26 (Wireshark y nmap)
 
+> [!IMPORTANT]
+> **Peio, lo que falta para cerrar la tarea** (tu prueba del 27/10 está en la sección 1.2 y vale como ensayo):
+> 1. **Red de invitados en el router 1** (tu tarea 24, hallazgo S-06). Sin ella no se pueden hacer los pasos 4 y 5.
+> 2. **Repetir el WDS con la red del proyecto:** router 1 en `192.168.10.1`, router 2 en `192.168.10.2`, SSID `Restaurante-Almichain` y `Restaurante-Almichain-Invitados` (secciones 3, 4 y 6). No con `TP-Link_AF60`.
+> 3. **Captura de *WDS Status: Run*** en el router 2 (W1) y `ping 192.168.10.2` desde el PC del gerente (W2).
+> 4. **Aislamiento de invitados** (W3 a W7): móvil en la Wi-Fi de invitados junto al router 2, **con el BSSID del router 2** (WiFi Analyzer), que navega pero **no** llega a Odoo, a los TPV ni a los paneles de los routers.
+> 5. **Medidas de antes y después** en los 5 puntos (sección 8): señal en dBm, velocidad de internet e iperf3, primero con el router 2 apagado y luego encendido.
+> 6. Evidencias con los nombres de la sección 9 (desde `10-`), con las contraseñas tapadas, y subirlo **por rama y PR** (CONTRIBUTING), no directamente a `main`.
+
 ## 1. Qué pide el enunciado y qué hay que demostrar
 
 > «Para ampliar la cobertura Wi-Fi para los clientes del local se dispondrá de otro router Wi-Fi conectado mediante WDS al router principal, comprobando que la solución funciona correctamente.»
