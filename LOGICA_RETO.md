@@ -83,8 +83,8 @@ Diagrama de todos los equipos: [tarea 11](docs/diagramas/11-arquitectura-equipos
 | Equipo | Modelo elegido | Sistema | Qué hace | Cómo se conecta | Dónde se ha probado |
 |---|---|---|---|---|---|
 | PC del gerente | Lenovo ThinkCentre Neo 50q Gen 4 + monitor Xiaomi A24i | Windows 10 + Ubuntu LTS (arranque dual) | Gestión y ofimática; entra en Odoo como `gerente` | Cable, LAN 2 | VM de VMware (#12) |
-| TPV 1 y 2 | Iggual AIO B156.88.N100 táctil | Windows 10 Pro restringido | Solo abre el TPV de Odoo en el navegador | Cable, LAN 3 y 4 | Pendiente (#13) |
-| Impresoras de tickets | Epson TM-T20IV | Driver de Windows | Imprime el ticket del TPV | **USB** a su TPV (sin IP: no expone nada en la red) | Pendiente (#14, #37) |
+| TPV 1 y 2 | Iggual AIO B156.88.N100 táctil | Windows 10 Pro restringido | Solo abre el TPV de Odoo en el navegador | Cable, LAN 3 y 4 | VM hechas a mano por Markel (#13); TPV provisional con Odoo por HTTPS probado (#52) |
+| Impresoras de tickets | Epson TM-T20IV | Driver de Windows | Imprime el ticket del TPV | **USB** a su TPV (sin IP: no expone nada en la red) | Pendiente (#14, #37): el ticket se genera; falta imprimirlo desde el TPV con la impresora del centro |
 | Servidor | HP ProDesk 600 G5 MT reacondicionado + 2 discos WD Red Plus en RAID 1 + SAI ([tarea 10, sección 12](docs/hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto)) | Debian 13 sin escritorio + Docker | Odoo, PostgreSQL, RAID y copias | Cable, switch (LAN 1) | VM de VirtualBox `ServidorERP` (#33–45) |
 | Recreativa | Equipo de 1 núcleo y 1 GB | Debian 13 mínimo + MAME (Batocera descartada en la #51) | Juegos arcade para clientes | Wi-Fi de invitados (adaptador USB) | VM (#16, #17; faltan las medidas en 1 núcleo y 1 GB); equipo real pendiente (#53) |
 | Arcade stick | Keyestudio Leonardo (ATmega32U4) + 4 botones + palanca Sanwa | Firmware propio (palanca digital) | Mando de la recreativa | USB a la recreativa | Compila; placa pendiente (#50) |
@@ -369,15 +369,15 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 
 | Capa | Mínimos privilegios | Secretos | Cifrado | Estado |
 |---|---|---|---|---|
-| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | — | Gerente (con contraseñas robustas, #55) y recreativa hechos; TPV pendiente (#13) |
-| Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi. **La Wi-Fi de prueba estuvo visible en capturas (tapadas el 24/10): hay que cambiarla** | WPA2-AES; WPA3 pendiente | En curso (#24) |
-| Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS preparado** (#52, falta activarlo) | En curso |
+| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | — | Gerente (con contraseñas robustas, #55), recreativa y TPV (#13, a mano) hechos; falta `comprobar-tpv.ps1` en los TPV |
+| Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi; las dos cambiadas el 26/10 y en KeePassXC (la Wi-Fi estuvo visible en capturas antiguas) | WPA2-AES; WPA3 pendiente | En curso (#24) |
+| Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS probado entero en VM** (#52: certificado con `nameConstraints`, venta y venta sin red en un TPV); falta activarlo en el servidor del equipo | En curso |
 | Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Cuentas `tpv_app` e `informes` con login; contraseñas por variable, nunca en el repositorio (#42) | — | Hecho (probado 9/9 con cada cuenta) |
 | Copias | Solo root lee la contraseña | Contraseña de restic fuera del servidor | AES-256 | Hecho |
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
 | Repositorio | Cambios por Pull Request con CI (gitleaks); nadie escribe en `main` | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
-Pendientes ya conocidos para la revisión final (#46): HTTPS en Odoo (y, con el proxy, publicar 8069 solo en `127.0.0.1`), red de invitados y WPA3, contraseñas Wi-Fi y de administración del router, BD en el RAID y menús que ve el cajero en Odoo. Las contraseñas de la VM del gerente ya se cambiaron (#55).
+La revisión transversal (#46, [documento](docs/seguridad/46-revision-seguridad/DOCUMENTACION.md)) tiene 19 hallazgos con responsable. Corregidos: el certificado de Odoo sin límites (S-01) y la Wi-Fi expuesta (S-05). Los más importantes que siguen abiertos: activar HTTPS en el servidor del equipo (S-02), la red de invitados y la administración del router (S-04, S-06), la contraseña de root de Batocera si se usara (S-03) y SSH y actualizaciones del servidor (S-08, S-09). Las contraseñas de la VM del gerente ya se cambiaron (#55).
 
 **Regla para todas las contraseñas del proyecto:** nada de contraseñas por defecto ni en texto plano. Se generan con el gestor (KeePassXC), son distintas en cada cuenta y nunca entran en Git (lo vigilan el `.gitignore` y gitleaks).
 
