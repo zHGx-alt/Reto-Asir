@@ -66,7 +66,7 @@ journalctl -u backup-odoo               # ver qué ha pasado
 ## 7. Pendiente
 - [x] Añadir la base de datos de las tareas 38–41 a `backup-odoo.sh` (24/10: se copia si existe `almi_chain`).
 - [ ] Crear `almi_chain` en el PostgreSQL del servidor (tarea 40, sección 2) y repetir las pruebas 2 y 6 con las dos bases.
-- [ ] Pasar la contraseña de restic a KeePassXC y borrar `.credenciales-backup` del PC del técnico.
+- [x] Pasar la contraseña de restic a KeePassXC y borrar `.credenciales-backup` del PC del técnico (27/10).
 - [x] Fijar cada cuánto se renueva la copia fuera del local: cada lunes, con aviso a los 7 días (sección 1).
 - [ ] (Mejora) Tercer repositorio en AWS S3, en vez del USB o además de él, para que la copia fuera del local sea automática.
 - [ ] Avisar por correo si la copia falla (`OnFailure=` en el servicio).

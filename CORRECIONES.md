@@ -46,7 +46,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
   - **Quién:** Peio · **Hecho cuando:** marcado en la [tarea 24, sección 12](docs/redes/24-red-segura/DOCUMENTACION.md#12-pendiente), sin captura de la contraseña.
 - [ ] 🟠 **Contraseña de administración del router:** *System Tools → Password*, otra de KeePassXC; limitar la administración a la MAC del PC del gerente; captura sin la contraseña.
   - **Quién:** Peio.
-- [ ] 🟠 **Contraseña de restic en texto plano:** copiarla de `tarea-44/.credenciales-backup` (o `sudo cat /root/.config/backup-odoo/restic.pass` en el servidor) a una entrada de KeePassXC y **borrar** `.credenciales-backup`. La del servidor se queda: la necesita la copia nocturna.
+- [x] 🟠 **Contraseña de restic en texto plano:** copiarla de `tarea-44/.credenciales-backup` (o `sudo cat /root/.config/backup-odoo/restic.pass` en el servidor) a una entrada de KeePassXC y **borrar** `.credenciales-backup`. La del servidor se queda: la necesita la copia nocturna. Hecho el 27/10: en el KeePassXC del proyecto y `.credenciales-backup` ya no está en el PC de Adrian.
   - **Quién:** Iker (con quien tenga la contraseña maestra del `.kdbx`).
 - [x] 🟢 **Contraseñas de Packet Tracer** (R1, SW1 y las Wi-Fi de prueba) en el Drive del grupo: pasadas a KeePassXC ([guía de la tarea 23](docs/redes/23-packet-tracer-red-local.md)). Adrian, 26/10.
 - [ ] 🟢 **Recreativas instaladas con el preseed antiguo:** borrar la línea `recreativa-claude` de `~tecnico/.ssh/authorized_keys`.
@@ -188,7 +188,7 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] Router: con la contraseña Wi-Fi **antigua** ya no se conecta; con la nueva sí. La contraseña de administración antigua tampoco entra.
 - [ ] La administración del router solo abre desde el PC del gerente (desde otro equipo, rechazada).
 - [ ] Las contraseñas nuevas están en KeePassXC y en ningún otro sitio (ni capturas, ni chats, ni ficheros de texto, ni Drive).
-- [ ] Restic: `ls tarea-44/.credenciales-backup` en el PC del técnico → «No existe».
+- [x] Restic: `ls tarea-44/.credenciales-backup` en el PC del técnico → «No existe» (27/10, Adrian).
 - [ ] Restic, prueba de que la copia de KeePassXC es buena: en el servidor, `sudo restic -r /srv/datos/restic snapshots` sin el fichero de contraseña, pegando la de KeePassXC cuando la pida → lista las copias.
 
 **HTTPS y menús del cajero (2.2 y 2.3)**
