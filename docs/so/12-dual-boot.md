@@ -25,7 +25,7 @@ El equipo real (Lenovo ThinkCentre Neo 50q, tarea 8) se simula en una máquina v
 | Disco | 60 GB, NVMe virtual |
 | Red | NAT |
 | Sistema 1 | Windows 10 x64 |
-| Sistema 2 | Ubuntu Desktop LTS. **Versión exacta pendiente de apuntar** (`lsb_release -d` en la VM, y el nombre de la ISO). Lleva GRUB 2.14 y sudo-rs, así que es una versión reciente |
+| Sistema 2 | **Ubuntu Desktop 26.04.1 LTS** («Resolute Raccoon»), imagen `Release amd64 (20260826)`. Leído del disco de la VM sin arrancarla el 27/10 ([evidencia](../evidencias/12-dual-boot/ubu-08-version-desde-disco.txt)). Lleva GRUB 2.14 y sudo-rs |
 | Nombre del equipo en Ubuntu | `pc-gerente` |
 
 ## 3. Particiones
@@ -185,7 +185,7 @@ La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM 
 
 ## 9. Pendiente
 
-- [ ] Apuntar la versión exacta de Ubuntu y la ISO usada (sección 2).
+- [x] Apuntar la versión exacta de Ubuntu y la ISO usada (sección 2): 26.04.1 LTS, imagen del 26/08/2026 (27/10).
 - [ ] Conectar la VM a internet, instalar las actualizaciones acumulativas de Windows y repetir la evidencia de Windows Update (RG-05 queda **parcial** hasta entonces).
 - [ ] Cifrar después de instalar: BitLocker en Windows y LUKS en los datos de Ubuntu (sección 7).
 - [x] Drive revisado el 24/10: están el `.vmdk` y el `.kdbx` del 23/10 y no hay ningún `.txt` con contraseñas.

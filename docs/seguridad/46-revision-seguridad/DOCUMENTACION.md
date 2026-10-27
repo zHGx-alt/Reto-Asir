@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (27/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 con lo que entró después (sección 1.1): 21 hallazgos; 3 corregidos (S-01, S-05 y S-21) y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
+- **Estado (27/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 con lo que entró después (sección 1.1): 21 hallazgos; 5 corregidos (S-01, S-05, S-15, S-18 y S-21) y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -47,7 +47,7 @@ Se leyó lo que entró en `main` después de la revisión (PR #57 a #65):
 |---|---|---|
 | Alta | 5 (S-01 a S-05) | 2 (S-01 y S-05); S-03 no aplica |
 | Media | 8 (S-06 a S-12 y S-20) | 0 |
-| Baja | 8 (S-13 a S-19 y S-21) | 1 (S-21) |
+| Baja | 8 (S-13 a S-19 y S-21) | 3 (S-15, S-18 y S-21) |
 
 Lo más urgente, por este orden:
 
@@ -73,10 +73,10 @@ Lo más urgente, por este orden:
 | S-12 | Media | Tareas 12 y 13 | Windows 10 dejó de tener soporte el 14/10/2025. Sin ESU o LTSC, el PC del gerente y los TPV no reciben parches. La VM del gerente sigue con la actualización de noviembre de 2022 | TPV: IoT Enterprise LTSC 2021 (soporte hasta 2032), decisión pendiente en la tarea 13. Gerente: ESU, o usar Ubuntu para el trabajo diario y dejar Windows solo para lo imprescindible | Markel, Adrian | ⏳ Pendiente |
 | S-13 | Baja | Tarea 52 y Docker | `ufw` no filtra los puertos que publica Docker: la regla «80/443 solo desde la LAN» de `cortafuegos-servidor.sh` no se aplica al proxy. Con la red de invitados aislada (S-06) no hay ruta hasta él, así que el impacto es bajo | Comprobarlo con nmap desde la red de invitados (sección 5). Si llega, regla en la cadena `DOCKER-USER` | Adrian | ⏳ Pendiente de comprobar |
 | S-14 | Baja | Tareas 13 y 52 | `configurar-tpv.ps1` permite por defecto los puertos 8069 y 443. Con el proxy activo, el TPV podría seguir abriendo `http://…:8069` (el servidor lo tiene cerrado, pero no es la configuración mínima) | Volver a ejecutarlo con `-PuertosOdoo 443` después de activar HTTPS (lo hace el runbook de la tarea 52) | Markel | ⏳ Con la tarea 52 |
-| S-15 | Baja | Tareas 34 a 36 | Los scripts se lanzan con `ODOO_PASSWORD=... python3 …`. La contraseña queda en `~/.bash_history` | `read -rs ODOO_PASSWORD && export ODOO_PASSWORD` antes de ejecutarlos. Cambiarlo en los ejemplos de uso | Iker, Eneko.P | ⏳ Pendiente |
+| S-15 | Baja | Tareas 34 a 36 | Los scripts se lanzan con `ODOO_PASSWORD=... python3 …`. La contraseña queda en `~/.bash_history` | `read -rs ODOO_PASSWORD && export ODOO_PASSWORD` antes de ejecutarlos. Cambiarlo en los ejemplos de uso | Iker, Eneko.P | ✅ Corregido el 27/10: los ejemplos de uso de los scripts de las tareas 34 a 36 piden la contraseña con `read -rs` (no se ve ni queda en el historial) |
 | S-16 | Baja | Tarea 31, `user-data.sh.tftpl` | El token de DuckDNS va en el `user_data`. Lo puede leer cualquier proceso de la EC2 (IMDS) y queda en claro en `terraform.tfstate`. `.gitignore` excluye el `tfstate`, así que no llega al repositorio | Aceptable en el laboratorio. En producción: guardarlo en SSM Parameter Store y leerlo desde la instancia | Eneko.P | Aceptado |
 | S-17 | Baja | Tarea 30 | `LabInstanceProfile` tiene más permisos de los que necesita la EC2 (solo leer un bucket). Ya está documentado como limitación del Learner Lab | Nada en el laboratorio. En producción, un rol con `s3:GetObject` y `s3:ListBucket` | Adrian | Aceptado (limitación) |
-| S-18 | Baja | `.github/workflows/` | Las acciones se referencian por etiqueta (`actions/checkout@v4`), no por SHA. Si alguien moviera la etiqueta, se ejecutaría otro código con los secretos de AWS | Fijarlas por SHA en `desplegar-web.yml`, que es el que usa secretos | Eneko.P | ⏳ Pendiente |
+| S-18 | Baja | `.github/workflows/` | Las acciones se referencian por etiqueta (`actions/checkout@v4`), no por SHA. Si alguien moviera la etiqueta, se ejecutaría otro código con los secretos de AWS | Fijarlas por SHA en `desplegar-web.yml`, que es el que usa secretos | Eneko.P | ✅ Corregido el 27/10: las acciones de los dos flujos van fijadas por SHA, en las mismas versiones (checkout v4.4.0, setup-terraform v3.1.2, gitleaks-action v2.3.9) |
 | S-19 | Baja | Tareas 34 y 52, ticket del TPV | El QR «¿Necesita una factura?» del ticket apunta a la IP vieja del servidor (`web.base.url` no se actualiza). Aunque apuntara bien, el cliente está en la Wi-Fi de invitados, que no llega al servidor: el QR invita a una dirección interna que no le sirve | [`fijar-url-y-qr.sh`](../../erp/52-https-odoo/fijar-url-y-qr.sh): fija `web.base.url` y `web.base.url.freeze` y quita el QR del recibo | Adrian | 🟡 Probado en la VM (el ticket sale sin QR con una sesión de caja nueva). Falta en el servidor del equipo, paso 2.1 del runbook de la 52 |
 | S-20 | Media | Tarea 13, TPV hechos a mano | Los TPV se configuraron a mano, no con `configurar-tpv.ps1`. Tienen usuario estándar, quiosco, USB bloqueado, firewall y Defender, pero el firewall solo está «activado» (por defecto Windows deja salir todo), no consta que la UAC deniegue la elevación ni que Edge tenga lista blanca y descargas bloqueadas, y el quiosco apunta a `http://localhost:8069`. Un cajero podría navegar a otras webs o sacar datos por la red | Ejecutar `configurar-tpv.ps1 -CertificadoOdoo .\odoo.crt -PuertosOdoo 443` en los dos TPV (o aplicar a mano lo que falta) y comprobarlo con `comprobar-tpv.ps1` (tarea 15) | Markel | ⏳ Pendiente |
 | S-21 | Baja | Tarea 19, `arduino/mando-joystick/subir.sh` | Instalaba la librería Joystick desde la rama principal de GitHub (con `ENABLE_UNSAFE_INSTALL`), sin fijar versión: cualquier cambio en esa rama entraría en el firmware sin revisar | Fijar la versión con la que se probó (`#v2.1.1`) | Adrian | ✅ Corregido el 27/10 (`LIB_VERSION`). La instalación no se pudo repetir: este PC no tiene `arduino-cli` |

@@ -19,8 +19,8 @@ Odoo 19 (servidor de la tarea 33) queda preparado para la tienda:
 Todo por la API de Odoo (XML-RPC), sin clics, con [`configurar-odoo.py`](configurar-odoo.py). Es reproducible e idempotente.
 
 ```bash
-ODOO_URL=http://localhost:8069 ODOO_DB=tienda \
-ODOO_ADMIN_PASSWORD=<la de /opt/odoo/.env> EMPRESA="Nombre real de la tienda" \
+read -rs ODOO_ADMIN_PASSWORD && export ODOO_ADMIN_PASSWORD   # la de /opt/odoo/.env; no se ve ni queda en el historial
+ODOO_URL=http://localhost:8069 ODOO_DB=tienda EMPRESA="Nombre real de la tienda" \
 python3 configurar-odoo.py
 ```
 - Log de la ejecución: [`evidencias/salida-configurar-odoo.log`](evidencias/salida-configurar-odoo.log).

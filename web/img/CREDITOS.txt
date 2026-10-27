@@ -1,0 +1,7 @@
+Fotos de Unsplash (licencia de Unsplash: https://unsplash.com/license), copiadas aquí el 27/10/2026
+en WebP, recortadas a 3:2, para no depender de images.unsplash.com.
+
+portada-*.webp   Alexandru-Bogdan Ghita (@bogzilla)        https://unsplash.com/photos/UeYkqQh4PoI
+txuleta-*.webp   Emerson Vieira (@emersonvieira)           https://unsplash.com/photos/3wzps8KbdCQ
+verduras-*.webp  Ella Olsson (@ellaolsson)                 https://unsplash.com/photos/KPDbRyFOTnE
+tarta-*.webp     mahyar mirghasemi (@mahyar_mirghasmi)     https://unsplash.com/photos/z35wEXJ8kvA

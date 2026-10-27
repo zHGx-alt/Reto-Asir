@@ -11,7 +11,8 @@ Hace por la API (XML-RPC), sin clics, el mismo recorrido que haría el gerente a
   6. Descarga el PDF de la factura
 
 Uso:
-  ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente ODOO_PASSWORD=... \
+  read -rs ODOO_PASSWORD && export ODOO_PASSWORD     (la pide sin mostrarla ni dejarla en el historial)
+  ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente \
   python3 factura_automatica.py --cliente "Eventos Ejemplo S.L." --producto "Menú de grupo (evento)" --precio 30 --cantidad 20
 
 Caso de uso real del restaurante: una empresa reserva una comida de grupo y pide factura completa
