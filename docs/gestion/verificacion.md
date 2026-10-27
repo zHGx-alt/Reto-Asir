@@ -121,7 +121,7 @@ Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los
 | Despliegue reproducible automatizado (IaC) | 31 | Pendiente (el enunciado lo pide «a poder ser») |
 | ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | Pendiente |
 | BD: implementación **y consulta de sus datos** | 41 | Pendiente |
-| Comunicaciones cifradas en toda la solución | 52, 46 | Pendiente (Odoo va por HTTP) |
+| Comunicaciones cifradas en toda la solución | 52, 46 | Odoo por HTTPS hecho en VM (tarea 52; falta imprimir el ticket desde la VM); la revisión de la 46 sigue en curso |
 | Tabla de pruebas, documentación y presentación | 47, 48, 49 | Pendiente |
 
 ## 8. Comprobaciones del 24/10/2026
