@@ -3,7 +3,7 @@
 - **Bloque:** 7 ERP
 - **Responsable:** Adrian
 - **Depende de:** tarea 33 (Odoo con Docker)
-- **Estado (26/10/2026):** ✅ Hecha en máquina virtual, con las 15 pruebas correctas. Las pruebas 5 y 6 se hicieron con un TPV provisional (sección 4.2). Falta activarla en la `ServidorERP` del equipo cuando la BD esté en el RAID (tarea 43), siguiendo el [runbook](RUNBOOK.md).
+- **Estado (27/10/2026):** ✅ Hecha en máquina virtual, con las 15 pruebas correctas. Las pruebas 5 y 6 se hicieron con un TPV provisional (sección 4.2). Solo queda **imprimir el ticket desde la VM**: se imprimió, pero por el CUPS del PC anfitrión (sección 4.2, *Impresión*). Para pasarla a la `ServidorERP` del equipo está el [runbook](RUNBOOK.md).
 
 ## 1. Por qué
 
@@ -85,7 +85,7 @@ Los TPV de la tarea 13 están en el PC de Markel y todavía no se han conectado 
 
 No es el TPV definitivo (Windows 11 y sin el bastionado de `configurar-tpv.ps1`), así que **se repiten en los TPV reales** al activar el proxy en el servidor del equipo ([runbook](RUNBOOK.md), paso 5). Lo que demuestran ya: Edge acepta el certificado con `nameConstraints`, el TPV de Odoo funciona igual por HTTPS y cobra sin red.
 
-**Impresión.** La impresora USB (una Samsung ML-1660 láser, en lugar de la térmica del centro) se pasó a la VM, pero Windows no creó el puerto `USB001` y el trabajo falló ([12](evidencias/12-impresora-en-la-vm-error.png)). El ticket de la foto [09](evidencias/09-ticket-venta-https.webp) es el de la venta por HTTPS, pero salió por el CUPS del PC anfitrión: no cuenta para las tareas 14 y 37, que siguen pendientes con la impresora del centro.
+**Impresión.** La impresora USB (una Samsung ML-1660 láser, en lugar de la térmica del centro) se pasó a la VM, pero Windows no creó el puerto `USB001` y el trabajo falló ([12](evidencias/12-impresora-en-la-vm-error.png)). El ticket de la foto [09](evidencias/09-ticket-venta-https.webp) es el de la venta por HTTPS, pero salió por el CUPS del PC anfitrión: imprimirlo desde la VM es lo único que queda de esta tarea. Tampoco cuenta para las tareas 14 y 37, que siguen pendientes con la impresora del centro.
 
 ## 5. Volver atrás
 

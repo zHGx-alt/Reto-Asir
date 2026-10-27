@@ -36,13 +36,13 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 
 ## Resumen
 
-**31 de 55 tareas hechas (56 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**32 de 55 tareas hechas (58 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 0 | 3 | 14 |
-| Software | 16 | 9 | 1 | 26 |
+| Software | 17 | 8 | 1 | 26 |
 | Físico | 0 | 1 | 8 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -60,7 +60,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 43 | RAID 1 y simulación de fallo | Software | Iker | 02/11 | En curso | RAID y simulación de fallo hechos por Iker en VM (22-23/10). Falta lo principal: la BD sigue en el disco del sistema. mover-docker-al-raid.sh preparado el 24/10 (sección 7); falta ejecutarlo y repetir el fallo con Odoo funcionando. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. El 24/10 el script copia también almi_chain si existe y avisa si el USB lleva más de 7 días sin conectarse; falta probarlo en la VM. Pasa de Markel a Iker, que la hizo. Mejora: aviso por correo si la copia falla (OnFailure=) y tercer repositorio en S3. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
-| 52 | Proxy HTTPS delante de Odoo | Software | Adrian | 04/11 | En curso | Proxy nginx con certificado propio (con nameConstraints; tarea 46). Probado en VM el 26/10: las 15 pruebas correctas; la 5 (venta por HTTPS) y la 6 (venta sin red) con un TPV provisional (win-11) en la red 192.168.10.0/24 del plano; fijar-url-y-qr.sh quita el QR del ticket (S-19). Falta activarlo en la ServidorERP del equipo cuando la BD esté en el RAID (tarea 43) y repetir 5 y 6 en los TPV reales (RUNBOOK.md). | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | Revisión del repositorio hecha el 26/10: 19 hallazgos (5 altos) con responsable. Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge) y S-05 (Wi-Fi cambiada). S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
@@ -112,13 +111,14 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | Adrian | 08-usuarios.sql (tpv_app e informes con LOGIN; contraseñas por variable) y 09-pruebas-usuarios.sql: 9/9 con cada cuenta el 24/10. Pasa de Markel a Adrian. | [42-usuarios-y-permisos.txt](../../docs/bd/evidencias/42-usuarios-y-permisos.txt) |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | Iker | Restaurada la copia del USB en un entorno aislado del mismo servidor (46 s). Falta repetirla en una VM nueva para medir el RTO real. | [DOCUMENTACION.md](../../docs/backup/45-restauracion/DOCUMENTACION.md) |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | Iker | 26/10: medidas en VM de 1 núcleo y 1 GB (3 antes y 3 después en Batocera; Debian del 23/10). Decidido Debian 13 + MAME: llega antes a jugar (7,1 s frente a 12,9 s), usa menos RAM (400 MB con el juego frente a 554 MB solo con el menú) y MAME va igual o más rápido. Batocera endurecido (security.enabled) y optimizado; incidencias y decisión en NOTAS.md y Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
+| 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | Adrian | Hecha en VM el 26/10: proxy nginx con certificado propio (con nameConstraints; tarea 46) y las 15 pruebas correctas, con venta por HTTPS (5) y venta sin red (6) en un TPV provisional (win-11) de la red 192.168.10.0/24; fijar-url-y-qr.sh quita el QR del ticket (S-19). El ticket se imprimió, pero por el CUPS del PC: solo queda imprimirlo desde la VM (la Samsung ML-1660 no crea el puerto USB001 dentro de ella). El 27/10 se da por hecha así. RUNBOOK.md queda para pasarla al servidor del equipo. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Drive revisado el 24/10: .vmdk y .kdbx nuevos y ningún .txt con contraseñas. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
 
 ## Carga por persona
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 15 | 5 | 2 | 1 | 38 | 0, 2, 4, 5, 6, 7, 8, 10 |
+| Adrian | 15 | 4 | 1 | 1 | 38 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 4 | 4 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
@@ -142,7 +142,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
-| 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 03/11–04/11 | #33 (Iker) | En curso |
+| 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 03/11–04/11 | #33 (Iker) | Hecho |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
 | 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 05/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
