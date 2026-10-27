@@ -1,0 +1,22 @@
+Tarea 12 · Versión de Ubuntu leída del disco exportado de la VM, sin arrancarla (27/10/2026)
+Disco: VM-dualboot-W10-ubuntu-disk1.vmdk (export del 23/10, SHA-256 29d633bb…), partición 4 (ext4 de Ubuntu)
+Método: 7z e <disco> 3.img y debugfs -R 'cat <fichero>' 3.img (solo lectura)
+
+== /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=26.04
+DISTRIB_CODENAME=resolute
+DISTRIB_DESCRIPTION="Ubuntu 26.04.1 LTS"
+
+== /var/log/installer/media-info
+Ubuntu 26.04.1 LTS "Resolute Raccoon" - Release amd64 (20260826)
+
+== /etc/hostname
+pc-gerente
+
+== /etc/crypttab
+/etc/crypttab: File not found by ext2_lookup 
+
+== /etc/fstab (sin comentarios)
+/dev/disk/by-uuid/ee6bf2e7-0d24-4acd-ad60-98699934d49f / ext4 defaults 0 1
+/dev/disk/by-uuid/A866-3435 /boot/efi vfat defaults 0 1

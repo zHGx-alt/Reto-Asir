@@ -22,8 +22,8 @@ jobs:
   validar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3.1.2
       - name: Formato y validación de Terraform
         working-directory: iac
         run: |
@@ -41,7 +41,7 @@ jobs:
       AWS_DEFAULT_REGION: us-east-1
       BUCKET: almi-chain-web-2026
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Publicar en S3
         run: |
           if [ -z "$AWS_ACCESS_KEY_ID" ]; then

@@ -9,7 +9,8 @@ Tarea 34 · Configura Odoo para la tienda por su API (XML-RPC), sin clics y de f
   4. Usuarios con mínimos privilegios: gerente (todo) y cajero1/cajero2 (solo TPV)
 
 Uso:
-  ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_ADMIN_PASSWORD=... \
+  read -rs ODOO_ADMIN_PASSWORD && export ODOO_ADMIN_PASSWORD     (la pide sin mostrarla ni dejarla en el historial)
+  ODOO_URL=http://localhost:8069 ODOO_DB=tienda \
   EMPRESA="Nombre de la tienda" python3 configurar-odoo.py
 
 Las contraseñas de los usuarios nuevos se generan al azar y se guardan en CREDENCIALES (permisos 600).

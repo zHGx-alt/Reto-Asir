@@ -9,7 +9,8 @@ Tarea 36 · Importar y exportar datos de Odoo por su API (XML-RPC). RA.7 de LMSG
                          Los CSV llevan datos personales: la carpeta NO se sube a Git (.gitignore).
 
 Uso (con el usuario gerente, no con admin: mínimos privilegios):
-  ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente ODOO_PASSWORD=... \
+  read -rs ODOO_PASSWORD && export ODOO_PASSWORD     (la pide sin mostrarla ni dejarla en el historial)
+  ODOO_URL=http://localhost:8069 ODOO_DB=tienda ODOO_USER=gerente \
   python3 importar-exportar.py importar carta.csv
   python3 importar-exportar.py exportar exportaciones-$(date +%Y%m%d)
 
