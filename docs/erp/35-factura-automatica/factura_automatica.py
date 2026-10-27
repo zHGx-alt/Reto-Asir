@@ -94,7 +94,10 @@ paso(2, f"Producto: {args.producto} a {args.precio:.2f} € + IVA {nombre_iva} (
 # 3. Pedido de venta
 pedido = x("sale.order", "create", {
     "partner_id": cliente,
-    "order_line": [(0, 0, {"product_id": producto, "product_uom_qty": args.cantidad, "price_unit": args.precio})]})
+    # El IVA se fija también en la línea: si no, un producto que ya existía con otro impuesto (o una posición fiscal
+    # del cliente) puede sumar un segundo IVA. Pasó el 27/10: 654,55 € en vez de 660,00 € (dos IVA del 10 %).
+    "order_line": [(0, 0, {"product_id": producto, "product_uom_qty": args.cantidad, "price_unit": args.precio,
+                           "tax_ids": [(6, 0, iva)]})]})
 boton("sale.order", "action_confirm", [pedido])
 p_info = x("sale.order", "read", [pedido], fields=["name", "state", "amount_total"])[0]
 paso(3, f"Pedido {p_info['name']} confirmado ({p_info['state']}), total {p_info['amount_total']:.2f} €")
@@ -109,6 +112,12 @@ f_info = x("account.move", "read", [factura],
            fields=["name", "state", "amount_untaxed", "amount_tax", "amount_total", "invoice_date"])[0]
 paso(4, f"Factura {f_info['name']} validada el {f_info['invoice_date']}: "
         f"base {f_info['amount_untaxed']:.2f} € + IVA {f_info['amount_tax']:.2f} € = {f_info['amount_total']:.2f} €")
+esperado = round(args.precio * args.cantidad * (1 + args.iva / 100), 2)
+if abs(f_info["amount_total"] - esperado) > 0.01:
+    sys.exit(f"ERROR: la factura suma {f_info['amount_total']:.2f} € y debería sumar {esperado:.2f} € "
+             f"({args.cantidad:g} × {args.precio:.2f} € + IVA {args.iva:g} %). Revisa los impuestos del producto "
+             f"'{args.producto}' y el IVA de venta (que no sea 'incluido en el precio'). La factura ya está validada "
+             f"pero sin cobrar: anúlala con una factura rectificativa.")
 
 # 5. Cobro: asistente "Registrar pago"
 ctx = {"active_model": "account.move", "active_ids": [factura]}

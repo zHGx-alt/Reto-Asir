@@ -1,0 +1,8 @@
+Factura: {'id': 8, 'fiscal_position_id': [1, 'ES Domestic'], 'partner_id': [11, 'Eventos Ejemplo S.L.'], 'amount_untaxed': 545.45, 'amount_tax': 109.1, 'amount_total': 654.55}
+Línea: {'id': 19, 'name': 'Menú de grupo (evento)', 'quantity': 20.0, 'price_unit': 30.0, 'price_subtotal': 545.45, 'price_total': 654.55, 'tax_ids': [88, 169]}
+   impuesto: {'id': 88, 'name': '10% S', 'amount': 10.0, 'amount_type': 'percent', 'price_include': False, 'price_include_override': False, 'children_tax_ids': [], 'tax_scope': 'service'}
+   impuesto: {'id': 169, 'name': '10% S (IVA incluido)', 'amount': 10.0, 'amount_type': 'percent', 'price_include': True, 'price_include_override': 'tax_included', 'children_tax_ids': [], 'tax_scope': 'service'}
+Producto: [{'id': 22, 'taxes_id': [88], 'list_price': 30.0, 'create_uid': [5, 'Gerente'], 'create_date': '2026-10-27 10:30:48'}]
+   impuesto del producto: {'id': 88, 'name': '10% S', 'amount': 10.0, 'price_include': False, 'children_tax_ids': []}
+Impuestos de venta del 10 %: [{'id': 72, 'name': '10% G', 'tax_scope': 'consu', 'price_include': False, 'amount_type': 'percent'}, {'id': 88, 'name': '10% S', 'tax_scope': 'service', 'price_include': False, 'amount_type': 'percent'}, {'id': 169, 'name': '10% S (IVA incluido)', 'tax_scope': 'service', 'price_include': True, 'amount_type': 'percent'}]
+Empresa: [{'id': 1, 'name': 'Almi-Chain', 'account_price_include': 'tax_excluded'}]
