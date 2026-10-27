@@ -16,6 +16,7 @@
 > 4. **Aislamiento de invitados** (W3 a W7): móvil en la Wi-Fi de invitados junto al router 2, **con el BSSID del router 2** (WiFi Analyzer), que navega pero **no** llega a Odoo, a los TPV ni a los paneles de los routers.
 > 5. **Medidas de antes y después** en los 5 puntos (sección 8): señal en dBm, velocidad de internet e iperf3, primero con el router 2 apagado y luego encendido.
 > 6. Evidencias con los nombres de la sección 9 (desde `10-`), con las contraseñas tapadas, y subirlo **por rama y PR** (CONTRIBUTING), no directamente a `main`.
+> 7. Tu informe es [prueba-laboratorio-2026-10-27.md](prueba-laboratorio-2026-10-27.md): si quieres cambiarlo, **edítalo** (lápiz de GitHub) en vez de borrarlo y subir otro. Al borrarlo se rompen los enlaces de esta guía.
 
 ## 1. Qué pide el enunciado y qué hay que demostrar
 
@@ -42,8 +43,8 @@ Peio montó el WDS con dos TL-WR841N antes de tener la red del proyecto. El info
 
 | Qué se hizo | Resultado | Evidencia |
 |---|---|---|
-| Router 2 enlazado por WDS (*Connect to Network*) al router 1, en WPA2-PSK/AES | ✅ El enlace funciona: un PC enchufado al router 2 recibe por DHCP una IP del router 1 (`192.168.1.102`, puerta de enlace `192.168.1.1`) y le hace `ping` con 0 % de pérdida | [01](evidencias/01-seleccion-red-wds.png), [02](evidencias/02-configuracion-wds.png) (contraseña tapada), [04](evidencias/04-ping-router-principal.png) |
-| DHCP del router 2 | ✅ Apagado: las IP las da solo el router 1 | [03](evidencias/03-dhcp-desactivado.png) |
+| Router 2 enlazado por WDS (*Connect to Network*) al router 1, en WPA2-PSK/AES | ✅ El enlace funciona: un PC enchufado al router 2 recibe por DHCP una IP del router 1 (`192.168.1.102`, puerta de enlace `192.168.1.1`) y le hace `ping` con 0 % de pérdida | [01](evidencias/01-seleccion-y-configuracion-wds.png), [02](evidencias/02-wds-y-dhcp-desactivado.png) (contraseña tapada), [03](evidencias/03-ping-y-estado-interfaz.png), [04](evidencias/04-ping-router-principal.png) |
+| DHCP del router 2 | ✅ Apagado: las IP las da solo el router 1 | [02](evidencias/02-wds-y-dhcp-desactivado.png) |
 | Móvil en la Wi-Fi | ✅ Se conecta, recibe IP del router 1 (`192.168.1.100`), señal excelente y enlace de 72 Mbit/s cerca de los routers. Lejos, sigue conectado cuando ya no ve ninguna otra red ([07](evidencias/07-limite-cobertura.png)); más allá se desconecta (sin captura) | [05](evidencias/05-cobertura-cerca.png), [06](evidencias/06-detalles-conexion-wifi.png) |
 
 **En qué se queda corta** (por eso la tarea sigue en curso):
@@ -188,7 +189,7 @@ En [`evidencias/`](evidencias/), con nombres que digan qué demuestran:
 
 | Fichero | Qué demuestra |
 |---|---|
-| `01` a `07` | Prueba de laboratorio del 27/10 (sección 1.2). Revisadas: no se lee ninguna contraseña |
+| `01` a `07` | Prueba de laboratorio del 27/10 (sección 1.2). Revisadas: no se lee ninguna contraseña. El 27/10 Peio cambió las fotos del monitor por capturas de pantalla (01, 02, 03, 06 y 07); la 04 se queda porque es la única con `ip route` |
 | `10-router1-canal-fijo.png` | Canal fijo en el router 1 |
 | `11-router2-lan-y-dhcp.png` | Router 2 en `192.168.10.2` y DHCP apagado |
 | `12-router2-wds-run.png` | WDS Status: Run (W1) |
