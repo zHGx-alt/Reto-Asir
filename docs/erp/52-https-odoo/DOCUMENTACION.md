@@ -3,7 +3,7 @@
 - **Bloque:** 7 ERP
 - **Responsable:** Adrian
 - **Depende de:** tarea 33 (Odoo con Docker)
-- **Estado (27/10/2026):** ✅ Hecha en máquina virtual, con las 15 pruebas correctas. Las pruebas 5 y 6 se hicieron con un TPV provisional (sección 4.2). Solo queda **imprimir el ticket desde la VM**: se imprimió, pero por el CUPS del PC anfitrión (sección 4.2, *Impresión*). Para pasarla a la `ServidorERP` del equipo está el [runbook](RUNBOOK.md).
+- **Estado (27/10/2026):** ✅ Hecha en máquina virtual, con las 15 pruebas correctas. Las pruebas 5 y 6 se hicieron con un TPV provisional (sección 4.2). El 27/10 el ticket se imprimió **desde la VM** del TPV, por IPP hacia la impresora del PC (sección 4.2, *Impresión*). Para pasarla a la `ServidorERP` del equipo está el [runbook](RUNBOOK.md).
 
 ## 1. Por qué
 
@@ -81,11 +81,39 @@ Los TPV de la tarea 13 están en el PC de Markel y todavía no se han conectado 
 |---|---|
 | Red | Red NAT de VirtualBox `reto-lan`, `192.168.10.0/24`, puerta de enlace `192.168.10.1` (como el router). DHCP con reserva para el servidor |
 | Servidor | La misma VM `ServidorERP`, ahora en `192.168.10.10`. Certificado regenerado para esa IP con `nameConstraints` (huella SHA-256 `04:3E:61:A7:61:1F:6E:BC:83:A9:1C:EC:1A:1C:D5:29:B6:72:84:0B:7B:86:E4:E5:79:4D:2F:8E:45:EF:9B:DE`) y Odoo configurado con los scripts de la tarea 34 |
-| TPV | VM `win-11` en `192.168.10.60`, con el `.crt` como raíz de confianza (`certutil -addstore Root`, en un PowerShell de administrador) |
+| TPV | VM `win-11` personal de Adrian (no es del proyecto, se usó solo para estas pruebas) en `192.168.10.60`, con el `.crt` como raíz de confianza (`certutil -addstore Root`, en un PowerShell de administrador) |
 
-No es el TPV definitivo (Windows 11 y sin el bastionado de `configurar-tpv.ps1`), así que **se repiten en los TPV reales** al activar el proxy en el servidor del equipo ([runbook](RUNBOOK.md), paso 5). Lo que demuestran ya: Edge acepta el certificado con `nameConstraints`, el TPV de Odoo funciona igual por HTTPS y cobra sin red.
+No es el TPV definitivo (es una VM personal con Windows 11, sin el bastionado de `configurar-tpv.ps1`), así que **se repiten en los TPV reales** al activar el proxy en el servidor del equipo ([runbook](RUNBOOK.md), paso 5). Lo que demuestran ya: Edge acepta el certificado con `nameConstraints`, el TPV de Odoo funciona igual por HTTPS y cobra sin red.
 
-**Impresión.** La impresora USB (una Samsung ML-1660 láser, en lugar de la térmica del centro) se pasó a la VM, pero Windows no creó el puerto `USB001` y el trabajo falló ([12](evidencias/12-impresora-en-la-vm-error.png)). El ticket de la foto [09](evidencias/09-ticket-venta-https.webp) es el de la venta por HTTPS, pero salió por el CUPS del PC anfitrión: imprimirlo desde la VM es lo único que queda de esta tarea. Tampoco cuenta para las tareas 14 y 37, que siguen pendientes con la impresora del centro.
+**Impresión.** La impresora USB (una Samsung ML-1660 láser, en lugar de la térmica del centro) se pasó a la VM, pero Windows no creó el puerto `USB001` y el trabajo falló ([12](evidencias/12-impresora-en-la-vm-error.png)). El ticket de la foto [09](evidencias/09-ticket-venta-https.webp) es el de la venta por HTTPS, pero salió por el CUPS del PC anfitrión: no salió de la VM.
+
+El 27/10 se imprimió desde la VM sin pasar el USB: la `win-11` manda el trabajo por **IPP** a la cola CUPS del PC, que tiene la impresora conectada. El PC no tiene sudo para Claude, así que Adrian cambió a mano `/etc/cups/cupsd.conf`:
+
+| Línea | Para qué |
+|---|---|
+| `Listen 172.17.0.1:631` | CUPS escucha también en la IP de `docker0`, que la VM alcanza por el NAT de `reto-lan` y que no se ve desde la LAN |
+| `ServerAlias 172.17.0.1` | Sin ella, CUPS responde 400 a una petición con ese nombre de host |
+| `Allow from 172.17.0.1` y `Allow from 192.168.1.101` en `<Location />` | Solo se permite el propio PC. CUPS registra la conexión con la IP de LAN del PC (`192.168.1.101`, la da el DHCP del router: si cambia, hay que cambiar la regla) |
+
+El mapeo de loopback de `reto-lan` (`192.168.10.2` → `127.0.0.1`) no sirve: a una conexión desde `127.0.0.1` CUPS solo le acepta `localhost` como nombre y ignora `ServerAlias`. En Windows, *Agregar impresora → Seleccionar una impresora compartida por nombre* → `http://172.17.0.1:631/printers/ML-1660-Series`, con el controlador **Microsoft PS Class Driver** (el filtro de la ML-1660 lo aplica CUPS). Venta de la Mesa 6 en *TPV Barra 1* (factura simplificada `261-1-000007`), *Imprimir recibo* en Edge: el ticket sale en papel y ya **sin el QR** (S-19, [16](evidencias/16-ticket-impreso-desde-vm.webp)). En el registro de CUPS el trabajo es del usuario de Windows de la VM, no del PC ([17](evidencias/17-cups-trabajo-desde-vm.txt)).
+
+Esto no cuenta para las tareas 14 y 37: allí la impresora térmica del centro va por USB al TPV (tarea 8), sin cola compartida en otro equipo.
+
+## 4.3 Cómo conectarse al laboratorio
+
+Todo está en el PC de Adrian: las VM no se ven desde otros equipos. Las contraseñas no van en el repositorio, sino en el KeePassXC del equipo.
+
+| Para | Dirección | Usuario |
+|---|---|---|
+| Odoo (gerente o administrador), desde la red `reto-lan` | `https://192.168.10.10/web/login` | `admin` |
+| TPV de Odoo (quiosco del TPV) | `https://192.168.10.10/pos/ui` | `cajero1` |
+| Odoo desde el propio PC | `https://127.0.0.1:8443/web/login` (el navegador avisa: el certificado solo vale para `192.168.10.10`) | `admin` |
+| SSH al servidor, desde el PC | `ssh -p 2223 tecnico@127.0.0.1` | `tecnico`, con la clave `id_ed25519` de Adrian (es la única en `authorized_keys`) |
+| Impresora, desde la VM del TPV | `http://172.17.0.1:631/printers/ML-1660-Series` (sección 4.2, *Impresión*) | — |
+
+- El HTTP (`http://192.168.10.10`, o `http://127.0.0.1:8080` desde el PC) redirige a HTTPS.
+- `tecnico` tiene `sudo` con contraseña. Esa contraseña también vale en la consola de VirtualBox.
+- Para usar la VM en otro PC, se arranca su `.vmdk`: el reenvío de puertos de la red `reto-lan` solo escucha en `127.0.0.1`.
 
 ## 5. Volver atrás
 
