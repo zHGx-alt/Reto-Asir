@@ -22,6 +22,7 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 - #11 (Diagrama de arquitectura de equipos) empieza el 23/10 y necesita #8 (Tabla de hardware con justificación), que acaba el 23/10
 - #11 (Diagrama de arquitectura de equipos) empieza el 23/10 y necesita #9 (Tabla de software y licencias), que acaba el 23/10
 - #12 (Dual boot Win10 + Linux en el equipo del gerente (VM)) empieza el 22/10 y necesita #8 (Tabla de hardware con justificación), que acaba el 23/10
+- #50 (Probar el firmware del stick en la placa (HID; comandos; EEPROM)) empieza el 27/10 y necesita #19 (Montaje del arcade stick (ATmega32U4)), que acaba el 27/10
 - #28 (Implementar web (mapa; formulario; slideshow)) empieza el 21/10 y necesita #27 (Wireframes y diseño conceptual web), que acaba el 23/10
 - #29 (Validación W3C; Lighthouse y accesibilidad) empieza el 23/10 y necesita #28 (Implementar web (mapa; formulario; slideshow)), que acaba el 23/10
 - #30 (Hosting AWS con dominio y HTTPS) empieza el 23/10 y necesita #28 (Implementar web (mapa; formulario; slideshow)), que acaba el 23/10
@@ -36,14 +37,14 @@ Tareas que empiezan antes de que acabe una tarea que necesitan:
 
 ## Resumen
 
-**32 de 55 tareas hechas (58 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**34 de 55 tareas hechas (61 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 0 | 3 | 14 |
 | Software | 17 | 8 | 1 | 26 |
-| Físico | 0 | 1 | 8 | 9 |
+| Físico | 2 | 1 | 6 | 9 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
 
@@ -64,11 +65,9 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | Revisión del repositorio hecha el 26/10 y repasada el 27/10 (PR #57-65): 21 hallazgos (5 altos) con responsable; S-03 no aplica (se descarta Batocera); nuevos S-20 (TPV hechos a mano sin el bastionado completo; Markel) y S-21 (versión de la librería del stick; corregido). Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge), S-05 (Wi-Fi cambiada) y S-21. S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
-| 19 | Montaje del arcade stick (ATmega32U4) | Físico | Markel | 27/10 | Pendiente | Esquema de conexiones con 4 botones (pines 2-5) y la palanca digital (A2-A5); actualizado el 26/10. Falta cablear la placa y conseguir la palanca. | [esquema-conexiones.svg](../../arduino/mando-joystick/esquema-conexiones.svg) |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). 26/10: intento con una Samsung ML-1660 USB pasada a la VM win-11 (tarea 52): Windows instala el driver pero no crea el puerto USB001 y el trabajo falla; queda para la impresora del centro. | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
-| 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | Físico | Adrian | 30/10 | Pendiente | Lista de comprobaciones en arduino/mando-joystick/README.md. | — |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16): la 51 decidió Debian el 26/10. | — |
-| 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. | — |
+| 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. 27/10: en Batocera ya se reconoce (evtest con los 4 botones y los ejes; es_input.cfg). | — |
 | 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 03/11 | Pendiente | Guía lista (docs/redes/25-wds/DOCUMENTACION.md): WDS en el Archer C6, pruebas W1-W10 (sobre todo que los clientes del router 2 sigan aislados de la LAN) y cobertura y velocidad antes y después en 5 puntos. Si la red de invitados no pasa por el enlace WDS: corregir los diagramas (tareas 11 y 23). | — |
 | 54 | Medir rendimiento y recursos en el equipo real | Físico | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. | — |
 | 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 05/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. | — |
@@ -93,6 +92,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | Adrian | Hecho en VMware (23/10). Pendiente: versión exacta de Ubuntu; RG-05 de Windows queda parcial (ninguna actualización acumulativa instalada); cifrado después de instalar. | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | Markel | Hecha a mano por Markel el 26/10 en dos VM con Windows 11 Pro (TPV2 clonado de TPV1 con MAC nuevas): usuario estándar UsuarioTPV; quiosco QuioscoTPV con Edge; USB bloqueado por directiva; firewall y Defender activos; capturas en la guía. Queda: el quiosco apunta a http://localhost:8069 provisional y hay que cambiarlo por la dirección del servidor (tarea 52); comprobar-tpv.ps1 no se ha ejecutado (tarea 15). El 26/10 pasa de Iker a Markel. | [13-bastionado-tpv-windows.md](../../docs/so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | Iker | Debian 13 + MAME 0.276 en VM: arranque directo en 4,7 s y 5 ROMs legales verificadas. El 24/10: preseed sin clave SSH fija y SSH sin contraseña; conexión a la Wi-Fi de invitados documentada. La instalación en el equipo real es la tarea 53. | [DOCUMENTACION.md](../../docs/arcade/16-recreativa-mame/DOCUMENTACION.md) |
+| 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | Markel | Esquema de conexiones con 4 botones (pines 2-5) y la palanca digital (A2-A5); actualizado el 26/10. Falta cablear la placa y conseguir la palanca. 27/10 (Iker): cableado y probado en la placa real; el común de la palanca es el cable blanco a GND. Ver arduino/mando-joystick/evidencias/prueba-placa-2026-10-27.txt. 27/10 (Adrian): montado en la caja con la palanca y los botones (foto). La caja tiene 6 botones; el firmware lee 4 (pines 2-5). | [stick-montado-2026-10-27.webp](../../arduino/mando-joystick/evidencias/stick-montado-2026-10-27.webp) |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | Adrian | Compila (pio run del 26/10: Flash 37,4 %; RAM 17,4 %). 26/10: 4 botones por indicación del profesor y solo palanca digital (fuera el modo analógico; la zona muerta y el modo NINGUNA). Probarlo en la placa es la tarea 50. | [README.md](../../arduino/mando-joystick/README.md) |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
@@ -110,6 +110,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 41 | Datos de prueba y consultas | 8 BD | Software | Iker | 06-datos.sql (2 locales; 8 ventas) y 07-consultas.sql (12 consultas) ejecutados el 24/10 en PostgreSQL 18.3 sin errores; evidencia guardada. Falta crear almi_chain en el servidor (tarea 40; sección 2). | [41-datos-y-consultas.txt](../../docs/bd/evidencias/41-datos-y-consultas.txt) |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | Adrian | 08-usuarios.sql (tpv_app e informes con LOGIN; contraseñas por variable) y 09-pruebas-usuarios.sql: 9/9 con cada cuenta el 24/10. Pasa de Markel a Adrian. | [42-usuarios-y-permisos.txt](../../docs/bd/evidencias/42-usuarios-y-permisos.txt) |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | Iker | Restaurada la copia del USB en un entorno aislado del mismo servidor (46 s). Falta repetirla en una VM nueva para medir el RTO real. | [DOCUMENTACION.md](../../docs/backup/45-restauracion/DOCUMENTACION.md) |
+| 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | Adrian | Lista de comprobaciones en arduino/mando-joystick/README.md. 27/10 (Iker): firmware subido y verificado; los 4 botones y las 4 direcciones llegan al PC y a Batocera. 27/10 (Adrian): ver-mando.py registra la entrada y deja evidencia: 2 registros con los 4 botones y las 4 direcciones, sin pulsaciones fantasma (el botón 3 ya no se pulsa solo); MAP + GUARDAR sobrevive al reinicio de la placa y RESET + GUARDAR deja los valores por defecto. Sin comprobar: el efecto de MAP e INV pulsando (probar-stick.py). | [README.md](../../arduino/mando-joystick/README.md) |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | Iker | 26/10: medidas en VM de 1 núcleo y 1 GB (3 antes y 3 después en Batocera; Debian del 23/10). Decidido Debian 13 + MAME: llega antes a jugar (7,1 s frente a 12,9 s), usa menos RAM (400 MB con el juego frente a 554 MB solo con el menú) y MAME va igual o más rápido. Batocera endurecido (security.enabled) y optimizado; incidencias y decisión en NOTAS.md y Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | Adrian | Hecha en VM el 26/10: proxy nginx con certificado propio (con nameConstraints; tarea 46) y las 15 pruebas correctas, con venta por HTTPS (5) y venta sin red (6) en un TPV provisional (win-11) de la red 192.168.10.0/24; fijar-url-y-qr.sh quita el QR del ticket (S-19). El 27/10 se da por hecha y ese mismo día el ticket se imprime desde la VM win-11, por IPP a la cola CUPS del PC (la Samsung ML-1660 no crea el puerto USB001 si se pasa por USB), ya sin QR. RUNBOOK.md queda para pasarla al servidor del equipo. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Drive revisado el 24/10: .vmdk y .kdbx nuevos y ningún .txt con contraseñas. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
@@ -118,11 +119,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 15 | 4 | 1 | 1 | 38 | 0, 2, 4, 5, 6, 7, 8, 10 |
+| Adrian | 15 | 3 | 1 | 0 | 36 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 4 | 4 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 7 | 3 | 0 | 2 | 14 | 1, 2, 4, 5, 6, 11 |
+| Markel | 7 | 2 | 0 | 1 | 14 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 4 | 0 | 3 | 14 | 0, 1, 5, 6, 7, 11 |
 
 ## Tareas por persona
@@ -138,7 +139,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | 22/10–23/10 | #8 (Eneko.S) | Hecho |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | 23/10–23/10 | — | Hecho |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | 22/10–23/10 | — | Hecho |
-| 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | 28/10–30/10 | #19 (Markel) | Pendiente |
+| 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | 27/10–27/10 | #19 (Markel) | Hecho |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
@@ -194,7 +195,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 26/10–26/10 | #9 (Markel) | Hecho |
-| 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Pendiente |
+| 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Hecho |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | 21/10–23/10 | #27 (Peio) | Hecho |
