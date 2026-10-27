@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="720" viewBox="0 0 900 720" font-family="Arial, Helvetica, sans-serif" role="img">
   <title>Esquema de conexiones del arcade stick</title>
-  <desc>Keyestudio Leonardo con 4 botones arcade: cable rojo de cada boton a los pines 2 a 5, cables negros a la fila negativa de la protoboard, que va a GND. Palanca de arcade de 4 microinterruptores en A2 (arriba), A3 (abajo), A4 (izquierda) y A5 (derecha), con el comun a GND.</desc>
+  <desc>Keyestudio Leonardo con 4 botones arcade: cable rojo de cada boton a los pines 2 a 5, cables negros a la fila negativa de la protoboard, que va a GND. Palanca de arcade de 4 microinterruptores en A2 (izquierda), A3 (derecha), A4 (abajo) y A5 (arriba), con el comun a GND.</desc>
   <rect width="900" height="720" fill="#FFFFFF"/>
   <text x="30" y="38" font-size="20" font-weight="bold" fill="#222">Arcade stick · esquema de conexiones</text>
   <text x="30" y="60" font-size="13" fill="#555">Keyestudio Leonardo (KS0248) · 4 botones arcade y palanca digital · firmware mando_joystick.ino</text>
@@ -42,7 +42,7 @@
   <rect x="272" y="470" width="16" height="144" fill="#F2D21B"/>
   <g font-size="11" fill="#D3D1C7">
     <text x="296" y="304">IOREF</text><text x="296" y="328">RESET</text><text x="296" y="352">3.3V</text>
-    <text x="296" y="376" fill="#FFFFFF" font-weight="bold">5V</text>
+    <text x="296" y="376">5V</text>
     <text x="296" y="400" fill="#FFFFFF" font-weight="bold">GND</text><text x="296" y="424">GND</text><text x="296" y="448">Vin</text>
     <text x="296" y="486">A0</text><text x="296" y="510">A1</text>
     <text x="296" y="534" fill="#FFFFFF" font-weight="bold">A2</text><text x="296" y="558" fill="#FFFFFF" font-weight="bold">A3</text><text x="296" y="582" fill="#FFFFFF" font-weight="bold">A4</text><text x="296" y="606" fill="#FFFFFF" font-weight="bold">A5</text>
@@ -107,9 +107,9 @@
   <circle cx="92" cy="466" r="26" fill="#D62828" stroke="#7a1010"/>
   <rect x="88" y="490" width="8" height="34" fill="#555"/>
   <g font-size="11" fill="#444" text-anchor="end">
-    <text x="182" y="400">Común (GND)</text>
-    <text x="182" y="534">Arriba</text><text x="182" y="558">Abajo</text>
-    <text x="182" y="582">Izquierda</text><text x="182" y="606">Derecha</text>
+    <text x="182" y="400">Común, cable blanco (GND)</text>
+    <text x="182" y="534">Izquierda</text><text x="182" y="558">Derecha</text>
+    <text x="182" y="582">Abajo</text><text x="182" y="606">Arriba</text>
   </g>
   <g fill="none" stroke-width="2.5" stroke-dasharray="7 4">
     <line x1="190" y1="396" x2="276" y2="396" stroke="#222"/>

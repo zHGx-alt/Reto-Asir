@@ -1,0 +1,91 @@
+Registro de entrada del stick · 27/10/2026 11:24 · Arduino LLC Arduino Leonardo (/dev/input/js0)
+Generado con ver-mando.py (tarea 50)
+
+## Resumen
+Duración: 21 s
+Botón 1 (pin 2): 5 pulsaciones, 0 de menos de 30 ms -> OK
+Botón 2 (pin 3): 3 pulsaciones, 0 de menos de 30 ms -> OK
+Botón 3 (pin 4): 5 pulsaciones, 0 de menos de 30 ms -> OK
+Botón 4 (pin 5): 5 pulsaciones, 0 de menos de 30 ms -> OK
+Palanca: las 4 direcciones -> OK
+RESULTADO: todo llega bien
+
+## Todo lo que llegó
+  0.056 s  BOTÓN 3 suelto
+  1.866 s  PALANCA ABAJO
+  1.897 s  PALANCA DERECHA
+  2.087 s  PALANCA ARRIBA
+  2.170 s  PALANCA IZQUIERDA
+  2.201 s  BOTÓN 3 (pin 4) pulsado
+  2.252 s  PALANCA ABAJO
+  2.325 s  PALANCA DERECHA
+  2.335 s  BOTÓN 3 suelto tras 133 ms
+  2.418 s  PALANCA ARRIBA
+  2.490 s  PALANCA IZQUIERDA
+  2.521 s  PALANCA ABAJO
+  2.614 s  PALANCA DERECHA
+  2.655 s  PALANCA ARRIBA
+  2.717 s  PALANCA centro
+  3.372 s  PALANCA ABAJO
+  3.496 s  PALANCA centro
+  3.599 s  PALANCA ABAJO
+  3.723 s  PALANCA centro
+  3.836 s  PALANCA ABAJO
+  3.960 s  PALANCA centro
+  4.063 s  PALANCA ABAJO
+  4.213 s  PALANCA centro
+  6.476 s  PALANCA ABAJO
+  6.548 s  PALANCA DERECHA
+  6.661 s  PALANCA centro
+  6.713 s  PALANCA ARRIBA
+  6.739 s  PALANCA IZQUIERDA
+  6.832 s  PALANCA ABAJO
+  6.935 s  PALANCA DERECHA
+  7.090 s  PALANCA centro
+  7.307 s  PALANCA ABAJO
+  7.420 s  PALANCA DERECHA
+  8.282 s  PALANCA centro
+  8.354 s  PALANCA ABAJO
+  9.431 s  PALANCA centro
+  9.885 s  PALANCA ABAJO
+ 10.123 s  PALANCA centro
+ 10.350 s  PALANCA ABAJO
+ 10.623 s  PALANCA centro
+ 10.850 s  PALANCA ABAJO
+ 11.005 s  PALANCA centro
+ 11.837 s  PALANCA ABAJO
+ 13.028 s  PALANCA centro
+ 14.159 s  BOTÓN 1 (pin 2) pulsado
+ 14.221 s  BOTÓN 1 suelto tras 61 ms
+ 14.314 s  BOTÓN 1 (pin 2) pulsado
+ 14.365 s  BOTÓN 1 suelto tras 51 ms
+ 14.437 s  BOTÓN 1 (pin 2) pulsado
+ 14.515 s  BOTÓN 1 suelto tras 82 ms
+ 14.952 s  BOTÓN 4 (pin 5) pulsado
+ 15.029 s  BOTÓN 4 suelto tras 82 ms
+ 15.111 s  BOTÓN 4 (pin 5) pulsado
+ 15.163 s  BOTÓN 4 suelto tras 51 ms
+ 15.224 s  BOTÓN 4 (pin 5) pulsado
+ 15.317 s  BOTÓN 4 suelto tras 92 ms
+ 15.875 s  BOTÓN 3 (pin 4) pulsado
+ 15.957 s  BOTÓN 3 suelto tras 82 ms
+ 16.019 s  BOTÓN 3 (pin 4) pulsado
+ 16.091 s  BOTÓN 3 suelto tras 72 ms
+ 16.158 s  BOTÓN 3 (pin 4) pulsado
+ 16.230 s  BOTÓN 3 suelto tras 72 ms
+ 16.323 s  BOTÓN 2 (pin 3) pulsado
+ 16.426 s  BOTÓN 2 suelto tras 103 ms
+ 16.519 s  BOTÓN 2 (pin 3) pulsado
+ 16.591 s  BOTÓN 2 suelto tras 72 ms
+ 16.663 s  BOTÓN 2 (pin 3) pulsado
+ 16.746 s  BOTÓN 2 suelto tras 82 ms
+ 17.261 s  BOTÓN 1 (pin 2) pulsado
+ 17.333 s  BOTÓN 1 suelto tras 72 ms
+ 17.384 s  BOTÓN 1 (pin 2) pulsado
+ 17.467 s  BOTÓN 1 suelto tras 82 ms
+ 17.750 s  BOTÓN 4 (pin 5) pulsado
+ 17.822 s  BOTÓN 4 suelto tras 72 ms
+ 17.884 s  BOTÓN 4 (pin 5) pulsado
+ 17.956 s  BOTÓN 4 suelto tras 72 ms
+ 18.626 s  BOTÓN 3 (pin 4) pulsado
+ 18.668 s  BOTÓN 3 suelto tras 41 ms
