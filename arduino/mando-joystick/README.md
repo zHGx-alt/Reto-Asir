@@ -124,6 +124,14 @@ Si la palanca aún no ha llegado, se responde "n" y esa parte se salta.
 
 Comprobado el 26/10/2026 sin placa: se para avisando de que no ve el mando; la lectura de eventos se probó con eventos simulados.
 
+### Ver en directo lo que llega
+
+```bash
+python3 ver-mando.py
+```
+
+Cada pulsación sale al momento (`BOTÓN 1 (pin 2) PULSADO`, `PALANCA eje X = 32767`…). Sirve para encontrar cables flojos: si un botón sale solo sin tocarlo, su cable toca GND.
+
 ## Pendiente: prueba en físico (tarea #50)
 
 Responsable: **Adrian**. Necesita el stick montado (#19).
