@@ -35,25 +35,25 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | # | Tarea | Tipo | Responsable | Fin | Estado | Qué falta | Evidencia |
 |---|---|---|---|---|---|---|---|
-| 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 22/10 | En curso | Estructura, .gitignore y gitleaks hechos: CI en verde y gitleaks local sin fugas en 81 commits (23/10). Tienen commits 5 de 6 personas; falta Eneko.P (Anexo IX). | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
 | 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | Software | Eneko.P | 30/10 | En curso | Antes y después hechos en una VM de 2 núcleos y 1,5 GB. En la VM de 1 núcleo y 1 GB (la del enunciado) solo hay 3 medidas de antes; faltan las de después y medir jugando. El 24/10 optimizar-arcade.sh mantiene las actualizaciones de seguridad (a las 5:00). El 26/10 pasa de Iker a Eneko.P (reparto de carga). El 26/10 (tarea 51) se ve que no se conoce la contraseña de tecnico en Recreativa-1GB: hay que ponerle una nueva desde la consola antes de medir. | [DOCUMENTACION.md](../../docs/arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; limitar la administración a la MAC del gerente. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
 | 18 | Monitorización de recursos de la recreativa | Software | Eneko.P | 02/11 | En curso | Scripts hechos y probados en Linux; documento reescrito para Debian el 24/10 (antes era para Batocera). Falta ejecutarlos en la VM de 1 GB durante una partida y guardar los CSV. El 26/10 pasa de Adrian a Eneko.P (reparto de carga). | [18-monitorizacion-recreativa.md](../../docs/arcade/18-monitorizacion-recreativa.md) |
 | 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 03/11 | En curso | Guía lista (docs/redes/25-wds/DOCUMENTACION.md): WDS en el Archer C6, pruebas W1-W10 (sobre todo que los clientes del router 2 sigan aislados de la LAN) y cobertura y velocidad antes y después en 5 puntos. Si la red de invitados no pasa por el enlace WDS: corregir los diagramas (tareas 11 y 23). 27/10 (Peio): prueba de laboratorio con dos TL-WR841N en una red de pruebas (TP-Link_AF60; 192.168.1.0/24): el enlace WDS funciona (el PC del router 2 recibe IP del router 1 y le hace ping) y el DHCP del router 2 está apagado. Falta repetirlo con la red del proyecto y la de invitados (tarea 24), las pruebas W3-W10 y las medidas de antes y después. | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
+| 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 04/11 | En curso | Estructura, .gitignore y gitleaks hechos: CI en verde y gitleaks local sin fugas en 81 commits (23/10). Tienen commits 5 de 6 personas; falta Eneko.P (Anexo IX). 27/10: fin movido al 4/11 (corte técnico). | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
+| 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 04/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
+| 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 04/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | Software | Iker | 04/11 | En curso | Funciona para Odoo: cifrado; diario; RAID y USB. El 24/10 el script copia también almi_chain si existe y avisa si el USB lleva más de 7 días sin conectarse; falta probarlo en la VM. Pasa de Markel a Iker, que la hizo. Mejora: aviso por correo si la copia falla (OnFailure=) y tercer repositorio en S3. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
-| 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 05/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
-| 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 05/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
-| 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | Revisión del repositorio hecha el 26/10 y repasada el 27/10 (PR #57-65): 21 hallazgos (5 altos) con responsable; S-03 no aplica (se descarta Batocera); nuevos S-20 (TPV hechos a mano sin el bastionado completo; Markel) y S-21 (versión de la librería del stick; corregido). Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge), S-05 (Wi-Fi cambiada) y S-21. S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| 46 | Revisión de seguridad transversal | Software | Adrian | 04/11 | En curso | Revisión del repositorio hecha el 26/10 y repasada el 27/10 (PR #57-65): 21 hallazgos (5 altos) con responsable; S-03 no aplica (se descarta Batocera); nuevos S-20 (TPV hechos a mano sin el bastionado completo; Markel) y S-21 (versión de la librería del stick; corregido). Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge), S-05 (Wi-Fi cambiada) y S-21. S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). 26/10: intento con una Samsung ML-1660 USB pasada a la VM win-11 (tarea 52): Windows instala el driver pero no crea el puerto USB001 y el trabajo falla; queda para la impresora del centro. 27/10: la impresora de pruebas es la Samsung ML-1660 (decisión del equipo; no hay térmicas para todos). Pasada por USB a la VM no crea USB001; por IPP a la cola CUPS del PC de Adrian sí imprime (tarea 52, sección 4.2). Falta la cola en los TPV de la tarea 13. | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16): la 51 decidió Debian el 26/10. | — |
 | 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. 27/10: en Batocera ya se reconoce (evtest con los 4 botones y los ejes; es_input.cfg). | — |
+| 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 04/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. 27/10: se acorta a un día (4/11) por el corte técnico de esa fecha; depende de que la 25 acabe el 3/11. | — |
 | 54 | Medir rendimiento y recursos en el equipo real | Físico | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. | — |
-| 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 05/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. | — |
-| 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 09/11 | Pendiente | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. | [verificacion.md](../../docs/gestion/verificacion.md) |
-| 48 | Documentación final paso a paso | Documentación | Markel | 10/11 | Pendiente | Punto de partida: LOGICA_RETO.md. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
-| 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente | — | — |
+| 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 06/11 | Pendiente | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. | [verificacion.md](../../docs/gestion/verificacion.md) |
+| 48 | Documentación final paso a paso | Documentación | Markel | 09/11 | Pendiente | Punto de partida: LOGICA_RETO.md. 27/10: después de la rúbrica (4/11), para ajustarla a ella. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
+| 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. | — |
 
 ## Tareas hechas
 
@@ -100,12 +100,12 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 16 | 3 | 1 | 0 | 37 | 0, 2, 4, 5, 6, 7, 8, 10 |
-| Eneko.P | 4 | 4 | 4 | 0 | 10 | 3, 6, 7 |
-| Eneko.S | 9 | 4 | 0 | 3 | 17 | 1, 3, 5, 7, 8, 11 |
-| Iker | 13 | 3 | 3 | 0 | 32 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 7 | 2 | 0 | 1 | 14 | 1, 2, 4, 5, 6, 11 |
-| Peio | 6 | 3 | 0 | 2 | 12 | 0, 1, 5, 6, 11 |
+| Adrian | 16 | 3 | 1 | 0 | 47 | 0, 2, 4, 5, 6, 7, 8, 10 |
+| Eneko.P | 4 | 4 | 4 | 0 | 9 | 3, 6, 7 |
+| Eneko.S | 9 | 4 | 0 | 3 | 16 | 1, 3, 5, 7, 8, 11 |
+| Iker | 13 | 3 | 3 | 0 | 27 | 0, 1, 2, 3, 7, 8, 9 |
+| Markel | 7 | 2 | 0 | 1 | 15 | 1, 2, 4, 5, 6, 11 |
+| Peio | 6 | 3 | 0 | 2 | 14 | 0, 1, 5, 6, 11 |
 
 ## Tareas por persona
 
@@ -116,7 +116,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 1 | Firmar Anexo I (contrato de equipo) | 0 Gestión | Gestión | 21/10–21/10 | — | Hecho |
 | 2 | Mantener Anexo II (11 pasos) | 0 Gestión | Gestión | 21/10–10/11 | — | En curso |
 | 3 | Repartir tareas y responsables | 0 Gestión | Gestión | 21/10–21/10 | — | Hecho |
-| 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–22/10 | — | En curso |
+| 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–04/11 | — | En curso |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | 22/10–23/10 | #8 (Eneko.S) | Hecho |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | 23/10–23/10 | — | Hecho |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | 22/10–23/10 | — | Hecho |
@@ -125,10 +125,10 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
 | 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 27/10–27/10 | #34 (Iker) | Hecho |
-| 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 03/11–04/11 | #33 (Iker) | Hecho |
+| 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 26/10–27/10 | #33 (Iker) | Hecho |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 05/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
+| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 02/11–04/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
 
 ### Eneko.P
 
@@ -136,8 +136,8 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 17 | Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) | 3 Arcade | Software | 29/10–30/10 | #16 (Iker) | En curso |
 | 18 | Monitorización de recursos de la recreativa | 3 Arcade | Software | 30/10–02/11 | #16 (Iker) | En curso |
-| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 02/11–05/11 | #28 (Markel) | En curso |
-| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 04/11–05/11 | #34 (Iker) | En curso |
+| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 02/11–04/11 | #28 (Markel) | En curso |
+| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 03/11–04/11 | #34 (Iker) | En curso |
 
 ### Eneko.S
 
@@ -147,11 +147,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 8 | Tabla de hardware con justificación | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
 | 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | 3 Arcade | Físico | 29/10–30/10 | #16 (Iker), #51 (Iker) | Pendiente |
 | 54 | Medir rendimiento y recursos en el equipo real | 3 Arcade | Físico | 03/11–04/11 | #17 (Eneko.P), #18 (Eneko.P), #53 (Eneko.S) | Pendiente |
-| 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | 04/11–05/11 | #25 (Peio) | Pendiente |
+| 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | 04/11–04/11 | #25 (Peio) | Pendiente |
 | 32 | Comparativa y elección de ERP | 7 ERP | Documentación | 22/10–23/10 | — | Hecho |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | 22/10–23/10 | #38 (Adrian) | Hecho |
 | 40 | Scripts DDL | 8 BD | Software | 22/10–23/10 | #39 (Eneko.S) | Hecho |
-| 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 06/11–09/11 | #21 (Markel), #26 (Eneko.S), #29 (Adrian) | Pendiente |
+| 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 05/11–06/11 | #21 (Markel), #26 (Eneko.S), #29 (Adrian) | Pendiente |
 
 ### Iker
 
@@ -162,12 +162,12 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Pendiente |
 | 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–04/11 | #12 (Adrian), #13 (Markel) | En curso |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | 22/10–23/10 | — | Hecho |
-| 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | 26/10–28/10 | — | Hecho |
+| 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | 23/10–26/10 | — | Hecho |
 | 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | 22/10–23/10 | #32 (Eneko.S) | Hecho |
 | 34 | Configurar módulos de Odoo | 7 ERP | Software | 22/10–23/10 | #33 (Iker) | Hecho |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | Software | 22/10–23/10 | #34 (Iker) | Hecho |
 | 41 | Datos de prueba y consultas | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–02/11 | — | Hecho |
+| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–27/10 | — | Hecho |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | Software | 03/11–04/11 | #41 (Iker), #43 (Iker) | En curso |
 | 45 | Prueba de restauración con evidencias | 9 Backup | Software | 22/10–23/10 | #44 (Iker) | Hecho |
 
@@ -181,7 +181,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | 21/10–23/10 | #27 (Peio) | Hecho |
-| 48 | Documentación final paso a paso | 11 Entrega | Documentación | 09/11–10/11 | #45 (Iker) | Pendiente |
+| 48 | Documentación final paso a paso | 11 Entrega | Documentación | 05/11–09/11 | #45 (Iker) | Pendiente |
 
 ### Peio
 
@@ -192,4 +192,4 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | 28/10–30/10 | #23 (Adrian) | En curso |
 | 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–03/11 | #24 (Peio) | En curso |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | 22/10–23/10 | — | Hecho |
-| 49 | Presentación y ensayo | 11 Entrega | Documentación | 09/11–10/11 | #46 (Adrian) | Pendiente |
+| 49 | Presentación y ensayo | 11 Entrega | Documentación | 05/11–10/11 | #46 (Adrian) | Pendiente |
