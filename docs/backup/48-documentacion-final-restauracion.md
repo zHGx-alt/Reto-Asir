@@ -2,7 +2,7 @@
 
 - **Responsable:** Markel
 - **Fecha:** 29/10/2026
-- **Depende de:** Tarea 45 · Prueba de restauración con evidencias
+- **Depende de:** [Tarea 45](45-restauracion/DOCUMENTACION.md) · Prueba de restauración con evidencias. Este documento es el capítulo de restauración de la documentación final (tarea 48): explica los pasos; las pruebas y evidencias son las de la 45
 - **Estado:** En curso. Restauración aislada completada; pendiente medir el RTO real en una máquina virtual nueva.
 
 ## 1. Objetivo

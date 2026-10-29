@@ -3,6 +3,9 @@
 **Responsable:** Iker · **Fecha:** 22/10/2026 · **Depende de:** 44
 **Estado:** ✅ Restauración aislada hecha en máquina virtual (`ServidorERP`), repetida el 27/10/2026 con la BD ya en el RAID · ⏳ Falta la restauración en una máquina nueva (sección 6)
 
+
+> El paso a paso completo de esta restauración, para un técnico nuevo, está en la documentación final ([tarea 48](../48-documentacion-final-restauracion.md)). Las pruebas y las evidencias son las de este documento.
+
 ## 1. Resultado
 Se ha restaurado la copia del **disco USB externo**, que es la copia que estaría fuera del local, en un **entorno aislado**.
 **Las 16 comprobaciones coinciden** con producción y el Odoo restaurado **arranca y deja entrar**.

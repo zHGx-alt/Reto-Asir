@@ -116,7 +116,7 @@ Corregido el 26/10 (sección 1).
 | Identificar y documentar el hardware necesario | Hecho | — |
 | Identificar y documentar el software necesario | Hecho, con huecos | Corr. 4 (versión de Ubuntu y del driver) |
 | Instalación, optimización y monitorización de la recreativa | Parcial | Corr. 3.2; tareas 18, 53 y 54 (la 51 decidió Debian + MAME) |
-| Montaje y programación del arcade stick | Casi hecho: montado y probado en la placa, en Batocera y con la EEPROM (27/10) | Tarea 21 (MAME y otro emulador) |
+| Montaje y programación del arcade stick | Hecho: montado y probado en la placa, con la EEPROM, en MAME (tarea 53) y en Batocera (27-29/10) | — |
 | Identificar necesidades de comunicación | Hecho | — |
 | Implementación y configuración de sistemas operativos | Casi hecho: TPV bastionados a mano (tarea 13) | Tarea 15 (`comprobar-tpv.ps1`) y S-20 de la tarea 46 |
 | Restricción de cuentas y equipos (mínimos privilegios) | Parcial | Corr. 2.3; tarea 15 y S-20 |

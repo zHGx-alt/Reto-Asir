@@ -1,7 +1,7 @@
 # Tarea 17 · Pruebas de rendimiento de MAME antes y después
 
 **Responsable:** Iker · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
-**Estado:** ⏳ En curso: hecha en una VM de 2 núcleos y 1,5 GB; **falta en la de 1 núcleo y 1 GB** que pide el enunciado, y en la máquina física
+**Estado:** ⏳ En curso: hecha en una VM de 2 núcleos y 1,5 GB; **falta en la de 1 núcleo y 1 GB** que pide el enunciado: se mide en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md), en `Recreativa-53` (ya no hay máquina física, decisión del 29/10)
 
 > ⚠️ **PENDIENTE DE REPETIR.** Estas medidas se hicieron en una VM con **2 núcleos y 1,5 GB**, pero el enunciado dice que la recreativa
 > tiene **1 núcleo y 1 GB**. Ya hay una VM con esas especificaciones (`Recreativa-1GB`) con 3 medidas de "antes"
@@ -121,6 +121,6 @@ En la máquina física los tiempos de arranque serán mucho más estables, y ade
 ## 8. Pendiente
 - [ ] Repetir antes y después en la VM `Recreativa-1GB` (1 núcleo, 1 GB) con la versión nueva de `optimizar-arcade.sh` y sustituir las tablas.
 - [ ] Medir jugando (no solo `-bench`) con `monitor-recreativa.sh` y guardar los CSV (tarea 18).
-- [ ] Repetir las medidas en la máquina física (tarea 54).
+- [ ] Repetir las medidas en la VM de 1 núcleo y 1 GB (`Recreativa-53`, tarea 54).
 - [ ] Revisión de Adrian → mover a **Hecho** en el Kanban.
 - [ ] Pasar a Adrian (tarea 18, monitorización) la lista de timers y servicios que quedan activos.

@@ -128,7 +128,7 @@ Salidas completas: [`06-comprobaciones.txt`](evidencias/06-comprobaciones.txt) y
 - [ ] Comprobar que la contraseña de `tecnico` está en el KeePassXC del proyecto y borrar `~/preseed-vm.cfg` del anfitrión.
 - [ ] Compartir la contraseña de `tecnico` de `Recreativa-53` (KeePassXC) con Eneko.P para las medidas de las tareas 17 y 18.
 - [ ] Tarea 54: medidas antes y después en `Recreativa-53`.
-- [ ] Tarea 21 (Markel): probar el stick con otro emulador; con MAME ya funciona (P4 y P10).
+- [x] Tarea 21: con MAME funciona (P4 y P10); en Batocera, entradas comprobadas por Iker y partida jugada el 27/10 (sin captura).
 
 ## Anexo: si hubiera que instalarla en un equipo físico
 
