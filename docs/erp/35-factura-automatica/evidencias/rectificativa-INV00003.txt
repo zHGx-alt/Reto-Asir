@@ -1,0 +1,2 @@
+Factura: 8 posted 654.55 €
+Rectificativa: {'id': 12, 'name': 'RINV/2026/00001', 'state': 'posted', 'amount_total': 654.55, 'ref': 'Reversión de: INV/2026/00003, Importe erróneo: dos IVA del 10 % (tarea 35). La correcta es INV/2026/00004'}

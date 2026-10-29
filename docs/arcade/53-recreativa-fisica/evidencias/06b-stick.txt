@@ -1,0 +1,2 @@
+N: Name="Arduino LLC Arduino Leonardo"
+P: Phys=usb-0000:00:06.0-1/input2
