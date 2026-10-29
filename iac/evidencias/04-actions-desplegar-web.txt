@@ -1,0 +1,79 @@
+# Tarea 31 · Publicación por GitHub Actions (flujo desplegar-web.yml)
+# Ejecución 40503296317, lanzada a mano (workflow_dispatch) el 27/10/2026 con los secretos del Learner Lab de esa sesión.
+# https://github.com/zHGx-alt/Reto-Asir/actions/runs/40503296317 · el usuario del laboratorio se ha recortado.
+
+
+✓ main desplegar-web · 40503296317
+Triggered via workflow_dispatch about 2 days ago
+
+JOBS
+✓ validar in 16s (ID 122186153355)
+✓ publicar in 7s (ID 122186302146)
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+validar: .github#2
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+validar: .github#1
+
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+publicar: .github#2
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+publicar: .github#1
+
+== Paso «Publicar en S3»
+##[endgroup]
+arn:aws:sts::975346860535:assumed-role/voclabs/user…
+Completed 566 Bytes/2.0 MiB (4.9 KiB/s) with 17 file(s) remaining
+upload: web/img/CREDITOS.txt to s3://almi-chain-web-2026/img/CREDITOS.txt
+Completed 566 Bytes/2.0 MiB (4.9 KiB/s) with 16 file(s) remaining
+Completed 267.8 KiB/2.0 MiB (1.3 MiB/s) with 16 file(s) remaining
+Completed 549.9 KiB/2.0 MiB (2.7 MiB/s) with 16 file(s) remaining
+Completed 677.8 KiB/2.0 MiB (3.1 MiB/s) with 16 file(s) remaining
+upload: web/img/portada-960.webp to s3://almi-chain-web-2026/img/portada-960.webp
+Completed 677.8 KiB/2.0 MiB (3.1 MiB/s) with 15 file(s) remaining
+Completed 806.1 KiB/2.0 MiB (3.5 MiB/s) with 15 file(s) remaining
+upload: web/img/txuleta-960.webp to s3://almi-chain-web-2026/img/txuleta-960.webp
+Completed 806.1 KiB/2.0 MiB (3.5 MiB/s) with 14 file(s) remaining
+Completed 876.3 KiB/2.0 MiB (3.6 MiB/s) with 14 file(s) remaining
+upload: web/img/portada-640.webp to s3://almi-chain-web-2026/img/portada-640.webp
+Completed 876.3 KiB/2.0 MiB (3.6 MiB/s) with 13 file(s) remaining
+Completed 1.2 MiB/2.0 MiB (4.9 MiB/s) with 13 file(s) remaining  
+Completed 1.3 MiB/2.0 MiB (5.0 MiB/s) with 13 file(s) remaining  
+upload: web/img/tarta-640.webp to s3://almi-chain-web-2026/img/tarta-640.webp
+Completed 1.3 MiB/2.0 MiB (5.0 MiB/s) with 12 file(s) remaining
+Completed 1.3 MiB/2.0 MiB (5.1 MiB/s) with 12 file(s) remaining
+upload: web/img/txuleta-640.webp to s3://almi-chain-web-2026/img/txuleta-640.webp
+Completed 1.3 MiB/2.0 MiB (5.1 MiB/s) with 11 file(s) remaining
+Completed 1.4 MiB/2.0 MiB (5.1 MiB/s) with 11 file(s) remaining
+upload: web/img/tarta-960.webp to s3://almi-chain-web-2026/img/tarta-960.webp
+Completed 1.4 MiB/2.0 MiB (5.1 MiB/s) with 10 file(s) remaining
+Completed 1.5 MiB/2.0 MiB (5.0 MiB/s) with 10 file(s) remaining
+upload: web/img/verduras-640.webp to s3://almi-chain-web-2026/img/verduras-640.webp
+Completed 1.5 MiB/2.0 MiB (5.0 MiB/s) with 9 file(s) remaining
+Completed 1.6 MiB/2.0 MiB (5.5 MiB/s) with 9 file(s) remaining
+upload: web/img/tarta-1400.webp to s3://almi-chain-web-2026/img/tarta-1400.webp
+Completed 1.6 MiB/2.0 MiB (5.5 MiB/s) with 8 file(s) remaining
+upload: web/img/txuleta-1400.webp to s3://almi-chain-web-2026/img/txuleta-1400.webp
+Completed 1.6 MiB/2.0 MiB (5.5 MiB/s) with 7 file(s) remaining
+Completed 1.6 MiB/2.0 MiB (5.2 MiB/s) with 7 file(s) remaining
+upload: web/index.html to s3://almi-chain-web-2026/index.html 
+Completed 1.6 MiB/2.0 MiB (5.2 MiB/s) with 6 file(s) remaining
+Completed 1.6 MiB/2.0 MiB (5.1 MiB/s) with 6 file(s) remaining
+upload: web/script.js to s3://almi-chain-web-2026/script.js   
+Completed 1.6 MiB/2.0 MiB (5.1 MiB/s) with 5 file(s) remaining
+Completed 1.8 MiB/2.0 MiB (5.6 MiB/s) with 5 file(s) remaining
+upload: web/img/portada-1280.webp to s3://almi-chain-web-2026/img/portada-1280.webp
+Completed 1.8 MiB/2.0 MiB (5.6 MiB/s) with 4 file(s) remaining
+Completed 2.0 MiB/2.0 MiB (6.1 MiB/s) with 4 file(s) remaining
+upload: web/img/verduras-960.webp to s3://almi-chain-web-2026/img/verduras-960.webp
+Completed 2.0 MiB/2.0 MiB (6.1 MiB/s) with 3 file(s) remaining
+upload: web/img/verduras-1400.webp to s3://almi-chain-web-2026/img/verduras-1400.webp
+Completed 2.0 MiB/2.0 MiB (6.1 MiB/s) with 2 file(s) remaining
+upload: web/img/portada-1600.webp to s3://almi-chain-web-2026/img/portada-1600.webp
+Completed 2.0 MiB/2.0 MiB (6.1 MiB/s) with 1 file(s) remaining
+Completed 2.0 MiB/2.0 MiB (5.9 MiB/s) with 1 file(s) remaining
+upload: web/style.css to s3://almi-chain-web-2026/style.css   
+Publicado. La EC2 lo descarga en menos de 5 minutos (o al momento con: sudo actualizar-web).

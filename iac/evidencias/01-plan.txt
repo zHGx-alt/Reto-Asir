@@ -1,0 +1,787 @@
+data.aws_s3_bucket.web: Reading...
+data.aws_ami.ubuntu: Reading...
+aws_eip.web: Refreshing state... [id=eipalloc-01cf80da3be3ade5d]
+aws_security_group.web: Refreshing state... [id=sg-01fb4729b6a0ce6b3]
+data.aws_s3_bucket.web: Read complete after 0s [id=almi-chain-web-2026]
+aws_s3_bucket_public_access_block.web: Refreshing state... [id=almi-chain-web-2026]
+aws_s3_bucket_ownership_controls.web: Refreshing state... [id=almi-chain-web-2026]
+aws_s3_bucket_server_side_encryption_configuration.web: Refreshing state... [id=almi-chain-web-2026]
+data.aws_ami.ubuntu: Read complete after 0s [id=ami-0d6dd9e8265d48906]
+aws_instance.web: Refreshing state... [id=i-0036cb0a110a532b9]
+aws_eip_association.web: Refreshing state... [id=eipassoc-0d423e2a781fcc7af]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # aws_eip.web will be updated in-place
+  ~ resource "aws_eip" "web" {
+        id                       = "eipalloc-01cf80da3be3ade5d"
+      ~ tags                     = {
+          + "Name" = "web-almichain"
+        }
+      ~ tags_all                 = {
+          + "Gestion"  = "terraform"
+          + "Name"     = "web-almichain"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+        # (17 unchanged attributes hidden)
+    }
+
+  # aws_eip_association.web must be replaced
+-/+ resource "aws_eip_association" "web" {
+      ~ id                   = "eipassoc-0d423e2a781fcc7af" -> (known after apply)
+      ~ instance_id          = "i-0036cb0a110a532b9" -> (known after apply) # forces replacement
+      ~ network_interface_id = "eni-089aa06c09c0573b3" -> (known after apply)
+      ~ private_ip_address   = "172.31.31.180" -> (known after apply)
+      ~ public_ip            = "52.200.94.167" -> (known after apply)
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_instance.web must be replaced
+-/+ resource "aws_instance" "web" {
+      ~ ami                                  = "ami-02a9cdd4e98bc3c78" -> "ami-0d6dd9e8265d48906" # forces replacement
+      ~ arn                                  = "arn:aws:ec2:us-east-1:975346860535:instance/i-0036cb0a110a532b9" -> (known after apply)
+      ~ associate_public_ip_address          = true -> (known after apply)
+      ~ availability_zone                    = "us-east-1c" -> (known after apply)
+      ~ cpu_core_count                       = 1 -> (known after apply)
+      ~ cpu_threads_per_core                 = 2 -> (known after apply)
+      ~ disable_api_stop                     = false -> (known after apply)
+      ~ disable_api_termination              = false -> (known after apply)
+      ~ ebs_optimized                        = true -> (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      - hibernation                          = false -> null
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      ~ id                                   = "i-0036cb0a110a532b9" -> (known after apply)
+      ~ instance_initiated_shutdown_behavior = "stop" -> (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      ~ instance_state                       = "running" -> (known after apply)
+      ~ ipv6_address_count                   = 0 -> (known after apply)
+      ~ ipv6_addresses                       = [] -> (known after apply)
+      ~ monitoring                           = false -> (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      ~ placement_partition_number           = 0 -> (known after apply)
+      ~ primary_network_interface_id         = "eni-089aa06c09c0573b3" -> (known after apply)
+      ~ private_dns                          = "ip-172-31-31-180.ec2.internal" -> (known after apply)
+      ~ private_ip                           = "172.31.31.180" -> (known after apply)
+      ~ public_dns                           = "ec2-52-200-94-167.compute-1.amazonaws.com" -> (known after apply)
+      ~ public_ip                            = "52.200.94.167" -> (known after apply)
+      ~ secondary_private_ips                = [] -> (known after apply)
+      ~ security_groups                      = [
+          - "web-almichain-sg",
+        ] -> (known after apply)
+      + spot_instance_request_id             = (known after apply)
+      ~ subnet_id                            = "subnet-0162c6ce56323c70e" -> (known after apply)
+        tags                                 = {
+            "Name" = "web-almichain"
+        }
+      ~ tags_all                             = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+            # (1 unchanged element hidden)
+        }
+      ~ tenancy                              = "default" -> (known after apply)
+      + user_data                            = (sensitive value) # forces replacement
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = true
+        # (6 unchanged attributes hidden)
+
+      ~ capacity_reservation_specification (known after apply)
+      - capacity_reservation_specification {
+          - capacity_reservation_preference = "open" -> null
+        }
+
+      ~ cpu_options (known after apply)
+      - cpu_options {
+          - core_count       = 1 -> null
+          - threads_per_core = 2 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - credit_specification {
+          - cpu_credits = "unlimited" -> null
+        }
+
+      ~ ebs_block_device (known after apply)
+
+      ~ enclave_options (known after apply)
+      - enclave_options {
+          - enabled = false -> null
+        }
+
+      ~ ephemeral_block_device (known after apply)
+
+      ~ instance_market_options (known after apply)
+
+      ~ maintenance_options (known after apply)
+      - maintenance_options {
+          - auto_recovery = "default" -> null
+        }
+
+      ~ metadata_options {
+          ~ http_put_response_hop_limit = 2 -> (known after apply)
+          ~ instance_metadata_tags      = "disabled" -> (known after apply)
+            # (3 unchanged attributes hidden)
+        }
+
+      ~ network_interface (known after apply)
+
+      ~ private_dns_name_options (known after apply)
+      - private_dns_name_options {
+          - enable_resource_name_dns_a_record    = true -> null
+          - enable_resource_name_dns_aaaa_record = false -> null
+          - hostname_type                        = "ip-name" -> null
+        }
+
+      ~ root_block_device {
+          ~ device_name           = "/dev/sda1" -> (known after apply)
+          ~ encrypted             = false -> true # forces replacement
+          ~ iops                  = 3000 -> (known after apply)
+          + kms_key_id            = (known after apply)
+          - tags                  = {} -> null
+          ~ tags_all              = {} -> (known after apply)
+          ~ throughput            = 125 -> (known after apply)
+          ~ volume_id             = "vol-03927e4cd31669be6" -> (known after apply)
+            # (3 unchanged attributes hidden)
+        }
+    }
+
+  # aws_s3_bucket_server_side_encryption_configuration.web will be updated in-place
+  ~ resource "aws_s3_bucket_server_side_encryption_configuration" "web" {
+        id                    = "almi-chain-web-2026"
+        # (2 unchanged attributes hidden)
+
+      - rule {
+          - bucket_key_enabled = true -> null
+
+          - apply_server_side_encryption_by_default {
+              - sse_algorithm     = "AES256" -> null
+                # (1 unchanged attribute hidden)
+            }
+        }
+      + rule {
+          + apply_server_side_encryption_by_default {
+              + sse_algorithm     = "AES256"
+                # (1 unchanged attribute hidden)
+            }
+        }
+    }
+
+  # aws_s3_object.web["img/CREDITOS.txt"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "application/octet-stream"
+      + etag                   = "75a37d806df91433ad7d84524e9c6e06"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/CREDITOS.txt"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/CREDITOS.txt"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/portada-1280.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "8b9d096fd8e1c9aba6429447b4c1baf7"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/portada-1280.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/portada-1280.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/portada-1600.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "39ebf1b6fd39e8acee25d73e09c96ac8"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/portada-1600.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/portada-1600.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/portada-640.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "970916637b00df09d8d037a4938c9689"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/portada-640.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/portada-640.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/portada-960.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "af1b985ab0fcb3efe9bfe5f2c0a11828"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/portada-960.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/portada-960.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/tarta-1400.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "2226480835f796af9406d1f251891cb7"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/tarta-1400.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/tarta-1400.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/tarta-640.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "e17bba772bdb618f4e4047f41d06a315"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/tarta-640.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/tarta-640.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/tarta-960.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "a92a3e667d83c980f6a1999124708554"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/tarta-960.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/tarta-960.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/txuleta-1400.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "6cf9618240a030a61c34c29ef463761a"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/txuleta-1400.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/txuleta-1400.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/txuleta-640.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "a29c6dac85f8587c4d66cbc821c4659e"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/txuleta-640.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/txuleta-640.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/txuleta-960.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "2122763ffe7ca35cc5f8acfbbf0863af"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/txuleta-960.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/txuleta-960.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/verduras-1400.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "2914d229eed0f666da37b5d0805844f2"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/verduras-1400.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/verduras-1400.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/verduras-640.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "c8ffaa512fedeb4a0c91379acf4e2911"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/verduras-640.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/verduras-640.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["img/verduras-960.webp"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "image/webp"
+      + etag                   = "d15f5dbd129181893b710bbe3c344f88"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "img/verduras-960.webp"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/img/verduras-960.webp"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["index.html"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "text/html; charset=utf-8"
+      + etag                   = "dfaf9867721e15ed9392f36596cc8d1b"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "index.html"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/index.html"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["script.js"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "application/javascript; charset=utf-8"
+      + etag                   = "5ebe06418cfe4ed0e548bba1ec977f41"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "script.js"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/script.js"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.web["style.css"] will be created
+  + resource "aws_s3_object" "web" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = "almi-chain-web-2026"
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "text/css; charset=utf-8"
+      + etag                   = "bd5ffa1a5a281367a5d91e0a233d8651"
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "style.css"
+      + kms_key_id             = (known after apply)
+      + server_side_encryption = (known after apply)
+      + source                 = "./../web/style.css"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # aws_security_group.web will be updated in-place
+  ~ resource "aws_security_group" "web" {
+      ~ egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "Salida (paquetes, S3 y Lets Encrypt)"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+        id                     = "sg-01fb4729b6a0ce6b3"
+      ~ ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 443
+                # (1 unchanged attribute hidden)
+            },
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 80
+                # (1 unchanged attribute hidden)
+            },
+          - {
+              - cidr_blocks      = [
+                  - "2.136.201.96/32",
+                ]
+              - from_port        = 22
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 22
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "HTTP (redireccion a HTTPS y validacion de Lets Encrypt)"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + description      = "HTTPS"
+              + from_port        = 443
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 443
+            },
+          + {
+              + cidr_blocks      = [
+                  + "2.136.201.96/32",
+                ]
+              + description      = "SSH solo desde nuestra IP"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+            },
+        ]
+        name                   = "web-almichain-sg"
+      + revoke_rules_on_delete = false
+        tags                   = {}
+      ~ tags_all               = {
+          + "Gestion"  = "terraform"
+          + "Proyecto" = "Almi-Chain"
+          + "Tarea"    = "31"
+        }
+        # (5 unchanged attributes hidden)
+    }
+
+Plan: 19 to add, 3 to change, 2 to destroy.
+
+Changes to Outputs:
+  + bucket      = "almi-chain-web-2026"
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: plan.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "plan.tfplan"

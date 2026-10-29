@@ -15,5 +15,5 @@ output "ssh" {
 
 output "bucket" {
   description = "Bucket privado con la web (lo usa desplegar-web.yml)"
-  value       = aws_s3_bucket.web.id
+  value       = data.aws_s3_bucket.web.id
 }

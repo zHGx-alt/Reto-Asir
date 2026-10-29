@@ -183,7 +183,7 @@ La validación W3C, Lighthouse y la accesibilidad son la tarea 29.
 > [!NOTE]
 > **Publicada la versión actual (26/10/2026).** Hasta ese día el servidor daba el `index.html` del 22/10 (`Content-Length: 7143`) y nginx no tenía la CSP ni la Permissions-Policy. Se subió la web actual al bucket y se volvió a ejecutar `instalar-servidor-web.sh`. Ahora `index.html`, `style.css` y `script.js` publicados son idénticos a los del repositorio y salen las dos cabeceras ([`08-pruebas-curl.txt`](../evidencias/30-hosting-aws/08-pruebas-curl.txt)). Lighthouse y W3C, contra la URL pública ([`lighthouse-w3c.txt`](../evidencias/web/lighthouse-w3c.txt)): móvil 94/100/100/100, escritorio 99/100/100/100 (medianas de 5) y W3C sin errores. En móvil daba 70 hasta que el mapa de OpenStreetMap pasó a cargarse al pulsar «Ver el mapa».
 >
-> **Pendiente:** el 27/10 la web cambió (fotos en `web/img/`). Las medidas y el `curl` de arriba son de la versión del 26/10: hay que repetir `08-pruebas-curl.txt` y Lighthouse con el Learner Lab arrancado.
+> **29/10: la web la gestiona Terraform** ([tarea 31](../../iac/README.md)): el montaje de esta guía se importó y se aplicó (instancia nueva, misma IP). Pruebas repetidas con la web actual, con las fotos: [`iac/evidencias/03-pruebas-curl.txt`](../../iac/evidencias/03-pruebas-curl.txt) (301, 200 con las cabeceras, certificado hasta el 27/01/2027, bucket 403 y ficheros iguales al repositorio) y Lighthouse 97/100/100/100 en móvil y 100/100/100/100 en escritorio ([`lighthouse-w3c.txt`](../evidencias/web/lighthouse-w3c.txt)).
 
 ### Capturas
 

@@ -1,0 +1,33 @@
+data.aws_ami.ubuntu: Reading...
+data.aws_s3_bucket.web: Reading...
+aws_eip.web: Refreshing state... [id=eipalloc-01cf80da3be3ade5d]
+aws_security_group.web: Refreshing state... [id=sg-01fb4729b6a0ce6b3]
+data.aws_s3_bucket.web: Read complete after 1s [id=almi-chain-web-2026]
+aws_s3_bucket_ownership_controls.web: Refreshing state... [id=almi-chain-web-2026]
+aws_s3_bucket_public_access_block.web: Refreshing state... [id=almi-chain-web-2026]
+aws_s3_bucket_server_side_encryption_configuration.web: Refreshing state... [id=almi-chain-web-2026]
+aws_s3_object.web["img/portada-640.webp"]: Refreshing state... [id=img/portada-640.webp]
+aws_s3_object.web["img/portada-1600.webp"]: Refreshing state... [id=img/portada-1600.webp]
+aws_s3_object.web["img/CREDITOS.txt"]: Refreshing state... [id=img/CREDITOS.txt]
+aws_s3_object.web["img/tarta-960.webp"]: Refreshing state... [id=img/tarta-960.webp]
+aws_s3_object.web["img/verduras-640.webp"]: Refreshing state... [id=img/verduras-640.webp]
+aws_s3_object.web["index.html"]: Refreshing state... [id=index.html]
+aws_s3_object.web["style.css"]: Refreshing state... [id=style.css]
+data.aws_ami.ubuntu: Read complete after 1s [id=ami-0d6dd9e8265d48906]
+aws_s3_object.web["img/verduras-1400.webp"]: Refreshing state... [id=img/verduras-1400.webp]
+aws_s3_object.web["img/portada-960.webp"]: Refreshing state... [id=img/portada-960.webp]
+aws_s3_object.web["img/verduras-960.webp"]: Refreshing state... [id=img/verduras-960.webp]
+aws_s3_object.web["img/txuleta-960.webp"]: Refreshing state... [id=img/txuleta-960.webp]
+aws_s3_object.web["script.js"]: Refreshing state... [id=script.js]
+aws_s3_object.web["img/txuleta-640.webp"]: Refreshing state... [id=img/txuleta-640.webp]
+aws_s3_object.web["img/tarta-1400.webp"]: Refreshing state... [id=img/tarta-1400.webp]
+aws_s3_object.web["img/txuleta-1400.webp"]: Refreshing state... [id=img/txuleta-1400.webp]
+aws_s3_object.web["img/portada-1280.webp"]: Refreshing state... [id=img/portada-1280.webp]
+aws_s3_object.web["img/tarta-640.webp"]: Refreshing state... [id=img/tarta-640.webp]
+aws_instance.web: Refreshing state... [id=i-0e89432fcb7e3750e]
+aws_eip_association.web: Refreshing state... [id=eipassoc-049cedfb0e1ddf654]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.

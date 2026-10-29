@@ -17,12 +17,15 @@ locals {
 }
 
 # ---- 4.1 Bucket S3 privado ---------------------------------------------------
-resource "aws_s3_bucket" "web" {
+# El bucket se crea una vez con la AWS CLI (README, sección 4) y aquí se lee: el Learner Lab prohíbe
+# s3:GetBucketObjectLockConfiguration, que el recurso aws_s3_bucket consulta siempre, y con él falla el apply.
+# Su configuración (acceso público, ACL, cifrado) y los ficheros sí los gestiona Terraform.
+data "aws_s3_bucket" "web" {
   bucket = var.bucket
 }
 
 resource "aws_s3_bucket_public_access_block" "web" {
-  bucket                  = aws_s3_bucket.web.id
+  bucket                  = data.aws_s3_bucket.web.id
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
@@ -30,14 +33,14 @@ resource "aws_s3_bucket_public_access_block" "web" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "web" {
-  bucket = aws_s3_bucket.web.id
+  bucket = data.aws_s3_bucket.web.id
   rule {
     object_ownership = "BucketOwnerEnforced" # ACL deshabilitadas
   }
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "web" {
-  bucket = aws_s3_bucket.web.id
+  bucket = data.aws_s3_bucket.web.id
   rule {
     apply_server_side_encryption_by_default {
       sse_algorithm = "AES256"
@@ -48,7 +51,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "web" {
 # Primera carga del contenido. Los cambios posteriores los publica GitHub Actions (desplegar-web.yml).
 resource "aws_s3_object" "web" {
   for_each     = local.ficheros_web
-  bucket       = aws_s3_bucket.web.id
+  bucket       = data.aws_s3_bucket.web.id
   key          = each.value
   source       = "${local.carpeta_web}/${each.value}"
   etag         = filemd5("${local.carpeta_web}/${each.value}")
@@ -128,7 +131,7 @@ resource "aws_instance" "web" {
     ip_elastica   = aws_eip.web.public_ip
     dominio       = var.dominio
     duckdns_token = var.duckdns_token
-    bucket        = aws_s3_bucket.web.id
+    bucket        = data.aws_s3_bucket.web.id
     region        = var.region
     email         = var.email
     script        = file("${path.module}/../scripts/web/instalar-servidor-web.sh")
