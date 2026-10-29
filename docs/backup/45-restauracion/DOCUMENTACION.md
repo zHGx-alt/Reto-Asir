@@ -1,7 +1,7 @@
 # Tarea 45 · Prueba de restauración con evidencias
 
 **Responsable:** Iker · **Fecha:** 22/10/2026 · **Depende de:** 44
-**Estado:** ✅ Restauración aislada hecha en máquina virtual (`ServidorERP`) · ⏳ Falta la restauración en una máquina nueva (sección 6)
+**Estado:** ✅ Restauración aislada hecha en máquina virtual (`ServidorERP`), repetida el 27/10/2026 con la BD ya en el RAID · ⏳ Falta la restauración en una máquina nueva (sección 6)
 
 ## 1. Resultado
 Se ha restaurado la copia del **disco USB externo**, que es la copia que estaría fuera del local, en un **entorno aislado**.
@@ -12,6 +12,7 @@ Se ha restaurado la copia del **disco USB externo**, que es la copia que estarí
 | **Tiempo de restauración medido** (con el servidor ya instalado) | **46 s** |
 | **RTO real** (servidor perdido: instalar uno nuevo y restaurar) | **Sin medir.** Los 46 s no incluyen reinstalar Debian, Docker y Odoo, que es lo que pasaría si se pierde el servidor (sección 5). Pendiente: repetir la prueba en una VM nueva y dar ese tiempo como RTO |
 | **RPO** (datos que se pueden perder como máximo) | Hasta 24 h con la copia diaria. En la prueba, la copia tenía 6 min |
+| **Repetida el 27/10/2026** (BD ya en el RAID, tarea 43; copia del RAID) | **16 comprobaciones OK**, Odoo restaurado con login 200, **63 s**; la copia tenía 101 min ([log](evidencias/restauracion-raid-2026-10-27.log)). La copia ya lleva también `almi_chain` (tarea 44), pero el script solo compara la base de Odoo (`tienda`) |
 | Producción durante la prueba | Sin tocar: sigue funcionando, solo existe la base `tienda` y nadie se conectó desde la prueba |
 
 ## 2. Cómo se hace
