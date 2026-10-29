@@ -134,12 +134,13 @@ Los roles de `03-roles.sql` son grupos sin `LOGIN`. [`08-usuarios.sql`](scripts/
 | `tpv_app` | `rol_aplicacion` | Leer todo, vender (INSERT de facturas), dar de alta clientes | DDL, modificar o borrar facturas (R-04), tocar locales y equipos | 10 |
 | `informes` | `rol_lectura` | Leer todo (gerente, gestoría) | Escribir nada | 3 |
 
-- Las contraseñas se generan en KeePassXC y se pasan al ejecutar (`-v pass_tpv=... -v pass_informes=...`): no se escriben en ningún fichero. El script es repetible (si la cuenta existe, solo cambia la contraseña).
+- Las contraseñas se generan en KeePassXC y se pasan al ejecutar como variables de psql, leídas antes con `read -rs` para que no queden en `~/.bash_history` (tarea 46, S-22): no se escriben en ningún fichero. El script es repetible (si la cuenta existe, solo cambia la contraseña).
 - Solo esas dos cuentas y el propietario pueden **conectarse** a la base (`REVOKE CONNECT ... FROM PUBLIC`).
 - [`09-pruebas-usuarios.sql`](scripts/09-pruebas-usuarios.sql) se ejecuta con cada cuenta y comprueba 9 casos; todo termina en `ROLLBACK`.
 
 ```
-psql -d almi_chain -v ON_ERROR_STOP=1 -v pass_tpv='...' -v pass_informes='...' -f 08-usuarios.sql
+read -rsp 'tpv_app: ' PASS_TPV; echo; read -rsp 'informes: ' PASS_INF; echo
+psql -d almi_chain -v ON_ERROR_STOP=1 -v pass_tpv="$PASS_TPV" -v pass_informes="$PASS_INF" -f 08-usuarios.sql; unset PASS_TPV PASS_INF
 psql -d almi_chain -U tpv_app  -v cuenta=tpv_app  -f 09-pruebas-usuarios.sql
 psql -d almi_chain -U informes -v cuenta=informes -f 09-pruebas-usuarios.sql
 ```

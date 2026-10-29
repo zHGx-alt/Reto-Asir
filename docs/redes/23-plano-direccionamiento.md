@@ -42,7 +42,8 @@ En el despacho hay un armario pequeño o una balda con:
 
 - El router de DIGI (ONT), donde llega la fibra.
 - El **router 1** (Archer C6, principal), conectado por su puerto WAN al router de DIGI.
-- El **servidor de Odoo**, con cable al router 1.
+- El **switch** TL-SG108E (S-05), en el puerto LAN 1 del router 1.
+- El **servidor de Odoo**, con cable al switch.
 
 ### 3.2 Cableado
 
@@ -69,7 +70,7 @@ Las longitudes salen del plano y llevan holgura para las bajadas por la pared. T
 | Red | Subred | Puerta de enlace | DHCP | Para qué |
 |---|---|---|---|---|
 | LAN del local | `192.168.10.0/24` | `192.168.10.1` (router 1) | Router 1 | Servidor, gerente, TPV y routers |
-| Wi-Fi de invitados | `192.168.50.0/24` *(a comprobar, ver 4.4)* | Router 1 | Router 1 | Móviles de clientes y recreativa |
+| Wi-Fi de invitados | `192.168.50.0/24` *(a comprobar, ver 4.4)* | `192.168.50.1` (router 1) | Router 1 | Móviles de clientes y recreativa |
 | WAN | La que dé el router de DIGI | Router de DIGI | Router de DIGI | Enlace entre el router 1 y DIGI |
 
 **Por qué `192.168.10.0/24` y no `192.168.1.0/24`:** los routers de operador suelen venir con `192.168.1.0/24`. Si nuestra LAN usara la misma red que hay detrás del router de DIGI, el router 1 tendría la misma red a los dos lados y no sabría por dónde enviar el tráfico. Además, `192.168.10.x` es lo que ya proponía el diagrama de la [tarea 11](../diagramas/11-arquitectura-equipos/DIAGRAMA.md).

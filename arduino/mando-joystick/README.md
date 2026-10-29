@@ -12,8 +12,8 @@ Tareas relacionadas en el [backlog](../../docs/gestion/backlog-kanban.csv): #19 
 | Palanca de arcade (4 microinterruptores) | Hecho. El 26/10 se quitan el modo analógico, la zona muerta y el modo `NINGUNA`: la palanca presupuestada es digital |
 | Esquema de conexiones | [esquema-conexiones.svg](esquema-conexiones.svg), con 4 botones y la palanca (26/10) |
 | Montaje (#19) | Hecho: caja con la palanca y los botones ([foto](evidencias/stick-montado-2026-10-27.webp), 27/10). La caja tiene 6 botones, pero el firmware lee 4 (pines 2 a 5): solo esos 4 llegan al PC |
-| Mapeo configurable guardado en EEPROM | Hecho, compila |
-| Comandos por puerto serie | Hecho, compila |
+| Mapeo configurable guardado en EEPROM | Hecho y probado en la placa (27/10): `MAP` + `GUARDAR` sobrevive a un reinicio |
+| Comandos por puerto serie | Hecho y probado en la placa (27/10): `VER`, `MAP`, `GUARDAR` y `RESET` |
 | **Prueba en la placa real** | **Hecha el 27/10** (tarea #50): botones, palanca, puerto serie y EEPROM. Ver [la prueba](#prueba-en-físico-tarea-50) |
 | Pruebas con MAME y otro emulador | Pendiente (tarea #21). En Batocera ya se reconoce: [evtest](evidencias/batocera-evtest-2026-10-27.txt) |
 
