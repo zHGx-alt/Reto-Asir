@@ -3,9 +3,12 @@
 -- Crea las cuentas reales y las mete en los roles de grupo de 03-roles.sql:
 --   tpv_app    → rol_aplicacion (el programa de caja: lee, vende, no borra facturas ni hace DDL)
 --   informes   → rol_lectura    (gerente o gestoría: solo consulta)
--- Las contraseñas NO están en el repositorio: se generan en KeePassXC y se pasan al ejecutar
--- (psql no las guarda en el historial si se usan variables):
---   psql -d almi_chain -v ON_ERROR_STOP=1 -v pass_tpv='...' -v pass_informes='...' -f 08-usuarios.sql
+-- Las contraseñas NO están en el repositorio: se generan en KeePassXC y se pasan al ejecutar.
+-- Escritas a mano en la orden (-v pass_tpv='...') quedarían en ~/.bash_history (tarea 46, S-22),
+-- así que se leen antes sin que se vean:
+--   read -rsp 'tpv_app: ' PASS_TPV; echo; read -rsp 'informes: ' PASS_INF; echo
+--   psql -d almi_chain -v ON_ERROR_STOP=1 -v pass_tpv="$PASS_TPV" -v pass_informes="$PASS_INF" -f 08-usuarios.sql
+--   unset PASS_TPV PASS_INF
 -- Repetible: si las cuentas existen, solo cambia la contraseña.
 -- Requiere 01, 02 y 03, y ejecutarse con el propietario de las tablas.
 -- =============================================================================

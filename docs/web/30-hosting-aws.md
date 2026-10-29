@@ -69,7 +69,7 @@ Los nombres de los menús son los de la consola de AWS en español.
    - **Bloquear *todo* el acceso público:** marcado. El bucket no se abre al público.
    - Lo demás (control de versiones, cifrado SSE-S3, bloqueo de objetos) se deja como viene.
 3. Pulsar **Crear bucket**.
-4. Entrar en el bucket, pulsar **Cargar** → **Agregar archivos** y subir `index.html`, `style.css` y `script.js` de la carpeta `web/`. El `README.txt` no se sube: son notas para el equipo, no forman parte de la web. En **Permisos** no se toca nada.
+4. Entrar en el bucket, pulsar **Cargar** → **Agregar archivos** y subir `index.html`, `style.css` y `script.js` de la carpeta `web/`; después **Agregar carpeta** y subir la carpeta `web/img/` entera (las fotos, desde el 27/10). El `README.txt` no se sube: son notas para el equipo, no forman parte de la web. En **Permisos** no se toca nada. Con la AWS CLI es una sola orden (sección 6).
 
 ### 4.2 Grupo de seguridad
 
@@ -162,7 +162,7 @@ Las pruebas con `curl` y `openssl` se hicieron desde un equipo externo; su salid
 | Renovación automática | En la EC2: `sudo certbot renew --dry-run` | ✅ `all simulated renewals succeeded` | [03](../evidencias/30-hosting-aws/03-certbot-renovacion.png) |
 | Versión del servidor oculta | Cabecera `Server` | ✅ `nginx`, sin número de versión | [08](../evidencias/30-hosting-aws/08-pruebas-curl.txt) |
 | Bucket privado | `curl -I https://almi-chain-web-2026.s3.us-east-1.amazonaws.com/index.html` | ✅ `403 Forbidden` | [05](../evidencias/30-hosting-aws/05-s3-bloqueo-publico.png), [08](../evidencias/30-hosting-aws/08-pruebas-curl.txt) |
-| Solo se publica la web | Pedir `index.html`, `style.css`, `script.js` y `README.txt` | ✅ `200` los tres primeros y `404` el README | [08](../evidencias/30-hosting-aws/08-pruebas-curl.txt) |
+| Solo se publica la web | Pedir `index.html`, `style.css`, `script.js` y `README.txt` | ✅ `200` los tres primeros y `404` el README (26/10, antes de las fotos de `img/`) | [08](../evidencias/30-hosting-aws/08-pruebas-curl.txt) |
 | Geolocalización | Pulsar «Usar mi ubicación» | ✅ El navegador pide permiso (solo funciona con HTTPS) | [02](../evidencias/30-hosting-aws/02-geolocalizacion.png) |
 | Instancia en marcha | Consola de EC2 | ✅ En ejecución, 3/3 comprobaciones superadas | [04](../evidencias/30-hosting-aws/04-ec2-instancia.png) |
 | Cortafuegos | Reglas de entrada de `web-almichain-sg` | ✅ 80 y 443 abiertos; 22 solo desde nuestra IP | [06](../evidencias/30-hosting-aws/06-grupo-seguridad.png) |
@@ -172,6 +172,8 @@ La validación W3C, Lighthouse y la accesibilidad son la tarea 29.
 
 > [!NOTE]
 > **Publicada la versión actual (26/10/2026).** Hasta ese día el servidor daba el `index.html` del 22/10 (`Content-Length: 7143`) y nginx no tenía la CSP ni la Permissions-Policy. Se subió la web actual al bucket y se volvió a ejecutar `instalar-servidor-web.sh`. Ahora `index.html`, `style.css` y `script.js` publicados son idénticos a los del repositorio y salen las dos cabeceras ([`08-pruebas-curl.txt`](../evidencias/30-hosting-aws/08-pruebas-curl.txt)). Lighthouse y W3C, contra la URL pública ([`lighthouse-w3c.txt`](../evidencias/web/lighthouse-w3c.txt)): móvil 94/100/100/100, escritorio 99/100/100/100 (medianas de 5) y W3C sin errores. En móvil daba 70 hasta que el mapa de OpenStreetMap pasó a cargarse al pulsar «Ver el mapa».
+>
+> **Pendiente:** el 27/10 la web cambió (fotos en `web/img/`). Las medidas y el `curl` de arriba son de la versión del 26/10: hay que repetir `08-pruebas-curl.txt` y Lighthouse con el Learner Lab arrancado.
 
 ### Capturas
 

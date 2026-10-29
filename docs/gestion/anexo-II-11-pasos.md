@@ -5,7 +5,7 @@
 | **Reto** | 1 · Almi-Chain |
 | **Grupo** | ASIR1 2026-2027 |
 | **Equipo** | Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio |
-| **Periodo** | 21/10/2026 – 10/11/2026 |
+| **Periodo** | 21/10/2026 – 12/11/2026 (técnico hasta el 4/11; documentación y presentación del 5 al 10/11) |
 | **Responsable del documento** | Adrian |
 
 ---
@@ -53,6 +53,8 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | ERP · Odoo | Documentación de Odoo 19 y su API XML-RPC ([tareas 33-35](../erp/)) |
 | Copias · restic y mdadm | Documentación de restic y de mdadm ([tareas 43-45](../backup/)) |
 | Arcade · MAME y Batocera | Documentación de MAME, Debian (preseed) y Batocera ([tareas 16-18](../arcade/)) |
+| SO · Cifrado del gerente | Documentación de Microsoft sobre BitLocker (`manage-bde`, directiva «Requerir autenticación adicional al iniciar») y de [fscrypt](https://github.com/google/fscrypt) (protectores de inicio de sesión y `pam_fscrypt`) ([tarea 12](../so/12-dual-boot.md)) |
+| ERP · HTTPS | Documentación de nginx (`proxy_pass`, TLS) y de OpenSSL (`nameConstraints`) ([tarea 52](../erp/52-https-odoo/DOCUMENTACION.md)) |
 
 ## 4. Alternativas evaluadas
 
@@ -82,17 +84,19 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | SO de la recreativa | Debian 13 mínimo con arranque directo a MAME (descartada Batocera) | Medido en VM de 1 núcleo y 1 GB: llega a la partida en 7,1 s con 400 MB usados y MAME a 934 %/685 %; Batocera usa 554 MB solo con el menú (ya con swap), tarda 12,9 s al menú optimizado, pide 2 GB según su guía y guarda la contraseña de root en claro ([tarea 51](../arcade/16-batocera/NOTAS.md)) | 26/10/2026 |
 | Impresora de tickets de las pruebas | Samsung ML-1660 (láser) por IPP | Las térmicas del centro no llegan para todos los grupos. El ticket de Odoo sale igual; en la tienda real sigue siendo la Epson TM-T20IV por USB (tarea 8) | 27/10/2026 |
 | Corte técnico | Todo lo técnico acaba el miércoles 4/11; tabla de pruebas, documentación final y presentación del 5 al 10/11 | El 4/11 dan la rúbrica: lo que no se ajuste a ella tiene una semana de margen, y lo que más depende de la rúbrica (documentación y presentación) se hace después | 27/10/2026 |
-| Firmware de router | | | |
-| SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 ([tarea 40](../bd/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
+| Firmware de router | El de fábrica de TP-Link (sin OpenWrt) | Con la red plana (decisión del 24/10) no hacen falta VLAN; el firmware de fábrica tiene WDS y red de invitados, y OpenWrt arriesga los routers ([tarea 23, apartado 5.3](../redes/23-plano-direccionamiento.md#53-por-qué-la-red-plana-y-no-las-vlan)) | 24/10/2026 |
+| SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 y 18 y, desde el 29/10, en el 17 que usa Odoo, con todas las pruebas correctas ([tarea 40](../bd/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
 | Backup | restic sobre RAID 1 (`mdadm`) y disco USB externo | Copias cifradas con AES-256, deduplicadas y automatizadas; cumple la regla 3-2-1 ([tarea 44](../backup/44-backup-3-2-1/DOCUMENTACION.md)) | 22/10/2026 |
 | Placa del arcade stick | Arduino Leonardo (ATmega32U4) | HID nativo por USB sin drivers; compatible con la librería Joystick; EEPROM para guardar el mapeo | 22/10/2026 |
-| Tamaño del equipo | 6 personas | El grupo es de 6 aunque el enunciado diga 4-5; Eneko.P sigue sin tareas | 24/10/2026 |
+| Tamaño del equipo | 6 personas | El grupo es de 6 aunque el enunciado diga 4-5. Eneko.P volvió el 26/10 y tiene tareas ([roles.md](roles.md)) | 24/10/2026 |
 | Dominio de la web | `almichain1.duckdns.org` | Vale como dominio propio; no se compra ninguno | 24/10/2026 |
 | Fechas del reto | Del 26/10 al 12/11/2026 | Se mantiene la planificación actual hasta que salga la rúbrica | 24/10/2026 |
 | Base de datos de los establecimientos | Base central con los datos de cada local | Evita repetir carta y clientes en cada local ([tarea 38](../bd/38-modelo-er.md#11-una-base-central-para-toda-la-cadena)) | 24/10/2026 |
 | TicketBAI | No se configura | Queda documentado como obligación legal (tarea 34, sección 6) | 24/10/2026 |
-| Arranque dual | Una VM | Suficiente para demostrar el arranque dual (tarea 12) | 24/10/2026 |
-| Impresora de tickets | La da el centro | Las tareas 14 y 37 esperan a tenerla ([guía](../so/14-impresora/DOCUMENTACION.md)) | 24/10/2026 |
+| Arranque dual | Una VM | Suficiente para demostrar el arranque dual (tarea 12). Desde el 29/10 en VirtualBox ([tarea 12, sección 7](../so/12-dual-boot.md#7-decisiones-y-problemas-encontrados)) | 24/10/2026 |
+| Cifrado del PC del gerente | BitLocker con contraseña de arranque en Windows; fscrypt en `/home/gerente` | La VM no tiene TPM (en el equipo real, TPM + PIN). fscrypt no obliga a reparticionar y se abre con la contraseña de inicio de sesión ([tarea 12](../so/12-dual-boot.md#44-actualizar-y-cifrar-después-de-instalar-los-dos-sistemas)) | 29/10/2026 |
+| Exportar la VM del gerente | No se vuelve a exportar | Ocupa decenas de GB y tarda mucho; las evidencias de la tarea 12 bastan. En Drive sigue la exportación del 23/10 | 29/10/2026 |
+| Impresora de tickets | La da el centro | Las tareas 14 y 37 esperan a tenerla ([guía](../so/14-impresora/DOCUMENTACION.md)). **Sustituida el 27/10**: las pruebas se hacen con la Samsung ML-1660 | 24/10/2026 |
 | Notación del E/R | Pata de gallo (Mermaid) | Se revisa cuando salga la rúbrica | 24/10/2026 |
 | Red del local | Plana (LAN del personal) con la Wi-Fi de invitados aislada; separación entre TPV, gerente y servidor por el cortafuegos de cada equipo | Las VLAN reales exigían OpenWrt en los routers, complicaban el WDS, no se podían probar con el router de prácticas y obligaban a rehacer el plan de IP, los scripts de los TPV, el HTTPS, el presupuesto y los diagramas. ([tarea 23, apartados 5.2 y 5.3](../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)) | 24/10/2026 |
 | Simulación de Packet Tracer | Simular la red real (ISP, NAT, LAN, dos Wi-Fi, router 2 como puente). El primer `.pkt`, con una VLAN por grupo, se quitó el 25/10/2026 para que solo quede el diseño que se monta | La simulación tiene que coincidir con lo que se monta; el router 2 en WDS es un puente, y en Packet Tracer el aparato equivalente es un punto de acceso ([guía](../redes/23-packet-tracer-red-local.md)) | 24/10/2026 |
@@ -105,11 +109,11 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 
 | Semana | Fechas | Objetivo |
 |---|---|---|
-| 1 | 21/10 – 27/10 | Organización, requisitos, comparativas, diseño (red, web, E/R) y presupuesto |
-| 2 | 28/10 – 03/11 | Implantación: SO y TPV, recreativa y stick, red y WDS, web, Odoo, BD y RAID |
-| 3 | 04/11 – 10/11 | AWS e IaC, caso de uso del ERP, backups y restauración, pruebas, documentación y defensa |
+| 1 | 21/10 – 27/10 | Organización, requisitos, comparativas, diseño (red, web, E/R) y presupuesto; buena parte de la implantación en VM |
+| 2 | 28/10 – 04/11 | Terminar lo técnico (corte el miércoles 4/11, día de la rúbrica): equipos físicos, red y WDS, comprobaciones de seguridad |
+| 3 | 05/11 – 10/11 | Tabla de pruebas, documentación final y presentación, ajustadas a la rúbrica |
 
-> **Fechas del reto:** del lunes 26/10 al jueves 12/11/2026. La planificación actual vale y se revisará cuando salga la rúbrica (decisión del 24/10/2026). Las tareas ya hechas conservan sus fechas reales.
+> **Fechas del reto:** del lunes 26/10 al jueves 12/11/2026. El 27/10 se fijó el corte técnico el 4/11 (sección 5). Las tareas ya hechas conservan sus fechas reales.
 
 ## 7. Ejecución
 
@@ -140,27 +144,29 @@ Incidencias relevantes durante la ejecución:
 | 23/10/2026 | Seguridad | Contraseñas débiles de la VM del gerente en un fichero de texto sin seguimiento | No se sube (añadido al `.gitignore`); se cambian y se guardan en KeePassXC (tarea 55) |
 | 26/10/2026 | Seguridad | El certificado propio de Odoo (tarea 52) era una CA sin límites: con su clave se podían firmar certificados de cualquier web, y los TPV se los creerían | `nameConstraints` limitado a la IP del servidor y a `odoo.almichain.local`; probado con un certificado falso, que ahora se rechaza ([tarea 46, S-01](../seguridad/46-revision-seguridad/DOCUMENTACION.md#41-s-01-el-certificado-de-odoo-podía-firmar-cualquier-web-corregido)) |
 | 27/10/2026 | ERP | La impresora USB pasada a la VM del TPV no creaba el puerto `USB001` y el ticket no salía desde la VM | El TPV imprime por IPP en la cola CUPS del equipo que tiene la impresora; probado con el ticket en papel y ya sin QR ([tarea 52, sección 4.2](../erp/52-https-odoo/DOCUMENTACION.md#42-pruebas-5-y-6-con-un-tpv-provisional-26102026)) |
+| 29/10/2026 | SO | En VMware, sobre un Ubuntu con Wayland, no funcionaban copiar y pegar ni algunas teclas, y Windows Update fallaba porque el adaptador de red estaba deshabilitado | VM del gerente pasada a VirtualBox (disco SATA, teclado USB); Windows al día (KB5066791) ([tarea 12, sección 7](../so/12-dual-boot.md#7-decisiones-y-problemas-encontrados)) |
+| 29/10/2026 | Seguridad | Al activar BitLocker, la clave de recuperación salió en pantalla (`Add-BitLockerKeyProtector` la escribe como advertencia) | Clave sustituida por otra que no se mostró y script corregido (`-WarningAction SilentlyContinue`) |
 | 27/10/2026 | Seguridad | Los TPV se bastionaron a mano y no tienen el bloqueo de salida del firewall ni la lista blanca de Edge que da `configurar-tpv.ps1`; `subir.sh` instalaba la librería del stick sin versión fija | Hallazgos S-20 (Markel) y S-21 (corregido: versión 2.1.1 fijada) ([tarea 46, sección 1.1](../seguridad/46-revision-seguridad/DOCUMENTACION.md#11-repaso-del-27102026)) |
 
 ## 8. Pruebas
 
 | Bloque | Prueba | Resultado esperado | Resultado obtenido | Evidencia |
 |---|---|---|---|---|
-| SO | Arranque de ambos sistemas desde GRUB | Ambos arrancan y GRUB muestra las dos entradas | GRUB 2.14 muestra Ubuntu y Windows Boot Manager; particiones, EFI compartida, cuentas, firewall y Windows Update comprobados; contraseñas robustas en KeePassXC (23/10) | [tarea 12](../so/12-dual-boot.md) |
+| SO | Arranque de ambos sistemas desde GRUB | Ambos arrancan y GRUB muestra las dos entradas | GRUB 2.14 muestra Ubuntu y Windows Boot Manager; particiones, EFI compartida, cuentas y firewall comprobados; contraseñas robustas en KeePassXC (23/10). 29/10: Windows al día (KB5066791), BitLocker pide la contraseña al arrancar y `/home/gerente` cifrado con fscrypt | [tarea 12](../so/12-dual-boot.md#6-verificación) |
 | SO | Cajero intenta instalar software / usar USB | Operación denegada | Memoria USB sin acceso (directiva *denegar todo acceso*) y usuario de caja sin administrador, en las dos VM (26/10). Falta pasar `comprobar-tpv.ps1` (16 OK) | [tarea 13](../so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
 | Arcade | Rendimiento MAME antes y después de optimizar | Aumento de FPS y menor consumo de RAM | Robby Roto +27 % y más estable, Gridlee +6 %, timers de 8 a 3, −277 MB de disco; la RAM no cambia. Medido en una VM de 2 núcleos y 1,5 GB: falta repetirlo con 1 núcleo y 1 GB | [tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md) |
-| Arduino | Stick en MAME y en un segundo emulador | Todas las entradas reconocidas y remapeables | | |
+| Arduino | Stick en MAME y en un segundo emulador | Todas las entradas reconocidas y remapeables | En la placa (27/10): 4 botones y palanca llegan al PC sin pulsaciones fantasma; `MAP` y `GUARDAR` sobreviven al reinicio; Batocera lo reconoce (`evtest`). Falta MAME (tarea 21) | [tarea 50](../../arduino/mando-joystick/README.md#prueba-en-físico-tarea-50) |
 | Redes | Cliente de la red de invitados accede a la red interna | Acceso bloqueado | Pendiente: la red de invitados aún no está configurada | [red segura](../redes/24-red-segura/DOCUMENTACION.md) |
 | Redes | Roaming y throughput con WDS | Cobertura ampliada; velocidad medida con iperf3 | | |
-| Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | W3C sin errores; Lighthouse móvil 98/100/100/100 y escritorio 99/100/100/100 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
+| Web | Lighthouse y validador W3C | Sin errores; puntuación ≥ 90 | W3C sin errores; Lighthouse contra la URL pública (26/10): móvil 94/100/100/100 y escritorio 99/100/100/100. Repetir con las fotos de `web/img/` (27/10) | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
 | Web | Acceso por HTTP | Redirección a HTTPS con certificado válido | `301` a HTTPS; certificado de Let's Encrypt válido hasta el 21/01/2027 | [tarea 30, sección 5](../web/30-hosting-aws.md#5-pruebas) |
 | ERP | Venta en el TPV de barra | Ticket, cobro, cierre de caja y asiento contable | Mesa 3, 35,50 € en efectivo: factura simplificada, caja cuadrada (diferencia 0,00 €) y asiento `POSS/2026/10/0001` validado | [tarea 34, sección 8](../erp/34-configurar-odoo/DOCUMENTACION.md) |
 | ERP | Venta por HTTPS y venta sin red (tarea 52) | Candado sin avisos; la venta sin red se guarda y se sincroniza | Edge sin avisos con el certificado propio; venta de 7,30 € y, con el cable quitado, venta de 5,00 € que aparece en el servidor como `paid` al reconectar. Hecho con un TPV provisional (VM win-11) en la red 192.168.10.0/24. El 27/10 el ticket se imprime desde esa VM por IPP, sin QR | [tarea 52, sección 4.2](../erp/52-https-odoo/DOCUMENTACION.md#42-pruebas-5-y-6-con-un-tpv-provisional-26102026) |
-| ERP | Factura automática de extremo a extremo | Pedido, factura validada, cobro y PDF sin intervención | Repetido el 23/10 en una instalación limpia: `INV/2026/00001` y `00002` cobradas y con PDF. No incluye envío por correo ni descuento de stock (ideas del plan, no exigidas por el enunciado). El 24/10 el caso de uso pasa a un menú de grupo con IVA del 10 %: hay que repetirlo | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
+| ERP | Factura automática de extremo a extremo | Pedido, factura validada, cobro y PDF sin intervención | Repetido el 23/10 en una instalación limpia: `INV/2026/00001` y `00002` cobradas y con PDF. No incluye envío por correo ni descuento de stock (ideas del plan, no exigidas por el enunciado). Repetido el 27/10 con el caso de uso real (menú de grupo, IVA 10 %): `INV/2026/00004` = 660,00 € | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
 | BD | Usuario de aplicación ejecuta DDL | Permiso denegado | `CREATE TABLE`: *permission denied for schema public*; `DROP` y `ALTER`: *must be owner*; `DELETE`/`UPDATE` de facturas denegados; 33 pruebas de reglas correctas (repetido el 23/10) | [verificación](verificacion.md), [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
-| RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas. **Falta:** la BD viva aún no está en el RAID ([tarea 43, sección 7](../backup/43-raid1/DOCUMENTACION.md#7-pendiente-la-base-de-datos-tiene-que-estar-en-el-raid)) | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
-| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor. **Falta** el RTO real, restaurando en una máquina nueva | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
-| Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 21 hallazgos (5 altos); S-01, S-05 y S-21 corregidos y S-03 sin aplicar (se descarta Batocera). Faltan las comprobaciones en los equipos (nmap, router, SSH, cifrado) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas. El 27/10 la BD y los adjuntos de Odoo pasan al RAID y se repite con una venta en el RAID degradado ([tarea 43](../backup/43-raid1/DOCUMENTACION.md)) | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
+| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor; repetida el 27/10 con la BD en el RAID: todo correcto en 63 s. **Falta** el RTO real, restaurando en una máquina nueva | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
+| Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 23 hallazgos (5 altos); S-01, S-05, S-15, S-18, S-21 y S-22 corregidos, S-11 hecho en el PC del gerente y S-03 sin aplicar (se descarta Batocera). Faltan las comprobaciones en los equipos (nmap, router, SSH) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
 ## 9. Documentación y presentación
 
@@ -177,7 +183,7 @@ Incidencias relevantes durante la ejecución:
 | Anexo I (contrato de equipo) | 1 | Adrian | [Firmado el 21/10](anexo-I-contrato-equipo.md) | — | Hecho |
 | Anexo II (este documento) | 2 | Adrian | Secciones 1 a 8 | Cerrar la 9 y la 10 después de la presentación | En curso |
 | Commits de todos (Anexo IX) | 5 | Adrian | 5 de 6 personas con commits propios | Un commit de Eneko.P | En curso |
-| Máquinas virtuales | 12, 13, 33 | Responsable de cada tarea | VM del gerente exportada en OVF ([tarea 12](../so/12-dual-boot.md#8-entrega-de-la-máquina-virtual), disco en Drive) | Exportar las VM de los TPV y de la `ServidorERP` con la misma tabla de sumas SHA-256 | Parcial |
+| Máquinas virtuales | 12, 13, 33 | Responsable de cada tarea | VM del gerente exportada en OVF el 23/10 ([tarea 12](../so/12-dual-boot.md#8-entrega-de-la-máquina-virtual), disco en Drive). No se vuelve a exportar: lo del 29/10 está en las evidencias (sección 5) | Decidir si se exportan las VM de los TPV y de la `ServidorERP` o también bastan las evidencias | Parcial |
 | Registro de uso de IA | — | Todos | [registro-ia.md](registro-ia.md) | Que cada persona revise sus entradas | En curso |
 
 ### 9.2 Presentación (propuesta)
@@ -215,6 +221,6 @@ Una parte por bloque. Cada persona presenta **lo que no ha hecho**, para demostr
 |---|---|
 | **Qué ha funcionado** | Scripts idempotentes y probados en una máquina limpia (Odoo, TPV, HTTPS, copias): repetir una instalación cuesta minutos. · Ramas, PR y gitleaks: ningún secreto en el código (81 commits revisados el 23/10). · La revisión del 23/10 ([verificacion.md](verificacion.md)) encontró 14 enlaces rotos y 2 scripts que fallaban en una instalación limpia antes de la entrega. · Las decisiones se apuntan con fecha (sección 5), así que no se repiten discusiones. |
 | **Qué mejorar** | Reparto: la mayoría del software cayó en dos personas ([roles.md](roles.md)). · Las tareas físicas (stick, router, recreativa real) se dejaron para el final y dependen de material que no teníamos. · Probar con el equipo que pide el enunciado: las medidas de MAME se hicieron en una VM de 2 núcleos y 1,5 GB (tarea 17) y la red con un router sin WPA3 (tarea 24). · Revisar las capturas antes de subirlas: dos dejaban ver la contraseña Wi-Fi (tarea 24). · Hacer la revisión de seguridad antes, no al final: el hallazgo S-01 de la [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) se habría evitado al escribir la tarea 52. |
-| **Desviaciones respecto a la planificación** | Fechas del reto movidas al 26/10 – 12/11 (decisión del 24/10). · Eneko.P sigue sin commits propios; las tareas 43 y 47 pasaron de él a otras personas. · Varias tareas cambiaron de responsable (13, 14, 43, 46). · La BD viva sigue fuera del RAID (tarea 43), lo que retrasa el HTTPS en el servidor del equipo (tarea 52). · *Completar con la comparación final del Gantt: tareas acabadas tarde y cuántos días.* |
+| **Desviaciones respecto a la planificación** | Fechas del reto movidas al 26/10 – 12/11 (decisión del 24/10). · Eneko.P sigue sin commits propios; las tareas 43 y 47 pasaron de él a otras personas. · Varias tareas cambiaron de responsable (13, 14, 43, 46). · La BD viva no pasó al RAID hasta el 27/10 (tarea 43), y eso retrasó el HTTPS en el servidor del equipo (tarea 52). · *Completar con la comparación final del Gantt: tareas acabadas tarde y cuántos días.* |
 | **Uso de IA y validación** | Ver [registro-ia.md](registro-ia.md). Todo lo hecho con IA se ha ejecutado y comprobado (evidencias en cada tarea); los scripts se probaron en máquinas limpias. |
 | **Nota del equipo (1-10) y por qué** | *A rellenar en la reunión* |

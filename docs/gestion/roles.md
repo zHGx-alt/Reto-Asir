@@ -19,6 +19,14 @@ El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), 
 
 ## Cambios en el reparto
 
+### 27/10/2026
+
+| # | Tarea | Antes | Ahora |
+|---|---|---|---|
+| 37 | Ticket en la impresora real | Peio | Adrian |
+
+El ticket salió desde la VM del TPV por IPP a la Samsung ML-1660, dentro de la tarea 52; el equipo decidió ese día que la impresora de las pruebas es la Samsung ([Anexo II, sección 5](anexo-II-11-pasos.md#5-decisiones)).
+
 ### 26/10/2026 (tarde)
 
 Markel e Iker se cambian una tarea; Markel lo cambió en el backlog.

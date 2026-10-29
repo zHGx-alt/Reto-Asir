@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (27/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 con lo que entró después (sección 1.1): 21 hallazgos; 5 corregidos (S-01, S-05, S-15, S-18 y S-21) y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
+- **Estado (29/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 y el 29/10 con lo que entró después (secciones 1.1 y 1.2): 23 hallazgos; 6 corregidos (S-01, S-05, S-15, S-18, S-21 y S-22), S-11 hecho en el PC del gerente y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -41,13 +41,26 @@ Se leyó lo que entró en `main` después de la revisión (PR #57 a #65):
 | Stick (`mando_joystick.ino`, `subir.sh`) | Firmware bien: comandos con límites, búfer acotado y la EEPROM se valida (firma, versión, suma y rango). Hallazgo nuevo **S-21** en `subir.sh`, corregido |
 | Tarea 52 (`fijar-url-y-qr.sh`, impresión por IPP) | Sin hallazgos. El script lee `/opt/odoo/.env` como root y no muestra la contraseña. El CUPS compartido es solo del laboratorio del PC de Adrian, no del proyecto |
 
+### 1.2 Repaso del 29/10/2026
+
+Se leyó lo que entró en `main` del PR #66 al #84 (scripts y configuraciones):
+
+| Qué | Resultado |
+|---|---|
+| Tarea 12: BitLocker y fscrypt (`scripts/so/`) | Sin hallazgos. La clave de recuperación no sale por pantalla (`-WarningAction`); al crearla la primera vez sí salió y se sustituyó (tarea 12, sección 7). **S-11** hecho en el PC del gerente; **S-12** cambia: el gerente ya tiene la última acumulativa, pero Windows 10 sigue sin soporte |
+| Tarea 42: `08-usuarios.sql` | Hallazgo nuevo **S-22**, corregido |
+| Tarea 44: aviso de fallo y copia en S3 | `aviso-fallo-backup.sh` correcto (fichero de estado 700, `/etc/default/backup-odoo` de root). Hallazgo nuevo **S-23** en la copia a S3 |
+| Tarea 53: `preparar-preseed-fisico.sh` | Bien: contraseña con `read -rs`, solo el hash SHA-512 en el preseed, fichero 600 y fuera de Git, disco y clave SSH validados |
+| Tarea 26: `analizar-red.sh` | Sin hallazgos (solo lee con nmap y avisa de escanear solo la red del reto) |
+| Tarea 43 | La BD ya está en el RAID (27/10): **S-02** deja de esperar a la 43 |
+
 ## 2. Resumen
 
 | Gravedad | Hallazgos | Corregidos |
 |---|---|---|
 | Alta | 5 (S-01 a S-05) | 2 (S-01 y S-05); S-03 no aplica |
-| Media | 8 (S-06 a S-12 y S-20) | 0 |
-| Baja | 8 (S-13 a S-19 y S-21) | 3 (S-15, S-18 y S-21) |
+| Media | 9 (S-06 a S-12, S-20 y S-23) | 0; S-11 hecho en el PC del gerente (faltan los TPV) |
+| Baja | 9 (S-13 a S-19, S-21 y S-22) | 4 (S-15, S-18, S-21 y S-22) |
 
 Lo más urgente, por este orden:
 
@@ -60,7 +73,7 @@ Lo más urgente, por este orden:
 | ID | Gravedad | Dónde | Qué pasa | Qué hacer | Responsable | Estado |
 |---|---|---|---|---|---|---|
 | S-01 | Alta | Tarea 52, `activar-https.sh` | El certificado de Odoo es una CA (`CA:TRUE`) sin límites, y se instala como raíz de confianza en los TPV y en el PC del gerente. Quien robara `odoo.key` del servidor podría firmar certificados de **cualquier** web (banco, correo) y los TPV se los creerían | Añadir `nameConstraints` para que solo valga para `192.168.10.10` y `odoo.almichain.local` | Adrian | ✅ Corregido en el script y probado en la VM de la tarea 52, también en Edge (candado sin avisos) (sección 4.1). Se aplica al generar el certificado en el servidor del equipo |
-| S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Probado entero en VM, con TPV provisional y venta sin red (tarea 52, sección 4.2). Falta en el servidor del equipo: espera a la tarea 43 ([runbook](../../erp/52-https-odoo/RUNBOOK.md)) |
+| S-02 | Alta | Tareas 33 y 52 | Odoo va por **HTTP** en la LAN: contraseñas de cajeros y del gerente y ventas sin cifrar | Activar el proxy en la `ServidorERP` del equipo e instalar el `.crt` en los TPV | Adrian | ⏳ Probado entero en VM, con TPV provisional y venta sin red (tarea 52, sección 4.2). Falta en el servidor del equipo: ya no espera a nada (la tarea 43 llevó la BD al RAID el 27/10), es seguir el [runbook](../../erp/52-https-odoo/RUNBOOK.md) |
 | S-03 | Alta | Tarea 16, Batocera | Con *Enforce security* desactivado, root tiene siempre la contraseña `linux`, se ve en el menú y sirve también para SSH y Samba | `batocera-settings-set system.security.enabled 1` y contraseña de root aleatoria en KeePassXC. O quedarse con la versión Debian, que ya está endurecida (S-08 lo compara) | Iker | ➖ No aplica: la tarea 51 elige Debian, ya endurecida (27/10) |
 | S-04 | Alta | Tarea 24, router | Se entra al panel como `Admin` con una contraseña de 5 caracteres que parece la de fábrica. El panel va por HTTP y está abierto a toda la LAN. No hay evidencia de que WPS esté apagado | Contraseña de KeePassXC, administración solo desde la MAC del gerente y por cable, y WPS desactivado | Peio | 🟡 Contraseña cambiada y en KeePassXC (26/10). Faltan la MAC y WPS |
 | S-05 | Alta | Tarea 24, Wi-Fi | La contraseña Wi-Fi tiene 8 cifras y se leía en dos capturas que siguen en el historial de Git (commits `532c87a` y `215eac7`). El repositorio es privado, lo que lo atenúa, pero el profesor y cualquiera con acceso las pueden ver | Cambiarla por una frase de 20 caracteres o más. No hace falta reescribir el historial si se cambia la contraseña | Peio | ✅ Cambiada y en KeePassXC (26/10). Comprobar que la RADIUS de las mismas capturas tampoco sigue en uso |
@@ -70,7 +83,7 @@ Lo más urgente, por este orden:
 | S-09 | Media | Tareas 33 y 52 | El servidor no tiene `unattended-upgrades` (el preseed no lo instala y Debian sin escritorio no lo trae). Las imágenes `odoo:19.0`, `postgres:17` y `nginx:1.27-alpine` no tienen un procedimiento de actualización | Ver sección 4.2 | Iker | ⏳ Pendiente |
 | S-10 | Media | Tarea 33, `docker-compose.yml` | Odoo se conecta a PostgreSQL con el usuario de `POSTGRES_USER`, que la imagen de PostgreSQL crea como **superusuario**. Choca con los mínimos privilegios de la tarea 42. Lo atenúa que PostgreSQL no está publicado fuera de Docker | Mejora para un despliegue nuevo: un rol `odoo` con `CREATEDB` y sin `SUPERUSER`. Hoy se acepta y se documenta, porque cambiarlo con datos reales tiene riesgo | Iker | Aceptado (riesgo documentado) |
 | S-11 | Media | Tareas 12 y 13 | Ni el PC del gerente (BitLocker desactivado para el arranque dual, Ubuntu sin LUKS) ni los TPV tienen el disco cifrado. Si roban el equipo, se leen los datos sin contraseña | BitLocker en Windows y cifrado de `/home/gerente` (tarea 12, sección 4.4). BitLocker en los TPV (Pro e IoT Enterprise lo incluyen) | Adrian (12), Markel (13) | ◐ Gerente hecho el 29/10 (BitLocker + fscrypt); TPV pendiente |
-| S-12 | Media | Tareas 12 y 13 | Windows 10 dejó de tener soporte el 14/10/2025. Sin ESU o LTSC, el PC del gerente y los TPV no reciben parches. La VM del gerente sigue con la actualización de noviembre de 2022 | TPV: IoT Enterprise LTSC 2021 (soporte hasta 2032), decisión pendiente en la tarea 13. Gerente: ESU, o usar Ubuntu para el trabajo diario y dejar Windows solo para lo imprescindible | Markel, Adrian | ⏳ Pendiente |
+| S-12 | Media | Tareas 12 y 13 | Windows 10 dejó de tener soporte el 14/10/2025. Sin ESU o LTSC, el PC del gerente y los TPV no reciben parches. El 29/10 la VM del gerente recibió la última acumulativa gratuita (2025-10, KB5066791): a partir de ahí ya no llega nada | TPV: IoT Enterprise LTSC 2021 (soporte hasta 2032), decisión pendiente en la tarea 13. Gerente: ESU, o usar Ubuntu para el trabajo diario y dejar Windows solo para lo imprescindible | Markel, Adrian | ⏳ Gerente: al día hasta octubre de 2025 (tarea 12); la decisión (Windows 11 Pro o ESU) queda para el equipo real. TPV pendiente |
 | S-13 | Baja | Tarea 52 y Docker | `ufw` no filtra los puertos que publica Docker: la regla «80/443 solo desde la LAN» de `cortafuegos-servidor.sh` no se aplica al proxy. Con la red de invitados aislada (S-06) no hay ruta hasta él, así que el impacto es bajo | Comprobarlo con nmap desde la red de invitados (sección 5). Si llega, regla en la cadena `DOCKER-USER` | Adrian | ⏳ Pendiente de comprobar |
 | S-14 | Baja | Tareas 13 y 52 | `configurar-tpv.ps1` permite por defecto los puertos 8069 y 443. Con el proxy activo, el TPV podría seguir abriendo `http://…:8069` (el servidor lo tiene cerrado, pero no es la configuración mínima) | Volver a ejecutarlo con `-PuertosOdoo 443` después de activar HTTPS (lo hace el runbook de la tarea 52) | Markel | ⏳ Con la tarea 52 |
 | S-15 | Baja | Tareas 34 a 36 | Los scripts se lanzan con `ODOO_PASSWORD=... python3 …`. La contraseña queda en `~/.bash_history` | `read -rs ODOO_PASSWORD && export ODOO_PASSWORD` antes de ejecutarlos. Cambiarlo en los ejemplos de uso | Iker, Eneko.P | ✅ Corregido el 27/10: los ejemplos de uso de los scripts de las tareas 34 a 36 piden la contraseña con `read -rs` (no se ve ni queda en el historial) |
@@ -80,6 +93,8 @@ Lo más urgente, por este orden:
 | S-19 | Baja | Tareas 34 y 52, ticket del TPV | El QR «¿Necesita una factura?» del ticket apunta a la IP vieja del servidor (`web.base.url` no se actualiza). Aunque apuntara bien, el cliente está en la Wi-Fi de invitados, que no llega al servidor: el QR invita a una dirección interna que no le sirve | [`fijar-url-y-qr.sh`](../../erp/52-https-odoo/fijar-url-y-qr.sh): fija `web.base.url` y `web.base.url.freeze` y quita el QR del recibo | Adrian | 🟡 Probado en la VM (el ticket sale sin QR con una sesión de caja nueva). Falta en el servidor del equipo, paso 2.1 del runbook de la 52 |
 | S-20 | Media | Tarea 13, TPV hechos a mano | Los TPV se configuraron a mano, no con `configurar-tpv.ps1`. Tienen usuario estándar, quiosco, USB bloqueado, firewall y Defender, pero el firewall solo está «activado» (por defecto Windows deja salir todo), no consta que la UAC deniegue la elevación ni que Edge tenga lista blanca y descargas bloqueadas, y el quiosco apunta a `http://localhost:8069`. Un cajero podría navegar a otras webs o sacar datos por la red | Ejecutar `configurar-tpv.ps1 -CertificadoOdoo .\odoo.crt -PuertosOdoo 443` en los dos TPV (o aplicar a mano lo que falta) y comprobarlo con `comprobar-tpv.ps1` (tarea 15) | Markel | ⏳ Pendiente |
 | S-21 | Baja | Tarea 19, `arduino/mando-joystick/subir.sh` | Instalaba la librería Joystick desde la rama principal de GitHub (con `ENABLE_UNSAFE_INSTALL`), sin fijar versión: cualquier cambio en esa rama entraría en el firmware sin revisar | Fijar la versión con la que se probó (`#v2.1.1`) | Adrian | ✅ Corregido el 27/10 (`LIB_VERSION`). La instalación no se pudo repetir: este PC no tiene `arduino-cli` |
+| S-22 | Baja | Tarea 42, `08-usuarios.sql` | El ejemplo de uso pasaba las contraseñas de `tpv_app` e `informes` escritas en la orden (`-v pass_tpv='...'`), y el comentario decía que así no quedaban en el historial: sí quedan en `~/.bash_history` | Leerlas antes con `read -rs` y pasarlas como variable (mismo criterio que S-15) | Adrian | ✅ Corregido el 29/10 en el script y en la tarea 40 |
+| S-23 | Media | Tarea 44, copia 3b a S3 | La copia a S3 necesita un usuario IAM con claves permanentes, y el Learner Lab no deja crear usuarios IAM: sus credenciales caducan en cada sesión. Con claves de la sesión, la copia nocturna fallaría en cuanto se pare el laboratorio; y unas claves con permisos de todo el laboratorio en el servidor serían peor que no tener la copia | En el laboratorio, dejar la 3b como diseño (la regla 3-2-1 ya la cumple el USB) y no guardar claves del Learner Lab en `s3.env`. En una cuenta de AWS normal: usuario IAM limitado al bucket, como dice la tarea 44 | Iker | ⏳ Pendiente |
 
 ## 4. Detalle
 
@@ -151,7 +166,7 @@ No se pueden hacer desde el repositorio. Cada una cierra o confirma un hallazgo.
 | 6 | `ssh -o PubkeyAuthentication=no tecnico@192.168.10.10` | `Permission denied (publickey)` | S-08 |
 | 7 | En el servidor: `systemctl status unattended-upgrades` | `active` | S-09 |
 | 8 | Batocera: menú *Sistema → Seguridad* | *Enforce security* activado; la contraseña ya no es `linux` | S-03 |
-| 9 | PC del gerente: `manage-bde -status C:` y `lsblk -f` en Ubuntu | BitLocker activo; `/home/gerente` cifrado (fscrypt; 29/10: OK) | S-11 |
+| 9 | PC del gerente: `manage-bde -status C:` y `lsblk -f` en Ubuntu | BitLocker activo; `/home/gerente` cifrado | S-11 · ✅ 29/10 en la VM ([BitLocker](../../evidencias/12-dual-boot/win-10-bitlocker-final.txt), [fscrypt](../../evidencias/12-dual-boot/ubu-09-fscrypt-home-gerente.txt)) |
 
 ## 6. Lo que ya está bien
 
@@ -169,4 +184,4 @@ Para no repetirlo en otras tareas y para la presentación:
 
 - [ ] Hacer las comprobaciones de la sección 5 y guardar las capturas.
 - [ ] Pasar cada hallazgo a su responsable (columna de la sección 3) y marcarlo aquí cuando lo cierre.
-- [ ] Repetir la revisión rápida antes de la entrega (10/11), con los hallazgos abiertos. El 27/10 se repasó lo que entró hasta el PR #65 (sección 1.1).
+- [ ] Repetir la revisión rápida antes de la entrega (10/11), con los hallazgos abiertos. Repasado hasta el PR #84 (secciones 1.1 y 1.2, 27/10 y 29/10).

@@ -67,7 +67,7 @@ probar_bd() {
 echo "== Base de datos"
 if hay docker; then
   docker rm -f verif-pg >/dev/null 2>&1
-  docker run -d --name verif-pg -e POSTGRES_PASSWORD=verif -v "$PWD/docs/bd/scripts:/s:ro" postgres:16 >/dev/null
+  docker run -d --name verif-pg -e POSTGRES_PASSWORD=verif -v "$PWD/docs/bd/scripts:/s:ro" postgres:17 >/dev/null
   until docker exec verif-pg pg_isready -U postgres -q 2>/dev/null; do sleep 1; done; sleep 2
   S=/s
   psql_() { local u=$1; shift; docker exec verif-pg psql -U "$u" -v ON_ERROR_STOP=1 -q "$@" </dev/null; }
