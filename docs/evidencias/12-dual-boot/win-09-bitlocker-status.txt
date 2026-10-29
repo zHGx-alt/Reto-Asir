@@ -1,0 +1,62 @@
+# Tarea 12 · Windows del gerente: BitLocker en C: (2026-10-29 08:49)
+Edicion: Professional  Version: 22H2  Compilacion: 19045.6456
+# Nota: la clave de recuperación inicial (ID CCAB671D-…) se mostró en pantalla al crearla y se sustituyó a las 08:51
+# por otra; la vigente es la 274BDA6D-… y solo esa está en KeePassXC. Las claves no se guardan en el repo.
+
+> manage-bde -status C:
+Cifrado de unidad BitLocker: versión de la herramienta de configuración 10.0.19041
+Copyright (C) 2013 Microsoft Corporation. Todos los derechos reservados.
+
+Volumen C: []
+[Volumen del sistema operativo]
+
+    Tamaño:                 39,62 GB
+    Versión de BitLocker:   2.0
+    Estado de conversión:   Cifrado en progreso
+    Porcentaje cifrado:     35,9%
+    Método de cifrado:      XTS-AES 256
+    Estado de protección:   Protección desactivada
+    Estado de bloqueo:      Desbloqueado
+    Campo de identificación:Desconocido
+    Protectores de clave:
+        Contraseña
+        Contraseña numérica
+
+
+> Get-BitLockerVolume C: | protectores (sin la clave)
+
+KeyProtectorType KeyProtectorId                        
+---------------- --------------                        
+        Password {C084A47F-25D1-4DAA-8F54-F1C2AEF49CF6}
+RecoveryPassword {274BDA6D-5296-4C82-B7FE-CA975C49E489}
+
+
+
+> Directiva HKLM\SOFTWARE\Policies\Microsoft\FVE
+
+
+UseAdvancedStartup : 1
+EnableBDEWithNoTPM : 1
+UseTPM             : 2
+
+
+
+
+> Get-HotFix
+
+HotFixID  Description     InstalledOn       
+--------  -----------     -----------       
+KB5015684 Update          05/05/2023 0:00:00
+KB5025315 Update          05/05/2023 0:00:00
+KB5014032 Security Update 05/05/2023 0:00:00
+KB5020683 Update          22/10/2026 0:00:00
+KB5033052 Update          28/10/2026 0:00:00
+KB5066790 Security Update 28/10/2026 0:00:00
+KB5066135 Update          28/10/2026 0:00:00
+KB5011048 Update          28/10/2026 0:00:00
+KB5066130 Update          29/10/2026 0:00:00
+KB5066791 Security Update 29/10/2026 0:00:00
+KB5011056 Update          29/10/2026 0:00:00
+
+
+
