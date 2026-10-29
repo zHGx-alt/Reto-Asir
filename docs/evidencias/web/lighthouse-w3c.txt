@@ -1,42 +1,84 @@
-# Lighthouse 12.2.1 y validadores del W3C contra la URL pública (26/10/2026)
+# Lighthouse 12.2.1 y validadores del W3C contra la URL pública (29/10/2026)
 
-Todo contra https://almichain1.duckdns.org, con la versión actual de web/ publicada (index.html,
-style.css y script.js idénticos a los del repositorio: 08-pruebas-curl.txt).
-Lighthouse desde la línea de comandos (npx lighthouse@12.2.1, Chrome sin interfaz), 5 pasadas
-por modo como recomienda Lighthouse; se da la mediana porque el resultado varía con la red.
+Todo contra https://almichain1.duckdns.org después del terraform apply de la tarea 31: la versión actual de web/,
+con las fotos en web/img/ (iac/evidencias/03-pruebas-curl.txt: ficheros publicados iguales al repositorio).
+Lighthouse desde la línea de comandos (npx lighthouse@12.2.1, Chrome sin interfaz), 5 pasadas por modo; se da la
+mediana porque el resultado varía con la red.
 
 ## Lighthouse · Móvil (5 pasadas)
   Pasada  Rendimiento  Accesibilidad  Buenas prácticas  SEO   FCP    LCP    TBT   CLS
-  1       94           100            100               100   1.9 s  2.8 s  0 ms  0
-  2       94           100            100               100   1.9 s  2.8 s  0 ms  0
-  3       94           100            100               100   1.9 s  2.8 s  0 ms  0
-  4       95           100            100               100   1.3 s  2.9 s  0 ms  0
-  5       94           100            100               100   1.9 s  2.8 s  0 ms  0
-  Mediana 94           100            100               100   1.9 s  2.8 s  0 ms  0
+  1       95           100            100               100   1.4 s  2.6 s  0 ms  0
+  2       97           100            100               100   1.3 s  2.6 s  0 ms  0
+  3       97           100            100               100   0.9 s  2.6 s  0 ms  0
+  4       96           100            100               100   1.4 s  2.6 s  0 ms  0
+  5       97           100            100               100   0.9 s  2.6 s  0 ms  0
+  Mediana 97           100            100               100   1.3 s  2.6 s  0 ms  0
 
 ## Lighthouse · Escritorio (5 pasadas)
   Pasada  Rendimiento  Accesibilidad  Buenas prácticas  SEO   FCP    LCP    TBT   CLS
-  1       99           100            100               100   0.6 s  1.0 s  0 ms  0
-  2       99           100            100               100   0.6 s  1.0 s  0 ms  0
-  3       98           100            100               100   0.6 s  1.0 s  0 ms  0
-  4       99           100            100               100   0.6 s  1.0 s  0 ms  0
-  5       98           100            100               100   0.7 s  1.0 s  0 ms  0
-  Mediana 99           100            100               100   0.6 s  1.0 s  0 ms  0
-
-## Antes del cambio del mapa (misma mañana)
-  Con el iframe de OpenStreetMap cargándose solo, móvil daba 70 de rendimiento (mediana de 5:
-  68, 95, 70, 71 y 70; FCP 3,6 s y LCP 6,0 s): el mapa trae unos 1,3 MB de JavaScript y se
-  cargaba dentro de la medida. Ahora se carga al pulsar «Ver el mapa» y ninguna pasada pide
-  nada a OpenStreetMap. Escritorio daba 98 y no ha cambiado.
+  1       100          100            100               100   0.2 s  0.5 s  0 ms  0
+  2       100          100            100               100   0.2 s  0.6 s  0 ms  0
+  3       100          100            100               100   0.2 s  0.6 s  0 ms  0
+  4       99           100            100               100   0.3 s  0.7 s  0 ms  0
+  5       100          100            100               100   0.2 s  0.6 s  0 ms  0
+  Mediana 100          100            100               100   0.2 s  0.6 s  0 ms  0
 
 ## Consola del navegador
-  Sin errores en las 10 pasadas (auditoría errors-in-console): la CSP no bloquea las fotos ni el mapa.
+  Sin errores en las 10 pasadas (auditoría errors-in-console).
 
-## W3C · https://almichain1.duckdns.org/ (validador Nu, vnu 26.10.18)
-  Document checking completed. No errors or warnings to show.
+## W3C · https://almichain1.duckdns.org/ (validador Nu, vnu 26.10.12)
+  Sin errores (vnu https://almichain1.duckdns.org/ no devuelve nada).
 
-## W3C · https://almichain1.duckdns.org/style.css (validador CSS, perfil CSS3 + SVG)
-  ¡Enhorabuena! No error encontrado. 0 errores y 11 advertencias, ninguna es un fallo:
-  - 9 × «Due to their dynamic nature, CSS variables are currently not statically checked»:
-    el validador no comprueba las variables CSS (--color...).
-  - 2 × «-webkit-text-stroke is a vendor extension»: propiedad con prefijo de navegador, a propósito.
+## W3C · https://almichain1.duckdns.org/style.css (vnu --css)
+  Sin errores.
+
+## Comparación con el 26/10 (fotos desde images.unsplash.com)
+  Móvil 94/100/100/100 (FCP 1,9 s, LCP 2,8 s) → 97/100/100/100 (FCP 1,3 s, LCP 2,6 s).
+  Escritorio 99/100/100/100 → 100/100/100/100. Servir las fotos desde la propia web ahorra la conexión a otro dominio.
+
+
+# ---------------------------------------------------------------------------------------------
+# Medida anterior (26/10/2026), antes de las fotos en local
+
+  # Lighthouse 12.2.1 y validadores del W3C contra la URL pública (26/10/2026)
+
+  Todo contra https://almichain1.duckdns.org, con la versión actual de web/ publicada (index.html,
+  style.css y script.js idénticos a los del repositorio: 08-pruebas-curl.txt).
+  Lighthouse desde la línea de comandos (npx lighthouse@12.2.1, Chrome sin interfaz), 5 pasadas
+  por modo como recomienda Lighthouse; se da la mediana porque el resultado varía con la red.
+
+  ## Lighthouse · Móvil (5 pasadas)
+    Pasada  Rendimiento  Accesibilidad  Buenas prácticas  SEO   FCP    LCP    TBT   CLS
+    1       94           100            100               100   1.9 s  2.8 s  0 ms  0
+    2       94           100            100               100   1.9 s  2.8 s  0 ms  0
+    3       94           100            100               100   1.9 s  2.8 s  0 ms  0
+    4       95           100            100               100   1.3 s  2.9 s  0 ms  0
+    5       94           100            100               100   1.9 s  2.8 s  0 ms  0
+    Mediana 94           100            100               100   1.9 s  2.8 s  0 ms  0
+
+  ## Lighthouse · Escritorio (5 pasadas)
+    Pasada  Rendimiento  Accesibilidad  Buenas prácticas  SEO   FCP    LCP    TBT   CLS
+    1       99           100            100               100   0.6 s  1.0 s  0 ms  0
+    2       99           100            100               100   0.6 s  1.0 s  0 ms  0
+    3       98           100            100               100   0.6 s  1.0 s  0 ms  0
+    4       99           100            100               100   0.6 s  1.0 s  0 ms  0
+    5       98           100            100               100   0.7 s  1.0 s  0 ms  0
+    Mediana 99           100            100               100   0.6 s  1.0 s  0 ms  0
+
+  ## Antes del cambio del mapa (misma mañana)
+    Con el iframe de OpenStreetMap cargándose solo, móvil daba 70 de rendimiento (mediana de 5:
+    68, 95, 70, 71 y 70; FCP 3,6 s y LCP 6,0 s): el mapa trae unos 1,3 MB de JavaScript y se
+    cargaba dentro de la medida. Ahora se carga al pulsar «Ver el mapa» y ninguna pasada pide
+    nada a OpenStreetMap. Escritorio daba 98 y no ha cambiado.
+
+  ## Consola del navegador
+    Sin errores en las 10 pasadas (auditoría errors-in-console): la CSP no bloquea las fotos ni el mapa.
+
+  ## W3C · https://almichain1.duckdns.org/ (validador Nu, vnu 26.10.18)
+    Document checking completed. No errors or warnings to show.
+
+  ## W3C · https://almichain1.duckdns.org/style.css (validador CSS, perfil CSS3 + SVG)
+    ¡Enhorabuena! No error encontrado. 0 errores y 11 advertencias, ninguna es un fallo:
+    - 9 × «Due to their dynamic nature, CSS variables are currently not statically checked»:
+      el validador no comprueba las variables CSS (--color...).
+    - 2 × «-webkit-text-stroke is a vendor extension»: propiedad con prefijo de navegador, a propósito.

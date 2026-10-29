@@ -1,7 +1,7 @@
 # Tarea 31 · Infraestructura como código de la web
 
-- **Responsable:** Iker
-- **Estado (24/10/2026):** Terraform escrito y comprobado con `terraform validate` y `terraform fmt -check` (Terraform 1.16, proveedor AWS 5.x); el `user_data` generado pasa `bash -n` con y sin token de DuckDNS. **Falta ejecutar `terraform apply` en el Learner Lab** (sección 4).
+- **Responsable:** Adrian (desde el 29/10; antes Iker y Eneko.P)
+- **Estado (29/10/2026):** ✅ Hecha en el Learner Lab. El montaje a mano de la tarea 30 se importó en Terraform (`terraform import`) y se aplicó: instancia nueva con Ubuntu 24.04 actualizado, disco cifrado e IMDSv2, la misma IP elástica (sin tocar DuckDNS) y la web actual con las fotos. Después, `terraform plan` dice *No changes*. Evidencias en [`evidencias/`](evidencias/): [plan](evidencias/01-plan.txt), [apply](evidencias/02-apply.txt), [pruebas](evidencias/03-pruebas-curl.txt), [GitHub Actions](evidencias/04-actions-desplegar-web.txt) y [plan sin cambios](evidencias/05-plan-sin-cambios.txt)
 
 Crea con un solo comando el mismo montaje que la [tarea 30](../docs/web/30-hosting-aws.md) hizo a mano, y GitHub Actions publica la web cada vez que cambia `web/` en `main`.
 
@@ -31,13 +31,33 @@ Crea con un solo comando el mismo montaje que la [tarea 30](../docs/web/30-hosti
 
 ## 4. Uso
 
+**El bucket se crea una vez a mano.** El Learner Lab prohíbe `s3:GetBucketObjectLockConfiguration`, y el recurso `aws_s3_bucket` de Terraform lo consulta siempre: con él, el `apply` falla (probado con los proveedores 5.100 y 6.71). Por eso `main.tf` lee el bucket con un `data` y gestiona todo lo demás (acceso público, ACL, cifrado y ficheros):
+
+```bash
+aws s3api create-bucket --bucket almi-chain-web-2026 --region us-east-1
+```
+
+**Si ya existe el montaje a mano** (tarea 30), no hace falta borrarlo: se importa y Terraform lo deja como dice el código (así se hizo el 29/10, y la IP elástica no cambia):
+
+```bash
+terraform import aws_security_group.web <sg-…>
+terraform import aws_eip.web <eipalloc-…>
+terraform import aws_instance.web <i-…>
+terraform import aws_eip_association.web <eipassoc-…>
+terraform import aws_s3_bucket_public_access_block.web almi-chain-web-2026
+terraform import aws_s3_bucket_ownership_controls.web almi-chain-web-2026
+terraform import aws_s3_bucket_server_side_encryption_configuration.web almi-chain-web-2026
+```
+
+Los identificadores salen de `aws ec2 describe-instances` y `aws ec2 describe-addresses`. Después:
+
 ```bash
 cd iac
 cp terraform.tfvars.example terraform.tfvars    # rellenar email y ssh_cidr
 export TF_VAR_duckdns_token='...'               # opcional
 terraform init
-terraform plan
-terraform apply
+terraform plan -out=plan.tfplan
+terraform apply plan.tfplan
 ```
 
 Al terminar muestra la IP elástica y la URL. La instancia tarda unos minutos más en tener el certificado: se sigue con `ssh -i labsuser.pem ubuntu@<ip> sudo tail -f /var/log/almichain-user-data.log`.

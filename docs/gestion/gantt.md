@@ -12,13 +12,13 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 ## Resumen
 
-**42 de 55 tareas hechas (76 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**43 de 55 tareas hechas (78 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 2 | 1 | 14 |
-| Software | 23 | 4 | 1 | 28 |
+| Software | 24 | 3 | 1 | 28 |
 | Físico | 4 | 2 | 1 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -33,7 +33,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 03/11 | En curso | Guía lista (docs/redes/25-wds/DOCUMENTACION.md): WDS en el Archer C6, pruebas W1-W10 (sobre todo que los clientes del router 2 sigan aislados de la LAN) y cobertura y velocidad antes y después en 5 puntos. Si la red de invitados no pasa por el enlace WDS: corregir los diagramas (tareas 11 y 23). 27/10 (Peio): prueba de laboratorio con dos TL-WR841N en una red de pruebas (TP-Link_AF60; 192.168.1.0/24): el enlace WDS funciona (el PC del router 2 recibe IP del router 1 y le hace ping) y el DHCP del router 2 está apagado. Falta repetirlo con la red del proyecto y la de invitados (tarea 24), las pruebas W3-W10 y las medidas de antes y después. | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
 | 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 04/11 | En curso | Estructura, .gitignore y gitleaks hechos: CI en verde y gitleaks local sin fugas en 81 commits (23/10). Tienen commits 5 de 6 personas; falta Eneko.P (Anexo IX). 27/10: fin movido al 4/11 (corte técnico). 29/10: verificar-repo.sh «Todo correcto» (incluye gitleaks de todo el historial y los enlaces); todo entra por PR (hasta el #88). Siguen 5 de 6 personas con commits: falta Eneko.P. | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
-| 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 04/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 04/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 04/11 | En curso | Revisión del repositorio hecha el 26/10 y repasada el 27/10 (PR #57-65): 21 hallazgos (5 altos) con responsable; S-03 no aplica (se descarta Batocera); nuevos S-20 (TPV hechos a mano sin el bastionado completo; Markel) y S-21 (versión de la librería del stick; corregido). Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge), S-05 (Wi-Fi cambiada) y S-21. S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. 29/10: repaso hasta el PR #84 (sección 1.2): S-22 corregido (08-usuarios.sql), S-23 nuevo (copia a S3 sin usuario IAM en el Learner Lab, Iker), S-11 hecho en el gerente y comprobación 9 de la sección 5 hecha. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 06/11 | En curso | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. 29/10: borrador con 59 pruebas de los 11 bloques (46 hechas; 13 pendientes, con la 53) sacadas de cada tarea, del backlog y de verificacion.md. | [47-tabla-pruebas.md](../../docs/gestion/47-tabla-pruebas.md) |
@@ -69,8 +68,9 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | Peio | — | [27-wireframes.md](../../docs/web/27-wireframes.md) |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | Markel | Mapa de OpenStreetMap; geolocalización; formulario de ejemplo y slideshow. | [index.html](../../web/index.html) |
-| 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | Adrian | Lighthouse 98-100 en local (23/10). Contra la URL pública (26/10; medianas de 5): móvil 94/100/100/100 y escritorio 99/100/100/100. Móvil daba 70 hasta que el mapa pasó a cargarse al pulsar un botón. W3C contra la URL pública: 0 errores en HTML y en CSS. Pasa de Eneko.P a Adrian, que la hizo. 29/10: la web cambió el 27/10 (fotos en web/img/): hay que repetir Lighthouse y el W3C contra la URL pública con el Learner Lab arrancado. | [lighthouse-w3c.txt](../../docs/evidencias/web/lighthouse-w3c.txt) |
-| 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | Adrian | Probado con el laboratorio encendido (evidencias del 23/10). Fuera de sesión no responde porque el Learner Lab apaga la EC2. Configuración de nginx comprobada con nginx -t. | [30-hosting-aws.md](../../docs/web/30-hosting-aws.md) |
+| 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | Adrian | Lighthouse 98-100 en local (23/10). Contra la URL pública (26/10; medianas de 5): móvil 94/100/100/100 y escritorio 99/100/100/100. Móvil daba 70 hasta que el mapa pasó a cargarse al pulsar un botón. W3C contra la URL pública: 0 errores en HTML y en CSS. Pasa de Eneko.P a Adrian, que la hizo. 29/10: la web cambió el 27/10 (fotos en web/img/): hay que repetir Lighthouse y el W3C contra la URL pública con el Learner Lab arrancado. 29/10: repetido con la web actual (fotos en web/img/) tras el apply de la tarea 31: móvil 97/100/100/100, escritorio 100/100/100/100, sin errores en la consola; W3C sin errores en HTML y CSS. | [lighthouse-w3c.txt](../../docs/evidencias/web/lighthouse-w3c.txt) |
+| 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | Adrian | Probado con el laboratorio encendido (evidencias del 23/10). Fuera de sesión no responde porque el Learner Lab apaga la EC2. Configuración de nginx comprobada con nginx -t. 29/10: el montaje se importó en Terraform (tarea 31) y se aplicó: misma IP, instancia nueva; pruebas con curl repetidas con la web actual (iac/evidencias/03-pruebas-curl.txt). | [30-hosting-aws.md](../../docs/web/30-hosting-aws.md) |
+| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | Adrian | Código hecho el 24/10 (Iker); pasó a Eneko.P el 26/10 y a Adrian el 29/10. 29/10: aplicado en el Learner Lab importando el montaje a mano de la tarea 30 (misma IP elástica, sin tocar DuckDNS): instancia nueva con disco cifrado e IMDSv2, web actual con las fotos, pruebas correctas y terraform plan sin cambios. Arreglado: el Learner Lab prohíbe leer el object lock del bucket, así que el bucket se lee con un data y se crea una vez con la CLI. Publicación por GitHub Actions comprobada el 27/10 (ejecución 40503296317); los secretos caducan con cada sesión del laboratorio. | [README.md](../../iac/README.md) |
 | 32 | Comparativa y elección de ERP | 7 ERP | Documentación | Eneko.S | Elige Odoo Community. | [32-comparativa-erp.md](../../docs/erp/32-comparativa-erp.md) |
 | 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | Iker | Repetido el 23/10 en Docker limpio con el mismo docker-compose.yml: login 200; gestor de BD desactivado; 5432 sin publicar; admin/admin rechazado. | [DOCUMENTACION.md](../../docs/erp/33-odoo-docker/DOCUMENTACION.md) |
 | 34 | Configurar módulos de Odoo | 7 ERP | Software | Iker | Hecha por Iker (estaba a nombre de Markel). La prueba en limpio del 23/10 encontró 2 fallos que impedían repetirla desde cero; corregidos (evidencias/prueba-instalacion-limpia.txt). TPV de barra probado con una venta real. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
@@ -94,8 +94,8 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 18 | 3 | 1 | 0 | 54 | 0, 2, 3, 4, 5, 6, 7, 8, 10 |
-| Eneko.P | 2 | 2 | 2 | 0 | 5 | 6, 7 |
+| Adrian | 19 | 3 | 1 | 0 | 55 | 0, 2, 3, 4, 5, 6, 7, 8, 10 |
+| Eneko.P | 1 | 1 | 1 | 0 | 2 | 7 |
 | Eneko.S | 9 | 3 | 1 | 1 | 16 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 1 | 1 | 0 | 27 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 7 | 1 | 0 | 0 | 16 | 1, 2, 4, 5, 6, 11 |
@@ -120,6 +120,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
 | 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
+| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 29/10–29/10 | #28 (Markel) | Hecho |
 | 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 27/10–27/10 | #34 (Iker) | Hecho |
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 26/10–27/10 | #33 (Iker) | Hecho |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
@@ -130,7 +131,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
 |---|---|---|---|---|---|---|
-| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 02/11–04/11 | #28 (Markel) | En curso |
 | 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 03/11–04/11 | #34 (Iker) | En curso |
 
 ### Eneko.S

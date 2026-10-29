@@ -65,3 +65,4 @@ preseed-local.cfg
 
 # --- Exportaciones de Odoo (tarea 36): llevan datos personales ---
 exportaciones-*/
+*.tfplan

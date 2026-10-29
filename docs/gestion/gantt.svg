@@ -302,11 +302,11 @@
 <rect x="684" y="1026" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>30. Hosting AWS con dominio y HTTPS · Adrian · 23/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="1066" x2="1202" y2="1066" stroke="#f0efeb"/>
 <text x="16" y="1059.0" class="s">31</text>
-<text x="44" y="1059.0" class="t">IaC y despliegue automatizado (Terraform + Actions)</text>
-<circle cx="449" cy="1055.0" r="4.5" fill="#eb6834"/>
-<text x="458" y="1059.0" class="t">Eneko.P</text>
+<text x="44" y="1059.0" class="m">IaC y despliegue automatizado (Terraform + Actions) ✓</text>
+<circle cx="449" cy="1055.0" r="4.5" fill="#2a78d6"/>
+<text x="458" y="1059.0" class="t">Adrian</text>
 <text x="528" y="1059.0" class="s">28</text>
-<rect x="924" y="1048" width="116" height="14" rx="4" fill="#eb6834" stroke="#0b0b0b" stroke-width="1.5"><title>31. IaC y despliegue automatizado (Terraform + Actions) · Eneko.P · 02/11–04/11 · En curso</title></rect>
+<rect x="844" y="1048" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>31. IaC y despliegue automatizado (Terraform + Actions) · Adrian · 29/10–29/10 · Hecho</title></rect>
 <rect x="16" y="1066" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="1083" class="t b">7 ERP</text>
 <line x1="16" y1="1114" x2="1202" y2="1114" stroke="#f0efeb"/>
