@@ -4,7 +4,7 @@
 - **Depende de:** tarea 39 (modelo lógico 3FN)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Estado:** hecha
-- **Gestor:** PostgreSQL 16 (probado en esa versión)
+- **Gestor:** PostgreSQL 17, el mismo que usa Odoo en el servidor. Probado en 16 (22/10), en 18.3 (24/10, tareas 41 y 42) y en 17.11 desde el 29/10, que es el que usa `scripts/verificar-repo.sh`
 
 ## 1. Qué se entrega
 

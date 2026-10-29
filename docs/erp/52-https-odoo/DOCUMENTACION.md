@@ -87,7 +87,7 @@ No es el TPV definitivo (es una VM personal con Windows 11, sin el bastionado de
 
 **Impresión.** La impresora USB (una Samsung ML-1660 láser, en lugar de la térmica del centro) se pasó a la VM, pero Windows no creó el puerto `USB001` y el trabajo falló ([12](evidencias/12-impresora-en-la-vm-error.png)). El ticket de la foto [09](evidencias/09-ticket-venta-https.webp) es el de la venta por HTTPS, pero salió por el CUPS del PC anfitrión: no salió de la VM.
 
-El 27/10 se imprimió desde la VM sin pasar el USB: la `win-11` manda el trabajo por **IPP** a la cola CUPS del PC, que tiene la impresora conectada. El PC no tiene sudo para Claude, así que Adrian cambió a mano `/etc/cups/cupsd.conf`:
+El 27/10 se imprimió desde la VM sin pasar el USB: la `win-11` manda el trabajo por **IPP** a la cola CUPS del PC, que tiene la impresora conectada. En el PC se cambió a mano `/etc/cups/cupsd.conf` (necesita `sudo`):
 
 | Línea | Para qué |
 |---|---|

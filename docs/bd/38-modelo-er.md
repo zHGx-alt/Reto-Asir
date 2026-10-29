@@ -1,6 +1,11 @@
 # Modelo E/R — Base de datos de establecimiento (Almi-Chain)
 
-Tarea #38 del backlog (bloque 8 BD). Fuente: `Reto_1_ASIR1_2026-2027.docx`.
+- **Bloque:** 8 BD
+- **Responsable:** Adrian
+- **Reto:** Almi-Chain (ASIR1 2026-27)
+- **Estado:** hecha; la notación se revisa con la rúbrica (4/11)
+- **Fecha:** 23/10/2026
+- **Fuente:** `Reto_1_ASIR1_2026-2027.docx`
 
 > **Versión revisada.** Se han aplicado los cambios C-01 a C-04 acordados al normalizar el modelo en la tarea #39 (3FN). Están resumidos en la sección 5.
 
@@ -36,7 +41,7 @@ El enunciado habla de «las bases de datos que habrá en cada establecimiento».
 | ESTABLECIMIENTO | Tendría una sola fila (el propio local): sobra | Una fila por local |
 | Clientes, platos, campañas | Se repiten en cada local y se desincronizan | Comunes a la cadena: se dan de alta una vez |
 | STOCK, empleados, equipos, facturas | De ese local | De cada local, separados por `id_establecimiento` |
-| Informes de la cadena (ventas por local, platos más vendidos) | Hay que juntar varias bases | Una consulta (tarea 41, C-03 y C-04) |
+| Informes de la cadena (ventas por local, platos más vendidos) | Hay que juntar varias bases | Una consulta (consultas C-03 y C-04 de [`07-consultas.sql`](scripts/07-consultas.sql), tarea 41; no confundir con los cambios C-03 y C-04 de la sección 5) |
 
 **Decisión:** el modelo es el de una **base central** de la cadena, que guarda los datos de **cada establecimiento** separados por la clave `id_establecimiento` (por eso existen ESTABLECIMIENTO y STOCK por local). Así se cumple la frase del enunciado («los datos de cada establecimiento») sin repetir la carta ni los clientes. Mientras la cadena sea el local piloto, la base está en el servidor de ese local, en el mismo PostgreSQL que Odoo y sobre el RAID (tareas 40 y 43). Si se abren más locales, se movería a un servidor central o a la nube, con acceso por VPN desde cada local.
 

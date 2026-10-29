@@ -53,6 +53,8 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | ERP · Odoo | Documentación de Odoo 19 y su API XML-RPC ([tareas 33-35](../erp/)) |
 | Copias · restic y mdadm | Documentación de restic y de mdadm ([tareas 43-45](../backup/)) |
 | Arcade · MAME y Batocera | Documentación de MAME, Debian (preseed) y Batocera ([tareas 16-18](../arcade/)) |
+| SO · Cifrado del gerente | Documentación de Microsoft sobre BitLocker (`manage-bde`, directiva «Requerir autenticación adicional al iniciar») y de [fscrypt](https://github.com/google/fscrypt) (protectores de inicio de sesión y `pam_fscrypt`) ([tarea 12](../so/12-dual-boot.md)) |
+| ERP · HTTPS | Documentación de nginx (`proxy_pass`, TLS) y de OpenSSL (`nameConstraints`) ([tarea 52](../erp/52-https-odoo/DOCUMENTACION.md)) |
 
 ## 4. Alternativas evaluadas
 
@@ -83,7 +85,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Impresora de tickets de las pruebas | Samsung ML-1660 (láser) por IPP | Las térmicas del centro no llegan para todos los grupos. El ticket de Odoo sale igual; en la tienda real sigue siendo la Epson TM-T20IV por USB (tarea 8) | 27/10/2026 |
 | Corte técnico | Todo lo técnico acaba el miércoles 4/11; tabla de pruebas, documentación final y presentación del 5 al 10/11 | El 4/11 dan la rúbrica: lo que no se ajuste a ella tiene una semana de margen, y lo que más depende de la rúbrica (documentación y presentación) se hace después | 27/10/2026 |
 | Firmware de router | El de fábrica de TP-Link (sin OpenWrt) | Con la red plana (decisión del 24/10) no hacen falta VLAN; el firmware de fábrica tiene WDS y red de invitados, y OpenWrt arriesga los routers ([tarea 23, apartado 5.3](../redes/23-plano-direccionamiento.md#53-por-qué-la-red-plana-y-no-las-vlan)) | 24/10/2026 |
-| SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 ([tarea 40](../bd/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
+| SGBD | PostgreSQL | Lo exige Odoo, así que todo el proyecto usa un único gestor. Scripts DDL probados en PostgreSQL 16 y 18 y, desde el 29/10, en el 17 que usa Odoo, con todas las pruebas correctas ([tarea 40](../bd/40-scripts-ddl.md)); Odoo corre sobre PostgreSQL 17 ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) | 22/10/2026 |
 | Backup | restic sobre RAID 1 (`mdadm`) y disco USB externo | Copias cifradas con AES-256, deduplicadas y automatizadas; cumple la regla 3-2-1 ([tarea 44](../backup/44-backup-3-2-1/DOCUMENTACION.md)) | 22/10/2026 |
 | Placa del arcade stick | Arduino Leonardo (ATmega32U4) | HID nativo por USB sin drivers; compatible con la librería Joystick; EEPROM para guardar el mapeo | 22/10/2026 |
 | Tamaño del equipo | 6 personas | El grupo es de 6 aunque el enunciado diga 4-5. Eneko.P volvió el 26/10 y tiene tareas ([roles.md](roles.md)) | 24/10/2026 |
