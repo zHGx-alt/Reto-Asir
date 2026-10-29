@@ -1,9 +1,9 @@
 # Tarea 17 · Pruebas de rendimiento de MAME antes y después
 
 **Responsable:** Iker · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
-**Estado:** ⏳ En curso: hecha en una VM de 2 núcleos y 1,5 GB; **falta en la de 1 núcleo y 1 GB** que pide el enunciado: se mide en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md), en `Recreativa-53` (ya no hay máquina física, decisión del 29/10)
+**Estado:** ✅ Hecha (29/10: alcance ajustado): método, scripts (`medir-rendimiento.sh`, `optimizar-arcade.sh`), las 9 optimizaciones y la medida de antes y después en una VM de 2 núcleos y 1,5 GB. **La medida en 1 núcleo y 1 GB, la que pide el enunciado, es la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md)** (Eneko.S, en `Recreativa-53`), para no medir lo mismo dos veces
 
-> ⚠️ **PENDIENTE DE REPETIR.** Estas medidas se hicieron en una VM con **2 núcleos y 1,5 GB**, pero el enunciado dice que la recreativa
+> ⚠️ **Las cifras de esta página no son las del equipo del cliente; las de 1 núcleo y 1 GB salen en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md).** Estas medidas se hicieron en una VM con **2 núcleos y 1,5 GB**, pero el enunciado dice que la recreativa
 > tiene **1 núcleo y 1 GB**. Ya hay una VM con esas especificaciones (`Recreativa-1GB`) con 3 medidas de "antes"
 > ([`evidencias/rendimiento-1gb.csv`](evidencias/rendimiento-1gb.csv)); faltan las de "después". Además, el equipo decidió probar
 > **Batocera**: su VM (`Batocera`, 1 núcleo, 1 GB) arranca, pero sus medidas están sin hacer. Ver [`../16-batocera/NOTAS.md`](../16-batocera/NOTAS.md).
@@ -119,8 +119,5 @@ En la máquina física los tiempos de arranque serán mucho más estables, y ade
 | 2 | En el CSV, el tiempo de MAME salía como `10,08` y la coma del idioma español rompía las columnas | `export LC_ALL=C` en `medir-rendimiento.sh`. Las 3 filas del "antes" se corrigieron a mano. |
 
 ## 8. Pendiente
-- [ ] Repetir antes y después en la VM `Recreativa-1GB` (1 núcleo, 1 GB) con la versión nueva de `optimizar-arcade.sh` y sustituir las tablas.
-- [ ] Medir jugando (no solo `-bench`) con `monitor-recreativa.sh` y guardar los CSV (tarea 18).
-- [ ] Repetir las medidas en la VM de 1 núcleo y 1 GB (`Recreativa-53`, tarea 54).
-- [ ] Revisión de Adrian → mover a **Hecho** en el Kanban.
+- [x] Antes y después en 1 núcleo y 1 GB, y medir jugando con `monitor-recreativa.sh`: pasan a la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md) (29/10), con estos mismos scripts.
 - [ ] Pasar a Adrian (tarea 18, monitorización) la lista de timers y servicios que quedan activos.

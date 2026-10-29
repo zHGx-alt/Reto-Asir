@@ -90,7 +90,7 @@ En `Guest Network` se configuró una red independiente:
 | Aislamiento entre invitados | Activado |
 | Renovación de clave de grupo | `3600` segundos |
 
-La contraseña de invitados es diferente de la contraseña del personal y no se publica en el repositorio.
+La contraseña de invitados no se publica en el repositorio. **Corrección (29/10):** en las capturas 14 y 16 se veía que era la misma que la del personal; hay que poner dos distintas ([DOCUMENTACION.md, sección 6](DOCUMENTACION.md#6-seguridad-wi-fi)).
 
 ![Red de invitados](imagenes/16-red-invitados.png)
 
@@ -181,4 +181,4 @@ La principal limitación es la ausencia de WPA3-SAE en el TP-Link TL-WR841N. Par
 
 ## 13. Seguridad de las evidencias
 
-Las imágenes preparadas para GitHub ocultan contraseñas y el PIN WPS. El PDF original no debe subirse al repositorio porque contiene credenciales visibles. Como esas credenciales aparecieron en las capturas originales, se recomienda rotarlas antes de dar la tarea por finalizada.
+Las imágenes preparadas para GitHub ocultan contraseñas y el PIN WPS. **El 29/10 no los ocultaban:** en la 14 y la 16 el recuadro tapaba el campo de al lado y en la 15 se leía el PIN; se taparon bien el mismo día y la contraseña y el PIN hay que cambiarlos, porque las versiones anteriores siguen en el historial de Git. El PDF original no debe subirse al repositorio porque contiene credenciales visibles. Como esas credenciales aparecieron en las capturas originales, se recomienda rotarlas antes de dar la tarea por finalizada.

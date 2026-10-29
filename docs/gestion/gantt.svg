@@ -177,18 +177,18 @@
 <rect x="684" y="574" width="76" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>51. Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO · Iker · 23/10–26/10 · Hecho</title></rect>
 <line x1="16" y1="614" x2="1202" y2="614" stroke="#f0efeb"/>
 <text x="16" y="607.0" class="s">17</text>
-<text x="44" y="607.0" class="t">Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB)</text>
-<circle cx="449" cy="603.0" r="4.5" fill="#eb6834"/>
-<text x="458" y="607.0" class="t">Eneko.P</text>
+<text x="44" y="607.0" class="m">Pruebas de rendimiento MAME antes/después (método, scripts, VM de 2 núcleos) ✓</text>
+<circle cx="449" cy="603.0" r="4.5" fill="#eda100"/>
+<text x="458" y="607.0" class="t">Iker</text>
 <text x="528" y="607.0" class="s">16</text>
-<rect x="844" y="596" width="76" height="14" rx="4" fill="#eb6834" stroke="#0b0b0b" stroke-width="1.5"><title>17. Pruebas de rendimiento MAME antes/después (VM de 1 núcleo y 1 GB) · Eneko.P · 29/10–30/10 · En curso</title></rect>
+<rect x="644" y="596" width="76" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>17. Pruebas de rendimiento MAME antes/después (método, scripts, VM de 2 núcleos) · Iker · 22/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="636" x2="1202" y2="636" stroke="#f0efeb"/>
 <text x="16" y="629.0" class="s">18</text>
-<text x="44" y="629.0" class="t">Monitorización de recursos de la recreativa</text>
-<circle cx="449" cy="625.0" r="4.5" fill="#eb6834"/>
-<text x="458" y="629.0" class="t">Eneko.P</text>
+<text x="44" y="629.0" class="m">Monitorización de recursos de la recreativa (scripts) ✓</text>
+<circle cx="449" cy="625.0" r="4.5" fill="#2a78d6"/>
+<text x="458" y="629.0" class="t">Adrian</text>
 <text x="528" y="629.0" class="s">16</text>
-<rect x="884" y="618" width="76" height="14" rx="4" fill="#eb6834" stroke="#0b0b0b" stroke-width="1.5"><title>18. Monitorización de recursos de la recreativa · Eneko.P · 30/10–02/11 · En curso</title></rect>
+<rect x="684" y="618" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>18. Monitorización de recursos de la recreativa (scripts) · Adrian · 23/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="658" x2="1202" y2="658" stroke="#f0efeb"/>
 <text x="16" y="651.0" class="s">53</text>
 <text x="44" y="651.0" class="m">Instalar la recreativa en VM de 1 núcleo y 1 GB y probarla con el stick ✓</text>
@@ -198,11 +198,11 @@
 <rect x="844" y="640" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>53. Instalar la recreativa en VM de 1 núcleo y 1 GB y probarla con el stick · Eneko.S · 29/10–30/10 · Hecho</title></rect>
 <line x1="16" y1="680" x2="1202" y2="680" stroke="#f0efeb"/>
 <text x="16" y="673.0" class="s">54</text>
-<text x="44" y="673.0" class="t">Medir rendimiento y recursos en la VM de 1 núcleo y 1 GB (Recreativa-53)</text>
+<text x="44" y="673.0" class="t">Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando)</text>
 <circle cx="449" cy="669.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="673.0" class="t">Eneko.S</text>
 <text x="528" y="673.0" class="s">17, 18, 53</text>
-<rect x="964" y="662" width="76" height="14" rx="4" fill="#1baf7a"><title>54. Medir rendimiento y recursos en la VM de 1 núcleo y 1 GB (Recreativa-53) · Eneko.S · 03/11–04/11 · Pendiente</title></rect>
+<rect x="964" y="662" width="76" height="14" rx="4" fill="#1baf7a"><title>54. Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) · Eneko.S · 03/11–04/11 · Pendiente</title></rect>
 <rect x="16" y="680" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="697" class="t b">4 Arduino</text>
 <line x1="16" y1="728" x2="1202" y2="728" stroke="#f0efeb"/>
