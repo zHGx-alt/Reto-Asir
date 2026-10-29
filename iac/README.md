@@ -1,6 +1,6 @@
 # Tarea 31 · Infraestructura como código de la web
 
-- **Responsable:** Iker
+- **Responsable:** Adrian (desde el 29/10; antes Iker y Eneko.P)
 - **Estado (24/10/2026):** Terraform escrito y comprobado con `terraform validate` y `terraform fmt -check` (Terraform 1.16, proveedor AWS 5.x); el `user_data` generado pasa `bash -n` con y sin token de DuckDNS. **Falta ejecutar `terraform apply` en el Learner Lab** (sección 4).
 
 Crea con un solo comando el mismo montaje que la [tarea 30](../docs/web/30-hosting-aws.md) hizo a mano, y GitHub Actions publica la web cada vez que cambia `web/` en `main`.
