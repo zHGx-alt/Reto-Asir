@@ -1,0 +1,29 @@
+
+==> 1/7 Desactivando tareas programadas que no hacen falta en una recreativa
+  desactivado: man-db.timer
+  desactivado: e2scrub_all.timer
+  desactivado: dpkg-db-backup.timer
+  desactivado: e2scrub_reap.service
+
+==> 2/7 Actualizaciones de seguridad automáticas a las 5:00, con el local cerrado
+  apt-daily a las 04:30 y apt-daily-upgrade (unattended-upgrades) a las 05:00
+
+==> 3/7 Desactivando cron (sus tareas diarias ya las llevan los timers de systemd)
+  desactivado: cron.service
+
+==> 4/7 Ajustando memoria: evitar que MAME acabe en swap
+  vm.swappiness = 10
+
+==> 5/7 Limitando el tamaño de los logs
+
+==> 6/7 CPU a máximo rendimiento (solo en máquinas físicas con cpufreq)
+  Sin cpufreq (máquina virtual): se omite.
+
+==> 7/7 Liberando disco (paquetes y kernels que ya no se usan, caché de apt)
+
+==> Resumen
+Servicios en marcha: 10
+Timers activos:      5
+Disco usado:         2,0G
+
+Listo. Reinicia para medir el resultado:  sudo reboot

@@ -198,11 +198,11 @@
 <rect x="844" y="640" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>53. Instalar la recreativa en VM de 1 núcleo y 1 GB y probarla con el stick · Eneko.S · 29/10–30/10 · Hecho</title></rect>
 <line x1="16" y1="680" x2="1202" y2="680" stroke="#f0efeb"/>
 <text x="16" y="673.0" class="s">54</text>
-<text x="44" y="673.0" class="t">Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando)</text>
+<text x="44" y="673.0" class="m">Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) ✓</text>
 <circle cx="449" cy="669.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="673.0" class="t">Eneko.S</text>
 <text x="528" y="673.0" class="s">17, 18, 53</text>
-<rect x="964" y="662" width="76" height="14" rx="4" fill="#1baf7a"><title>54. Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) · Eneko.S · 03/11–04/11 · Pendiente</title></rect>
+<rect x="964" y="662" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>54. Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) · Eneko.S · 03/11–04/11 · Hecho</title></rect>
 <rect x="16" y="680" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="697" class="t b">4 Arduino</text>
 <line x1="16" y1="728" x2="1202" y2="728" stroke="#f0efeb"/>

@@ -1,7 +1,7 @@
 # Tarea 47 · Tabla de pruebas por bloque
 
 **Responsable:** Eneko.S · **Fechas:** 05–06/11/2026 · **Depende de:** tareas 21, 26 y 29
-**Estado:** 📝 Borrador del 27/10/2026, actualizado el 29/10 con lo que entró hasta el PR #78 y con la tarea 53. Se completa a medida que se cierran las pruebas pendientes (⏳) y se ajusta a la rúbrica (llega el 4/11).
+**Estado:** 📝 Borrador del 27/10/2026, actualizado el 29/10 con lo que entró hasta el PR #87 y con las tareas 53 y 54. Se completa a medida que se cierran las pruebas pendientes (⏳) y se ajusta a la rúbrica (llega el 4/11).
 
 Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde está la evidencia**. No sustituye a la documentación de cada tarea: cada fila enlaza a ella. Los resultados se han copiado de los documentos de cada tarea, de [verificacion.md](verificacion.md) y del [backlog](backlog-kanban.csv) a fecha de 29/10/2026; no se han inventado ni redondeado.
 
@@ -18,16 +18,16 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 |---|---|---|---|---|
 | 0 Gestión | 5 | 4 | 1 | Commits de Eneko.P |
 | 1 Hardware | 3 | 3 | 0 | — |
-| 2 SO | 7 | 5 | 2 | Scripts del TPV en los dos equipos (S-20); impresora |
-| 3 Arcade | 9 | 7 | 2 | Medidas antes y después en la VM de 1 núcleo y 1 GB (17 y 54) |
-| 4 Arduino | 5 | 4 | 1 | Probarlo con MAME y con otro emulador (tarea 21) |
+| 2 SO | 7 | 6 | 1 | Scripts del TPV en los dos equipos (S-20) |
+| 3 Arcade | 9 | 9 | 0 | — |
+| 4 Arduino | 5 | 5 | 0 | — |
 | 5 Redes | 6 | 3 | 3 | Invitados aislados, WDS en el plan real y análisis con nmap y Wireshark |
-| 6 Web | 5 | 4 | 1 | `terraform apply` en el Learner Lab |
+| 6 Web | 5 | 4 | 1 | `terraform apply` en el Learner Lab; repetir W3C y Lighthouse con la web nueva |
 | 7 ERP | 8 | 7 | 1 | Importar y exportar datos contra Odoo (tarea 36) |
 | 8 BD | 3 | 3 | 0 | — |
 | 9 Backup | 5 | 4 | 1 | Restauración en una VM nueva (RTO real) |
 | 10 Seguridad | 3 | 2 | 1 | Comprobaciones en los equipos (tarea 46, sección 5) |
-| **Total** | **59** | **46** | **13** | |
+| **Total** | **59** | **50** | **9** | |
 
 ## 0 · Gestión
 
@@ -57,7 +57,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | S-04 | 13 | TPV: usuario estándar, quiosco con Edge, USB bloqueado, cortafuegos y Defender | Todo aplicado | ✅ 🖥️ A mano en dos VM con Windows 11 Pro. El quiosco apunta todavía a `http://localhost:8069` (provisional). Sin el bloqueo de salida del firewall ni la lista blanca de Edge que da `configurar-tpv.ps1` (hallazgo S-20 de la tarea 46) | 26/10 | [Bastionado del TPV](../so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
 | S-05 | 15 | Analizador de PowerShell sobre `configurar-tpv.ps1` y `comprobar-tpv.ps1` | 0 errores | ✅ | 24/10 | [comprobar-tpv.ps1](../so/13-tpv/comprobar-tpv.ps1) |
 | S-06 | 15 | `comprobar-tpv.ps1` en los dos TPV | Todo OK | ⏳ | — | [comprobar-tpv.ps1](../so/13-tpv/comprobar-tpv.ps1) |
-| S-07 | 14 | Cola de impresión en los TPV y página de prueba | Imprime | ⏳ La impresora de pruebas es la Samsung ML-1660 (decisión del 27/10). Por USB a la VM no crea el puerto; por IPP sí imprime (ver E-08). Falta la cola en los TPV de la tarea 13 | — | [Tarea 14](../so/14-impresora/DOCUMENTACION.md) |
+| S-07 | 14 | Impresión de prueba desde el TPV | Imprime | ✅ 🖥️ Con la Samsung ML-1660 (impresora de pruebas acordada el 27/10): por IPP a la cola CUPS del PC, el ticket de Odoo sale en papel desde la VM del TPV. Por USB pasado a la VM, Windows no crea el puerto | 27/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
 
 ## 3 · Recreativa
 
@@ -68,10 +68,10 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | A-03 | 16 | `arcade` sin `sudo`, contraseña bloqueada y carpetas privadas | Denegado | ✅ 🖥️ | 22/10 | [Tarea 16, §7](../arcade/16-recreativa-mame/DOCUMENTACION.md) |
 | A-04 | 51 | Batocera frente a Debian en VM de 1 núcleo y 1 GB | Elegir el más ligero | ✅ 🖥️ Debian: 7,1 s frente a 12,9 s hasta jugar; 400 MB frente a 554 MB | 26/10 | [NOTAS.md](../arcade/16-batocera/NOTAS.md) |
 | A-05 | 17 | Rendimiento antes y después de optimizar (VM de 2 núcleos y 1,5 GB) | Mejora o igual | ✅ 🖥️ Timers 8 → 3, disco −277 MB, Robby Roto +27 % y más estable; arranque no concluyente | 22/10 | [rendimiento.csv](../arcade/17-rendimiento-mame/evidencias/rendimiento.csv) |
-| A-06 | 17, 18 | Lo mismo en la VM de 1 núcleo y 1 GB, también jugando | Antes y después | ⏳ Solo hay 3 medidas de «antes» | — | [Tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md) |
+| A-06 | 17, 18 | Lo mismo en la VM de 1 núcleo y 1 GB, también jugando | Antes y después | ✅ 🖥️ Hecho dentro de la tarea 54 en `Recreativa-53` (ver A-09) | 29/10 | [Tarea 54](../arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 | A-07 | 18 | Scripts de monitorización en Linux | CSV correcto, parada limpia | ✅ | 23/10 | [Tarea 18](../arcade/18-monitorizacion-recreativa.md) |
 | A-08 | 53 | Recreativa en VM de 1 núcleo y 1 GB con el stick: comprobaciones P1-P10 | Todo OK | ✅ 🖥️ `Recreativa-53`: arranque directo a MAME, 5 juegos, partida con el stick, MAME se reabre, `arcade` sin privilegios, SSH solo con clave; 524 MB libres con MAME | 29/10 | [Tarea 53](../arcade/53-recreativa-fisica/DOCUMENTACION.md) |
-| A-09 | 54 | Medidas antes y después en `Recreativa-53` (1 núcleo y 1 GB) | Datos de antes y después | ⏳ Protocolo listo | — | [Tarea 54](../arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
+| A-09 | 54 | Medidas antes y después en `Recreativa-53` (1 núcleo y 1 GB): 3 + 3 arranques, reposo y 10 min de juego | Datos de antes y después | ✅ 🖥️ Timers 8 → 5, disco −12 %; arranque (14,4 s), RAM y velocidad sin cambios significativos (*Robby Roto* 773 % → 777 %). Jugando: CPU media 52-58 %, más de 460 MB libres y sin swap | 29/10 | [Tarea 54](../arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 
 ## 4 · Arcade stick (Arduino)
 
@@ -81,7 +81,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | R-02 | 16 | MAME detecta un mando con la identidad USB del Leonardo | Detectado | ✅ 🖥️ Mando virtual | 22/10 | [prueba-stick-virtual.txt](../arcade/16-recreativa-mame/evidencias/prueba-stick-virtual.txt) |
 | R-03 | 19 | Montaje y cableado | Montado | ✅ Cableado y probado en la placa; montado en la caja con la palanca y los botones (la caja tiene 6 botones; el firmware lee 4) | 27/10 | [Foto](../../arduino/mando-joystick/evidencias/stick-montado-2026-10-27.webp) · [prueba en la placa](../../arduino/mando-joystick/evidencias/prueba-placa-2026-10-27.txt) |
 | R-04 | 50 | Firmware en la placa: HID, comandos y EEPROM | Funciona | ✅ Los 4 botones y las 4 direcciones llegan al PC y a Batocera | 27/10 | [Entrada registrada](../../arduino/mando-joystick/evidencias/entrada-stick-2026-10-27-1124.txt) · [EEPROM](../../arduino/mando-joystick/evidencias/eeprom-2026-10-27.txt) |
-| R-05 | 21 | Stick con MAME y con otro emulador | Funciona en los dos | ⏳ Con MAME, ✅ (partida en `Recreativa-53`, tarea 53, 29/10). Batocera lo reconoce (evtest con los 4 botones y los ejes). Falta jugar con otro emulador | — | [evtest en Batocera](../../arduino/mando-joystick/evidencias/batocera-evtest-2026-10-27.txt) |
+| R-05 | 21 | Stick con MAME y con otro emulador | Funciona en los dos | ✅ MAME: partida en `Recreativa-53` (tarea 53, 29/10). Batocera (RetroArch): evtest con los 4 botones y los ejes y una partida el 27/10, sin captura | 27-29/10 | [evtest en Batocera](../../arduino/mando-joystick/evidencias/batocera-evtest-2026-10-27.txt) · [partida en MAME](../arcade/53-recreativa-fisica/evidencias/07-partida-stick.png) |
 
 ## 5 · Redes
 
@@ -98,8 +98,8 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 
 | Id | Tarea | Prueba | Esperado | Resultado | Fecha | Evidencia |
 |---|---|---|---|---|---|---|
-| W-01 | 29 | Validador W3C contra la URL pública | 0 errores | ✅ 0 en HTML y en CSS | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
-| W-02 | 29 | Lighthouse contra la URL pública (mediana de 5) | ≥ 90 | ✅ Móvil 94/100/100/100; escritorio 99/100/100/100 | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
+| W-01 | 29 | Validador W3C contra la URL pública | 0 errores | ✅ 0 en HTML y en CSS. Hay que repetirlo: la web cambió el 27/10 (fotos) | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
+| W-02 | 29 | Lighthouse contra la URL pública (mediana de 5) | ≥ 90 | ✅ Móvil 94/100/100/100; escritorio 99/100/100/100. Hay que repetirlo por el cambio del 27/10 | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
 | W-03 | 30 | Web en AWS con dominio y HTTPS; `nginx -t` | Responde por HTTPS | ✅ Con el laboratorio encendido; fuera de sesión no responde (el Learner Lab apaga la EC2) | 23/10 | [Tarea 30](../web/30-hosting-aws.md) |
 | W-04 | 28 | Geolocalización con una posición simulada | Distancia y ruta | ✅ «1,1 km» y enlace a la ruta | 24/10 | [verificacion.md §8](verificacion.md) |
 | W-05 | 31 | `terraform fmt`/`validate` y `apply` en el Learner Lab | Infraestructura creada | ⏳ `validate` y `fmt` correctos (24/10); falta `apply` | — | [iac/README.md](../../iac/README.md) |
@@ -139,7 +139,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 
 | Id | Tarea | Prueba | Esperado | Resultado | Fecha | Evidencia |
 |---|---|---|---|---|---|---|
-| X-01 | 46 | Revisión de seguridad del repositorio, repasada con lo que entró hasta el PR #65 | Hallazgos con responsable | ✅ 21 hallazgos (5 altos): corregidos S-01, S-05, S-15, S-18 y S-21; S-03 ya no aplica (se descarta Batocera) | 26-27/10 | [Tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| X-01 | 46 | Revisión de seguridad del repositorio, repasada el 27/10 y el 29/10 | Hallazgos con responsable | ✅ 23 hallazgos: corregidos S-01, S-05, S-15, S-18, S-21 y S-22; S-03 ya no aplica (se descarta Batocera) | 26-29/10 | [Tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | X-02 | 46, 52 | S-01: certificado de Odoo limitado con `nameConstraints` | No vale para otras webs | ✅ 🖥️ Probado también en Edge | 26/10 | [Tarea 46, §4.1](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | X-03 | 46 | Comprobaciones en los equipos (nmap, router, SSH, cifrado) | 9 comprobaciones | ⏳ Las 1 y 2 se hacen con la tarea 26 | — | [Tarea 46, §5](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
