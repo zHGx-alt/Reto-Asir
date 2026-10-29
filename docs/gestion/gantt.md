@@ -12,14 +12,14 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 ## Resumen
 
-**38 de 55 tareas hechas (69 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**40 de 55 tareas hechas (72 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 2 | 1 | 14 |
-| Software | 20 | 6 | 2 | 28 |
-| Físico | 3 | 2 | 2 | 7 |
+| Software | 21 | 6 | 1 | 28 |
+| Físico | 4 | 2 | 1 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
 
@@ -41,8 +41,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 06/11 | En curso | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. 29/10: borrador con 59 pruebas de los 11 bloques (46 hechas; 13 pendientes, con la 53) sacadas de cada tarea, del backlog y de verificacion.md. | [47-tabla-pruebas.md](../../docs/gestion/47-tabla-pruebas.md) |
 | 48 | Documentación final paso a paso | Documentación | Markel | 09/11 | En curso | Punto de partida: LOGICA_RETO.md. 27/10: después de la rúbrica (4/11), para ajustarla a ella. 29/10: estaba en Hecho por error (el plan la pone del 5 al 9/11 y su documento dice En curso). Markel subió el capítulo de restauración (docs/backup/48-documentacion-final-restauracion.md), que amplía la 45 sin repetir sus pruebas. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. 29/10: puesto al día (decisiones sustituidas marcadas, firmware de router, cifrado del gerente, semanas con el corte del 4/11, incidencias y pruebas del 27-29/10). | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). 26/10: intento con una Samsung ML-1660 USB pasada a la VM win-11 (tarea 52): Windows instala el driver pero no crea el puerto USB001 y el trabajo falla; queda para la impresora del centro. 27/10: la impresora de pruebas es la Samsung ML-1660 (decisión del equipo; no hay térmicas para todos). Pasada por USB a la VM no crea USB001; por IPP a la cola CUPS del PC de Adrian sí imprime (tarea 52, sección 4.2). Falta la cola en los TPV de la tarea 13. | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
-| 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. 27/10: en Batocera ya se reconoce (evtest con los 4 botones y los ejes; es_input.cfg). 29/10: con MAME ya está probado en la tarea 53 (partida de Gridlee con el stick, pruebas P4 y P10). Falta solo el segundo emulador jugando (Batocera solo comprobó que llegan las entradas). | [DOCUMENTACION.md](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md) |
 | 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 04/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. 27/10: se acorta a un día (4/11) por el corte técnico de esa fecha; depende de que la 25 acabe el 3/11. 27/10: plan W1-W7 de Wireshark y analizar-red.sh (nmap con veredicto; probado con servicios locales). | [DOCUMENTACION.md](../../docs/redes/26-analisis-conectividad/DOCUMENTACION.md) |
 | 54 | Medir rendimiento y recursos en la VM de 1 núcleo y 1 GB (Recreativa-53) | Software | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. 27/10: protocolo y resumir-rendimiento.sh (reproduce la tabla de la tarea 17); falta medir en el equipo real. 29/10: se mide en Recreativa-53 (tarea 53); sirve también para lo que le falta a la 17 en 1 GB. | [DOCUMENTACION.md](../../docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. | — |
@@ -62,9 +60,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | Iker | Actualizado el 24/10: switch; servidor presupuestado; red de invitados 192.168.50.0/24; Actions y HTTPS; SVG regenerado; tabla de guías de instalación por equipo. | [DIAGRAMA.md](../../docs/diagramas/11-arquitectura-equipos/DIAGRAMA.md) |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | Adrian | Hecho en VMware (23/10). Ubuntu 26.04.1 LTS (leído del disco el 27/10). 29/10: VM pasada a VirtualBox (disco SATA, teclado USB); Windows al día con KB5066791 (19045.6456); BitLocker en C: con contraseña de arranque (sin TPM) y /home/gerente cifrado con fscrypt; scripts en scripts/so/. No se vuelve a exportar: bastan las evidencias. Windows 10 sin soporte: anotado como riesgo (Windows 11 Pro o ESU en el equipo real). | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | Markel | Hecha a mano por Markel el 26/10 en dos VM con Windows 11 Pro (TPV2 clonado de TPV1 con MAC nuevas): usuario estándar UsuarioTPV; quiosco QuioscoTPV con Edge; USB bloqueado por directiva; firewall y Defender activos; capturas en la guía. Queda (hallazgo S-20 de la tarea 46): el quiosco apunta a http://localhost:8069 provisional y hay que cambiarlo por la dirección del servidor (tarea 52); comprobar-tpv.ps1 no se ha ejecutado (tarea 15). El 26/10 pasa de Iker a Markel. | [13-bastionado-tpv-windows.md](../../docs/so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
+| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | Adrian | Hecha con la Samsung ML-1660 (decisión del 27/10: no hay térmicas para todos). 26/10: pasada por USB a la VM del TPV, Windows no crea USB001. 27/10: cola IPP a la CUPS del PC con el controlador Microsoft PS Class Driver; el ticket de Odoo sale en papel desde la VM y sin QR (tarea 52, sección 4.2; evidencias 16 y 17). Pasa a Adrian, que la hizo (antes Iker). La guía de docs/so/14-impresora queda para la térmica por USB del local. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | Iker | Debian 13 + MAME 0.276 en VM: arranque directo en 4,7 s y 5 ROMs legales verificadas. El 24/10: preseed sin clave SSH fija y SSH sin contraseña; conexión a la Wi-Fi de invitados documentada. 29/10: la recreativa se entrega en VM; la tarea 53 la repite en la VM de 1 núcleo y 1 GB con el stick real. | [DOCUMENTACION.md](../../docs/arcade/16-recreativa-mame/DOCUMENTACION.md) |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | Markel | Esquema de conexiones con 4 botones (pines 2-5) y la palanca digital (A2-A5); actualizado el 26/10. 27/10 (Iker): cableado y probado en la placa real; el común de la palanca es el cable blanco a GND. Ver arduino/mando-joystick/evidencias/prueba-placa-2026-10-27.txt. 27/10 (Adrian): montado en la caja con la palanca y los botones (foto). La caja tiene 6 botones; el firmware lee 4 (pines 2-5). | [stick-montado-2026-10-27.webp](../../arduino/mando-joystick/evidencias/stick-montado-2026-10-27.webp) |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | Adrian | Compila (pio run del 26/10: Flash 37,4 %; RAM 17,4 %). 26/10: 4 botones por indicación del profesor y solo palanca digital (fuera el modo analógico; la zona muerta y el modo NINGUNA). Probarlo en la placa es la tarea 50. | [README.md](../../arduino/mando-joystick/README.md) |
+| 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | Markel | Pasa de Eneko.P a Markel. MAME: partida de Gridlee con el stick en Recreativa-53 (tarea 53, P4 y P10, 29/10). Otro emulador: Batocera (RetroArch), con evtest de los 4 botones y los ejes y es_input.cfg (Iker, 27/10) y una partida jugada ese día, sin captura. | [README.md](../../arduino/mando-joystick/README.md) |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | Peio | — | [27-wireframes.md](../../docs/web/27-wireframes.md) |
@@ -94,11 +94,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 16 | 3 | 1 | 0 | 51 | 0, 2, 4, 5, 6, 7, 8, 10 |
+| Adrian | 17 | 3 | 1 | 0 | 53 | 0, 2, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 4 | 4 | 4 | 0 | 9 | 3, 6, 7 |
 | Eneko.S | 9 | 3 | 1 | 1 | 16 | 1, 3, 5, 7, 8, 11 |
-| Iker | 13 | 2 | 2 | 0 | 27 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 7 | 2 | 0 | 1 | 15 | 1, 2, 4, 5, 6, 11 |
+| Iker | 12 | 1 | 1 | 0 | 25 | 0, 1, 2, 3, 7, 8, 9 |
+| Markel | 7 | 1 | 0 | 0 | 16 | 1, 2, 4, 5, 6, 11 |
 | Peio | 6 | 3 | 0 | 2 | 14 | 0, 1, 5, 6, 11 |
 
 ## Tareas por persona
@@ -112,6 +112,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 3 | Repartir tareas y responsables | 0 Gestión | Gestión | 21/10–21/10 | — | Hecho |
 | 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–04/11 | — | En curso |
 | 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | 22/10–29/10 | #8 (Eneko.S) | Hecho |
+| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 26/10–27/10 | #8 (Eneko.S) | Hecho |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | 23/10–23/10 | — | Hecho |
 | 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | 22/10–23/10 | — | Hecho |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | 27/10–27/10 | #19 (Markel) | Hecho |
@@ -153,7 +154,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 4 | Herramienta de seguimiento (Gantt en el repo) | 0 Gestión | Gestión | 21/10–23/10 | — | Hecho |
 | 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | 23/10–23/10 | #8 (Eneko.S), #9 (Markel) | Hecho |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 29/10–30/10 | #8 (Eneko.S) | Pendiente |
 | 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–04/11 | #12 (Adrian), #13 (Markel) | En curso |
 | 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | 22/10–23/10 | — | Hecho |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | 23/10–26/10 | — | Hecho |
@@ -172,7 +172,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 26/10–26/10 | #9 (Markel) | Hecho |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Hecho |
-| 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
+| 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 27/10–29/10 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Hecho |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | 21/10–23/10 | #27 (Peio) | Hecho |
 | 48 | Documentación final paso a paso | 11 Entrega | Documentación | 05/11–09/11 | #45 (Iker) | En curso |

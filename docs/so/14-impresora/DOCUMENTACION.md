@@ -1,9 +1,9 @@
 # Tareas 14 y 37: Impresora de tickets en el TPV y ticket desde Odoo
 
 - **Bloque:** 2 SO (14) y 7 ERP (37)
-- **Responsables:** Adrian (14) · Peio (37)
+- **Responsables:** Adrian (14 y 37)
 - **Requisitos que cubre:** RI-01 a RI-07 y RT-02 de la [tarea 7](../../hardware/07-necesidades-equipos.md)
-- **Estado:** guía preparada el 24/10/2026. **La impresora la da el centro**: hasta entonces solo se puede hacer la parte de la VM (sección 3, pasos 1-3 con la impresora en modo «Microsoft Print to PDF»).
+- **Estado:** ✅ Hechas el 26-27/10/2026 en VM, con la Samsung ML-1660 (decisión del 27/10: las térmicas del centro no llegan para todos). En la VM del TPV, el USB pasado no creaba el puerto `USB001`; se instaló la impresora como cola IPP (`http://172.17.0.1:631/printers/ML-1660-Series`, controlador Microsoft PS Class Driver) y el ticket de Odoo salió en papel desde la VM, sin QR. Evidencias y pasos: [tarea 52, sección 4.2](../../erp/52-https-odoo/DOCUMENTACION.md#42-pruebas-5-y-6-con-un-tpv-provisional-26102026) ([ticket](../../erp/52-https-odoo/evidencias/16-ticket-impreso-desde-vm.webp), [registro de CUPS](../../erp/52-https-odoo/evidencias/17-cups-trabajo-desde-vm.txt)). Esta guía queda para la térmica por USB del local.
 
 ## 1. Cómo va conectada
 

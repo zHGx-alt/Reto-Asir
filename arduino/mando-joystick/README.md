@@ -15,7 +15,7 @@ Tareas relacionadas en el [backlog](../../docs/gestion/backlog-kanban.csv): #19 
 | Mapeo configurable guardado en EEPROM | Hecho y probado en la placa (27/10): `MAP` + `GUARDAR` sobrevive a un reinicio |
 | Comandos por puerto serie | Hecho y probado en la placa (27/10): `VER`, `MAP`, `GUARDAR` y `RESET` |
 | **Prueba en la placa real** | **Hecha el 27/10** (tarea #50): botones, palanca, puerto serie y EEPROM. Ver [la prueba](#prueba-en-físico-tarea-50) |
-| Pruebas con MAME y otro emulador | Pendiente (tarea #21). En Batocera ya se reconoce: [evtest](evidencias/batocera-evtest-2026-10-27.txt) |
+| Pruebas con MAME y otro emulador | Hecho (tarea #21): en MAME, partida de *Gridlee* con el stick en la recreativa de 1 GB ([tarea 53](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md), P4 y P10, 29/10); en Batocera (RetroArch), entradas comprobadas ([evtest](evidencias/batocera-evtest-2026-10-27.txt)) y partida jugada el 27/10, sin captura |
 
 Compila con `pio run` (26/10, Flash 37,4 %, RAM 17,4 %) y funciona en la placa real desde el 27/10.
 
