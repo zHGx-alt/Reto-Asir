@@ -3,8 +3,8 @@
 - **Bloque:** 5 Redes
 - **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** en curso (faltan la red de invitados, WPA3, WPS y limitar la administración a la MAC del gerente, sección 12). Contraseñas Wi-Fi y de administración cambiadas el 26/10/2026
-- **Fecha:** 23/10/2026 · **Revisión:** 24/10/2026
+- **Estado (29/10/2026):** 🟡 Configuración hecha por Peio el 29/10 ([segunda parte](configurar-red-segura.md)): LAN `192.168.10.0/24`, reserva del PC del gerente, WPS desactivado, red de invitados aislada, administración solo desde el PC del gerente y renovación de la clave de grupo. **Falta:** cambiar la contraseña Wi-Fi, que se leía en dos capturas y es la misma en las dos redes (sección 6), y las capturas de ping de las pruebas P3b y P4. WPA3 no existe en este router: queda como limitación
+- **Fecha:** 23/10/2026 · **Revisión:** 24/10/2026 · **Segunda parte:** 29/10/2026
 - **Depende de:** tarea 23 (plano y direccionamiento)
 
 ## 1. Objetivo
@@ -16,6 +16,9 @@ Configurar y comprobar la seguridad de la red inalámbrica del restaurante, prot
 
 > [!NOTE]
 > **Por qué un TL-WR841N y no el Archer C6.** Los Archer C6 del presupuesto (tarea 10) no se han comprado; el TL-WR841N es el router que había disponible para practicar. Sirve para demostrar el procedimiento (administración, cifrado, firewall), pero **no es el router del diseño**: su LAN está en `192.168.1.0/24` y no en `192.168.10.0/24` (tarea 23), y no tiene WPA3. La configuración definitiva se repite en el Archer C6 (sección 12).
+
+> [!NOTE]
+> **Este documento es la primera parte (23-26/10), con la red de prácticas `192.168.1.0/24`.** La configuración definitiva del 29/10, con la red del proyecto (tarea 23), está en [configurar-red-segura.md](configurar-red-segura.md). Las secciones 9, 10 y 12 recogen ya el resultado de las dos.
 
 ## 2. Comprobación de conectividad
 
@@ -69,6 +72,8 @@ El panel recomienda WPA2-PSK con cifrado AES.
 > **Contraseñas expuestas (corregido el 24/10/2026).** En la primera versión de las figuras 7 y 8 el recuadro negro tapaba otra zona y **se leían la contraseña Wi-Fi y la contraseña RADIUS**. Ahora están tapadas encima del campo correcto, pero las imágenes antiguas **siguen en el historial de Git**, así que:
 > 1. Hay que **cambiar la contraseña Wi-Fi** de ese router si sigue en uso. Además era débil (8 cifras), contra la norma del proyecto. La nueva, una frase de 20 caracteres o más generada con KeePassXC.
 > 2. gitleaks no analiza imágenes: cada captura se revisa a ojo, ampliada, antes de subirla.
+>
+> **Volvió a pasar el 29/10.** En las capturas 14 y 16 de la segunda parte el recuadro tapaba el campo de al lado: se leía la contraseña Wi-Fi nueva (**la misma en la red del personal y en la de invitados**). En la 15 se leía el PIN de WPS. Las imágenes se taparon bien el mismo día, pero las anteriores siguen en el historial de Git, así que hay que: cambiar la contraseña Wi-Fi del personal y poner **otra distinta** a la de invitados (las dos en KeePassXC), y generar un PIN nuevo en *Wireless → WPS* (WPS sigue desactivado). Hallazgo S-24 de la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md).
 
 ![Primera configuración de seguridad Wi-Fi](imagenes/07-wifi-seguridad-primera.png)
 
@@ -121,7 +126,7 @@ El panel solicita credenciales de administración. La contraseña administrativa
 
 ## 9. Red de invitados
 
-El menú incluye **Guest Network**, pero las once capturas no muestran la página de configuración final de esa red. Para completar esta parte hay que añadir una captura donde aparezcan:
+**Hecha el 29/10** ([segunda parte, sección 6](configurar-red-segura.md#6-red-de-invitados)): `Restaurante-Almichain-Invitados`, WPA2-PSK con AES, sin acceso a la red local, aislamiento entre invitados y renovación de la clave cada 3600 s. Un móvil de la red de invitados no abre el panel del router. Lo que se pedía:
 
 1. Un SSID independiente, por ejemplo `Restaurante-Almichain-Invitados`.
 2. Una contraseña diferente de la red principal.
@@ -141,10 +146,11 @@ El menú incluye **Guest Network**, pero las once capturas no muestran la págin
 | WPA3 | No disponible en las capturas ni en el panel mostrado |
 | Firewall SPI | Revisado en el panel |
 | Protección DoS | Disponible y revisada |
-| Red de invitados aislada | Pendiente de configuración y evidencia |
-| WPS | Sin evidencia de que esté desactivado |
-| Contraseña de administración | Cambiada por Peio el 26/10/2026 y guardada en KeePassXC. Falta limitar la administración a la MAC del gerente |
-| Contraseña Wi-Fi | Cambiada por Peio el 26/10/2026 y guardada en KeePassXC: la de las capturas antiguas ya no vale |
+| Red de invitados aislada | Configurada el 29/10 (acceso a la LAN desactivado y aislamiento activado); el móvil no abre el panel. Faltan las capturas de ping (P3b y P4) |
+| WPS | Desactivado (29/10). Hay que generar un PIN nuevo: el actual se leía en una captura |
+| Contraseña de administración | Cambiada por Peio el 26/10/2026 y guardada en KeePassXC. Administración solo desde la MAC del PC del gerente (29/10) |
+| Contraseña Wi-Fi | Cambiada el 26/10 y otra vez el 29/10, pero la del 29/10 se leía en las capturas 14 y 16 y es la misma que la de invitados: **hay que cambiarla** (sección 6) |
+| LAN del proyecto | `192.168.10.1/24`, DHCP `.100-.199` y reserva `192.168.10.20` para el PC del gerente (29/10) |
 
 ## 11. Conclusión
 
@@ -157,8 +163,11 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 
 - [x] Cambiar la contraseña Wi-Fi expuesta del TL-WR841N (26/10/2026, guardada en KeePassXC).
 - [x] Cambiar la contraseña de administración (26/10/2026, guardada en KeePassXC).
-- [ ] Limitar la administración a la MAC del PC del gerente; captura.
-- [ ] Desactivar WPS; captura.
-- [ ] Repetir la configuración en el Archer C6: LAN `192.168.10.0/24`, reservas de la tarea 23, WPA3 (o WPA2/WPA3), clave de grupo con renovación y modo sin 802.11b.
-- [ ] Configurar la red de invitados (`192.168.50.0/24` si el router lo permite) con aislamiento entre clientes y hacer las pruebas 3 a 5 de la [tarea 23, sección 6](../23-plano-direccionamiento.md#6-cómo-se-comprueba).
+- [x] Limitar la administración a la MAC del PC del gerente; captura (29/10).
+- [x] Desactivar WPS; captura (29/10).
+- [ ] Cambiar la contraseña Wi-Fi del personal (se leía en las capturas 14 y 16) y poner otra distinta en la de invitados; generar un PIN de WPS nuevo.
+- [ ] Capturas de ping desde la red de invitados: al PC del gerente (P3b) y entre dos móviles (P4).
+- [x] LAN en `192.168.10.0/24`, reserva del gerente y renovación de la clave de grupo, en el TL-WR841N (29/10).
+- [ ] En el local, con el Archer C6: WPA3 (o WPA2/WPA3) y modo sin 802.11b, que el TL-WR841N no tiene (limitación).
+- [x] Configurar la red de invitados con aislamiento entre clientes (29/10). El TL-WR841N no le da una subred propia en el panel: el aislamiento es interno (tarea 23, apartado 4.4).
 - [ ] Comprobar en la tarea 25 si la red de invitados pasa por el enlace WDS al router 2. Si no pasa, documentarlo y corregir los diagramas (tarea 11 y LOGICA_RETO).
