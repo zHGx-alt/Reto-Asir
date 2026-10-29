@@ -1,0 +1,27 @@
+# Tarea 12 · Windows del gerente: BitLocker terminado (2026-10-29 09:05)
+
+Cifrado de unidad BitLocker: versión de la herramienta de configuración 10.0.19041
+Copyright (C) 2013 Microsoft Corporation. Todos los derechos reservados.
+
+Volumen C: []
+[Volumen del sistema operativo]
+
+    Tamaño:                 39,62 GB
+    Versión de BitLocker:   2.0
+    Estado de conversión:   Cifrado solo de espacio usado
+    Porcentaje cifrado:     100,0%
+    Método de cifrado:      XTS-AES 256
+    Estado de protección:   Protección activada
+    Estado de bloqueo:      Desbloqueado
+    Campo de identificación:Desconocido
+    Protectores de clave:
+        Contraseña
+        Contraseña numérica
+
+
+KeyProtectorType KeyProtectorId                        
+---------------- --------------                        
+        Password {C084A47F-25D1-4DAA-8F54-F1C2AEF49CF6}
+RecoveryPassword {274BDA6D-5296-4C82-B7FE-CA975C49E489}
+
+

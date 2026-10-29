@@ -1,0 +1,30 @@
+# Tarea 12 · Ubuntu del gerente: /home/gerente cifrado con fscrypt (2026-10-29 11:41)
+
+$ lsblk -f
+NAME   FSTYPE    FSVER LABEL                         UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0  squashfs  4.0                                                                            0   100% /snap/hwctl/131
+sda                                                                                                      
+├─sda1 vfat      FAT32                               A866-3435                             164,3M    16% /boot/efi
+├─sda2                                                                                                   
+├─sda3 BitLocker 2     DESKTOP-QCHVER6 C: 29/10/2026 f1cc9bd8-80ab-49d7-8e35-ff272e13574a                
+├─sda4 ntfs                                          92BAB40ABAB3E93D                                    
+└─sda5 ext4      1.0                                 ee6bf2e7-0d24-4acd-ad60-98699934d49f   11,6G    34% /
+
+$ tune2fs -l /dev/sda5 | grep features
+Filesystem features:      has_journal ext_attr resize_inode dir_index orphan_file filetype needs_recovery extent 64bit flex_bg metadata_csum_seed encrypt sparse_super large_file huge_file dir_nlink extra_isize metadata_csum orphan_present
+
+$ fscrypt status /home/gerente
+"/home/gerente" is encrypted with fscrypt.
+
+Policy:   5565dd1d3cb379cdc7fbf43020c3a17f
+Options:  padding:32 contents:AES_256_XTS filenames:AES_256_CTS policy_version:2
+Unlocked: Yes
+
+Protected with 1 protector:
+PROTECTOR         LINKED  DESCRIPTION
+946e757aeac84871  No      login protector for gerente
+
+$ grep fscrypt /etc/pam.d/common-*
+/etc/pam.d/common-auth:auth	optional	pam_fscrypt.so 
+/etc/pam.d/common-password:password	optional	pam_fscrypt.so 
+/etc/pam.d/common-session:session	optional	pam_fscrypt.so 

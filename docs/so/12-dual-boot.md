@@ -4,8 +4,8 @@
 - **Depende de:** tarea 8 (tabla de hardware)
 - **Requisitos que cubre:** RG-01, RG-03, RG-04 y RG-05 (tarea 7, sección 3.1)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** hecha en VM, con pendientes (sección 9: versión de Ubuntu, actualizaciones de Windows y cifrado)
-- **Fecha:** 22/10/2026
+- **Estado:** hecha en VM (actualizaciones y cifrado terminados el 29/10/2026)
+- **Fecha:** 22/10/2026; actualizada el 29/10/2026
 
 ## 1. Alcance
 
@@ -19,12 +19,13 @@ El equipo real (Lenovo ThinkCentre Neo 50q, tarea 8) se simula en una máquina v
 
 | Elemento | Valor |
 |---|---|
-| Hipervisor | VMware Workstation |
+| Hipervisor | VirtualBox 7.2 desde el 29/10. Se instaló en VMware Workstation y se migró el disco (sección 7) |
 | Firmware | UEFI, disco GPT (como el equipo real) |
 | CPU y memoria | 4 procesadores virtuales, 8 GB de RAM |
-| Disco | 60 GB, NVMe virtual |
+| Disco | 60 GB. En VMware, NVMe; en VirtualBox, **SATA** (con NVMe Windows no arranca, error 0xc0000001) |
+| Teclado | **USB** en VirtualBox: con el PS/2 la pantalla de BitLocker no recibe las teclas |
 | Red | NAT |
-| Sistema 1 | Windows 10 x64 |
+| Sistema 1 | **Windows 10 Pro 22H2**, compilación 19045.6456 (acumulativa de octubre de 2025) |
 | Sistema 2 | **Ubuntu Desktop 26.04.1 LTS** («Resolute Raccoon»), imagen `Release amd64 (20260826)`. Leído del disco de la VM sin arrancarla el 27/10 ([evidencia](../evidencias/12-dual-boot/ubu-08-version-desde-disco.txt)). Lleva GRUB 2.14 y sudo-rs |
 | Nombre del equipo en Ubuntu | `pc-gerente` |
 
@@ -36,8 +37,11 @@ Resultado de `lsblk -f` en Ubuntu ([captura](../evidencias/12-dual-boot/ubu-04-l
 |---|---|---|
 | `nvme0n1p1` | FAT32, unos 200 MB | Partición EFI. La comparten los dos sistemas; Ubuntu la monta en `/boot/efi`. |
 | `nvme0n1p2` | — | Partición reservada de Microsoft (MSR). |
-| `nvme0n1p3` | NTFS | Windows (`C:`). |
-| `nvme0n1p4` | ext4, unos 18 GB | Ubuntu (`/`). Sin partición swap: Ubuntu usa un archivo de intercambio. |
+| `nvme0n1p3` | NTFS, **cifrada con BitLocker** desde el 29/10 | Windows (`C:`). |
+| `nvme0n1p4` | NTFS | Recuperación de Windows (WinRE). |
+| `nvme0n1p5` | ext4, unos 18 GB | Ubuntu (`/`). `/home/gerente` cifrado con fscrypt. Sin partición swap: Ubuntu usa un archivo de intercambio. |
+
+En VirtualBox los nombres son `sda1` a `sda5`, porque el disco va por SATA ([lsblk del 29/10](../evidencias/12-dual-boot/ubu-09-fscrypt-home-gerente.txt)).
 
 En el equipo real, con 512 GB, el reparto previsto es de unos 100 GB para cada sistema y el resto para datos (tarea 8).
 
@@ -113,6 +117,28 @@ Las actualizaciones de seguridad automáticas (`unattended-upgrades`) vienen act
 cat /etc/apt/apt.conf.d/20auto-upgrades
 ```
 
+### 4.4 Actualizar y cifrar (después de instalar los dos sistemas)
+
+**Windows Update.** Con Windows conectado a internet, Configuración → Windows Update → Buscar actualizaciones, e instalar y reiniciar hasta que no quede nada. Debe aparecer la acumulativa **2025-10 (KB5066791)**: es la última de Windows 10 sin ESU (sección 7).
+
+**BitLocker en `C:` sin TPM.** El equipo real tiene TPM 2.0, pero la VM no, así que se usa una contraseña de arranque. En PowerShell como administrador, con un USB o carpeta compartida en `E:\` para la clave de recuperación:
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\so\12-bitlocker-sin-tpm.ps1 -Salida E:\
+```
+
+El [script](../../scripts/so/12-bitlocker-sin-tpm.ps1) aplica la directiva «Permitir BitLocker sin un TPM compatible» (lo mismo que `gpedit.msc`), pide la contraseña de arranque dos veces, cifra con **XTS-AES 256** solo el espacio usado y añade una clave de recuperación. La clave **no sale por pantalla**: se guarda en `E:\CLAVE-RECUPERACION-BITLOCKER.txt`, se pasa a KeePassXC y el fichero se borra. En el equipo real, con TPM, se usaría `-TpmAndPinProtector` en vez de la contraseña.
+
+**`/home/gerente` cifrado con fscrypt.** Con la sesión de `gerente` cerrada, como `administrador`:
+
+```bash
+sudo bash scripts/so/12-cifrar-home-gerente.sh
+```
+
+El [script](../../scripts/so/12-cifrar-home-gerente.sh) instala `fscrypt` y `libpam-fscrypt`, activa el cifrado en el ext4 (`tune2fs -O encrypt`), cifra `/home/gerente` con una protección ligada a la **contraseña de inicio de sesión** de `gerente` (la pide una vez) y copia dentro los ficheros que tenía. Al entrar, PAM desbloquea la carpeta; con la sesión cerrada, sin esa contraseña los nombres y el contenido son ilegibles.
+
+⚠️ La contraseña de `gerente` se cambia **desde su sesión** (`passwd`), no como root: así `pam_fscrypt` actualiza también la protección de la carpeta. Si root la cambia, la carpeta ya no se abre al entrar.
+
 ## 5. Cuentas
 
 | Sistema | Cuenta | Tipo | Uso |
@@ -139,11 +165,15 @@ Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una disti
 | RG-04 Windows | `net user`, `net localgroup Administradores` y estado de `Administrador` | OK: solo `admin` y `gerente` como cuentas de uso; en Administradores solo `admin` y la integrada `Administrador`, con «Cuenta activa: No» | [cuentas](../evidencias/12-dual-boot/win-05-cuentas-y-administradores.png) |
 | RG-04 Ubuntu | `administrador` en el grupo `sudo` | OK | [groups](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
 | RG-05 Windows | `netsh advfirewall show allprofiles state` | OK: dominio, privado y público en ACTIVAR | [firewall](../evidencias/12-dual-boot/win-06-firewall.png) |
-| RG-05 Windows | Windows Update funcionando | **Parcial:** el 22/10 sincronizó e instaló KB5020683 (actualización de noviembre de 2022, la del instalador) y un driver. El 23/10 todos los intentos fallan por falta de conexión de la VM (errores 0x8024402c y 0x80240438). **No hay ninguna actualización acumulativa de seguridad instalada.** Pendiente: conectar la VM, instalar las actualizaciones disponibles y repetir la evidencia | [historial](../evidencias/12-dual-boot/win-07-historial-windows-update.txt) |
+| RG-05 Windows | Windows Update al día | OK (29/10): instalada la acumulativa **2025-10 KB5066791**, compilación 19045.6456, y la de .NET KB5066747. Los fallos del 23/10 (0x8024402c) eran porque el adaptador de red estaba deshabilitado en Windows | [historial](../evidencias/12-dual-boot/win-13-historial-windows-update-kb5066791.png), [Get-HotFix](../evidencias/12-dual-boot/win-09-bitlocker-status.txt), [23/10](../evidencias/12-dual-boot/win-07-historial-windows-update.txt) |
+| Seguridad Windows | BitLocker en `C:` | OK (29/10): «Cifrado solo de espacio usado», 100 %, XTS-AES 256, «Protección activada»; protectores contraseña y contraseña numérica | [manage-bde](../evidencias/12-dual-boot/win-10-bitlocker-final.txt) |
+| Seguridad Windows | Arranque en frío | OK: antes de cargar Windows, BitLocker pide la contraseña | [captura](../evidencias/12-dual-boot/win-11-bitlocker-pide-contrasena-al-arrancar.png) |
+| Seguridad Ubuntu | `/home/gerente` cifrado | OK (29/10): `fscrypt status` «is encrypted», AES-256-XTS, protector «login protector for gerente»; `pam_fscrypt` en `common-auth`, `-password` y `-session` | [fscrypt](../evidencias/12-dual-boot/ubu-09-fscrypt-home-gerente.txt) |
+| Seguridad Ubuntu | Entrar como `gerente` abre la carpeta sola | OK | [captura](../evidencias/12-dual-boot/ubu-10-gerente-home-cifrado-se-abre-al-entrar.png) |
 | Seguridad (tarea 55) | Contraseñas robustas, solo las cuentas previstas | OK: las 4 contraseñas cambiadas el 23/10 y guardadas en KeePassXC; en Ubuntu solo `administrador` y `gerente`, y solo `administrador` en `sudo`; la cuenta de instalación de Windows ya no existe | [Ubuntu](../evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt), [Windows](../evidencias/12-dual-boot/win-05-cuentas-y-administradores.png) |
 | RG-05 Ubuntu | `ufw status verbose`: activo, deny entrante | OK | [ufw](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
 | RG-05 Ubuntu | `20auto-upgrades` con las dos opciones a `"1"` | OK | [auto-upgrades](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
-| Preparación | BitLocker desactivado | OK | [BitLocker](../evidencias/12-dual-boot/win-01-bitlocker-desactivado.png) |
+| Preparación | BitLocker desactivado **antes de instalar Ubuntu** (se activa al final, sección 4.4) | OK | [BitLocker](../evidencias/12-dual-boot/win-01-bitlocker-desactivado.png) |
 | Preparación | Inicio rápido e hibernación no disponibles | OK | [powercfg](../evidencias/12-dual-boot/win-02-powercfg-sin-inicio-rapido.png) |
 
 ## 7. Decisiones y problemas encontrados
@@ -151,15 +181,20 @@ Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una disti
 - **`admin` está reservado en Ubuntu.** El instalador lo rechaza («Ese nombre está reservado para uso del sistema», [captura](../evidencias/12-dual-boot/ubu-01-admin-reservado.png)) porque existe un grupo `admin` heredado de versiones antiguas. Por eso la cuenta de mantenimiento se llama `admin` en Windows y `administrador` en Ubuntu ([captura](../evidencias/12-dual-boot/ubu-02-cuenta-administrador.png)).
 - **Mensaje de `sudo` en Ubuntu.** Al intentar `sudo` con `gerente`, aparece «I'm sorry gerente. I'm afraid I can't do that». Las versiones recientes de Ubuntu usan **sudo-rs** (reimplementación de `sudo` en Rust), y ese es su mensaje cuando el usuario no está en sudoers.
 - **Disco de Windows lleno.** Tras instalar, `C:` tenía 13 GB y solo 53 MB libres. Se amplió con «Extender volumen» antes de instalar Ubuntu, porque Windows sin espacio libre no puede instalar actualizaciones.
-- **BitLocker desactivado: el equipo del gerente queda sin cifrar.** Se desactiva para instalar Ubuntu, porque con el disco cifrado Ubuntu no puede reducir ni leer la partición de Windows. Pero dejarlo así va contra la seguridad por defecto: si roban el mini PC, se leen los datos. **Después de instalar los dos sistemas** hay que:
-  1. Activar **BitLocker** en `C:` (Windows 10 Pro lo incluye) y guardar la clave de recuperación en KeePassXC, no en el equipo. GRUB arranca Windows Boot Manager igual; BitLocker solo pedirá la clave de recuperación si cambia la cadena de arranque, así que hay que probar un arranque desde GRUB después de activarlo.
-  2. En Ubuntu, cifrar los datos del gerente: una partición o un contenedor **LUKS** para `/home/gerente`, o reinstalar Ubuntu con «cifrado de disco» si se repite la instalación.
-  En la VM no se ha hecho todavía (pendiente, sección 9).
+- **Cifrado: BitLocker se activa al final.** Para instalar Ubuntu BitLocker tiene que estar desactivado (con el disco cifrado Ubuntu no puede reducir ni leer la partición de Windows), pero el equipo no puede quedarse así. Por eso se cifra **después** de instalar los dos sistemas (sección 4.4). GRUB sigue arrancando Windows Boot Manager con BitLocker activo, comprobado el 29/10.
+- **fscrypt en vez de LUKS para `/home/gerente`.** LUKS obliga a crear una partición o un contenedor y a reparticionar con Ubuntu ya instalado. fscrypt cifra la carpeta dentro del ext4 que ya existe y se abre con la contraseña de inicio de sesión, sin una segunda contraseña. Para cifrar todo Ubuntu, en una reinstalación se elegiría «cifrado de disco» (LUKS) en el instalador.
+- **Windows 10 sin soporte desde el 14/10/2025.** La acumulativa de octubre de 2025 (KB5066791) es la última sin ESU. Windows Update lo avisa («Ha finalizado el soporte técnico de Windows 10», [captura](../evidencias/12-dual-boot/win-12-aviso-fin-soporte-windows10.png)). Es un **riesgo**: a partir de ahí no llegan parches de seguridad. Para el equipo real se recomienda **Windows 11 Pro** (el Neo 50q tiene TPM 2.0 y CPU compatible) o, si se mantiene Windows 10, contratar **ESU**.
+- **Red de Windows deshabilitada.** Los fallos de Windows Update del 23/10 eran porque el adaptador de red estaba deshabilitado en Windows. Se habilitó en Conexiones de red.
+- **Migración de VMware a VirtualBox (29/10).** En VMware Workstation, sobre Ubuntu con Wayland, no funcionaban ni copiar y pegar ni algunas teclas (`\` salía como `|`). Se juntó el disco con `vmware-vdiskmanager -r … -t 0` y se conectó a una VM de VirtualBox con EFI. Cambios necesarios: disco en **SATA** (con NVMe, Windows da 0xc0000001), teclado **USB** (con el PS/2 la pantalla de BitLocker no recibe teclas) y las VMware Tools deshabilitadas (no se dejan desinstalar fuera de VMware). Al cambiar de controlador, VirtualBox volvió a la instantánea anterior y se perdieron los cambios de Ubuntu de esa mañana; se repitieron.
+- **Windows se pone primero en el arranque.** Tras actualizar, el firmware arrancaba Windows Boot Manager directamente y GRUB no salía. Se corrigió desde Windows: `bcdedit /set {fwbootmgr} displayorder {id-de-Ubuntu} /addfirst` (el id sale en `bcdedit /enum firmware`).
+- **Clave de recuperación de BitLocker vista en pantalla.** `Add-BitLockerKeyProtector` escribe la clave como advertencia aunque se redirija la salida. Se sustituyó por otra creada sin mostrarla, se borró la primera y el script lleva `-WarningAction SilentlyContinue`. La vigente solo está en KeePassXC.
+- **Contraseñas de Ubuntu repuestas el 29/10.** Las de `administrador` y `gerente` se volvieron a poner desde el modo de recuperación (`passwd`) y están en KeePassXC. En la consola de VirtualBox se colaba a veces un **Esc** al hacer clic en la ventana (sale como `^[`), que acababa dentro de la contraseña: antes de escribir una contraseña, pulsar Retroceso.
+- **Reiniciar desde Windows no siempre pide la contraseña de BitLocker.** En una prueba, `Restart-Computer` llegó a Windows sin pedirla; al arrancar en frío la pide siempre. El caso que importa (equipo apagado y robado) está cubierto. Queda anotado para comprobarlo en el equipo real con TPM.
 - **Inicio rápido.** La opción no aparece en las opciones de energía porque la VM no admite hibernación. Aun así se ejecutó `powercfg /h off` para dejarlo garantizado.
 
 ## 8. Entrega de la máquina virtual
 
-Exportación actual: **23/10/2026**, después de cambiar las contraseñas (tarea 55).
+Exportación actual: **23/10/2026**, después de cambiar las contraseñas (tarea 55). **Está desfasada:** no tiene ni las actualizaciones ni el cifrado del 29/10. Falta exportar la VM de VirtualBox a OVA y subirla a Drive (sección 9).
 
 La VM no se sube al repositorio, porque ocupa varios GB y GitHub no admite archivos de más de 100 MB. Se exporta desde VMware con **File → Export to OVF**. Los archivos pequeños están en el repositorio, en [`docs/evidencias/12-dual-boot/vm/`](../evidencias/12-dual-boot/vm/). El disco y las credenciales están en Google Drive: [carpeta Reto-Asir](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link).
 
@@ -186,6 +221,8 @@ La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM 
 ## 9. Pendiente
 
 - [x] Apuntar la versión exacta de Ubuntu y la ISO usada (sección 2): 26.04.1 LTS, imagen del 26/08/2026 (27/10).
-- [ ] Conectar la VM a internet, instalar las actualizaciones acumulativas de Windows y repetir la evidencia de Windows Update (RG-05 queda **parcial** hasta entonces).
-- [ ] Cifrar después de instalar: BitLocker en Windows y LUKS en los datos de Ubuntu (sección 7).
+- [x] Windows Update al día: acumulativa 2025-10 KB5066791 (29/10).
+- [x] Cifrado: BitLocker en `C:` y fscrypt en `/home/gerente` (29/10, sección 4.4).
+- [ ] Exportar la VM de VirtualBox (`VBoxManage export VM-dualboot-W10-ubuntu -o VM-dualboot-W10-ubuntu.ova`), subir el `.ova` a Drive y actualizar la sección 8. Avisar en la entrega de que la clave de recuperación y las contraseñas nuevas están en el `.kdbx`.
+- [ ] En el equipo real: Windows 11 Pro o ESU (sección 7) y BitLocker con TPM + PIN.
 - [x] Drive revisado el 24/10: están el `.vmdk` y el `.kdbx` del 23/10 y no hay ningún `.txt` con contraseñas.
