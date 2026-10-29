@@ -23,6 +23,16 @@ Navegador ──HTTPS──▶ almichain1.duckdns.org ──▶ nginx + certific
                      Subida de la web ──▶ Bucket S3 privado almi-chain-web-2026
 ```
 
+```mermaid
+flowchart LR
+    U[Navegador del cliente] -- "HTTPS 443<br/>(HTTP 80 → 301)" --> D[almichain1.duckdns.org<br/>registro A]
+    D --> E["EC2 web-almichain<br/>nginx + Let's Encrypt<br/>IP elástica 52.200.94.167"]
+    E -- "aws s3 sync cada 5 min<br/>(rol LabInstanceProfile)" --> S[(Bucket S3 privado<br/>almi-chain-web-2026)]
+    G[GitHub: push a web/] -- "desplegar-web.yml<br/>(tarea 31)" --> S
+    T[Terraform iac/<br/>tarea 31] -. crea .-> E
+    T -. crea .-> S
+```
+
 | Pieza | Para qué |
 |---|---|
 | **Bucket S3** | Guarda la versión publicada de la web. Es **privado**: solo lo leen la EC2 (por su rol) y el equipo (con sus credenciales). |

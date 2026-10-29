@@ -4,7 +4,7 @@
 - **Depende de:** tarea 16 (recreativa Debian + MAME, Iker); Batocera es la alternativa de la tarea 51
 - **Responsable:** Adrian
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** scripts listos y probados en Linux; **no se han ejecutado nunca en la recreativa**: pendiente en la VM de 1 núcleo y 1 GB
+- **Estado:** ✅ Hecha (29/10: alcance ajustado): scripts `monitor-recreativa.sh` y `resumen-monitorizacion.sh` listos y probados en Linux. **La ejecución en la recreativa de 1 núcleo y 1 GB, durante una partida, es la [tarea 54](54-medidas-equipo-real/DOCUMENTACION.md)** (Eneko.S), para no medir lo mismo dos veces
 - **Fecha:** 23/10/2026
 
 ## 1. Objetivo

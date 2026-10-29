@@ -19,6 +19,17 @@ El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), 
 
 ## Cambios en el reparto
 
+### 29/10/2026
+
+La 17, la 18 y la 54 pedían la misma medida (rendimiento y monitorización en la VM de 1 núcleo y 1 GB). Se deja solo en la 54 (Eneko.S), y la 17 y la 18 se cierran con lo que ya estaba hecho y pasan a quien lo hizo:
+
+| # | Tarea | Antes | Ahora |
+|---|---|---|---|
+| 17 | Rendimiento de MAME: método, scripts y medida en VM de 2 núcleos | Eneko.P | Iker |
+| 18 | Monitorización: scripts | Eneko.P | Adrian |
+
+A Eneko.P le quedan la 31 y la 36.
+
 ### 27/10/2026
 
 | # | Tarea | Antes | Ahora |

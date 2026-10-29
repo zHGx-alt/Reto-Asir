@@ -3,7 +3,7 @@
 **Responsable:** Eneko.S · **Fechas:** 03–04/11/2026 · **Depende de:** tareas 17 (rendimiento en VM), 18 (monitorización) y 53 (recreativa de 1 núcleo y 1 GB con el stick)
 **Estado:** ⏳ Protocolo y script de resumen preparados el 27/10. La recreativa en la que se mide ya existe: `Recreativa-53` (tarea 53, 29/10). Falta medir.
 
-Objetivo: medir en `Recreativa-53`, la VM de **1 núcleo y 1 GB** que pide el enunciado (el equipo decidió el 29/10 entregar la recreativa en VM), lo que las tareas 17 y 18 midieron en una VM de 2 núcleos y 1,5 GB, para responder con datos a dos preguntas del enunciado: **¿cuánto rinde MAME con esos recursos?** y **¿mejora con las optimizaciones?** Las mismas medidas sirven para terminar la tarea 17 en la VM de 1 GB (le faltan las de «después» y medir jugando), así que conviene hacerlas junto con Eneko.P. En una VM el tiempo de arranque tiene ruido del ordenador anfitrión (tarea 17, sección 5): se cierran los demás programas y se toman 3 muestras de cada fase.
+Objetivo: medir en `Recreativa-53`, la VM de **1 núcleo y 1 GB** que pide el enunciado (el equipo decidió el 29/10 entregar la recreativa en VM), lo que las tareas 17 y 18 midieron en una VM de 2 núcleos y 1,5 GB, para responder con datos a dos preguntas del enunciado: **¿cuánto rinde MAME con esos recursos?** y **¿mejora con las optimizaciones?** Desde el 29/10 esta tarea es la única que mide en 1 núcleo y 1 GB: la 17 (método y scripts) y la 18 (scripts de monitorización) quedan cerradas y sus medidas en 1 GB se hacen aquí. En una VM el tiempo de arranque tiene ruido del ordenador anfitrión (tarea 17, sección 5): se cierran los demás programas y se toman 3 muestras de cada fase.
 
 ## 1. Herramientas
 
