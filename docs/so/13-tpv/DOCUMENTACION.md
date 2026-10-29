@@ -5,6 +5,9 @@
 - **Requisitos que cubre:** RT-01, RT-04, RT-05 y RT-06 de la [tarea 7](../../hardware/07-necesidades-equipos.md)
 - **Estado:** scripts listos (24/10/2026): sintaxis comprobada y `comprobar-tpv.ps1` probado en un Windows 11 sin bastionar (da FALLO donde debe). **Falta ejecutarlos en la VM del TPV** (sección 6).
 
+
+> **Dos documentos de la tarea 13.** Este explica los scripts (tareas 13 y 15). Lo que se hizo a mano en los TPV el 26/10, con capturas, está en [13-bastionado-tpv-windows.md](Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) (Markel); lo que falta de los scripts en esos TPV es el hallazgo S-20 de la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md).
+
 ## 1. Qué se consigue
 
 El enunciado pide que los TPV estén «lo más restringidos posible en cuanto a permisos y funcionalidades, aplicando el principio de mínimos privilegios y una configuración segura por defecto», con documentación que permita repetir la instalación. Al terminar, cada TPV:

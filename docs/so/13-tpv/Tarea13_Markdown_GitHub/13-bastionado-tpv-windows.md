@@ -1,5 +1,7 @@
 # **Tarea 13: Bastionado de los dos TPV Windows**
 
+> Lo que se hizo a mano en los TPV (26/10). Los scripts que lo dejan igual y añaden lo que falta (tarea 15) están en [DOCUMENTACION.md](../DOCUMENTACION.md).
+
 ## **1. Objetivo**
 
 El objetivo de esta tarea es proteger los dos equipos TPV del

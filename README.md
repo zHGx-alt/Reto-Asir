@@ -6,7 +6,7 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 
 ## Estado
 
-**35 de 55 tareas hechas** (27/10/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
+**38 de 55 tareas hechas** (29/10/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
 
 ```bash
 bash scripts/verificar-repo.sh
