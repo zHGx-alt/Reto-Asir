@@ -1,0 +1,28 @@
+== P3 recursos
+1
+               total       usado       libre  compartido   búf/caché  disponible
+Mem:             967         443         311           4         347         524
+Inter:          1021           0        1021
+== P2 arranque
+Startup finished in 11.499s (kernel) + 2.940s (userspace) = 14.439s 
+multi-user.target reached after 2.937s in userspace.
+== MAME en marcha
+785 /usr/games/mame -rompath /home/arcade/roms -skip_gameinfo
+== P6 arcade sin privilegios
+[sudo] contraseña para tecnico: 
+User arcade is not allowed to run sudo on recreativa.
+arcade L 2026-10-29 0 99999 7 -1
+== P7 carpeta privada
+ls: no se puede abrir el directorio '/home/arcade': Permiso denegado
+== P8 SSH
+permitrootlogin no
+passwordauthentication no
+kbdinteractiveauthentication no
+== P9 GRUB
+GRUB_TIMEOUT=0
+== P10 stick
+== Sistema
+13.7
+6.12.113+deb13-amd64
+0.276 (unknown)
+Connection to 127.0.0.1 closed.

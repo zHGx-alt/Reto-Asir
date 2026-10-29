@@ -1,159 +1,135 @@
-# Tarea 53 · Instalar la recreativa en el equipo real (1 núcleo, 1 GB)
+# Tarea 53 · Recreativa de 1 núcleo y 1 GB con el stick — Registro de ejecución
 
-**Responsable:** Eneko.S · **Fechas:** 29–30/10/2026 · **Depende de:** tareas 16 (recreativa en VM) y 51 (decisión: Debian 13 + MAME)
-**Estado:** ⏳ Guía y preseed del equipo físico preparados el 27/10. Falta ejecutarla en el aula con el equipo real.
+**Responsable:** Eneko.S · **Fecha de ejecución:** 29/10/2026 · **Depende de:** tareas 16 (recreativa en VM), 51 (decisión: Debian 13 + MAME) y 50 (stick probado en la placa)
+**Estado:** ✅ Hecha en una VM de VirtualBox con **1 núcleo y 1 GB**, los recursos del enunciado, y probada **con el stick real**. Decisión del equipo (29/10): la recreativa se entrega en VM, no en un equipo físico.
 
-Objetivo: repetir en el ordenador físico de la recreativa lo que la [tarea 16](../16-recreativa-mame/DOCUMENTACION.md) hizo en una VM. Al encender, Debian entra solo con el usuario `arcade` y abre MAME a pantalla completa, sin escritorio y sin privilegios de administrador para quien juega. Se usan **el mismo preseed y el mismo script** que en la VM; solo cambia lo que en la VM hacía VirtualBox.
+## 1. Resultado
 
-## 1. Qué cambia respecto a la VM
+Al encender `Recreativa-53`, Debian entra solo con el usuario `arcade` y abre MAME a pantalla completa, sin pedir contraseña y sin escritorio. Aparecen los 5 juegos legales y se juega con el **stick de Arduino** (palanca y botones) pasado a la VM por USB. Si se sale de MAME, vuelve a abrirse solo.
 
-| En la VM (tarea 16) | En el equipo real |
+![Menú de MAME al arrancar](evidencias/05-arranque-directo.png)
+
+## 2. Entorno
+
+| Elemento | Valor |
 |---|---|
-| `VBoxManage unattended install` mete la contraseña en el preseed | [`preparar-preseed-fisico.sh`](preparar-preseed-fisico.sh) la pide y guarda solo su **hash** SHA-512 |
-| El disco es siempre `/dev/sda` | Se elige al generar el preseed (`/dev/sda`, `/dev/nvme0n1`…) |
-| El preseed se carga solo | Se sirve desde un portátil por HTTP y se indica su URL en el instalador (sección 4) |
-| Red NAT de VirtualBox, SSH por el puerto 2222 | Cable para instalar; después, Wi-Fi de invitados (sección 6) |
-| Recursos fijados en la VM | Hay que comprobar los del equipo (sección 3) |
+| Anfitrión | PC de Eneko.S con Ubuntu y VirtualBox |
+| Máquina virtual | `Recreativa-53`: **1 CPU, 1024 MB de RAM**, disco de 20 GB, VMSVGA, controlador USB OHCI |
+| Red | NAT con reenvío `127.0.0.1:2223 → 22` (SSH). El 2223 para no chocar con la VM de la tarea 16 (2222) |
+| USB | Filtro para el vendedor `2341` (Arduino): el stick pasa solo a la VM |
+| Sistema | Debian 13.7, kernel 6.12.113+deb13-amd64 |
+| Emulador | MAME 0.276 (repositorio de Debian) |
+| Mando | Stick de las tareas 19, 20 y 50 (Arduino Leonardo, `2341:8036`) |
 
-## 2. Antes de ir al aula (en casa)
+**Por qué una VM nueva y no `Recreativa-1GB`.** La VM de 1 núcleo y 1 GB de las tareas 17 y 51 existe, pero no se conoce la contraseña de `tecnico` (tarea 17). `Recreativa-53` se ha instalado desde cero con el mismo preseed y el mismo script, con una contraseña nueva que se guarda en el KeePassXC del proyecto, así que sirve también para terminar las medidas de las tareas 17, 18 y 54.
 
-| ✓ | Qué | Cómo |
-|---|---|---|
-| ☐ | **USB 1 (instalador):** ISO *netinst* de Debian 13 | Descargar de <https://www.debian.org/download> y grabarla con Balena Etcher o `dd`. La netinst descarga los paquetes: hará falta **cable con internet** al instalar. |
-| ☐ | **USB 2 (ficheros):** scripts y ROMs | Copiar `docs/arcade/16-recreativa-mame/instalar-arcade.sh`, `docs/arcade/17-rendimiento-mame/*.sh` y `scripts/arcade/*.sh` (los dos últimos, para la tarea 54) y la carpeta `roms/` del paso siguiente. Formato FAT32. |
-| ☐ | **ROMs legales** (las 5 de la tarea 16) | Con el mismo bucle de la [tarea 16, apartado 4.5](../16-recreativa-mame/DOCUMENTACION.md#45-instalar-roms-legales), en una carpeta `roms/` del USB 2. No se suben a Git (`.gitignore`). |
-| ☐ | **Contraseña de `tecnico`** | Generarla en KeePassXC (frase larga) y guardarla en la base del equipo. En la VM de 1 GB nadie la conocía (tarea 17): que no vuelva a pasar. |
-| ☐ | **Preseed del equipo real** | `bash docs/arcade/53-recreativa-fisica/preparar-preseed-fisico.sh` (ver abajo) |
-| ☐ | Adaptador Wi-Fi USB, si el equipo no tiene Wi-Fi | Presupuestado en la tarea 10 (sección 12) |
+## 3. Pasos realizados
 
-**Generar el preseed.** En tu PC, dentro del repositorio:
+Todo desde la terminal del anfitrión. Los ficheros son los mismos de la [tarea 16](../16-recreativa-mame/DOCUMENTACION.md).
+
+### 3.1 Preseed con la clave SSH y contraseña de `tecnico`
 
 ```bash
-bash docs/arcade/53-recreativa-fisica/preparar-preseed-fisico.sh             # disco /dev/sda
-bash docs/arcade/53-recreativa-fisica/preparar-preseed-fisico.sh /dev/nvme0n1 # si el disco es NVMe
+cd docs/arcade/16-recreativa-mame
+sed "s|CLAVE_PUBLICA_SSH|$(cat ~/.ssh/id_ed25519.pub)|" preseed-recreativa.cfg > ~/preseed-vm.cfg
+read -rsp "Contraseña de tecnico: " P; echo; printf '%s' "$P" > ~/.credenciales-vm; chmod 600 ~/.credenciales-vm; unset P
 ```
 
-Pide dos veces la contraseña de `tecnico` (no se ve al escribir), añade tu clave SSH pública (`~/.ssh/id_ed25519.pub`, si existe) y crea `preseed-local.cfg` con permisos 600. Ese fichero lleva el hash de la contraseña: **no se sube a Git** (está en `.gitignore`) y se borra después de instalar. Si en el aula resulta que el disco es otro, se vuelve a generar allí en un minuto.
+La contraseña se genera en KeePassXC y no se escribe en ningún fichero del repositorio. `~/.credenciales-vm` se borra al terminar (sección 7).
 
-## 3. Ficha del equipo (rellenar en el aula)
-
-Arrancar el USB 1 y, antes de instalar, abrir una consola (`Ctrl+Alt+F2` en el instalador) o, ya instalado, entrar como `tecnico`:
-
-| Dato | Comando | Valor |
-|---|---|---|
-| Marca y modelo | Pegatina del equipo | |
-| Procesador y núcleos | `lscpu \| grep -E 'Model name\|^CPU\(s\)'` | |
-| Memoria | `free -m` | |
-| Disco | `lsblk -d -o NAME,SIZE,MODEL` | |
-| Firmware | `[ -d /sys/firmware/efi ] && echo UEFI \|\| echo BIOS` | |
-| Red por cable y Wi-Fi | `ip link` y `lsusb` | |
-
-**Si el equipo tiene más de 1 núcleo o 1 GB.** El enunciado pide 1 núcleo y 1 GB. Se puede limitar al arrancar, sin tocar el hardware, si el profesor lo acepta:
+### 3.2 Crear la VM e instalar Debian sin intervención (≈15 min)
 
 ```bash
-sudo sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="maxcpus=1 mem=1024M"/' /etc/default/grub
-sudo update-grub && sudo reboot
-nproc && free -m        # 1 núcleo y algo menos de 1024 MB (el núcleo reserva una parte)
+VM=Recreativa-53
+VBoxManage createvm --name $VM --ostype Debian_64 --register
+VBoxManage modifyvm $VM --cpus 1 --memory 1024 --vram 128 --graphicscontroller vmsvga \
+  --nic1 nat --natpf1 "ssh,tcp,127.0.0.1,2223,,22" --usbohci on
+VBoxManage createmedium disk --filename "$HOME/VirtualBox VMs/$VM/$VM.vdi" --size 20480
+VBoxManage storagectl $VM --name SATA --add sata
+VBoxManage storageattach $VM --storagectl SATA --port 0 --type hdd --medium "$HOME/VirtualBox VMs/$VM/$VM.vdi"
+VBoxManage storageattach $VM --storagectl SATA --port 1 --type dvddrive --medium emptydrive
+VBoxManage usbfilter add 0 --target $VM --name Arduino --vendorid 2341
+
+# ISO netinst actual de Debian, comprobada con su SHA256
+URL=https://cdimage.debian.org/debian-cd/current/amd64/iso-cd
+ISO=$(wget -qO- $URL/SHA256SUMS | grep -o 'debian-[0-9.]*-amd64-netinst.iso' | head -1)
+wget -c "$URL/$ISO" && wget -qO- $URL/SHA256SUMS | grep " $ISO\$" | sha256sum -c
+
+VBoxManage unattended install $VM --iso="$PWD/$ISO" --user=tecnico --password-file="$HOME/.credenciales-vm" \
+  --script-template="$HOME/preseed-vm.cfg" --start-vm=gui
 ```
 
-## 4. Instalar Debian 13 (≈15-20 min)
+La instalación termina sola en el `login:` de Debian. Los avisos `systemd-ssh-generator: Failed to query local AF_VSOCK CID` que salen en la consola son normales en VirtualBox y no afectan.
 
-> ⚠️ El preseed **borra el disco entero** del equipo. Confirmar antes que es el de la recreativa y que no tiene nada que conservar.
-
-1. Conectar el **cable de red** y el USB 1. Arrancar desde el USB (tecla del menú de arranque: F12, F11, F8 o Esc, según la marca).
-2. En el portátil (misma red), en la carpeta donde está `preseed-local.cfg`:
-   ```bash
-   python3 -m http.server 8000
-   ```
-   Apuntar la IP del portátil (`ip -4 addr`).
-3. En el menú del instalador: **Advanced options → Automated install**. Cuando pida la ubicación del preseed, escribir:
-   ```
-   http://IP_DEL_PORTATIL:8000/preseed-local.cfg
-   ```
-   *Alternativa:* en el menú, pulsar `e` (UEFI) o `Tab` (BIOS) sobre **Install** y añadir al final de la línea del kernel `auto=true priority=critical url=http://IP_DEL_PORTATIL:8000/preseed-local.cfg`.
-4. Esperar: instala sin preguntar y reinicia. **Parar el servidor del portátil** (`Ctrl+C`) en cuanto el instalador haya descargado el preseed.
-5. Quitar el USB 1. Debe aparecer el `login:` de Debian.
-
-**Si el preseed no se puede cargar** (sin portátil o sin red entre ambos): instalar a mano con las mismas decisiones, siguiendo el [README de la tarea 16](../16-recreativa-mame/README.md) (root en blanco, usuario `tecnico`, solo «Utilidades estándar» y «Servidor SSH»). Después, dejar SSH solo con clave:
-```bash
-printf 'PasswordAuthentication no\nKbdInteractiveAuthentication no\nPermitRootLogin no\n' | sudo tee /etc/ssh/sshd_config.d/90-recreativa.conf
-sudo systemctl restart ssh
-```
-
-## 5. Convertirla en recreativa (≈5 min)
-
-Entrar como `tecnico`, conectar el USB 2 y montarlo:
+### 3.3 Convertirla en recreativa y copiar los juegos
 
 ```bash
-lsblk                                  # el USB suele ser sdb1 (o sdc1)
-sudo mount /dev/sdb1 /mnt
-cp /mnt/instalar-arcade.sh ~ && chmod +x ~/instalar-arcade.sh
-sudo ~/instalar-arcade.sh 2>&1 | tee ~/salida-instalar-arcade.log
-sudo cp /mnt/roms/*.zip /home/arcade/roms/ && sudo chown arcade:arcade /home/arcade/roms/*.zip
-sudo -u arcade /usr/games/mame -rompath /home/arcade/roms -verifyroms gridlee robby supertnk targ teetert
+scp -P 2223 docs/arcade/16-recreativa-mame/instalar-arcade.sh tecnico@127.0.0.1:
+scp -P 2223 roms/*.zip tecnico@127.0.0.1:          # las 5 ROMs legales de la tarea 16, apartado 4.5
+ssh -t -p 2223 tecnico@127.0.0.1 'chmod +x instalar-arcade.sh && sudo ./instalar-arcade.sh 2>&1 | tee salida-instalar-arcade.log'
+ssh -t -p 2223 tecnico@127.0.0.1 'sudo sh -c "cp /home/tecnico/*.zip /home/arcade/roms/ && chown arcade:arcade /home/arcade/roms/*.zip" \
+  && sudo -u arcade /usr/games/mame -rompath /home/arcade/roms -verifyroms gridlee robby supertnk targ teetert && sudo reboot'
 ```
 
-Lo último debe acabar en `5 romsets found, 5 were OK`. Copiar `~/salida-instalar-arcade.log` al USB 2 para las evidencias y reiniciar: `sudo reboot`.
+Resultado: `5 romsets found, 5 were OK`. Al reiniciar, la VM abre MAME sola. Log del script: [`03-salida-instalar-arcade.log`](evidencias/03-salida-instalar-arcade.log).
 
-## 6. Conectarla a la Wi-Fi de invitados
+### 3.4 Stick
 
-En el local, la recreativa va a la Wi-Fi de invitados, aislada de la LAN. Seguir la [tarea 16, sección 6](../16-recreativa-mame/DOCUMENTACION.md#6-conexión-a-la-wi-fi-de-invitados) y **apuntar aquí el adaptador y su chip** (`lsusb`). Si en el aula todavía no está el router de la tarea 24 con la red de invitados, dejar la recreativa por cable y anotarlo como pendiente.
+Con el stick enchufado al anfitrión, el filtro USB lo pasa a la VM (el usuario del anfitrión tiene que estar en el grupo `vboxusers`). Moneda y Start se asignan una vez a los botones 3 y 4 en MAME (`Tab` → *Input Settings* → *Input Assignments (general)* → *Other Controls*), como explica [STICK-ARDUINO.md](../16-recreativa-mame/STICK-ARDUINO.md). Con el teclado, la moneda es `5` y Start es `1`.
 
-| Dato | Valor |
-|---|---|
-| Adaptador Wi-Fi y chip | |
-| Paquete de firmware instalado | |
-| IP recibida en la red de invitados | |
+## 4. Comprobaciones (29/10/2026)
 
-## 7. Comprobaciones
-
-Resultado en la última columna (✅ / ❌ y la salida o la foto). Las pruebas por consola, en `Ctrl+Alt+F2` como `tecnico`.
+Salidas completas: [`06-comprobaciones.txt`](evidencias/06-comprobaciones.txt) y [`06b-stick.txt`](evidencias/06b-stick.txt).
 
 | # | Prueba | Cómo | Esperado | Resultado |
 |---|---|---|---|---|
-| P1 | Arranque directo | Encender y cronometrar con el móvil hasta ver el menú de MAME | MAME sin tocar nada, sin pedir contraseña | |
-| P2 | Tiempos de arranque | `systemd-analyze` | Apuntar kernel y userspace (comparar con 4,7 s de la VM) | |
-| P3 | Recursos | `nproc` y `free -m` | 1 núcleo y ≈1 GB | |
-| P4 | Juegos | Menú de MAME | Solo los 5 juegos; una partida con moneda y start | |
-| P5 | MAME se vuelve a abrir | Salir de MAME con `Esc` | Se abre de nuevo solo | |
-| P6 | `arcade` sin privilegios | `sudo -l -U arcade` y `passwd -S arcade` | «not allowed to run sudo» y estado `L` (bloqueada) | |
-| P7 | Carpetas privadas | `ls /home/arcade` como `tecnico` | «Permiso denegado» | |
-| P8 | SSH solo con clave | `sudo sshd -T \| grep -Ei 'passwordauth\|permitroot'` | `passwordauthentication no` y `permitrootlogin no` | |
-| P9 | GRUB sin espera | `grep GRUB_TIMEOUT /etc/default/grub` | `GRUB_TIMEOUT=0` | |
-| P10 | Stick Arduino (si está montado, tareas 19 y 50) | `grep -i arduino /proc/bus/input/devices` y jugar | Aparece el Leonardo y mueve en MAME | |
-| P11 | Red de invitados | `ip -4 addr` | IP de la red de invitados, no `192.168.10.x` | |
-| P12 | Aislamiento | `ping -c 4 192.168.10.31` y `ping -c 4 192.168.10.10` | Sin respuesta (pruebas 4 y 5 de la tarea 23) | |
+| P1 | Arranque directo | *Máquina → Reiniciar* y cronómetro hasta el menú de MAME | MAME sin tocar nada ni pedir contraseña | ✅ Entre 20 y 30 s cronometrados a mano, desde el reinicio de VirtualBox (incluye firmware y GRUB) |
+| P2 | Tiempos de arranque del sistema | `systemd-analyze` | Apuntar | ✅ 14,4 s: 11,5 s de kernel y 2,9 s de espacio de usuario (primer arranque tras instalar) |
+| P3 | Recursos | `nproc` y `free -m` | 1 núcleo y ≈1 GB | ✅ 1 núcleo y 967 MB. Con MAME abierto en el menú: 443 MB usados, 524 MB disponibles y 0 de swap |
+| P4 | Juegos | Menú de MAME y una partida | Los 5 juegos; se juega | ✅ Los 5 juegos; partida de *Gridlee* jugada con el stick ([captura](evidencias/07-partida-stick.png)) |
+| P5 | MAME se vuelve a abrir | Salir de MAME (`Esc` en el menú) | Se abre de nuevo solo | ✅ El jugador no puede quedarse en el sistema |
+| P6 | `arcade` sin privilegios | `sudo -l -U arcade` y `passwd -S arcade` | Sin `sudo`; contraseña bloqueada | ✅ `User arcade is not allowed to run sudo`; estado `L` |
+| P7 | Carpeta privada | `ls /home/arcade` como `tecnico` | Denegado | ✅ `Permiso denegado` |
+| P8 | SSH solo con clave | `sshd -T` | Sin contraseña ni root | ✅ `passwordauthentication no`, `kbdinteractiveauthentication no`, `permitrootlogin no` |
+| P9 | GRUB sin espera | `/etc/default/grub` | `GRUB_TIMEOUT=0` | ✅ |
+| P10 | Stick en la VM | `lsusb` en el anfitrión y `/proc/bus/input/devices` en la VM | Se detecta | ✅ Anfitrión: `2341:8036 Arduino SA Leonardo`; VM: `Arduino LLC Arduino Leonardo` |
+| P11 | Red de invitados | — | — | No aplica en VM: la VM usa NAT. La conexión a la Wi-Fi de invitados se documenta en la [tarea 16, sección 6](../16-recreativa-mame/DOCUMENTACION.md#6-conexión-a-la-wi-fi-de-invitados) para un equipo físico |
+| P12 | Aislamiento de la LAN | — | — | No aplica en VM, por lo mismo. El aislamiento de la red de invitados se prueba en las tareas 24, 25 y 26 |
 
-## 8. Evidencias (en `evidencias/`)
+**Comparación con la VM de la tarea 16** (2 núcleos y 1,5 GB): allí MAME se abría a los 4,7 s del arranque y usaba 425 MB de RAM con el menú. Con 1 núcleo y 1 GB el sistema tarda más en arrancar, pero MAME funciona y deja más de la mitad de la memoria libre. Las medidas comparables, con reinicios repetidos y `mame -bench`, son las de la tarea 54.
+
+## 5. Evidencias (en `evidencias/`)
 
 | Fichero | Qué |
 |---|---|
-| `01-ficha-equipo.txt` | Salidas de la sección 3 |
-| `02-instalando.jpg` | Foto del instalador trabajando sin preguntas |
-| `03-salida-instalar-arcade.log` | Log del script (sección 5) |
-| `04-verifyroms.txt` | `5 romsets found, 5 were OK` |
-| `05-arranque-directo.jpg` | Foto del menú de MAME tras encender |
-| `06-comprobaciones.txt` | Salidas de P2, P3, P6-P9, P11 y P12 |
-| `07-partida-stick.jpg` | Partida con el stick (si está) |
+| [`03-salida-instalar-arcade.log`](evidencias/03-salida-instalar-arcade.log) | Salida de `instalar-arcade.sh` |
+| [`05-arranque-directo.png`](evidencias/05-arranque-directo.png) | Menú de MAME con los 5 juegos tras arrancar |
+| [`06-comprobaciones.txt`](evidencias/06-comprobaciones.txt) | P2, P3 y P6 a P9, y versiones |
+| [`06b-stick.txt`](evidencias/06b-stick.txt) | P10: el stick dentro de la VM |
+| [`07-partida-stick.png`](evidencias/07-partida-stick.png) | Partida de *Gridlee* con el stick |
 
-> Antes de subir fotos, comprobar ampliándolas que no se lee ninguna contraseña (Wi-Fi, KeePassXC). gitleaks no mira dentro de las imágenes.
-
-## 9. Seguridad
-
-- `tecnico` con contraseña robusta guardada en KeePassXC; nunca en un `.txt` ni en el repositorio.
-- `preseed-local.cfg` lleva el hash de esa contraseña: servirlo solo mientras dura la descarga y **borrarlo** después (`shred -u preseed-local.cfg`).
-- SSH solo con clave y sin root (P8). En el local, la recreativa está en la red de invitados: desde la LAN no se llega a ella y se administra desde su consola (tarea 16, sección 7).
-- Si se instaló con la versión antigua del preseed, borrar la clave `recreativa-claude` de `~tecnico/.ssh/authorized_keys` (tarea 16, corrección del 24/10). Con este preseed no hace falta.
-
-## 10. Incidencias
+## 6. Incidencias
 
 | # | Incidencia | Causa | Solución |
 |---|---|---|---|
-| | | | |
+| 1 | `VBoxManage unattended` no encontraba la ISO | El nombre de la ISO de Debian cambia con cada versión | Descargar la *netinst* actual leyendo su nombre de `SHA256SUMS` y comprobarla con `sha256sum -c` (sección 3.2) |
+| 2 | `chown: no se puede acceder a '/home/arcade/roms/*.zip'` | `/home/arcade` tiene permisos 700 (tarea 16, sección 7): la shell de `tecnico` no puede expandir el `*` dentro de esa carpeta | Hacer la copia y el `chown` dentro de `sudo sh -c "…"`, para que el `*` lo expanda root |
+| 3 | P10 vacía la primera vez | El stick no estaba enchufado | Enchufarlo; el filtro USB lo pasa solo a la VM |
+| 4 | El primer `Esc` volvía al menú de MAME | Es el comportamiento de MAME: `Esc` sale del juego al menú | Un segundo `Esc` en el menú cierra MAME, que se vuelve a abrir solo (P5) |
 
-## 11. Pendiente
+## 7. Seguridad
 
-- [ ] Ejecutar las secciones 3 a 7 en el equipo real y rellenar las tablas.
-- [ ] Guardar las evidencias de la sección 8.
-- [ ] Borrar `preseed-local.cfg` del portátil.
-- [ ] Pasar a la tarea 54 (medidas en el equipo real).
+- `arcade` sin `sudo`, con la contraseña bloqueada y la carpeta privada (P6, P7). El jugador solo tiene MAME (P5).
+- SSH solo con clave, sin contraseña ni root (P8). La única clave instalada es la del equipo de administración.
+- La contraseña de `tecnico` va al KeePassXC del proyecto, nunca a un fichero de texto. `~/.credenciales-vm` y `~/preseed-vm.cfg` no están en el repositorio y se borran del anfitrión al terminar.
+
+## 8. Pendiente
+
+- [ ] Comprobar que la contraseña de `tecnico` está en el KeePassXC del proyecto y borrar `~/preseed-vm.cfg` del anfitrión.
+- [ ] Compartir la contraseña de `tecnico` de `Recreativa-53` (KeePassXC) con Eneko.P para las medidas de las tareas 17 y 18.
+- [ ] Tarea 54: medidas antes y después en `Recreativa-53`.
+- [ ] Tarea 21 (Markel): probar el stick con otro emulador; con MAME ya funciona (P4 y P10).
+
+## Anexo: si hubiera que instalarla en un equipo físico
+
+El procedimiento es el mismo con dos cambios: el preseed se genera con [`preparar-preseed-fisico.sh`](preparar-preseed-fisico.sh), que guarda la contraseña de `tecnico` como hash SHA-512 y permite elegir el disco (`bash preparar-preseed-fisico.sh /dev/nvme0n1`), y se sirve al instalador desde un portátil (`python3 -m http.server 8000`; en el menú del instalador, *Advanced options → Automated install* y la URL `http://IP_DEL_PORTATIL:8000/preseed-local.cfg`). Los scripts y las ROMs se copian con un USB. Si el equipo tuviera más de 1 núcleo o 1 GB, se puede limitar con `maxcpus=1 mem=1024M` en `GRUB_CMDLINE_LINUX`.
