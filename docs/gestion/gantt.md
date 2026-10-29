@@ -12,12 +12,12 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 ## Resumen
 
-**37 de 55 tareas hechas (67 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**38 de 55 tareas hechas (69 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
-| Documentación | 11 | 0 | 3 | 14 |
+| Documentación | 12 | 1 | 1 | 14 |
 | Software | 19 | 6 | 1 | 26 |
 | Físico | 3 | 2 | 4 | 9 |
 
@@ -38,14 +38,13 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | Software | Eneko.P | 04/11 | En curso | Terraform (S3; SG; EC2; IP elástica; user_data) y workflow desplegar-web.yml hechos el 24/10: terraform validate y fmt correctos; user_data con bash -n. Falta terraform apply en el Learner Lab y los secretos de AWS en GitHub. El 26/10 pasa de Iker a Eneko.P (reparto de carga). Hecho cuando está guardada la salida del apply; terraform plan justo después dice No changes y un cambio en web/ se publica solo con desplegar-web. | [README.md](../../iac/README.md) |
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 04/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 04/11 | En curso | Revisión del repositorio hecha el 26/10 y repasada el 27/10 (PR #57-65): 21 hallazgos (5 altos) con responsable; S-03 no aplica (se descarta Batocera); nuevos S-20 (TPV hechos a mano sin el bastionado completo; Markel) y S-21 (versión de la librería del stick; corregido). Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge), S-05 (Wi-Fi cambiada) y S-21. S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 06/11 | En curso | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. 29/10: borrador con 59 pruebas de los 11 bloques (45 hechas; 14 pendientes) sacadas de cada tarea, del backlog y de verificacion.md. | [47-tabla-pruebas.md](../../docs/gestion/47-tabla-pruebas.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | Software | Iker | 30/10 | Pendiente | Guía lista el 24/10 (driver; predeterminada del cajero; pruebas). La impresora la da el centro: se hace cuando llegue. El 26/10 pasa de Adrian a Markel (reparto de carga). Ese mismo día Markel se la pasa a Iker (a cambio de la 13). 26/10: intento con una Samsung ML-1660 USB pasada a la VM win-11 (tarea 52): Windows instala el driver pero no crea el puerto USB001 y el trabajo falla; queda para la impresora del centro. 27/10: la impresora de pruebas es la Samsung ML-1660 (decisión del equipo; no hay térmicas para todos). Pasada por USB a la VM no crea USB001; por IPP a la cola CUPS del PC de Adrian sí imprime (tarea 52, sección 4.2). Falta la cola en los TPV de la tarea 13. | [DOCUMENTACION.md](../../docs/so/14-impresora/DOCUMENTACION.md) |
-| 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16): la 51 decidió Debian el 26/10. | — |
+| 53 | Instalar la recreativa en el equipo real (1 núcleo; 1 GB) | Físico | Eneko.S | 30/10 | Pendiente | Mismo preseed y script que la VM (tarea 16): la 51 decidió Debian el 26/10. 27/10: guía y preparar-preseed-fisico.sh (contraseña como hash; disco elegido; clave SSH) listos y probados; falta hacerlo en el equipo real. | [DOCUMENTACION.md](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md) |
 | 21 | Pruebas del stick con MAME y otro emulador | Físico | Markel | 03/11 | Pendiente | Pasa de Eneko.P a Markel. 27/10: en Batocera ya se reconoce (evtest con los 4 botones y los ejes; es_input.cfg). | — |
-| 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 04/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. 27/10: se acorta a un día (4/11) por el corte técnico de esa fecha; depende de que la 25 acabe el 3/11. | — |
-| 54 | Medir rendimiento y recursos en el equipo real | Físico | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. | — |
-| 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 06/11 | Pendiente | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. | [verificacion.md](../../docs/gestion/verificacion.md) |
-| 48 | Documentación final paso a paso | Documentación | Markel | 09/11 | Pendiente | Punto de partida: LOGICA_RETO.md. 27/10: después de la rúbrica (4/11), para ajustarla a ella. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
+| 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 04/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. 27/10: se acorta a un día (4/11) por el corte técnico de esa fecha; depende de que la 25 acabe el 3/11. 27/10: plan W1-W7 de Wireshark y analizar-red.sh (nmap con veredicto; probado con servicios locales). | [DOCUMENTACION.md](../../docs/redes/26-analisis-conectividad/DOCUMENTACION.md) |
+| 54 | Medir rendimiento y recursos en el equipo real | Físico | Eneko.S | 04/11 | Pendiente | Con medir-rendimiento.sh y monitor-recreativa.sh. 27/10: protocolo y resumir-rendimiento.sh (reproduce la tabla de la tarea 17); falta medir en el equipo real. | [DOCUMENTACION.md](../../docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. | — |
 
 ## Tareas hechas
@@ -80,11 +79,12 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 38 | Modelo E/R | 8 BD | Documentación | Adrian | — | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | Eneko.S | — | [39-modelo-logico-3fn.md](../../docs/bd/39-modelo-logico-3fn.md) |
 | 40 | Scripts DDL | 8 BD | Software | Eneko.S | Repetido el 23/10 en PostgreSQL 16: 01 a 03 sin errores; 03 repetible; 05-pruebas 33/33 dos veces; 04 borra y se puede recrear. | [40-scripts-ddl.md](../../docs/bd/40-scripts-ddl.md) |
-| 41 | Datos de prueba y consultas | 8 BD | Software | Iker | 06-datos.sql (2 locales; 8 ventas) y 07-consultas.sql (12 consultas) ejecutados el 24/10 en PostgreSQL 18.3 sin errores; evidencia guardada. Falta crear almi_chain en el servidor (tarea 40; sección 2). | [41-datos-y-consultas.txt](../../docs/bd/evidencias/41-datos-y-consultas.txt) |
+| 41 | Datos de prueba y consultas | 8 BD | Software | Iker | 06-datos.sql (2 locales; 8 ventas) y 07-consultas.sql (12 consultas) ejecutados el 24/10 en PostgreSQL 18.3 sin errores; evidencia guardada. almi_chain creada en el servidor el 27/10 con 01-03 y 06 (tarea 44) y ya entra en las copias. | [41-datos-y-consultas.txt](../../docs/bd/evidencias/41-datos-y-consultas.txt) |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | Adrian | 08-usuarios.sql (tpv_app e informes con LOGIN; contraseñas por variable) y 09-pruebas-usuarios.sql: 9/9 con cada cuenta el 24/10. Pasa de Markel a Adrian. | [42-usuarios-y-permisos.txt](../../docs/bd/evidencias/42-usuarios-y-permisos.txt) |
-| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | Iker | RAID y simulación de fallo (22-23/10). 27/10: la BD y los adjuntos de Odoo pasan al RAID (solo los volúmenes de Docker: todo /var/lib/docker no cabía, 6097 MB frente a 4454 MB libres) con mover-docker-al-raid.sh; avería repetida con Odoo funcionando (venta S00007 guardada con [U_]; reconstruido en 30 s) y reinicio comprobado. Falta repetir la restauración (45) con la BD en el RAID. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
+| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | Iker | RAID y simulación de fallo (22-23/10). 27/10: la BD y los adjuntos de Odoo pasan al RAID (solo los volúmenes de Docker: todo /var/lib/docker no cabía, 6097 MB frente a 4454 MB libres) con mover-docker-al-raid.sh; avería repetida con Odoo funcionando (venta S00007 guardada con [U_]; reconstruido en 30 s) y reinicio comprobado. La restauración (45) se repitió con la BD en el RAID el 27/10: todo OK en 63 s. | [DOCUMENTACION.md](../../docs/backup/43-raid1/DOCUMENTACION.md) |
 | 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | Software | Iker | Copia diaria cifrada en RAID y USB. 27/10: almi_chain creada en el servidor y la copia lleva las dos bases; aviso si la copia falla (OnFailure=) instalado y probado con un fallo provocado. Mejora preparada sin probar: tercer repositorio en S3 (falta crear el bucket y el usuario IAM). | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
-| 45 | Prueba de restauración con evidencias | 9 Backup | Software | Iker | Restaurada la copia del USB en un entorno aislado del mismo servidor (46 s). Falta repetirla en una VM nueva para medir el RTO real. | [DOCUMENTACION.md](../../docs/backup/45-restauracion/DOCUMENTACION.md) |
+| 45 | Prueba de restauración con evidencias | 9 Backup | Software | Iker | Restaurada la copia del USB en un entorno aislado (46 s). Repetida el 27/10 con la BD en el RAID: todas las comprobaciones OK en 63 s. Falta repetirla en una VM nueva para medir el RTO real. | [DOCUMENTACION.md](../../docs/backup/45-restauracion/DOCUMENTACION.md) |
+| 48 | Documentación final paso a paso | 11 Entrega | Documentación | Markel | Punto de partida: LOGICA_RETO.md. 27/10: después de la rúbrica (4/11), para ajustarla a ella. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
 | 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | Adrian | Lista de comprobaciones en arduino/mando-joystick/README.md. 27/10 (Iker): firmware subido y verificado; los 4 botones y las 4 direcciones llegan al PC y a Batocera. 27/10 (Adrian): ver-mando.py registra la entrada y deja evidencia: 2 registros con los 4 botones y las 4 direcciones, sin pulsaciones fantasma (el botón 3 ya no se pulsa solo); MAP + GUARDAR sobrevive al reinicio de la placa y RESET + GUARDAR deja los valores por defecto. Sin comprobar: el efecto de MAP e INV pulsando (probar-stick.py). | [README.md](../../arduino/mando-joystick/README.md) |
 | 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | Iker | 26/10: medidas en VM de 1 núcleo y 1 GB (3 antes y 3 después en Batocera; Debian del 23/10). Decidido Debian 13 + MAME: llega antes a jugar (7,1 s frente a 12,9 s), usa menos RAM (400 MB con el juego frente a 554 MB solo con el menú) y MAME va igual o más rápido. Batocera endurecido (security.enabled) y optimizado; incidencias y decisión en NOTAS.md y Anexo II. | [NOTAS.md](../../docs/arcade/16-batocera/NOTAS.md) |
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | Adrian | Hecha en VM el 26/10: proxy nginx con certificado propio (con nameConstraints; tarea 46) y las 15 pruebas correctas, con venta por HTTPS (5) y venta sin red (6) en un TPV provisional (win-11) de la red 192.168.10.0/24; fijar-url-y-qr.sh quita el QR del ticket (S-19). El 27/10 se da por hecha y ese mismo día el ticket se imprime desde la VM win-11, por IPP a la cola CUPS del PC (la Samsung ML-1660 no crea el puerto USB001 si se pasa por USB), ya sin QR. RUNBOOK.md queda para pasarla al servidor del equipo. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
@@ -98,7 +98,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Eneko.P | 4 | 4 | 4 | 0 | 9 | 3, 6, 7 |
 | Eneko.S | 9 | 4 | 0 | 3 | 16 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 2 | 2 | 0 | 27 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 7 | 2 | 0 | 1 | 15 | 1, 2, 4, 5, 6, 11 |
+| Markel | 7 | 1 | 0 | 1 | 15 | 1, 2, 4, 5, 6, 11 |
 | Peio | 6 | 3 | 0 | 2 | 14 | 0, 1, 5, 6, 11 |
 
 ## Tareas por persona
@@ -145,7 +145,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 32 | Comparativa y elección de ERP | 7 ERP | Documentación | 22/10–23/10 | — | Hecho |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | 22/10–23/10 | #38 (Adrian) | Hecho |
 | 40 | Scripts DDL | 8 BD | Software | 22/10–23/10 | #39 (Eneko.S) | Hecho |
-| 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 05/11–06/11 | #21 (Markel), #26 (Eneko.S), #29 (Adrian) | Pendiente |
+| 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 05/11–06/11 | #21 (Markel), #26 (Eneko.S), #29 (Adrian) | En curso |
 
 ### Iker
 
@@ -175,7 +175,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 02/11–03/11 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | 21/10–23/10 | #27 (Peio) | Hecho |
-| 48 | Documentación final paso a paso | 11 Entrega | Documentación | 05/11–09/11 | #45 (Iker) | Pendiente |
+| 48 | Documentación final paso a paso | 11 Entrega | Documentación | 05/11–09/11 | #45 (Iker) | Hecho |
 
 ### Peio
 
