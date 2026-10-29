@@ -1,7 +1,7 @@
 # Tarea 16 · Instalar SO ligero y MAME con arranque directo — Registro de ejecución
 
 **Responsable:** Iker · **Fecha de ejecución:** 22/10/2026
-**Estado:** ✅ Hecha en máquina virtual (con 5 juegos legales funcionando) · ⏳ Pendiente: pasarla a la máquina física
+**Estado:** ✅ Hecha en máquina virtual (con 5 juegos legales funcionando) · La recreativa se entrega en VM (decisión del 29/10): la [tarea 53](../53-recreativa-fisica/DOCUMENTACION.md) la repite en la VM de 1 núcleo y 1 GB con el stick real
 
 ## 1. Resultado
 
@@ -194,5 +194,5 @@ En el local la recreativa no va por cable: va a la **Wi-Fi de invitados** (tarea
 ## 9. Pendiente
 - [x] Jugar una partida (comprobado con teclado y con el stick simulado).
 - [ ] Añadir el usuario del PC a `vboxusers` y probar con el stick real (tabla de pruebas de `STICK-ARDUINO.md`).
-- [ ] Repetir la instalación en la máquina física (mismo preseed y mismo script) y conectarla a la Wi-Fi de invitados (sección 6).
+- [x] Repetir la instalación con los recursos del enunciado: hecho en la VM `Recreativa-53` (tarea 53, 29/10). Ya no hay equipo físico (decisión del 29/10), así que la Wi-Fi de invitados (sección 6) queda como procedimiento para el local.
 - [ ] Revisión de Markel → mover a **Hecho** en el Kanban.

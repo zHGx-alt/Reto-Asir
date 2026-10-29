@@ -130,7 +130,7 @@
 <circle cx="449" cy="423.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="427.0" class="t">Adrian</text>
 <text x="528" y="427.0" class="s">8</text>
-<rect x="644" y="416" width="76" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>12. Dual boot Win10 + Linux en el equipo del gerente (VM) · Adrian · 22/10–23/10 · Hecho</title></rect>
+<rect x="644" y="416" width="236" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>12. Dual boot Win10 + Linux en el equipo del gerente (VM) · Adrian · 22/10–29/10 · Hecho</title></rect>
 <line x1="16" y1="456" x2="1202" y2="456" stroke="#f0efeb"/>
 <text x="16" y="449.0" class="s">13</text>
 <text x="44" y="449.0" class="m">Bastionado de los 2 TPV Windows en VM (usuario estándar, kiosko, USB) ✓</text>
