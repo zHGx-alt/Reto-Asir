@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (29/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 y el 29/10 con lo que entró después (secciones 1.1 y 1.2): 24 hallazgos; 7 corregidos (S-01, S-04, S-05, S-15, S-18, S-21 y S-22), S-11 hecho en el PC del gerente y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
+- **Estado (29/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 y el 29/10 con lo que entró después (secciones 1.1 y 1.2): 24 hallazgos; 8 corregidos (S-01, S-04, S-05, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -58,7 +58,7 @@ Se leyó lo que entró en `main` del PR #66 al #84 (scripts y configuraciones):
 
 | Gravedad | Hallazgos | Corregidos |
 |---|---|---|
-| Alta | 6 (S-01 a S-05 y S-24) | 3 (S-01, S-04 y S-05); S-03 no aplica |
+| Alta | 6 (S-01 a S-05 y S-24) | 4 (S-01, S-04, S-05 y S-24); S-03 no aplica |
 | Media | 9 (S-06 a S-12, S-20 y S-23) | 0; S-11 hecho en el PC del gerente (faltan los TPV) |
 | Baja | 9 (S-13 a S-19, S-21 y S-22) | 4 (S-15, S-18, S-21 y S-22) |
 
@@ -95,7 +95,7 @@ Lo más urgente, por este orden:
 | S-21 | Baja | Tarea 19, `arduino/mando-joystick/subir.sh` | Instalaba la librería Joystick desde la rama principal de GitHub (con `ENABLE_UNSAFE_INSTALL`), sin fijar versión: cualquier cambio en esa rama entraría en el firmware sin revisar | Fijar la versión con la que se probó (`#v2.1.1`) | Adrian | ✅ Corregido el 27/10 (`LIB_VERSION`). La instalación no se pudo repetir: este PC no tiene `arduino-cli` |
 | S-22 | Baja | Tarea 42, `08-usuarios.sql` | El ejemplo de uso pasaba las contraseñas de `tpv_app` e `informes` escritas en la orden (`-v pass_tpv='...'`), y el comentario decía que así no quedaban en el historial: sí quedan en `~/.bash_history` | Leerlas antes con `read -rs` y pasarlas como variable (mismo criterio que S-15) | Adrian | ✅ Corregido el 29/10 en el script y en la tarea 40 |
 | S-23 | Media | Tarea 44, copia 3b a S3 | La copia a S3 necesita un usuario IAM con claves permanentes, y el Learner Lab no deja crear usuarios IAM: sus credenciales caducan en cada sesión. Con claves de la sesión, la copia nocturna fallaría en cuanto se pare el laboratorio; y unas claves con permisos de todo el laboratorio en el servidor serían peor que no tener la copia | En el laboratorio, dejar la 3b como diseño (la regla 3-2-1 ya la cumple el USB) y no guardar claves del Learner Lab en `s3.env`. En una cuenta de AWS normal: usuario IAM limitado al bucket, como dice la tarea 44 | Iker | ⏳ Pendiente |
-| S-24 | Alta | Tarea 24, capturas del 29/10 | Las capturas 14 y 16 de la red segura dejaban leer la contraseña Wi-Fi nueva (el recuadro tapaba el campo de al lado), la misma en la red del personal y en la de invitados; la 15, el PIN de WPS. Las imágenes antiguas siguen en el historial de Git. Es lo mismo que S-05 | Cambiar la contraseña del personal, poner otra distinta en invitados (KeePassXC) y generar un PIN de WPS nuevo. Revisar cada captura ampliada antes de subirla | Peio | 🟡 Capturas tapadas el 29/10; falta cambiar la contraseña y el PIN |
+| S-24 | Alta | Tarea 24, capturas del 29/10 | Las capturas 14 y 16 de la red segura dejaban leer la contraseña Wi-Fi nueva (el recuadro tapaba el campo de al lado), la misma en la red del personal y en la de invitados; la 15, el PIN de WPS. Las imágenes antiguas siguen en el historial de Git. Es lo mismo que S-05 | Cambiar la contraseña del personal, poner otra distinta en invitados (KeePassXC) y generar un PIN de WPS nuevo. Revisar cada captura ampliada antes de subirla | Peio | ✅ Corregido el 29/10: capturas tapadas, contraseñas Wi-Fi cambiadas (distintas en personal e invitados, en KeePassXC) y PIN de WPS nuevo (Peio) |
 
 ## 4. Detalle
 

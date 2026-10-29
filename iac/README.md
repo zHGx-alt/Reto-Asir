@@ -1,6 +1,6 @@
 # Tarea 31 · Infraestructura como código de la web
 
-- **Responsable:** Adrian (desde el 29/10; antes Iker y Eneko.P)
+- **Responsable:** Eneko.P (código de Iker; aplicado el 29/10 en el Learner Lab de Adrian)
 - **Estado (29/10/2026):** ✅ Hecha en el Learner Lab. El montaje a mano de la tarea 30 se importó en Terraform (`terraform import`) y se aplicó: instancia nueva con Ubuntu 24.04 actualizado, disco cifrado e IMDSv2, la misma IP elástica (sin tocar DuckDNS) y la web actual con las fotos. Después, `terraform plan` dice *No changes*. Evidencias en [`evidencias/`](evidencias/): [plan](evidencias/01-plan.txt), [apply](evidencias/02-apply.txt), [pruebas](evidencias/03-pruebas-curl.txt), [GitHub Actions](evidencias/04-actions-desplegar-web.txt) y [plan sin cambios](evidencias/05-plan-sin-cambios.txt)
 
 Crea con un solo comando el mismo montaje que la [tarea 30](../docs/web/30-hosting-aws.md) hizo a mano, y GitHub Actions publica la web cada vez que cambia `web/` en `main`.

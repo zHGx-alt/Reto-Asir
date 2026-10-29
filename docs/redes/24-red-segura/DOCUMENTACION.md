@@ -3,7 +3,7 @@
 - **Bloque:** 5 Redes
 - **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado (29/10/2026):** 🟡 Configuración hecha por Peio el 29/10 ([segunda parte](configurar-red-segura.md)): LAN `192.168.10.0/24`, reserva del PC del gerente, WPS desactivado, red de invitados aislada, administración solo desde el PC del gerente y renovación de la clave de grupo. **Falta:** cambiar la contraseña Wi-Fi, que se leía en dos capturas y es la misma en las dos redes (sección 6), y las capturas de ping de las pruebas P3b y P4. WPA3 no existe en este router: queda como limitación
+- **Estado (29/10/2026):** 🟡 Configuración hecha por Peio el 29/10 ([segunda parte](configurar-red-segura.md)): LAN `192.168.10.0/24`, reserva del PC del gerente, WPS desactivado, red de invitados aislada, administración solo desde el PC del gerente y renovación de la clave de grupo. Contraseñas Wi-Fi del personal y de invitados cambiadas el 29/10 tras verse en dos capturas (sección 6). PIN de WPS nuevo el mismo día. **Falta:** las capturas de ping de las pruebas P3b y P4. WPA3 no existe en este router: queda como limitación
 - **Fecha:** 23/10/2026 · **Revisión:** 24/10/2026 · **Segunda parte:** 29/10/2026
 - **Depende de:** tarea 23 (plano y direccionamiento)
 
@@ -147,9 +147,9 @@ El panel solicita credenciales de administración. La contraseña administrativa
 | Firewall SPI | Revisado en el panel |
 | Protección DoS | Disponible y revisada |
 | Red de invitados aislada | Configurada el 29/10 (acceso a la LAN desactivado y aislamiento activado); el móvil no abre el panel. Faltan las capturas de ping (P3b y P4) |
-| WPS | Desactivado (29/10). Hay que generar un PIN nuevo: el actual se leía en una captura |
+| WPS | Desactivado, con PIN nuevo desde el 29/10 (el anterior se leía en una captura) |
 | Contraseña de administración | Cambiada por Peio el 26/10/2026 y guardada en KeePassXC. Administración solo desde la MAC del PC del gerente (29/10) |
-| Contraseña Wi-Fi | Cambiada el 26/10 y otra vez el 29/10, pero la del 29/10 se leía en las capturas 14 y 16 y es la misma que la de invitados: **hay que cambiarla** (sección 6) |
+| Contraseña Wi-Fi | Cambiada el 26/10, otra vez el 29/10 y de nuevo ese día tras verse en las capturas 14 y 16; personal e invitados con contraseñas distintas, en KeePassXC |
 | LAN del proyecto | `192.168.10.1/24`, DHCP `.100-.199` y reserva `192.168.10.20` para el PC del gerente (29/10) |
 
 ## 11. Conclusión
@@ -165,7 +165,8 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 - [x] Cambiar la contraseña de administración (26/10/2026, guardada en KeePassXC).
 - [x] Limitar la administración a la MAC del PC del gerente; captura (29/10).
 - [x] Desactivar WPS; captura (29/10).
-- [ ] Cambiar la contraseña Wi-Fi del personal (se leía en las capturas 14 y 16) y poner otra distinta en la de invitados; generar un PIN de WPS nuevo.
+- [x] Cambiar la contraseña Wi-Fi del personal (se leía en las capturas 14 y 16) y poner otra distinta en la de invitados (29/10).
+- [x] PIN de WPS nuevo (29/10).
 - [ ] Capturas de ping desde la red de invitados: al PC del gerente (P3b) y entre dos móviles (P4).
 - [x] LAN en `192.168.10.0/24`, reserva del gerente y renovación de la clave de grupo, en el TL-WR841N (29/10).
 - [ ] En el local, con el Archer C6: WPA3 (o WPA2/WPA3) y modo sin 802.11b, que el TL-WR841N no tiene (limitación).

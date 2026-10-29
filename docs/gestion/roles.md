@@ -30,7 +30,7 @@ La 17, la 18 y la 54 pedían la misma medida (rendimiento y monitorización en l
 
 A Eneko.P le quedan la 31 y la 36.
 
-Ese mismo día la **31** (Terraform) pasa de Eneko.P a **Adrian**: montó la web a mano (tarea 30) y tiene el Learner Lab, el token de DuckDNS y los permisos de GitHub que hacen falta. A Eneko.P le queda la 36.
+La **31** (Terraform) sigue a nombre de Eneko.P. Se aplicó el 29/10 en el Learner Lab de Adrian, que es quien tiene el laboratorio y los permisos de GitHub.
 
 ### 27/10/2026
 
