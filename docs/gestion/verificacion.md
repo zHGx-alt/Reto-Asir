@@ -116,7 +116,7 @@ Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los
 | TPV restringidos con mínimos privilegios | 13, 15 | Hecho a mano en VM (26/10, tarea 13); falta comprobar-tpv.ps1 (tarea 15) |
 | Instalación y configuración de una impresora | 14, 37 | Pendiente |
 | Arcade stick montado y probado con dos emuladores | 19, 50, 21 | Pendiente |
-| Recreativa de 1 núcleo y 1 GB con pruebas de rendimiento | 17, 18, 51, 53, 54 | En curso / pendiente |
+| Recreativa de 1 núcleo y 1 GB con pruebas de rendimiento | 17, 18, 51, 53, 54 | Hecho (29/10: instalada con el stick en la 53 y medida en la 54) |
 | Red segura con WDS comprobado | 24, 25, 26 | En curso / pendiente |
 | Despliegue reproducible automatizado (IaC) | 31 | Pendiente (el enunciado lo pide «a poder ser») |
 | ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | Pendiente |
