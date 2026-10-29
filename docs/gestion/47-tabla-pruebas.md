@@ -1,7 +1,7 @@
 # Tarea 47 · Tabla de pruebas por bloque
 
 **Responsable:** Eneko.S · **Fechas:** 05–06/11/2026 · **Depende de:** tareas 21, 26 y 29
-**Estado:** 📝 Borrador del 27/10/2026, actualizado el 29/10 con lo que entró hasta el PR #78. Se completa a medida que se cierran las pruebas pendientes (⏳) y se ajusta a la rúbrica (llega el 4/11).
+**Estado:** 📝 Borrador del 27/10/2026, actualizado el 29/10 con lo que entró hasta el PR #78 y con la tarea 53. Se completa a medida que se cierran las pruebas pendientes (⏳) y se ajusta a la rúbrica (llega el 4/11).
 
 Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde está la evidencia**. No sustituye a la documentación de cada tarea: cada fila enlaza a ella. Los resultados se han copiado de los documentos de cada tarea, de [verificacion.md](verificacion.md) y del [backlog](backlog-kanban.csv) a fecha de 29/10/2026; no se han inventado ni redondeado.
 
@@ -19,7 +19,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | 0 Gestión | 5 | 4 | 1 | Commits de Eneko.P |
 | 1 Hardware | 3 | 3 | 0 | — |
 | 2 SO | 7 | 5 | 2 | Scripts del TPV en los dos equipos (S-20); impresora |
-| 3 Arcade | 9 | 6 | 3 | Medidas en VM de 1 GB y todo el equipo real (53 y 54) |
+| 3 Arcade | 9 | 7 | 2 | Medidas antes y después en la VM de 1 núcleo y 1 GB (17 y 54) |
 | 4 Arduino | 5 | 4 | 1 | Probarlo con MAME y con otro emulador (tarea 21) |
 | 5 Redes | 6 | 3 | 3 | Invitados aislados, WDS en el plan real y análisis con nmap y Wireshark |
 | 6 Web | 5 | 4 | 1 | `terraform apply` en el Learner Lab |
@@ -27,7 +27,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | 8 BD | 3 | 3 | 0 | — |
 | 9 Backup | 5 | 4 | 1 | Restauración en una VM nueva (RTO real) |
 | 10 Seguridad | 3 | 2 | 1 | Comprobaciones en los equipos (tarea 46, sección 5) |
-| **Total** | **59** | **45** | **14** | |
+| **Total** | **59** | **46** | **13** | |
 
 ## 0 · Gestión
 
@@ -70,8 +70,8 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | A-05 | 17 | Rendimiento antes y después de optimizar (VM de 2 núcleos y 1,5 GB) | Mejora o igual | ✅ 🖥️ Timers 8 → 3, disco −277 MB, Robby Roto +27 % y más estable; arranque no concluyente | 22/10 | [rendimiento.csv](../arcade/17-rendimiento-mame/evidencias/rendimiento.csv) |
 | A-06 | 17, 18 | Lo mismo en la VM de 1 núcleo y 1 GB, también jugando | Antes y después | ⏳ Solo hay 3 medidas de «antes» | — | [Tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md) |
 | A-07 | 18 | Scripts de monitorización en Linux | CSV correcto, parada limpia | ✅ | 23/10 | [Tarea 18](../arcade/18-monitorizacion-recreativa.md) |
-| A-08 | 53 | Instalación y comprobaciones P1-P12 en el equipo real | Todo OK | ⏳ Guía y preseed listos | — | [Tarea 53](../arcade/53-recreativa-fisica/DOCUMENTACION.md) |
-| A-09 | 54 | Medidas antes y después en el equipo real | Datos reales | ⏳ Protocolo listo | — | [Tarea 54](../arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
+| A-08 | 53 | Recreativa en VM de 1 núcleo y 1 GB con el stick: comprobaciones P1-P10 | Todo OK | ✅ 🖥️ `Recreativa-53`: arranque directo a MAME, 5 juegos, partida con el stick, MAME se reabre, `arcade` sin privilegios, SSH solo con clave; 524 MB libres con MAME | 29/10 | [Tarea 53](../arcade/53-recreativa-fisica/DOCUMENTACION.md) |
+| A-09 | 54 | Medidas antes y después en `Recreativa-53` (1 núcleo y 1 GB) | Datos de antes y después | ⏳ Protocolo listo | — | [Tarea 54](../arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 
 ## 4 · Arcade stick (Arduino)
 
@@ -81,7 +81,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | R-02 | 16 | MAME detecta un mando con la identidad USB del Leonardo | Detectado | ✅ 🖥️ Mando virtual | 22/10 | [prueba-stick-virtual.txt](../arcade/16-recreativa-mame/evidencias/prueba-stick-virtual.txt) |
 | R-03 | 19 | Montaje y cableado | Montado | ✅ Cableado y probado en la placa; montado en la caja con la palanca y los botones (la caja tiene 6 botones; el firmware lee 4) | 27/10 | [Foto](../../arduino/mando-joystick/evidencias/stick-montado-2026-10-27.webp) · [prueba en la placa](../../arduino/mando-joystick/evidencias/prueba-placa-2026-10-27.txt) |
 | R-04 | 50 | Firmware en la placa: HID, comandos y EEPROM | Funciona | ✅ Los 4 botones y las 4 direcciones llegan al PC y a Batocera | 27/10 | [Entrada registrada](../../arduino/mando-joystick/evidencias/entrada-stick-2026-10-27-1124.txt) · [EEPROM](../../arduino/mando-joystick/evidencias/eeprom-2026-10-27.txt) |
-| R-05 | 21 | Stick con MAME y con otro emulador | Funciona en los dos | ⏳ Batocera ya lo reconoce (evtest con los 4 botones y los ejes) | — | [evtest en Batocera](../../arduino/mando-joystick/evidencias/batocera-evtest-2026-10-27.txt) |
+| R-05 | 21 | Stick con MAME y con otro emulador | Funciona en los dos | ⏳ Con MAME, ✅ (partida en `Recreativa-53`, tarea 53, 29/10). Batocera lo reconoce (evtest con los 4 botones y los ejes). Falta jugar con otro emulador | — | [evtest en Batocera](../../arduino/mando-joystick/evidencias/batocera-evtest-2026-10-27.txt) |
 
 ## 5 · Redes
 
