@@ -1,7 +1,7 @@
 # Tarea 17 · Pruebas de rendimiento de MAME antes y después
 
 **Responsable:** Iker · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
-**Estado:** ✅ Hecha (29/10: alcance ajustado): método, scripts (`medir-rendimiento.sh`, `optimizar-arcade.sh`), las 9 optimizaciones y la medida de antes y después en una VM de 2 núcleos y 1,5 GB. **La medida en 1 núcleo y 1 GB, la que pide el enunciado, es la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md)** (Eneko.S, en `Recreativa-53`), para no medir lo mismo dos veces
+**Estado:** ✅ Hecha (29/10: alcance ajustado): método, scripts (`medir-rendimiento.sh`, `optimizar-arcade.sh`), las 9 optimizaciones y la medida de antes y después en una VM de 2 núcleos y 1,5 GB. **La medida en 1 núcleo y 1 GB, la que pide el enunciado, está hecha en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md)** (29/10, `Recreativa-53`): MAME va de sobra y la optimización baja timers y disco sin cambiar la velocidad
 
 > ⚠️ **Las cifras de esta página no son las del equipo del cliente; las de 1 núcleo y 1 GB salen en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md).** Estas medidas se hicieron en una VM con **2 núcleos y 1,5 GB**, pero el enunciado dice que la recreativa
 > tiene **1 núcleo y 1 GB**. Ya hay una VM con esas especificaciones (`Recreativa-1GB`) con 3 medidas de "antes"
