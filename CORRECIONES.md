@@ -15,7 +15,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 |---|---|
 | **Adrian** | [4](#4-datos-que-faltan-en-tareas-hechas) exportar la VM del gerente a Drive, notación del E/R |
 | **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura rectificativa · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
-| **Peio** | Nada en esta lista: sus tareas abiertas (24 y 25) están en el Gantt |
+| **Peio** | Nada en esta lista: su tarea abierta (25) está en el Gantt; la 24 se cerró el 30/10 |
 | **Eneko.P** | [3.2](#32-recreativa-medida-en-una-vm-que-no-es-la-del-enunciado-tarea-17) medidas de la recreativa en 1 núcleo y 1 GB |
 | **Markel** | [4](#4-datos-que-faltan-en-tareas-hechas) edición de Windows de los TPV |
 | **Todos** | [4](#4-datos-que-faltan-en-tareas-hechas) sus filas del registro de IA |
@@ -45,7 +45,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 - [ ] 🟢 **Recreativas instaladas con el preseed antiguo:** borrar la línea `recreativa-claude` de `~tecnico/.ssh/authorized_keys`.
   - **Quién:** Iker.
 
-Lo demás de este apartado está corregido (sección 1). Limitar la administración del router a la MAC del gerente y apagar WPS es trabajo de la tarea 24, en el Gantt.
+Lo demás de este apartado está corregido (sección 1). Limitar la administración del router a la MAC del gerente y apagar WPS se hizo en la tarea 24 (29/10).
 
 ### 2.2 HTTPS en Odoo (tarea 52)
 
@@ -142,7 +142,7 @@ Corregido el 26/10 (sección 1).
 | Contratar una línea WAN | Hecho (DIGI 1 Gb, con análisis de necesidades) |
 | Esquema de conectividad | Hecho ([tarea 22, sección 4](docs/redes/22-comparativa-wan.md#4-esquema-de-conectividad)) |
 | Diagrama de la red (plano), cableado y Wi-Fi | Hecho: plano y Packet Tracer de la red real probado |
-| Red configurada de forma segura | Parcial: contraseñas del router cambiadas; faltan corr. 2.4 y la tarea 24 (red de invitados, WPS y administración por MAC) |
+| Red configurada de forma segura | Parcial: tarea 24 hecha (30/10): red de invitados aislada y probada, WPS desactivado, administración solo desde la MAC del gerente y contraseñas en KeePassXC. WPA3 queda como limitación del TL-WR841N. Falta corr. 2.4 |
 | Segundo router por WDS, comprobando que funciona | Prueba de laboratorio hecha (27/10): el enlace WDS funciona. Falta con la red del proyecto y el aislamiento de invitados (tarea 25) |
 | RA.7 de PAR: conectar redes privadas a públicas | Demostrado en Packet Tracer: NAT, WAN e Internet sin acceso a la LAN (pruebas 11 y 12) |
 

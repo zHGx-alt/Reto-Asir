@@ -154,7 +154,7 @@ El panel solicita credenciales de administración. La contraseña administrativa
 
 ## 11. Conclusión
 
-Se ha verificado la conectividad, se ha revisado la administración local y remota, se ha configurado la opción Wi-Fi más segura disponible en el equipo y se han comprobado las funciones de firewall. Para terminar completamente la tarea faltan dos acciones: utilizar un equipo compatible con WPA3-SAE y documentar la configuración y el aislamiento de la red de invitados.
+Se ha verificado la conectividad, se ha revisado la administración local y remota, se ha configurado la opción Wi-Fi más segura disponible en el equipo y se han comprobado las funciones de firewall. La red de invitados quedó configurada el 29/10 y su aislamiento probado el 30/10 ([segunda parte, sección 9](configurar-red-segura.md#9-pruebas-de-la-red-de-invitados)). Lo único que no se cumple es WPA3-SAE, que este router no tiene: queda como limitación.
 
 > [!WARNING]
 > No deben subirse al repositorio las capturas originales sin censurar, ya que contienen contraseñas Wi-Fi y credenciales RADIUS visibles.

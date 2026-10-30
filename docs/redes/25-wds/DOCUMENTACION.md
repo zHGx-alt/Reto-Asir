@@ -210,7 +210,7 @@ En [`evidencias/`](evidencias/), con nombres que digan qué demuestran:
 ## 11. Pendiente
 
 - [x] Prueba de laboratorio del enlace WDS y del DHCP del router 2 (27/10, Peio; sección 1.2).
-- [ ] Red de invitados en el router 1 (tarea 24): sin ella no se pueden hacer W3 a W7.
+- [x] Red de invitados en el router 1 (tarea 24, hecha el 29/10 y probada el 30/10): ya se pueden hacer W3 a W7.
 - [ ] Router 1 con el canal fijo (sección 4).
 - [ ] Medidas «antes» (sección 5).
 - [ ] Router 2 configurado y WDS en *Run* (sección 6).
