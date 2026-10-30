@@ -12,14 +12,14 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 ## Resumen
 
-**45 de 55 tareas hechas (81 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**46 de 55 tareas hechas (83 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 2 | 1 | 14 |
 | Software | 25 | 3 | 0 | 28 |
-| Físico | 5 | 1 | 1 | 7 |
+| Físico | 6 | 1 | 0 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
 
@@ -37,7 +37,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 06/11 | En curso | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. 29/10: borrador con 59 pruebas de los 11 bloques (50 hechas; 9 pendientes, con la 53 y la 54) sacadas de cada tarea, del backlog y de verificacion.md. | [47-tabla-pruebas.md](../../docs/gestion/47-tabla-pruebas.md) |
 | 48 | Documentación final paso a paso | Documentación | Markel | 09/11 | En curso | Punto de partida: LOGICA_RETO.md. 27/10: después de la rúbrica (4/11), para ajustarla a ella. 29/10: estaba en Hecho por error (el plan la pone del 5 al 9/11 y su documento dice En curso). Markel subió el capítulo de restauración (docs/backup/48-documentacion-final-restauracion.md), que amplía la 45 sin repetir sus pruebas. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 10/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. 29/10: puesto al día (decisiones sustituidas marcadas, firmware de router, cifrado del gerente, semanas con el corte del 4/11, incidencias y pruebas del 27-29/10). 29/10 (tarde): pruebas de redes y arcade al día, incidencias del 29/10, retrospectiva (qué mejorar y desviaciones) y diagrama de AWS en la tarea 30. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
-| 26 | Análisis de conectividad (Wireshark; nmap) | Físico | Eneko.S | 04/11 | Pendiente | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. 27/10: se acorta a un día (4/11) por el corte técnico de esa fecha; depende de que la 25 acabe el 3/11. 27/10: plan W1-W7 de Wireshark y analizar-red.sh (nmap con veredicto; probado con servicios locales). | [DOCUMENTACION.md](../../docs/redes/26-analisis-conectividad/DOCUMENTACION.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 10/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. | — |
 
 ## Tareas hechas
@@ -65,6 +64,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | Peio | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). 29/10 (Peio, configurar-red-segura.md): LAN 192.168.10.0/24, reserva del gerente, WPS desactivado, red de invitados aislada, administración solo desde la MAC del gerente y renovación de la clave de grupo. 29/10: contraseñas del personal y de invitados cambiadas (distintas) tras verse en las capturas 14 y 16 (S-24). PIN de WPS nuevo. 30/10: capturas de ping P3b y P4 desde la red de invitados (sin respuesta al gerente ni entre móviles; Internet sí). WPA3: limitación del TL-WR841N. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
+| 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | Eneko.S | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. 27/10: se acorta a un día (4/11) por el corte técnico de esa fecha; depende de que la 25 acabe el 3/11. 27/10: plan W1-W7 de Wireshark y analizar-red.sh (nmap con veredicto; probado con servicios locales). 30/10: hecho con el router real; invitados aislados; hallazgos H-01 a H-05 (UPnP y SSH en el router). | [DOCUMENTACION.md](../../docs/redes/26-analisis-conectividad/DOCUMENTACION.md) |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | Peio | — | [27-wireframes.md](../../docs/web/27-wireframes.md) |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | Markel | Mapa de OpenStreetMap; geolocalización; formulario de ejemplo y slideshow. | [index.html](../../web/index.html) |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | Adrian | Lighthouse 98-100 en local (23/10). Contra la URL pública (26/10; medianas de 5): móvil 94/100/100/100 y escritorio 99/100/100/100. Móvil daba 70 hasta que el mapa pasó a cargarse al pulsar un botón. W3C contra la URL pública: 0 errores en HTML y en CSS. Pasa de Eneko.P a Adrian, que la hizo. 29/10: repetido con la web actual (fotos en web/img/) tras el apply de la tarea 31: móvil 97/100/100/100, escritorio 100/100/100/100, sin errores en la consola; W3C sin errores en HTML y CSS. | [lighthouse-w3c.txt](../../docs/evidencias/web/lighthouse-w3c.txt) |
@@ -96,7 +96,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | Adrian | 18 | 3 | 1 | 0 | 54 | 0, 2, 3, 4, 5, 6, 7, 8, 10 |
 | Eneko.P | 2 | 1 | 1 | 0 | 3 | 6, 7 |
-| Eneko.S | 9 | 2 | 0 | 1 | 16 | 1, 3, 5, 7, 8, 11 |
+| Eneko.S | 9 | 1 | 0 | 0 | 16 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 1 | 1 | 0 | 27 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 7 | 1 | 0 | 0 | 16 | 1, 2, 4, 5, 6, 11 |
 | Peio | 6 | 2 | 0 | 1 | 14 | 0, 1, 5, 6, 11 |
@@ -141,7 +141,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 8 | Tabla de hardware con justificación | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
 | 53 | Instalar la recreativa en VM de 1 núcleo y 1 GB y probarla con el stick | 3 Arcade | Software | 29/10–30/10 | #16 (Iker), #51 (Iker) | Hecho |
 | 54 | Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) | 3 Arcade | Software | 03/11–04/11 | #17 (Iker), #18 (Adrian), #53 (Eneko.S) | Hecho |
-| 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | 04/11–04/11 | #25 (Peio) | Pendiente |
+| 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | 04/11–04/11 | #25 (Peio) | Hecho |
 | 32 | Comparativa y elección de ERP | 7 ERP | Documentación | 22/10–23/10 | — | Hecho |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | 22/10–23/10 | #38 (Adrian) | Hecho |
 | 40 | Scripts DDL | 8 BD | Software | 22/10–23/10 | #39 (Eneko.S) | Hecho |

@@ -1,0 +1,7 @@
+# Nmap 7.94SVN scan initiated Fri Oct 30 08:53:55 2026 as: nmap -Pn -T4 -p- -oN /home/eneko/Reto-Asir/docs/redes/26-analisis-conectividad/evidencias/lan-20261030-085342/02-servidor-todos.txt -oG /home/eneko/Reto-Asir/docs/redes/26-analisis-conectividad/evidencias/lan-20261030-085342/02-servidor-todos.gnmap 192.168.10.10
+Nmap scan report for 192.168.10.10
+Host is up (0.049s latency).
+All 65535 scanned ports on 192.168.10.10 are in ignored states.
+Not shown: 65525 filtered tcp ports (no-response), 10 filtered tcp ports (host-unreach)
+
+# Nmap done at Fri Oct 30 08:56:51 2026 -- 1 IP address (1 host up) scanned in 175.91 seconds

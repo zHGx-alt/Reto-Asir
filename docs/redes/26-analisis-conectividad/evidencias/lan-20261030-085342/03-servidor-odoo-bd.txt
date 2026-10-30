@@ -1,0 +1,9 @@
+# Nmap 7.94SVN scan initiated Fri Oct 30 08:56:51 2026 as: nmap -Pn -p 8069,5432 -oN /home/eneko/Reto-Asir/docs/redes/26-analisis-conectividad/evidencias/lan-20261030-085342/03-servidor-odoo-bd.txt -oG /home/eneko/Reto-Asir/docs/redes/26-analisis-conectividad/evidencias/lan-20261030-085342/03-servidor-odoo-bd.gnmap 192.168.10.10
+Nmap scan report for 192.168.10.10
+Host is up.
+
+PORT     STATE    SERVICE
+5432/tcp filtered postgresql
+8069/tcp filtered unknown
+
+# Nmap done at Fri Oct 30 08:56:54 2026 -- 1 IP address (1 host up) scanned in 3.07 seconds
