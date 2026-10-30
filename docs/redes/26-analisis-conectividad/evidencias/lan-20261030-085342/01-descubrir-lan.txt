@@ -1,0 +1,6 @@
+# Nmap 7.94SVN scan initiated Fri Oct 30 08:53:42 2026 as: nmap -sn -oN /home/eneko/Reto-Asir/docs/redes/26-analisis-conectividad/evidencias/lan-20261030-085342/01-descubrir-lan.txt -oG /home/eneko/Reto-Asir/docs/redes/26-analisis-conectividad/evidencias/lan-20261030-085342/01-descubrir-lan.gnmap 192.168.10.0/24
+Nmap scan report for _gateway (192.168.10.1)
+Host is up (0.00035s latency).
+Nmap scan report for eneko-System-Product-Name (192.168.10.100)
+Host is up (0.00056s latency).
+# Nmap done at Fri Oct 30 08:53:55 2026 -- 256 IP addresses (2 hosts up) scanned in 13.28 seconds

@@ -92,7 +92,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | N-03 | 24 | Red de invitados aislada y WPA3 en el Archer C6 | Aislada | ⏳ | — | [Tarea 24](../redes/24-red-segura/DOCUMENTACION.md) |
 | N-04 | 25 | Práctica de WDS con dos TL-WR841N en `192.168.1.0/24`: enlace, DHCP del router 2 apagado, ping y cobertura | Enlazados, sin pérdidas | ✅ El PC conectado al router 2 recibe IP del router 1 y le hace ping: 4/4, 0 % de pérdidas; DHCP del router 2 apagado; cobertura comprobada con el móvil (sin medidas numéricas) | 27/10 | [README de la tarea 25](../redes/25-wds/README.md) |
 | N-05 | 25 | WDS en el plan real: Archer C6, `192.168.10.0/24`, pruebas W1-W10 (sobre todo, clientes del router 2 aislados de la LAN) y cobertura antes y después | Aislados; más cobertura | ⏳ | — | [Tarea 25](../redes/25-wds/DOCUMENTACION.md) |
-| N-06 | 26 | nmap desde la LAN y desde invitados; capturas de Wireshark | Lo del plan de la tarea 23 | ⏳ Script probado con servicios locales (27/10) | — | [Tarea 26](../redes/26-analisis-conectividad/DOCUMENTACION.md) |
+| N-06 | 26 | nmap desde la LAN y desde invitados; capturas de Wireshark | Lo del plan de la tarea 23 | ✅ Invitados no ven la LAN; router con UPnP y SSH (H-01, H-02); L2-L8 y W5 pendientes de que el servidor esté en la red | 30/10 Eneko.S | [Tarea 26](../redes/26-analisis-conectividad/DOCUMENTACION.md) |
 
 ## 6 · Web
 
@@ -141,7 +141,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 |---|---|---|---|---|---|---|
 | X-01 | 46 | Revisión de seguridad del repositorio, repasada el 27/10 y el 29/10 | Hallazgos con responsable | ✅ 23 hallazgos: corregidos S-01, S-05, S-15, S-18, S-21 y S-22; S-03 ya no aplica (se descarta Batocera) | 26-29/10 | [Tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | X-02 | 46, 52 | S-01: certificado de Odoo limitado con `nameConstraints` | No vale para otras webs | ✅ 🖥️ Probado también en Edge | 26/10 | [Tarea 46, §4.1](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
-| X-03 | 46 | Comprobaciones en los equipos (nmap, router, SSH, cifrado) | 9 comprobaciones | ⏳ Las 1 y 2 se hacen con la tarea 26 | — | [Tarea 46, §5](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| X-03 | 46 | Comprobaciones en los equipos (nmap, router, SSH, cifrado) | 9 comprobaciones | ⏳ La 1 hecha con la tarea 26 (30/10); la 2 espera al servidor en la red | — | [Tarea 46, §5](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
 ## Cómo actualizar esta tabla
 

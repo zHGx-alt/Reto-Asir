@@ -1,0 +1,29 @@
+Tarea 26 - Pruebas desde el movil (Android, Termux, nmap 7.99), 30/10/2026
+Resumen transcrito de la pantalla del movil (Termux no deja pasar la salida al PC sin root).
+
+=== 1) Wi-Fi de INVITADOS: Restaurante-Almichain-Invitados (WPA2, 2,4 GHz) - 09:21 ===
+IP del movil: 192.168.10.103. PC de Eneko.S conectado por cable en 192.168.10.100.
+
+$ nmap -sn 192.168.10.0/24
+  Host activo: 192.168.10.103 (el propio movil). Ningun otro.
+
+$ nmap -Pn -p 22,80,443 192.168.10.1 192.168.10.100
+  192.168.10.1   22/tcp filtered  80/tcp filtered  443/tcp filtered
+  192.168.10.100 22/tcp filtered  80/tcp filtered  443/tcp filtered
+
+$ ping -c 4 192.168.10.100
+  From 192.168.10.103: Destination Host Unreachable
+  4 packets transmitted, 0 received, 100% packet loss
+
+Resultado: aislamiento correcto (no se ve la LAN ni el panel del router).
+
+=== 2) Wi-Fi del PERSONAL: Restaurante_Almichain (contraste) ===
+IP del movil: 192.168.10.102. En ese momento el cable del PC estaba desconectado.
+
+$ nmap -sn 192.168.10.0/24
+  Hosts activos: 192.168.10.1 (router) y 192.168.10.102 (movil).
+
+$ nmap -Pn -p 22,80 192.168.10.1
+  22/tcp open  80/tcp open
+
+Resultado: desde la red del personal si se ve el router, como debe ser.
