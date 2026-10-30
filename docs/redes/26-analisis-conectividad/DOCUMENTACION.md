@@ -113,7 +113,8 @@ tshark -r evidencias/w1-dhcp.pcapng -Y dhcp                         # ver solo D
 
 ## 8. Pendiente
 
-- [ ] Red de invitados aislada (tarea 24) y WDS (tarea 25) montados.
+- [x] Red de invitados aislada (tarea 24, 30/10).
+- [ ] WDS (tarea 25) montado.
 - [ ] Ejecutar `analizar-red.sh lan` y `analizar-red.sh invitados`.
 - [ ] Capturas W1 a W7 con Wireshark.
 - [ ] Rellenar las secciones 5 y 6 y avisar de los hallazgos a cada responsable.

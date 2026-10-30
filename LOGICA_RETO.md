@@ -129,9 +129,11 @@ Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direc
 
 ### 4.3 Red segura y WDS
 
-- Hecho en un TL-WR841N ([tarea 24](docs/redes/24-red-segura/DOCUMENTACION.md)): administración remota cerrada, WPA2-AES, firewall SPI y protección DoS.
-- Falta: red de invitados aislada con su prueba, y WPA3 (el TL-WR841N no lo tiene; el Archer C6 sí). Después, WDS con medidas de cobertura (#25) y análisis con Wireshark y nmap (#26).
-- **Contraseña Wi-Fi expuesta:** se leía en dos capturas antiguas (ya tapadas, pero siguen en el historial de Git). Hay que cambiarla, y también la de administración del router, que parece la de fábrica.
+- Hecho en un TL-WR841N ([tarea 24](docs/redes/24-red-segura/DOCUMENTACION.md), cerrada el 30/10): LAN `192.168.10.0/24` con la reserva del gerente, administración remota cerrada y la local solo desde la MAC del gerente, WPA2-AES, WPS desactivado, firewall SPI y protección DoS.
+- **Red de invitados aislada y probada** (30/10): desde un móvil de invitados hay Internet, pero el ping al PC del gerente y a otro invitado no responde.
+- WPA3 queda como limitación: el TL-WR841N no lo tiene (el Archer C6 sí).
+- Las contraseñas que se vieron en capturas (Wi-Fi, administración y PIN de WPS) se cambiaron el 26/10 y el 29/10 y están en KeePassXC.
+- Falta: WDS con medidas de cobertura (#25) y análisis con Wireshark y nmap (#26).
 
 ---
 

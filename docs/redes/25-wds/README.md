@@ -13,7 +13,7 @@
 
 ## Pendiente para cerrar la tarea
 
-- [ ] Configurar la red de invitados en el router 1.
+- [x] Configurar la red de invitados en el router 1 (tarea 24, 29/10; aislamiento probado el 30/10).
 - [ ] Repetir WDS con router 1 en `192.168.10.1` y router 2 en `192.168.10.2`.
 - [ ] Utilizar `Restaurante-Almichain` y `Restaurante-Almichain-Invitados`.
 - [ ] Obtener una captura de `WDS Status: Run` o estado equivalente.
