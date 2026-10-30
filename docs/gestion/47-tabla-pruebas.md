@@ -44,7 +44,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | Id | Tarea | Prueba | Esperado | Resultado | Fecha | Evidencia |
 |---|---|---|---|---|---|---|
 | H-01 | 8 | Sumas de la tabla de hardware | Cuadran | ✅ 2.361,36 € | 23/10 | [08-tabla-hardware.md](../hardware/08-tabla-hardware.md) |
-| H-02 | 10 | Sumas del presupuesto | Cuadran | ✅ 2.447,34 € de inversión (23/10); con lo añadido el 24/10, 3.814,74 € y 4.174,74 € el primer año | 23-24/10 | [10-presupuesto-hardware.md](../hardware/10-presupuesto-hardware.md) |
+| H-02 | 10 | Sumas del presupuesto | Cuadran | ✅ 2.447,34 € de inversión (23/10); con lo añadido el 24/10, 3.814,74 € y 4.174,74 € el primer año; con las licencias de los TPV (30/10), 2.522,16 €, 3.889,56 € y 4.249,56 € | 23-30/10 | [10-presupuesto-hardware.md](../hardware/10-presupuesto-hardware.md) |
 | H-03 | 11 | SVG del diagrama de arquitectura | XML válido y legible | ✅ | 24/10 | [DIAGRAMA.md](../diagramas/11-arquitectura-equipos/DIAGRAMA.md) |
 
 ## 2 · Sistemas operativos

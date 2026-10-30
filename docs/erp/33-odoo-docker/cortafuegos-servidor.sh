@@ -33,7 +33,14 @@ ufw allow from "$GERENTE" to any port 22 proto tcp comment 'SSH solo desde el PC
 # Quien ejecuta el script por SSH desde otra IP no se queda fuera
 ssh_origen=${SSH_CLIENT:-}
 ssh_origen=${ssh_origen%% *}
-# sudo no conserva SSH_CLIENT: se saca de la sesión (la IP sale entre paréntesis en "who -m")
+# sudo no conserva SSH_CLIENT: se busca en los procesos padre (el shell de la sesión SSH lo tiene).
+# "who -m" no sirve con "ssh host 'sudo ...'": sin shell de login no hay entrada en utmp (corregido el 30/10)
+pid=$$
+while [[ -z $ssh_origen && $pid -gt 1 ]]; do
+  ssh_origen=$( { tr '\0' '\n' < "/proc/$pid/environ"; } 2>/dev/null | sed -n 's/^SSH_CLIENT=\([^ ]*\) .*/\1/p' || true)
+  pid=$(ps -o ppid= -p "$pid" | tr -d ' ' || true)
+  [[ -n $pid ]] || pid=1
+done
 [[ -n $ssh_origen ]] || ssh_origen=$(who -m 2>/dev/null | sed -n 's/.*(\([0-9.]*\)).*/\1/p')
 if [[ -n $ssh_origen && $ssh_origen != "$GERENTE" ]]; then
   ufw allow from "$ssh_origen" to any port 22 proto tcp comment 'SSH de quien configuró el cortafuegos'

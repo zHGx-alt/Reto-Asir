@@ -16,7 +16,7 @@ Las versiones son las que se han instalado y probado en las máquinas virtuales 
 | Software | Versión | Equipo | Uso | Licencia | Cantidad | Coste |
 | --- | --- | --- | --- | --- | --- | --- |
 | Windows 10 Pro | 22H2 (la última de Windows 10; probada en la VM de la [tarea 12](../so/12-dual-boot.md)) | Gerente | Sistema operativo, directivas de seguridad y BitLocker | Propietaria (Microsoft) | 1 | Derecho de *downgrade* desde el Windows 11 Pro del equipo, a confirmar (H-01 de la tarea 8). Sin soporte gratuito desde el 14/10/2025 |
-| Windows 10 IoT Enterprise LTSC 2021 *(propuesta)* o Windows 10 Pro 22H2 + ESU | 21H2 LTSC | 2 TPV | Sistema operativo, modo quiosco (Acceso asignado), directivas | Propietaria; la LTSC se vende con el equipo por canal OEM | 2 | A pedir al proveedor ([tarea 10](10-presupuesto-hardware.md), apartado 4.1). La LTSC tiene soporte hasta enero de 2032 |
+| Windows 10 IoT Enterprise LTSC 2021 (decidida el 30/10) | 21H2 LTSC | 2 TPV | Sistema operativo, modo quiosco (Acceso asignado), directivas | Propietaria; la LTSC se vende con el equipo por canal OEM | 2 | 37,41 € cada una, licencia Entry (74,82 € las dos, [tarea 10](10-presupuesto-hardware.md), apartado 4.1). Soporte hasta enero de 2032. Las VM de pruebas la simulan con Windows 11 Pro |
 | Ubuntu Desktop | 26.04.1 LTS ([tarea 12](../so/12-dual-boot.md)) | Gerente | Segundo sistema del arranque dual | Libre (GPL y otras) | 1 | 0 € |
 | LibreOffice | La de los repositorios de Ubuntu | Gerente (Ubuntu) | Documentos, hojas de cálculo y presentaciones | Libre, MPL 2.0 | 1 | 0 € |
 | Microsoft Edge | Canal estable, actualizado por Windows Update | Gerente y 2 TPV | Acceso a Odoo; navegador del modo quiosco en los TPV | Propietaria, incluida con Windows | 3 | 0 € adicional |
@@ -58,6 +58,6 @@ Las versiones son las que se han instalado y probado en las máquinas virtuales 
 
 ## 6. Conclusión
 
-- **Licencias de pago:** solo Windows. Una de Windows 10 Pro para el gerente (por *downgrade* desde el Windows 11 Pro del equipo, a confirmar) y dos para los TPV, que se proponen con **Windows 10 IoT Enterprise LTSC 2021** para tener actualizaciones de seguridad hasta 2032. Su precio se pide al proveedor y se añade al presupuesto (tarea 10).
+- **Licencias de pago:** solo Windows. Una de Windows 10 Pro para el gerente (por *downgrade* desde el Windows 11 Pro del equipo, a confirmar) y dos para los TPV, con **Windows 10 IoT Enterprise LTSC 2021** (decidida el 30/10) para tener actualizaciones de seguridad hasta 2032: **74,82 €** las dos, ya en el presupuesto (tarea 10). Las VM de la tarea 13 llevan Windows 11 Pro porque la LTSC no se descarga sin contrato OEM; simulan la edición presupuestada, que se configura igual.
 - **Todo lo demás** es software libre o viene incluido con Windows o con las impresoras: el ERP, la base de datos, las copias, la recreativa y la web no tienen coste de licencia.
 - **Pendiente:** nada de versiones. La de Ubuntu (26.04.1 LTS) se leyó del disco de la VM el 27/10; la del driver de Epson ya no se apunta porque las pruebas se hacen con la Samsung ML-1660 (decisión del 27/10).

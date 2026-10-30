@@ -125,7 +125,9 @@ Script: [`cargar-carta-y-mesas.py`](cargar-carta-y-mesas.py) (log: [`evidencias/
 
 En la prueba 1 de la sección 8.2, `cajero1` ve **Contactos, Empleados, Conversaciones, Calendario y Tableros**, y puede leer facturas, diarios y usuarios. Para cobrar no le hace falta: ve datos de los clientes y del personal, y eso va contra los mínimos privilegios. Viene de que todo «Usuario interno» (`base.group_user`) tiene esos menús.
 
-**Script preparado:** [`restringir-menus-cajero.py`](restringir-menus-cajero.py) aplica la opción 1 (grupo «Almi-Chain / Gerencia» con admin y gerente en los menús raíz) y se puede deshacer con `--deshacer`. Falta ejecutarlo en una base de pruebas y repetir la prueba 1.
+**Script preparado:** [`restringir-menus-cajero.py`](restringir-menus-cajero.py) aplica la opción 1 (grupo «Almi-Chain / Gerencia» con admin y gerente en los menús raíz) y se puede deshacer con `--deshacer`.
+
+**Probado el 30/10 en la `ServidorERP` de laboratorio** ([evidencia](evidencias/23-menus-cajero-laboratorio.txt)): `cajero1` y `cajero2` ven solo *Punto de venta*; `gerente`, 11 aplicaciones, y `admin`, 13. La primera versión del script **añadía** el grupo a los menús, y no bastaba: Odoo enseña un menú si el usuario está en cualquiera de sus grupos, y Contactos, Empleados, Conversaciones y Calendario ya tenían «Usuario interno». Ahora el grupo de gerencia queda como el único, los grupos originales se guardan en el parámetro `almi_chain.menus_originales` para `--deshacer`, y también se oculta *Aplicaciones*. Lo comprueba [`ver-menus-usuarios.py`](ver-menus-usuarios.py), que inicia sesión como cada usuario y lista los menús que le pinta el navegador. Falta hacerlo en la `ServidorERP` del equipo (corrección 2.3) y la opción 3 (lectura de datos).
 
 Opciones, por orden de preferencia:
 
