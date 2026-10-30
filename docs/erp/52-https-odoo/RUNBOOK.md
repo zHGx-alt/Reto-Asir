@@ -63,9 +63,12 @@ Que `cajero1` y `cajero2` solo vean *Punto de venta*. Es idempotente. La contras
 
 ```bash
 sudo bash -c 'set -a; . /opt/odoo/.env; python3 ~tecnico/Reto-Asir/docs/erp/34-configurar-odoo/restringir-menus-cajero.py' | tee ~/52-menus-cajero.txt
+sudo bash -c 'set -a; . /opt/odoo/.env; python3 ~tecnico/Reto-Asir/docs/erp/34-configurar-odoo/ver-menus-usuarios.py' | tee -a ~/52-menus-cajero.txt
 ```
 
-**Evidencia:** captura del menú de aplicaciones (el icono de la cuadrícula) como `cajero1`, donde solo sale *Punto de venta*, y como `gerente`, donde siguen saliendo todas. Se guardan en `docs/erp/34-configurar-odoo/evidencias/`.
+La segunda orden tiene que dar `cajero1 ( 1): Point of Sale` (o *Punto de venta*), igual que en el laboratorio el 30/10 ([evidencia](../34-configurar-odoo/evidencias/23-menus-cajero-laboratorio.txt)).
+
+**Evidencia:** `52-menus-cajero.txt` y una captura del menú de aplicaciones (el icono de la cuadrícula) como `cajero1`, donde solo sale *Punto de venta*, y como `gerente`, donde siguen saliendo todas. Se guardan en `docs/erp/34-configurar-odoo/evidencias/`.
 
 ## 4. Los dos TPV
 

@@ -78,7 +78,7 @@ Los dos llevan BOM UTF-8 para que Windows PowerShell 5.1 (el de Windows 10) lea 
 ## 6. Pendiente
 
 - [ ] Crear la VM del TPV y ejecutar el procedimiento de la sección 4; guardar `tpv1-comprobacion.txt` y las capturas de la sección 5 en `docs/evidencias/13-tpv/`.
-- [ ] Decidir la edición de Windows de los TPV (IoT Enterprise LTSC 2021 o Pro + ESU) y apuntarla en la tarea 9.
+- [x] Edición de Windows de los TPV: **IoT Enterprise LTSC 2021**, apuntada en las tareas 9 y 10 con su precio (30/10). Las VM de pruebas llevan Windows 11 Pro y la simulan (tarea 10, 4.1).
 - [ ] Impresión del ticket sin diálogo: con Edge en quiosco, el ticket abre el diálogo de impresión del navegador. Si se quiere imprimir directamente, en **IoT Enterprise** se puede lanzar Edge con `--kiosk ... --kiosk-printing` (Shell Launcher); en Pro se queda el diálogo (tareas 14 y 37).
 
 ## 7. Decisiones

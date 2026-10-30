@@ -13,7 +13,7 @@
 | Validez del presupuesto | 15 días |
 | Revisión | Eneko.S, 23/10/2026: ajustado a la tabla de hardware (tarea 8) |
 | Revisión | Equipo, 23/10/2026: la línea WAN pasa a DIGI 1 Gb, el operador elegido en la comparativa (tarea 22) y el que usa el plano de red (tarea 23) |
-| Revisión | Equipo, 24/10/2026: se añaden el servidor, sus discos, el disco de copias, el SAI, el switch, el cable, el adaptador Wi-Fi de la recreativa y la palanca del stick (sección 12); impresoras fuera del rango de gerencia; Windows 10 IoT Enterprise LTSC para los TPV |
+| Revisión | Equipo, 24/10/2026: se añaden el servidor, sus discos, el disco de copias, el SAI, el switch, el cable, el adaptador Wi-Fi de la recreativa y la palanca del stick (sección 12); impresoras fuera del rango de gerencia; Windows 10 IoT Enterprise LTSC para los TPV. 30/10: decidida la LTSC 2021 Entry y su precio sumado (4.1 y 5.1) |
 
 > Los precios y la disponibilidad pueden cambiar. Antes de realizar una compra hay que comprobar el precio final, los gastos de envío, el vendedor y la versión exacta del producto.
 
@@ -98,7 +98,8 @@ Es la elección de la tabla de hardware (tarea 8, sección 3.2). Incluye la pant
 - No es un TPV de hostelería especializado: no consta refrigeración sin ventilador ni protección contra salpicaduras (RT-09, incidencia H-05 de la tarea 8).
 - **Windows 10 frente a Windows 11:** el enunciado exige Windows 10 y los equipos traen Windows 11 Pro. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en la licencia. La tarea 9 contempla tres licencias de Windows 10 Pro; si finalmente hubiera que comprarlas, su coste no está incluido en este presupuesto.
 - El equipo no se usará como servidor.
-- **Soporte de Windows 10.** Windows 10 Pro no tiene actualizaciones gratuitas desde el 14/10/2025, y el programa ESU para particulares terminó el 13/10/2026. Para unos TPV de función fija, la opción con soporte es **Windows 10 IoT Enterprise LTSC 2021**, con actualizaciones de seguridad hasta enero de 2032. Es Windows 10, como pide el enunciado, y está pensada para equipos dedicados como un TPV. Solo se vende con el equipo a través de distribuidores OEM, así que su precio hay que pedirlo al proveedor (no está en tiendas). La otra opción es pagar el ESU para empresas de Windows 10 Pro. La decisión queda abierta (tarea 13) y su coste se tiene que añadir aquí cuando se conozca.
+- **Soporte de Windows 10.** Windows 10 Pro no tiene actualizaciones gratuitas desde el 14/10/2025, y el programa ESU para particulares terminó el 13/10/2026. Para unos TPV de función fija, la opción con soporte es **Windows 10 IoT Enterprise LTSC 2021**, con actualizaciones de seguridad hasta enero de 2032. Es Windows 10, como pide el enunciado, y está pensada para equipos dedicados como un TPV. Solo se vende con el equipo a través de distribuidores OEM, así que su precio hay que pedirlo al proveedor (no está en tiendas). **Decisión (30/10): IoT Enterprise LTSC 2021**, descartado el ESU (de pago cada año y solo hasta 2028). El N100 entra en la categoría **Entry** de las licencias IoT (procesadores de gama básica), que cuesta **37,41 €** por equipo en [Advantech Europe, tienda de software Microsoft embebido](https://buy.advantech.eu/Microsoft-Software/Windows-10-IoT-Enterprise/AEU_31138.products.htm) (consultado el 30/10/2026); son **74,82 €** los dos, ya sumados en la sección 5.1. Se confirma con el proveedor al pedir los equipos.
+- **Las VM de pruebas llevan Windows 11 Pro** (tarea 13), porque la imagen de la LTSC no se puede descargar sin contrato OEM. La VM **simula** la edición presupuestada: el bastionado (usuario estándar, Acceso asignado, bloqueo de USB, Defender y firewall) se configura igual en las dos, y los scripts de la tarea 15 avisan si el sistema no es Windows 10. En los TPV reales se instala la LTSC.
 
 ---
 
@@ -258,9 +259,10 @@ Antes de contratar la línea se deberá comprobar:
 | Iggual AIO B156.88.N100 táctil, Windows 11 Pro (TPV) | 2 | 538,99 € | 1.077,98 € |
 | Impresora Epson TM-T20IV Ethernet/USB/RS-232 | 2 | 199,86 € | 399,72 € |
 | Router TP-Link Archer C6 V3 AC1200 | 2 | 42,99 € | 85,98 € |
-| **Total de inversión inicial** |  |  | **2.447,34 €** |
+| Licencia Windows 10 IoT Enterprise LTSC 2021 Entry (TPV, 4.1) | 2 | 37,41 € | 74,82 € |
+| **Total de inversión inicial** |  |  | **2.522,16 €** |
 
-De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impresoras) y 85,98 € los routers. Los importes se toman de los precios publicados por las tiendas consultadas; las páginas no indican siempre si incluyen IVA (incidencia H-02 de la tarea 8), así que hay que confirmarlo antes de la compra.
+De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impresoras), 85,98 € los routers y 74,82 € las licencias de los TPV (añadidas el 30/10). Los importes se toman de los precios publicados por las tiendas consultadas; las páginas no indican siempre si incluyen IVA (incidencia H-02 de la tarea 8), así que hay que confirmarlo antes de la compra.
 
 ### 5.2. Costes recurrentes
 
@@ -272,11 +274,11 @@ De ellos, **2.361,36 €** son los equipos de la tarea 8 (gerente, TPV e impreso
 
 | Tipo de coste | Total |
 |---|---:|
-| Inversión inicial | 2.447,34 € |
+| Inversión inicial | 2.522,16 € |
 | Conexión WAN durante 12 meses | 360,00 € |
-| **Coste total estimado del primer año** | **2.807,34 €** |
+| **Coste total estimado del primer año** | **2.882,16 €** |
 
-> Estos totales son los de los puestos y los routers. El servidor, sus discos, el disco de copias, el SAI, el switch, el cable, el adaptador Wi-Fi de la recreativa y la palanca del stick están en la **sección 12**, con su total aparte. No se incluyen gastos de envío, canaletas, rollos de papel, teclado y ratón del gerente, licencias de Windows 10 (si fueran necesarias, ver 4.1) ni licencias del ERP (Odoo Community es gratuito).
+> Estos totales son los de los puestos y los routers. El servidor, sus discos, el disco de copias, el SAI, el switch, el cable, el adaptador Wi-Fi de la recreativa y la palanca del stick están en la **sección 12**, con su total aparte. No se incluyen gastos de envío, canaletas, rollos de papel, teclado y ratón del gerente, la licencia de Windows 10 Pro del gerente (por *downgrade*, ver 4.1) ni licencias del ERP (Odoo Community es gratuito).
 
 ---
 
@@ -439,7 +441,7 @@ Si el equipo de la operadora no puede configurarse en modo puente, el Archer C6 
 
 ## 11. Conclusión
 
-La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **2.447,34 €** (2.361,36 € de equipos de la tarea 8 más 85,98 € de routers) y un coste total aproximado durante el primer año de **2.807,34 €**, con la fibra de 1 Gb de DIGI incluida (360 € al año). Con el servidor, el RAID, las copias, el SAI, el switch y el resto de la sección 12, la inversión completa es de **3.814,74 €** y el primer año, de **4.174,74 €**.
+La solución propuesta cubre las necesidades principales del restaurante con una inversión inicial estimada de **2.522,16 €** (2.361,36 € de equipos de la tarea 8, 85,98 € de routers y 74,82 € de licencias de los TPV) y un coste total aproximado durante el primer año de **2.882,16 €**, con la fibra de 1 Gb de DIGI incluida (360 € al año). Con el servidor, el RAID, las copias, el SAI, el switch y el resto de la sección 12, la inversión completa es de **3.889,56 €** y el primer año, de **4.249,56 €**.
 
 Los TPV táctiles incluyen Windows Pro para aplicar el modo quiosco y mínimos privilegios. Las impresoras Epson TM-T20IV ofrecen USB y Ethernet, velocidad adecuada y cortador automático. La utilización de dos routers TP-Link Archer C6 del mismo modelo permite diseñar una red Gigabit, utilizar WPA3 en las redes compatibles y realizar la práctica de ampliación de cobertura mediante WDS.
 
@@ -469,11 +471,11 @@ Sin precio verificado: canaletas, conectores RJ45, la bola de la palanca, los bo
 
 | Total con la sección 12 | Importe |
 |---|---:|
-| Inversión inicial (sección 5.1) | 2.447,34 € |
+| Inversión inicial (sección 5.1) | 2.522,16 € |
 | Elementos de esta sección | 1.367,40 € |
-| **Inversión inicial completa** | **3.814,74 €** |
+| **Inversión inicial completa** | **3.889,56 €** |
 | Fibra de DIGI, 12 meses | 360,00 € |
-| **Primer año completo** | **4.174,74 €** |
+| **Primer año completo** | **4.249,56 €** |
 
 **Por qué estos modelos:**
 - **Servidor:** Odoo y PostgreSQL para un solo local no necesitan más que un i5 con 16 GB. Uno reacondicionado de empresa cuesta la mitad que uno nuevo; el formato torre (MT) deja sitio para los dos discos del RAID.

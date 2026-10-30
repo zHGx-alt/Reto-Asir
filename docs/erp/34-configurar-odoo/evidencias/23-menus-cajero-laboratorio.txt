@@ -1,0 +1,19 @@
+# Corrección 2.3 · restringir-menus-cajero.py arreglado · 30/10/2026 10:12
+==> Grupo «Almi-Chain / Gerencia» (id 64)
+    admin: en el grupo
+    gerente: en el grupo
+==> Menús 
+    Contactos: solo gerencia (antes: grupos [9, 1])
+    Empleados: solo gerencia (antes: grupos [43, 44, 1])
+    Conversaciones: solo gerencia (antes: grupos [1])
+    Calendario: solo gerencia (antes: grupos [1])
+    Tableros: solo gerencia (antes: grupos [])
+    Aplicaciones: solo gerencia (antes: grupos [])
+
+Listo. Comprobación: entrar como cajero1; solo debe ver Punto de venta (tarea 34, sección 8.2, prueba 1).
+
+# Aplicaciones que ve cada usuario (ver-menus-usuarios.py)
+cajero1  ( 1): Point of Sale
+cajero2  ( 1): Point of Sale
+gerente  (11): Discuss, Calendar, Contacts, CRM, Sales, Dashboards, Point of Sale, Invoicing, Inventory, Employees, Apps
+admin    (13): Discuss, Calendar, Contacts, CRM, Sales, Dashboards, Point of Sale, Invoicing, Email Marketing, Inventory, Employees, Apps, Settings

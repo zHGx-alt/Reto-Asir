@@ -17,7 +17,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
 | **Peio** | Nada en esta lista: su tarea abierta (25) está en el Gantt; la 24 se cerró el 30/10 |
 | **Eneko.P** | Nada en esta lista: la 3.2 se cerró con las medidas de la tarea 54 (29/10) |
-| **Markel** | [4](#4-datos-que-faltan-en-tareas-hechas) edición de Windows de los TPV |
+| **Markel** | Nada en esta lista: la edición de Windows de los TPV se cerró el 30/10 (sección 1) |
 | **Todos** | [4](#4-datos-que-faltan-en-tareas-hechas) sus filas del registro de IA |
 
 ---
@@ -28,7 +28,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 |---|---|
 | Seguridad | Contraseñas Wi-Fi y RADIUS tapadas en las capturas; preseed de la recreativa sin clave SSH fija y SSH sin contraseña; actualizaciones de seguridad de la recreativa a las 5:00; contraseñas robustas en la VM del gerente (tarea 55); contraseñas Wi-Fi y de administración del router cambiadas y en KeePassXC (26/10); contraseñas de Packet Tracer en KeePassXC (26/10); Drive sin ficheros de contraseñas (24/10); contraseña de restic en KeePassXC y borrada del PC del técnico (27/10); **Odoo por HTTPS** hecho y probado en VM (26/10; activarlo en el servidor del equipo es la tarea 52) |
 | Redes | Tarea 22 con análisis de necesidades y esquema de conectividad; tarea 23 con cita literal, invitados en `192.168.50.0/24` y switch; **red plana con invitados aislada** decidida (24/10) y diseño antiguo con VLAN quitado (25/10); Packet Tracer de la red real con 16 de 16 pruebas ([evidencia](docs/redes/evidencias/23-red-local-configuracion-y-pruebas.txt)) |
-| Hardware | Presupuesto completo; Windows 10 IoT LTSC para los TPV; versiones del software; WAN unificada en DIGI 1 Gb |
+| Hardware | Presupuesto completo; Windows 10 IoT LTSC para los TPV, **decidida y con precio: 2 × 37,41 € (licencia Entry), sumados al presupuesto (30/10)**; las VM de la tarea 13 la simulan con Windows 11 Pro porque la LTSC no se descarga sin contrato OEM; versiones del software; WAN unificada en DIGI 1 Gb |
 | Arcade | **Recreativa medida en 1 núcleo y 1 GB** (`Recreativa-53`, 29/10): 3 arranques antes y 3 después de optimizar y 10 min de juego, con 967 MB de RAM en las medidas ([tarea 54](docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md)) |
 | Arduino | Firmware con palanca digital y botones 7-8; esquema con la palanca en A2-A5 |
 | ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido; 2 fallos de los scripts de Odoo que impedían instalar en limpio; **factura de la tarea 35 repetida con el menú de grupo: `INV/2026/00004` = 660,00 €**, y el script fija el IVA en la línea y comprueba el total (Iker, 27/10); la errónea `INV/2026/00003` anulada con la rectificativa `RINV/2026/00001` ([evidencia](docs/erp/35-factura-automatica/evidencias/rectificativa-INV00003.txt)) |
@@ -57,12 +57,13 @@ Corregido el 26/10 (sección 1). Activarlo en la `ServidorERP` del equipo es tra
 
 - [ ] 🟠 **El cajero ve más aplicaciones de las que necesita** (la tarea 34 está en Hecho). `restringir-menus-cajero.py`; entrar como `cajero1` y hacer la captura nueva (solo ve Punto de venta).
   - **Quién:** Iker.
-  - 26/10: en la VM de la tarea 52, `cajero1` entra directo en *Punto de venta* por HTTPS ([evidencia 08](docs/erp/52-https-odoo/evidencias/08-tpv-cajero1-https.png)), pero la captura no enseña el menú de aplicaciones, que es lo que hay que demostrar. 27/10: añadido al [runbook de la 52](docs/erp/52-https-odoo/RUNBOOK.md#31-menús-del-cajero-corrección-23) (paso 3.1), con la contraseña leída del `.env` y las dos capturas que faltan.
+  - 26/10: en la VM de la tarea 52, `cajero1` entra directo en *Punto de venta* por HTTPS ([evidencia 08](docs/erp/52-https-odoo/evidencias/08-tpv-cajero1-https.png)), pero la captura no enseña el menú de aplicaciones, que es lo que hay que demostrar. 27/10: añadido al [runbook de la 52](docs/erp/52-https-odoo/RUNBOOK.md#31-menús-del-cajero-corrección-23) (paso 3.1), con la contraseña leída del `.env` y las dos capturas que faltan. 30/10 (Adrian): probado en la `ServidorERP` de laboratorio, y **el script tenía un fallo**: añadía el grupo de gerencia a los menús, pero Odoo los enseña si el usuario está en cualquiera de sus grupos, así que el cajero seguía viendo Contactos, Empleados, Conversaciones, Calendario y Aplicaciones. Arreglado (deja gerencia como único grupo y guarda los originales para `--deshacer`) y comprobado con el nuevo `ver-menus-usuarios.py`: el cajero ve solo *Punto de venta* ([evidencia](docs/erp/34-configurar-odoo/evidencias/23-menus-cajero-laboratorio.txt)). Solo falta lanzar las dos órdenes del paso 3.1 en el servidor del equipo.
 
 ### 2.4 Cortafuegos del servidor
 
 - [ ] 🟠 **La red plana solo es segura si cada equipo filtra** ([tarea 23, 5.3](docs/redes/23-plano-direccionamiento.md#5-segmentación)), y el servidor aún no lo hace: `sudo docs/erp/33-odoo-docker/cortafuegos-servidor.sh` en `ServidorERP` y guardar `ufw status verbose`.
   - **Quién:** Iker.
+  - 30/10 (Adrian): probado en la `ServidorERP` de laboratorio ([evidencia](docs/erp/33-odoo-docker/evidencias/24-cortafuegos-laboratorio.txt)); Odoo sigue respondiendo. **El script tenía un fallo**: lanzado como `ssh servidor 'sudo …'` no detectaba la IP de la conexión (sudo borra `SSH_CLIENT` y sin shell de login no hay entrada en `who`) y dejaba fuera a quien lo ejecutaba. Arreglado: la busca en los procesos padre. Lanzado así en el servidor del equipo, ahora avisa con `AVISO: también se permite SSH desde …`.
 
 ---
 
@@ -93,7 +94,7 @@ Corregido el 26/10 (sección 1).
 
 ## 4. Datos que faltan en tareas hechas
 
-- [ ] 🟠 **Edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y su precio en las tareas 9 y 10. Las VM de la tarea 13 se hicieron con **Windows 11 Pro**, que no coincide con lo presupuestado: o se dice que la VM simula la edición elegida, o se cambian las tareas 9 y 10. **Quién:** Markel. (El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660, decisión del 27/10.)
+- [x] 🟠 **Edición de Windows de los TPV:** **IoT Enterprise LTSC 2021**, a 37,41 € por TPV (licencia Entry, la del N100), en las tareas 9 y 10; el presupuesto pasa a 2.522,16 € (3.889,56 € completo y 4.249,56 € el primer año). Las VM de la tarea 13 llevan Windows 11 Pro y **simulan** la edición elegida: el presupuesto es el de la instalación real y el bastionado se configura igual en las dos (30/10, [tarea 10, 4.1](docs/hardware/10-presupuesto-hardware.md#41-equipos-tpv)). **Quién:** Markel. (El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660, decisión del 27/10.)
 - [x] 🟠 **VM del gerente (tarea 12):** actualizaciones, BitLocker y cifrado de `/home/gerente` hechos el 29/10. No se exporta a Drive (decisión del 30/10): se queda en el PC de Adrian ([maquinas-virtuales.md](docs/gestion/maquinas-virtuales.md)). **Quién:** Adrian.
   - [x] Windows Update al día (KB5066791), BitLocker en `C:` con contraseña de arranque y `/home/gerente` cifrado con fscrypt (29/10, [tarea 12, sección 6](docs/so/12-dual-boot.md#6-verificación)).
   - [x] Versión de Ubuntu: **26.04.1 LTS**, imagen del 26/08/2026, leída del disco de la VM sin arrancarla y puesta en las tareas 12 y 9 (27/10, [evidencia](docs/evidencias/12-dual-boot/ubu-08-version-desde-disco.txt)).
@@ -110,7 +111,7 @@ Corregido el 26/10 (sección 1).
 
 | Tarea del enunciado | Estado | Qué falta |
 |---|---|---|
-| Necesidades, configuración y presupuesto de equipos e impresoras | Hecho, con huecos | Corr. 4 (edición de Windows de los TPV) |
+| Necesidades, configuración y presupuesto de equipos e impresoras | Hecho: Windows de los TPV decidido y con precio (30/10) | — |
 | Identificar y documentar el hardware necesario | Hecho | — |
 | Identificar y documentar el software necesario | Hecho (Ubuntu 26.04.1 LTS leído del disco; el driver de Epson no se apunta, decisión del 27/10) | — |
 | Instalación, optimización y monitorización de la recreativa | Hecho: Debian + MAME en la VM de 1 núcleo y 1 GB (tarea 53) y medidas antes y después (tarea 54, 29/10) | — |

@@ -16,6 +16,8 @@ Para la simulación se han utilizado dos máquinas virtuales con Windows
 
 - TPV2-Windows11
 
+Los TPV reales llevarán **Windows 10 IoT Enterprise LTSC 2021**, la edición presupuestada ([tarea 10](../../../hardware/10-presupuesto-hardware.md), apartado 4.1). Su imagen no se puede descargar sin contrato OEM, así que las VM la simulan con Windows 11 Pro: todo lo de esta tarea se configura igual en las dos ediciones.
+
 ## **2. Usuario estándar del TPV1**
 
 En el primer TPV se ha creado la cuenta local UsuarioTPV.

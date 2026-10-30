@@ -1,0 +1,31 @@
+# Corrección 2.4 · cortafuegos-servidor.sh arreglado, lanzado con ssh host 'sudo ...' · 30/10/2026 10:10
+
+==> 1/3 Instalando ufw
+ufw 0.36.2
+
+==> 2/3 Reglas
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+Rules updated
+Rules updated
+  AVISO: también se permite SSH desde 192.168.10.1 (la conexión actual). Quitarlo al acabar:
+         sudo ufw delete allow from 192.168.10.1 to any port 22 proto tcp
+Rules updated
+
+==> 3/3 Activando
+Firewall is active and enabled on system startup
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    192.168.10.20              # SSH solo desde el PC del gerente
+22/tcp                     ALLOW IN    192.168.10.1               # SSH de quien configuró el cortafuegos
+80,443/tcp                 ALLOW IN    192.168.10.0/24            # Odoo por HTTPS desde la LAN (tarea 52)
+
+
+https://localhost/web/login -> HTTP 200
