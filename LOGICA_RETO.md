@@ -322,7 +322,7 @@ Primero Windows y después Ubuntu (si se hace al revés, Windows borra el arranq
 | Windows 10 | `gerente` (estándar) | `admin`; la cuenta integrada `Administrador`, desactivada | UAC pide la contraseña de `admin`; Firewall y Windows Update |
 | Ubuntu | `gerente` (sin sudo) | `administrador` (sudo; `admin` está reservado en Ubuntu) | `ufw` deniega lo entrante; actualizaciones de seguridad automáticas |
 
-[Guía y evidencias (tarea 12)](docs/so/12-dual-boot.md). La VM está en Google Drive; sus contraseñas, nunca en el repositorio.
+[Guía y evidencias (tarea 12)](docs/so/12-dual-boot.md). La VM está en el PC de Adrian ([quién tiene cada VM](docs/gestion/maquinas-virtuales.md)); sus contraseñas, en KeePassXC y nunca en el repositorio.
 
 ### 10.2 TPV (#13 y #15: scripts listos, falta la VM)
 

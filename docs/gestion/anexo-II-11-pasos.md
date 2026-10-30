@@ -95,9 +95,9 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | TicketBAI | No se configura | Queda documentado como obligación legal (tarea 34, sección 6) | 24/10/2026 |
 | Arranque dual | Una VM | Suficiente para demostrar el arranque dual (tarea 12). Desde el 29/10 en VirtualBox ([tarea 12, sección 7](../so/12-dual-boot.md#7-decisiones-y-problemas-encontrados)) | 24/10/2026 |
 | Cifrado del PC del gerente | BitLocker con contraseña de arranque en Windows; fscrypt en `/home/gerente` | La VM no tiene TPM (en el equipo real, TPM + PIN). fscrypt no obliga a reparticionar y se abre con la contraseña de inicio de sesión ([tarea 12](../so/12-dual-boot.md#44-actualizar-y-cifrar-después-de-instalar-los-dos-sistemas)) | 29/10/2026 |
-| Exportar la VM del gerente | No se vuelve a exportar | Ocupa decenas de GB y tarda mucho; las evidencias de la tarea 12 bastan. En Drive sigue la exportación del 23/10 | 29/10/2026 |
+| Máquinas virtuales | No se suben a Drive: cada VM se queda en el PC de quien la tiene, con su lista ([maquinas-virtuales.md](maquinas-virtuales.md)) | Ocupan decenas de GB, en Drive solo cabe una y cada exportación se queda vieja en cuanto se toca la VM; lo que demuestra cada tarea son sus evidencias. En Drive sigue la exportación del gerente del 23/10, desfasada | 30/10/2026 (amplía la del 29/10 de no volver a exportar la del gerente) |
 | Impresora de tickets | La da el centro | Las tareas 14 y 37 esperan a tenerla ([guía](../so/14-impresora/DOCUMENTACION.md)). **Sustituida el 27/10**: las pruebas se hacen con la Samsung ML-1660 | 24/10/2026 |
-| Notación del E/R | Pata de gallo (Mermaid) | Se revisa cuando salga la rúbrica | 24/10/2026 |
+| Notación del E/R | Chen (rectángulos, rombos y elipses, con (mín,máx)) | Es la que se ha visto en clase; la de pata de gallo se queda como vista de tablas ([tarea 38, sección 2](../bd/38-modelo-er.md#2-diagrama)) | 30/10/2026 (sustituye a «pata de gallo» del 24/10) |
 | Red del local | Plana (LAN del personal) con la Wi-Fi de invitados aislada; separación entre TPV, gerente y servidor por el cortafuegos de cada equipo | Las VLAN reales exigían OpenWrt en los routers, complicaban el WDS, no se podían probar con el router de prácticas y obligaban a rehacer el plan de IP, los scripts de los TPV, el HTTPS, el presupuesto y los diagramas. ([tarea 23, apartados 5.2 y 5.3](../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)) | 24/10/2026 |
 | Simulación de Packet Tracer | Simular la red real (ISP, NAT, LAN, dos Wi-Fi, router 2 como puente). El primer `.pkt`, con una VLAN por grupo, se quitó el 25/10/2026 para que solo quede el diseño que se monta | La simulación tiene que coincidir con lo que se monta; el router 2 en WDS es un puente, y en Packet Tracer el aparato equivalente es un punto de acceso ([guía](../redes/23-packet-tracer-red-local.md)) | 24/10/2026 |
 
@@ -131,7 +131,7 @@ Incidencias relevantes durante la ejecución:
 | Fecha | Bloque | Incidencia | Resolución |
 |---|---|---|---|
 | 22/10/2026 | Arcade | Debian 13 reserva el nombre de usuario `admin` y el instalador desatendido se paraba | El administrador se llama `tecnico` ([tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md)) |
-| 22/10/2026 | Arcade | Las medidas de rendimiento se hicieron en una VM de 2 núcleos y 1,5 GB, no de 1 núcleo y 1 GB como pide el enunciado | Hay que repetirlas en la VM `Recreativa-1GB` ([tarea 17](../arcade/17-rendimiento-mame/DOCUMENTACION.md)) |
+| 22/10/2026 | Arcade | Las medidas de rendimiento se hicieron en una VM de 2 núcleos y 1,5 GB, no de 1 núcleo y 1 GB como pide el enunciado | Repetidas el 29/10 en `Recreativa-53` (1 núcleo y 1 GB, 967 MB útiles): [tarea 54](../arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 | 22/10/2026 | ERP | Odoo se instaló antes de cerrar la comparativa de ERP (tarea 32) | La tarea 32 eligió Odoo Community, así que no hay que rehacer nada |
 | 22/10/2026 | ERP | Crear la factura por XML-RPC devolvía `cannot marshal None` | La acción sí se ejecuta; el script lo controla ([tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md)) |
 | 22/10/2026 | Redes | El router TP-Link TL-WR841N v14 no admite WPA3 | Se usa WPA2-PSK con AES; para WPA3 hace falta otro equipo ([red segura](../redes/24-red-segura/DOCUMENTACION.md)) |
@@ -168,7 +168,7 @@ Incidencias relevantes durante la ejecución:
 | BD | Usuario de aplicación ejecuta DDL | Permiso denegado | `CREATE TABLE`: *permission denied for schema public*; `DROP` y `ALTER`: *must be owner*; `DELETE`/`UPDATE` de facturas denegados; 33 pruebas de reglas correctas (repetido el 23/10) | [verificación](verificacion.md), [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
 | RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas. El 27/10 la BD y los adjuntos de Odoo pasan al RAID y se repite con una venta en el RAID degradado ([tarea 43](../backup/43-raid1/DOCUMENTACION.md)) | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
 | Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor; repetida el 27/10 con la BD en el RAID: todo correcto en 63 s. **Falta** el RTO real, restaurando en una máquina nueva | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
-| Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 23 hallazgos (5 altos); S-01, S-05, S-15, S-18, S-21 y S-22 corregidos, S-11 hecho en el PC del gerente y S-03 sin aplicar (se descarta Batocera). Faltan las comprobaciones en los equipos (nmap, router, SSH) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 24 hallazgos (6 altos); 9 corregidos (S-01, S-04, S-05, S-06, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente y S-03 sin aplicar (se descarta Batocera). Faltan las comprobaciones en los equipos (nmap, router, SSH) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
 ## 9. Documentación y presentación
 
@@ -185,7 +185,7 @@ Incidencias relevantes durante la ejecución:
 | Anexo I (contrato de equipo) | 1 | Adrian | [Firmado el 21/10](anexo-I-contrato-equipo.md) | — | Hecho |
 | Anexo II (este documento) | 2 | Adrian | Secciones 1 a 8 | Cerrar la 9 y la 10 después de la presentación | En curso |
 | Commits de todos (Anexo IX) | 5 | Adrian | 5 de 6 personas con commits propios | Un commit de Eneko.P | En curso |
-| Máquinas virtuales | 12, 13, 33 | Responsable de cada tarea | VM del gerente exportada en OVF el 23/10 ([tarea 12](../so/12-dual-boot.md#8-entrega-de-la-máquina-virtual), disco en Drive). No se vuelve a exportar: lo del 29/10 está en las evidencias (sección 5) | Decidir si se exportan las VM de los TPV y de la `ServidorERP` o también bastan las evidencias | Parcial |
+| Máquinas virtuales | 12, 13, 33, 53 | Quien tiene cada una | No se suben a Drive (30/10): cada VM está en el PC de quien la tiene ([maquinas-virtuales.md](maquinas-virtuales.md)) | Que Iker y Markel confirmen en qué PC están las suyas | En curso |
 | Registro de uso de IA | — | Todos | [registro-ia.md](registro-ia.md) | Que cada persona revise sus entradas | En curso |
 
 ### 9.2 Presentación (propuesta)
@@ -212,7 +212,7 @@ Una parte por bloque. Cada persona presenta **lo que no ha hecho**, para demostr
 - [ ] `bash scripts/verificar-repo.sh` sin errores y `python3 scripts/gantt.py` regenerado.
 - [ ] Backlog al día: ninguna tarea «En curso» sin explicar en *Observaciones*.
 - [ ] Ninguna captura con contraseñas (revisar ampliadas: gitleaks no mira imágenes).
-- [ ] Enlaces de Drive (VM y `.kdbx`) accesibles para el profesor; la contraseña maestra del `.kdbx` se entrega aparte, nunca en el repositorio.
+- [ ] Enlace de Drive del `.kdbx` accesible para el profesor; la contraseña maestra se entrega aparte, nunca en el repositorio. Las VM entregables, arrancadas o a mano en el PC de quien las tiene ([maquinas-virtuales.md](maquinas-virtuales.md)).
 - [ ] Liberar la IP elástica de AWS cuando el profesor haya visto la web.
 
 ## 10. Evaluación y retrospectiva

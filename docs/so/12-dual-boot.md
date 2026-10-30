@@ -194,7 +194,9 @@ Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una disti
 
 ## 8. Entrega de la máquina virtual
 
-Exportación actual: **23/10/2026**, después de cambiar las contraseñas (tarea 55). **Está desfasada:** no tiene ni las actualizaciones ni el cifrado del 29/10. Falta exportar la VM de VirtualBox a OVA y subirla a Drive (sección 9).
+**Decisión del 30/10/2026:** la VM ya no se sube a Drive. Está en el **PC de Adrian** (VirtualBox, instantánea `tarea12-cifrado-y-actualizado-2026-10-29`) y se enseña desde ahí; lo que demuestra la tarea son las evidencias de la sección 6. Quién tiene cada VM del reto: [maquinas-virtuales.md](../gestion/maquinas-virtuales.md).
+
+Lo que sigue es la exportación del **23/10/2026** (VMware), que sigue en Drive pero está **desfasada**: no tiene ni las actualizaciones ni el cifrado del 29/10.
 
 La VM no se sube al repositorio, porque ocupa varios GB y GitHub no admite archivos de más de 100 MB. Se exporta desde VMware con **File → Export to OVF**. Los archivos pequeños están en el repositorio, en [`docs/evidencias/12-dual-boot/vm/`](../evidencias/12-dual-boot/vm/). El disco y las credenciales están en Google Drive: [carpeta Reto-Asir](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link).
 
@@ -223,6 +225,6 @@ La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM 
 - [x] Apuntar la versión exacta de Ubuntu y la ISO usada (sección 2): 26.04.1 LTS, imagen del 26/08/2026 (27/10).
 - [x] Windows Update al día: acumulativa 2025-10 KB5066791 (29/10).
 - [x] Cifrado: BitLocker en `C:` y fscrypt en `/home/gerente` (29/10, sección 4.4).
-- [ ] Exportar la VM de VirtualBox (`VBoxManage export VM-dualboot-W10-ubuntu -o VM-dualboot-W10-ubuntu.ova`), subir el `.ova` a Drive y actualizar la sección 8. Avisar en la entrega de que la clave de recuperación y las contraseñas nuevas están en el `.kdbx`.
+- [x] ~~Exportar la VM a OVA y subirla a Drive~~: no se hace (decisión del 30/10). La VM se queda en el PC de Adrian ([maquinas-virtuales.md](../gestion/maquinas-virtuales.md)). Si hay que pasarla: `VBoxManage export VM-dualboot-W10-ubuntu -o VM-dualboot-W10-ubuntu.ova` en ese momento, y la clave de recuperación y las contraseñas nuevas van en el `.kdbx`.
 - [ ] En el equipo real: Windows 11 Pro o ESU (sección 7) y BitLocker con TPM + PIN.
 - [x] Drive revisado el 24/10: están el `.vmdk` y el `.kdbx` del 23/10 y no hay ningún `.txt` con contraseñas.

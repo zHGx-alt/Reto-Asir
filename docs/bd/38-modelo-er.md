@@ -3,7 +3,7 @@
 - **Bloque:** 8 BD
 - **Responsable:** Adrian
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** hecha; la notación se revisa con la rúbrica (4/11)
+- **Estado:** hecha. 30/10: diagrama pasado a **notación Chen**, la que se da en clase (sección 2)
 - **Fecha:** 23/10/2026
 - **Fuente:** `Reto_1_ASIR1_2026-2027.docx`
 
@@ -48,6 +48,32 @@ El enunciado habla de «las bases de datos que habrá en cada establecimiento».
 Si el profesor entiende el enunciado como «una base distinta en cada local», el cambio es pequeño: quitar ESTABLECIMIENTO y las claves `id_establecimiento`, y cargar en cada local solo sus datos.
 
 ## 2. Diagrama
+
+### 2.1 Notación Chen
+
+![Modelo E/R de Almi-Chain en notación Chen](38-modelo-er-chen.svg)
+
+Fuentes: [`38-modelo-er-chen.drawio`](38-modelo-er-chen.drawio) (para abrirlo y retocarlo en draw.io) y [`38-modelo-er-chen.svg`](38-modelo-er-chen.svg). Los dos se generan con `python3 scripts/bd/er-chen.py`, que tiene las entidades, atributos, relaciones y cardinalidades en un solo sitio: si cambia el modelo, se cambia el script y se vuelven a generar.
+
+Cómo leerlo (también está en la leyenda del diagrama):
+
+| Símbolo | Significado |
+|---|---|
+| Rectángulo | Entidad |
+| Doble rectángulo y doble rombo | Entidad débil (`LINEA_FACTURA`) y su relación identificadora (`contiene`): una línea no existe sin su factura y se identifica por `id_factura` + `num_linea` |
+| Rombo | Relación, con su tipo (1:N o N:M) al lado |
+| Elipse | Atributo; subrayado, identificador; subrayado discontinuo, clave parcial de la débil (`num_linea`) |
+| (mín,máx) junto a una entidad | Cuántas ocurrencias de **esa** entidad se relacionan con **una** de la otra. Ej.: `EMPLEADO (0,n)` y `ESTABLECIMIENTO (1,1)` en *trabaja en*: un local tiene de 0 a n empleados y un empleado trabaja en un local y solo uno |
+
+Diferencias con la vista de tablas de la sección 2.2, que son las propias de la notación Chen:
+
+- **Las claves ajenas no se dibujan:** las representa la relación. Por ejemplo, `FACTURA.id_cliente` es la relación *recibe* entre CLIENTE y FACTURA, con `CLIENTE (0,1)` porque el ticket simplificado no lleva cliente.
+- **Las N:M con atributos son rombos, no entidades:** *almacena* (tabla `STOCK`, con `cantidad` y `stock_minimo`), *lleva* (tabla `RECETA`, con `cantidad`) y *se envía a* (tabla `ENVIO_CAMPANA`, con `fecha_envio`). Al pasar al modelo lógico (tarea 39) cada una se convierte en una tabla con las dos claves.
+- **La impresora conectada a un TPV** es una relación reflexiva de EQUIPO con dos papeles: un TPV tiene de 0 a n impresoras (`impresora (0,n)`) y una impresora está en 0 o 1 TPV (`TPV (0,1)`).
+
+### 2.2 Vista de tablas (pata de gallo)
+
+La misma información en el formato de Mermaid, que GitHub dibuja solo y enseña las claves ajenas tal como quedan en las tablas de la tarea 39:
 
 ```mermaid
 erDiagram
@@ -169,9 +195,7 @@ erDiagram
     }
 ```
 
-> El diagrama está en notación «pata de gallo» (Mermaid, se ve en GitHub). En la asignatura suele pedirse la notación **Chen**: hay que confirmarlo con el profesor (duda de la tarea 6) y, si la pide, pasarlo a draw.io
-> con las mismas entidades y cardinalidades. `STOCK`, `RECETA`, `ENVIO_CAMPANA` y `LINEA_FACTURA` son relaciones N:M o entidades débiles,
-> no entidades fuertes.
+> `STOCK`, `RECETA`, `ENVIO_CAMPANA` y `LINEA_FACTURA` salen aquí como cajas porque son tablas, pero en el E/R son relaciones N:M o una entidad débil (sección 2.1).
 > Los importes de la factura (base imponible, IVA y total) no se guardan en FACTURA: se calculan a partir de sus líneas. `(marca, modelo)` es única en MODELO_EQUIPO.
 
 ## 3. Trazabilidad: de dónde sale cada cosa
