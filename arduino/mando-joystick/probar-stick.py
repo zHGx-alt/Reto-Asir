@@ -45,6 +45,7 @@ class Mando:
         self.f = open(ruta, "rb", buffering=0)
         self.botones = {}
         self.ejes = {}
+        self.vistos = set()  # botones (desde 1) que se han pulsado desde el último clear()
         self.leer(0.5)  # estado inicial que manda el kernel al abrir
 
     def leer(self, tiempo):
@@ -55,6 +56,8 @@ class Mando:
             _, valor, tipo, num = struct.unpack("IhBB", self.f.read(8))
             if tipo & ~JS_INICIAL == JS_BOTON:
                 self.botones[num] = valor
+                if valor and not tipo & JS_INICIAL:
+                    self.vistos.add(num + 1)
             elif tipo & ~JS_INICIAL == JS_EJE:
                 self.ejes[num] = valor
 
@@ -84,12 +87,14 @@ def probar_botones(m, mapa=None):
     for fisico in range(1, NUM_BOTONES + 1):
         esperado = (mapa or {}).get(fisico, fisico)
         print(f"\n>> Pulsa el botón {fisico} (pin {fisico + 1})... (tienes {ESPERA} s)")
-        if not m.esperar(lambda: m.pulsados()):
+        m.vistos.clear()
+        if not m.esperar(lambda: m.vistos):
             apunta(f"Botón físico {fisico} -> HID {esperado}", False, f"no llega ninguna pulsación en {ESPERA} s")
             continue
         m.leer(0.2)
-        ok = m.pulsados() == [esperado]
-        apunta(f"Botón físico {fisico} -> HID {esperado}", ok, f"llega: {m.pulsados()}")
+        # Se miran las pulsaciones recibidas, no el estado: un toque rápido (30-110 ms) ya está suelto a los 200 ms
+        llega = sorted(m.vistos)
+        apunta(f"Botón físico {fisico} -> HID {esperado}", llega == [esperado], f"llega: {llega}")
         print("   Suéltalo...")
         apunta(f"Botón {fisico} se suelta", m.esperar(lambda: not m.pulsados()))
         m.leer(0.3)  # rebotes del pulsador

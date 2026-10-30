@@ -154,9 +154,13 @@ Hecha el 27/10/2026 con el stick montado (#19): primero Iker (subida, cableado d
 | `RESET` + `GUARDAR` | ✅ Vuelven los valores por defecto (la placa queda así) | [eeprom](evidencias/eeprom-2026-10-27.txt) |
 | Batocera | ✅ La reconoce (`sdl2-jstest`) y `evtest` recibe los 4 botones y los ejes | [evtest](evidencias/batocera-evtest-2026-10-27.txt), [es_input.cfg](batocera/es_input.cfg) |
 
-**Sin comprobar** (no cambian el resultado; se ven con `python3 probar-stick.py`, que los recorre):
+**Repaso del 30/10 con `probar-stick.py`** ([prueba-stick](evidencias/prueba-stick-2026-10-30_0744.txt)): 28 OK y 5 FALLO, pero los fallos no son del mando:
 
-- Que con `MAP 1 3` el botón físico 1 **llegue al PC** como botón 3. Se comprobó en `VER` y después de reiniciar, no pulsando.
-- `INV X` / `INV Y` con la palanca: arriba pasa a dar abajo.
+- Los botones se pulsaron sin saber qué número tiene cada uno (en el stick montado no se ven los pines), así que el script pedía «el 2» y se pulsaba otro. Lo que importa sí se cumple: cada pulsación llega como **un solo** botón y los 4 son distintos.
+- **`MAP 1 3` pulsando: ✅** el botón que antes llegaba como 1 pasa a llegar como 3.
+- La palanca vuelve a dar las 4 direcciones y la diagonal.
+- El script tenía un fallo: miraba el botón 200 ms después de la pulsación y un toque rápido ya estaba suelto. Corregido el 30/10 (ahora apunta qué botón se pulsa).
+
+**Sin comprobar:** `INV X` / `INV Y` moviendo la palanca. El script solo comprueba que la placa responde «invertido».
 
 Nota: la lista original hablaba de ejes de 0 a 1023. El kernel los entrega de −32767 a 32767 (en `evtest`, de 0 a 65535), así que eso es lo que se mide.
