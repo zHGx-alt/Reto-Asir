@@ -139,6 +139,8 @@ El resultado confirmó `192.168.10.20/24` en la interfaz Ethernet.
 *Figura 8. El dispositivo Wi-Fi no puede abrir el panel del router.*
 
 > La captura anterior demuestra el bloqueo del panel, pero no sustituye las capturas de ping exigidas para P3b y P4.
+>
+> Además, en la captura no se ve a qué Wi-Fi está conectado el móvil, y `ERR_CONNECTION_REFUSED` significa que el router contesta y rechaza la conexión: es lo que pasa con **cualquier** equipo que no sea el del gerente, por la regla de administración local (figura 6). Así que demuestra esa regla, no el aislamiento de invitados. Para P3b y P4 el móvil tiene que estar en `Restaurante-Almichain-Invitados` y la captura debe enseñarlo (pantalla de detalles del Wi-Fi con el nombre y la IP).
 
 ## 10. Resultado de las comprobaciones
 
@@ -181,4 +183,4 @@ La principal limitación es la ausencia de WPA3-SAE en el TP-Link TL-WR841N. Par
 
 ## 13. Seguridad de las evidencias
 
-Las imágenes preparadas para GitHub ocultan contraseñas y el PIN WPS. **El 29/10 no los ocultaban:** en la 14 y la 16 el recuadro tapaba el campo de al lado y en la 15 se leía el PIN; se taparon bien el mismo día y la contraseña y el PIN hay que cambiarlos, porque las versiones anteriores siguen en el historial de Git. El PDF original no debe subirse al repositorio porque contiene credenciales visibles. Como esas credenciales aparecieron en las capturas originales, se recomienda rotarlas antes de dar la tarea por finalizada.
+Las imágenes preparadas para GitHub ocultan contraseñas y el PIN WPS. **El 29/10 no los ocultaban:** en la 14 y la 16 el recuadro tapaba el campo de al lado y en la 15 se leía el PIN; se taparon bien el mismo día y, como las versiones anteriores siguen en el historial de Git, **el 29/10 se cambiaron las contraseñas Wi-Fi (personal e invitados, distintas) y se generó un PIN de WPS nuevo**, guardados en KeePassXC (hallazgo S-24 de la tarea 46, cerrado). El PDF original no debe subirse al repositorio porque contiene credenciales visibles.
