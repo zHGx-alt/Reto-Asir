@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (29/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 y el 29/10 con lo que entró después (secciones 1.1 y 1.2): 24 hallazgos; 8 corregidos (S-01, S-04, S-05, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
+- **Estado (30/10/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10 y el 29/10 con lo que entró después (secciones 1.1 y 1.2): 24 hallazgos; 9 corregidos (S-01, S-04, S-05, S-06, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente y S-03 ya no aplica. Faltan las comprobaciones en los equipos (sección 5) y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -59,12 +59,12 @@ Se leyó lo que entró en `main` del PR #66 al #84 (scripts y configuraciones):
 | Gravedad | Hallazgos | Corregidos |
 |---|---|---|
 | Alta | 6 (S-01 a S-05 y S-24) | 4 (S-01, S-04, S-05 y S-24); S-03 no aplica |
-| Media | 9 (S-06 a S-12, S-20 y S-23) | 0; S-11 hecho en el PC del gerente (faltan los TPV) |
+| Media | 9 (S-06 a S-12, S-20 y S-23) | 1 (S-06, 30/10); S-11 hecho en el PC del gerente (faltan los TPV) |
 | Baja | 9 (S-13 a S-19, S-21 y S-22) | 4 (S-15, S-18, S-21 y S-22) |
 
 Lo más urgente, por este orden:
 
-1. **Router:** red de invitados sin hacer, y administración abierta a toda la LAN y WPS (S-06, S-04). Las contraseñas ya están cambiadas (26/10). La segmentación de la tarea 23 depende de esto.
+1. ~~**Router:** red de invitados sin hacer, y administración abierta a toda la LAN y WPS (S-06, S-04).~~ Hecho: S-04 el 29/10 y S-06 el 30/10 (tarea 24).
 2. **Odoo sigue por HTTP en la LAN** hasta activar la tarea 52 en el servidor del equipo (S-02).
 3. **Los TPV reales no tienen el bastionado completo** (S-20): sin bloqueo de salida en el firewall ni lista blanca en Edge.
 
@@ -77,7 +77,7 @@ Lo más urgente, por este orden:
 | S-03 | Alta | Tarea 16, Batocera | Con *Enforce security* desactivado, root tiene siempre la contraseña `linux`, se ve en el menú y sirve también para SSH y Samba | `batocera-settings-set system.security.enabled 1` y contraseña de root aleatoria en KeePassXC. O quedarse con la versión Debian, que ya está endurecida (S-08 lo compara) | Iker | ➖ No aplica: la tarea 51 elige Debian, ya endurecida (27/10) |
 | S-04 | Alta | Tarea 24, router | Se entra al panel como `Admin` con una contraseña de 5 caracteres que parece la de fábrica. El panel va por HTTP y está abierto a toda la LAN. No hay evidencia de que WPS esté apagado | Contraseña de KeePassXC, administración solo desde la MAC del gerente y por cable, y WPS desactivado | Peio | ✅ Contraseña cambiada (26/10), administración solo desde la MAC del PC del gerente y WPS desactivado (29/10, tarea 24). El PIN de WPS se leía en una captura: ver S-24 |
 | S-05 | Alta | Tarea 24, Wi-Fi | La contraseña Wi-Fi tiene 8 cifras y se leía en dos capturas que siguen en el historial de Git (commits `532c87a` y `215eac7`). El repositorio es privado, lo que lo atenúa, pero el profesor y cualquiera con acceso las pueden ver | Cambiarla por una frase de 20 caracteres o más. No hace falta reescribir el historial si se cambia la contraseña | Peio | ✅ Cambiada y en KeePassXC (26/10). Comprobar que la RADIUS de las mismas capturas tampoco sigue en uso |
-| S-06 | Media | Tareas 23 y 24 | La red de invitados no está configurada. La tabla 5.2 de la tarea 23 confía en ella para que clientes y recreativa no lleguen al servidor ni a los TPV | Red `192.168.50.0/24` sin acceso a la LAN y con aislamiento entre clientes; pruebas 3 a 5 de la tarea 23 | Peio | 🟡 Red de invitados configurada el 29/10 (sin acceso a la LAN, aislamiento entre clientes) y el móvil no abre el panel del router. Faltan las capturas de ping P3b y P4 (tarea 24) |
+| S-06 | Media | Tareas 23 y 24 | La red de invitados no está configurada. La tabla 5.2 de la tarea 23 confía en ella para que clientes y recreativa no lleguen al servidor ni a los TPV | Red `192.168.50.0/24` sin acceso a la LAN y con aislamiento entre clientes; pruebas 3 a 5 de la tarea 23 | Peio | ✅ Red de invitados configurada el 29/10 (sin acceso a la LAN, aislamiento entre clientes). 30/10: desde invitados, ping sin respuesta al PC del gerente y a otro invitado (tarea 24, P3b y P4). Sigue en la misma subred `192.168.10.0/24`: el TL-WR841N no le da una propia |
 | S-07 | Media | Tarea 24 | El TL-WR841N no tiene WPA3. Queda WPA2-AES, con la clave de grupo sin renovar (`0`) y modo `11bgn` | WPA3 (o WPA2/WPA3) en el Archer C6, renovación de la clave de grupo cada 3600 s y sin 802.11b. Si no se compra, dejarlo como limitación | Peio | ⏳ Pendiente |
 | S-08 | Media | Tarea 33, `preseed-servidor.cfg` | El SSH del servidor admite contraseña (el preseed de la recreativa sí lo cierra y el del servidor no). Además, la única clave autorizada es la del laboratorio (`recreativa-claude`), no la del PC del gerente | Ver sección 4.2 | Iker | ⏳ Pendiente |
 | S-09 | Media | Tareas 33 y 52 | El servidor no tiene `unattended-upgrades` (el preseed no lo instala y Debian sin escritorio no lo trae). Las imágenes `odoo:19.0`, `postgres:17` y `nginx:1.27-alpine` no tienen un procedimiento de actualización | Ver sección 4.2 | Iker | ⏳ Pendiente |

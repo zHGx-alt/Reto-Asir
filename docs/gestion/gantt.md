@@ -12,14 +12,14 @@ Cada barra tiene el color de su responsable. La columna *Necesita* indica qué t
 
 ## Resumen
 
-**44 de 55 tareas hechas (80 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**45 de 55 tareas hechas (81 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 2 | 1 | 14 |
 | Software | 25 | 3 | 0 | 28 |
-| Físico | 4 | 2 | 1 | 7 |
+| Físico | 5 | 1 | 1 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
 
@@ -29,7 +29,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | # | Tarea | Tipo | Responsable | Fin | Estado | Qué falta | Evidencia |
 |---|---|---|---|---|---|---|---|
-| 24 | Configurar red segura (WPA3; invitados; firewall) | Físico | Peio | 30/10 | En curso | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; limitar la administración a la MAC del gerente. 29/10 (Peio, configurar-red-segura.md): LAN 192.168.10.0/24, reserva del gerente, WPS desactivado, red de invitados aislada, administración solo desde la MAC del gerente y renovación de la clave de grupo. 29/10: contraseñas del personal y de invitados cambiadas (distintas) tras verse en las capturas 14 y 16 (S-24). PIN de WPS nuevo. Falta: las capturas de ping P3b y P4 (desde la red de invitados al PC del gerente y entre dos móviles). WPA3: limitación del TL-WR841N. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
 | 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 03/11 | En curso | Guía lista (docs/redes/25-wds/DOCUMENTACION.md): WDS en el Archer C6, pruebas W1-W10 (sobre todo que los clientes del router 2 sigan aislados de la LAN) y cobertura y velocidad antes y después en 5 puntos. Si la red de invitados no pasa por el enlace WDS: corregir los diagramas (tareas 11 y 23). 27/10 (Peio): prueba de laboratorio con dos TL-WR841N en una red de pruebas (TP-Link_AF60; 192.168.1.0/24): el enlace WDS funciona (el PC del router 2 recibe IP del router 1 y le hace ping) y el DHCP del router 2 está apagado. Falta repetirlo con la red del proyecto y la de invitados (tarea 24), las pruebas W3-W10 y las medidas de antes y después. | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
 | 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 04/11 | En curso | Estructura, .gitignore y gitleaks hechos: CI en verde y gitleaks local sin fugas en 81 commits (23/10). Tienen commits 5 de 6 personas; falta Eneko.P (Anexo IX). 27/10: fin movido al 4/11 (corte técnico). 29/10: verificar-repo.sh «Todo correcto» (incluye gitleaks de todo el historial y los enlaces); todo entra por PR (hasta el #88). Siguen 5 de 6 personas con commits: falta Eneko.P. | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 04/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
@@ -65,6 +64,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | Markel | Pasa de Eneko.P a Markel. MAME: partida de Gridlee con el stick en Recreativa-53 (tarea 53, P4 y P10, 29/10). Otro emulador: Batocera (RetroArch), con evtest de los 4 botones y los ejes y es_input.cfg (Iker, 27/10) y una partida jugada ese día, sin captura. | [README.md](../../arduino/mando-joystick/README.md) |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
+| 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | Peio | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). Faltan la red de invitados aislada con su prueba; WPA3 (Archer C6); WPS; limitar la administración a la MAC del gerente. 29/10 (Peio, configurar-red-segura.md): LAN 192.168.10.0/24, reserva del gerente, WPS desactivado, red de invitados aislada, administración solo desde la MAC del gerente y renovación de la clave de grupo. 29/10: contraseñas del personal y de invitados cambiadas (distintas) tras verse en las capturas 14 y 16 (S-24). PIN de WPS nuevo. 30/10: capturas de ping P3b y P4 desde la red de invitados (sin respuesta al gerente ni entre móviles; Internet sí). WPA3: limitación del TL-WR841N. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | Peio | — | [27-wireframes.md](../../docs/web/27-wireframes.md) |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | Markel | Mapa de OpenStreetMap; geolocalización; formulario de ejemplo y slideshow. | [index.html](../../web/index.html) |
 | 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | Adrian | Lighthouse 98-100 en local (23/10). Contra la URL pública (26/10; medianas de 5): móvil 94/100/100/100 y escritorio 99/100/100/100. Móvil daba 70 hasta que el mapa pasó a cargarse al pulsar un botón. W3C contra la URL pública: 0 errores en HTML y en CSS. Pasa de Eneko.P a Adrian, que la hizo. 29/10: repetido con la web actual (fotos en web/img/) tras el apply de la tarea 31: móvil 97/100/100/100, escritorio 100/100/100/100, sin errores en la consola; W3C sin errores en HTML y CSS. | [lighthouse-w3c.txt](../../docs/evidencias/web/lighthouse-w3c.txt) |
@@ -99,7 +99,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Eneko.S | 9 | 2 | 0 | 1 | 16 | 1, 3, 5, 7, 8, 11 |
 | Iker | 13 | 1 | 1 | 0 | 27 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 7 | 1 | 0 | 0 | 16 | 1, 2, 4, 5, 6, 11 |
-| Peio | 6 | 3 | 0 | 2 | 14 | 0, 1, 5, 6, 11 |
+| Peio | 6 | 2 | 0 | 1 | 14 | 0, 1, 5, 6, 11 |
 
 ## Tareas por persona
 
@@ -183,7 +183,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 6 | Resolver dudas pendientes con el profesor | 0 Gestión | Gestión | 23/10–23/10 | — | Hecho |
 | 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | Documentación | 22/10–23/10 | #8 (Eneko.S), #9 (Markel), #22 (Markel) | Hecho |
-| 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | 28/10–30/10 | #23 (Adrian) | En curso |
+| 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | 28/10–30/10 | #23 (Adrian) | Hecho |
 | 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–03/11 | #24 (Peio) | En curso |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | 22/10–23/10 | — | Hecho |
 | 49 | Presentación y ensayo | 11 Entrega | Documentación | 05/11–10/11 | #46 (Adrian) | Pendiente |

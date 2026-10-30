@@ -3,7 +3,7 @@
 - **Bloque:** 5 Redes
 - **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado (29/10/2026):** 🟡 Configuración hecha por Peio el 29/10 ([segunda parte](configurar-red-segura.md)): LAN `192.168.10.0/24`, reserva del PC del gerente, WPS desactivado, red de invitados aislada, administración solo desde el PC del gerente y renovación de la clave de grupo. Contraseñas Wi-Fi del personal y de invitados cambiadas el 29/10 tras verse en dos capturas (sección 6). PIN de WPS nuevo el mismo día. **Falta:** las capturas de ping de las pruebas P3b y P4. WPA3 no existe en este router: queda como limitación
+- **Estado (30/10/2026):** ✅ Hecha. Configuración hecha por Peio el 29/10 ([segunda parte](configurar-red-segura.md)): LAN `192.168.10.0/24`, reserva del PC del gerente, WPS desactivado, red de invitados aislada, administración solo desde el PC del gerente y renovación de la clave de grupo. Contraseñas Wi-Fi del personal y de invitados cambiadas el 29/10 tras verse en dos capturas (sección 6). PIN de WPS nuevo el mismo día. Pruebas de la red de invitados con captura el 30/10 (P3b y P4: ping al gerente y entre invitados sin respuesta). WPA3 no existe en este router: queda como limitación
 - **Fecha:** 23/10/2026 · **Revisión:** 24/10/2026 · **Segunda parte:** 29/10/2026
 - **Depende de:** tarea 23 (plano y direccionamiento)
 
@@ -146,7 +146,7 @@ El panel solicita credenciales de administración. La contraseña administrativa
 | WPA3 | No disponible en las capturas ni en el panel mostrado |
 | Firewall SPI | Revisado en el panel |
 | Protección DoS | Disponible y revisada |
-| Red de invitados aislada | Configurada el 29/10 (acceso a la LAN desactivado y aislamiento activado); el móvil no abre el panel. Faltan las capturas de ping (P3b y P4) |
+| Red de invitados aislada | Configurada el 29/10 (acceso a la LAN desactivado y aislamiento activado); un invitado no llega al PC del gerente ni a otro invitado (ping sin respuesta, 30/10) y sí a Internet |
 | WPS | Desactivado, con PIN nuevo desde el 29/10 (el anterior se leía en una captura) |
 | Contraseña de administración | Cambiada por Peio el 26/10/2026 y guardada en KeePassXC. Administración solo desde la MAC del PC del gerente (29/10) |
 | Contraseña Wi-Fi | Cambiada el 26/10, otra vez el 29/10 y de nuevo ese día tras verse en las capturas 14 y 16; personal e invitados con contraseñas distintas, en KeePassXC |
@@ -167,7 +167,7 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 - [x] Desactivar WPS; captura (29/10).
 - [x] Cambiar la contraseña Wi-Fi del personal (se leía en las capturas 14 y 16) y poner otra distinta en la de invitados (29/10).
 - [x] PIN de WPS nuevo (29/10).
-- [ ] Capturas de ping desde la red de invitados: al PC del gerente (P3b) y entre dos móviles (P4).
+- [x] Capturas de ping desde la red de invitados: al PC del gerente (P3b) y entre dos móviles (P4) (30/10, [figuras 9 y 10](configurar-red-segura.md#9-pruebas-de-la-red-de-invitados)).
 - [x] LAN en `192.168.10.0/24`, reserva del gerente y renovación de la clave de grupo, en el TL-WR841N (29/10).
 - [ ] En el local, con el Archer C6: WPA3 (o WPA2/WPA3) y modo sin 802.11b, que el TL-WR841N no tiene (limitación).
 - [x] Configurar la red de invitados con aislamiento entre clientes (29/10). El TL-WR841N no le da una subred propia en el panel: el aislamiento es interno (tarea 23, apartado 4.4).

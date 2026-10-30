@@ -127,11 +127,11 @@ El resultado confirmó `192.168.10.20/24` en la interfaz Ethernet.
 
 | Prueba | Resultado esperado | Evidencia disponible |
 |---|---|---|
-| P1. Abrir una web desde invitados | La web abre | Comprobado durante la práctica, sin captura específica en el PDF |
-| P2. Consultar IP y puerta de enlace del invitado | Registrar ambos valores | No hay captura específica de la red de invitados |
+| P1. Salir a Internet desde invitados | Responde | ✅ Ping a `8.8.8.8` con respuesta, 18-23 ms (figura 9) |
+| P2. Consultar IP y puerta de enlace del invitado | Registrar ambos valores | ✅ Móvil en `Restaurante-Almichain-Invitados`: `192.168.10.100/24`, router `192.168.10.1` (figura 9) |
 | P3a. Abrir `192.168.10.1` desde invitados | El panel no abre | Sí |
-| P3b. Ping a `192.168.10.20` desde invitados | Sin respuesta | No hay captura de ping en el PDF |
-| P4. Ping entre dos móviles invitados | Sin respuesta | No hay captura en el PDF |
+| P3b. Ping a `192.168.10.20` desde invitados | Sin respuesta | ✅ Ningún paquete responde (figura 9) |
+| P4. Ping entre dos móviles invitados | Sin respuesta | ✅ Del `.100` al `.101`, los dos en invitados: ningún paquete responde (figura 10) |
 | P5. Conectar con la contraseña antigua | No conecta | Sin captura requerida |
 
 ![Invitado sin acceso al router](imagenes/20-invitados-sin-acceso-router.png)
@@ -139,6 +139,16 @@ El resultado confirmó `192.168.10.20/24` en la interfaz Ethernet.
 *Figura 8. El dispositivo Wi-Fi no puede abrir el panel del router.*
 
 > La captura anterior demuestra el bloqueo del panel, pero no sustituye las capturas de ping exigidas para P3b y P4.
+>
+> Además, en la captura no se ve a qué Wi-Fi está conectado el móvil, y `ERR_CONNECTION_REFUSED` significa que el router contesta y rechaza la conexión: es lo que pasa con **cualquier** equipo que no sea el del gerente, por la regla de administración local (figura 6). Así que demuestra esa regla, no el aislamiento de invitados. Por eso P3b y P4 se hicieron el 30/10 con ping (app de iPhone) y con la pantalla de detalles del Wi-Fi, que enseña la red y la IP.
+
+![P3b: invitado sin acceso al PC del gerente](imagenes/21-p3b-invitado-ping-gerente.png)
+
+*Figura 9. P2, P3b y P1 (30/10/2026): el móvil está en la red de invitados con `192.168.10.100`; el ping al PC del gerente (`192.168.10.20`) no responde y el de `8.8.8.8` sí. La pérdida del 64 % hacia `8.8.8.8` es de la red del aula y no cambia el resultado: hay salida a Internet.*
+
+![P4: aislamiento entre invitados](imagenes/22-p4-ping-entre-invitados.png)
+
+*Figura 10. P4 (30/10/2026): el segundo móvil está en la red de invitados con `192.168.10.101` y el ping desde el primero (`.100`) no responde.*
 
 ## 10. Resultado de las comprobaciones
 
@@ -159,7 +169,7 @@ El resultado confirmó `192.168.10.20/24` en la interfaz Ethernet.
 
 La red se ha migrado a `192.168.10.0/24`, se ha configurado DHCP con una reserva para el PC de administración, se ha protegido el Wi-Fi con WPA2-PSK y AES, se ha desactivado WPS, se ha creado una red de invitados aislada y se ha limitado el panel a un único equipo autorizado.
 
-La principal limitación es la ausencia de WPA3-SAE en el TP-Link TL-WR841N. Para cerrar todas las evidencias solicitadas por la guía todavía deben añadirse, si el profesor las exige, las capturas de P1, P2, el ping de P3 y el ping entre invitados de P4.
+La principal limitación es la ausencia de WPA3-SAE en el TP-Link TL-WR841N. Las pruebas de la red de invitados (P1 a P4) tienen captura desde el 30/10.
 
 ## 12. Lista de comprobación
 
@@ -174,11 +184,11 @@ La principal limitación es la ausencia de WPA3-SAE en el TP-Link TL-WR841N. Par
 - [x] Aislamiento entre invitados habilitado en la configuración.
 - [x] Administración limitada al PC autorizado.
 - [x] Prueba de bloqueo del panel desde un móvil.
-- [ ] Captura de navegación web desde la red de invitados.
-- [ ] Captura de IP y puerta de enlace de un invitado.
-- [ ] Captura del ping fallido desde invitados a `192.168.10.20`.
-- [ ] Captura del ping fallido entre dos invitados.
+- [x] Salida a Internet desde la red de invitados (ping a `8.8.8.8`, 30/10).
+- [x] Captura de IP y puerta de enlace de un invitado (30/10).
+- [x] Captura del ping fallido desde invitados a `192.168.10.20` (30/10).
+- [x] Captura del ping fallido entre dos invitados (30/10).
 
 ## 13. Seguridad de las evidencias
 
-Las imágenes preparadas para GitHub ocultan contraseñas y el PIN WPS. **El 29/10 no los ocultaban:** en la 14 y la 16 el recuadro tapaba el campo de al lado y en la 15 se leía el PIN; se taparon bien el mismo día y la contraseña y el PIN hay que cambiarlos, porque las versiones anteriores siguen en el historial de Git. El PDF original no debe subirse al repositorio porque contiene credenciales visibles. Como esas credenciales aparecieron en las capturas originales, se recomienda rotarlas antes de dar la tarea por finalizada.
+Las imágenes preparadas para GitHub ocultan contraseñas y el PIN WPS. **El 29/10 no los ocultaban:** en la 14 y la 16 el recuadro tapaba el campo de al lado y en la 15 se leía el PIN; se taparon bien el mismo día y, como las versiones anteriores siguen en el historial de Git, **el 29/10 se cambiaron las contraseñas Wi-Fi (personal e invitados, distintas) y se generó un PIN de WPS nuevo**, guardados en KeePassXC (hallazgo S-24 de la tarea 46, cerrado). El PDF original no debe subirse al repositorio porque contiene credenciales visibles.
