@@ -1,7 +1,7 @@
 # Tarea 26 · Análisis de conectividad con Wireshark y nmap
 
 **Responsable:** Eneko.S · **Fechas:** 04–05/11/2026 · **Depende de:** tarea 25 (WDS; y antes, la 24: red segura con invitados)
-**Estado:** ⏳ Plan, filtros y script de nmap preparados el 27/10; script probado contra servicios locales. Falta ejecutarlo en la red del local.
+**Estado:** ✅ Hecho el 30/10/2026 con el router real (TL-WR841N): LAN, invitados y Wireshark W1-W4. Pendiente solo lo que depende de que el servidor y los TPV estén en la red (sección 8).
 
 Objetivo: comprobar **con herramientas de análisis**, y no solo con `ping`, que la red se comporta como dice el plan de la [tarea 23](../23-plano-direccionamiento.md):
 
@@ -89,15 +89,76 @@ tshark -r evidencias/w1-dhcp.pcapng -Y dhcp                         # ver solo D
 | `w1-dhcp.png` … `w7-escaneo.png` | Capturas de pantalla de Wireshark con lo señalado |
 | `w1-dhcp.pcapng` … | Capturas filtradas (solo si no tienen datos sensibles) |
 
-## 5. Resultados y hallazgos (rellenar)
+## 5. Resultados (30/10/2026)
 
-| Prueba | Resultado | ¿Coincide con el plan? | Acción |
+**Red usada:** el router real del equipo, un **TP-Link TL-WR841N v14** (no los Archer C6 del plan), en `192.168.10.0/24`: router en `.1` (MAC `b0:be:76:17:af:60`), DHCP de `.100` a `.199`. Conectados: el PC de Eneko.S por cable (Ubuntu, `enp2s0`, `192.168.10.100`) y un móvil Android con nmap 7.99 en Termux, primero en la Wi-Fi del personal y después en la de invitados. El PC no tiene Wi-Fi, así que las pruebas desde invitados se hicieron con el móvil.
+
+El servidor (`.10`), el gerente (`.20`) y los TPV (`.31`, `.32`) son máquinas virtuales y **no estaban en esta red**, así que las pruebas L2-L8 y W5 no se pudieron hacer (ver 5.4).
+
+### 5.1 nmap desde la LAN (PC por cable)
+
+Salida completa en `evidencias/lan-20261030-085342/` (`resumen.txt`: 5 OK, 2 REVISAR, 2 INFO).
+
+| # | Resultado | ¿Coincide con el plan? |
+|---|---|---|
+| L1 | Solo 2 equipos: el router (`.1`) y el PC (`.100`) | Sí para lo que había conectado; faltan los equipos que son VM |
+| L2-L8 | Sin equipo en esas IP | **No aplicable.** Los «OK» del resumen solo dicen que no responde nadie: no valen como prueba del servidor ni de los TPV |
+| L9 | Abiertos 22, 80 y 1900. Sin Telnet (23) ni FTP (21) | Panel web y sin Telnet/FTP, como se esperaba. **SSH y UPnP no estaban previstos** (hallazgos H-01 y H-02) |
+
+Versiones del router (`evidencias/router-versiones.txt` y `router-udp.txt`):
+
+| Puerto | Servicio que detecta nmap |
+|---|---|
+| 22/tcp | SSH: Dropbear sshd **2012.55** |
+| 80/tcp | Panel web de TP-Link (nmap lo confunde con un TD-W8968; el modelo real es el TL-WR841N) |
+| 1900/tcp | UPnP: Portable SDK for UPnP devices **1.6.19** sobre Linux 2.6.36 |
+| 53/udp | DNS (el router hace de DNS para la LAN) |
+| 67/udp | DHCP (`open\|filtered`) |
+| 1900/udp | UPnP (SSDP) |
+
+### 5.2 Desde la Wi-Fi de invitados (móvil con Termux)
+
+Red `Restaurante-Almichain-Invitados` (WPA2, 2,4 GHz). El móvil recibió `192.168.10.103`; el PC seguía conectado por cable en `.100`. Captura de la red en `evidencias/movil-red-invitados.jpg` y lo que mostró Termux en `evidencias/movil-termux.txt`.
+
+| # | Comando | Resultado | ¿Coincide con el plan? |
 |---|---|---|---|
-| | | | |
+| I1 | `nmap -sn 192.168.10.0/24` | Solo se ve el propio móvil (`.103`) | **Sí:** desde invitados no se ve la LAN |
+| I2/I3/I5 | `nmap -Pn -p 22,80,443 192.168.10.1 192.168.10.100` | Todos los puertos `filtered` | **Sí:** ni el panel ni el SSH del router, ni el PC |
+| W6 | `ping -c 4 192.168.10.100` | `Destination Host Unreachable`, 100 % perdidos | **Sí:** el aislamiento funciona |
+| I4 | Otros clientes de invitados | No había otro cliente conectado; I1 no ve a nadie más | Sin probar con un segundo cliente |
 
-## 6. Conclusión (rellenar)
+Como contraste, desde la Wi-Fi del **personal** (`Restaurante_Almichain`, `evidencias/movil-red-personal.jpg`) el mismo móvil sí ve el router y sus puertos 22 y 80 abiertos, que es lo normal en la red de trabajo.
 
-*(¿Está aislada la Wi-Fi de invitados? ¿El servidor solo expone lo necesario? ¿Va cifrado el tráfico con Odoo? ¿Qué hay que corregir y quién?)*
+### 5.3 Wireshark (PC por cable)
+
+Capturas filtradas en `evidencias/captura-lan.pcapng` (filtro `dhcp || arp || (ip.addr == 192.168.10.1 && tcp)`); se revisaron antes de subirlas y no tienen contraseñas.
+
+| # | Captura | Qué se ve |
+|---|---|---|
+| W1 | ![DHCP](evidencias/w1-dhcp.png) | *Request* y *ACK*: el router da `192.168.10.100/24`, puerta de enlace `.1` y DNS `.1`. No salen *Discover* ni *Offer* porque al reconectar (`nmcli device disconnect/connect enp2s0`) el PC pide renovar la IP que ya tenía |
+| W2 | ![ARP](evidencias/w2-arp.png) | *Who has 192.168.10.1?* y la respuesta *is at b0:be:76:17:af:60*. También el *ARP Probe* y el *Announcement* del PC (comprueba que nadie más usa su IP) y las preguntas periódicas del router |
+| W3 | ![DNS](evidencias/w3-dns.png) | Consultas DNS al router (`.1`): `api.snapcraft.io`, `dl.flathub.org`, `appstream.ubuntu.com` |
+| W4 | ![TCP](evidencias/w4-tcp.png) | `nc -zv 192.168.10.1 80`: SYN, SYN-ACK, ACK y cierre con FIN (puerto abierto). `nc -zv 192.168.10.1 23`: RST, ACK (cerrado). Además se ve una petición **HTTP sin cifrar** de Ubuntu a `146.190.225.48` con el contenido legible |
+| W5 | — | Sin hacer: el servidor Odoo es una VM y no estaba en la red |
+| W6 | — | No se pudo capturar desde invitados (el PC no tiene Wi-Fi); se comprobó con `ping` desde el móvil (5.2) |
+| W7 | — | Igual que W6: el escaneo se hizo desde el móvil, sin Wireshark |
+
+### 5.4 Hallazgos
+
+| Id | Hallazgo | Riesgo | Acción | Para |
+|---|---|---|---|---|
+| H-01 | El router tiene **UPnP** activo (libupnp 1.6.19, de 2013) | Cualquier equipo de la LAN puede abrir puertos hacia Internet sin pedir permiso; esa versión tiene fallos conocidos | Desactivar UPnP (*Forwarding → UPnP*) | Peio (24) |
+| H-02 | El router tiene **SSH** abierto en la LAN (Dropbear 2012.55) y el firmware es antiguo (Linux 2.6.36) | Software sin actualizar | Actualizar el firmware desde la web de TP-Link. Si el SSH no se puede quitar (lo usa la app Tether), se acepta el riesgo porque la administración ya está limitada | Peio (24), Adrian (46) |
+| H-03 | La red de invitados usa el **mismo rango** `192.168.10.0/24` con aislamiento, no `192.168.50.0/24` | Ninguno: el aislamiento funciona (5.2) | Corregir el «a comprobar» de la tarea 23 | Peio (23) |
+| H-04 | La Wi-Fi del personal se llama `Restaurante_Almichain` (guion bajo); la documentación pone `Restaurante-Almichain` | Ninguno | Unificar el nombre en la documentación | Peio (24) |
+| H-05 | Se ve tráfico **HTTP sin cifrar** (W4) | Lo que vaya por HTTP se lee con Wireshark | Argumento para que Odoo vaya solo por HTTPS (tarea 52) | Adrian (46, 52) |
+
+## 6. Conclusión
+
+- **La Wi-Fi de invitados está aislada:** desde ella nmap no ve ningún equipo de la LAN, el panel y el SSH del router salen filtrados y el `ping` al PC no llega. Las comprobaciones 1 de la tarea 46 y W6 quedan hechas con el router real.
+- **El router expone más de lo previsto:** UPnP y SSH con software de hace más de diez años. No es grave en una LAN cerrada, pero UPnP se debe desactivar y conviene actualizar el firmware (H-01, H-02).
+- **El servidor, el gerente y los TPV no se han podido analizar** porque son VM fuera de esta red. La comprobación 2 de la tarea 46 (puertos del servidor) y W5 (HTTPS con Odoo) quedan pendientes; `analizar-red.sh lan` sirve tal cual cuando estén conectados.
+- **Wireshark** muestra DHCP, ARP, DNS y TCP tal como se explicaron en clase, y deja ver que lo que va por HTTP se lee sin esfuerzo (H-05).
 
 ## 7. Pruebas del script (27/10/2026)
 
@@ -113,9 +174,10 @@ tshark -r evidencias/w1-dhcp.pcapng -Y dhcp                         # ver solo D
 
 ## 8. Pendiente
 
-- [x] Red de invitados aislada (tarea 24, 30/10).
-- [ ] WDS (tarea 25) montado.
-- [ ] Ejecutar `analizar-red.sh lan` y `analizar-red.sh invitados`.
-- [ ] Capturas W1 a W7 con Wireshark.
-- [ ] Rellenar las secciones 5 y 6 y avisar de los hallazgos a cada responsable.
-- [ ] Marcar como hechas las comprobaciones 1 y 2 de la tarea 46.
+- [x] Red de invitados aislada (tarea 24) montada en el router real.
+- [x] `analizar-red.sh lan` y pruebas desde invitados (con el móvil).
+- [x] Capturas W1 a W4 con Wireshark.
+- [x] Secciones 5 y 6.
+- [ ] Avisar de H-01 a H-05 a Peio y Adrian.
+- [ ] Cuando el servidor (tarea 52) y los TPV estén en la red: repetir `analizar-red.sh lan` (L2-L8) y W5. Con eso se cierra la comprobación 2 de la tarea 46.
+- [ ] WDS (tarea 25): repetir L1 con el segundo router conectado.

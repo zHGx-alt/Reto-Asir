@@ -265,11 +265,11 @@
 <rect x="924" y="890" width="76" height="14" rx="4" fill="#008300" stroke="#0b0b0b" stroke-width="1.5"><title>25. WDS con segundo router y pruebas de cobertura · Peio · 02/11–03/11 · En curso</title></rect>
 <line x1="16" y1="930" x2="1202" y2="930" stroke="#f0efeb"/>
 <text x="16" y="923.0" class="s">26</text>
-<text x="44" y="923.0" class="t">Análisis de conectividad (Wireshark, nmap)<tspan class="s"> · físico</tspan></text>
+<text x="44" y="923.0" class="m">Análisis de conectividad (Wireshark, nmap) ✓<tspan class="s"> · físico</tspan></text>
 <circle cx="449" cy="919.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="923.0" class="t">Eneko.S</text>
 <text x="528" y="923.0" class="s">25</text>
-<rect x="1004" y="912" width="36" height="14" rx="4" fill="#1baf7a"><title>26. Análisis de conectividad (Wireshark, nmap) · Eneko.S · 04/11–04/11 · Pendiente</title></rect>
+<rect x="1004" y="912" width="36" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>26. Análisis de conectividad (Wireshark, nmap) · Eneko.S · 04/11–04/11 · Hecho</title></rect>
 <rect x="16" y="930" width="1186" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="947" class="t b">6 Web</text>
 <line x1="16" y1="978" x2="1202" y2="978" stroke="#f0efeb"/>
