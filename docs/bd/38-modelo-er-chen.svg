@@ -1,0 +1,310 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3500 2540" width="3500" height="2540" font-family="DejaVu Sans, Arial, sans-serif">
+<title>Modelo E/R de Almi-Chain en notación Chen (tarea 38)</title>
+<rect width="3500" height="2540" fill="#ffffff"/>
+<g stroke="#333" stroke-width="2" fill="none">
+<line x1="480" y1="360" x2="274" y2="300" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="360" x2="380" y2="188" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="360" x2="580" y2="188" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="360" x2="703" y2="295" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="360" x2="715" y2="428" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="1100" x2="351" y2="953" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="1100" x2="219" y2="1003" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="1100" x2="250" y2="1116" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="1100" x2="239" y2="1235" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="1100" x2="371" y2="1263" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="1100" x2="523" y2="1297" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1227" y2="512" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1084" y2="440" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1132" y2="328" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1129" y2="215" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1278" y2="198" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1411" y2="129" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1519" y2="233" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="360" x2="1648" y2="276" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="1100" x2="1143" y2="1037" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="1100" x2="1174" y2="952" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="1100" x2="1556" y2="968" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="1100" x2="1589" y2="1051" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="1100" x2="1160" y2="1192" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="2210" x2="1137" y2="2145" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="2210" x2="1125" y2="2278" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="2210" x2="1251" y2="2362" stroke="#888" stroke-width="1.5"/>
+<line x1="1360" y1="2210" x2="1433" y2="2370" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="360" x2="2005" y2="292" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="360" x2="2048" y2="163" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="360" x2="2210" y2="187" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="360" x2="2357" y2="128" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="360" x2="2457" y2="260" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="360" x2="2058" y2="482" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="360" x2="2422" y2="482" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1100" x2="2030" y2="1022" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1100" x2="2109" y2="918" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1100" x2="2422" y2="986" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1100" x2="2040" y2="1192" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1100" x2="2115" y2="1273" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1840" x2="2011" y2="1773" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1840" x2="2011" y2="1907" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1840" x2="2457" y2="1777" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="1840" x2="2457" y2="1903" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="2063" y2="2069" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="2417" y2="2069" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="2429" y2="2298" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="2399" y2="2414" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="2270" y2="2378" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="2178" y2="2445" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="2115" y2="2353" stroke="#888" stroke-width="1.5"/>
+<line x1="2240" y1="2210" x2="1986" y2="2328" stroke="#888" stroke-width="1.5"/>
+<line x1="3120" y1="2210" x2="3320" y2="2118" stroke="#888" stroke-width="1.5"/>
+<line x1="3120" y1="2210" x2="3337" y2="2273" stroke="#888" stroke-width="1.5"/>
+<line x1="3120" y1="2210" x2="3173" y2="2369" stroke="#888" stroke-width="1.5"/>
+<line x1="480" y1="730" x2="699" y2="730" stroke="#888" stroke-width="1.5"/>
+<line x1="3120" y1="360" x2="3354" y2="327" stroke="#888" stroke-width="1.5"/>
+<line x1="3120" y1="360" x2="3347" y2="445" stroke="#888" stroke-width="1.5"/>
+<line x1="2680" y1="2210" x2="2680" y2="2340" stroke="#888" stroke-width="1.5"/>
+<polyline points="480,360 480,730"/>
+<polyline points="480,1100 480,730"/>
+<polyline points="480,1100 920,1100"/>
+<polyline points="1360,1100 920,1100"/>
+<polyline points="1360,360 1360,730"/>
+<polyline points="1360,1100 1360,730"/>
+<polyline points="1360,360 1800,360"/>
+<polyline points="2240,360 1800,360"/>
+<polyline points="2240,360 2240,730"/>
+<polyline points="2240,1100 2240,730"/>
+<polyline points="1360,1100 1800,1100"/>
+<polyline points="2240,1100 1800,1100"/>
+<polyline points="2355,1084 2634,1079"/>
+<polyline points="2355,1116 2634,1121"/>
+<polyline points="2240,1100 2240,1470"/>
+<polyline points="2240,1840 2240,1470"/>
+<polyline points="2240,360 3120,360"/>
+<polyline points="3120,2210 3120,360"/>
+<polyline points="1360,1100 1360,1655"/>
+<polyline points="1360,2210 1360,1655"/>
+<polyline points="1360,2210 1800,2210"/>
+<polyline points="2240,2210 1800,2210"/>
+<polyline points="2240,2210 2680,2210"/>
+<polyline points="3120,2210 2680,2210"/>
+</g>
+<ellipse cx="274" cy="300" rx="62" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="274" y="305" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_campana</text>
+<ellipse cx="380" cy="188" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="380" y="193" text-anchor="middle" font-size="15" fill="#222">nombre</text>
+<ellipse cx="580" cy="188" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="580" y="193" text-anchor="middle" font-size="15" fill="#222">canal</text>
+<ellipse cx="703" cy="295" rx="71" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="703" y="300" text-anchor="middle" font-size="15" fill="#222">fecha_inicio</text>
+<ellipse cx="715" cy="428" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="715" y="433" text-anchor="middle" font-size="15" fill="#222">fecha_fin</text>
+<ellipse cx="351" cy="953" rx="62" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="351" y="958" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_cliente</text>
+<ellipse cx="219" cy="1003" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="219" y="1008" text-anchor="middle" font-size="15" fill="#222">nif</text>
+<ellipse cx="250" cy="1116" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="250" y="1121" text-anchor="middle" font-size="15" fill="#222">nombre</text>
+<ellipse cx="239" cy="1235" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="239" y="1240" text-anchor="middle" font-size="15" fill="#222">email</text>
+<ellipse cx="371" cy="1263" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="371" y="1268" text-anchor="middle" font-size="15" fill="#222">telefono</text>
+<ellipse cx="523" cy="1297" rx="94" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="523" y="1302" text-anchor="middle" font-size="15" fill="#222">acepta_publicidad</text>
+<ellipse cx="1227" cy="512" rx="66" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1227" y="517" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_empleado</text>
+<ellipse cx="1084" cy="440" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1084" y="445" text-anchor="middle" font-size="15" fill="#222">dni</text>
+<ellipse cx="1132" cy="328" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1132" y="333" text-anchor="middle" font-size="15" fill="#222">nombre</text>
+<ellipse cx="1129" cy="215" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1129" y="220" text-anchor="middle" font-size="15" fill="#222">apellidos</text>
+<ellipse cx="1278" cy="198" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1278" y="203" text-anchor="middle" font-size="15" fill="#222">puesto</text>
+<ellipse cx="1411" cy="129" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1411" y="134" text-anchor="middle" font-size="15" fill="#222">email</text>
+<ellipse cx="1519" cy="233" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1519" y="238" text-anchor="middle" font-size="15" fill="#222">telefono</text>
+<ellipse cx="1648" cy="276" rx="62" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1648" y="281" text-anchor="middle" font-size="15" fill="#222">fecha_alta</text>
+<ellipse cx="1143" cy="1037" rx="62" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1143" y="1042" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_factura</text>
+<ellipse cx="1174" cy="952" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1174" y="957" text-anchor="middle" font-size="15" fill="#222">serie</text>
+<ellipse cx="1556" cy="968" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1556" y="973" text-anchor="middle" font-size="15" fill="#222">numero</text>
+<ellipse cx="1589" cy="1051" rx="62" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1589" y="1056" text-anchor="middle" font-size="15" fill="#222">fecha_hora</text>
+<ellipse cx="1160" cy="1192" rx="62" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1160" y="1198" text-anchor="middle" font-size="15" fill="#222">forma_pago</text>
+<ellipse cx="1137" cy="2145" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1137" y="2150" text-anchor="middle" font-size="15" fill="#222">num_linea</text>
+<line x1="1100" y1="2155" x2="1174" y2="2155" stroke="#222" stroke-width="1.5" stroke-dasharray="5,3"/>
+<ellipse cx="1125" cy="2278" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1125" y="2283" text-anchor="middle" font-size="15" fill="#222">cantidad</text>
+<ellipse cx="1251" cy="2362" rx="84" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1251" y="2367" text-anchor="middle" font-size="15" fill="#222">precio_unitario</text>
+<ellipse cx="1433" cy="2370" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1433" y="2375" text-anchor="middle" font-size="15" fill="#222">tipo_iva</text>
+<ellipse cx="2005" cy="292" rx="98" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2005" y="297" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_establecimiento</text>
+<ellipse cx="2048" cy="163" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2048" y="168" text-anchor="middle" font-size="15" fill="#222">nombre</text>
+<ellipse cx="2210" cy="187" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2210" y="192" text-anchor="middle" font-size="15" fill="#222">direccion</text>
+<ellipse cx="2357" cy="128" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2357" y="133" text-anchor="middle" font-size="15" fill="#222">ciudad</text>
+<ellipse cx="2457" cy="260" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2457" y="265" text-anchor="middle" font-size="15" fill="#222">telefono</text>
+<ellipse cx="2058" cy="482" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2058" y="487" text-anchor="middle" font-size="15" fill="#222">latitud</text>
+<ellipse cx="2422" cy="482" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2422" y="487" text-anchor="middle" font-size="15" fill="#222">longitud</text>
+<ellipse cx="2030" cy="1022" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2030" y="1027" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_equipo</text>
+<ellipse cx="2109" cy="918" rx="94" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2109" y="923" text-anchor="middle" font-size="15" fill="#222">sistema_operativo</text>
+<ellipse cx="2422" cy="986" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2422" y="991" text-anchor="middle" font-size="15" fill="#222">ip</text>
+<ellipse cx="2040" cy="1192" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2040" y="1198" text-anchor="middle" font-size="15" fill="#222">ubicacion</text>
+<ellipse cx="2115" cy="1273" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2115" y="1278" text-anchor="middle" font-size="15" fill="#222">precio</text>
+<ellipse cx="2011" cy="1773" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2011" y="1778" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_modelo</text>
+<ellipse cx="2011" cy="1907" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2011" y="1912" text-anchor="middle" font-size="15" fill="#222">tipo</text>
+<ellipse cx="2457" cy="1777" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2457" y="1782" text-anchor="middle" font-size="15" fill="#222">marca</text>
+<ellipse cx="2457" cy="1903" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2457" y="1908" text-anchor="middle" font-size="15" fill="#222">modelo</text>
+<ellipse cx="2063" cy="2069" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2063" y="2074" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_plato</text>
+<ellipse cx="2417" cy="2069" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2417" y="2074" text-anchor="middle" font-size="15" fill="#222">nombre</text>
+<ellipse cx="2429" cy="2298" rx="66" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2429" y="2302" text-anchor="middle" font-size="15" fill="#222">descripcion</text>
+<ellipse cx="2399" cy="2414" rx="58" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2399" y="2419" text-anchor="middle" font-size="15" fill="#222">categoria</text>
+<ellipse cx="2270" cy="2378" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2270" y="2383" text-anchor="middle" font-size="15" fill="#222">precio</text>
+<ellipse cx="2178" cy="2445" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2178" y="2450" text-anchor="middle" font-size="15" fill="#222">tipo_iva</text>
+<ellipse cx="2115" cy="2353" rx="66" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2115" y="2358" text-anchor="middle" font-size="15" fill="#222">es_estrella</text>
+<ellipse cx="1986" cy="2328" rx="62" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="1986" y="2332" text-anchor="middle" font-size="15" fill="#222">url_imagen</text>
+<ellipse cx="3320" cy="2118" rx="66" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="3320" y="2122" text-anchor="middle" font-size="15" fill="#222" text-decoration="underline">id_articulo</text>
+<ellipse cx="3337" cy="2273" rx="48" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="3337" y="2278" text-anchor="middle" font-size="15" fill="#222">nombre</text>
+<ellipse cx="3173" cy="2369" rx="76" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="3173" y="2374" text-anchor="middle" font-size="15" fill="#222">unidad_medida</text>
+<ellipse cx="699" cy="730" rx="66" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="699" y="735" text-anchor="middle" font-size="15" fill="#222">fecha_envio</text>
+<ellipse cx="3354" cy="327" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="3354" y="332" text-anchor="middle" font-size="15" fill="#222">cantidad</text>
+<ellipse cx="3347" cy="445" rx="71" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="3347" y="450" text-anchor="middle" font-size="15" fill="#222">stock_minimo</text>
+<ellipse cx="2680" cy="2340" rx="53" ry="19.0" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="2680" y="2345" text-anchor="middle" font-size="15" fill="#222">cantidad</text>
+<polygon points="480,688.0 568.0,730 480,772.0 392.0,730" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="480" y="736" text-anchor="middle" font-size="16" fill="#222">se envía a</text>
+<text x="530" y="701" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">N:M</text>
+<text x="468" y="790.0" text-anchor="end" font-size="14" fill="#666">tabla ENVIO_CAMPANA</text>
+<polygon points="920,1058.0 995.0,1100 920,1142.0 845.0,1100" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="920" y="1106" text-anchor="middle" font-size="16" fill="#222">recibe</text>
+<text x="964" y="1071" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="1360,688.0 1435.0,730 1360,772.0 1285.0,730" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="1360" y="736" text-anchor="middle" font-size="16" fill="#222">atiende</text>
+<text x="1404" y="701" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="1800,318.0 1888.0,360 1800,402.0 1712.0,360" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="1800" y="366" text-anchor="middle" font-size="16" fill="#222">trabaja en</text>
+<text x="1850" y="331" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="2240,688.0 2315.0,730 2240,772.0 2165.0,730" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="2240" y="736" text-anchor="middle" font-size="16" fill="#222">tiene</text>
+<text x="2284" y="701" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="1800,1058.0 1875.0,1100 1800,1142.0 1725.0,1100" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="1800" y="1106" text-anchor="middle" font-size="16" fill="#222">emite</text>
+<text x="1844" y="1071" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="2680,1058.0 2772.8,1100 2680,1142.0 2587.2,1100" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="2680" y="1106" text-anchor="middle" font-size="16" fill="#222">conectada a</text>
+<text x="2732" y="1071" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="2240,1428.0 2315.0,1470 2240,1512.0 2165.0,1470" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="2240" y="1476" text-anchor="middle" font-size="16" fill="#222">es de</text>
+<text x="2284" y="1441" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="3120,318.0 3198.4,360 3120,402.0 3041.6,360" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="3120" y="366" text-anchor="middle" font-size="16" fill="#222">almacena</text>
+<text x="3165" y="331" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">N:M</text>
+<text x="3108" y="420.0" text-anchor="end" font-size="14" fill="#666">tabla STOCK</text>
+<polygon points="1360,1613.0 1438.4,1655 1360,1697.0 1281.6,1655" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<polygon points="1360,1620.0 1427.4,1655 1360,1690.0 1292.6,1655" fill="none" stroke="#b07800" stroke-width="2"/>
+<text x="1360" y="1661" text-anchor="middle" font-size="16" fill="#222">contiene</text>
+<text x="1405" y="1626" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="1800,2168.0 1892.8,2210 1800,2252.0 1707.2,2210" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="1800" y="2216" text-anchor="middle" font-size="16" fill="#222">se vende en</text>
+<text x="1852" y="2181" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">1:N</text>
+<polygon points="2680,2168.0 2755.0,2210 2680,2252.0 2605.0,2210" fill="#fff6e0" stroke="#b07800" stroke-width="2"/>
+<text x="2680" y="2216" text-anchor="middle" font-size="16" fill="#222">lleva</text>
+<text x="2724" y="2181" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">N:M</text>
+<text x="2668" y="2270.0" text-anchor="end" font-size="14" fill="#666">tabla RECETA</text>
+<rect x="365.0" y="328.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="480" y="366" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">CAMPANA_MARKETING</text>
+<rect x="365.0" y="1068.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="480" y="1106" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">CLIENTE</text>
+<rect x="1245.0" y="328.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="1360" y="366" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">EMPLEADO</text>
+<rect x="1245.0" y="1068.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="1360" y="1106" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">FACTURA</text>
+<rect x="1245.0" y="2178.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<rect x="1251.0" y="2184.0" width="218" height="52" fill="none" stroke="#1f5f99" stroke-width="2"/>
+<text x="1360" y="2216" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">LINEA_FACTURA</text>
+<rect x="2125.0" y="328.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="2240" y="366" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">ESTABLECIMIENTO</text>
+<rect x="2125.0" y="1068.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="2240" y="1106" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">EQUIPO</text>
+<rect x="2125.0" y="1808.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="2240" y="1846" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">MODELO_EQUIPO</text>
+<rect x="2125.0" y="2178.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="2240" y="2216" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">PLATO</text>
+<rect x="3005.0" y="2178.0" width="230" height="64" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>
+<text x="3120" y="2216" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">ARTICULO</text>
+<text x="510" y="414" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="510" y="1046" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="629" y="1116" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,1)</text>
+<text x="1211" y="1116" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="1390" y="414" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,1)</text>
+<text x="1390" y="1046" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="1509" y="376" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="2091" y="376" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,1)</text>
+<text x="2270" y="414" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,1)</text>
+<text x="2270" y="1046" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="1509" y="1116" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="2091" y="1116" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,1)</text>
+<text x="2450" y="1060" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">TPV (0,1)</text>
+<text x="2450" y="1140" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">impresora (0,n)</text>
+<text x="2270" y="1154" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="2270" y="1786" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,1)</text>
+<text x="2389" y="376" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="3150" y="2156" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="1390" y="1154" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,1)</text>
+<text x="1390" y="2156" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,n)</text>
+<text x="1509" y="2226" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="2091" y="2226" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(1,1)</text>
+<text x="2389" y="2226" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<text x="2971" y="2226" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">(0,n)</text>
+<rect x="60" y="1590" width="820" height="584" fill="#fafafa" stroke="#999" stroke-width="1.5" rx="8"/>
+<text x="84" y="1632" font-weight="bold" font-size="20" fill="#222">Modelo E/R de Almi-Chain · notación Chen · tarea 38</text>
+<text x="84" y="1666" font-size="17" fill="#222"></text>
+<text x="84" y="1700" font-size="17" fill="#222">Rectángulo: entidad · doble rectángulo: entidad débil</text>
+<text x="84" y="1734" font-size="17" fill="#222">Rombo: relación · doble rombo: relación identificadora</text>
+<text x="84" y="1768" font-size="17" fill="#222">Elipse: atributo · subrayado: identificador</text>
+<text x="84" y="1802" font-size="17" fill="#222">Subrayado discontinuo: clave parcial de la débil</text>
+<text x="84" y="1836" font-size="17" fill="#222"></text>
+<text x="84" y="1870" font-size="17" fill="#222">(mín,máx) junto a una entidad: cuántas ocurrencias de</text>
+<text x="84" y="1904" font-size="17" fill="#222">esa entidad se relacionan con UNA de la otra.</text>
+<text x="84" y="1938" font-size="17" fill="#222">Ej.: EMPLEADO (0,n) · ESTABLECIMIENTO (1,1): un local</text>
+<text x="84" y="1972" font-size="17" fill="#222">tiene de 0 a n empleados; un empleado, uno y solo uno.</text>
+<text x="84" y="2006" font-size="17" fill="#222">Encima del rombo, el tipo: 1:N o N:M.</text>
+<text x="84" y="2040" font-size="17" fill="#222"></text>
+<text x="84" y="2074" font-size="17" fill="#222">Las claves ajenas no se dibujan: son las relaciones.</text>
+<text x="84" y="2108" font-size="17" fill="#222">Las N:M con atributos son tablas en el modelo lógico</text>
+<text x="84" y="2142" font-size="17" fill="#222">(tarea 39): STOCK, RECETA y ENVIO_CAMPANA.</text>
+</svg>

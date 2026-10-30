@@ -13,10 +13,10 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 
 | Persona | Correcciones |
 |---|---|
-| **Adrian** | [4](#4-datos-que-faltan-en-tareas-hechas) exportar la VM del gerente a Drive, notación del E/R |
-| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.3](#33-factura-automática-con-el-caso-de-uso-antiguo-tarea-35) factura rectificativa · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
+| **Adrian** | Nada: E/R en notación Chen y VM del gerente cerrados el 30/10 (sección 1) |
+| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
 | **Peio** | Nada en esta lista: su tarea abierta (25) está en el Gantt; la 24 se cerró el 30/10 |
-| **Eneko.P** | [3.2](#32-recreativa-medida-en-una-vm-que-no-es-la-del-enunciado-tarea-17) medidas de la recreativa en 1 núcleo y 1 GB |
+| **Eneko.P** | Nada en esta lista: la 3.2 se cerró con las medidas de la tarea 54 (29/10) |
 | **Markel** | [4](#4-datos-que-faltan-en-tareas-hechas) edición de Windows de los TPV |
 | **Todos** | [4](#4-datos-que-faltan-en-tareas-hechas) sus filas del registro de IA |
 
@@ -29,11 +29,13 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Seguridad | Contraseñas Wi-Fi y RADIUS tapadas en las capturas; preseed de la recreativa sin clave SSH fija y SSH sin contraseña; actualizaciones de seguridad de la recreativa a las 5:00; contraseñas robustas en la VM del gerente (tarea 55); contraseñas Wi-Fi y de administración del router cambiadas y en KeePassXC (26/10); contraseñas de Packet Tracer en KeePassXC (26/10); Drive sin ficheros de contraseñas (24/10); contraseña de restic en KeePassXC y borrada del PC del técnico (27/10); **Odoo por HTTPS** hecho y probado en VM (26/10; activarlo en el servidor del equipo es la tarea 52) |
 | Redes | Tarea 22 con análisis de necesidades y esquema de conectividad; tarea 23 con cita literal, invitados en `192.168.50.0/24` y switch; **red plana con invitados aislada** decidida (24/10) y diseño antiguo con VLAN quitado (25/10); Packet Tracer de la red real con 16 de 16 pruebas ([evidencia](docs/redes/evidencias/23-red-local-configuracion-y-pruebas.txt)) |
 | Hardware | Presupuesto completo; Windows 10 IoT LTSC para los TPV; versiones del software; WAN unificada en DIGI 1 Gb |
+| Arcade | **Recreativa medida en 1 núcleo y 1 GB** (`Recreativa-53`, 29/10): 3 arranques antes y 3 después de optimizar y 10 min de juego, con 967 MB de RAM en las medidas ([tarea 54](docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md)) |
 | Arduino | Firmware con palanca digital y botones 7-8; esquema con la palanca en A2-A5 |
-| ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido; 2 fallos de los scripts de Odoo que impedían instalar en limpio; **factura de la tarea 35 repetida con el menú de grupo: `INV/2026/00004` = 660,00 €**, y el script fija el IVA en la línea y comprueba el total (Iker, 27/10) |
-| BD | Datos, consultas y usuarios de `almi_chain` ejecutados con evidencias ([41](docs/bd/evidencias/41-datos-y-consultas.txt), [42](docs/bd/evidencias/42-usuarios-y-permisos.txt)) |
+| ERP | Caso de uso de la tarea 35 al 10 %; TicketBAI decidido; 2 fallos de los scripts de Odoo que impedían instalar en limpio; **factura de la tarea 35 repetida con el menú de grupo: `INV/2026/00004` = 660,00 €**, y el script fija el IVA en la línea y comprueba el total (Iker, 27/10); la errónea `INV/2026/00003` anulada con la rectificativa `RINV/2026/00001` ([evidencia](docs/erp/35-factura-automatica/evidencias/rectificativa-INV00003.txt)) |
+| BD | Datos, consultas y usuarios de `almi_chain` ejecutados con evidencias ([41](docs/bd/evidencias/41-datos-y-consultas.txt), [42](docs/bd/evidencias/42-usuarios-y-permisos.txt)); **E/R en notación Chen** (30/10, [tarea 38, sección 2](docs/bd/38-modelo-er.md#2-diagrama)), con el `.drawio` y el SVG generados por `scripts/bd/er-chen.py` |
 | Copias | Procedimiento para la BD en el RAID; aviso del USB; RTO real marcado como pendiente; **BD de Odoo en el RAID** y fallo repetido con Odoo funcionando: con un disco quitado se guarda la venta `S00007`, el espejo vuelve a `[UU]` y tras reiniciar Odoo responde (Iker, 27/10, [evidencias 10-12](docs/backup/43-raid1/evidencias/)) |
 | Web | CSP y Permissions-Policy; distancia al local; créditos; contraste, favicon y W3C; evidencias repetidas contra la versión publicada y Lighthouse móvil de 70 a 94 cargando el mapa al pulsar (26/10) |
+| SO | **Las VM no van a Drive** (decisión del 30/10): cada una se queda en el PC de quien la tiene, con su lista en [maquinas-virtuales.md](docs/gestion/maquinas-virtuales.md); la del gerente, en el de Adrian con la instantánea del 29/10 |
 | Gestión | Fechas reales; responsables coherentes; Anexo II con requisitos separados; decisiones del equipo apuntadas; 14 enlaces rotos |
 
 ---
@@ -72,15 +74,11 @@ Corregido el 27/10 (sección 1).
 
 ### 3.2 Recreativa medida en una VM que no es la del enunciado (tarea 17)
 
-- [ ] 🔴 **Las medidas de antes y después son de una VM de 2 núcleos y 1,5 GB**; el enunciado pide 1 núcleo y 1 GB. En `Recreativa-1GB` solo hay 3 medidas de antes (las de la tarea 51 también son sin optimizar). Hacer las 3 de después con el `optimizar-arcade.sh` nuevo y sustituir las tablas de la [tarea 17](docs/arcade/17-rendimiento-mame/DOCUMENTACION.md).
-  - **Quién:** Eneko.P.
+Corregido el 29/10 con la tarea 54 (sección 1).
 
 ### 3.3 Factura automática con el caso de uso antiguo (tarea 35)
 
-Corregido el 27/10 (sección 1). Queda un resto:
-
-- [ ] 🟢 **`INV/2026/00003` salió por 654,55 €** (dos IVA en la línea) y está validada y cobrada: anularla con una **factura rectificativa** y guardar el PDF en las evidencias de la [tarea 35](docs/erp/35-factura-automatica/DOCUMENTACION.md).
-  - **Quién:** Iker.
+Corregido el 27/10 (sección 1), también la rectificativa de `INV/2026/00003`.
 
 ### 3.4 Evidencias de la web (tarea 30)
 
@@ -96,13 +94,13 @@ Corregido el 26/10 (sección 1).
 ## 4. Datos que faltan en tareas hechas
 
 - [ ] 🟠 **Edición de Windows de los TPV** (IoT Enterprise LTSC 2021 o Pro + ESU) y su precio en las tareas 9 y 10. Las VM de la tarea 13 se hicieron con **Windows 11 Pro**, que no coincide con lo presupuestado: o se dice que la VM simula la edición elegida, o se cambian las tareas 9 y 10. **Quién:** Markel. (El driver de Epson ya no se apunta: las pruebas se hacen con la Samsung ML-1660, decisión del 27/10.)
-- [ ] 🟠 **VM del gerente (tarea 12):** ~~actualizaciones de Windows y evidencia de RG-05; BitLocker y LUKS~~ hecho el 29/10. Falta exportar la VM (ahora en VirtualBox) a OVA y subirla a Drive. **Quién:** Adrian.
+- [x] 🟠 **VM del gerente (tarea 12):** actualizaciones, BitLocker y cifrado de `/home/gerente` hechos el 29/10. No se exporta a Drive (decisión del 30/10): se queda en el PC de Adrian ([maquinas-virtuales.md](docs/gestion/maquinas-virtuales.md)). **Quién:** Adrian.
   - [x] Windows Update al día (KB5066791), BitLocker en `C:` con contraseña de arranque y `/home/gerente` cifrado con fscrypt (29/10, [tarea 12, sección 6](docs/so/12-dual-boot.md#6-verificación)).
   - [x] Versión de Ubuntu: **26.04.1 LTS**, imagen del 26/08/2026, leída del disco de la VM sin arrancarla y puesta en las tareas 12 y 9 (27/10, [evidencia](docs/evidencias/12-dual-boot/ubu-08-version-desde-disco.txt)).
 - [ ] 🟠 **`almi_chain` en el servidor (tareas 40-42):** la base está probada pero no existe en `ServidorERP`. Crearla (comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md)), cargar `08-usuarios.sql` con contraseñas de KeePassXC y lanzar `sudo systemctl start backup-odoo`: el log tiene que decir `Volcado almi_chain`. **Quién:** Iker.
 - [ ] 🟠 **Registro de IA:** cada persona pone en sus filas qué comprobó a mano, en vez de «pendiente de revisar por el equipo». **Quién:** todos.
 - [x] 🟢 **Imágenes de la web:** copiadas a `web/img/` en WebP, con su autor en los créditos y en `web/img/CREDITOS.txt`; la txuleta del carrusel ya no repite la portada (que eran costillas) y la tarta de queso es otra foto de autor conocido. La CSP del servidor deja de admitir `images.unsplash.com` (se aplica al reinstalar). Adrian, 27/10. Publicado ese día con `desplegar-web` (secretos del Learner Lab renovados): el `index.html` público es idéntico al del repositorio (8425 bytes) y `img/txuleta-640.webp` se sirve desde la propia web.
-- [ ] 🟢 **Notación del E/R:** comprobarla con la rúbrica cuando salga. **Quién:** Adrian.
+- [x] 🟢 **Notación del E/R:** pasado a **Chen**, la de clase (30/10, [tarea 38](docs/bd/38-modelo-er.md#21-notación-chen)). Si la rúbrica pide otra, se cambia en `scripts/bd/er-chen.py`. **Quién:** Adrian.
 
 ---
 
@@ -114,8 +112,8 @@ Corregido el 26/10 (sección 1).
 |---|---|---|
 | Necesidades, configuración y presupuesto de equipos e impresoras | Hecho, con huecos | Corr. 4 (edición de Windows de los TPV) |
 | Identificar y documentar el hardware necesario | Hecho | — |
-| Identificar y documentar el software necesario | Hecho, con huecos | Corr. 4 (versión de Ubuntu y del driver) |
-| Instalación, optimización y monitorización de la recreativa | Parcial | Corr. 3.2; tareas 18, 53 y 54 (la 51 decidió Debian + MAME) |
+| Identificar y documentar el software necesario | Hecho (Ubuntu 26.04.1 LTS leído del disco; el driver de Epson no se apunta, decisión del 27/10) | — |
+| Instalación, optimización y monitorización de la recreativa | Hecho: Debian + MAME en la VM de 1 núcleo y 1 GB (tarea 53) y medidas antes y después (tarea 54, 29/10) | — |
 | Montaje y programación del arcade stick | Hecho: montado y probado en la placa, con la EEPROM, en MAME (tarea 53) y en Batocera (27-29/10) | — |
 | Identificar necesidades de comunicación | Hecho | — |
 | Implementación y configuración de sistemas operativos | Casi hecho: TPV bastionados a mano (tarea 13) | Tarea 15 (`comprobar-tpv.ps1`) y S-20 de la tarea 46 |
@@ -125,7 +123,7 @@ Corregido el 26/10 (sección 1).
 | Hosting en AWS con dominio propio y despliegue reproducible | Casi hecho | Tarea 31 |
 | ERP + TPV con un caso de uso automatizado | Hecho: factura de 660,00 € (27/10) | Tarea 36 |
 | Instalación y configuración de una impresora | Hecho: ticket de Odoo impreso desde el TPV (Samsung por IPP, tarea 37, 27/10) | Tarea 14: cola en los TPV reales |
-| Modelo E/R y tablas | Hecho | Corr. 4 (notación) |
+| Modelo E/R y tablas | Hecho: E/R en notación Chen (30/10) | — |
 | Implementación de la BD y consulta de sus datos | Hecho | Corr. 4 (`almi_chain` en el servidor) |
 | Configurar disco redundante | Hecho: BD de Odoo en el RAID 1 y fallo probado con Odoo funcionando (27/10) | — |
 | Plan de copias y prueba de restauración | Hecho, con huecos | Corr. 3.5; tarea 44 |
@@ -198,7 +196,7 @@ Quien hace la corrección repasa estas casillas antes de unir su PR: si alguna n
 - [ ] RTO real: está el tiempo cronometrado de una restauración en una **VM nueva**, y aparece en la tarea 45, LOGICA_RETO y el Anexo II.
 
 **Recreativa (3.2)**
-- [ ] La evidencia muestra que la VM es de **1 núcleo y 1 GB** (`nproc` → 1; `free -m` → unos 1000 MB en total) en las medidas de antes y de después.
+- [x] La evidencia muestra que la VM es de **1 núcleo y 1 GB**: `nproc` → 1 y `free -m` → 967 MB ([tarea 53, 06-comprobaciones](docs/arcade/53-recreativa-fisica/evidencias/06-comprobaciones.txt)), y `mem_total_mb` = 967 en las medidas de antes y de después ([monitor_antes](docs/arcade/54-medidas-equipo-real/evidencias/monitor_antes_20261029-130134.csv), [monitor_despues](docs/arcade/54-medidas-equipo-real/evidencias/monitor_despues_20261029-132504.csv)) (29/10).
 
 **Factura automática (3.3)**
 - [x] `660,00 €`, factura validada, cobrada y con PDF (`INV/2026/00004`, 27/10).
