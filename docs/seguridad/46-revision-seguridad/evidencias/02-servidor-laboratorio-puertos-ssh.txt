@@ -1,0 +1,50 @@
+# Tarea 46 · Comprobaciones 2, 6 y 7 de la sección 5 en la ServidorERP del LABORATORIO (PC de Adrian) · 03/11/2026 11:31
+# No es el servidor del equipo (el del RAID, de Iker): repetirlas allí con la red montada.
+# Se entra desde el PC por el reenvío 127.0.0.1:2223 -> 192.168.10.10:22 de la red NAT reto-lan.
+
+== Comprobación 2 (puertos). Sin otro equipo en reto-lan no se puede lanzar nmap desde la LAN:
+== se mira qué escucha el servidor (ss -tln) y el cortafuegos ya probado (tarea 33, evidencia 24).
+State  Recv-Q Send-Q Local Address:Port  Peer Address:Port
+LISTEN 0      4096       127.0.0.1:8069       0.0.0.0:*
+LISTEN 0      4096         0.0.0.0:443        0.0.0.0:*
+LISTEN 0      128          0.0.0.0:22         0.0.0.0:*
+LISTEN 0      4096         0.0.0.0:80         0.0.0.0:*
+LISTEN 0      4096       127.0.0.1:35555      0.0.0.0:*
+LISTEN 0      4096            [::]:443           [::]:*
+LISTEN 0      128             [::]:22            [::]:*
+LISTEN 0      4096            [::]:80            [::]:*
+Resultado: hacia fuera solo 22, 80 y 443. Odoo (8069) y 35555 (containerd) solo en 127.0.0.1. OK.
+
+== Comprobación 6: ssh -o PubkeyAuthentication=no tecnico@servidor
+tecnico@127.0.0.1: Permission denied (publickey,password).
+Resultado: el servidor todavía OFRECE contraseña (debería decir solo «publickey»). S-08 sigue abierto.
+sshd_config.d: KbdInteractiveAuthentication no; PasswordAuthentication sin fijar (Debian: yes).
+authorized_keys: una sola clave, la de Adrian (no está recreativa-claude).
+
+== Comprobación 7: systemctl is-active unattended-upgrades
+inactive
+dpkg-query: no se ha encontrado ningún paquete que corresponda con unattended-upgrades.
+Resultado: no está instalado. S-09 sigue abierto.
+
+# ---------------------------------------------------------------------------------------------
+# 03/11/2026 11:45 · Sección 4.2 aplicada en el laboratorio (instantánea previa: antes-46-endurecer-2026-11-03)
+# Con sudo, lanzada desde el PC: /etc/ssh/sshd_config.d/10-endurecer.conf y unattended-upgrades.
+# No se actualizaron las imágenes de Docker (eso va después de una copia, en el servidor del equipo).
+
+== sshd -T
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+kbdinteractiveauthentication no
+
+== Comprobación 6 (repetida)
+tecnico@127.0.0.1: Permission denied (publickey).
+Con la clave de Adrian se sigue entrando. Resultado: OK.
+
+== Comprobación 7 (repetida)
+/etc/apt/apt.conf.d/20auto-upgrades:
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+systemctl is-active unattended-upgrades -> active (unattended-upgrades 2.12). Resultado: OK.
+
+Odoo después del cambio: https://localhost/web/login -> HTTP 200
