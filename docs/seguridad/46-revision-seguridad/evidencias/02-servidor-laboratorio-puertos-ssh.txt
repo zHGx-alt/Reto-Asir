@@ -25,3 +25,26 @@ authorized_keys: una sola clave, la de Adrian (no está recreativa-claude).
 inactive
 dpkg-query: no se ha encontrado ningún paquete que corresponda con unattended-upgrades.
 Resultado: no está instalado. S-09 sigue abierto.
+
+# ---------------------------------------------------------------------------------------------
+# 03/11/2026 11:45 · Sección 4.2 aplicada en el laboratorio (instantánea previa: antes-46-endurecer-2026-11-03)
+# Con sudo, lanzada desde el PC: /etc/ssh/sshd_config.d/10-endurecer.conf y unattended-upgrades.
+# No se actualizaron las imágenes de Docker (eso va después de una copia, en el servidor del equipo).
+
+== sshd -T
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+kbdinteractiveauthentication no
+
+== Comprobación 6 (repetida)
+tecnico@127.0.0.1: Permission denied (publickey).
+Con la clave de Adrian se sigue entrando. Resultado: OK.
+
+== Comprobación 7 (repetida)
+/etc/apt/apt.conf.d/20auto-upgrades:
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+systemctl is-active unattended-upgrades -> active (unattended-upgrades 2.12). Resultado: OK.
+
+Odoo después del cambio: https://localhost/web/login -> HTTP 200

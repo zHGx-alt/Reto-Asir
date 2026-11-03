@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (03/11/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10, el 29/10 y el 03/11 con lo que entró después (secciones 1.1 a 1.3): 26 hallazgos; 10 corregidos (S-01, S-04, S-05, S-06, S-13, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente, S-12 resuelto en el diseño de los TPV y S-03 ya no aplica. Comprobaciones de la sección 5: 1, 4, 5 y 9 hechas; 2, 3, 6 y 7 en el laboratorio (6 y 7 confirman S-08 y S-09). Faltan las de los equipos del equipo en la red y que cada responsable cierre los suyos (sección 3).
+- **Estado (03/11/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10, el 29/10 y el 03/11 con lo que entró después (secciones 1.1 a 1.3): 26 hallazgos; 10 corregidos (S-01, S-04, S-05, S-06, S-13, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente, S-12 resuelto en el diseño de los TPV y S-03 ya no aplica. Comprobaciones de la sección 5: 1, 4, 5 y 9 hechas; 2, 3, 6 y 7 en el laboratorio (6 y 7 pasan tras aplicar la sección 4.2). Faltan las de los equipos del equipo en la red y que cada responsable cierre los suyos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 
@@ -65,7 +65,7 @@ Se leyó lo que entró en `main` del PR #85 al #99 y se hicieron las comprobacio
 | Corrección 2.3: `restringir-menus-cajero.py` y `ver-menus-usuarios.py` | Bien: el grupo de gerencia queda como único grupo de los menús (antes se sumaba a «Usuario interno» y no ocultaba nada) y se puede deshacer. `ver-menus-usuarios.py` lee las contraseñas de `/root/.credenciales-usuarios`, que sigue en el servidor: hallazgo nuevo **S-26** |
 | Tareas 9 y 10: Windows de los TPV | Decidida la **LTSC 2021** (30/10), con soporte hasta 2032: **S-12** queda resuelto en el diseño para los TPV |
 | Tarea 50: `probar-stick.py` | Sin hallazgos (solo lee el mando) |
-| Comprobaciones 2, 6 y 7 en la `ServidorERP` del laboratorio | Hacia fuera solo escuchan 22, 80 y 443. El SSH sigue aceptando contraseña (S-08) y no está `unattended-upgrades` (S-09): los dos siguen abiertos ([evidencia 02](evidencias/02-servidor-laboratorio-puertos-ssh.txt)) |
+| Comprobaciones 2, 6 y 7 en la `ServidorERP` del laboratorio | Hacia fuera solo escuchan 22, 80 y 443. El SSH aceptaba contraseña (S-08) y no estaba `unattended-upgrades` (S-09). Aplicada la sección 4.2 (salvo la actualización de Docker): las dos comprobaciones pasan y Odoo sigue respondiendo ([evidencia 02](evidencias/02-servidor-laboratorio-puertos-ssh.txt)). Falta hacerlo en el servidor del equipo |
 
 ## 2. Resumen
 
@@ -80,7 +80,7 @@ Lo más urgente, por este orden:
 1. ~~**Router:** red de invitados sin hacer, y administración abierta a toda la LAN y WPS (S-06, S-04).~~ Hecho: S-04 el 29/10 y S-06 el 30/10 (tarea 24).
 2. **Odoo sigue por HTTP en la LAN** hasta activar la tarea 52 en el servidor del equipo (S-02).
 3. **Los TPV reales no tienen el bastionado completo** (S-20): sin bloqueo de salida en el firewall ni lista blanca en Edge.
-4. **SSH con contraseña y sin actualizaciones automáticas en el servidor** (S-08, S-09): comprobado el 03/11 en el laboratorio; los comandos de la sección 4.2 lo arreglan.
+4. **SSH con contraseña y sin actualizaciones automáticas en el servidor** (S-08, S-09): los comandos de la sección 4.2 lo arreglan; probados el 03/11 en el laboratorio. Falta en el servidor del equipo.
 
 ## 3. Hallazgos
 
@@ -93,8 +93,8 @@ Lo más urgente, por este orden:
 | S-05 | Alta | Tarea 24, Wi-Fi | La contraseña Wi-Fi tiene 8 cifras y se leía en dos capturas que siguen en el historial de Git (commits `532c87a` y `215eac7`). El repositorio es privado, lo que lo atenúa, pero el profesor y cualquiera con acceso las pueden ver | Cambiarla por una frase de 20 caracteres o más. No hace falta reescribir el historial si se cambia la contraseña | Peio | ✅ Cambiada y en KeePassXC (26/10). Comprobar que la RADIUS de las mismas capturas tampoco sigue en uso |
 | S-06 | Media | Tareas 23 y 24 | La red de invitados no está configurada. La tabla 5.2 de la tarea 23 confía en ella para que clientes y recreativa no lleguen al servidor ni a los TPV | Red `192.168.50.0/24` sin acceso a la LAN y con aislamiento entre clientes; pruebas 3 a 5 de la tarea 23 | Peio | ✅ Red de invitados configurada el 29/10 (sin acceso a la LAN, aislamiento entre clientes). 30/10: desde invitados, ping sin respuesta al PC del gerente y a otro invitado (tarea 24, P3b y P4). Sigue en la misma subred `192.168.10.0/24`: el TL-WR841N no le da una propia |
 | S-07 | Media | Tarea 24 | El TL-WR841N no tiene WPA3. Queda WPA2-AES, con la clave de grupo sin renovar (`0`) y modo `11bgn` | WPA3 (o WPA2/WPA3) en el Archer C6, renovación de la clave de grupo cada 3600 s y sin 802.11b. Si no se compra, dejarlo como limitación | Peio | 🟡 Clave de grupo renovada cada 3600 s (29/10, tarea 24). WPA3 queda como limitación del TL-WR841N; el Archer C6 no se ha comprado |
-| S-08 | Media | Tarea 33, `preseed-servidor.cfg` | El SSH del servidor admite contraseña (el preseed de la recreativa sí lo cierra y el del servidor no). Además, la única clave autorizada es la del laboratorio (`recreativa-claude`), no la del PC del gerente | Ver sección 4.2 | Iker | ⏳ Pendiente. 03/11: comprobado en el laboratorio, el servidor sigue ofreciendo contraseña (comprobación 6) |
-| S-09 | Media | Tareas 33 y 52 | El servidor no tiene `unattended-upgrades` (el preseed no lo instala y Debian sin escritorio no lo trae). Las imágenes `odoo:19.0`, `postgres:17` y `nginx:1.27-alpine` no tienen un procedimiento de actualización | Ver sección 4.2 | Iker | ⏳ Pendiente. 03/11: en el laboratorio no está instalado (comprobación 7) |
+| S-08 | Media | Tarea 33, `preseed-servidor.cfg` | El SSH del servidor admite contraseña (el preseed de la recreativa sí lo cierra y el del servidor no). Además, la única clave autorizada es la del laboratorio (`recreativa-claude`), no la del PC del gerente | Ver sección 4.2 | Iker | ◐ 03/11: sección 4.2 aplicada y probada en el laboratorio (comprobación 6 OK). Falta en el servidor del equipo |
+| S-09 | Media | Tareas 33 y 52 | El servidor no tiene `unattended-upgrades` (el preseed no lo instala y Debian sin escritorio no lo trae). Las imágenes `odoo:19.0`, `postgres:17` y `nginx:1.27-alpine` no tienen un procedimiento de actualización | Ver sección 4.2 | Iker | ◐ 03/11: `unattended-upgrades` instalado y activo en el laboratorio (comprobación 7 OK). Falta en el servidor del equipo y el procedimiento de las imágenes |
 | S-10 | Media | Tarea 33, `docker-compose.yml` | Odoo se conecta a PostgreSQL con el usuario de `POSTGRES_USER`, que la imagen de PostgreSQL crea como **superusuario**. Choca con los mínimos privilegios de la tarea 42. Lo atenúa que PostgreSQL no está publicado fuera de Docker | Mejora para un despliegue nuevo: un rol `odoo` con `CREATEDB` y sin `SUPERUSER`. Hoy se acepta y se documenta, porque cambiarlo con datos reales tiene riesgo | Iker | Aceptado (riesgo documentado) |
 | S-11 | Media | Tareas 12 y 13 | Ni el PC del gerente (BitLocker desactivado para el arranque dual, Ubuntu sin LUKS) ni los TPV tienen el disco cifrado. Si roban el equipo, se leen los datos sin contraseña | BitLocker en Windows y cifrado de `/home/gerente` (tarea 12, sección 4.4). BitLocker en los TPV (Pro e IoT Enterprise lo incluyen) | Adrian (12), Markel (13) | ◐ Gerente hecho el 29/10 (BitLocker + fscrypt); TPV pendiente |
 | S-12 | Media | Tareas 12 y 13 | Windows 10 dejó de tener soporte el 14/10/2025. Sin ESU o LTSC, el PC del gerente y los TPV no reciben parches. El 29/10 la VM del gerente recibió la última acumulativa gratuita (2025-10, KB5066791): a partir de ahí ya no llega nada | TPV: IoT Enterprise LTSC 2021 (soporte hasta 2032), decisión pendiente en la tarea 13. Gerente: ESU, o usar Ubuntu para el trabajo diario y dejar Windows solo para lo imprescindible | Markel, Adrian | ⏳ Gerente: al día hasta octubre de 2025 (tarea 12); la decisión (Windows 11 Pro o ESU) queda para el equipo real. TPV: decidida la LTSC 2021 el 30/10 (tareas 9 y 10), con soporte hasta 2032 |
@@ -180,8 +180,8 @@ No se pueden hacer desde el repositorio. Cada una cierra o confirma un hallazgo.
 | 3 | Navegador del TPV: `https://192.168.10.10/pos/ui`, ver el certificado (candado) | Sin avisos; la huella coincide con la de `activar-https.sh` | S-01, S-02 | ◐ 26/10 en la VM (tarea 52, prueba 5). Falta en los TPV reales, con el runbook de la 52 |
 | 4 | Panel del router: *System Tools → Password*, *Local Management* y *WPS* | Contraseña cambiada, solo la MAC del gerente, WPS desactivado | S-04 | ✅ 29/10 (tarea 24, [figuras 4 y 6](../../redes/24-red-segura/configurar-red-segura.md)) |
 | 5 | Panel del router: *Wireless Security* | Contraseña nueva (tapada en la captura), clave de grupo con renovación | S-05, S-07 | ✅ 29/10 (tarea 24, [figura 3](../../redes/24-red-segura/configurar-red-segura.md)) |
-| 6 | `ssh -o PubkeyAuthentication=no tecnico@192.168.10.10` | `Permission denied (publickey)` | S-08 | ❌ 03/11 en el laboratorio: `Permission denied (publickey,password)`, todavía admite contraseña ([evidencia 02](evidencias/02-servidor-laboratorio-puertos-ssh.txt)) |
-| 7 | En el servidor: `systemctl status unattended-upgrades` | `active` | S-09 | ❌ 03/11 en el laboratorio: no está instalado ([evidencia 02](evidencias/02-servidor-laboratorio-puertos-ssh.txt)) |
+| 6 | `ssh -o PubkeyAuthentication=no tecnico@192.168.10.10` | `Permission denied (publickey)` | S-08 | ◐ 03/11 en el laboratorio: admitía contraseña; tras la sección 4.2, `Permission denied (publickey)` ([evidencia 02](evidencias/02-servidor-laboratorio-puertos-ssh.txt)). Falta en el servidor del equipo |
+| 7 | En el servidor: `systemctl status unattended-upgrades` | `active` | S-09 | ◐ 03/11 en el laboratorio: no estaba; tras la sección 4.2, `active` ([evidencia 02](evidencias/02-servidor-laboratorio-puertos-ssh.txt)). Falta en el servidor del equipo |
 | 8 | Batocera: menú *Sistema → Seguridad* | *Enforce security* activado; la contraseña ya no es `linux` | S-03 | ➖ No aplica (Debian, tarea 51) |
 | 9 | PC del gerente: `manage-bde -status C:` y `lsblk -f` en Ubuntu | BitLocker activo; `/home/gerente` cifrado | S-11 | ✅ 29/10 en la VM ([BitLocker](../../evidencias/12-dual-boot/win-10-bitlocker-final.txt), [fscrypt](../../evidencias/12-dual-boot/ubu-09-fscrypt-home-gerente.txt)) |
 
@@ -199,6 +199,6 @@ Para no repetirlo en otras tareas y para la presentación:
 
 ## 7. Pendiente
 
-- [ ] Comprobaciones de la sección 5: hechas 1, 4, 5 y 9; la 8 no aplica; 2, 3, 6 y 7 en el laboratorio (03/11). Faltan 2 y 3 con el servidor y los TPV del equipo en la red, y repetir 6 y 7 cuando se aplique la sección 4.2.
+- [ ] Comprobaciones de la sección 5: hechas 1, 4, 5 y 9; la 8 no aplica; 2, 3, 6 y 7 en el laboratorio (03/11). Faltan 2 y 3 con el servidor y los TPV del equipo en la red, y 6 y 7 en el servidor del equipo cuando Iker aplique la sección 4.2.
 - [ ] Pasar cada hallazgo a su responsable (columna de la sección 3) y marcarlo aquí cuando lo cierre.
 - [ ] Repetir la revisión rápida antes de la entrega (10/11), con los hallazgos abiertos. Repasado hasta el PR #99 (secciones 1.1 a 1.3: 27/10, 29/10 y 03/11).
