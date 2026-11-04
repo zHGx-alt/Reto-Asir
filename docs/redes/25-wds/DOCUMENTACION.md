@@ -48,7 +48,9 @@ Router principal                            Range Extender
 
 El router principal se mantiene en `192.168.10.1`. Para evitar que el enlace inalámbrico cambie de canal durante el funcionamiento, la banda de 2,4 GHz se ha configurado en el **canal 6 fijo**.
 
-![Router 1 con canal fijo](evidencias/10-router1-canal-fijo.png)
+![Red de invitados del router 1](evidencias/14-router1-red-invitados.png)
+
+*No hay captura del canal 6 fijo en el router 1; el estado del router 2 (más abajo) sí muestra el canal 6.*
 
 La red de invitados utilizada es `Restaurante-Almichain-Invitados`, configurada para proporcionar acceso a Internet sin permitir acceso a la red local.
 
@@ -61,7 +63,7 @@ IP:      192.168.10.2
 Máscara: 255.255.255.0
 ```
 
-![Configuración LAN del router 2](evidencias/11-router2-lan.png)
+![Configuración LAN del router 2](evidencias/13-router2-lan.png)
 
 De esta manera, los dos routers tienen direcciones diferentes pero pertenecen a la misma red `192.168.10.0/24`.
 
@@ -69,7 +71,7 @@ De esta manera, los dos routers tienen direcciones diferentes pero pertenecen a 
 
 El servidor DHCP del segundo router se ha desactivado.
 
-![DHCP desactivado](evidencias/12-router2-dhcp-desactivado.png)
+![DHCP desactivado](evidencias/19-router2-dhcp-desactivado.jpg)
 
 Solo el router principal reparte direcciones IP. Esto evita conflictos entre dos servidores DHCP dentro de la misma red.
 
@@ -90,7 +92,7 @@ Restaurante_Almichain
 
 La contraseña necesaria para establecer el enlace está ocultada en la evidencia publicada.
 
-![Selección de Host Network](evidencias/18-router2-host-network-REDACTADA.png)
+![Selección de Host Network](evidencias/12-router2-conectar-red-principal.png)
 
 Una vez configurado, el estado del router 2 muestra:
 
@@ -101,7 +103,7 @@ Una vez configurado, el estado del router 2 muestra:
 - **Channel:** 6.
 - **IP LAN:** `192.168.10.2`.
 
-![Router 2 en modo Range Extender](evidencias/13-router2-range-extender.png)
+![Router 2 en modo Range Extender](evidencias/11-router2-estado-range-extender.png)
 
 El router 2 queda así enlazado inalámbricamente con el router principal y utiliza el mismo canal de 2,4 GHz.
 
@@ -121,7 +123,7 @@ El resultado fue:
 0% packet loss
 ```
 
-![Ping al router principal](evidencias/14-ping-router-principal.png)
+![Ping al router principal](evidencias/10-ping-router-principal.png)
 
 El **0 % de pérdida de paquetes** confirma que existe conectividad con el router principal.
 
@@ -253,15 +255,18 @@ Todas las evidencias están guardadas en la carpeta `evidencias/`.
 
 | Fichero | Qué demuestra |
 |---|---|
-| `10-router1-canal-fijo.png` | Router 1 funcionando con el canal 6 fijo |
-| `11-router2-lan.png` | Router 2 configurado como `192.168.10.2` |
-| `12-router2-dhcp-desactivado.png` | DHCP desactivado en el router 2 |
-| `13-router2-range-extender.png` | Estado del router 2 en modo Range Extender |
-| `14-ping-router-principal.png` | Comunicación con el router principal y 0 % de pérdida |
+| `01-pdf-seleccion-y-configuracion-wds.png` | Práctica del 27/10: selección de la red y configuración WDS |
+| `10-ping-router-principal.png` | Ping al router principal con 0 % de pérdida |
+| `11-router2-estado-range-extender.png` | Estado del router 2: Range Extender, `192.168.10.2`, canal 6, MAC `B0:BE:76:17:89:87` |
+| `12-router2-conectar-red-principal.png` | *Connect to Host Network*: el router 2 se une a `Restaurante_Almichain` (contraseña vacía en la captura) |
+| `13-router2-lan.png` | Router 2 con IP fija `192.168.10.2` |
+| `14-router1-red-invitados.png` | Red de invitados del router 1: sin acceso a la LAN y con aislamiento |
 | `15-wifi-analyzer-p1-antes.jpg` | Señal, BSSID y canal vistos desde WiFi Analyzer |
 | `16-invitados-sin-acceso-router2.jpg` | La red de invitados no alcanza `192.168.10.2` |
 | `17-invitados-sin-acceso-lan.jpg` | La red de invitados no alcanza `192.168.10.10` |
-| `18-router2-host-network-REDACTADA.png` | Selección de la red principal para el enlace, con la contraseña oculta |
+| `19-router2-dhcp-desactivado.jpg` | DHCP desactivado en el router 2 (foto de la pantalla) |
+
+El 04/11 se renombraron las capturas para que el nombre diga lo que muestran (estaban cruzadas) y se quitaron dos duplicadas.
 
 Las contraseñas y credenciales sensibles se han ocultado antes de publicar las evidencias.
 
@@ -285,5 +290,7 @@ Lo que pide el enunciado o la rúbrica (PAR, nivel 4 y 5) y aún no está probad
 
 - [ ] **Ampliar la Wi-Fi de clientes.** El router 2 repite `Restaurante_Almichain` (personal); el enunciado pide ampliar la de **clientes**. O se repite `Restaurante-Almichain-Invitados`, o se explica con capturas por qué el Range Extender del TL-WR841N no puede repetir la red de invitados y qué se haría con el Archer C6 del diseño ([tarea 24, sección 12](../24-red-segura/DOCUMENTACION.md#12-pendiente)).
 - [ ] **Prueba conectado al router 2:** captura de WiFi Analyzer con el BSSID del router 2 (`B0:BE:76:17:89:87`), no el del 1, y desde ahí ping o navegación.
+- [ ] **Qué demuestran hoy las secciones 8 y 9:** la medida de -31 dBm es del **router 1** (el móvil está en el BSSID `…:AF:60`, a 0 m), y las pruebas de aislamiento se hicieron en la red de invitados del router 1, no a través del router 2. Hay que repetirlas conectado al router 2.
+- [ ] **Por qué el Range Extender cuenta como WDS:** explicarlo (une los dos routers por Wi-Fi sin cable, como el puente WDS que se usó en la práctica del 27/10).
 - [ ] **Cobertura antes y después:** señal (dBm) en la barra y en la entrada con el router 2 apagado y encendido. Hoy hay una sola medida (-31 dBm) en un punto.
 - [ ] **Desactivar UPnP** en el router 1 (hallazgo S-25 de la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md)), con captura.
