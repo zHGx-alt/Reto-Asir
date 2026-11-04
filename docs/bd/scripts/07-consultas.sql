@@ -120,3 +120,43 @@ LEFT JOIN modelo_equipo m ON m.tipo = tipos.tipo
 LEFT JOIN equipo q        ON q.id_modelo = m.id_modelo AND q.id_establecimiento = e.id_establecimiento
 GROUP BY e.nombre, m.tipo
 ORDER BY local, m.tipo;
+
+-- ---- Tarea 56: atributo multivaluado, relación ternaria e historial ------------
+
+\echo '== C-13 Platos aptos para celíacos (sin gluten) y sus otros alérgenos · atributo multivaluado con NOT EXISTS y string_agg'
+SELECT p.categoria, p.nombre,
+       COALESCE(string_agg(a.alergeno, ', ' ORDER BY a.alergeno), '(ninguno)') AS otros_alergenos
+FROM plato p
+LEFT JOIN plato_alergeno a ON a.id_plato = p.id_plato
+WHERE NOT EXISTS (SELECT 1 FROM plato_alergeno g WHERE g.id_plato = p.id_plato AND g.alergeno = 'gluten')
+GROUP BY p.categoria, p.nombre
+ORDER BY p.categoria, p.nombre;
+
+\echo '== C-14 Proveedor más barato de cada artículo en cada local · relación ternaria con DISTINCT ON'
+SELECT DISTINCT ON (e.nombre, a.nombre)
+       e.nombre AS local, a.nombre AS articulo, pr.nombre AS proveedor,
+       s.precio_compra || ' €/' || a.unidad_medida AS precio,
+       count(*) OVER (PARTITION BY e.nombre, a.nombre) AS proveedores
+FROM suministro s
+JOIN proveedor pr      ON pr.id_proveedor = s.id_proveedor
+JOIN articulo a        ON a.id_articulo = s.id_articulo
+JOIN establecimiento e ON e.id_establecimiento = s.id_establecimiento
+ORDER BY e.nombre, a.nombre, s.precio_compra;
+
+\echo '== C-15 Historial de precios: precio de cada venta de café comparado con el vigente ese día · historial con rango de fechas'
+SELECT f.serie || '-' || f.numero AS factura, f.fecha_hora::date AS dia,
+       l.precio_unitario AS precio_cobrado, h.precio AS precio_vigente_ese_dia,
+       (SELECT precio FROM plato WHERE id_plato = l.id_plato) AS precio_hoy
+FROM linea_factura l
+JOIN factura f ON f.id_factura = l.id_factura
+JOIN plato p   ON p.id_plato = l.id_plato AND p.nombre = 'Café'
+JOIN historial_precio_plato h ON h.id_plato = l.id_plato
+                             AND f.fecha_hora >= h.fecha_desde
+                             AND (h.fecha_hasta IS NULL OR f.fecha_hora < h.fecha_hasta)
+ORDER BY f.fecha_hora;
+
+\echo '   Tramos del historial del café'
+SELECT h.fecha_desde, COALESCE(h.fecha_hasta::text, '(vigente)') AS fecha_hasta, h.precio, h.tipo_iva
+FROM historial_precio_plato h JOIN plato p ON p.id_plato = h.id_plato
+WHERE p.nombre = 'Café'
+ORDER BY h.fecha_desde;

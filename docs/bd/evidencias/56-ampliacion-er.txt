@@ -1,0 +1,136 @@
+# Tarea 56 · Ampliación del E/R: relación ternaria, historial y atributos especiales
+# Ejecutado el 04/11/2026 en un PostgreSQL 16.15 local y vacío (clúster temporal):
+#   base nueva; 01, 02 y 03 (el 03 dos veces: es repetible); 05 dos veces; 06; 07; 08; y 09 con las dos cuentas
+
+===== 01-crear-tablas.sql, 02-reglas.sql, 03-roles.sql
+OK  01-crear-tablas.sql
+OK  02-reglas.sql
+OK  03-roles.sql
+OK  03-roles.sql
+Tablas: 17
+
+===== 05-pruebas.sql (primera ejecución)
+OK    DNI duplicado  (rechazado: duplicate key value violates unique constraint "uk_empleado_dni")
+OK    puesto fuera de la lista  (rechazado: new row for relation "empleado" violates check constraint "empleado_puesto_check)
+OK    IVA del 7 %  (rechazado: new row for relation "plato" violates check constraint "plato_tipo_iva_check")
+OK    precio negativo  (rechazado: new row for relation "plato" violates check constraint "plato_precio_check")
+OK    publicidad sin email  (rechazado: new row for relation "cliente" violates check constraint "ck_cliente_publicidad_)
+OK    latitud fuera de rango  (rechazado: new row for relation "establecimiento" violates check constraint "establecimient)
+OK    IP repetida en el mismo local  (rechazado: duplicate key value violates unique constraint "uk_equipo_ip")
+OK    fin de campaña anterior al inicio  (rechazado: new row for relation "campana_marketing" violates check constraint "ck_campana_f)
+OK    borrar local con empleados (RESTRICT)  (rechazado: update or delete on table "establecimiento" violates foreign key constraint "emp)
+OK    R-03 TPV con id_equipo_tpv  (rechazado: R-03: solo una impresora de tickets puede tener id_equipo_tpv (el equipo es de t)
+OK    R-03 impresora a un PC de despacho  (rechazado: R-03: la impresora debe conectarse a un equipo de tipo tpv (el destino es despac)
+OK    R-03 impresora a TPV de otro local  (rechazado: R-03: la impresora y su TPV deben ser del mismo establecimiento)
+OK    R-02 factura desde un PC de despacho  (rechazado: R-02: la factura debe emitirse desde un equipo de tipo tpv (es despacho))
+OK    R-01 empleado de otro local  (rechazado: R-01: el empleado y el TPV de la factura deben ser del mismo establecimiento)
+OK    R-05 numeración automática empieza en 1
+OK    R-05 salto de número  (rechazado: R-05: la serie A debe continuar en el número 3 (se recibió 9))
+OK    R-05 número repetido  (rechazado: R-05: la serie A debe continuar en el número 3 (se recibió 2))
+OK    R-05 cada serie lleva su propia cuenta
+OK    R-06 stock descontado (5 - 4 = 1)
+OK    Vista: base = 8,50
+OK    Vista: IVA = 0,60 + 0,525 -> 1,13
+OK    Vista: total = 9,63
+OK    Vista: factura sin líneas vale 0
+OK    R-06 venta sin stock suficiente  (rechazado: new row for relation "stock" violates check constraint "stock_cantidad_check")
+OK    línea con cantidad 0  (rechazado: new row for relation "linea_factura" violates check constraint "linea_factura_ca)
+OK    línea con plato vendido no borrable (RESTRICT)  (rechazado: update or delete on table "plato" violates foreign key constraint "linea_factura)
+OK    alérgeno fuera de la lista de los 14  (rechazado: new row for relation "plato_alergeno" violates check constraint "plato_alergeno_)
+OK    alérgeno repetido en el mismo plato  (rechazado: duplicate key value violates unique constraint "plato_alergeno_pkey")
+OK    ternaria: mismo proveedor y artículo, otro precio en otro local
+OK    ternaria: el local 1 compra el pan a dos proveedores
+OK    ternaria: misma terna repetida  (rechazado: duplicate key value violates unique constraint "suministro_pkey")
+OK    ternaria: precio de compra 0  (rechazado: new row for relation "suministro" violates check constraint "suministro_precio_c)
+OK    proveedor con CIF repetido  (rechazado: duplicate key value violates unique constraint "uk_proveedor_cif")
+OK    R-07 el alta del plato abre su primer tramo
+OK    R-07 subir el precio cierra un tramo y abre otro
+OK    R-07 cambiar la descripción no crea tramo
+OK    R-07 la línea ya vendida conserva su precio (3,00)
+OK    historial: dos tramos abiertos  (rechazado: duplicate key value violates unique constraint "ux_historial_abierto")
+OK    historial: fin anterior al inicio  (rechazado: new row for relation "historial_precio_plato" violates check constraint "ck_hist)
+OK    rol aplicación no escribe en el historial  (rechazado: permission denied for table historial_precio_plato)
+OK    rol aplicación no corrige el historial  (rechazado: permission denied for table historial_precio_plato)
+OK    rol aplicación cambia el precio y R-07 lo apunta
+OK    R-04 UPDATE de FACTURA  (rechazado: permission denied for table factura)
+OK    R-04 DELETE de FACTURA  (rechazado: permission denied for table factura)
+OK    R-04 UPDATE de LINEA_FACTURA  (rechazado: permission denied for table linea_factura)
+OK    R-04 DELETE de LINEA_FACTURA  (rechazado: permission denied for table linea_factura)
+OK    rol aplicación no crea equipos  (rechazado: permission denied for table equipo)
+OK    rol aplicación sí puede emitir facturas
+OK    rol lectura no inserta  (rechazado: permission denied for table cliente)
+Total: 49 pruebas correctas en la segunda ejecución; facturas que quedan: 0
+
+===== 06-datos.sql
+         tabla          | filas 
+------------------------+-------
+ establecimiento        |     2
+ empleado               |     6
+ modelo_equipo          |     4
+ equipo                 |     8
+ plato                  |    12
+ articulo               |    13
+ stock                  |    19
+ receta                 |    13
+ cliente                |     4
+ campana_marketing      |     2
+ envio_campana          |     1
+ factura                |     8
+ linea_factura          |    26
+ plato_alergeno         |    16
+ historial_precio_plato |    13
+ proveedor              |     4
+ suministro             |    15
+(17 rows)
+
+===== 07-consultas.sql (solo las de la tarea 56; C-01 a C-12 igual que en 41-datos-y-consultas.txt)
+== C-13 Platos aptos para celíacos (sin gluten) y sus otros alérgenos · atributo multivaluado con NOT EXISTS y string_agg
+ categoria |        nombre        |  otros_alergenos  
+-----------+----------------------+-------------------
+ bebida    | Agua mineral         | (ninguno)
+ bebida    | Café                 | (ninguno)
+ bebida    | Txakoli (copa)       | sulfitos
+ entrante  | Gilda                | pescado, sulfitos
+ entrante  | Pimientos de Gernika | (ninguno)
+ principal | Bacalao al pil-pil   | pescado
+ principal | Marmitako            | pescado
+ principal | Txuleta a la brasa   | (ninguno)
+(8 rows)
+
+== C-14 Proveedor más barato de cada artículo en cada local · relación ternaria con DISTINCT ON
+       local       |     articulo      |       proveedor        |   precio   | proveedores 
+-------------------+-------------------+------------------------+------------+-------------
+ Almi-Chain Abando | Anchoa            | Pescados Ejemplo S.L.  | 0.35 €/ud  |           1
+ Almi-Chain Abando | Bacalao           | Pescados Ejemplo S.L.  | 18.00 €/kg |           1
+ Almi-Chain Abando | Bonito            | Pescados Ejemplo S.L.  | 14.50 €/kg |           1
+ Almi-Chain Abando | Café en grano     | Mayorista Ejemplo S.A. | 15.40 €/kg |           2
+ Almi-Chain Abando | Cerveza de barril | Distribuciones Ejemplo | 2.10 €/l   |           2
+ Almi-Chain Abando | Chuleta de vaca   | Carnes Ejemplo S.L.    | 24.50 €/kg |           1
+ Almi-Chain Abando | Masa de croqueta  | Carnes Ejemplo S.L.    | 9.80 €/kg  |           1
+ Almi-Chain Abando | Txakoli           | Distribuciones Ejemplo | 7.20 €/l   |           1
+ Almi-Chain Deusto | Anchoa            | Pescados Ejemplo S.L.  | 0.38 €/ud  |           1
+ Almi-Chain Deusto | Café en grano     | Distribuciones Ejemplo | 16.00 €/kg |           1
+ Almi-Chain Deusto | Cerveza de barril | Distribuciones Ejemplo | 2.10 €/l   |           1
+ Almi-Chain Deusto | Chuleta de vaca   | Carnes Ejemplo S.L.    | 25.90 €/kg |           1
+ Almi-Chain Deusto | Masa de croqueta  | Carnes Ejemplo S.L.    | 9.80 €/kg  |           1
+(13 rows)
+
+== C-15 Historial de precios: precio de cada venta de café comparado con el vigente ese día · historial con rango de fechas
+ factura |    dia     | precio_cobrado | precio_vigente_ese_dia | precio_hoy 
+---------+------------+----------------+------------------------+------------
+ A1-1    | 2026-10-19 |           1.45 |                   1.45 |       1.55
+ A2-1    | 2026-10-19 |           1.45 |                   1.45 |       1.55
+ D1-1    | 2026-10-20 |           1.45 |                   1.45 |       1.55
+(3 rows)
+
+   Tramos del historial del café
+        fecha_desde        |        fecha_hasta        | precio | tipo_iva 
+---------------------------+---------------------------+--------+----------
+ 2026-01-01 00:00:00       | 2026-11-04 11:32:27.04932 |   1.45 |    10.00
+ 2026-11-04 11:32:27.04932 | (vigente)                 |   1.55 |    10.00
+(2 rows)
+
+===== 08-usuarios.sql y 09-pruebas-usuarios.sql
+OK  08-usuarios.sql (contraseñas de prueba del clúster temporal)
+09 como tpv_app: 9/9
+09 como informes: 9/9

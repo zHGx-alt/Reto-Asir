@@ -24,10 +24,10 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | 5 Redes | 6 | 3 | 3 | Invitados aislados, WDS en el plan real y análisis con nmap y Wireshark |
 | 6 Web | 5 | 4 | 1 | `terraform apply` en el Learner Lab; repetir W3C y Lighthouse con la web nueva |
 | 7 ERP | 8 | 7 | 1 | Importar y exportar datos contra Odoo (tarea 36) |
-| 8 BD | 3 | 3 | 0 | — |
+| 8 BD | 4 | 4 | 0 | — |
 | 9 Backup | 5 | 4 | 1 | Restauración en una VM nueva (RTO real) |
 | 10 Seguridad | 3 | 2 | 1 | Comprobaciones en los equipos (tarea 46, sección 5) |
-| **Total** | **59** | **50** | **9** | |
+| **Total** | **60** | **51** | **9** | |
 
 ## 0 · Gestión
 
@@ -90,7 +90,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | N-01 | 23 | Simulación en Packet Tracer: direcciones, acceso a Odoo, aislamiento de invitados, NAT | 16 pruebas correctas | ✅ 16 de 16 | 25/10 | [Packet Tracer](../redes/23-packet-tracer-red-local.md) |
 | N-02 | 24 | Red segura en un TL-WR841N: administración remota cerrada, WPA2-AES, SPI, contraseñas cambiadas | Aplicado | ✅ | 26/10 | [Tarea 24](../redes/24-red-segura/DOCUMENTACION.md) |
 | N-03 | 24 | Red de invitados aislada y WPA3 en el Archer C6 | Aislada | ⏳ | — | [Tarea 24](../redes/24-red-segura/DOCUMENTACION.md) |
-| N-04 | 25 | Práctica de WDS con dos TL-WR841N en `192.168.1.0/24`: enlace, DHCP del router 2 apagado, ping y cobertura | Enlazados, sin pérdidas | ✅ El PC conectado al router 2 recibe IP del router 1 y le hace ping: 4/4, 0 % de pérdidas; DHCP del router 2 apagado; cobertura comprobada con el móvil (sin medidas numéricas) | 27/10 | [README de la tarea 25](../redes/25-wds/README.md) |
+| N-04 | 25 | Práctica de WDS con dos TL-WR841N en `192.168.1.0/24`: enlace, DHCP del router 2 apagado, ping y cobertura | Enlazados, sin pérdidas | ✅ El PC conectado al router 2 recibe IP del router 1 y le hace ping: 4/4, 0 % de pérdidas; DHCP del router 2 apagado; cobertura comprobada con el móvil (sin medidas numéricas) | 27/10 | [README de la tarea 25](../redes/25-wds/DOCUMENTACION.md) |
 | N-05 | 25 | WDS en el plan real: Archer C6, `192.168.10.0/24`, pruebas W1-W10 (sobre todo, clientes del router 2 aislados de la LAN) y cobertura antes y después | Aislados; más cobertura | ⏳ | — | [Tarea 25](../redes/25-wds/DOCUMENTACION.md) |
 | N-06 | 26 | nmap desde la LAN y desde invitados; capturas de Wireshark | Lo del plan de la tarea 23 | ✅ Invitados no ven la LAN; router con UPnP y SSH (H-01, H-02); L2-L8 y W5 pendientes de que el servidor esté en la red | 30/10 Eneko.S | [Tarea 26](../redes/26-analisis-conectividad/DOCUMENTACION.md) |
 
@@ -121,9 +121,10 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 
 | Id | Tarea | Prueba | Esperado | Resultado | Fecha | Evidencia |
 |---|---|---|---|---|---|---|
-| D-01 | 40 | Scripts DDL en PostgreSQL 16 | 01-03 sin errores; 05 33/33; 04 recrea | ✅ 33/33 dos veces | 23/10 | [40-scripts-ddl.md](../bd/40-scripts-ddl.md) |
+| D-01 | 40 | Scripts DDL en PostgreSQL 16 | 01-03 sin errores; 05 33/33; 04 recrea | ✅ 33/33 dos veces (49/49 desde la tarea 56) | 23/10 | [40-scripts-ddl.md](../bd/40-scripts-ddl.md) |
 | D-02 | 41 | Datos de prueba y consultas | 8 facturas; 12 consultas sin errores | ✅ | 24/10 | [41-datos-y-consultas.txt](../bd/evidencias/41-datos-y-consultas.txt) |
 | D-03 | 42 | Usuarios con mínimos privilegios (`tpv_app` e `informes`) | 9/9 por cuenta | ✅ | 24/10 | [42-usuarios-y-permisos.txt](../bd/evidencias/42-usuarios-y-permisos.txt) |
+| D-04 | 56 | Ternaria, historial (R-07) y multivaluado en PostgreSQL 16 | 05 49/49; 06 carga 17 tablas; C-13 a C-15 correctas; la aplicación no toca el historial | ✅ 49/49 dos veces; C-15: café vendido a 1,45 € con el precio de hoy en 1,55 € | 04/11 | [56-ampliacion-er.txt](../bd/evidencias/56-ampliacion-er.txt) |
 
 ## 9 · Copias de seguridad
 

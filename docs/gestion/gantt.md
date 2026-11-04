@@ -20,7 +20,7 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 |---|---|---|
 | Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11); #5 Repo con estructura y gitleaks; commits de todos (04/11–06/11); #46 Revisión de seguridad transversal (04/11–06/11) |
 | Eneko.P | 5 | #36 Importar y exportar datos en Odoo (04/11–06/11); #63 Usar CRM, personal, marketing e inventario con datos (05/11–06/11); #58 Tecnologías habilitadoras: análisis y comparativa (09/11–10/11) |
-| Eneko.S | 6 | #56 Ampliar el E/R: relación ternaria; historiales y atributos especiales (04/11–05/11); #62 Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA (06/11–09/11); #47 Tabla de pruebas por bloque (10/11–11/11) |
+| Eneko.S | 4 | #62 Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA (06/11–09/11); #47 Tabla de pruebas por bloque (10/11–11/11) |
 | Iker | 5 | #15 Scripts de configuración reproducibles (Windows) (04/11–05/11); #57 Integrar la BD propia con la de Odoo (06/11–10/11) |
 | Markel | 6 | #59 Stick: antirrebote; componentes y por qué este microcontrolador (04/11–06/11); #48 Documentación final paso a paso (09/11–11/11) |
 | Peio | 6 | #25 WDS con segundo router y pruebas de cobertura (04/11–05/11); #61 Poner al día los textos desfasados que señala la auditoría (06/11–09/11); #49 Presentación y ensayo (10/11–11/11) |
@@ -29,12 +29,12 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 
 ## Resumen
 
-**47 de 63 tareas hechas (74 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**48 de 63 tareas hechas (76 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
-| Documentación | 11 | 2 | 5 | 18 |
+| Documentación | 12 | 2 | 4 | 18 |
 | Software | 26 | 3 | 3 | 32 |
 | Físico | 6 | 1 | 0 | 7 |
 
@@ -54,7 +54,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 11/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. 29/10: puesto al día (decisiones sustituidas marcadas, firmware de router, cifrado del gerente, semanas con el corte del 4/11, incidencias y pruebas del 27-29/10). 29/10 (tarde): pruebas de redes y arcade al día, incidencias del 29/10, retrospectiva (qué mejorar y desviaciones) y diagrama de AWS en la tarea 30. 30/10: decisiones de las VM (no van a Drive) y de la notación Chen del E/R; incidencia de las medidas de la recreativa cerrada con la tarea 54; revisión de seguridad con 24 hallazgos. 03/11: decisión de Windows de los TPV (LTSC 2021), incidencias del 30/10 y del 03/11 y prueba de seguridad al día. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 11/11 | En curso | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. 29/10: borrador con 59 pruebas de los 11 bloques (50 hechas; 9 pendientes, con la 53 y la 54) sacadas de cada tarea, del backlog y de verificacion.md. | [47-tabla-pruebas.md](../../docs/gestion/47-tabla-pruebas.md) |
 | 48 | Documentación final paso a paso | Documentación | Markel | 11/11 | En curso | Punto de partida: LOGICA_RETO.md. 27/10: después de la rúbrica (4/11), para ajustarla a ella. 29/10: estaba en Hecho por error (el plan la pone del 5 al 9/11 y su documento dice En curso). Markel subió el capítulo de restauración (docs/backup/48-documentacion-final-restauracion.md), que amplía la 45 sin repetir sus pruebas. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
-| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | Documentación | Eneko.S | 05/11 | Pendiente | Rúbrica, GBD RA1-RA2, niveles 3 y 4: el E/R actual solo tiene relaciones binarias. Añadir una ternaria, un historial (p. ej. de precios) y atributos especiales (derivado, multivaluado), y llevarlo a las tareas 39 y 40. | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
 | 59 | Stick: antirrebote; componentes y por qué este microcontrolador | Software | Markel | 06/11 | Pendiente | Rúbrica, Digitalización RA2 (stick), niveles 4 y 5. YA HECHO: HID sin drivers, remapeo sin reprogramar (MAP + GUARDAR en EEPROM, probado el 27/10), esquema SVG y código comentado. FALTA: antirrebote real en el firmware (hoy solo delay(10)), captura de una partida en un segundo emulador, tabla de pruebas por control, precio de la Leonardo y los botones (solo está la palanca) y por qué un ATmega32U4 (sistema embebido) y no un encoder USB comercial. | [README.md](../../arduino/mando-joystick/README.md) |
 | 63 | Usar CRM, personal, marketing e inventario con datos | Software | Eneko.P | 06/11 | Pendiente | Rúbrica, LMSGI RA7, nivel 4 (y por ser acumulativo, el 5): los módulos están instalados pero solo se usan facturación y TPV. Una oportunidad de CRM que acaba en presupuesto, los empleados dados de alta, una campaña de correo y un movimiento de inventario, con capturas. Se hace a la vez que la 36 en la ServidorERP. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
 | 61 | Poner al día los textos desfasados que señala la auditoría | Documentación | Peio | 09/11 | Pendiente | Hallazgos de la auditoría del 04/11: README; CORRECIONES; tareas 7-11; 17; 18; 30; listas de pendientes ya hechas. LOGICA_RETO va en la 48. | — |
@@ -69,7 +68,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | Adrian | 19 | 3 | 1 | 0 | 60 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
 | Eneko.P | 4 | 3 | 2 | 0 | 9 | 6, 7, 11 |
-| Eneko.S | 11 | 3 | 0 | 0 | 19 | 1, 3, 5, 7, 8, 11 |
+| Eneko.S | 11 | 2 | 0 | 0 | 19 | 1, 3, 5, 7, 8, 11 |
 | Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 8 | 2 | 1 | 0 | 19 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 3 | 0 | 1 | 16 | 0, 1, 5, 6, 11 |
@@ -99,7 +98,6 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
 |---|---|---|---|---|---|---|
 | 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 10/11–11/11 | #21 (Markel), #25 (Peio), #26 (Eneko.S), #29 (Adrian) | En curso |
-| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | 04/11–05/11 | #38 (Adrian) | Pendiente |
 | 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | 11 Entrega | Documentación | 06/11–09/11 | — | Pendiente |
 
 ### Iker
@@ -174,4 +172,5 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 | 53 | Instalar la recreativa en VM de 1 núcleo y 1 GB y probarla con el stick | 3 Arcade | Software | Eneko.S | Mismo preseed y script que la VM (tarea 16): la 51 decidió Debian el 26/10. 27/10: guía y preparar-preseed-fisico.sh (contraseña como hash; disco elegido; clave SSH) listos y probados; falta hacerlo en el equipo real. 29/10: el equipo decide hacerla en VM. Hecha en Recreativa-53 (VirtualBox; 1 CPU; 1024 MB; Debian 13.7; MAME 0.276) con el mismo preseed y script de la 16 y contraseña nueva de tecnico en KeePassXC: arranque directo a MAME; 5 ROMs OK; partida de Gridlee con el stick por USB; MAME se reabre al salir; arcade sin sudo y bloqueada; SSH solo con clave; 524 MB libres con MAME. | [DOCUMENTACION.md](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md) |
 | 54 | Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) | 3 Arcade | Software | Eneko.S | Con medir-rendimiento.sh y monitor-recreativa.sh. 27/10: protocolo y resumir-rendimiento.sh (reproduce la tabla de la tarea 17); falta medir en el equipo real. 29/10: se mide en Recreativa-53 (tarea 53); sirve también para lo que le falta a la 17 en 1 GB. 29/10: es la única tarea que mide en 1 GB: absorbe lo que faltaba de la 17 y la 18. 29/10: medido en Recreativa-53 (3+3 arranques; reposo; 10 min de juego antes y después): timers 8→5 y disco −12 %; arranque 14,4 s, RAM y velocidad sin cambios significativos (Robby Roto 773 % → 777 %); jugando, CPU media 52-58 %, más de 460 MB libres y sin swap. Las 3 primeras de después se repitieron: el anfitrión estaba ocupado (−45 % en -bench; control con el anfitrión libre: 777 %). | [DOCUMENTACION.md](../../docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Drive revisado el 24/10: .vmdk y .kdbx nuevos y ningún .txt con contraseñas. 29/10: contraseñas de administrador y gerente de Ubuntu repuestas desde el modo de recuperación y guardadas en KeePassXC, con la contraseña de BitLocker y su clave de recuperación. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
+| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | Eneko.S | Rúbrica, GBD RA1-RA2, niveles 3 y 4: el E/R actual solo tiene relaciones binarias. Añadir una ternaria, un historial (p. ej. de precios) y atributos especiales (derivado, multivaluado), y llevarlo a las tareas 39 y 40. 04/11: hecho. Ternaria SUMINISTRO (proveedor, artículo y local, con precio_compra), historial HISTORIAL_PRECIO_PLATO (débil; lo escribe el disparador R-07 y la aplicación solo lo lee), multivaluado alergeno y derivado total en el E/R Chen; llevado a las tareas 39 y 40 (17 tablas; 05-pruebas 49/49; C-13 a C-15) y probado en PostgreSQL 16. | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
 | 60 | Copia remota en S3 y restauración de almi_chain probadas | 9 Backup | Software | Adrian | Hecha el 04/11 en la ServidorERP de laboratorio, montada desde cero con los scripts 43 y 44: copia diaria a RAID, USB y S3 (bucket privado almi-chain-backup-2026, cifrado AES-256) y restauración desde S3 con 23 comprobaciones OK en 166 s, también almi_chain (roles, tablas, filas, importes y permisos). El Learner Lab no deja crear usuarios IAM: se usan sus credenciales temporales (tarea 44, sección 8.2). | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
