@@ -1,6 +1,6 @@
 -- =============================================================================
 -- Almi-Chain · Tarea 40 · Script 02: reglas que una clave foránea no expresa
--- Implementa R-01, R-02, R-03, R-05 y R-06 de la tarea 39 con disparadores.
+-- Implementa R-01, R-02, R-03, R-05, R-06 y R-07 de la tarea 39 con disparadores.
 -- (R-04 se aplica con permisos en 03-roles.sql.)
 -- Requiere haber ejecutado 01-crear-tablas.sql.
 -- =============================================================================
@@ -111,5 +111,33 @@ END $$;
 CREATE TRIGGER tg_linea_descuenta_stock
 AFTER INSERT ON linea_factura
 FOR EACH ROW EXECUTE FUNCTION fn_linea_descuenta_stock();
+
+-- R-07 (tarea 56): historial de precios. Al dar de alta un plato se abre su primer tramo;
+-- cada cambio de precio o de IVA cierra el tramo abierto y abre otro. Cambiar el nombre
+-- o la descripción no crea tramo. clock_timestamp(): hora real aunque haya varios
+-- cambios en la misma transacción.
+-- SECURITY DEFINER: la aplicación puede cambiar el precio del plato, pero no tiene
+-- permiso para escribir ni corregir el historial a mano (03-roles.sql).
+CREATE FUNCTION fn_plato_historial_precio() RETURNS trigger
+LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, pg_temp AS $$
+DECLARE
+    v_ahora TIMESTAMP := clock_timestamp();
+BEGIN
+    IF TG_OP = 'UPDATE' THEN
+        IF NEW.precio = OLD.precio AND NEW.tipo_iva = OLD.tipo_iva THEN
+            RETURN NEW;
+        END IF;
+        UPDATE historial_precio_plato
+           SET fecha_hasta = v_ahora
+         WHERE id_plato = NEW.id_plato AND fecha_hasta IS NULL;
+    END IF;
+    INSERT INTO historial_precio_plato (id_plato, fecha_desde, precio, tipo_iva)
+    VALUES (NEW.id_plato, v_ahora, NEW.precio, NEW.tipo_iva);
+    RETURN NEW;
+END $$;
+
+CREATE TRIGGER tg_plato_historial_precio
+AFTER INSERT OR UPDATE OF precio, tipo_iva ON plato
+FOR EACH ROW EXECUTE FUNCTION fn_plato_historial_precio();
 
 COMMIT;

@@ -52,11 +52,11 @@ probar_bd() {
   psql_ postgres -c "CREATE DATABASE almi_chain" >/dev/null
   for s in 01-crear-tablas 02-reglas 03-roles; do psql_ postgres -d almi_chain -f "$S/$s.sql" >/dev/null 2>&1 && ok "$s.sql" || mal "$s.sql"; done
   n=$(psql_ postgres -d almi_chain -f "$S/05-pruebas.sql" 2>&1 | grep -c 'OK ')
-  [[ "$n" -eq 33 ]] && ok "05-pruebas.sql: 33/33" || mal "05-pruebas.sql: $n/33"
+  [[ "$n" -eq 49 ]] && ok "05-pruebas.sql: 49/49" || mal "05-pruebas.sql: $n/49"
   psql_ postgres -d almi_chain -f "$S/06-datos.sql" >/dev/null 2>&1 && ok "06-datos.sql" || mal "06-datos.sql"
   n=$(psql_ postgres -d almi_chain -tAc "SELECT count(*) FROM factura")
   [[ "$n" -eq 8 ]] && ok "06-datos.sql: 8 facturas cargadas" || mal "06-datos.sql: $n facturas (se esperaban 8)"
-  psql_ postgres -d almi_chain -f "$S/07-consultas.sql" >/dev/null 2>&1 && ok "07-consultas.sql: 12 consultas sin errores" || mal "07-consultas.sql"
+  psql_ postgres -d almi_chain -f "$S/07-consultas.sql" >/dev/null 2>&1 && ok "07-consultas.sql: 15 consultas sin errores" || mal "07-consultas.sql"
   psql_ postgres -d almi_chain -v pass_tpv=verif -v pass_informes=verif -f "$S/08-usuarios.sql" >/dev/null 2>&1     && ok "08-usuarios.sql" || mal "08-usuarios.sql"
   for u in tpv_app informes; do
     n=$(psql_ "$u" -d almi_chain -v cuenta="$u" -f "$S/09-pruebas-usuarios.sql" 2>&1 | grep -c 'OK  ')

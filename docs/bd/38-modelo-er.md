@@ -3,7 +3,7 @@
 - **Bloque:** 8 BD
 - **Responsable:** Adrian
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado:** hecha. 30/10: diagrama pasado a **notación Chen**, la que se da en clase (sección 2)
+- **Estado:** hecha. 30/10: diagrama pasado a **notación Chen**, la que se da en clase (sección 2). 04/11: ampliado en la tarea 56 (Eneko.S) con una relación ternaria, un historial y atributos especiales (sección 6)
 - **Fecha:** 23/10/2026
 - **Fuente:** `Reto_1_ASIR1_2026-2027.docx`
 
@@ -61,8 +61,11 @@ Cómo leerlo (también está en la leyenda del diagrama):
 |---|---|
 | Rectángulo | Entidad |
 | Doble rectángulo y doble rombo | Entidad débil (`LINEA_FACTURA`) y su relación identificadora (`contiene`): una línea no existe sin su factura y se identifica por `id_factura` + `num_linea` |
-| Rombo | Relación, con su tipo (1:N o N:M) al lado |
-| Elipse | Atributo; subrayado, identificador; subrayado discontinuo, clave parcial de la débil (`num_linea`) |
+| Rombo | Relación, con su tipo (1:N, N:M o N:M:P) al lado |
+| Rombo con tres líneas | Relación ternaria (*suministra*: PROVEEDOR, ARTICULO y ESTABLECIMIENTO) |
+| Elipse | Atributo; subrayado, identificador; subrayado discontinuo, clave parcial de la débil (`num_linea`, `fecha_desde`) |
+| Doble elipse | Atributo multivaluado (`alergeno` de PLATO) |
+| Elipse discontinua | Atributo derivado: no se guarda, se calcula (`total` de FACTURA) |
 | (mín,máx) junto a una entidad | Cuántas ocurrencias de **esa** entidad se relacionan con **una** de la otra. Ej.: `EMPLEADO (0,n)` y `ESTABLECIMIENTO (1,1)` en *trabaja en*: un local tiene de 0 a n empleados y un empleado trabaja en un local y solo uno |
 
 Diferencias con la vista de tablas de la sección 2.2, que son las propias de la notación Chen:
@@ -92,6 +95,11 @@ erDiagram
     ARTICULO ||--o{ RECETA : "se usa en"
     CLIENTE ||--o{ ENVIO_CAMPANA : "recibe"
     CAMPANA_MARKETING ||--o{ ENVIO_CAMPANA : "se envía"
+    PLATO ||--o{ PLATO_ALERGENO : "contiene alérgeno"
+    PLATO ||--|{ HISTORIAL_PRECIO_PLATO : "tuvo precio"
+    PROVEEDOR ||--o{ SUMINISTRO : "suministra"
+    ARTICULO ||--o{ SUMINISTRO : "es suministrado"
+    ESTABLECIMIENTO ||--o{ SUMINISTRO : "recibe"
 
     ESTABLECIMIENTO {
         int id_establecimiento PK
@@ -177,6 +185,30 @@ erDiagram
         int id_cliente PK, FK
         datetime fecha_envio
     }
+    PLATO_ALERGENO {
+        int id_plato PK, FK
+        string alergeno PK "uno de los 14 del Reglamento UE 1169/2011"
+    }
+    HISTORIAL_PRECIO_PLATO {
+        int id_plato PK, FK
+        datetime fecha_desde PK
+        datetime fecha_hasta "nulo = precio actual"
+        decimal precio
+        decimal tipo_iva
+    }
+    PROVEEDOR {
+        int id_proveedor PK
+        string cif UK
+        string nombre
+        string telefono
+        string email
+    }
+    SUMINISTRO {
+        int id_proveedor PK, FK
+        int id_articulo PK, FK
+        int id_establecimiento PK, FK
+        decimal precio_compra
+    }
     MODELO_EQUIPO {
         int id_modelo PK
         string tipo "despacho, TPV, recreativa, impresora_tickets"
@@ -195,7 +227,7 @@ erDiagram
     }
 ```
 
-> `STOCK`, `RECETA`, `ENVIO_CAMPANA` y `LINEA_FACTURA` salen aquí como cajas porque son tablas, pero en el E/R son relaciones N:M o una entidad débil (sección 2.1).
+> `STOCK`, `RECETA`, `ENVIO_CAMPANA`, `SUMINISTRO`, `LINEA_FACTURA`, `HISTORIAL_PRECIO_PLATO` y `PLATO_ALERGENO` salen aquí como cajas porque son tablas, pero en el E/R son relaciones (N:M o ternaria), entidades débiles o un atributo multivaluado (secciones 2.1 y 6). Mermaid no dibuja relaciones ternarias: SUMINISTRO aparece unida a sus tres entidades.
 > Los importes de la factura (base imponible, IVA y total) no se guardan en FACTURA: se calculan a partir de sus líneas. `(marca, modelo)` es única en MODELO_EQUIPO.
 
 ## 3. Trazabilidad: de dónde sale cada cosa
@@ -216,6 +248,8 @@ erDiagram
 | CAMPANA_MARKETING | 📄 R5 | ERP para gestionar «marketing» (R5) |
 | ENVIO_CAMPANA | 🛠 | N:M CLIENTE–CAMPAÑA: a qué clientes se envía cada campaña |
 | EQUIPO | 📄 R2, R3, T1, T13 | «un equipo con arranque dual» para el despacho, «dos equipos de barra (que funcionarán como TPV…) e impresoras de tickets» (R2); «otro equipo como máquina recreativa» (R3); T1 «configuración y presupuesto de equipos e impresoras» |
+| PROVEEDOR | 🛠 sobre R5 (tarea 56) | El inventario (R5) se repone comprando a proveedores; hace falta para la relación ternaria *suministra* |
+| HISTORIAL_PRECIO_PLATO | 🛠 sobre R5 (tarea 56) | Entidad débil de PLATO: los precios cambian y se quiere saber cuál estaba vigente cada día (informes de ventas y facturas) |
 | MODELO_EQUIPO | 🛠 sobre R2, R3, T2 | T2 pide «identificar y documentar el hardware necesario»: marca, modelo y tipo se guardan una sola vez por modelo y no se repiten en cada equipo (3FN) |
 
 ### Relaciones y cardinalidades
@@ -234,6 +268,8 @@ erDiagram
 | PLATO–ARTICULO (RECETA) | N:M | 🛠 | Ver arriba |
 | ESTABLECIMIENTO–ARTICULO (STOCK) | N:M | 🛠 sobre R5 | Ver arriba |
 | CLIENTE–CAMPAÑA (ENVIO) | N:M | 🛠 sobre R5 | Ver arriba |
+| PROVEEDOR–ARTICULO–ESTABLECIMIENTO (SUMINISTRO) | N:M:P (ternaria) | 🛠 sobre R5 (tarea 56) | Ver sección 6 |
+| PLATO *tuvo precio* HISTORIAL_PRECIO_PLATO | 1:1..N (identificadora) | 🛠 (tarea 56) | Todo plato tiene al menos un tramo de precio: el actual |
 
 ### Atributos destacables
 
@@ -246,13 +282,16 @@ erDiagram
 | `PLATO.tipo_iva` | 🛠 sobre R5 (facturas): en restauración conviven tipos de IVA distintos (4, 10 o 21 %) |
 | `LINEA_FACTURA.precio_unitario`, `LINEA_FACTURA.tipo_iva` | 🛠 sobre R5: copia del precio y del IVA vigentes en la venta; la factura no cambia si el plato sube de precio después |
 | `EQUIPO.sistema_operativo`, `ip`, `precio` | 📄 R2: «detalles tanto del hardware como del software», «presupuesto»; T6 necesidades de comunicación |
+| `PLATO.alergeno` (multivaluado) | 🛠 sobre R5 (tarea 56): un restaurante tiene que informar de los 14 alérgenos del Reglamento UE 1169/2011; un plato puede tener varios |
+| `FACTURA.total` (derivado) | 📄 R5, T12: el importe de la factura. Se calcula desde las líneas (vista `v_factura_totales`), no se guarda (C-01) |
+| `SUMINISTRO.precio_compra` | 🛠 (tarea 56): atributo de la relación ternaria; depende de proveedor, artículo y local a la vez |
 | `CLIENTE.acepta_publicidad` | 🛠 sobre R5 (marketing) + RGPD: no se envían campañas sin consentimiento |
 | Resto (nombre, dni, fechas, importes…) | 🛠 el documento no define ningún atributo; son los mínimos para identificar y operar cada entidad |
 
 ## 4. Qué se ha dejado fuera a propósito
 
-No aparecen en el documento y no se modelan: **proveedores, mesas, reservas, pedidos de cocina, nóminas/turnos**.
-Si el equipo los quiere, encajan sin romper el modelo (p. ej. PROVEEDOR 1:N ARTICULO, MESA 1:N FACTURA).
+No aparecen en el documento y no se modelan: **mesas, reservas, pedidos de cocina, nóminas/turnos**.
+Si el equipo los quiere, encajan sin romper el modelo (p. ej. MESA 1:N FACTURA). Los **proveedores** se añadieron en la tarea 56 (sección 6).
 La red (WAN, WDS, R4), la web en AWS y el arcade stick no son datos de negocio, así que no entran en la BD.
 
 ## 5. Cambios de esta versión (tarea #39)
@@ -265,3 +304,17 @@ La red (WAN, WDS, R4), la web en AWS y el arcade stick no son datos de negocio, 
 | C-04 | `(serie, numero)` única en FACTURA y valores permitidos en `puesto`, `categoria`, `tipo` y `forma_pago`. | Integridad. |
 
 El detalle de la normalización (1FN, 2FN, 3FN), el diccionario de datos y las restricciones están en el documento de la tarea #39.
+
+## 6. Ampliación de la tarea 56: relación ternaria, historial y atributos especiales
+
+La rúbrica de Gestión de BD (RA1 y RA2) pide, para el nivel 3, relaciones **binarias y ternarias con atributos**, y para el nivel 4, **historiales y atributos especiales**. El modelo tenía solo relaciones binarias, así que se añade lo siguiente (Eneko.S, 04/11/2026). Todo está en el diagrama de la sección 2.1, en el modelo lógico ([tarea 39, sección 9](39-modelo-logico-3fn.md#9-ampliación-de-la-tarea-56)) y en los scripts ([tarea 40, sección 9](40-scripts-ddl.md#9-tarea-56-ampliación-del-modelo)).
+
+| Elemento | Qué es | Por qué hace falta en Almi-Chain |
+|---|---|---|
+| **Relación ternaria** *suministra* (PROVEEDOR, ARTICULO, ESTABLECIMIENTO), con el atributo `precio_compra` | Qué proveedor sirve qué artículo a qué local y a qué precio | El precio depende de los tres a la vez: el mismo proveedor cobra distinto la chuleta en Abando y en Deusto, y Abando compra el café a dos proveedores. Con tres relaciones binarias (proveedor–artículo, proveedor–local, artículo–local) se sabría que un proveedor vende café y que sirve a Abando, pero no si le vende **café a Abando** ni a qué precio: se pierde información |
+| **Historial** HISTORIAL_PRECIO_PLATO, entidad débil de PLATO (relación identificadora *tuvo precio*) | Un tramo por cada precio que ha tenido el plato (`fecha_desde`, `fecha_hasta`, `precio`, `tipo_iva`); el tramo sin `fecha_hasta` es el precio actual | Saber qué precio estaba vigente cualquier día (informes, revisar una factura, ver subidas). Se identifica por el plato y `fecha_desde` (clave parcial). Lo rellena solo la base de datos (regla R-07), y la aplicación no puede cambiarlo |
+| **Atributo multivaluado** `alergeno` de PLATO (doble elipse) | Un plato puede tener varios alérgenos (las croquetas: gluten, lácteos y huevo) | Obligación legal de informar de los 14 alérgenos del Reglamento UE 1169/2011 en hostelería |
+| **Atributo derivado** `total` de FACTURA (elipse discontinua) | Se calcula desde las líneas: base + IVA | Ya existía como vista (`v_factura_totales`, cambio C-01); ahora se dibuja en el E/R con su símbolo |
+| **Atributo opcional** `nif` de CLIENTE, `fecha_hasta` del historial | Pueden quedar vacíos | El ticket simplificado no lleva NIF; el tramo actual aún no tiene fin |
+
+Cardinalidades de la ternaria: las tres son (0,n). Para una pareja proveedor–local puede haber de 0 a n artículos; para artículo–local, de 0 a n proveedores; y para proveedor–artículo, de 0 a n locales.

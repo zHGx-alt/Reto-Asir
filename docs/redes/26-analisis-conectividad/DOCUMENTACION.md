@@ -25,7 +25,7 @@ bash docs/redes/26-analisis-conectividad/analizar-red.sh lan         # conectado
 bash docs/redes/26-analisis-conectividad/analizar-red.sh invitados   # conectado a la Wi-Fi de invitados
 ```
 
-**Si la red del aula no es la del plan.** La práctica de WDS de la tarea 25 ([README](../25-wds/README.md)) se hizo con dos TL-WR841N en `192.168.1.0/24` (router 1 en `.1`, router 2 en `.101`), no con los Archer C6 en `192.168.10.0/24`. Si el día de la prueba la red es esa, se indican las direcciones reales y se apunta en la sección 5:
+**Si la red del aula no es la del plan.** La práctica de WDS de la tarea 25 ([documentación](../25-wds/DOCUMENTACION.md)) se hizo con dos TL-WR841N en `192.168.1.0/24` (router 1 en `.1`, router 2 en `.101`), no con los Archer C6 en `192.168.10.0/24`. Si el día de la prueba la red es esa, se indican las direcciones reales y se apunta en la sección 5:
 
 ```bash
 RED_LAN=192.168.1.0/24 ROUTER=192.168.1.1 ROUTER2=192.168.1.101 SERVIDOR=<IP> TPV1=<IP> TPV2=<IP> GERENTE=<IP> \

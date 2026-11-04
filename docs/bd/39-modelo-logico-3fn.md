@@ -4,13 +4,13 @@
 - **Depende de:** tarea 38 (modelo E/R, Adrian)
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Resultado de aprendizaje:** Gestión de BD, RA.2: «Diseña modelos lógicos normalizados interpretando diagramas entidad/relación»
-- **Estado:** hecha
+- **Estado:** hecha. 04/11: ampliada con la tarea 56 (sección 9)
 
 ## 1. Resumen
 
 Se parte del modelo E/R de la tarea 38 (12 entidades) y se pasa al modelo relacional, normalizado hasta la tercera forma normal (3FN). Al analizar las dependencias funcionales se han encontrado **cuatro problemas** en el E/R que impiden la 3FN. El equipo ha aceptado las correcciones y se corrigen aquí y en el E/R de la tarea 38.
 
-Resultado: **13 tablas**, todas en 3FN (y en forma normal de Boyce-Codd, BCNF, según el análisis de la sección 4).
+Resultado: **13 tablas**, todas en 3FN (y en forma normal de Boyce-Codd, BCNF, según el análisis de la sección 4). La tarea 56 (04/11) añade **4 tablas** más (relación ternaria, historial y atributo multivaluado), también en 3FN y BCNF: **17 en total** (sección 9).
 
 ### Cambios respecto al E/R de la tarea 38
 
@@ -110,6 +110,11 @@ erDiagram
     ARTICULO ||--o{ RECETA : "se usa en"
     CLIENTE ||--o{ ENVIO_CAMPANA : "recibe"
     CAMPANA_MARKETING ||--o{ ENVIO_CAMPANA : "se envía"
+    PLATO ||--o{ PLATO_ALERGENO : "contiene alérgeno"
+    PLATO ||--|{ HISTORIAL_PRECIO_PLATO : "tuvo precio"
+    PROVEEDOR ||--o{ SUMINISTRO : "suministra"
+    ARTICULO ||--o{ SUMINISTRO : "es suministrado"
+    ESTABLECIMIENTO ||--o{ SUMINISTRO : "recibe"
 
     ESTABLECIMIENTO {
         int id_establecimiento PK
@@ -211,6 +216,30 @@ erDiagram
         int id_cliente PK, FK
         datetime fecha_envio
     }
+    PROVEEDOR {
+        int id_proveedor PK
+        string cif UK
+        string nombre
+        string telefono
+        string email
+    }
+    SUMINISTRO {
+        int id_proveedor PK, FK
+        int id_articulo PK, FK
+        int id_establecimiento PK, FK
+        decimal precio_compra
+    }
+    PLATO_ALERGENO {
+        int id_plato PK, FK
+        string alergeno PK
+    }
+    HISTORIAL_PRECIO_PLATO {
+        int id_plato PK, FK
+        datetime fecha_desde PK
+        datetime fecha_hasta
+        decimal precio
+        decimal tipo_iva
+    }
 ```
 
 ## 4. Normalización paso a paso
@@ -219,7 +248,7 @@ erDiagram
 
 Una tabla está en 1FN si todos sus atributos son atómicos (un solo valor por celda) y no hay grupos repetidos.
 
-- No hay atributos multivaluados: un teléfono y un correo por fila, un solo valor en `ip`.
+- No hay atributos multivaluados: un teléfono y un correo por fila, un solo valor en `ip`. El único multivaluado del E/R, `alergeno` (tarea 56), va en su propia tabla PLATO_ALERGENO (sección 9).
 - Las facturas con varios platos no repiten columnas (`plato1`, `plato2`…): se separan en LINEA_FACTURA, una fila por plato.
 - Los platos con varios ingredientes se resuelven en RECETA, y los clientes con varias campañas en ENVIO_CAMPANA.
 - `direccion` se trata como un valor único (calle y número): no se necesita consultar sus partes por separado.
@@ -435,6 +464,9 @@ Los tipos están pensados para PostgreSQL; se adaptan fácilmente a otros gestor
 | RECETA → PLATO | CASCADE | Si se elimina el plato, su receta no tiene sentido. |
 | RECETA → ARTICULO | RESTRICT | No se borra un artículo usado en recetas. |
 | ENVIO_CAMPANA → CAMPANA_MARKETING, CLIENTE | CASCADE | Los envíos son registros dependientes. |
+| PLATO_ALERGENO, HISTORIAL_PRECIO_PLATO → PLATO | CASCADE | Son el multivaluado y la débil del plato. Un plato vendido no se puede borrar (LINEA_FACTURA lo impide), así que el historial de lo vendido se conserva. |
+| SUMINISTRO → PROVEEDOR | CASCADE | Si se deja de trabajar con un proveedor, sus tarifas sobran. |
+| SUMINISTRO → ARTICULO, ESTABLECIMIENTO | RESTRICT | No se borra un artículo o un local con tarifas de compra. |
 
 ### 6.2 Vista de totales de factura (sustituye a los atributos eliminados)
 
@@ -448,7 +480,7 @@ Si el equipo prefiere guardar esos importes en la factura por rendimiento o por 
 
 ### 6.3 Reglas que una clave foránea no puede expresar
 
-Estas reglas se aplican con disparadores (triggers) o con permisos. Están implementadas y probadas en la tarea 40 (scripts DDL): R-01, R-02, R-03, R-05 y R-06 en `02-reglas.sql`, y R-04 en `03-roles.sql`.
+Estas reglas se aplican con disparadores (triggers) o con permisos. Están implementadas y probadas en la tarea 40 (scripts DDL): R-01, R-02, R-03, R-05, R-06 y R-07 en `02-reglas.sql`, y R-04 en `03-roles.sql`.
 
 | Id | Regla |
 |---|---|
@@ -458,6 +490,7 @@ Estas reglas se aplican con disparadores (triggers) o con permisos. Están imple
 | R-04 | Las facturas emitidas no se modifican ni se borran: el rol de la aplicación no tiene permisos de UPDATE ni DELETE sobre FACTURA y LINEA_FACTURA (mínimos privilegios). |
 | R-05 | La numeración de cada serie es correlativa y sin huecos. |
 | R-06 | Una venta descuenta del STOCK los artículos de la RECETA del plato, en el establecimiento del TPV. |
+| R-07 | (Tarea 56.) Cada alta o cambio de precio o IVA de un plato cierra su tramo abierto de HISTORIAL_PRECIO_PLATO y abre otro. Solo lo escribe la base de datos: la aplicación lee el historial pero no puede modificarlo. |
 
 ## 7. Preguntas abiertas para Adrian y Peio
 
@@ -470,3 +503,92 @@ Los scripts de la tarea 40 se escribieron con el supuesto indicado en cada punto
 ## 8. Siguiente paso
 
 Hecho en la tarea 40: scripts SQL con tablas, claves, restricciones, índices, vista, reglas R-01 a R-06 y roles, probados en PostgreSQL 16. La única restricción añadida al pasar a SQL es que un equipo no puede apuntar a sí mismo en `id_equipo_tpv` (`CHECK id_equipo_tpv <> id_equipo`); no cambia el esquema.
+
+## 9. Ampliación de la tarea 56
+
+La tarea 56 añade al E/R una relación ternaria, un historial y atributos especiales ([tarea 38, sección 6](38-modelo-er.md#6-ampliación-de-la-tarea-56-relación-ternaria-historial-y-atributos-especiales)). Aquí, su paso a tablas y su normalización.
+
+### 9.1 Reglas de paso
+
+7. **Relación ternaria** (*suministra*): una tabla cuya clave primaria son las claves de las **tres** entidades, más los atributos de la relación (`precio_compra`). Con cardinalidades (0,n) en los tres lados no se puede quitar ninguna de las tres de la clave.
+8. **Atributo multivaluado** (`alergeno`): no cabe en una celda (1FN), así que va a una tabla aparte con la clave del plato y el valor; la clave es la pareja.
+9. **Historial** (entidad débil): tabla con la clave del plato más la clave parcial `fecha_desde`.
+10. **Atributo derivado** (`total`): no se guarda; se calcula en la vista `v_factura_totales` (sección 6.2).
+
+### 9.2 Esquema relacional
+
+```
+PROVEEDOR (id_proveedor, cif, nombre, telefono, email)
+    UK: cif
+
+SUMINISTRO (id_proveedor, id_articulo, id_establecimiento, precio_compra)
+    PK compuesta: (id_proveedor, id_articulo, id_establecimiento)
+    FK: id_proveedor → PROVEEDOR
+    FK: id_articulo → ARTICULO
+    FK: id_establecimiento → ESTABLECIMIENTO
+
+PLATO_ALERGENO (id_plato, alergeno)
+    PK compuesta: (id_plato, alergeno)
+    FK: id_plato → PLATO
+
+HISTORIAL_PRECIO_PLATO (id_plato, fecha_desde, fecha_hasta, precio, tipo_iva)
+    PK compuesta: (id_plato, fecha_desde)
+    FK: id_plato → PLATO
+    Única parcial: id_plato donde fecha_hasta es nulo (un solo tramo abierto por plato)
+```
+
+### 9.3 Normalización
+
+| Tabla | 1FN | 2FN | 3FN y BCNF |
+|---|---|---|---|
+| PROVEEDOR | Valores atómicos | Clave simple | `id_proveedor` → todo y `cif` → todo: los dos determinantes son claves |
+| SUMINISTRO | Sí | `precio_compra` depende de la **terna completa**: ni de proveedor y artículo (cobra distinto en cada local), ni de artículo y local (hay varios proveedores), ni de proveedor y local (cada artículo tiene su precio) | Solo hay un atributo no clave: no puede haber dependencias transitivas |
+| PLATO_ALERGENO | Es justo lo que arregla la 1FN: un alérgeno por fila en vez de una lista en PLATO | Sin atributos no clave | Sí |
+| HISTORIAL_PRECIO_PLATO | Sí | `precio`, `tipo_iva` y `fecha_hasta` dependen del plato **y** de la fecha de inicio, no solo del plato | `fecha_hasta` no se calcula de otro atributo no clave (es el inicio del tramo siguiente, que está en otra fila); el único determinante es la clave |
+
+**¿Por qué no partir SUMINISTRO en tres tablas binarias?** Con (proveedor, artículo), (proveedor, local) y (artículo, local), si Mayorista vende café y cerveza, sirve a Abando y a Deusto, Abando compra café y cerveza y Deusto compra cerveza (a otro proveedor), al juntarlas saldría que Mayorista sirve cerveza a Deusto, que no es verdad: la descomposición no es sin pérdida. Y `precio_compra` no tendría tabla donde ir.
+
+**¿Duplica el historial el precio de PLATO?** `PLATO.precio` es el precio actual, y el tramo abierto del historial tiene el mismo valor. Es una redundancia controlada: la mantiene un disparador (R-07), y nadie más puede escribir en el historial. Se deja en PLATO para no cambiar el TPV ni las consultas, que leen `PLATO.precio`.
+
+### 9.4 Diccionario de datos
+
+**PROVEEDOR**
+
+| Columna | Tipo | Nulo | Restricciones |
+|---|---|---|---|
+| id_proveedor | INTEGER | No | PK, identidad |
+| cif | VARCHAR(9) | No | UK |
+| nombre | VARCHAR(150) | No | |
+| telefono | VARCHAR(20) | Sí | |
+| email | VARCHAR(254) | Sí | |
+
+**SUMINISTRO**
+
+| Columna | Tipo | Nulo | Restricciones |
+|---|---|---|---|
+| id_proveedor | INTEGER | No | PK (1/3), FK → PROVEEDOR |
+| id_articulo | INTEGER | No | PK (2/3), FK → ARTICULO |
+| id_establecimiento | INTEGER | No | PK (3/3), FK → ESTABLECIMIENTO |
+| precio_compra | NUMERIC(10,2) | No | CHECK > 0 (por unidad de medida del artículo) |
+
+**PLATO_ALERGENO**
+
+| Columna | Tipo | Nulo | Restricciones |
+|---|---|---|---|
+| id_plato | INTEGER | No | PK (1/2), FK → PLATO |
+| alergeno | VARCHAR(20) | No | PK (2/2), CHECK en los 14 del Reglamento UE 1169/2011: `gluten`, `crustaceos`, `huevos`, `pescado`, `cacahuetes`, `soja`, `lacteos`, `frutos_cascara`, `apio`, `mostaza`, `sesamo`, `sulfitos`, `altramuces`, `moluscos` |
+
+**HISTORIAL_PRECIO_PLATO**
+
+| Columna | Tipo | Nulo | Restricciones |
+|---|---|---|---|
+| id_plato | INTEGER | No | PK (1/2), FK → PLATO |
+| fecha_desde | TIMESTAMP | No | PK (2/2) |
+| fecha_hasta | TIMESTAMP | Sí | CHECK > `fecha_desde`; nulo = precio actual (uno solo por plato) |
+| precio | NUMERIC(8,2) | No | CHECK ≥ 0 |
+| tipo_iva | NUMERIC(4,2) | No | CHECK en (4, 10, 21) |
+
+### 9.5 Integridad y seguridad
+
+- **Integridad:** claves primarias compuestas (no se repite una terna, un alérgeno en el mismo plato ni un tramo), claves ajenas con sus acciones (sección 6.1), CHECK en precios, fechas y la lista de alérgenos, y un índice único parcial que impide dos precios «actuales» a la vez.
+- **Seguridad:** el historial solo lo escribe el disparador R-07 (`SECURITY DEFINER`). El rol de la aplicación puede cambiar el precio de un plato, pero no puede insertar, cambiar ni borrar tramos: nadie puede maquillar el historial desde el TPV. Proveedores, tarifas y alérgenos los mantiene la aplicación (INSERT, UPDATE o DELETE según la tabla); el rol de lectura solo consulta.
