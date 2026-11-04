@@ -1,0 +1,50 @@
+
+==> [10:45:13] 1/6 Elegir la copia (s3)
+ID        Time                 Host          Tags    Size
+---------------------------------------------------------------
+ee64d414  2026-11-04 10:44:34  servidor-erp  odoo    24.285 MiB
+---------------------------------------------------------------
+1 snapshots
+
+==> [10:45:20] 2/6 Restaurar los ficheros de la última instantánea
+Summary: Restored 919 files/dirs (24.285 MiB) in 1:20
+  Volcado: 7,2M · adjuntos: 466 ficheros · configuración: config docker-compose.https.yml docker-compose.yml .env https 
+
+==> [10:46:49] 3/6 PostgreSQL aislado y restauración de la base de datos
+  Base 'tienda' restaurada en el PostgreSQL aislado (pg-prueba-restauracion, red interna 'restauracion')
+  Base 'almi_chain' (tarea 40) restaurada con sus roles y permisos
+
+==> [10:47:49] 4/6 Comparar: producción vs restaurado
+  Dato                                 Producción                        Restaurado                         
+  Clientes y contactos                 9                                  9                                  OK
+  Productos                            20                                 20                                 OK
+  Pedidos de venta                     0                                  0                                  OK
+  Facturas validadas                   0                                  0                                  OK
+  Total facturado (€)                0                                  0                                  OK
+  Última factura                                                                                            OK
+  Apuntes contables                    14                                 14                                 OK
+  Puntos de venta                      TPV Barra 1,TPV Barra 2            TPV Barra 1,TPV Barra 2            OK
+  Usuarios activos                     admin,gerente,cajero1,cajero2      admin,gerente,cajero1,cajero2      OK
+  Adjuntos: nº de ficheros            466                                466                                OK
+  Adjuntos: huella del contenido       cf9f3f4cd875e1f9                   cf9f3f4cd875e1f9                   OK
+  almi_chain: tablas                   13                                 13                                 OK
+  almi_chain: filas por tabla (huella) b93910dc979337e1f6b7178409a656e8   b93910dc979337e1f6b7178409a656e8   OK
+  almi_chain: clientes                 4                                  4                                  OK
+  almi_chain: platos en carta          12                                 12                                 OK
+  almi_chain: facturas                 8                                  8                                  OK
+  almi_chain: total de líneas (€)   375.22                             375.22                             OK
+  almi_chain: permisos de rol_aplicacion y rol_lectura 48                                 48                                 OK
+  Config: docker-compose.yml           7421974fc9777dd8                   7421974fc9777dd8                   OK
+  Config: .env                         3520adfd0a03c80e                   3520adfd0a03c80e                   OK
+  Config: config/odoo.conf             2db563062ded0719                   2db563062ded0719                   OK
+
+==> [10:47:54] 5/6 Arrancar un Odoo de prueba con lo restaurado y entrar
+  Odoo restaurado: /web/login          200                                200                                OK
+  Odoo restaurado: login admin (uid)   2                                  2                                  OK
+  Conexiones a PostgreSQL de producción desde fuera de producción: 1
+
+==> [10:47:59] 6/6 Resultado
+  Tiempo total de recuperación (RTO medido): 166 s
+  Antigüedad de la copia restaurada (RPO): 3 min
+  ✅ RESTAURACIÓN CORRECTA: todo coincide y el Odoo restaurado funciona
+  (limpiando: se borran el PostgreSQL y el Odoo temporales, su red y los ficheros restaurados)

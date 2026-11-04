@@ -15,13 +15,14 @@ Se ha restaurado la copia del **disco USB externo**, que es la copia que estarí
 | **Tiempo de restauración medido** (con el servidor ya instalado) | **46 s** |
 | **RTO real** (servidor perdido: instalar uno nuevo y restaurar) | **Sin medir.** Los 46 s no incluyen reinstalar Debian, Docker y Odoo, que es lo que pasaría si se pierde el servidor (sección 5). Pendiente: repetir la prueba en una VM nueva y dar ese tiempo como RTO |
 | **RPO** (datos que se pueden perder como máximo) | Hasta 24 h con la copia diaria. En la prueba, la copia tenía 6 min |
-| **Repetida el 27/10/2026** (BD ya en el RAID, tarea 43; copia del RAID) | **16 comprobaciones OK**, Odoo restaurado con login 200, **63 s**; la copia tenía 101 min ([log](evidencias/restauracion-raid-2026-10-27.log)). La copia ya lleva también `almi_chain` (tarea 44), pero el script solo compara la base de Odoo (`tienda`) |
+| **Repetida el 27/10/2026** (BD ya en el RAID, tarea 43; copia del RAID) | **16 comprobaciones OK**, Odoo restaurado con login 200, **63 s**; la copia tenía 101 min ([log](evidencias/restauracion-raid-2026-10-27.log)). La copia ya lleva también `almi_chain` (tarea 44), pero el script solo comparaba la base de Odoo (`tienda`) |
+| **Repetida el 04/11/2026** (tarea 60; laboratorio montado desde cero con los scripts 43 y 44) | El script restaura y compara ahora también **`almi_chain`**: sus roles (`globals.sql`), las 13 tablas, una huella de las filas de cada tabla, clientes, platos, facturas, importe de las líneas y los 48 permisos de `rol_aplicacion` y `rol_lectura`. **Desde S3: 23 comprobaciones OK en 166 s** ([log](evidencias/restauracion-s3-2026-11-04.log)); **desde el RAID: 23 OK en 68 s** ([log](evidencias/restauracion-raid-almi-chain-2026-11-04.log)) |
 | Producción durante la prueba | Sin tocar: sigue funcionando, solo existe la base `tienda` y nadie se conectó desde la prueba |
 
 ## 2. Cómo se hace
 Script: [`probar-restauracion.sh`](probar-restauracion.sh). Es repetible y se recomienda **una vez al mes**: una copia que nunca se ha probado a restaurar no es una copia.
 ```bash
-sudo ./probar-restauracion.sh usb     # o "raid"
+sudo ./probar-restauracion.sh usb     # o "raid", o "s3" (lee las claves de /root/.config/backup-odoo/s3.env)
 ```
 
 ```
@@ -29,7 +30,7 @@ sudo ./probar-restauracion.sh usb     # o "raid"
           │  odoo-odoo-1 ──► odoo-db-1 (base "tienda")       │──┐ solo lectura, para comparar
           └──────────────────────────────────────────────────┘  │
                                                                  ▼
- USB ─► restic restore ─► /srv/datos/prueba-restauracion ─► comparación
+ USB / RAID / S3 ─► restic restore ─► /srv/datos/prueba-restauracion ─► comparación
                                  │                                 ▲
           ┌──────── red Docker "restauracion" (interna) ───────────┤
           │  pg-prueba-restauracion ◄── pg_restore del volcado     │
