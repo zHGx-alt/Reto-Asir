@@ -64,6 +64,68 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 60 | Copia remota en S3 y restauración de almi_chain probadas | Software | Adrian | 10/11 | Pendiente | Rúbrica, ISO RA3, nivel 4: copias «en local y remoto». El tercer repositorio de restic en S3 está preparado desde el 27/10; falta crearlo en el Learner Lab y probar copia y restauración. GBD RA6, nivel 5: la prueba de restauración de la 45 solo compara tienda; añadir almi_chain (filas por tabla y una consulta) y guardar el log. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 11/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. 04/11: ensayo con todos el 11/11. | — |
 
+## Carga por persona
+
+| Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
+|---|---|---|---|---|---|---|
+| Adrian | 19 | 4 | 2 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
+| Eneko.P | 4 | 3 | 2 | 0 | 9 | 6, 7, 11 |
+| Eneko.S | 11 | 3 | 0 | 0 | 19 | 1, 3, 5, 7, 8, 11 |
+| Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
+| Markel | 8 | 2 | 1 | 0 | 19 | 1, 2, 4, 5, 6, 11 |
+| Peio | 7 | 3 | 0 | 1 | 16 | 0, 1, 5, 6, 11 |
+
+## Tareas por persona
+
+Solo las que están en curso o pendientes; las hechas están al final, en *Tareas hechas*.
+
+### Adrian
+
+| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
+|---|---|---|---|---|---|---|
+| 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–06/11 | — | En curso |
+| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 02/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
+| 2 | Mantener Anexo II (11 pasos) | 0 Gestión | Gestión | 21/10–11/11 | — | En curso |
+| 60 | Copia remota en S3 y restauración de almi_chain probadas | 9 Backup | Software | 09/11–10/11 | #44 (Iker) | Pendiente |
+
+### Eneko.P
+
+| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
+|---|---|---|---|---|---|---|
+| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 03/11–06/11 | #34 (Iker) | En curso |
+| 63 | Usar CRM, personal, marketing e inventario con datos | 7 ERP | Software | 05/11–06/11 | #34 (Iker) | Pendiente |
+| 58 | Tecnologías habilitadoras: análisis y comparativa | 11 Entrega | Documentación | 09/11–10/11 | #30 (Adrian), #32 (Eneko.S) | Pendiente |
+
+### Eneko.S
+
+| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
+|---|---|---|---|---|---|---|
+| 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 10/11–11/11 | #21 (Markel), #25 (Peio), #26 (Eneko.S), #29 (Adrian) | En curso |
+| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | 04/11–05/11 | #38 (Adrian) | Pendiente |
+| 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | 11 Entrega | Documentación | 06/11–09/11 | — | Pendiente |
+
+### Iker
+
+| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
+|---|---|---|---|---|---|---|
+| 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–05/11 | #12 (Adrian), #13 (Markel) | En curso |
+| 57 | Integrar la BD propia con la de Odoo | 8 BD | Software | 06/11–10/11 | #34 (Iker), #40 (Eneko.S) | Pendiente |
+
+### Markel
+
+| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
+|---|---|---|---|---|---|---|
+| 48 | Documentación final paso a paso | 11 Entrega | Documentación | 09/11–11/11 | #45 (Iker) | En curso |
+| 59 | Stick: antirrebote; componentes y por qué este microcontrolador | 4 Arduino | Software | 04/11–06/11 | #21 (Markel) | Pendiente |
+
+### Peio
+
+| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
+|---|---|---|---|---|---|---|
+| 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–05/11 | #24 (Peio) | En curso |
+| 61 | Poner al día los textos desfasados que señala la auditoría | 11 Entrega | Documentación | 06/11–09/11 | — | Pendiente |
+| 49 | Presentación y ensayo | 11 Entrega | Documentación | 10/11–11/11 | #46 (Adrian) | Pendiente |
+
 ## Tareas hechas
 
 | # | Tarea | Bloque | Tipo | Responsable | Comprobación | Evidencia |
@@ -114,109 +176,3 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 53 | Instalar la recreativa en VM de 1 núcleo y 1 GB y probarla con el stick | 3 Arcade | Software | Eneko.S | Mismo preseed y script que la VM (tarea 16): la 51 decidió Debian el 26/10. 27/10: guía y preparar-preseed-fisico.sh (contraseña como hash; disco elegido; clave SSH) listos y probados; falta hacerlo en el equipo real. 29/10: el equipo decide hacerla en VM. Hecha en Recreativa-53 (VirtualBox; 1 CPU; 1024 MB; Debian 13.7; MAME 0.276) con el mismo preseed y script de la 16 y contraseña nueva de tecnico en KeePassXC: arranque directo a MAME; 5 ROMs OK; partida de Gridlee con el stick por USB; MAME se reabre al salir; arcade sin sudo y bloqueada; SSH solo con clave; 524 MB libres con MAME. | [DOCUMENTACION.md](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md) |
 | 54 | Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) | 3 Arcade | Software | Eneko.S | Con medir-rendimiento.sh y monitor-recreativa.sh. 27/10: protocolo y resumir-rendimiento.sh (reproduce la tabla de la tarea 17); falta medir en el equipo real. 29/10: se mide en Recreativa-53 (tarea 53); sirve también para lo que le falta a la 17 en 1 GB. 29/10: es la única tarea que mide en 1 GB: absorbe lo que faltaba de la 17 y la 18. 29/10: medido en Recreativa-53 (3+3 arranques; reposo; 10 min de juego antes y después): timers 8→5 y disco −12 %; arranque 14,4 s, RAM y velocidad sin cambios significativos (Robby Roto 773 % → 777 %); jugando, CPU media 52-58 %, más de 460 MB libres y sin swap. Las 3 primeras de después se repitieron: el anfitrión estaba ocupado (−45 % en -bench; control con el anfitrión libre: 777 %). | [DOCUMENTACION.md](../../docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Drive revisado el 24/10: .vmdk y .kdbx nuevos y ningún .txt con contraseñas. 29/10: contraseñas de administrador y gerente de Ubuntu repuestas desde el modo de recuperación y guardadas en KeePassXC, con la contraseña de BitLocker y su clave de recuperación. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
-
-## Carga por persona
-
-| Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
-|---|---|---|---|---|---|---|
-| Adrian | 19 | 4 | 2 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
-| Eneko.P | 4 | 3 | 2 | 0 | 9 | 6, 7, 11 |
-| Eneko.S | 11 | 3 | 0 | 0 | 19 | 1, 3, 5, 7, 8, 11 |
-| Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 8 | 2 | 1 | 0 | 19 | 1, 2, 4, 5, 6, 11 |
-| Peio | 7 | 3 | 0 | 1 | 16 | 0, 1, 5, 6, 11 |
-
-## Tareas por persona
-
-### Adrian
-
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 1 | Firmar Anexo I (contrato de equipo) | 0 Gestión | Gestión | 21/10–21/10 | — | Hecho |
-| 2 | Mantener Anexo II (11 pasos) | 0 Gestión | Gestión | 21/10–11/11 | — | En curso |
-| 3 | Repartir tareas y responsables | 0 Gestión | Gestión | 21/10–21/10 | — | Hecho |
-| 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–06/11 | — | En curso |
-| 12 | Dual boot Win10 + Linux en el equipo del gerente (VM) | 2 SO | Software | 22/10–29/10 | #8 (Eneko.S) | Hecho |
-| 14 | Driver y cola de la impresora de tickets en el TPV (VM) y prueba | 2 SO | Software | 26/10–27/10 | #8 (Eneko.S) | Hecho |
-| 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | 23/10–23/10 | — | Hecho |
-| 18 | Monitorización de recursos de la recreativa (scripts) | 3 Arcade | Software | 23/10–23/10 | #16 (Iker) | Hecho |
-| 20 | Firmware HID y mapeo configurable (EEPROM) | 4 Arduino | Software | 22/10–23/10 | — | Hecho |
-| 50 | Probar el firmware del stick en la placa (HID; comandos; EEPROM) | 4 Arduino | Físico | 27/10–27/10 | #19 (Markel) | Hecho |
-| 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
-| 29 | Validación W3C; Lighthouse y accesibilidad | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
-| 30 | Hosting AWS con dominio y HTTPS | 6 Web | Software | 23/10–23/10 | #28 (Markel) | Hecho |
-| 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | 27/10–27/10 | #34 (Iker) | Hecho |
-| 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 26/10–27/10 | #33 (Iker) | Hecho |
-| 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
-| 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 60 | Copia remota en S3 y restauración de almi_chain probadas | 9 Backup | Software | 09/11–10/11 | #44 (Iker) | Pendiente |
-| 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 02/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
-
-### Eneko.P
-
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 29/10–29/10 | #28 (Markel) | Hecho |
-| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 03/11–06/11 | #34 (Iker) | En curso |
-| 63 | Usar CRM, personal, marketing e inventario con datos | 7 ERP | Software | 05/11–06/11 | #34 (Iker) | Pendiente |
-| 58 | Tecnologías habilitadoras: análisis y comparativa | 11 Entrega | Documentación | 09/11–10/11 | #30 (Adrian), #32 (Eneko.S) | Pendiente |
-
-### Eneko.S
-
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 7 | Definir necesidades de equipos (gerente; 2 TPV; impresoras) | 1 Hardware | Documentación | 22/10–22/10 | — | Hecho |
-| 8 | Tabla de hardware con justificación | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
-| 53 | Instalar la recreativa en VM de 1 núcleo y 1 GB y probarla con el stick | 3 Arcade | Software | 29/10–30/10 | #16 (Iker), #51 (Iker) | Hecho |
-| 54 | Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) | 3 Arcade | Software | 29/10–29/10 | #17 (Iker), #18 (Adrian), #53 (Eneko.S) | Hecho |
-| 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | 30/10–30/10 | #24 (Peio) | Hecho |
-| 32 | Comparativa y elección de ERP | 7 ERP | Documentación | 22/10–23/10 | — | Hecho |
-| 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | 22/10–23/10 | #38 (Adrian) | Hecho |
-| 40 | Scripts DDL | 8 BD | Software | 22/10–23/10 | #39 (Eneko.S) | Hecho |
-| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | 04/11–05/11 | #38 (Adrian) | Pendiente |
-| 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 10/11–11/11 | #21 (Markel), #25 (Peio), #26 (Eneko.S), #29 (Adrian) | En curso |
-| 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | 11 Entrega | Documentación | 06/11–09/11 | — | Pendiente |
-
-### Iker
-
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 4 | Herramienta de seguimiento (Gantt en el repo) | 0 Gestión | Gestión | 21/10–23/10 | — | Hecho |
-| 11 | Diagrama de arquitectura de equipos | 1 Hardware | Documentación | 23/10–23/10 | #8 (Eneko.S), #9 (Markel) | Hecho |
-| 15 | Scripts de configuración reproducibles (Windows) | 2 SO | Software | 03/11–05/11 | #12 (Adrian), #13 (Markel) | En curso |
-| 16 | Instalar SO ligero y MAME con arranque directo (VM) | 3 Arcade | Software | 22/10–23/10 | — | Hecho |
-| 51 | Comparar Batocera con Debian en VM de 1 núcleo y 1 GB y decidir el SO | 3 Arcade | Software | 23/10–26/10 | — | Hecho |
-| 17 | Pruebas de rendimiento MAME antes/después (método; scripts; VM de 2 núcleos) | 3 Arcade | Software | 22/10–23/10 | #16 (Iker) | Hecho |
-| 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | 22/10–23/10 | #32 (Eneko.S) | Hecho |
-| 34 | Configurar módulos de Odoo | 7 ERP | Software | 22/10–23/10 | #33 (Iker) | Hecho |
-| 35 | Caso de uso end-to-end automatizado | 7 ERP | Software | 22/10–23/10 | #34 (Iker) | Hecho |
-| 41 | Datos de prueba y consultas | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 57 | Integrar la BD propia con la de Odoo | 8 BD | Software | 06/11–10/11 | #34 (Iker), #40 (Eneko.S) | Pendiente |
-| 43 | RAID 1 y simulación de fallo | 9 Backup | Software | 22/10–27/10 | — | Hecho |
-| 44 | Plan de backup 3-2-1 cifrado y automatizado | 9 Backup | Software | 22/10–27/10 | #41 (Iker), #43 (Iker) | Hecho |
-| 45 | Prueba de restauración con evidencias | 9 Backup | Software | 22/10–23/10 | #44 (Iker) | Hecho |
-
-### Markel
-
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 9 | Tabla de software y licencias | 1 Hardware | Documentación | 22/10–23/10 | #7 (Eneko.S) | Hecho |
-| 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 26/10–26/10 | #9 (Markel) | Hecho |
-| 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Hecho |
-| 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 27/10–29/10 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Hecho |
-| 59 | Stick: antirrebote; componentes y por qué este microcontrolador | 4 Arduino | Software | 04/11–06/11 | #21 (Markel) | Pendiente |
-| 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
-| 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | 21/10–23/10 | #27 (Peio) | Hecho |
-| 48 | Documentación final paso a paso | 11 Entrega | Documentación | 09/11–11/11 | #45 (Iker) | En curso |
-
-### Peio
-
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 6 | Resolver dudas pendientes con el profesor | 0 Gestión | Gestión | 23/10–23/10 | — | Hecho |
-| 10 | Presupuesto con enlaces (incl. WAN y router extra) | 1 Hardware | Documentación | 22/10–23/10 | #8 (Eneko.S), #9 (Markel), #22 (Markel) | Hecho |
-| 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | 28/10–30/10 | #23 (Adrian) | Hecho |
-| 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–05/11 | #24 (Peio) | En curso |
-| 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | 22/10–23/10 | — | Hecho |
-| 49 | Presentación y ensayo | 11 Entrega | Documentación | 10/11–11/11 | #46 (Adrian) | Pendiente |
-| 61 | Poner al día los textos desfasados que señala la auditoría | 11 Entrega | Documentación | 06/11–09/11 | — | Pendiente |

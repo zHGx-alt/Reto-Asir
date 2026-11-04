@@ -319,14 +319,6 @@ def main():
                       f"{fecha(t['Fin']):%d/%m} | {t['Estado']} | {t['Observaciones'] or '—'} | {enlace(t)} |")
     lineas.append("")
 
-    lineas += ["## Tareas hechas", "",
-               "| # | Tarea | Bloque | Tipo | Responsable | Comprobación | Evidencia |",
-               "|---|---|---|---|---|---|---|"]
-    for t in sorted(hechas, key=lambda t: int(t["ID"])):
-        lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | {t['Tipo']} | {t['Responsable']} | "
-                      f"{t['Observaciones'] or '—'} | {enlace(t)} |")
-    lineas.append("")
-
     por_persona = defaultdict(list)
     for t in tareas:
         por_persona[t["Responsable"]].append(t)
@@ -347,17 +339,31 @@ def main():
                       f"{', '.join(bloques)} |")
     lineas.append("")
 
-    lineas += ["## Tareas por persona", ""]
+    lineas += ["## Tareas por persona", "",
+               "Solo las que están en curso o pendientes; las hechas están al final, en *Tareas hechas*.", ""]
     for persona, ts in sorted(por_persona.items()):
-        lineas += [f"### {persona}", "",
-                   "| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |",
+        abiertas = sorted((t for t in ts if t["Estado"] != "Hecho"),
+                          key=lambda t: (t["Estado"] != "En curso", fecha(t["Fin"]), int(t["ID"])))
+        lineas += [f"### {persona}", ""]
+        if not abiertas:
+            lineas += ["Nada en curso ni pendiente.", ""]
+            continue
+        lineas += ["| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |",
                    "|---|---|---|---|---|---|---|"]
-        for t in ts:
+        for t in abiertas:
             deps = ", ".join(f"#{d} ({por_id[d]['Responsable']})" for d in dependencias(t))
             lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | {t['Tipo']} | "
                           f"{fecha(t['Inicio']):%d/%m}–{fecha(t['Fin']):%d/%m} | "
                           f"{deps or '—'} | {t['Estado']} |")
         lineas.append("")
+
+    lineas += ["## Tareas hechas", "",
+               "| # | Tarea | Bloque | Tipo | Responsable | Comprobación | Evidencia |",
+               "|---|---|---|---|---|---|---|"]
+    for t in sorted(hechas, key=lambda t: int(t["ID"])):
+        lineas.append(f"| {t['ID']} | {t['Tarea']} | {t['Bloque']} | {t['Tipo']} | {t['Responsable']} | "
+                      f"{t['Observaciones'] or '—'} | {enlace(t)} |")
+    lineas.append("")
 
     SALIDA.write_text("\n".join(lineas), encoding="utf-8")
     print(f"Generado {SALIDA.relative_to(RAIZ)} ({len(tareas)} tareas)")
