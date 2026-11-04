@@ -160,11 +160,54 @@ void leerSerie() {
   }
 }
 
-// Microinterruptores: pulsado = LOW. Si se pulsan los dos a la vez (no deberia pasar), centro.
+// Antirrebote. Al pulsar o soltar, el contacto metalico vibra unos milisegundos y el pin
+// lee LOW y HIGH alternados; sin filtrar, una pulsacion podria contar como varias.
+// Cada entrada (4 botones y 4 direcciones) solo cambia de estado cuando la lectura cruda
+// lleva ANTIRREBOTE_MS seguidos sin cambiar. No hay delay(): el bucle lee continuamente.
+const uint8_t ANTIRREBOTE_MS = 5;
+const uint8_t NUM_ENTRADAS = NUM_BOTONES + 4;
+enum { E_ARRIBA = NUM_BOTONES, E_ABAJO, E_IZQUIERDA, E_DERECHA };
+int pinesEntrada[NUM_ENTRADAS];
+bool estable[NUM_ENTRADAS];         // estado ya filtrado (true = pulsado)
+bool crudoAnterior[NUM_ENTRADAS];   // ultima lectura sin filtrar
+unsigned long desde[NUM_ENTRADAS];  // millis() del ultimo cambio de la lectura cruda
+
+void iniciarEntradas() {
+  for (uint8_t i = 0; i < NUM_BOTONES; i++) pinesEntrada[i] = PINES_BOTON[i];
+  pinesEntrada[E_ARRIBA] = PIN_ARRIBA;
+  pinesEntrada[E_ABAJO] = PIN_ABAJO;
+  pinesEntrada[E_IZQUIERDA] = PIN_IZQUIERDA;
+  pinesEntrada[E_DERECHA] = PIN_DERECHA;
+  unsigned long ahora = millis();
+  for (uint8_t i = 0; i < NUM_ENTRADAS; i++) {
+    pinMode(pinesEntrada[i], INPUT_PULLUP);
+    crudoAnterior[i] = estable[i] = false;
+    desde[i] = ahora;
+  }
+}
+
+// Devuelve true si alguna entrada filtrada ha cambiado en esta vuelta.
+bool actualizarEntradas() {
+  bool hayCambio = false;
+  unsigned long ahora = millis();
+  for (uint8_t i = 0; i < NUM_ENTRADAS; i++) {
+    bool crudo = digitalRead(pinesEntrada[i]) == LOW;  // microinterruptor: pulsado = LOW
+    if (crudo != crudoAnterior[i]) {
+      crudoAnterior[i] = crudo;  // sigue rebotando: se vuelve a contar desde ahora
+      desde[i] = ahora;
+    } else if (crudo != estable[i] && ahora - desde[i] >= ANTIRREBOTE_MS) {
+      estable[i] = crudo;
+      hayCambio = true;
+    }
+  }
+  return hayCambio;
+}
+
+// Si se pulsan los dos sentidos a la vez (no deberia pasar), centro.
 // En HID, X = 0 es izquierda e Y = 0 es arriba.
-int leerEje(int pinMenos, int pinMas, bool invertir) {
-  bool menos = digitalRead(pinMenos) == LOW;
-  bool mas = digitalRead(pinMas) == LOW;
+int leerEje(uint8_t entradaMenos, uint8_t entradaMas, bool invertir) {
+  bool menos = estable[entradaMenos];
+  bool mas = estable[entradaMas];
   if (invertir) {
     bool t = menos;
     menos = mas;
@@ -175,10 +218,21 @@ int leerEje(int pinMenos, int pinMas, bool invertir) {
   return 512;
 }
 
+// Calcula el estado HID completo y lo envia. Se recalculan todos los botones HID
+// para que ninguno se quede pulsado al remapear.
+void enviarEstado() {
+  Joystick.setXAxis(leerEje(E_IZQUIERDA, E_DERECHA, cfg.invertirX));
+  Joystick.setYAxis(leerEje(E_ARRIBA, E_ABAJO, cfg.invertirY));
+  bool pulsado[NUM_BOTONES] = {false};
+  for (uint8_t i = 0; i < NUM_BOTONES; i++) {
+    if (estable[i]) pulsado[cfg.mapa[i]] = true;
+  }
+  for (uint8_t b = 0; b < NUM_BOTONES; b++) Joystick.setButton(b, pulsado[b]);
+  Joystick.sendState();
+}
+
 void setup() {
-  for (uint8_t i = 0; i < NUM_BOTONES; i++) pinMode(PINES_BOTON[i], INPUT_PULLUP);
-  const int pinesPalanca[] = {PIN_ARRIBA, PIN_ABAJO, PIN_IZQUIERDA, PIN_DERECHA};
-  for (int pin : pinesPalanca) pinMode(pin, INPUT_PULLUP);
+  iniciarEntradas();
   if (!cargarConfig()) configPorDefecto();
 
   Serial.begin(9600);
@@ -190,16 +244,21 @@ void setup() {
 void loop() {
   leerSerie();
 
-  Joystick.setXAxis(leerEje(PIN_IZQUIERDA, PIN_DERECHA, cfg.invertirX));
-  Joystick.setYAxis(leerEje(PIN_ARRIBA, PIN_ABAJO, cfg.invertirY));
-
-  // Se recalculan todos los botones HID para que ninguno se quede pulsado al remapear
-  bool pulsado[NUM_BOTONES] = {false};
-  for (uint8_t i = 0; i < NUM_BOTONES; i++) {
-    if (digitalRead(PINES_BOTON[i]) == LOW) pulsado[cfg.mapa[i]] = true;
+  // Solo se envia por USB cuando cambia algo (o cada 100 ms, por si el PC se perdio un informe).
+  // Asi no hace falta el delay(10) de antes, que retrasaba cada pulsacion hasta 10 ms.
+  static unsigned long ultimoEnvio = 0;
+  static uint8_t mapaAnterior[NUM_BOTONES];
+  static uint8_t invXAnterior = 255, invYAnterior = 255;
+  bool cambio = actualizarEntradas();
+  if (memcmp(mapaAnterior, cfg.mapa, NUM_BOTONES) != 0 ||
+      invXAnterior != cfg.invertirX || invYAnterior != cfg.invertirY) {
+    memcpy(mapaAnterior, cfg.mapa, NUM_BOTONES);  // MAP, INV, CARGAR o RESET por el puerto serie
+    invXAnterior = cfg.invertirX;
+    invYAnterior = cfg.invertirY;
+    cambio = true;
   }
-  for (uint8_t b = 0; b < NUM_BOTONES; b++) Joystick.setButton(b, pulsado[b]);
-
-  Joystick.sendState();
-  delay(10);
+  if (cambio || millis() - ultimoEnvio >= 100) {
+    enviarEstado();
+    ultimoEnvio = millis();
+  }
 }

@@ -24,7 +24,7 @@ Hecho por Adrian con Claude Code ([registro de IA](registro-ia.md)).
 bash scripts/verificar-repo.sh
 ```
 
-Las que necesitan Docker o PlatformIO se saltan si no están instalados. Resultado del 23/10/2026: **todo correcto**.
+Las que necesitan Docker o g++ se saltan si no están instalados. Resultado del 23/10/2026: **todo correcto**.
 
 | # | Qué se comprueba | Cómo | Resultado |
 |---|---|---|---|

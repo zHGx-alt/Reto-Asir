@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Comprobaciones automáticas del repositorio (ver docs/gestion/verificacion.md).
 # Uso: bash scripts/verificar-repo.sh
-# Las pruebas que necesitan Docker o PlatformIO se saltan si no están instalados.
+# Las pruebas que necesitan Docker o g++ se saltan si no están instalados.
 set -uo pipefail
 cd "$(git rev-parse --show-toplevel)"
 fallos=0
@@ -36,16 +36,9 @@ for f in $(git ls-files '*.py'); do python3 -m py_compile "$f" 2>/dev/null && ok
 for f in $(git ls-files '*.sh'); do bash -n "$f" 2>/dev/null && ok "$f" || mal "$f"; done
 
 echo "== Firmware del arcade stick"
-PIO=$(command -v pio || echo "$HOME/.platformio/penv/bin/pio")
-if [[ -x "$PIO" ]]; then pio_() { "$PIO" "$@"; }
-else
-  for py in python3 python; do                    # instalado con pip (pip install platformio)
-    if $py -m platformio --version >/dev/null 2>&1; then PY_PIO=$py; pio_() { "$PY_PIO" -m platformio "$@"; }; break; fi
-  done
-fi
-if declare -F pio_ >/dev/null; then
-  (cd arduino/mando-joystick && pio_ run -s) >/dev/null 2>&1 && ok "compila para Leonardo" || mal "no compila"
-else salta "compilación" "no hay PlatformIO"; fi
+if command -v g++ >/dev/null; then                # compila el .ino en el PC con sustitutos de Arduino
+  bash arduino/mando-joystick/prueba-antirrebote/probar.sh >/dev/null 2>&1 && ok "antirrebote (prueba simulada)" || mal "antirrebote (prueba simulada)"
+else salta "antirrebote" "no hay g++"; fi
 
 # Pruebas de la BD (tareas 40-42). psql_ <usuario> <argumentos de psql>; $S = carpeta de los scripts.
 probar_bd() {
