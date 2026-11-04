@@ -17,7 +17,7 @@ Tareas relacionadas en el [backlog](../../docs/gestion/backlog-kanban.csv): #19 
 | **Prueba en la placa real** | **Hecha el 27/10** (tarea #50): botones, palanca, puerto serie y EEPROM. Ver [la prueba](#prueba-en-físico-tarea-50) |
 | Pruebas con MAME y otro emulador | Hecho (tarea #21): en MAME, partida de *Gridlee* con el stick en la recreativa de 1 GB ([tarea 53](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md), P4 y P10, 29/10); en Batocera (RetroArch), entradas comprobadas ([evtest](evidencias/batocera-evtest-2026-10-27.txt)) y partida jugada el 27/10, sin captura |
 
-Funciona en la placa real desde el 27/10. Desde el 04/11 lleva antirrebote por software (5 ms por entrada) y ya no usa `delay(10)`; `bash prueba-antirrebote/probar.sh` compila el `.ino` en el PC y lo prueba con rebotes simulados (9 de 9 OK). **Falta subirlo a la placa y probarlo** con el stick (tarea 59).
+Funciona en la placa real desde el 27/10. Desde el 04/11 lleva antirrebote por software (5 ms por entrada) y ya no usa `delay(10)`; `bash prueba-antirrebote/probar.sh` compila el `.ino` en el PC y lo prueba con rebotes simulados (9 de 9 OK). **Falta subirlo a la placa y probarlo** con el stick: ver [Antirrebote](#antirrebote-tarea-59).
 
 ## Conexiones
 
@@ -91,6 +91,29 @@ Los cambios se aplican al momento, pero se pierden al desenchufar si no se hace 
 La versión de la configuración pasó a 4 al dejar 4 botones y quitar el tipo de palanca y la zona muerta (26/10): una placa con una configuración antigua guardada arranca con los valores por defecto y hay que volver a hacer los `MAP` y `GUARDAR`.
 
 Al arrancar se lee la EEPROM. Si está vacía o los datos no son válidos (no coincide el número de control, la versión o el checksum), se usan los valores por defecto.
+
+## Antirrebote (tarea 59)
+
+> **Para Markel:** el código está hecho y probado en simulación. Falta probarlo en la placa y terminar de documentar esta sección.
+
+**Dónde está el código**, en [mando_joystick.ino](mando_joystick/mando_joystick.ino):
+
+| Qué | Línea |
+|---|---|
+| Explicación y `ANTIRREBOTE_MS = 5` (lo que tiene que estar estable una lectura para aceptarla) | [163-173](mando_joystick/mando_joystick.ino#L163) |
+| `iniciarEntradas()`: junta los 4 botones y las 4 direcciones en una sola lista de 8 entradas | [175](mando_joystick/mando_joystick.ino#L175) |
+| `actualizarEntradas()`: **el antirrebote**. Por cada entrada guarda la última lectura y desde cuándo (`millis()`); solo cambia el estado cuando lleva 5 ms sin variar | [190](mando_joystick/mando_joystick.ino#L190) |
+| `leerEje()` y `enviarEstado()`: usan el estado ya filtrado, no `digitalRead` directo | [208](mando_joystick/mando_joystick.ino#L208), [223](mando_joystick/mando_joystick.ino#L223) |
+| `loop()`: sin `delay(10)`; envía por USB cuando cambia algo o cada 100 ms | [244](mando_joystick/mando_joystick.ino#L244) |
+
+**La prueba simulada** está en [prueba-antirrebote/](prueba-antirrebote/): `prueba.cpp` compila el `.ino` real en el PC con sustitutos de Arduino (`stubs/`) y simula rebotes. Se lanza con `bash prueba-antirrebote/probar.sh`. El 04/11 dio 9 de 9 OK: una pulsación con rebotes cuenta 1, el ruido de 1-2 ms no pasa, la pulsación llega en 6 ms y remapear no deja botones colgados.
+
+**Lo que falta (Markel):**
+
+1. Conectar el stick y subir el firmware: `./subir.sh`.
+2. `python3 ver-mando.py` (sección siguiente) y pulsar cada botón y cada dirección varias veces, rápido. En el resumen, **ninguna pulsación de menos de 30 ms** y cada botón con el número de pulsaciones que has hecho. Guardar el fichero de `evidencias/`.
+3. Con eso, la tabla de pruebas por control (cada dirección y botón: llega, se suelta, número de pulsaciones).
+4. Explicar aquí con tus palabras por qué hace falta (rebote del microinterruptor) y por qué 5 ms.
 
 ## Prueba guiada (Linux)
 
