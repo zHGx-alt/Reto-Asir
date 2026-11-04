@@ -15,7 +15,7 @@ TPV (Edge en quiosco, TPV de Odoo) ── ticket ──► cola de Windows ─�
 
 ## 2. Antes de empezar
 
-- Apuntar **marca, modelo y conexiones** de la impresora que dé el centro. Si no es la Epson TM-T20IV del presupuesto, buscar su driver de Windows en la web del fabricante (para Epson TM: *Advanced Printer Driver*, APD).
+- Apuntar **marca, modelo y conexiones** de la impresora térmica del local (la del presupuesto es la Epson TM-T20IV). Si es otra, buscar su driver de Windows en la web del fabricante (para Epson TM: *Advanced Printer Driver*, APD).
 - Descargar el driver **desde la web del fabricante** con la cuenta de administración, **antes** de ejecutar `configurar-tpv.ps1` (después, Edge solo abre Odoo y los USB de almacenamiento están bloqueados). Si el TPV ya está bastionado, se descarga en otro equipo y se instala desde una carpeta compartida o se desactiva temporalmente el bloqueo USB.
 
 ## 3. Procedimiento
@@ -48,5 +48,5 @@ TPV (Edge en quiosco, TPV de Odoo) ── ticket ──► cola de Windows ─�
 
 - **Impresora de las pruebas (decisión del 27/10/2026).** Las térmicas del centro no llegan para todos los grupos, así que las pruebas se hacen con una **Samsung ML-1660** láser (A4, sin corte ni cajón). Pasada por USB a una VM, Windows instala el driver pero no crea el puerto `USB001`. Por IPP a la cola CUPS del equipo que la tiene enchufada sí imprime el ticket de Odoo: así se hizo la tarea 37 ([tarea 52, sección 4.2](../../erp/52-https-odoo/DOCUMENTACION.md#42-pruebas-5-y-6-con-un-tpv-provisional-26102026)). Las pruebas 1, 2 y 4 de la sección 4 son de la térmica y no se pueden hacer con ella.
 
-- **Diálogo de impresión.** Con Edge en el modo quiosco de Windows 10 Pro, cada ticket muestra el diálogo de impresión (un toque en *Imprimir*). Imprimir sin diálogo necesita lanzar Edge con `--kiosk-printing`, que se puede en Windows 10 IoT Enterprise con Shell Launcher, o una IoT Box de Odoo (de pago). Se deja así y se documenta.
+- **Diálogo de impresión.** En las VM de pruebas (Windows 11 Pro, que simula la edición elegida), Edge en modo quiosco muestra el diálogo de impresión en cada ticket (un toque en *Imprimir*). En los TPV reales, que llevan **Windows 10 IoT Enterprise LTSC 2021** (decisión del 30/10, [tarea 10, 4.1](../../hardware/10-presupuesto-hardware.md#41-equipos-tpv)), la propuesta es lanzar Edge desde Shell Launcher con `--kiosk-printing`, que imprime en la impresora predeterminada sin diálogo. No se ha podido probar porque la LTSC no se descarga sin contrato OEM; la alternativa es una IoT Box de Odoo (de pago).
 - **ESC/POS directo** (comandos de corte y cajón desde Odoo) solo funciona con la IoT Box. Con el driver de Windows, el corte y el cajón los hace el driver (paso 3).

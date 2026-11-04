@@ -121,7 +121,7 @@ Script: [`cargar-carta-y-mesas.py`](cargar-carta-y-mesas.py) (log: [`evidencias/
 | 10 | En una base nueva, `configurar-odoo.py` fallaba en el paso 1: *Object stock.warehouse doesn't exist* (prueba en limpio del 23/10, Adrian) | El renombrado del almacén se hacía antes de instalar Inventario; en la VM ya estaba instalado y no se notaba | Se renombra después de instalar los módulos |
 | 11 | En una base nueva, `cargar-carta-y-mesas.py` fallaba al crear el primer producto: *unhashable type: 'list'* | En Odoo 19, `copy` devuelve por la API una lista de ids y el script la metía en otra lista al crear el IVA 10 % incluido | Se acepta un id o una lista. Instalación limpia completa repetida: [`evidencias/prueba-instalacion-limpia.txt`](evidencias/prueba-instalacion-limpia.txt) |
 
-## 9. Pendiente: lo que ve el cajero
+## 9. Lo que ve el cajero (resuelto en el laboratorio el 30/10)
 
 En la prueba 1 de la sección 8.2, `cajero1` ve **Contactos, Empleados, Conversaciones, Calendario y Tableros**, y puede leer facturas, diarios y usuarios. Para cobrar no le hace falta: ve datos de los clientes y del personal, y eso va contra los mínimos privilegios. Viene de que todo «Usuario interno» (`base.group_user`) tiene esos menús.
 

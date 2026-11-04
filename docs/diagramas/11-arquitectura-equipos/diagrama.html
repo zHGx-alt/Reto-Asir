@@ -25,13 +25,13 @@ flowchart TB
             srv["🖥️ Servidor · .10<br/>Debian 13 · Docker<br/>Odoo 19 + PostgreSQL 17<br/>RAID 1 · copias restic"]
             usb[("💾 Disco USB<br/>BACKUP_USB")]
             ger["💼 PC gerente · .20<br/>Lenovo Neo 50q Gen 4<br/>Windows 10 + Ubuntu (tarea 12)"]
-            tpv1["🧾 TPV 1 · .31<br/>Iggual AIO N100 táctil<br/>Windows 10 Pro en quiosco"]
-            tpv2["🧾 TPV 2 · .32<br/>Iggual AIO N100 táctil<br/>Windows 10 Pro en quiosco"]
+            tpv1["🧾 TPV 1 · .31<br/>Iggual AIO N100 táctil<br/>Windows 10 IoT LTSC en quiosco"]
+            tpv2["🧾 TPV 2 · .32<br/>Iggual AIO N100 táctil<br/>Windows 10 IoT LTSC en quiosco"]
             imp1["🖨️ Epson TM-T20IV"]
             imp2["🖨️ Epson TM-T20IV"]
         end
 
-        subgraph INV["Wi-Fi de invitados · 192.168.50.0/24 (aislada de la LAN)"]
+        subgraph INV["Wi-Fi de invitados · 192.168.50.0/24 en el diseño (aislada de la LAN)"]
             cli["📱 Móviles de clientes"]
             rec["🕹️ Recreativa<br/>1 núcleo · 1 GB<br/>Debian 13 + MAME"]
             stick["Arcade stick<br/>Arduino Leonardo<br/>joystick HID"]

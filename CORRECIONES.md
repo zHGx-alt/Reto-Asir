@@ -14,7 +14,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Persona | Correcciones |
 |---|---|
 | **Adrian** | Nada: E/R en notación Chen y VM del gerente cerrados el 30/10 (sección 1) |
-| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `almi_chain` en el servidor |
+| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `08-usuarios.sql` en el servidor |
 | **Peio** | Nada en esta lista: su tarea abierta (25) está en el Gantt; la 24 se cerró el 30/10 |
 | **Eneko.P** | Nada en esta lista: la 3.2 se cerró con las medidas de la tarea 54 (29/10) |
 | **Markel** | Nada en esta lista: la edición de Windows de los TPV se cerró el 30/10 (sección 1) |
@@ -55,13 +55,13 @@ Corregido el 26/10 (sección 1). Activarlo en la `ServidorERP` del equipo es tra
 
 ### 2.3 Menús del cajero (tarea 34)
 
-- [ ] 🟠 **El cajero ve más aplicaciones de las que necesita** (la tarea 34 está en Hecho). `restringir-menus-cajero.py`; entrar como `cajero1` y hacer la captura nueva (solo ve Punto de venta).
+- [ ] 🟠 **El cajero ve más aplicaciones de las que necesita** (la tarea 34 está en Hecho). ✅ **Probado en el laboratorio (30/10); falta en el servidor del equipo.** `restringir-menus-cajero.py`; entrar como `cajero1` y hacer la captura nueva (solo ve Punto de venta).
   - **Quién:** Iker.
   - 26/10: en la VM de la tarea 52, `cajero1` entra directo en *Punto de venta* por HTTPS ([evidencia 08](docs/erp/52-https-odoo/evidencias/08-tpv-cajero1-https.png)), pero la captura no enseña el menú de aplicaciones, que es lo que hay que demostrar. 27/10: añadido al [runbook de la 52](docs/erp/52-https-odoo/RUNBOOK.md#31-menús-del-cajero-corrección-23) (paso 3.1), con la contraseña leída del `.env` y las dos capturas que faltan. 30/10 (Adrian): probado en la `ServidorERP` de laboratorio, y **el script tenía un fallo**: añadía el grupo de gerencia a los menús, pero Odoo los enseña si el usuario está en cualquiera de sus grupos, así que el cajero seguía viendo Contactos, Empleados, Conversaciones, Calendario y Aplicaciones. Arreglado (deja gerencia como único grupo y guarda los originales para `--deshacer`) y comprobado con el nuevo `ver-menus-usuarios.py`: el cajero ve solo *Punto de venta* ([evidencia](docs/erp/34-configurar-odoo/evidencias/23-menus-cajero-laboratorio.txt)). Solo falta lanzar las dos órdenes del paso 3.1 en el servidor del equipo.
 
 ### 2.4 Cortafuegos del servidor
 
-- [ ] 🟠 **La red plana solo es segura si cada equipo filtra** ([tarea 23, 5.3](docs/redes/23-plano-direccionamiento.md#5-segmentación)), y el servidor aún no lo hace: `sudo docs/erp/33-odoo-docker/cortafuegos-servidor.sh` en `ServidorERP` y guardar `ufw status verbose`.
+- [ ] 🟠 ✅ **Probado en el laboratorio (30/10); falta en el servidor del equipo.** **La red plana solo es segura si cada equipo filtra** ([tarea 23, 5.3](docs/redes/23-plano-direccionamiento.md#5-segmentación)), y el servidor aún no lo hace: `sudo docs/erp/33-odoo-docker/cortafuegos-servidor.sh` en `ServidorERP` y guardar `ufw status verbose`.
   - **Quién:** Iker.
   - 30/10 (Adrian): probado en la `ServidorERP` de laboratorio ([evidencia](docs/erp/33-odoo-docker/evidencias/24-cortafuegos-laboratorio.txt)); Odoo sigue respondiendo. **El script tenía un fallo**: lanzado como `ssh servidor 'sudo …'` no detectaba la IP de la conexión (sudo borra `SSH_CLIENT` y sin shell de login no hay entrada en `who`) y dejaba fuera a quien lo ejecutaba. Arreglado: la busca en los procesos padre. Lanzado así en el servidor del equipo, ahora avisa con `AVISO: también se permite SSH desde …`.
 
@@ -98,14 +98,15 @@ Corregido el 26/10 (sección 1).
 - [x] 🟠 **VM del gerente (tarea 12):** actualizaciones, BitLocker y cifrado de `/home/gerente` hechos el 29/10. No se exporta a Drive (decisión del 30/10): se queda en el PC de Adrian ([maquinas-virtuales.md](docs/gestion/maquinas-virtuales.md)). **Quién:** Adrian.
   - [x] Windows Update al día (KB5066791), BitLocker en `C:` con contraseña de arranque y `/home/gerente` cifrado con fscrypt (29/10, [tarea 12, sección 6](docs/so/12-dual-boot.md#6-verificación)).
   - [x] Versión de Ubuntu: **26.04.1 LTS**, imagen del 26/08/2026, leída del disco de la VM sin arrancarla y puesta en las tareas 12 y 9 (27/10, [evidencia](docs/evidencias/12-dual-boot/ubu-08-version-desde-disco.txt)).
-- [ ] 🟠 **`almi_chain` en el servidor (tareas 40-42):** la base está probada pero no existe en `ServidorERP`. Crearla (comandos de la [tarea 40, sección 2](docs/bd/40-scripts-ddl.md)), cargar `08-usuarios.sql` con contraseñas de KeePassXC y lanzar `sudo systemctl start backup-odoo`: el log tiene que decir `Volcado almi_chain`. **Quién:** Iker.
+- [ ] 🟠 **`almi_chain` en el servidor (tareas 40-42):** ✅ **base y copia hechas por Iker el 27/10** en la `ServidorERP` del equipo: 14 tablas con datos, y la copia diaria lleva `almi_chain.dump` junto a la de Odoo ([evidencia 04 de la tarea 44](docs/backup/44-backup-3-2-1/evidencias/04-almi-chain-y-aviso-de-fallo.log)). **Solo falta** cargar `08-usuarios.sql` con las contraseñas de KeePassXC (no sale en esa evidencia) y guardar la salida. **Quién:** Iker.
+  - 04/11 (Adrian): hecho en la `ServidorERP` de laboratorio: `almi_chain` cargada, volcada por `backup-odoo` al RAID, al USB y a S3, y restaurada desde el RAID y desde S3 con sus tablas, filas, importes y permisos comparados (23 OK, [tarea 45](docs/backup/45-restauracion/DOCUMENTACION.md)). Los mismos comandos sirven en el servidor del equipo.
 - [ ] 🟠 **Registro de IA:** cada persona pone en sus filas qué comprobó a mano, en vez de «pendiente de revisar por el equipo». **Quién:** todos.
 - [x] 🟢 **Imágenes de la web:** copiadas a `web/img/` en WebP, con su autor en los créditos y en `web/img/CREDITOS.txt`; la txuleta del carrusel ya no repite la portada (que eran costillas) y la tarta de queso es otra foto de autor conocido. La CSP del servidor deja de admitir `images.unsplash.com` (se aplica al reinstalar). Adrian, 27/10. Publicado ese día con `desplegar-web` (secretos del Learner Lab renovados): el `index.html` público es idéntico al del repositorio (8425 bytes) y `img/txuleta-640.webp` se sirve desde la propia web.
 - [x] 🟢 **Notación del E/R:** pasado a **Chen**, la de clase (30/10, [tarea 38](docs/bd/38-modelo-er.md#21-notación-chen)). Si la rúbrica pide otra, se cambia en `scripts/bd/er-chen.py`. **Quién:** Adrian.
 
 ---
 
-## 5. Cumplimiento del enunciado (27/10)
+## 5. Cumplimiento del enunciado (04/11)
 
 «Tarea» es una tarea pendiente del [Gantt](docs/gestion/gantt.md); «corr.» es una corrección de esta lista.
 
@@ -114,25 +115,25 @@ Corregido el 26/10 (sección 1).
 | Necesidades, configuración y presupuesto de equipos e impresoras | Hecho: Windows de los TPV decidido y con precio (30/10) | — |
 | Identificar y documentar el hardware necesario | Hecho | — |
 | Identificar y documentar el software necesario | Hecho (Ubuntu 26.04.1 LTS leído del disco; el driver de Epson no se apunta, decisión del 27/10) | — |
-| Instalación, optimización y monitorización de la recreativa | Hecho: Debian + MAME en la VM de 1 núcleo y 1 GB (tarea 53) y medidas antes y después (tarea 54, 29/10) | — |
-| Montaje y programación del arcade stick | Hecho: montado y probado en la placa, con la EEPROM, en MAME (tarea 53) y en Batocera (27-29/10) | — |
+| Instalación, optimización y monitorización de la recreativa | Hecho: Debian + MAME en la VM de 1 núcleo y 1 GB (tarea 53) y medidas antes y después (tarea 54, 29/10) | Tarea 62: justificar el front-end |
+| Montaje y programación del arcade stick | Hecho: montado y probado en la placa, con la EEPROM, en MAME (tarea 53) y en Batocera (27-29/10); antirrebote en el firmware (04/11) | Tarea 59: probar el antirrebote en la placa, componentes y por qué la Leonardo |
 | Identificar necesidades de comunicación | Hecho | — |
-| Implementación y configuración de sistemas operativos | Casi hecho: TPV bastionados a mano (tarea 13) | Tarea 15 (`comprobar-tpv.ps1`) y S-20 de la tarea 46 |
-| Restricción de cuentas y equipos (mínimos privilegios) | Parcial | Corr. 2.3; tarea 15 y S-20 |
-| Diseño conceptual de la web | Hecho, a posteriori | — |
+| Implementación y configuración de sistemas operativos | Hecho: TPV bastionados (tarea 13) y PC del gerente (tarea 55) | Tarea 15: ejecutar `configurar-tpv.ps1` en los TPV |
+| Restricción de cuentas y equipos (mínimos privilegios) | Hecho en el laboratorio: cajero solo con Punto de venta (30/10) | Corr. 2.3 en el servidor del equipo; tarea 15 |
+| Diseño conceptual de la web | Hecho, a posteriori | Tarea 62: tableta y WCAG AA |
 | Web accesible y por HTTPS | Hecho | — |
-| Hosting en AWS con dominio propio y despliegue reproducible | Casi hecho | Tarea 31 |
-| ERP + TPV con un caso de uso automatizado | Hecho: factura de 660,00 € (27/10) | Tarea 36 |
-| Instalación y configuración de una impresora | Hecho: ticket de Odoo impreso desde el TPV (Samsung por IPP, tarea 37, 27/10) | Tarea 14: cola en los TPV reales |
-| Modelo E/R y tablas | Hecho: E/R en notación Chen (30/10) | — |
-| Implementación de la BD y consulta de sus datos | Hecho | Corr. 4 (`almi_chain` en el servidor) |
+| Hosting en AWS con dominio propio y despliegue reproducible | Hecho: Terraform aplicado y despliegue por GitHub Actions (tarea 31, 29/10) | — |
+| ERP + TPV con un caso de uso automatizado | Hecho: factura de 660,00 € (27/10) | Tareas 36 y 63 |
+| Instalación y configuración de una impresora | Hecho: ticket de Odoo impreso desde el TPV (Samsung por IPP, tarea 37, 27/10) | — |
+| Modelo E/R y tablas | Hecho: E/R en notación Chen (30/10), con relación ternaria, historial de precios y atributos especiales (tarea 56, 04/11) | Tarea 57: enlazar `almi_chain` con Odoo |
+| Implementación de la BD y consulta de sus datos | Hecho: `almi_chain` en el servidor del equipo y en su copia (27/10) | Cargar `08-usuarios.sql` en el servidor (corr. 4) |
 | Configurar disco redundante | Hecho: BD de Odoo en el RAID 1 y fallo probado con Odoo funcionando (27/10) | — |
-| Plan de copias y prueba de restauración | Hecho, con huecos | Corr. 3.5; tarea 44 |
-| Seguridad por defecto en toda la solución | Parcial | Corr. 2; tareas 24 y 46 |
-| Verificar con pruebas (funcionamiento, restauración, failover) | Parcial: el failover del RAID ya está probado | Tareas 15, 21, 24, 25 y 47 |
-| Documentación reproducible con diagramas | Casi hecho | Evidencias de lo que se ejecute |
+| Plan de copias y prueba de restauración | Hecho: copia en el RAID, el USB y S3 (04/11) y restauración comprobada desde el RAID y desde S3 | Corr. 3.5 (RTO en una VM nueva) |
+| Seguridad por defecto en toda la solución | Casi hecho: revisión transversal (tarea 46) con el preseed endurecido (04/11) | Corr. 2.1 y 2.4 en el servidor del equipo; tarea 46 |
+| Verificar con pruebas (funcionamiento, restauración, failover) | Casi hecho: failover del RAID y restauración probados | Tareas 15, 25 y 47 |
+| Documentación reproducible con diagramas | Casi hecho | Tarea 48 |
 | Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | Commits de Eneko.P (tarea 5) |
-| Documentación y presentación | Pendiente | Tareas 48 y 49 |
+| Documentación y presentación | En curso | Tareas 48 y 49 |
 
 **Redes, en concreto:**
 
@@ -141,8 +142,8 @@ Corregido el 26/10 (sección 1).
 | Contratar una línea WAN | Hecho (DIGI 1 Gb, con análisis de necesidades) |
 | Esquema de conectividad | Hecho ([tarea 22, sección 4](docs/redes/22-comparativa-wan.md#4-esquema-de-conectividad)) |
 | Diagrama de la red (plano), cableado y Wi-Fi | Hecho: plano y Packet Tracer de la red real probado |
-| Red configurada de forma segura | Parcial: tarea 24 hecha (30/10): red de invitados aislada y probada, WPS desactivado, administración solo desde la MAC del gerente y contraseñas en KeePassXC. WPA3 queda como limitación del TL-WR841N. Falta corr. 2.4 |
-| Segundo router por WDS, comprobando que funciona | Prueba de laboratorio hecha (27/10): el enlace WDS funciona. Falta con la red del proyecto y el aislamiento de invitados (tarea 25) |
+| Red configurada de forma segura | Casi hecho: tarea 24 hecha (30/10): red de invitados aislada y probada, WPS desactivado, administración solo desde la MAC del gerente y contraseñas en KeePassXC. WPA3 queda como limitación del TL-WR841N. Falta corr. 2.4 en el servidor del equipo y desactivar UPnP en el router (A-22) |
+| Segundo router por WDS, comprobando que funciona | En curso (tarea 25): el 04/11 el router 2 extiende la red del proyecto en `192.168.10.2` sin DHCP, con ping al router 1 y los invitados sin acceso a la LAN. Falta que amplíe la Wi-Fi de clientes, la prueba en el BSSID del router 2 y la cobertura antes y después |
 | RA.7 de PAR: conectar redes privadas a públicas | Demostrado en Packet Tracer: NAT, WAN e Internet sin acceso a la LAN (pruebas 11 y 12) |
 
 ---

@@ -9,7 +9,7 @@
 | Responsable | Peio Amenabar |
 | Fecha de elaboración | 22/10/2026 |
 | Moneda | Euros |
-| Impuestos | IVA incluido, salvo que se indique lo contrario |
+| Impuestos | Precios publicados por las tiendas. En tiendas minoristas suelen incluir el IVA, pero las páginas no siempre lo dicen: hay que confirmarlo antes de comprar (incidencia H-02 de la tarea 8). La fibra sí está desglosada (sección 5.2) |
 | Validez del presupuesto | 15 días |
 | Revisión | Eneko.S, 23/10/2026: ajustado a la tabla de hardware (tarea 8) |
 | Revisión | Equipo, 23/10/2026: la línea WAN pasa a DIGI 1 Gb, el operador elegido en la comparativa (tarea 22) y el que usa el plano de red (tarea 23) |

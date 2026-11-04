@@ -70,7 +70,7 @@ Las longitudes salen del plano y llevan holgura para las bajadas por la pared. T
 | Red | Subred | Puerta de enlace | DHCP | Para qué |
 |---|---|---|---|---|
 | LAN del local | `192.168.10.0/24` | `192.168.10.1` (router 1) | Router 1 | Servidor, gerente, TPV y routers |
-| Wi-Fi de invitados | `192.168.50.0/24` *(a comprobar, ver 4.4)* | `192.168.50.1` (router 1) | Router 1 | Móviles de clientes y recreativa |
+| Wi-Fi de invitados | `192.168.50.0/24` en el diseño y en Packet Tracer; en el router de pruebas, la misma `192.168.10.0/24` aislada (ver abajo) | `192.168.50.1` (router 1) | Router 1 | Móviles de clientes y recreativa |
 | WAN | La que dé el router de DIGI | Router de DIGI | Router de DIGI | Enlace entre el router 1 y DIGI |
 
 **Por qué `192.168.10.0/24` y no `192.168.1.0/24`:** los routers de operador suelen venir con `192.168.1.0/24`. Si nuestra LAN usara la misma red que hay detrás del router de DIGI, el router 1 tendría la misma red a los dos lados y no sabría por dónde enviar el tráfico. Además, `192.168.10.x` es lo que ya proponía el diagrama de la [tarea 11](../diagramas/11-arquitectura-equipos/DIAGRAMA.md).
@@ -121,7 +121,7 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 
 Se mantienen los nombres de la [tarea 24](24-red-segura/DOCUMENTACION.md).
 
-**A comprobar en la tarea 24:** no está confirmado que la red de invitados del Archer C6 use una subred propia (`192.168.50.0/24`, la de la simulación de Packet Tracer). Algunos routers domésticos dan a los invitados IPs del mismo rango que la LAN y los aíslan solo con reglas internas. Lo importante es el aislamiento, que se prueba igual en los dos casos (apartado 6). La subred que asigne el router de verdad se apunta en esta tabla.
+**Comprobado en la tarea 24 (30/10):** el router de pruebas (TP-Link TL-WR841N) no da a los invitados una subred propia: les asigna IP de la misma `192.168.10.0/24` (un móvil recibió `192.168.10.100`, [figura 9](24-red-segura/configurar-red-segura.md)) y los aísla con reglas internas: desde invitados no se abre el panel ni responde el PC del gerente, y sí hay Internet. El diseño con el Archer C6 y la simulación de Packet Tracer mantienen `192.168.50.0/24`. Lo que importa en los dos casos es el aislamiento, y está probado en el router real (tarea 24, P2-P4; tarea 26).
 
 ## 5. Segmentación
 
@@ -254,8 +254,8 @@ En el local se hacen en las tareas 24 y 25, con el router montado; en Packet Tra
 ## 8. Pendiente
 
 - [ ] Apuntar las MAC de los equipos cuando estén montados.
-- [ ] Confirmar en la tarea 24 qué subred da el Archer C6 a la red de invitados.
-- [ ] Confirmar si el PC de la recreativa tiene Wi-Fi (el adaptador USB ya está presupuestado).
+- [x] Subred de invitados: en el router de pruebas, la misma `192.168.10.0/24` aislada (tarea 24, 30/10; ver 4.4). El Archer C6 del diseño no se ha montado.
+- [x] ~~Confirmar si el PC de la recreativa tiene Wi-Fi~~: la recreativa se entrega en VM (decisión del 29/10); para el local queda el adaptador USB presupuestado.
 - [x] Decidir red plana o VLAN: red plana con invitados aislada (apartados 5.2 y 5.3, 24/10/2026).
 - [x] Construir `23-red-local.pkt` con [la guía](23-packet-tracer-red-local.md) (25/10/2026, con el MCP de Packet Tracer).
 - [x] Conectar CLIENTE y RECREATIVA a la Wi-Fi, cortafuegos de los PC, las 16 pruebas y la captura `23-red-local.png` (25/10/2026).

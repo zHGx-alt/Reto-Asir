@@ -3,14 +3,9 @@
 **Responsable:** Iker · **Fecha de ejecución:** 22/10/2026 · **Depende de:** tarea 16
 **Estado:** ✅ Hecha (29/10: alcance ajustado): método, scripts (`medir-rendimiento.sh`, `optimizar-arcade.sh`), las 9 optimizaciones y la medida de antes y después en una VM de 2 núcleos y 1,5 GB. **La medida en 1 núcleo y 1 GB, la que pide el enunciado, está hecha en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md)** (29/10, `Recreativa-53`): MAME va de sobra y la optimización baja timers y disco sin cambiar la velocidad
 
-> ⚠️ **Las cifras de esta página no son las del equipo del cliente; las de 1 núcleo y 1 GB salen en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md).** Estas medidas se hicieron en una VM con **2 núcleos y 1,5 GB**, pero el enunciado dice que la recreativa
-> tiene **1 núcleo y 1 GB**. Ya hay una VM con esas especificaciones (`Recreativa-1GB`) con 3 medidas de "antes"
-> ([`evidencias/rendimiento-1gb.csv`](evidencias/rendimiento-1gb.csv)); faltan las de "después". Además, el equipo decidió probar
-> **Batocera**: su VM (`Batocera`, 1 núcleo, 1 GB) arranca, pero sus medidas están sin hacer. Ver [`../16-batocera/NOTAS.md`](../16-batocera/NOTAS.md).
+> ℹ️ **Estas cifras son de una VM de 2 núcleos y 1,5 GB, donde se pusieron a punto el método y las optimizaciones.** Las del equipo del cliente (1 núcleo y 1 GB, lo que pide el enunciado) están en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md) (29/10, `Recreativa-53`), hechas con estos mismos scripts. Batocera se probó en la [tarea 51](../16-batocera/NOTAS.md) y se descartó.
 >
-> **Mientras no se repitan, esta tarea no demuestra nada sobre el equipo del cliente.** El enunciado dice «un procesador de un núcleo y 1 GB de RAM» y «dejando constancia de las pruebas de rendimiento»: con 2 núcleos, MAME tiene un núcleo para él y el sistema otro, y con 1,5 GB no hay presión de memoria. Las tablas de abajo se sustituyen por las de `Recreativa-1GB` cuando estén.
->
-> Además, `-bench` emula **sin pantalla y sin límite de velocidad**: no es lo mismo que jugar. Falta medir **jugando** (FPS, CPU y RAM durante una partida) con `monitor-recreativa.sh` de la [tarea 18](../18-monitorizacion-recreativa.md).
+> `-bench` emula **sin pantalla y sin límite de velocidad**: no es lo mismo que jugar. La medida **jugando** (CPU y RAM durante una partida) se hizo en la tarea 54 con `monitor-recreativa.sh` de la [tarea 18](../18-monitorizacion-recreativa.md).
 
 ## 1. Resumen
 
@@ -120,4 +115,4 @@ En la máquina física los tiempos de arranque serán mucho más estables, y ade
 
 ## 8. Pendiente
 - [x] Antes y después en 1 núcleo y 1 GB, y medir jugando con `monitor-recreativa.sh`: pasan a la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md) (29/10), con estos mismos scripts.
-- [ ] Pasar a Adrian (tarea 18, monitorización) la lista de timers y servicios que quedan activos.
+- [x] Lista de timers y servicios que quedan activos: en la sección 3 y en las medidas de la tarea 54, que es la que la usa (29/10).

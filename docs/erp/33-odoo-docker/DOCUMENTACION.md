@@ -92,7 +92,7 @@ Lo que hace el script (log completo en [`evidencias/salida-desplegar-odoo.log`](
 | Solo la base de la tienda | `dbfilter = ^tienda$` |
 | Mínimos privilegios | `tecnico` **no** está en el grupo `docker`, porque ese grupo equivale a ser root. Docker se maneja con `sudo`. |
 | Reinicio automático | `restart: unless-stopped` en los dos contenedores |
-| Cortafuegos del servidor | [`cortafuegos-servidor.sh`](cortafuegos-servidor.sh) (`ufw`): entrada bloqueada; SSH solo desde el PC del gerente; 80/443 solo desde la LAN. Hace falta porque la red del local es plana ([tarea 23, apartado 5.2](../../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)). Pendiente de ejecutar en la VM |
+| Cortafuegos del servidor | [`cortafuegos-servidor.sh`](cortafuegos-servidor.sh) (`ufw`): entrada bloqueada; SSH solo desde el PC del gerente; 80/443 solo desde la LAN. Hace falta porque la red del local es plana ([tarea 23, apartado 5.2](../../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)). Probado en la `ServidorERP` de laboratorio el 30/10 ([evidencia](evidencias/24-cortafuegos-laboratorio.txt)); falta en el servidor del equipo (CORRECIONES 2.4) |
 
 **Comunicaciones cifradas:** Odoo responde por **HTTP**. El proxy HTTPS está preparado en la [tarea 52](../52-https-odoo/DOCUMENTACION.md) (nginx delante y Odoo solo en `127.0.0.1:8069`). Se probó el 26/10 en una VM nueva; falta activarlo en esta.
 
@@ -119,11 +119,11 @@ De [`evidencias/pruebas-odoo.txt`](evidencias/pruebas-odoo.txt):
 | 2 | Duda sobre usar `workers = 2` (multiproceso) | Con workers, el chat y las notificaciones en tiempo real (`/websocket`) necesitan un proxy que los envíe al puerto 8072 | `workers = 0` (multihilo), que basta para una tienda pequeña. Cuando esté el proxy HTTPS se puede pasar a workers. |
 
 ## 8. Para las siguientes tareas
-- **34 · Configurar módulos (Iker):** entrar en <http://localhost:8069> como `admin` e instalar Ventas, Punto de Venta, Inventario y Facturación.
-- **36 · Importar/exportar datos (Iker):** con `list_db = False` no se puede usar el gestor web de bases de datos. Para copias completas hay que usar `pg_dump` (tarea 44).
+- **34 · Configurar módulos (Iker):** entrar en Odoo (desde el 27/10, por HTTPS: <https://192.168.10.10>, [tarea 52](../52-https-odoo/DOCUMENTACION.md)) como `admin` e instalar Ventas, Punto de Venta, Inventario y Facturación.
+- **36 · Importar/exportar datos (Eneko.P):** con `list_db = False` no se puede usar el gestor web de bases de datos. Para copias completas hay que usar `pg_dump` (tarea 44).
 - **44 · Backup (Iker):** hay que copiar los volúmenes `odoo-db-data` (`pg_dump` del contenedor `db`) y `odoo-web-data`, además de `/opt/odoo/.env`, **cifrados**.
 
 ## 9. Pendiente
-- [ ] Revisión de Peio → mover a **Hecho** en el Kanban.
-- [ ] Ejecutar `sudo ./cortafuegos-servidor.sh` en `ServidorERP` y guardar la salida de `ufw status verbose` como evidencia.
+- [x] ~~Revisión de Peio~~: desde el 25/10 no hay revisor; los cambios entran por PR con el CI en verde ([roles.md](../../gestion/roles.md)).
+- [ ] Ejecutar `sudo ./cortafuegos-servidor.sh` en `ServidorERP` del equipo y guardar la salida de `ufw status verbose` como evidencia. Hecho en la de laboratorio el 30/10 ([evidencia](evidencias/24-cortafuegos-laboratorio.txt)); falta en la del equipo.
 - [x] Confirmar con Eneko.S (tarea 32) que el ERP elegido es Odoo.

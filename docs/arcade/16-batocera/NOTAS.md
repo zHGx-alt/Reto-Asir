@@ -99,7 +99,5 @@ Qué cambia `optimizar-batocera.sh` (todas las claves se comprobaron antes en `/
 | 6 | El primer intento de reiniciar por SSH no reiniciaba: el `reboot` se cortaba al cerrar la sesión, y el SSH de Batocera tarda ~5 s en responder | Se lanza con `nohup setsid` y se comprueba que el *uptime* ha bajado antes de medir |
 
 ## 6. Pendiente
-- [ ] Tarea 17 (Eneko.P): medidas de "después" de Debian en la VM de 1 GB. **Bloqueado:** no se conoce la contraseña de
-  `tecnico` en `Recreativa-1GB` (la de la tarea 16 es de la VM de 2 núcleos): hay que ponerle una nueva desde la consola
-  y guardarla en KeePassXC.
-- [ ] Tarea 53 (Eneko.S): instalar Debian en el equipo real con el preseed de la tarea 16.
+- [x] Medidas de Debian en 1 núcleo y 1 GB: hechas en la [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md) (29/10) en `Recreativa-53`, que sustituye a `Recreativa-1GB`.
+- [x] Tarea 53: Debian instalado con el preseed de la tarea 16 en `Recreativa-53` (29/10; la recreativa se entrega en VM, decisión del 29/10).

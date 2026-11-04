@@ -116,7 +116,7 @@ La conexión recomendada sigue siendo **USB** directamente al TPV: evita un disp
 
 | Requisito | Cumple | Cómo |
 |---|---|---|
-| RG-01 Arranque dual | Sí | 512 GB de SSD para dos sistemas. El equipo es moderno y lleva UEFI, a confirmar en su ficha. Se simula en VMware Workstation (tarea 12). |
+| RG-01 Arranque dual | Sí | 512 GB de SSD para dos sistemas. El equipo es moderno y lleva UEFI, a confirmar en su ficha. Se simula en una VM de VirtualBox (tarea 12). |
 | RG-06 Rendimiento | Sí | 8 núcleos y 16 GB de RAM. |
 | RG-07 Conexión | Sí | Ethernet gigabit. |
 | RT-01, RT-04, RT-06 Quiosco y restricciones | Sí | Windows Pro (modo quiosco, directivas de seguridad local, cortafuegos). Hay que aplicar los derechos de licencia (sección 6). |
@@ -149,12 +149,12 @@ Elementos sin precio verificado, para añadir al presupuesto con el valor que se
 
 | Id | Asunto | Cómo se resuelve |
 |---|---|---|
-| H-01 | **Windows 10 frente a Windows 11 Pro.** Los equipos elegidos traen Windows 11 Pro y el enunciado exige Windows 10. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en las condiciones de licencia de Microsoft y del vendedor. | Confirmar la licencia. Windows 10 Pro no tiene soporte gratuito desde el 14/10/2025 y el ESU para particulares terminó el 13/10/2026. Para los TPV se propone **Windows 10 IoT Enterprise LTSC 2021** (soporte hasta 2032) o el ESU de pago para empresas ([tarea 10](10-presupuesto-hardware.md), apartado 4.1). |
+| H-01 | **Windows 10 frente a Windows 11 Pro.** Los equipos elegidos traen Windows 11 Pro y el enunciado exige Windows 10. Windows 11 Pro suele incluir derechos para instalar Windows 10 Pro, pero hay que confirmarlo en las condiciones de licencia de Microsoft y del vendedor. | **Decidido el 30/10:** los TPV llevan **Windows 10 IoT Enterprise LTSC 2021** (licencia Entry, 37,41 € por TPV, soporte hasta 2032), sumada al presupuesto ([tarea 10](10-presupuesto-hardware.md), apartado 4.1); en el PC del gerente, Windows 11 Pro trae derechos de bajada a Windows 10 Pro. Contexto: Windows 10 Pro no tiene soporte gratuito desde el 14/10/2025 y el ESU para particulares terminó el 13/10/2026. Para los TPV se propone **Windows 10 IoT Enterprise LTSC 2021** (soporte hasta 2032) o el ESU de pago para empresas ([tarea 10](10-presupuesto-hardware.md), apartado 4.1). |
 | H-02 | Los precios no indican si incluyen IVA. | Confirmar con la tienda o en el carrito antes del presupuesto final. |
 | H-03 | Stock: a fecha de consulta no hay stock del Lenovo Neo 50q Gen 4. | Buscar el mismo modelo en otras tiendas o el sucesor. |
 | H-04 | Resuelta: se sustituye la impresora descatalogada TM-T20III por la TM-T20IV (vigente). | Comprobar precio y stock antes de comprar. |
 | H-05 | RT-09 (hostelería) no confirmado. | Decidir con el equipo si se acepta el riesgo o se sube de gama. |
-| H-06 | En las pruebas del reto estos equipos se simulan en máquinas virtuales (VirtualBox o VMware Workstation). | Ver S-07 de la tarea 7. |
+| H-06 | En las pruebas del reto estos equipos se simulan en máquinas virtuales (VirtualBox). | Ver S-07 de la tarea 7. |
 | H-07 | Precios sujetos a cambio. | Actualizar antes de la entrega final. |
 
 ## 7. Hardware de otros bloques pendiente de consolidar

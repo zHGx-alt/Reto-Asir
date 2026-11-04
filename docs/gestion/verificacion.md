@@ -24,7 +24,7 @@ Hecho por Adrian con Claude Code ([registro de IA](registro-ia.md)).
 bash scripts/verificar-repo.sh
 ```
 
-Las que necesitan Docker o g++ se saltan si no están instalados. Resultado del 23/10/2026: **todo correcto**.
+Las que necesitan Docker o g++ se saltan si no están instalados. Resultado del 23/10/2026: **todo correcto**. **Resultado del 04/11/2026** (con Docker): todo correcto salvo los enlaces rotos de la tarea 25, que se arreglan ese mismo día al dejar un solo documento; ese día se arregla también el propio comprobador de enlaces, que con un nombre de fichero con espacios o tildes fallaba y aun así daba «Todo correcto». La fila 5 pasa a ser la prueba del antirrebote (`prueba-antirrebote/probar.sh`, 9 de 9), que sustituye a `pio run` al quitar PlatformIO del repositorio.
 
 | # | Qué se comprueba | Cómo | Resultado |
 |---|---|---|---|
@@ -32,7 +32,7 @@ Las que necesitan Docker o g++ se saltan si no están instalados. Resultado del 
 | 2 | Ningún enlace relativo roto en los `.md` | Script de enlaces | ✅ 0 rotos (antes: 14, ver sección 4) |
 | 3 | Sintaxis de los scripts de Python y de shell | `py_compile` y `bash -n` | ✅ |
 | 4 | Errores de shellcheck | `koalaman/shellcheck:v0.10.0` | ✅ 0 errores. Un único aviso menor (variable `i` sin usar en `medir-batocera.sh`) |
-| 5 | Firmware del arcade stick (tarea 20) | `pio run` | ✅ Compila. Flash 37,3 %, RAM 17,4 % |
+| 5 | Firmware del arcade stick (tareas 20 y 59) | 23/10: `pio run`. Desde el 04/11: `arduino/mando-joystick/prueba-antirrebote/probar.sh`, que compila el `.ino` en el PC y simula rebotes | ✅ 23/10: compila (Flash 37,3 %, RAM 17,4 %). 04/11: 9 de 9 |
 | 6 | Scripts DDL (tarea 40) | PostgreSQL 16 en Docker | ✅ 01, 02 y 03 sin errores; 03 repetible; `05-pruebas.sql` 33/33 dos veces seguidas y la tabla `factura` vacía al acabar; 04 borra y se puede recrear |
 | 7 | Mínimos privilegios en la BD (tarea 42) | Usuario con `rol_aplicacion` | ✅ `CREATE TABLE` → *permission denied for schema public*; `DROP` y `ALTER` → *must be owner*; `DELETE` y `UPDATE` de facturas → *permission denied*; `SELECT` permitido |
 | 8 | Web válida (tarea 29) | Validador Nu del W3C en Docker | ✅ 0 errores en `index.html` y en `style.css` |
@@ -111,18 +111,18 @@ Resueltas después de la revisión (23/10): **la WAN es DIGI 1 Gb** en todos los
 
 ## 7. Lo que pide el enunciado y no tiene tarea terminada
 
-| Requisito del enunciado | Tarea | Estado |
+Repasado el 04/11/2026 contra el backlog. Lo que estaba aquí el 23/10 y ya está hecho: impresora (14 y 37, 27/10), stick montado y probado con dos emuladores (19, 50 y 21, 27-29/10), IaC (31, 29/10), consultas de la BD (41, 24/10) y la recreativa (53 y 54, 29/10).
+
+| Requisito del enunciado | Tarea | Estado (04/11) |
 |---|---|---|
-| TPV restringidos con mínimos privilegios | 13, 15 | Hecho a mano en VM (26/10, tarea 13); falta comprobar-tpv.ps1 (tarea 15) |
-| Instalación y configuración de una impresora | 14, 37 | Pendiente |
-| Arcade stick montado y probado con dos emuladores | 19, 50, 21 | Pendiente |
-| Recreativa de 1 núcleo y 1 GB con pruebas de rendimiento | 17, 18, 51, 53, 54 | Hecho (29/10: instalada con el stick en la 53 y medida en la 54) |
-| Red segura con WDS comprobado | 24, 25, 26 | En curso / pendiente |
-| Despliegue reproducible automatizado (IaC) | 31 | Pendiente (el enunciado lo pide «a poder ser») |
-| ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | Pendiente |
-| BD: implementación **y consulta de sus datos** | 41 | Pendiente |
-| Comunicaciones cifradas en toda la solución | 52, 46 | Odoo por HTTPS hecho en VM (tarea 52, con el ticket impreso desde el TPV provisional); la revisión de la 46 sigue en curso |
-| Tabla de pruebas, documentación y presentación | 47, 48, 49 | Pendiente |
+| TPV restringidos con mínimos privilegios | 13, 15 | Hecho a mano en VM (26/10, tarea 13); falta ejecutar `configurar-tpv.ps1` y `comprobar-tpv.ps1` (tarea 15) |
+| Red segura con WDS comprobado | 24, 25, 26 | 24 y 26 hechas; WDS en curso (25): enlace probado el 04/11, falta ampliar la Wi-Fi de clientes y medir la cobertura |
+| ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | En curso: script y CSV hechos, falta ejecutarlo contra Odoo con evidencias |
+| ERP: usar el resto de módulos con datos | 63 | Pendiente |
+| BD propia integrada con la de Odoo | 57 | Pendiente |
+| Comunicaciones cifradas y seguridad en toda la solución | 52, 46 | Odoo por HTTPS hecho (52); revisión transversal en curso (46): falta lo que depende del servidor del equipo y de la red del aula |
+| Tecnologías habilitadoras (Digitalización RA.2) | 58 | Pendiente |
+| Tabla de pruebas, documentación y presentación | 47, 48, 49 | En curso / pendiente (hasta el 11/11) |
 
 ## 8. Comprobaciones del 24/10/2026
 

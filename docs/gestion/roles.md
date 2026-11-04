@@ -19,6 +19,24 @@ El detalle de tareas, fechas y carga por persona está en [gantt.md](gantt.md), 
 
 ## Cambios en el reparto
 
+### 04/11/2026
+
+Con la rúbrica (Anexo VI, [rubrica-anexo-VI.md](rubrica-anexo-VI.md)) se añaden las tareas que suben cada criterio, repartidas por carga:
+
+| # | Tarea | Responsable |
+|---|---|---|
+| 56 | Ampliar el E/R: relación ternaria, historiales y atributos especiales | Eneko.S |
+| 57 | Integrar la BD propia con la de Odoo | Iker |
+| 58 | Tecnologías habilitadoras: análisis y comparativa | Eneko.P |
+| 59 | Stick: antirrebote, componentes y por qué este microcontrolador | Markel |
+| 60 | Copia remota en S3 y restauración de `almi_chain` probadas | Adrian |
+| 61 | Poner al día los textos desfasados que señala la auditoría | Peio |
+| 62 | Huecos de la rúbrica: VM, front-end de MAME, tableta y WCAG AA | Eneko.S |
+| 63 | Usar CRM, personal, marketing e inventario con datos | Eneko.P |
+
+Además, la 14 y la 37 (impresora) constan a nombre de Adrian, que las hizo (26-27/10), y la 13 es de Markel, que la hizo a mano el 26/10; los scripts de Windows (15) siguen con Iker.
+
+
 ### 29/10/2026
 
 La 17, la 18 y la 54 pedían la misma medida (rendimiento y monitorización en la VM de 1 núcleo y 1 GB). Se deja solo en la 54 (Eneko.S), y la 17 y la 18 se cierran con lo que ya estaba hecho y pasan a quien lo hizo:
@@ -28,9 +46,7 @@ La 17, la 18 y la 54 pedían la misma medida (rendimiento y monitorización en l
 | 17 | Rendimiento de MAME: método, scripts y medida en VM de 2 núcleos | Eneko.P | Iker |
 | 18 | Monitorización: scripts | Eneko.P | Adrian |
 
-A Eneko.P le quedan la 31 y la 36.
-
-La **31** (Terraform) sigue a nombre de Eneko.P. Se aplicó el 29/10 en el Learner Lab de Adrian, que es quien tiene el laboratorio y los permisos de GitHub.
+A Eneko.P le queda la 36: la 31 (Terraform) sigue a su nombre, pero ya está hecha. Se aplicó el 29/10 en el Learner Lab de Adrian, que es quien tiene el laboratorio y los permisos de GitHub.
 
 ### 27/10/2026
 
