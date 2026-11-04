@@ -28,6 +28,11 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO rol_aplicacion;
 GRANT INSERT, UPDATE ON cliente, plato, articulo, stock, receta,
                         campana_marketing, envio_campana, empleado        TO rol_aplicacion;
 GRANT DELETE ON envio_campana, receta                                     TO rol_aplicacion;
+-- Tarea 56: compras y alérgenos los mantiene la aplicación. El historial de precios
+-- solo lo escribe R-07: la aplicación lo lee pero no puede tocarlo.
+GRANT INSERT, UPDATE ON proveedor, suministro                             TO rol_aplicacion;
+GRANT INSERT, DELETE ON plato_alergeno                                    TO rol_aplicacion;
+GRANT DELETE ON suministro                                                TO rol_aplicacion;
 
 -- R-04: las facturas emitidas no se modifican ni se borran. Solo INSERT.
 GRANT INSERT ON factura, linea_factura TO rol_aplicacion;

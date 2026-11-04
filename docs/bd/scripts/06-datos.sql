@@ -2,6 +2,8 @@
 -- Almi-Chain · Tarea 41 · Script 06: datos de prueba
 -- Carga un ejemplo coherente de la cadena: 2 locales, su personal, sus equipos
 -- (los de las tareas 8 y 10), la carta, el almacén, clientes, una campaña y ventas.
+-- Tarea 56: alérgenos de cada plato, proveedores con sus precios por local (relación
+-- ternaria) e historial de precios (con una subida de precio después de las ventas).
 -- Las ventas se hacen con INSERT normales: los disparadores de 02-reglas.sql numeran
 -- las facturas (R-05), comprueban TPV y empleado (R-01, R-02) y descuentan el stock (R-06).
 --
@@ -83,6 +85,25 @@ INSERT INTO plato (nombre, descripcion, categoria, precio, tipo_iva, es_estrella
   ('Agua mineral',          '50 cl',                                       'bebida',     1.82, 10, FALSE),
   ('Café',                  'Solo o con leche',                            'bebida',     1.45, 10, FALSE);
 
+-- La carta está vigente desde el 1/1/2026: R-07 abrió cada tramo con la hora de la
+-- carga, y aquí se pone la fecha real (lo hace el propietario, no la aplicación).
+UPDATE historial_precio_plato SET fecha_desde = '2026-01-01 00:00';
+
+-- Alérgenos (atributo multivaluado, tarea 56). Los platos sin fila no llevan ninguno.
+INSERT INTO plato_alergeno (id_plato, alergeno)
+SELECT p.id_plato, v.alergeno
+FROM (VALUES
+  ('Gilda', 'pescado'), ('Gilda', 'sulfitos'),
+  ('Croquetas de jamón', 'gluten'), ('Croquetas de jamón', 'lacteos'), ('Croquetas de jamón', 'huevos'),
+  ('Bacalao al pil-pil', 'pescado'),
+  ('Marmitako', 'pescado'),
+  ('Tarta de queso', 'lacteos'), ('Tarta de queso', 'huevos'), ('Tarta de queso', 'gluten'),
+  ('Pantxineta', 'gluten'), ('Pantxineta', 'lacteos'), ('Pantxineta', 'huevos'), ('Pantxineta', 'frutos_cascara'),
+  ('Caña', 'gluten'),
+  ('Txakoli (copa)', 'sulfitos')
+) AS v(plato, alergeno)
+JOIN plato p ON p.nombre = v.plato;
+
 -- ---- Almacén ------------------------------------------------------------------
 INSERT INTO articulo (nombre, unidad_medida) VALUES
   ('Anchoa', 'ud'), ('Guindilla', 'ud'), ('Aceituna', 'ud'),
@@ -125,6 +146,39 @@ FROM (VALUES
 ) AS v(local, articulo, cantidad, minimo)
 JOIN establecimiento e ON e.nombre = v.local
 JOIN articulo a ON a.nombre = v.articulo;
+
+-- ---- Proveedores (tarea 56) ---------------------------------------------------
+INSERT INTO proveedor (cif, nombre, telefono, email) VALUES
+  ('B00000011', 'Carnes Ejemplo S.L.',      '944000201', 'pedidos@carnes.ejemplo.test'),
+  ('B00000012', 'Pescados Ejemplo S.L.',    '944000202', 'pedidos@pescados.ejemplo.test'),
+  ('B00000013', 'Distribuciones Ejemplo',   '944000203', 'pedidos@distribuciones.ejemplo.test'),
+  ('B00000014', 'Mayorista Ejemplo S.A.',   '944000204', 'pedidos@mayorista.ejemplo.test');
+
+-- Relación ternaria: qué proveedor sirve qué artículo a qué local y a qué precio
+-- (por unidad de medida del artículo). La cerveza y el café se compran a dos
+-- proveedores en Abando; la chuleta cuesta distinto en cada local.
+INSERT INTO suministro (id_proveedor, id_articulo, id_establecimiento, precio_compra)
+SELECT pr.id_proveedor, a.id_articulo, e.id_establecimiento, v.precio
+FROM (VALUES
+  ('Carnes Ejemplo S.L.',    'Chuleta de vaca',   'Almi-Chain Abando', 24.50),
+  ('Carnes Ejemplo S.L.',    'Chuleta de vaca',   'Almi-Chain Deusto', 25.90),
+  ('Carnes Ejemplo S.L.',    'Masa de croqueta',  'Almi-Chain Abando',  9.80),
+  ('Carnes Ejemplo S.L.',    'Masa de croqueta',  'Almi-Chain Deusto',  9.80),
+  ('Pescados Ejemplo S.L.',  'Bacalao',           'Almi-Chain Abando', 18.00),
+  ('Pescados Ejemplo S.L.',  'Bonito',            'Almi-Chain Abando', 14.50),
+  ('Pescados Ejemplo S.L.',  'Anchoa',            'Almi-Chain Abando',  0.35),
+  ('Pescados Ejemplo S.L.',  'Anchoa',            'Almi-Chain Deusto',  0.38),
+  ('Distribuciones Ejemplo', 'Cerveza de barril', 'Almi-Chain Abando',  2.10),
+  ('Distribuciones Ejemplo', 'Cerveza de barril', 'Almi-Chain Deusto',  2.10),
+  ('Mayorista Ejemplo S.A.', 'Cerveza de barril', 'Almi-Chain Abando',  2.25),
+  ('Distribuciones Ejemplo', 'Café en grano',     'Almi-Chain Abando', 16.00),
+  ('Mayorista Ejemplo S.A.', 'Café en grano',     'Almi-Chain Abando', 15.40),
+  ('Distribuciones Ejemplo', 'Café en grano',     'Almi-Chain Deusto', 16.00),
+  ('Distribuciones Ejemplo', 'Txakoli',           'Almi-Chain Abando',  7.20)
+) AS v(proveedor, articulo, local, precio)
+JOIN proveedor pr      ON pr.nombre = v.proveedor
+JOIN articulo a        ON a.nombre = v.articulo
+JOIN establecimiento e ON e.nombre = v.local;
 
 -- ---- Clientes y marketing -----------------------------------------------------
 INSERT INTO cliente (nif, nombre, email, telefono, acepta_publicidad) VALUES
@@ -190,6 +244,10 @@ PERFORM pg_temp.venta('D1', 'Almi-Chain Deusto', '192.168.10.31', '00000006Y', '
        ARRAY['Croquetas de jamón','Caña'], ARRAY[2,2]);
 END $$;
 
+-- Después de las ventas sube el café (R-07 cierra el tramo de 1,45 y abre el de 1,55).
+-- Las facturas ya emitidas conservan el precio de entonces (consulta C-15).
+UPDATE plato SET precio = 1.55 WHERE nombre = 'Café';
+
 COMMIT;
 
 -- Resumen de lo cargado
@@ -205,4 +263,8 @@ UNION ALL SELECT 'cliente', count(*) FROM cliente
 UNION ALL SELECT 'campana_marketing', count(*) FROM campana_marketing
 UNION ALL SELECT 'envio_campana', count(*) FROM envio_campana
 UNION ALL SELECT 'factura', count(*) FROM factura
-UNION ALL SELECT 'linea_factura', count(*) FROM linea_factura;
+UNION ALL SELECT 'linea_factura', count(*) FROM linea_factura
+UNION ALL SELECT 'plato_alergeno', count(*) FROM plato_alergeno
+UNION ALL SELECT 'historial_precio_plato', count(*) FROM historial_precio_plato
+UNION ALL SELECT 'proveedor', count(*) FROM proveedor
+UNION ALL SELECT 'suministro', count(*) FROM suministro;

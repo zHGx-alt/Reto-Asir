@@ -11,7 +11,8 @@
 BEGIN;
 
 TRUNCATE establecimiento, empleado, cliente, modelo_equipo, equipo, plato, articulo,
-         stock, receta, factura, linea_factura, campana_marketing, envio_campana
+         stock, receta, factura, linea_factura, campana_marketing, envio_campana,
+         proveedor, suministro, plato_alergeno, historial_precio_plato
          RESTART IDENTITY CASCADE;
 
 -- Función auxiliar: ejecuta una sentencia y comprueba que falla (opcionalmente con cierto mensaje).
@@ -97,8 +98,34 @@ SELECT pg_temp.debe_fallar('R-06 venta sin stock suficiente', $$INSERT INTO line
 SELECT pg_temp.debe_fallar('línea con cantidad 0', $$INSERT INTO linea_factura SELECT id_factura,1,2,0,2.50,21 FROM factura WHERE serie='A' AND numero=2$$);
 SELECT pg_temp.debe_fallar('línea con plato vendido no borrable (RESTRICT)', $$DELETE FROM plato WHERE id_plato = 1$$);
 
+-- ---- Tarea 56: atributo multivaluado, relación ternaria e historial (R-07) ------
+INSERT INTO plato_alergeno VALUES (1,'gluten'), (1,'pescado');
+SELECT pg_temp.debe_fallar('alérgeno fuera de la lista de los 14', $$INSERT INTO plato_alergeno VALUES (2,'chocolate')$$);
+SELECT pg_temp.debe_fallar('alérgeno repetido en el mismo plato', $$INSERT INTO plato_alergeno VALUES (1,'gluten')$$);
+
+INSERT INTO proveedor (cif, nombre) VALUES ('B11111111','Panadería Uno'), ('B22222222','Panadería Dos');
+INSERT INTO suministro VALUES (1,1,1,0.40), (1,1,2,0.45), (2,1,1,0.38);
+SELECT pg_temp.debe_valer('ternaria: mismo proveedor y artículo, otro precio en otro local', (SELECT count(DISTINCT precio_compra) FROM suministro WHERE id_proveedor=1 AND id_articulo=1) = 2);
+SELECT pg_temp.debe_valer('ternaria: el local 1 compra el pan a dos proveedores', (SELECT count(*) FROM suministro WHERE id_articulo=1 AND id_establecimiento=1) = 2);
+SELECT pg_temp.debe_fallar('ternaria: misma terna repetida', $$INSERT INTO suministro VALUES (1,1,1,0.50)$$);
+SELECT pg_temp.debe_fallar('ternaria: precio de compra 0', $$INSERT INTO suministro VALUES (2,1,2,0)$$);
+SELECT pg_temp.debe_fallar('proveedor con CIF repetido', $$INSERT INTO proveedor (cif, nombre) VALUES ('B11111111','Otra')$$, 'uk_proveedor_cif');
+
+SELECT pg_temp.debe_valer('R-07 el alta del plato abre su primer tramo', (SELECT count(*) FROM historial_precio_plato WHERE id_plato=1 AND fecha_hasta IS NULL AND precio=3.00) = 1);
+UPDATE plato SET precio = 3.20 WHERE id_plato = 1;
+SELECT pg_temp.debe_valer('R-07 subir el precio cierra un tramo y abre otro', (SELECT count(*) FROM historial_precio_plato WHERE id_plato=1) = 2 AND (SELECT precio FROM historial_precio_plato WHERE id_plato=1 AND fecha_hasta IS NULL) = 3.20);
+UPDATE plato SET descripcion = 'Con pan' WHERE id_plato = 1;
+SELECT pg_temp.debe_valer('R-07 cambiar la descripción no crea tramo', (SELECT count(*) FROM historial_precio_plato WHERE id_plato=1) = 2);
+SELECT pg_temp.debe_valer('R-07 la línea ya vendida conserva su precio (3,00)', (SELECT precio_unitario FROM linea_factura WHERE id_plato=1 AND num_linea=1) = 3.00);
+SELECT pg_temp.debe_fallar('historial: dos tramos abiertos', $$INSERT INTO historial_precio_plato (id_plato,fecha_desde,precio,tipo_iva) VALUES (1,'2020-01-01',1,10)$$, 'ux_historial_abierto');
+SELECT pg_temp.debe_fallar('historial: fin anterior al inicio', $$INSERT INTO historial_precio_plato VALUES (1,'2020-01-02','2020-01-01',1,10)$$, 'ck_historial_fechas');
+
 -- ---- R-04: permisos del rol de la aplicación ------------------------------------
 SET LOCAL ROLE rol_aplicacion;
+SELECT pg_temp.debe_fallar('rol aplicación no escribe en el historial', $$INSERT INTO historial_precio_plato VALUES (2,'2020-01-01',NULL,1,10)$$, 'permission denied');
+SELECT pg_temp.debe_fallar('rol aplicación no corrige el historial', $$UPDATE historial_precio_plato SET precio = 0$$, 'permission denied');
+UPDATE plato SET precio = 2.80 WHERE id_plato = 2;   -- sí puede cambiar el precio; R-07 apunta el tramo
+SELECT pg_temp.debe_valer('rol aplicación cambia el precio y R-07 lo apunta', (SELECT precio FROM historial_precio_plato WHERE id_plato=2 AND fecha_hasta IS NULL) = 2.80);
 SELECT pg_temp.debe_fallar('R-04 UPDATE de FACTURA', $$UPDATE factura SET forma_pago='otro' WHERE serie='A' AND numero=1$$, 'permission denied');
 SELECT pg_temp.debe_fallar('R-04 DELETE de FACTURA', $$DELETE FROM factura WHERE serie='A' AND numero=1$$, 'permission denied');
 SELECT pg_temp.debe_fallar('R-04 UPDATE de LINEA_FACTURA', $$UPDATE linea_factura SET cantidad=9$$, 'permission denied');

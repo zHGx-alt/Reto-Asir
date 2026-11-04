@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Diagrama E/R de la tarea 38 en notación Chen.
+"""Diagrama E/R de la tarea 38 en notación Chen (ampliado en la tarea 56).
 
 Genera dos ficheros con las mismas posiciones:
   docs/bd/38-modelo-er-chen.svg     (se ve en GitHub)
@@ -24,11 +24,12 @@ def r(j):  # fila de la cuadrícula
     return 360 + 370 * j
 
 
-ANCHO, ALTO = 3500, r(5) + 330
+ANCHO, ALTO = c(7) + 460, r(5) + 820
 
 
 # Entidades: nombre -> (x, y, débil, [(atributo, ángulo, distancia, clave)])
-# clave: "pk" = identificador (subrayado), "parcial" = clave parcial de la débil (subrayado discontinuo)
+# clave: "pk" = identificador (subrayado), "parcial" = clave parcial de la débil (subrayado discontinuo),
+#        "multi" = multivaluado (doble elipse), "derivado" = se calcula (elipse discontinua)
 ENTIDADES = {
     "CAMPANA_MARKETING": (c(0), r(0), False, [
         ("id_campana", 200, 175, "pk"), ("nombre", 245, 190, ""), ("canal", 295, 190, ""),
@@ -45,7 +46,7 @@ ENTIDADES = {
     ]),
     "FACTURA": (c(2), r(2), False, [
         ("id_factura", 200, 185, "pk"), ("serie", 225, 210, ""), ("numero", 320, 205, ""),
-        ("fecha_hora", 345, 190, ""), ("forma_pago", 150, 185, ""),
+        ("fecha_hora", 345, 190, ""), ("forma_pago", 150, 185, ""), ("total", 20, 190, "derivado"),
     ]),
     "LINEA_FACTURA": (c(2), r(5), True, [
         ("num_linea", 200, 190, "parcial"), ("cantidad", 160, 200, ""),
@@ -53,7 +54,7 @@ ENTIDADES = {
     ]),
     "ESTABLECIMIENTO": (c(4), r(0), False, [
         ("id_establecimiento", 200, 200, "pk"), ("nombre", 232, 250, ""), ("direccion", 262, 175, ""),
-        ("ciudad", 292, 250, ""), ("telefono", 330, 200, ""), ("latitud", 140, 190, ""),
+        ("ciudad", 292, 250, ""), ("telefono", 345, 200, ""), ("latitud", 140, 190, ""),
         ("longitud", 40, 190, ""),
     ]),
     "EQUIPO": (c(4), r(2), False, [
@@ -65,12 +66,21 @@ ENTIDADES = {
         ("modelo", 20, 185, ""),
     ]),
     "PLATO": (c(4), r(5), False, [
-        ("id_plato", 225, 200, "pk"), ("nombre", 315, 200, ""), ("descripcion", 30, 175, ""),
-        ("categoria", 58, 240, ""), ("precio", 82, 170, ""), ("tipo_iva", 102, 240, ""),
-        ("es_estrella", 125, 175, ""), ("url_imagen", 150, 235, ""),
+        ("id_plato", 225, 200, "pk"), ("nombre", 315, 200, ""), ("descripcion", 25, 175, ""),
+        ("categoria", 50, 240, ""), ("precio", 70, 175, ""), ("tipo_iva", 110, 175, ""),
+        ("es_estrella", 130, 240, ""), ("url_imagen", 155, 175, ""), ("alergeno", 345, 190, "multi"),
+    ]),
+    # Tarea 56: historial (entidad débil de PLATO) y PROVEEDOR (relación ternaria)
+    "HISTORIAL_PRECIO_PLATO": (c(4), r(5) + 570, True, [
+        ("fecha_desde", 200, 200, "parcial"), ("fecha_hasta", 160, 200, ""),
+        ("precio", 20, 180, ""), ("tipo_iva", 340, 180, ""),
+    ]),
+    "PROVEEDOR": (c(7) + 60, r(5), False, [
+        ("id_proveedor", 340, 175, "pk"), ("email", 15, 185, ""), ("cif", 50, 185, ""),
+        ("nombre", 85, 185, ""), ("telefono", 120, 190, ""),
     ]),
     "ARTICULO": (c(6), r(5), False, [
-        ("id_articulo", 330, 185, "pk"), ("nombre", 20, 185, ""), ("unidad_medida", 75, 165, ""),
+        ("id_articulo", 15, 185, "pk"), ("nombre", 45, 185, ""), ("unidad_medida", 100, 165, ""),
     ]),
 }
 
@@ -105,9 +115,36 @@ RELACIONES = {
     "lleva": (c(5), r(5), "lleva", "RECETA", "N:M", False,
               [("cantidad", 90, 130)],
               [("PLATO", "(0,n)", ""), ("ARTICULO", "(0,n)", "")]),
+    # Tarea 56
+    "tuvo": (c(4), r(5) + 300, "tuvo precio", "", "1:N", True, [],
+             [("PLATO", "(1,1)", ""), ("HISTORIAL_PRECIO_PLATO", "(1,n)", "")]),
+    "suministra": (c(7) + 60, (r(3) + r(4)) // 2, "suministra", "SUMINISTRO", "N:M:P", False,
+                   [("precio_compra", 0, 190)],
+                   [("ESTABLECIMIENTO", "(0,n)", ""), ("ARTICULO", "(0,n)", ""), ("PROVEEDOR", "(0,n)", "")]),
 }
 
-ENT_W, ENT_H = 230, 64
+# Relación ternaria: la línea a ESTABLECIMIENTO rodea el diagrama por arriba
+# (sale del lado derecho de la entidad, sube y baja hasta el rombo).
+RODEO_Y = r(0) - 130
+RODEO_X = c(4) + 90
+
+# Etiquetas de cardinalidad colocadas a mano donde dos se pisarían
+ETIQUETAS_FIJAS = {
+    ("almacena", "ARTICULO"): (c(6) - 40, r(5) - 44),
+}
+
+
+def etiqueta(rel, ent, puntos, dy):
+    return ETIQUETAS_FIJAS.get((rel, ent)) or pos_etiqueta(puntos, dy)
+
+ENT_H = 64
+
+
+def ent_w(nombre):
+    return max(230, len(nombre) * 11 + 30)
+
+
+ENT_W = 230
 ATR_H = 38
 FUENTE = "DejaVu Sans, Arial, sans-serif"
 
@@ -150,12 +187,16 @@ def lineas_relacion(nombre):
         return tramos
     for ent, card, papel in partes:
         ex, ey = ENTIDADES[ent][:2]
-        tramos.append((ent, [(ex, ey), (rx, ry)], card, papel, 0))
+        if nombre == "suministra" and ent == "ESTABLECIMIENTO":
+            puntos = [(RODEO_X, ey), (RODEO_X, RODEO_Y), (rx, RODEO_Y), (rx, ry)]
+        else:
+            puntos = [(ex, ey), (rx, ry)]
+        tramos.append((ent, puntos, card, papel, 0))
     return tramos
 
 
 def pos_etiqueta(puntos, dy_reflexiva):
-    (x1, y1), (x2, y2) = puntos[0], puntos[-1]
+    (x1, y1), (x2, y2) = puntos[0], puntos[1]
     if dy_reflexiva:
         return x1 + 95, y1 + dy_reflexiva * 24
     sx, sy = salida_rect(x1, y1, ENT_W / 2, ENT_H / 2, x2, y2)
@@ -213,20 +254,23 @@ def svg():
         o.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-size="16" fill="#222">{escape(texto)}</text>')
         o.append(f'<text x="{x+w/4+6:.0f}" y="{y-h/4-8:.0f}" text-anchor="start" font-size="16" font-weight="bold" fill="#b07800">{tipo}</text>')
         if tabla:
-            o.append(f'<text x="{x-12}" y="{y+h/2+18}" text-anchor="end" font-size="14" fill="#666">tabla {tabla}</text>')
+            # en la ternaria, a la derecha: por la izquierda baja la línea a ARTICULO
+            lado = ("start", x + 12) if rel == "suministra" else ("end", x - 12)
+            o.append(f'<text x="{lado[1]}" y="{y+h/2+18}" text-anchor="{lado[0]}" font-size="14" fill="#666">tabla {tabla}</text>')
 
     # Entidades
     for ent, (x, y, debil, _a) in ENTIDADES.items():
-        x0, y0 = x - ENT_W / 2, y - ENT_H / 2
-        o.append(f'<rect x="{x0}" y="{y0}" width="{ENT_W}" height="{ENT_H}" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>')
+        w = ent_w(ent)
+        x0, y0 = x - w / 2, y - ENT_H / 2
+        o.append(f'<rect x="{x0}" y="{y0}" width="{w}" height="{ENT_H}" fill="#e3effb" stroke="#1f5f99" stroke-width="2.5"/>')
         if debil:
-            o.append(f'<rect x="{x0+6}" y="{y0+6}" width="{ENT_W-12}" height="{ENT_H-12}" fill="none" stroke="#1f5f99" stroke-width="2"/>')
+            o.append(f'<rect x="{x0+6}" y="{y0+6}" width="{w-12}" height="{ENT_H-12}" fill="none" stroke="#1f5f99" stroke-width="2"/>')
         o.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-size="17" font-weight="bold" fill="#123">{ent}</text>')
 
     # Cardinalidades
     for rel in RELACIONES:
         for _ent, puntos, card, papel, dy in lineas_relacion(rel):
-            lx, ly = pos_etiqueta(puntos, dy)
+            lx, ly = etiqueta(rel, _ent, puntos, dy)
             txt = f"{papel} {card}" if papel else card
             o.append(f'<text x="{lx:.0f}" y="{ly:.0f}" text-anchor="middle" font-size="15" font-weight="bold" fill="#a3001b">{escape(txt)}</text>')
 
@@ -238,8 +282,11 @@ def svg():
 def atributo_svg(x, y, nombre, clave):
     w = ancho_atributo(nombre)
     subrayado = ' text-decoration="underline"' if clave == "pk" else ""
-    s = (f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{w/2:.0f}" ry="{ATR_H/2}" fill="#ffffff" stroke="#555" stroke-width="1.5"/>\n'
-         f'<text x="{x:.0f}" y="{y+5:.0f}" text-anchor="middle" font-size="15" fill="#222"{subrayado}>{escape(nombre)}</text>')
+    trazo = ' stroke-dasharray="6,4"' if clave == "derivado" else ""
+    s = f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{w/2:.0f}" ry="{ATR_H/2}" fill="#ffffff" stroke="#555" stroke-width="1.5"{trazo}/>\n'
+    if clave == "multi":  # multivaluado: doble elipse
+        s += f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{w/2-5:.0f}" ry="{ATR_H/2-5}" fill="none" stroke="#555" stroke-width="1.5"/>\n'
+    s += (f'<text x="{x:.0f}" y="{y+5:.0f}" text-anchor="middle" font-size="15" fill="#222"{subrayado}>{escape(nombre)}</text>')
     if clave == "parcial":  # clave parcial: subrayado discontinuo
         tw = len(nombre) * 15 * 0.55
         s += (f'\n<line x1="{x-tw/2:.0f}" y1="{y+10:.0f}" x2="{x+tw/2:.0f}" y2="{y+10:.0f}" '
@@ -248,22 +295,24 @@ def atributo_svg(x, y, nombre, clave):
 
 
 LEYENDA = [
-    "Modelo E/R de Almi-Chain · notación Chen · tarea 38",
+    "Modelo E/R de Almi-Chain · notación Chen · tareas 38 y 56",
     "",
     "Rectángulo: entidad · doble rectángulo: entidad débil",
     "Rombo: relación · doble rombo: relación identificadora",
+    "Rombo con tres líneas: relación ternaria (suministra)",
     "Elipse: atributo · subrayado: identificador",
     "Subrayado discontinuo: clave parcial de la débil",
+    "Doble elipse: multivaluado · discontinua: derivado",
     "",
     "(mín,máx) junto a una entidad: cuántas ocurrencias de",
     "esa entidad se relacionan con UNA de la otra.",
     "Ej.: EMPLEADO (0,n) · ESTABLECIMIENTO (1,1): un local",
     "tiene de 0 a n empleados; un empleado, uno y solo uno.",
-    "Encima del rombo, el tipo: 1:N o N:M.",
+    "Encima del rombo, el tipo: 1:N, N:M o N:M:P.",
     "",
     "Las claves ajenas no se dibujan: son las relaciones.",
     "Las N:M con atributos son tablas en el modelo lógico",
-    "(tarea 39): STOCK, RECETA y ENVIO_CAMPANA.",
+    "(tarea 39): STOCK, RECETA, ENVIO_CAMPANA y SUMINISTRO.",
 ]
 
 LEYENDA_Y = r(3) + 120
@@ -310,12 +359,17 @@ def drawio():
             valor = f'<span style="text-decoration: underline dashed">{nombre}</span>'
         else:
             valor = nombre
-        i = vertice(valor, "ellipse;whiteSpace=wrap;html=1;fontSize=14;", x - w / 2, y - ATR_H / 2, w, ATR_H)
+        estilo = "ellipse;whiteSpace=wrap;html=1;fontSize=14;"
+        if clave == "multi":
+            estilo = "ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;fontSize=14;"
+        elif clave == "derivado":
+            estilo += "dashed=1;"
+        i = vertice(valor, estilo, x - w / 2, y - ATR_H / 2, w, ATR_H)
         arista(padre, i, "endArrow=none;html=1;strokeColor=#888888;")
 
     for ent, (x, y, debil, atrs) in ENTIDADES.items():
         estilo = ("shape=ext;double=1;" if debil else "") + "rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=16;fillColor=#dae8fc;strokeColor=#1f5f99;"
-        ids[ent] = vertice(ent, estilo, x - ENT_W / 2, y - ENT_H / 2, ENT_W, ENT_H)
+        ids[ent] = vertice(ent, estilo, x - ent_w(ent) / 2, y - ENT_H / 2, ent_w(ent), ENT_H)
         for nombre, ang, dist, clave in atrs:
             atributo(*pos_atributo(x, y, ang, dist), nombre, clave, ids[ent])
 
@@ -331,9 +385,12 @@ def drawio():
             estilo_l = "endArrow=none;html=1;strokeWidth=2;"
             if rel == "conectada":
                 arista(ids[ent], rid, estilo_l + f"exitX=1;exitY={0.5 + dy * 0.25};entryX=0.25;entryY={0.5 + dy * 0.25};")
+            elif len(puntos) > 2:  # rodeo de la ternaria
+                ex = (RODEO_X - (ENTIDADES[ent][0] - ent_w(ent) / 2)) / ent_w(ent)
+                arista(ids[ent], rid, estilo_l + f"exitX={ex:.2f};exitY=0;entryX=0.5;entryY=0;", puntos[1:3])
             else:
                 arista(ids[ent], rid, estilo_l)
-            lx, ly = pos_etiqueta(puntos, dy)
+            lx, ly = etiqueta(rel, ent, puntos, dy)
             txt = f"{papel} {card}" if papel else card
             vertice(txt, "text;html=1;align=center;fontStyle=1;fontColor=#a3001b;fontSize=14;", lx - 50, ly - 16, 100, 22)
 

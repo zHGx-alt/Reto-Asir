@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="858" height="716" viewBox="0 0 858 716" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="12">
+<svg xmlns="http://www.w3.org/2000/svg" width="858" height="694" viewBox="0 0 858 694" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="12">
 <style>.t{fill:#0b0b0b}.s{fill:#52514e}.m{fill:#8a8984}.b{font-weight:600}</style>
-<rect width="858" height="716" fill="#fcfcfb"/>
+<rect width="858" height="694" fill="#fcfcfb"/>
 <text x="16" y="28" class="t b" font-size="16">Almi-Chain · Plan final 04/11–11/11</text>
-<text x="16" y="48" class="s">04/11/2026 – 11/11/2026 · 6 días laborables (sin fines de semana) · 16 tareas</text>
+<text x="16" y="48" class="s">04/11/2026 – 11/11/2026 · 6 días laborables (sin fines de semana) · 15 tareas</text>
 <text x="606" y="70" class="t b">Semana 1<tspan class="s" font-weight="400"> 04/11–06/11</tspan></text>
 <text x="726" y="70" class="t b">Semana 2<tspan class="s" font-weight="400"> 09/11–11/11</tspan></text>
 <text x="622.0" y="86" text-anchor="middle" class="s" font-size="11">X 4</text>
@@ -15,13 +15,13 @@
 <text x="44" y="86" class="s b" font-size="11">Tarea</text>
 <text x="444" y="86" class="s b" font-size="11">Responsable</text>
 <text x="528" y="86" class="s b" font-size="11">Necesita</text>
-<line x1="602" y1="74" x2="602" y2="652" stroke="#b8b7b0" stroke-width="1"/>
-<line x1="642" y1="92" x2="642" y2="652" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="682" y1="92" x2="682" y2="652" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="722" y1="74" x2="722" y2="652" stroke="#b8b7b0" stroke-width="1"/>
-<line x1="762" y1="92" x2="762" y2="652" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="802" y1="92" x2="802" y2="652" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="842" y1="74" x2="842" y2="652" stroke="#b8b7b0" stroke-width="1"/>
+<line x1="602" y1="74" x2="602" y2="630" stroke="#b8b7b0" stroke-width="1"/>
+<line x1="642" y1="92" x2="642" y2="630" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="682" y1="92" x2="682" y2="630" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="722" y1="74" x2="722" y2="630" stroke="#b8b7b0" stroke-width="1"/>
+<line x1="762" y1="92" x2="762" y2="630" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="802" y1="92" x2="802" y2="630" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="842" y1="74" x2="842" y2="630" stroke="#b8b7b0" stroke-width="1"/>
 <rect x="16" y="92" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="109" class="t b">0 Gestión</text>
 <line x1="16" y1="140" x2="842" y2="140" stroke="#f0efeb"/>
@@ -84,86 +84,79 @@
 <rect x="16" y="376" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="393" class="t b">8 BD</text>
 <line x1="16" y1="424" x2="842" y2="424" stroke="#f0efeb"/>
-<text x="16" y="417.0" class="s">56</text>
-<text x="44" y="417.0" class="t">Ampliar el E/R: relación ternaria, historiales y atributos especiales</text>
-<circle cx="449" cy="413.0" r="4.5" fill="#1baf7a"/>
-<text x="458" y="417.0" class="t">Eneko.S</text>
-<text x="528" y="417.0" class="s">38</text>
-<rect x="604" y="406" width="76" height="14" rx="4" fill="#1baf7a"><title>56. Ampliar el E/R: relación ternaria, historiales y atributos especiales · Eneko.S · 04/11–05/11 · Pendiente</title></rect>
-<line x1="16" y1="446" x2="842" y2="446" stroke="#f0efeb"/>
-<text x="16" y="439.0" class="s">57</text>
-<text x="44" y="439.0" class="t">Integrar la BD propia con la de Odoo</text>
-<circle cx="449" cy="435.0" r="4.5" fill="#eda100"/>
-<text x="458" y="439.0" class="t">Iker</text>
-<text x="528" y="439.0" class="s">34, 40</text>
-<rect x="684" y="428" width="116" height="14" rx="4" fill="#eda100"><title>57. Integrar la BD propia con la de Odoo · Iker · 06/11–10/11 · Pendiente</title></rect>
-<rect x="16" y="446" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
-<text x="22" y="463" class="t b">10 Seguridad</text>
-<line x1="16" y1="494" x2="842" y2="494" stroke="#f0efeb"/>
-<text x="16" y="487.0" class="s">46</text>
-<text x="44" y="487.0" class="t">Revisión de seguridad transversal</text>
-<circle cx="449" cy="483.0" r="4.5" fill="#2a78d6"/>
-<text x="458" y="487.0" class="t">Adrian</text>
-<text x="528" y="487.0" class="s">13, 24, 30, 42, 52</text>
-<rect x="604" y="476" width="116" height="14" rx="4" fill="#2a78d6" stroke="#0b0b0b" stroke-width="1.5"><title>46. Revisión de seguridad transversal · Adrian · 02/11–06/11 · En curso</title></rect>
-<rect x="16" y="494" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
-<text x="22" y="511" class="t b">11 Entrega</text>
+<text x="16" y="417.0" class="s">57</text>
+<text x="44" y="417.0" class="t">Integrar la BD propia con la de Odoo</text>
+<circle cx="449" cy="413.0" r="4.5" fill="#eda100"/>
+<text x="458" y="417.0" class="t">Iker</text>
+<text x="528" y="417.0" class="s">34, 40</text>
+<rect x="684" y="406" width="116" height="14" rx="4" fill="#eda100"><title>57. Integrar la BD propia con la de Odoo · Iker · 06/11–10/11 · Pendiente</title></rect>
+<rect x="16" y="424" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
+<text x="22" y="441" class="t b">10 Seguridad</text>
+<line x1="16" y1="472" x2="842" y2="472" stroke="#f0efeb"/>
+<text x="16" y="465.0" class="s">46</text>
+<text x="44" y="465.0" class="t">Revisión de seguridad transversal</text>
+<circle cx="449" cy="461.0" r="4.5" fill="#2a78d6"/>
+<text x="458" y="465.0" class="t">Adrian</text>
+<text x="528" y="465.0" class="s">13, 24, 30, 42, 52</text>
+<rect x="604" y="454" width="116" height="14" rx="4" fill="#2a78d6" stroke="#0b0b0b" stroke-width="1.5"><title>46. Revisión de seguridad transversal · Adrian · 02/11–06/11 · En curso</title></rect>
+<rect x="16" y="472" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
+<text x="22" y="489" class="t b">11 Entrega</text>
+<line x1="16" y1="520" x2="842" y2="520" stroke="#f0efeb"/>
+<text x="16" y="513.0" class="s">47</text>
+<text x="44" y="513.0" class="t">Tabla de pruebas por bloque</text>
+<circle cx="449" cy="509.0" r="4.5" fill="#1baf7a"/>
+<text x="458" y="513.0" class="t">Eneko.S</text>
+<text x="528" y="513.0" class="s">21, 25, 26, 29</text>
+<rect x="764" y="502" width="76" height="14" rx="4" fill="#1baf7a" stroke="#0b0b0b" stroke-width="1.5"><title>47. Tabla de pruebas por bloque · Eneko.S · 10/11–11/11 · En curso</title></rect>
 <line x1="16" y1="542" x2="842" y2="542" stroke="#f0efeb"/>
-<text x="16" y="535.0" class="s">47</text>
-<text x="44" y="535.0" class="t">Tabla de pruebas por bloque</text>
-<circle cx="449" cy="531.0" r="4.5" fill="#1baf7a"/>
-<text x="458" y="535.0" class="t">Eneko.S</text>
-<text x="528" y="535.0" class="s">21, 25, 26, 29</text>
-<rect x="764" y="524" width="76" height="14" rx="4" fill="#1baf7a" stroke="#0b0b0b" stroke-width="1.5"><title>47. Tabla de pruebas por bloque · Eneko.S · 10/11–11/11 · En curso</title></rect>
+<text x="16" y="535.0" class="s">48</text>
+<text x="44" y="535.0" class="t">Documentación final paso a paso</text>
+<circle cx="449" cy="531.0" r="4.5" fill="#e87ba4"/>
+<text x="458" y="535.0" class="t">Markel</text>
+<text x="528" y="535.0" class="s">45</text>
+<rect x="724" y="524" width="116" height="14" rx="4" fill="#e87ba4" stroke="#0b0b0b" stroke-width="1.5"><title>48. Documentación final paso a paso · Markel · 09/11–11/11 · En curso</title></rect>
 <line x1="16" y1="564" x2="842" y2="564" stroke="#f0efeb"/>
-<text x="16" y="557.0" class="s">48</text>
-<text x="44" y="557.0" class="t">Documentación final paso a paso</text>
-<circle cx="449" cy="553.0" r="4.5" fill="#e87ba4"/>
-<text x="458" y="557.0" class="t">Markel</text>
-<text x="528" y="557.0" class="s">45</text>
-<rect x="724" y="546" width="116" height="14" rx="4" fill="#e87ba4" stroke="#0b0b0b" stroke-width="1.5"><title>48. Documentación final paso a paso · Markel · 09/11–11/11 · En curso</title></rect>
+<text x="16" y="557.0" class="s">49</text>
+<text x="44" y="557.0" class="t">Presentación y ensayo</text>
+<circle cx="449" cy="553.0" r="4.5" fill="#008300"/>
+<text x="458" y="557.0" class="t">Peio</text>
+<text x="528" y="557.0" class="s">46</text>
+<rect x="764" y="546" width="76" height="14" rx="4" fill="#008300"><title>49. Presentación y ensayo · Peio · 10/11–11/11 · Pendiente</title></rect>
 <line x1="16" y1="586" x2="842" y2="586" stroke="#f0efeb"/>
-<text x="16" y="579.0" class="s">49</text>
-<text x="44" y="579.0" class="t">Presentación y ensayo</text>
-<circle cx="449" cy="575.0" r="4.5" fill="#008300"/>
-<text x="458" y="579.0" class="t">Peio</text>
-<text x="528" y="579.0" class="s">46</text>
-<rect x="764" y="568" width="76" height="14" rx="4" fill="#008300"><title>49. Presentación y ensayo · Peio · 10/11–11/11 · Pendiente</title></rect>
+<text x="16" y="579.0" class="s">58</text>
+<text x="44" y="579.0" class="t">Tecnologías habilitadoras: análisis y comparativa</text>
+<circle cx="449" cy="575.0" r="4.5" fill="#eb6834"/>
+<text x="458" y="579.0" class="t">Eneko.P</text>
+<text x="528" y="579.0" class="s">30, 32</text>
+<rect x="724" y="568" width="76" height="14" rx="4" fill="#eb6834"><title>58. Tecnologías habilitadoras: análisis y comparativa · Eneko.P · 09/11–10/11 · Pendiente</title></rect>
 <line x1="16" y1="608" x2="842" y2="608" stroke="#f0efeb"/>
-<text x="16" y="601.0" class="s">58</text>
-<text x="44" y="601.0" class="t">Tecnologías habilitadoras: análisis y comparativa</text>
-<circle cx="449" cy="597.0" r="4.5" fill="#eb6834"/>
-<text x="458" y="601.0" class="t">Eneko.P</text>
-<text x="528" y="601.0" class="s">30, 32</text>
-<rect x="724" y="590" width="76" height="14" rx="4" fill="#eb6834"><title>58. Tecnologías habilitadoras: análisis y comparativa · Eneko.P · 09/11–10/11 · Pendiente</title></rect>
+<text x="16" y="601.0" class="s">61</text>
+<text x="44" y="601.0" class="t">Poner al día los textos desfasados que señala la auditoría</text>
+<circle cx="449" cy="597.0" r="4.5" fill="#008300"/>
+<text x="458" y="601.0" class="t">Peio</text>
+<text x="528" y="601.0" class="s">—</text>
+<rect x="684" y="590" width="76" height="14" rx="4" fill="#008300"><title>61. Poner al día los textos desfasados que señala la auditoría · Peio · 06/11–09/11 · Pendiente</title></rect>
 <line x1="16" y1="630" x2="842" y2="630" stroke="#f0efeb"/>
-<text x="16" y="623.0" class="s">61</text>
-<text x="44" y="623.0" class="t">Poner al día los textos desfasados que señala la auditoría</text>
-<circle cx="449" cy="619.0" r="4.5" fill="#008300"/>
-<text x="458" y="623.0" class="t">Peio</text>
+<text x="16" y="623.0" class="s">62</text>
+<text x="44" y="623.0" class="t">Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA</text>
+<circle cx="449" cy="619.0" r="4.5" fill="#1baf7a"/>
+<text x="458" y="623.0" class="t">Eneko.S</text>
 <text x="528" y="623.0" class="s">—</text>
-<rect x="684" y="612" width="76" height="14" rx="4" fill="#008300"><title>61. Poner al día los textos desfasados que señala la auditoría · Peio · 06/11–09/11 · Pendiente</title></rect>
-<line x1="16" y1="652" x2="842" y2="652" stroke="#f0efeb"/>
-<text x="16" y="645.0" class="s">62</text>
-<text x="44" y="645.0" class="t">Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA</text>
-<circle cx="449" cy="641.0" r="4.5" fill="#1baf7a"/>
-<text x="458" y="645.0" class="t">Eneko.S</text>
-<text x="528" y="645.0" class="s">—</text>
-<rect x="684" y="634" width="76" height="14" rx="4" fill="#1baf7a"><title>62. Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA · Eneko.S · 06/11–09/11 · Pendiente</title></rect>
-<rect x="16" y="676" width="22" height="12" rx="4" fill="#2a78d6"/>
-<text x="44" y="686" class="t">Adrian</text>
-<rect x="116" y="676" width="22" height="12" rx="4" fill="#eb6834"/>
-<text x="144" y="686" class="t">Eneko.P</text>
-<rect x="216" y="676" width="22" height="12" rx="4" fill="#1baf7a"/>
-<text x="244" y="686" class="t">Eneko.S</text>
-<rect x="316" y="676" width="22" height="12" rx="4" fill="#eda100"/>
-<text x="344" y="686" class="t">Iker</text>
-<rect x="416" y="676" width="22" height="12" rx="4" fill="#e87ba4"/>
-<text x="444" y="686" class="t">Markel</text>
-<rect x="516" y="676" width="22" height="12" rx="4" fill="#008300"/>
-<text x="544" y="686" class="t">Peio</text>
-<rect x="636" y="676" width="22" height="12" rx="4" fill="#8a8984" stroke="#0b0b0b" stroke-width="1.5"/>
-<text x="664" y="686" class="s">En curso</text>
-<rect x="736" y="676" width="22" height="12" rx="4" fill="#8a8984" fill-opacity="0.4"/>
-<text x="764" y="686" class="s">Hecho ✓</text>
+<rect x="684" y="612" width="76" height="14" rx="4" fill="#1baf7a"><title>62. Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA · Eneko.S · 06/11–09/11 · Pendiente</title></rect>
+<rect x="16" y="654" width="22" height="12" rx="4" fill="#2a78d6"/>
+<text x="44" y="664" class="t">Adrian</text>
+<rect x="116" y="654" width="22" height="12" rx="4" fill="#eb6834"/>
+<text x="144" y="664" class="t">Eneko.P</text>
+<rect x="216" y="654" width="22" height="12" rx="4" fill="#1baf7a"/>
+<text x="244" y="664" class="t">Eneko.S</text>
+<rect x="316" y="654" width="22" height="12" rx="4" fill="#eda100"/>
+<text x="344" y="664" class="t">Iker</text>
+<rect x="416" y="654" width="22" height="12" rx="4" fill="#e87ba4"/>
+<text x="444" y="664" class="t">Markel</text>
+<rect x="516" y="654" width="22" height="12" rx="4" fill="#008300"/>
+<text x="544" y="664" class="t">Peio</text>
+<rect x="636" y="654" width="22" height="12" rx="4" fill="#8a8984" stroke="#0b0b0b" stroke-width="1.5"/>
+<text x="664" y="664" class="s">En curso</text>
+<rect x="736" y="654" width="22" height="12" rx="4" fill="#8a8984" fill-opacity="0.4"/>
+<text x="764" y="664" class="s">Hecho ✓</text>
 </svg>

@@ -1,7 +1,9 @@
 -- =============================================================================
 -- Almi-Chain · Tarea 40 · Script 01: tablas, índices y vista
 -- Gestor: PostgreSQL 16 (válido desde PostgreSQL 12)
--- Origen: modelo lógico 3FN de la tarea 39 (13 tablas + vista v_factura_totales)
+-- Origen: modelo lógico 3FN de la tarea 39 (17 tablas + vista v_factura_totales).
+-- Tarea 56: PROVEEDOR y SUMINISTRO (relación ternaria), PLATO_ALERGENO (atributo
+-- multivaluado) e HISTORIAL_PRECIO_PLATO (historial; lo rellena R-07 en 02-reglas.sql).
 --
 -- Se ejecuta UNA VEZ en la base central de la cadena (ver tarea 38, apartado 1.1):
 --   psql -d almi_chain -v ON_ERROR_STOP=1 -f 01-crear-tablas.sql
@@ -93,12 +95,50 @@ CREATE TABLE plato (
     CONSTRAINT uk_plato_nombre UNIQUE (nombre)
 );
 
+-- Tarea 56. Atributo multivaluado de PLATO: un plato tiene 0 o más alérgenos.
+-- Lista de los 14 alérgenos de declaración obligatoria (Reglamento UE 1169/2011, anexo II).
+CREATE TABLE plato_alergeno (
+    id_plato INTEGER     NOT NULL
+             REFERENCES plato (id_plato) ON DELETE CASCADE,
+    alergeno VARCHAR(20) NOT NULL
+             CHECK (alergeno IN ('gluten','crustaceos','huevos','pescado','cacahuetes',
+                                 'soja','lacteos','frutos_cascara','apio','mostaza',
+                                 'sesamo','sulfitos','altramuces','moluscos')),
+    PRIMARY KEY (id_plato, alergeno)
+);
+
+-- Tarea 56. Historial de precios de PLATO (entidad débil): un tramo por cada precio
+-- que ha tenido. El tramo abierto (fecha_hasta NULL) es el precio actual.
+-- Lo escribe el disparador R-07 de 02-reglas.sql; la aplicación solo puede leerlo.
+CREATE TABLE historial_precio_plato (
+    id_plato    INTEGER      NOT NULL
+                REFERENCES plato (id_plato) ON DELETE CASCADE,
+    fecha_desde TIMESTAMP    NOT NULL,
+    fecha_hasta TIMESTAMP,
+    precio      NUMERIC(8,2) NOT NULL CHECK (precio >= 0),
+    tipo_iva    NUMERIC(4,2) NOT NULL CHECK (tipo_iva IN (4, 10, 21)),
+    PRIMARY KEY (id_plato, fecha_desde),
+    CONSTRAINT ck_historial_fechas CHECK (fecha_hasta IS NULL OR fecha_hasta > fecha_desde)
+);
+-- Un solo tramo abierto por plato (índice único parcial).
+CREATE UNIQUE INDEX ux_historial_abierto ON historial_precio_plato (id_plato) WHERE fecha_hasta IS NULL;
+
 CREATE TABLE articulo (
     id_articulo   INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre        VARCHAR(100) NOT NULL,
     unidad_medida VARCHAR(10)  NOT NULL
                   CHECK (unidad_medida IN ('kg','g','l','ml','ud')),
     CONSTRAINT uk_articulo_nombre UNIQUE (nombre)
+);
+
+-- Tarea 56.
+CREATE TABLE proveedor (
+    id_proveedor INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    cif          VARCHAR(9)   NOT NULL,
+    nombre       VARCHAR(150) NOT NULL,
+    telefono     VARCHAR(20),
+    email        VARCHAR(254),
+    CONSTRAINT uk_proveedor_cif UNIQUE (cif)
 );
 
 CREATE TABLE stock (
@@ -109,6 +149,21 @@ CREATE TABLE stock (
     cantidad           NUMERIC(10,3) NOT NULL CHECK (cantidad >= 0),
     stock_minimo       NUMERIC(10,3) NOT NULL DEFAULT 0 CHECK (stock_minimo >= 0),
     PRIMARY KEY (id_establecimiento, id_articulo)
+);
+
+-- Tarea 56. Relación ternaria PROVEEDOR–ARTICULO–ESTABLECIMIENTO: qué proveedor sirve
+-- qué artículo a qué local, y a qué precio. La clave son las tres claves ajenas: el
+-- precio depende de las tres a la vez (el mismo proveedor cobra distinto en cada local,
+-- y un local compra el mismo artículo a varios proveedores).
+CREATE TABLE suministro (
+    id_proveedor       INTEGER NOT NULL
+                       REFERENCES proveedor (id_proveedor) ON DELETE CASCADE,
+    id_articulo        INTEGER NOT NULL
+                       REFERENCES articulo (id_articulo) ON DELETE RESTRICT,
+    id_establecimiento INTEGER NOT NULL
+                       REFERENCES establecimiento (id_establecimiento) ON DELETE RESTRICT,
+    precio_compra      NUMERIC(10,2) NOT NULL CHECK (precio_compra > 0),  -- por unidad_medida del artículo
+    PRIMARY KEY (id_proveedor, id_articulo, id_establecimiento)
 );
 
 CREATE TABLE receta (
@@ -176,6 +231,8 @@ CREATE INDEX ix_factura_equipo           ON factura (id_equipo);
 CREATE INDEX ix_factura_fecha            ON factura (fecha_hora);
 CREATE INDEX ix_linea_plato              ON linea_factura (id_plato);
 CREATE INDEX ix_envio_cliente            ON envio_campana (id_cliente);
+CREATE INDEX ix_suministro_articulo_local ON suministro (id_articulo, id_establecimiento);
+CREATE INDEX ix_suministro_local          ON suministro (id_establecimiento);
 
 -- Vista que sustituye a base_imponible, iva y total (cambio C-01 de la tarea 39).
 CREATE VIEW v_factura_totales AS

@@ -7,7 +7,8 @@ BEGIN;
 
 DROP VIEW IF EXISTS v_factura_totales;
 
-DROP TABLE IF EXISTS envio_campana, campana_marketing, linea_factura, factura,
+DROP TABLE IF EXISTS suministro, proveedor, historial_precio_plato, plato_alergeno,
+                     envio_campana, campana_marketing, linea_factura, factura,
                      receta, stock, articulo, plato, equipo, modelo_equipo,
                      cliente, empleado, establecimiento CASCADE;
 
@@ -15,6 +16,7 @@ DROP FUNCTION IF EXISTS fn_equipo_impresora_tpv();
 DROP FUNCTION IF EXISTS fn_factura_coherencia();
 DROP FUNCTION IF EXISTS fn_factura_numeracion();
 DROP FUNCTION IF EXISTS fn_linea_descuenta_stock();
+DROP FUNCTION IF EXISTS fn_plato_historial_precio();
 
 -- Los roles son globales del servidor: se eliminan solo si no los usa otra base.
 -- DROP ROLE IF EXISTS rol_aplicacion;
