@@ -45,7 +45,7 @@ Las versiones son las que se han instalado y probado en las máquinas virtuales 
 | unattended-upgrades | El de Debian 13 | Actualizaciones de seguridad a las 5:00 (tarea 17) | Libre, GPL v2 | 0 € | [optimizar-arcade.sh](../arcade/17-rendimiento-mame/optimizar-arcade.sh) |
 | ROMs | — | Solo las 5 que publica el equipo de MAME con permiso de sus autores | Uso no comercial | 0 € | [Tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md) |
 | Batocera *(alternativa en estudio, tarea 51)* | Pendiente de decidir | Sistema todo en uno para emuladores | Libre | 0 € | [Notas](../arcade/16-batocera/NOTAS.md) |
-| Firmware del arcade stick | Propio, compilado con PlatformIO para Arduino Leonardo | Joystick HID con mapeo en EEPROM | Propio del equipo | 0 € | [Firmware](../../arduino/mando-joystick/README.md) |
+| Firmware del arcade stick | Propio, compilado con el Arduino IDE o `arduino-cli` (`subir.sh`) para Arduino Leonardo | Joystick HID con mapeo en EEPROM | Propio del equipo | 0 € | [Firmware](../../arduino/mando-joystick/README.md) |
 
 ## 5. Web (AWS)
 

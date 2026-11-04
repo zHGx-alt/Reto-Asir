@@ -17,7 +17,7 @@ Tareas relacionadas en el [backlog](../../docs/gestion/backlog-kanban.csv): #19 
 | **Prueba en la placa real** | **Hecha el 27/10** (tarea #50): botones, palanca, puerto serie y EEPROM. Ver [la prueba](#prueba-en-físico-tarea-50) |
 | Pruebas con MAME y otro emulador | Hecho (tarea #21): en MAME, partida de *Gridlee* con el stick en la recreativa de 1 GB ([tarea 53](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md), P4 y P10, 29/10); en Batocera (RetroArch), entradas comprobadas ([evtest](evidencias/batocera-evtest-2026-10-27.txt)) y partida jugada el 27/10, sin captura |
 
-Compila con `pio run` (26/10, Flash 37,4 %, RAM 17,4 %) y funciona en la placa real desde el 27/10.
+Funciona en la placa real desde el 27/10. Desde el 04/11 lleva antirrebote por software (5 ms por entrada) y ya no usa `delay(10)`; `bash prueba-antirrebote/probar.sh` compila el `.ino` en el PC y lo prueba con rebotes simulados (9 de 9 OK). **Falta subirlo a la placa y probarlo** con el stick (tarea 59).
 
 ## Conexiones
 
@@ -69,23 +69,9 @@ Probado el 27/10/2026 en la placa real (Keyestudio Leonardo): 10 722 bytes graba
 4. *Herramientas → Placa → Arduino Leonardo* y el puerto `/dev/ttyACM0` (en Windows, `COMx`).
 5. *Subir*. Si no encuentra la placa al subir, pulsar el botón **RESET** de la placa justo cuando aparezca "Subiendo…".
 
-### PlatformIO
-
-Desde esta carpeta (VS Code o CLI). Usa el mismo `.ino`:
-
-```bash
-pio run -t upload
-```
-
-La librería `mheironimus/Joystick` se descarga sola (está en [platformio.ini](platformio.ini)).
-
 ## Configuración por puerto serie
 
-Abre el monitor serie a 9600 baudios. En el Arduino IDE, *Herramientas → Monitor serie* con el fin de línea en "Nueva línea". Con PlatformIO:
-
-```bash
-pio device monitor -b 9600
-```
+Abre el monitor serie a 9600 baudios. En el Arduino IDE, *Herramientas → Monitor serie* con el fin de línea en "Nueva línea". Desde la terminal, `./subir.sh monitor`.
 
 Los botones se numeran desde 1.
 
