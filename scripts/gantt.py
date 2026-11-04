@@ -15,6 +15,9 @@ RAIZ = Path(__file__).resolve().parent.parent
 CSV = RAIZ / "docs/gestion/backlog-kanban.csv"
 SALIDA = RAIZ / "docs/gestion/gantt.md"
 SVG = RAIZ / "docs/gestion/gantt.svg"
+SVG_FINAL = RAIZ / "docs/gestion/gantt-final.svg"
+# Tramo final: del día de la rúbrica a la víspera de la presentación (decisión del 04/11/2026).
+FINAL_INI, FINAL_FIN = dt.date(2026, 11, 4), dt.date(2026, 11, 11)
 ESTADOS = ("Pendiente", "En curso", "Hecho")
 # Software: se hace en un ordenador o una VM. Físico: necesita montar o tocar el equipo real.
 TIPOS = ("Gestión", "Documentación", "Software", "Físico")
@@ -98,15 +101,16 @@ def validar(tareas):
     return avisos
 
 
-def generar_svg(tareas, por_id):
+def generar_svg(tareas, por_id, svg=SVG, titulo="Diagrama de Gantt", ini=None, fin=None, personas=None):
     """Dibuja el Gantt solo con días laborables: filas agrupadas por bloque,
-    nombre de la tarea a la izquierda y barra con el color del responsable."""
-    ini = min(fecha(t["Inicio"]) for t in tareas)
-    fin = max(fecha(t["Fin"]) for t in tareas)
+    nombre de la tarea a la izquierda y barra con el color del responsable.
+    Con ini/fin se dibuja solo ese tramo y las barras se recortan a él."""
+    ini = ini or min(fecha(t["Inicio"]) for t in tareas)
+    fin = fin or max(fecha(t["Fin"]) for t in tareas)
     dias = [ini + dt.timedelta(i) for i in range((fin - ini).days + 1)]
     dias = [d for d in dias if d.weekday() < 5]
     col_dia = {d: i for i, d in enumerate(dias)}
-    personas = sorted({t["Responsable"] for t in tareas})
+    personas = personas or sorted({t["Responsable"] for t in tareas})
     color = {p: COLORES[i % len(COLORES)] for i, p in enumerate(personas)}
 
     m, w_id, w_tarea, w_resp, w_dep, w_dia = 16, 28, 400, 84, 74, 40
@@ -129,16 +133,22 @@ def generar_svg(tareas, por_id):
          f'Segoe UI, Roboto, sans-serif" font-size="12">',
          '<style>.t{fill:#0b0b0b}.s{fill:#52514e}.m{fill:#8a8984}.b{font-weight:600}</style>',
          f'<rect width="{ancho}" height="{alto}" fill="#fcfcfb"/>',
-         f'<text x="{m}" y="28" class="t b" font-size="16">Almi-Chain · Diagrama de Gantt</text>',
+         f'<text x="{m}" y="28" class="t b" font-size="16">Almi-Chain · {escape(titulo)}</text>',
          f'<text x="{m}" y="48" class="s">{ini:%d/%m/%Y} – {fin:%d/%m/%Y} · '
          f'{len(dias)} días laborables (sin fines de semana) · {len(tareas)} tareas</text>']
 
-    # Cabecera: semanas del proyecto (bloques de 5 días laborables) y días.
-    for s in range(0, len(dias), 5):
-        x = x_tl + s * w_dia
-        tramo = dias[s:s + 5]
-        o.append(f'<text x="{x + 4}" y="70" class="t b">Semana {s // 5 + 1}'
-                 f'<tspan class="s" font-weight="400"> {tramo[0]:%d/%m}–{tramo[-1]:%d/%m}</tspan></text>')
+    # Cabecera: semanas de calendario (de lunes a viernes) y días.
+    semanas = []
+    for i, d in enumerate(dias):
+        if not semanas or d.isocalendar()[1] != dias[semanas[-1][0]].isocalendar()[1]:
+            semanas.append([i, i])
+        semanas[-1][1] = i
+    inicio_semana = {a for a, _ in semanas}
+    for n, (a, b) in enumerate(semanas, 1):
+        x = x_tl + a * w_dia
+        rango = f" {dias[a]:%d/%m}–{dias[b]:%d/%m}" if b - a >= 2 else ""
+        o.append(f'<text x="{x + 4}" y="70" class="t b">Semana {n}'
+                 f'<tspan class="s" font-weight="400">{rango}</tspan></text>')
     for i, d in enumerate(dias):
         x = x_tl + i * w_dia + w_dia / 2
         o.append(f'<text x="{x}" y="86" text-anchor="middle" class="s" font-size="11">'
@@ -150,7 +160,7 @@ def generar_svg(tareas, por_id):
     # Cuadrícula: línea fina por día, más marcada al cambiar de semana.
     for i in range(len(dias) + 1):
         x = x_tl + i * w_dia
-        fuerte = i % 5 == 0
+        fuerte = i in inicio_semana or i == len(dias)
         o.append(f'<line x1="{x}" y1="{y0 - 18 if fuerte else y0}" x2="{x}" y2="{y0 + alto_tabla}" '
                  f'stroke="{"#b8b7b0" if fuerte else "#e6e5e0"}" stroke-width="1"/>')
 
@@ -178,7 +188,8 @@ def generar_svg(tareas, por_id):
                  f'fill="{color[t["Responsable"]]}"/>')
         o.append(f'<text x="{m + w_id + w_tarea + 14}" y="{cy}" class="t">{escape(t["Responsable"])}</text>')
         o.append(f'<text x="{m + w_id + w_tarea + w_resp}" y="{cy}" class="s">{deps}</text>')
-        a, b = col_dia[fecha(t["Inicio"])], col_dia[fecha(t["Fin"])]
+        a = col_dia[max(fecha(t["Inicio"]), dias[0])]
+        b = col_dia[min(fecha(t["Fin"]), dias[-1])]
         bx, bw = x_tl + a * w_dia + 2, (b - a + 1) * w_dia - 4
         estilo = ' stroke="#0b0b0b" stroke-width="1.5"' if t["Estado"] == "En curso" else ""
         if hecho:
@@ -204,7 +215,7 @@ def generar_svg(tareas, por_id):
              f'fill-opacity="0.4"/>')
     o.append(f'<text x="{x + 28}" y="{y_leyenda + 10}" class="s">Hecho ✓</text>')
     o.append("</svg>")
-    SVG.write_text("\n".join(o) + "\n", encoding="utf-8")
+    svg.write_text("\n".join(o) + "\n", encoding="utf-8")
 
 
 def main():
@@ -238,6 +249,38 @@ def main():
         "",
     ]
     generar_svg(tareas, por_id)
+
+    # Tramo final: solo lo que queda, del 04/11 al 11/11, y reparto por persona.
+    todas_personas = sorted({t["Responsable"] for t in tareas})
+    final = [t for t in tareas if t["Estado"] != "Hecho" and fecha(t["Fin"]) >= FINAL_INI]
+    generar_svg(final, por_id, SVG_FINAL, f"Plan final {FINAL_INI:%d/%m}–{FINAL_FIN:%d/%m}",
+                FINAL_INI, FINAL_FIN, todas_personas)
+    carga = defaultdict(list)
+    for t in final:
+        carga[t["Responsable"]].append(t)
+    lineas += [
+        f"## Plan final ({FINAL_INI:%d/%m} – {FINAL_FIN:%d/%m})",
+        "",
+        "Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](rubrica-anexo-VI.pdf)) "
+        "y la auditoría del repositorio: lo que queda, repartido para que cada persona tenga una carga parecida. "
+        "Las tareas 56 a 62 salen de criterios de la rúbrica que el repositorio aún no cubre.",
+        "",
+        "![Plan final](gantt-final.svg)",
+        "",
+        "| Persona | Días de trabajo | Tareas |",
+        "|---|---|---|",
+    ]
+    for persona in todas_personas:
+        ts = sorted(carga[persona], key=lambda t: fecha(t["Inicio"]))
+        dias_p = {FINAL_INI + dt.timedelta(i) for t in ts
+                  for i in range((fecha(t["Fin"]) - FINAL_INI).days + 1)
+                  if FINAL_INI + dt.timedelta(i) >= fecha(t["Inicio"])
+                  and (FINAL_INI + dt.timedelta(i)).weekday() < 5}
+        lista = "; ".join(f"#{t['ID']} {t['Tarea']} ({max(fecha(t['Inicio']), FINAL_INI):%d/%m}–"
+                          f"{fecha(t['Fin']):%d/%m})" for t in ts)
+        lineas.append(f"| {persona} | {len(dias_p)} | {lista or '—'} |")
+    lineas += ["", "*Días de trabajo:* días laborables del tramo en que la persona tiene al menos una tarea. "
+               "Las tareas 2 y 5 de Adrian son de seguimiento y ocupan poco cada día.", ""]
 
     if avisos:
         lineas += ["## ⚠️ Avisos de dependencias", "",
