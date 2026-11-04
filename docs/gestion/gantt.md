@@ -18,24 +18,24 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 
 | Persona | Días de trabajo | Tareas |
 |---|---|---|
-| Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11); #5 Repo con estructura y gitleaks; commits de todos (04/11–06/11); #46 Revisión de seguridad transversal (04/11–06/11); #60 Copia remota en S3 probada (09/11–09/11) |
-| Eneko.P | 5 | #36 Importar y exportar datos en Odoo (04/11–06/11); #58 Tecnologías habilitadoras: análisis y comparativa (09/11–10/11) |
-| Eneko.S | 5 | #56 Ampliar el E/R: relación ternaria; historiales y atributos especiales (05/11–06/11); #62 Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA (09/11–09/11); #47 Tabla de pruebas por bloque (10/11–11/11) |
+| Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11); #5 Repo con estructura y gitleaks; commits de todos (04/11–06/11); #46 Revisión de seguridad transversal (04/11–06/11); #60 Copia remota en S3 y restauración de almi_chain probadas (09/11–10/11) |
+| Eneko.P | 5 | #36 Importar y exportar datos en Odoo (04/11–06/11); #63 Usar CRM, personal, marketing e inventario con datos (05/11–06/11); #58 Tecnologías habilitadoras: análisis y comparativa (09/11–10/11) |
+| Eneko.S | 6 | #56 Ampliar el E/R: relación ternaria; historiales y atributos especiales (04/11–05/11); #62 Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA (06/11–09/11); #47 Tabla de pruebas por bloque (10/11–11/11) |
 | Iker | 5 | #15 Scripts de configuración reproducibles (Windows) (04/11–05/11); #57 Integrar la BD propia con la de Odoo (06/11–10/11) |
-| Markel | 5 | #59 Stick: antirrebote; componentes y por qué este microcontrolador (05/11–06/11); #48 Documentación final paso a paso (09/11–11/11) |
+| Markel | 6 | #59 Stick: antirrebote; componentes y por qué este microcontrolador (04/11–06/11); #48 Documentación final paso a paso (09/11–11/11) |
 | Peio | 6 | #25 WDS con segundo router y pruebas de cobertura (04/11–05/11); #61 Poner al día los textos desfasados que señala la auditoría (06/11–09/11); #49 Presentación y ensayo (10/11–11/11) |
 
 *Días de trabajo:* días laborables del tramo en que la persona tiene al menos una tarea. Las tareas 2 y 5 de Adrian son de seguimiento y ocupan poco cada día.
 
 ## Resumen
 
-**46 de 62 tareas hechas (74 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**46 de 63 tareas hechas (73 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 11 | 2 | 5 | 18 |
-| Software | 25 | 3 | 3 | 31 |
+| Software | 25 | 3 | 4 | 32 |
 | Físico | 6 | 1 | 0 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -47,20 +47,21 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Tipo | Responsable | Fin | Estado | Qué falta | Evidencia |
 |---|---|---|---|---|---|---|---|
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 05/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
-| 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 05/11 | En curso | 04/11: Peio subió el router 2 en Range Extender (192.168.10.2, DHCP apagado, ping al router 1). Falta lo que pide la rúbrica: que amplíe la Wi-Fi de clientes y justificar la cobertura con medidas de antes y después. | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
+| 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 05/11 | En curso | 04/11: Peio subió el router 2 en Range Extender (192.168.10.2, DHCP apagado, ping al router 1). Falta lo que pide la rúbrica: que amplíe la Wi-Fi de clientes y justificar la cobertura con medidas de antes y después. Aprovechar que se entra al router para desactivar UPnP (A-22). | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
 | 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 06/11 | En curso | Estructura, .gitignore y gitleaks hechos: CI en verde y gitleaks local sin fugas en 81 commits (23/10). Tienen commits 5 de 6 personas; falta Eneko.P (Anexo IX). 27/10: fin movido al 4/11 (corte técnico). 29/10: verificar-repo.sh «Todo correcto» (incluye gitleaks de todo el historial y los enlaces); todo entra por PR (hasta el #88). Siguen 5 de 6 personas con commits: falta Eneko.P. 04/11: se cierra con el primer commit de Eneko.P (tarea 36). | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 06/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | Revisión del repositorio hecha el 26/10 y repasada el 27/10 (PR #57-65): 21 hallazgos (5 altos) con responsable; S-03 no aplica (se descarta Batocera); nuevos S-20 (TPV hechos a mano sin el bastionado completo; Markel) y S-21 (versión de la librería del stick; corregido). Corregidos S-01 (certificado de Odoo con nameConstraints; probado también en Edge), S-05 (Wi-Fi cambiada) y S-21. S-19 (QR del ticket) probado en VM. Faltan las comprobaciones en los equipos (sección 5: nmap; router; SSH; cifrado) y que cada responsable cierre los suyos. Pasa de Eneko.S a Adrian. 29/10: repaso hasta el PR #84 (sección 1.2): S-22 corregido (08-usuarios.sql), S-23 nuevo (copia a S3 sin usuario IAM en el Learner Lab, Iker), S-11 hecho en el gerente y comprobación 9 de la sección 5 hecha. 03/11: repaso hasta el PR #99 (sección 1.3): S-13 cerrado con la comprobación 1 (tarea 26), S-12 resuelto en el diseño de los TPV, nuevos S-25 (UPnP y firmware del router, Peio) y S-26 (credenciales de Odoo en el servidor, Iker). Comprobaciones 2, 6 y 7 en la ServidorERP del laboratorio: solo 22, 80 y 443; aplicada la sección 4.2 (SSH solo con clave, unattended-upgrades) y 6 y 7 pasan; falta en el servidor del equipo (Iker). Faltan la 2 y la 3 con el servidor y los TPV del equipo en la red. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 11/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. 29/10: puesto al día (decisiones sustituidas marcadas, firmware de router, cifrado del gerente, semanas con el corte del 4/11, incidencias y pruebas del 27-29/10). 29/10 (tarde): pruebas de redes y arcade al día, incidencias del 29/10, retrospectiva (qué mejorar y desviaciones) y diagrama de AWS en la tarea 30. 30/10: decisiones de las VM (no van a Drive) y de la notación Chen del E/R; incidencia de las medidas de la recreativa cerrada con la tarea 54; revisión de seguridad con 24 hallazgos. 03/11: decisión de Windows de los TPV (LTSC 2021), incidencias del 30/10 y del 03/11 y prueba de seguridad al día. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 47 | Tabla de pruebas por bloque | Documentación | Eneko.S | 11/11 | En curso | Punto de partida: las pruebas del 23/10 en verificacion.md. Pasa de Eneko.P a Eneko.S. 27/10: el equipo decide cerrar lo técnico el 4/11 (ese día dan la rúbrica) y dejar la documentación y la presentación para después, para ajustarlas a ella. 29/10: borrador con 59 pruebas de los 11 bloques (50 hechas; 9 pendientes, con la 53 y la 54) sacadas de cada tarea, del backlog y de verificacion.md. | [47-tabla-pruebas.md](../../docs/gestion/47-tabla-pruebas.md) |
 | 48 | Documentación final paso a paso | Documentación | Markel | 11/11 | En curso | Punto de partida: LOGICA_RETO.md. 27/10: después de la rúbrica (4/11), para ajustarla a ella. 29/10: estaba en Hecho por error (el plan la pone del 5 al 9/11 y su documento dice En curso). Markel subió el capítulo de restauración (docs/backup/48-documentacion-final-restauracion.md), que amplía la 45 sin repetir sus pruebas. | [LOGICA_RETO.md](../../LOGICA_RETO.md) |
-| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | Documentación | Eneko.S | 06/11 | Pendiente | Rúbrica, GBD RA1-RA2, niveles 3 y 4: el E/R actual solo tiene relaciones binarias. Añadir una ternaria, un historial (p. ej. de precios) y atributos especiales (derivado, multivaluado), y llevarlo a las tareas 39 y 40. | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
-| 59 | Stick: antirrebote; componentes y por qué este microcontrolador | Software | Markel | 06/11 | Pendiente | Rúbrica, Digitalización RA2 (stick), niveles 4 y 5: antirrebote de los botones, prueba en un segundo emulador con captura, lista de componentes con precio y por qué un ATmega32U4 (sistema embebido) y no un encoder comercial. | [README.md](../../arduino/mando-joystick/README.md) |
-| 60 | Copia remota en S3 probada | Software | Adrian | 09/11 | Pendiente | Rúbrica, ISO RA3, nivel 4: copias «en local y remoto». El tercer repositorio de restic en S3 está preparado desde el 27/10; falta crearlo en el Learner Lab y probar copia y restauración. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
+| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | Documentación | Eneko.S | 05/11 | Pendiente | Rúbrica, GBD RA1-RA2, niveles 3 y 4: el E/R actual solo tiene relaciones binarias. Añadir una ternaria, un historial (p. ej. de precios) y atributos especiales (derivado, multivaluado), y llevarlo a las tareas 39 y 40. | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
+| 59 | Stick: antirrebote; componentes y por qué este microcontrolador | Software | Markel | 06/11 | Pendiente | Rúbrica, Digitalización RA2 (stick), niveles 4 y 5: antirrebote real (hoy solo delay(10)), remapeo sin reprogramar, prueba en un segundo emulador con captura, tabla de pruebas por control, lista de componentes con precio (faltan Leonardo y botones) y por qué un ATmega32U4 (sistema embebido) y no un encoder comercial. | [README.md](../../arduino/mando-joystick/README.md) |
+| 63 | Usar CRM, personal, marketing e inventario con datos | Software | Eneko.P | 06/11 | Pendiente | Rúbrica, LMSGI RA7, nivel 4 (y por ser acumulativo, el 5): los módulos están instalados pero solo se usan facturación y TPV. Una oportunidad de CRM que acaba en presupuesto, los empleados dados de alta, una campaña de correo y un movimiento de inventario, con capturas. Se hace a la vez que la 36 en la ServidorERP. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
 | 61 | Poner al día los textos desfasados que señala la auditoría | Documentación | Peio | 09/11 | Pendiente | Hallazgos de la auditoría del 04/11: README; CORRECIONES; tareas 7-11; 17; 18; 30; listas de pendientes ya hechas. LOGICA_RETO va en la 48. | — |
 | 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | Documentación | Eneko.S | 09/11 | Pendiente | Rúbrica ISO RA1 n4 (VM con su RAM, disco y Guest Additions en la tarea 12); ISO RA2 n5 (justificar el menú de MAME como front-end: selección de juego y pantalla completa); LMSGI RA1 n3 y n5 (wireframe de tablet y accesibilidad WCAG AA justificada). | — |
 | 57 | Integrar la BD propia con la de Odoo | Software | Iker | 10/11 | Pendiente | Rúbrica, GBD RA3, nivel 4: «aporta una solución a la necesidad de integrar dos bases de datos distintas (la propia y Odoo)». Por ejemplo, un script que pase las facturas de Odoo a almi_chain, con su prueba. | — |
 | 58 | Tecnologías habilitadoras: análisis y comparativa | Documentación | Eneko.P | 10/11 | Pendiente | Rúbrica, Digitalización RA2, niveles 4 y 5: caracterizar las THD del reto (cloud/AWS, IaC, ERP-TPV, Arduino/IoT, IA) y su aplicación, comparando alternativas y justificando la elección. Hoy no hay ningún documento que hable de THD. | — |
+| 60 | Copia remota en S3 y restauración de almi_chain probadas | Software | Adrian | 10/11 | Pendiente | Rúbrica, ISO RA3, nivel 4: copias «en local y remoto». El tercer repositorio de restic en S3 está preparado desde el 27/10; falta crearlo en el Learner Lab y probar copia y restauración. GBD RA6, nivel 5: la prueba de restauración de la 45 solo compara tienda; añadir almi_chain (filas por tabla y una consulta) y guardar el log. | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 11/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. 04/11: ensayo con todos el 11/11. | — |
 
 ## Tareas hechas
@@ -118,11 +119,11 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 19 | 4 | 2 | 0 | 60 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
-| Eneko.P | 3 | 2 | 1 | 0 | 7 | 6, 7, 11 |
-| Eneko.S | 11 | 3 | 0 | 0 | 18 | 1, 3, 5, 7, 8, 11 |
+| Adrian | 19 | 4 | 2 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
+| Eneko.P | 4 | 3 | 2 | 0 | 9 | 6, 7, 11 |
+| Eneko.S | 11 | 3 | 0 | 0 | 19 | 1, 3, 5, 7, 8, 11 |
 | Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
-| Markel | 8 | 2 | 1 | 0 | 18 | 1, 2, 4, 5, 6, 11 |
+| Markel | 8 | 2 | 1 | 0 | 19 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 3 | 0 | 1 | 16 | 0, 1, 5, 6, 11 |
 
 ## Tareas por persona
@@ -148,7 +149,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 52 | Proxy HTTPS delante de Odoo | 7 ERP | Software | 26/10–27/10 | #33 (Iker) | Hecho |
 | 38 | Modelo E/R | 8 BD | Documentación | 22/10–23/10 | — | Hecho |
 | 42 | Usuarios de BD con mínimos privilegios | 8 BD | Software | 23/10–23/10 | #40 (Eneko.S) | Hecho |
-| 60 | Copia remota en S3 probada | 9 Backup | Software | 09/11–09/11 | #44 (Iker) | Pendiente |
+| 60 | Copia remota en S3 y restauración de almi_chain probadas | 9 Backup | Software | 09/11–10/11 | #44 (Iker) | Pendiente |
 | 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 02/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
 
 ### Eneko.P
@@ -157,6 +158,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | 31 | IaC y despliegue automatizado (Terraform + Actions) | 6 Web | Software | 29/10–29/10 | #28 (Markel) | Hecho |
 | 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 03/11–06/11 | #34 (Iker) | En curso |
+| 63 | Usar CRM, personal, marketing e inventario con datos | 7 ERP | Software | 05/11–06/11 | #34 (Iker) | Pendiente |
 | 58 | Tecnologías habilitadoras: análisis y comparativa | 11 Entrega | Documentación | 09/11–10/11 | #30 (Adrian), #32 (Eneko.S) | Pendiente |
 
 ### Eneko.S
@@ -171,9 +173,9 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 32 | Comparativa y elección de ERP | 7 ERP | Documentación | 22/10–23/10 | — | Hecho |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | 22/10–23/10 | #38 (Adrian) | Hecho |
 | 40 | Scripts DDL | 8 BD | Software | 22/10–23/10 | #39 (Eneko.S) | Hecho |
-| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | 05/11–06/11 | #38 (Adrian) | Pendiente |
+| 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | 04/11–05/11 | #38 (Adrian) | Pendiente |
 | 47 | Tabla de pruebas por bloque | 11 Entrega | Documentación | 10/11–11/11 | #21 (Markel), #25 (Peio), #26 (Eneko.S), #29 (Adrian) | En curso |
-| 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | 11 Entrega | Documentación | 09/11–09/11 | — | Pendiente |
+| 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | 11 Entrega | Documentación | 06/11–09/11 | — | Pendiente |
 
 ### Iker
 
@@ -202,7 +204,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 13 | Bastionado de los 2 TPV Windows en VM (usuario estándar; kiosko; USB) | 2 SO | Software | 26/10–26/10 | #9 (Markel) | Hecho |
 | 19 | Montaje del arcade stick (ATmega32U4) | 4 Arduino | Físico | 26/10–27/10 | — | Hecho |
 | 21 | Pruebas del stick con MAME y otro emulador | 4 Arduino | Físico | 27/10–29/10 | #19 (Markel), #20 (Adrian), #50 (Adrian), #53 (Eneko.S) | Hecho |
-| 59 | Stick: antirrebote; componentes y por qué este microcontrolador | 4 Arduino | Software | 05/11–06/11 | #21 (Markel) | Pendiente |
+| 59 | Stick: antirrebote; componentes y por qué este microcontrolador | 4 Arduino | Software | 04/11–06/11 | #21 (Markel) | Pendiente |
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | 22/10–23/10 | — | Hecho |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | 21/10–23/10 | #27 (Peio) | Hecho |
 | 48 | Documentación final paso a paso | 11 Entrega | Documentación | 09/11–11/11 | #45 (Iker) | En curso |
