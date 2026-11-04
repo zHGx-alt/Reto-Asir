@@ -119,7 +119,7 @@ De [`evidencias/pruebas-odoo.txt`](evidencias/pruebas-odoo.txt):
 | 2 | Duda sobre usar `workers = 2` (multiproceso) | Con workers, el chat y las notificaciones en tiempo real (`/websocket`) necesitan un proxy que los envíe al puerto 8072 | `workers = 0` (multihilo), que basta para una tienda pequeña. Cuando esté el proxy HTTPS se puede pasar a workers. |
 
 ## 8. Para las siguientes tareas
-- **34 · Configurar módulos (Iker):** entrar en Odoo (desde el 27/10, por HTTPS: <https://192.168.10.10>, [tarea 52](../52-https-odoo/DOCUMENTACION.md)) como `admin` e instalar Ventas, Punto de Venta, Inventario y Facturación.
+- **34 · Configurar módulos (Iker):** entrar en Odoo (<http://192.168.10.10:8069>; con el proxy HTTPS de la [tarea 52](../52-https-odoo/DOCUMENTACION.md), <https://192.168.10.10>) como `admin` e instalar Ventas, Punto de Venta, Inventario y Facturación.
 - **36 · Importar/exportar datos (Eneko.P):** con `list_db = False` no se puede usar el gestor web de bases de datos. Para copias completas hay que usar `pg_dump` (tarea 44).
 - **44 · Backup (Iker):** hay que copiar los volúmenes `odoo-db-data` (`pg_dump` del contenedor `db`) y `odoo-web-data`, además de `/opt/odoo/.env`, **cifrados**.
 

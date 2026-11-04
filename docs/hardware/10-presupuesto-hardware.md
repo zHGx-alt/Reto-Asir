@@ -6,11 +6,11 @@
 |---|---|
 | Proyecto | Reto 1: Almi-Chain |
 | Empresa | Cadena de restaurantes Almi-Chain |
-| Responsable | Peio Amenabar |
+| Responsable | Peio |
 | Fecha de elaboración | 22/10/2026 |
 | Moneda | Euros |
 | Impuestos | Precios publicados por las tiendas. En tiendas minoristas suelen incluir el IVA, pero las páginas no siempre lo dicen: hay que confirmarlo antes de comprar (incidencia H-02 de la tarea 8). La fibra sí está desglosada (sección 5.2) |
-| Validez del presupuesto | 15 días |
+| Validez del presupuesto | 15 días desde la consulta de precios (22-24/10/2026), es decir, hasta el 06-08/11. Antes de comprar se vuelven a consultar todos los precios |
 | Revisión | Eneko.S, 23/10/2026: ajustado a la tabla de hardware (tarea 8) |
 | Revisión | Equipo, 23/10/2026: la línea WAN pasa a DIGI 1 Gb, el operador elegido en la comparativa (tarea 22) y el que usa el plano de red (tarea 23) |
 | Revisión | Equipo, 24/10/2026: se añaden el servidor, sus discos, el disco de copias, el SAI, el switch, el cable, el adaptador Wi-Fi de la recreativa y la palanca del stick (sección 12); impresoras fuera del rango de gerencia; Windows 10 IoT Enterprise LTSC para los TPV. 30/10: decidida la LTSC 2021 Entry y su precio sumado (4.1 y 5.1) |

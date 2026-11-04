@@ -22,7 +22,9 @@ Las versiones son las que se han instalado y probado en las máquinas virtuales 
 | Microsoft Edge | Canal estable, actualizado por Windows Update | Gerente y 2 TPV | Acceso a Odoo; navegador del modo quiosco en los TPV | Propietaria, incluida con Windows | 3 | 0 € adicional |
 | Microsoft Defender y Firewall | Incluidos en Windows 10 | Gerente y 2 TPV | Antivirus y cortafuegos | Incluidos con Windows | 3 | 0 € adicional |
 | KeePassXC | Última estable | Gerente | Gestor de contraseñas del proyecto (tarea 55) | Libre, GPL v3 | 1 | 0 € |
-| Driver de Windows de Epson (APD) para TM-T20IV | A apuntar al instalarlo (tarea 14) | 2 TPV | Impresión de tickets y cortador automático | Del fabricante, gratuito | 2 | 0 € |
+| Driver de Windows de Epson (APD) para TM-T20IV | Se apunta al instalarlo en el local (la guía de la tarea 14 queda para la térmica) | 2 TPV | Impresión de tickets y cortador automático | Del fabricante, gratuito | 2 | 0 € |
+| Microsoft PS Class Driver | El que trae Windows | TPV de pruebas | Impresión del ticket en la Samsung ML-1660 por IPP (tarea 37, decisión del 27/10) | Incluido en Windows | — | 0 € |
+| CUPS | El de Ubuntu del PC con la Samsung enchufada | Pruebas de impresión | Cola IPP compartida a la que imprime el TPV (tarea 37) | Libre, Apache 2.0 | — | 0 € |
 
 ## 3. Servidor del local
 
@@ -33,7 +35,10 @@ Las versiones son las que se han instalado y probado en las máquinas virtuales 
 | Odoo Community | 19.0 (imagen `odoo:19.0`, compilación 19.0-20261015) | ERP y TPV del restaurante | Libre, LGPL v3 | 0 € | [Tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md) |
 | PostgreSQL | 17 (imagen `postgres:17`) | Base de datos de Odoo y base `almi_chain` (tareas 40 y 41) | Libre, licencia PostgreSQL | 0 € | [Tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md) |
 | mdadm | 4.4 | RAID 1 por software | Libre, GPL v2 | 0 € | [02-crear-raid.log](../backup/43-raid1/evidencias/02-crear-raid.log) |
-| restic | 0.18.0 | Copias cifradas 3-2-1 | Libre, BSD-2 | 0 € | [01-instalar-backup.log](../backup/44-backup-3-2-1/evidencias/01-instalar-backup.log) |
+| restic | 0.18.0 | Copias cifradas 3-2-1 (RAID, USB y S3) | Libre, BSD-2 | 0 € | [01-instalar-backup.log](../backup/44-backup-3-2-1/evidencias/01-instalar-backup.log) |
+| nginx | 1.27 (imagen `nginx:1.27-alpine`) | Proxy HTTPS delante de Odoo (tarea 52) | Libre, BSD-2 | 0 € | [01-activar-https.txt](../erp/52-https-odoo/evidencias/01-activar-https.txt) |
+| unattended-upgrades | El de Debian 13 | Actualizaciones de seguridad automáticas del servidor (S-09, preseed del 04/11) | Libre, GPL v2 | 0 € | [Tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| AWS CLI | v2 | Subir la copia cifrada al bucket S3 (tarea 60) | Libre, Apache 2.0 | 0 € (S3 dentro del Learner Lab) | [s3-bucket-2026-11-04.txt](../backup/44-backup-3-2-1/evidencias/s3-bucket-2026-11-04.txt) |
 
 ## 4. Recreativa
 
@@ -44,7 +49,7 @@ Las versiones son las que se han instalado y probado en las máquinas virtuales 
 | Servidor X (Xorg) mínimo, Mesa y ALSA | Los de Debian 13 | Pantalla, gráficos y sonido de MAME | Libres (MIT y otras) | 0 € | [instalar-arcade.sh](../arcade/16-recreativa-mame/instalar-arcade.sh) |
 | unattended-upgrades | El de Debian 13 | Actualizaciones de seguridad a las 5:00 (tarea 17) | Libre, GPL v2 | 0 € | [optimizar-arcade.sh](../arcade/17-rendimiento-mame/optimizar-arcade.sh) |
 | ROMs | — | Solo las 5 que publica el equipo de MAME con permiso de sus autores | Uso no comercial | 0 € | [Tarea 16](../arcade/16-recreativa-mame/DOCUMENTACION.md) |
-| Batocera *(alternativa en estudio, tarea 51)* | Pendiente de decidir | Sistema todo en uno para emuladores | Libre | 0 € | [Notas](../arcade/16-batocera/NOTAS.md) |
+| Batocera *(probada y descartada, tarea 51)* | — | Sistema todo en uno para emuladores | Libre | 0 € | [Notas](../arcade/16-batocera/NOTAS.md) |
 | Firmware del arcade stick | Propio, compilado con el Arduino IDE o `arduino-cli` (`subir.sh`) para Arduino Leonardo | Joystick HID con mapeo en EEPROM | Propio del equipo | 0 € | [Firmware](../../arduino/mando-joystick/README.md) |
 
 ## 5. Web (AWS)
@@ -55,6 +60,8 @@ Las versiones son las que se han instalado y probado en las máquinas virtuales 
 | nginx | El de Ubuntu 24.04 | Servidor web con HTTPS | Libre, BSD-2 | 0 € |
 | Certbot (Let's Encrypt) | El de Ubuntu 24.04 | Certificado HTTPS gratuito con renovación automática | Libre, Apache 2.0 | 0 € |
 | AWS CLI | v2 | Sincronizar la web desde el bucket S3 | Libre, Apache 2.0 | 0 € |
+| Terraform | 1.6 o posterior, proveedor `hashicorp/aws` 5.x | Crear la infraestructura de la web (tarea 31) | BSL 1.1 (uso libre para esto) | 0 € |
+| GitHub Actions | — | Publicar la web en cada cambio (`desplegar-web.yml`) | Servicio de GitHub; entra en los minutos gratuitos del plan Free para repositorios privados | 0 € |
 
 ## 6. Conclusión
 

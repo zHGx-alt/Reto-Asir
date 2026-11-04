@@ -120,7 +120,7 @@ Repasado el 04/11/2026 contra el backlog. Lo que estaba aquí el 23/10 y ya est�
 | ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | En curso: script y CSV hechos, falta ejecutarlo contra Odoo con evidencias |
 | ERP: usar el resto de módulos con datos | 63 | Pendiente |
 | BD propia integrada con la de Odoo | 57 | Pendiente |
-| Comunicaciones cifradas y seguridad en toda la solución | 52, 46 | Odoo por HTTPS hecho (52); revisión transversal en curso (46): falta lo que depende del servidor del equipo y de la red del aula |
+| Comunicaciones cifradas y seguridad en toda la solución | 52, 46 | Odoo por HTTPS probado entero en VM (52), falta activarlo en el servidor del equipo (S-02); revisión transversal en curso (46): falta lo que depende del servidor del equipo y de la red del aula |
 | Tecnologías habilitadoras (Digitalización RA.2) | 58 | Pendiente |
 | Tabla de pruebas, documentación y presentación | 47, 48, 49 | En curso / pendiente (hasta el 11/11) |
 
