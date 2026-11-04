@@ -26,7 +26,7 @@ sin pedir contraseña y sin escritorio.
 |---|---|
 | [`preseed-recreativa.cfg`](preseed-recreativa.cfg) | Respuestas automáticas al instalador de Debian. Instala el sistema sin intervención y siempre igual. |
 | [`instalar-arcade.sh`](instalar-arcade.sh) | Convierte el Debian recién instalado en recreativa. Es idempotente: se puede ejecutar varias veces. |
-| [`README.md`](README.md) | Guía para hacerlo a mano, paso a paso. |
+| `DOCUMENTACION.md`, secciones 10 y 11 | Decisiones y «Si algo falla» de la guía manual del 22/10 (el README antiguo, fusionado aquí el 04/11). |
 | [`evidencias/`](evidencias/) | Capturas, logs y medidas. |
 
 ## 4. Pasos realizados
@@ -172,7 +172,7 @@ En el local la recreativa no va por cable: va a la **Wi-Fi de invitados** (tarea
    ```
 5. `sudo ifup wlx00c0ca123456` y comprobar con `ip addr` que recibe una IP de la red de invitados. Pruebas de aislamiento: las 4 y 5 de la [tarea 23](../../redes/23-plano-direccionamiento.md#6-cómo-se-comprueba).
 
-**Pendiente:** hacerlo en el equipo real (tarea 53) y apuntar el adaptador y su chip.
+**Sin hacer en un equipo real:** el 29/10 se decidió entregar la recreativa en VM (`Recreativa-53`, tarea 53), así que este apartado queda como procedimiento para el local. El adaptador previsto es el TP-Link TL-WN725N del presupuesto.
 
 ## 7. Seguridad aplicada (mínimos privilegios)
 - `arcade` **no** pertenece a `sudo` y su contraseña está bloqueada (`passwd -l`). Solo puede entrar por el autologin de tty1.
@@ -193,6 +193,28 @@ En el local la recreativa no va por cable: va a la **Wi-Fi de invitados** (tarea
 
 ## 9. Pendiente
 - [x] Jugar una partida (comprobado con teclado y con el stick simulado).
-- [ ] Añadir el usuario del PC a `vboxusers` y probar con el stick real (tabla de pruebas de `STICK-ARDUINO.md`).
+- [x] Usuario en `vboxusers` y stick real probado en la VM: hecho en la [tarea 53](../53-recreativa-fisica/DOCUMENTACION.md) (29/10, partida de *Gridlee* con el stick).
 - [x] Repetir la instalación con los recursos del enunciado: hecho en la VM `Recreativa-53` (tarea 53, 29/10). Ya no hay equipo físico (decisión del 29/10), así que la Wi-Fi de invitados (sección 6) queda como procedimiento para el local.
-- [ ] Revisión de Markel → mover a **Hecho** en el Kanban.
+- [x] ~~Revisión de Markel~~: desde el 25/10 no hay revisor; los cambios entran por PR con el CI en verde ([roles.md](../../gestion/roles.md)).
+
+## 10. Decisiones
+
+Vienen de la guía de instalación manual del 22/10 (antes del preseed), que se ha fusionado aquí.
+
+| Decisión | Por qué |
+|---|---|
+| **Debian 13 sin escritorio** | Estable, gratis y muy ligero: sin GNOME/KDE arranca en segundos y deja toda la RAM y la CPU para MAME. |
+| **MAME desde los repos de Debian** | Se instala y actualiza con `apt`, sin compilar nada. |
+| **X11 sin gestor de ventanas** | X solo abre MAME. No hay escritorio que el jugador pueda tocar. |
+| **Autologin en tty1 con el usuario `arcade`** | Arranque directo sin teclado. La cuenta no tiene sudo ni contraseña (mínimos privilegios). |
+| **MAME dentro de un bucle** | Si alguien sale de MAME con Esc, vuelve a abrirse solo. |
+| **GRUB con timeout 0** | Se elimina la espera del menú de arranque. |
+
+## 11. Si algo falla
+
+| Problema | Solución |
+|---|---|
+| Pantalla negra y vuelve a la consola una y otra vez | En `Ctrl+Alt+F2`, mira `/home/arcade/.local/share/xorg/Xorg.0.log`. Suele faltar un driver de vídeo: `sudo apt install xserver-xorg-video-all`. |
+| MAME dice que no encuentra el juego | El `.zip` debe tener el nombre exacto (por ejemplo `gridlee.zip`), estar sin descomprimir y estar en `/home/arcade/roms`. |
+| No hay sonido | `sudo -u arcade alsamixer`: sube el volumen y quita el silencio (tecla `M`). |
+| Va lento en la máquina virtual | Es normal sin aceleración 3D. Activa la aceleración 3D en VirtualBox o pruébalo en la máquina real. |

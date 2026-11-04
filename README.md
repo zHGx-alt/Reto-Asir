@@ -6,7 +6,7 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 
 ## Estado
 
-**45 de 55 tareas hechas** (30/10/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
+**48 de 63 tareas hechas** (04/11/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md); la rúbrica, en [rubrica-anexo-VI.md](docs/gestion/rubrica-anexo-VI.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
 
 ```bash
 bash scripts/verificar-repo.sh
@@ -16,20 +16,21 @@ bash scripts/verificar-repo.sh
 
 | Carpeta | Contenido |
 |---|---|
-| `docs/gestion/` | Anexo I, Anexo II, reparto, backlog, Gantt, registro de IA y verificación |
+| `docs/gestion/` | Anexo I, Anexo II, rúbrica, reparto, backlog, Gantt, inventario de VM, tabla de pruebas (47), registro de IA y verificación |
 | `docs/hardware/` | Necesidades, hardware, software y presupuesto (tareas 7-10) |
 | `docs/diagramas/` | Diagrama de arquitectura (tarea 11) y wireframes (tarea 27) |
 | `docs/so/` | Arranque dual del gerente (tarea 12), bastionado de los TPV (13 y 15) e impresora (14 y 37) |
-| `docs/arcade/` | Recreativa MAME, rendimiento, Batocera y monitorización (tareas 16-18) |
-| `docs/redes/` | Comparativa WAN, plano y direccionamiento, red segura (tareas 22-24) |
+| `docs/arcade/` | Recreativa MAME, rendimiento, Batocera y monitorización (tareas 16-18 y 51), recreativa en el equipo real y sus medidas en 1 núcleo y 1 GB (53 y 54) |
+| `docs/redes/` | Comparativa WAN, plano, direccionamiento y Packet Tracer, red segura, WDS y análisis con nmap y Wireshark (tareas 22-26) |
 | `docs/web/` | Wireframes (tarea 27) y hosting en AWS (tarea 30) |
 | `docs/erp/` | Comparativa de ERP, Odoo con Docker, configuración, factura automática, importar y exportar, y HTTPS (tareas 32-36 y 52) |
-| `docs/bd/` | Modelo E/R, modelo lógico 3FN, DDL, datos, consultas y usuarios, con evidencias (tareas 38-42) |
-| `docs/backup/` | RAID 1, copias 3-2-1 y prueba de restauración (tareas 43-45) |
+| `docs/bd/` | Modelo E/R en notación Chen, modelo lógico 3FN, DDL, datos, consultas y usuarios, con evidencias (tareas 38-42 y 56) |
+| `docs/backup/` | RAID 1, copias 3-2-1 (RAID, USB y S3) y prueba de restauración (tareas 43-45 y 60) |
+| `docs/seguridad/` | Revisión de seguridad transversal (tarea 46) |
 | `docs/evidencias/` | Capturas del arranque dual, la web y el hosting |
 | `iac/` | Infraestructura como código: Terraform de la web en AWS (tarea 31) |
 | `web/` | Página web del restaurante |
-| `arduino/` | Firmware y esquema del arcade stick |
+| `arduino/` | Firmware, esquema, prueba del antirrebote y scripts de prueba del arcade stick (tareas 19-21, 50 y 59) |
 | `scripts/` | Gantt, verificación, hooks de Git, servidor web y monitorización de la recreativa |
 
 ## Gestión del proyecto

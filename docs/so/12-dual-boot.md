@@ -149,9 +149,9 @@ El [script](../../scripts/so/12-cifrar-home-gerente.sh) instala `fscrypt` y `lib
 | Ubuntu | `administrador` | Grupo `sudo` | Solo mantenimiento (RG-04) |
 | Ubuntu | `gerente` | Sin `sudo` (grupos `gerente` y `users`) | Uso diario (RG-03) |
 
-Las contraseñas **no están en el repositorio** ([CONTRIBUTING, sección 6](../../CONTRIBUTING.md#6-secretos)). Se entregan aparte, en una base de KeePassXC que está en la misma carpeta de Drive que la máquina virtual (sección 8).
+Las contraseñas **no están en el repositorio** ([CONTRIBUTING, sección 6](../../CONTRIBUTING.md#6-secretos)). Están en la base de KeePassXC del equipo (`.kdbx`, cifrada), con la clave de recuperación de BitLocker del 29/10. La VM ya no va a Drive (decisión del 30/10, sección 8): allí solo queda la exportación del 23/10, desfasada, con su `.kdbx` de entonces.
 
-Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una distinta por cuenta) y se cambiaron el 23/10/2026 (tarea 55). La base de KeePassXC (`.kdbx`, cifrada) se entrega con la VM en Drive; su contraseña maestra se da aparte, nunca por escrito en el repositorio ni en Drive.
+Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una distinta por cuenta) y se cambiaron el 23/10/2026 (tarea 55). La contraseña maestra de la base de KeePassXC se da aparte, nunca por escrito en el repositorio ni en Drive.
 
 ## 6. Verificación
 
@@ -196,7 +196,7 @@ Las contraseñas se generaron con **KeePassXC** (frases de 5 palabras, una disti
 
 **Decisión del 30/10/2026:** la VM ya no se sube a Drive. Está en el **PC de Adrian** (VirtualBox, instantánea `tarea12-cifrado-y-actualizado-2026-10-29`) y se enseña desde ahí; lo que demuestra la tarea son las evidencias de la sección 6. Quién tiene cada VM del reto: [maquinas-virtuales.md](../gestion/maquinas-virtuales.md).
 
-Lo que sigue es la exportación del **23/10/2026** (VMware), que sigue en Drive pero está **desfasada**: no tiene ni las actualizaciones ni el cifrado del 29/10.
+Lo que sigue es la exportación del **23/10/2026** (VMware), que sigue en Drive pero está **desfasada**: no tiene ni las actualizaciones ni el cifrado del 29/10. Sus tres ficheros pequeños se quedan en el repositorio solo como registro de esa entrega (y de cómo se arregló la `.nvram`, abajo); para enseñar la VM se usa la del PC de Adrian.
 
 La VM no se sube al repositorio, porque ocupa varios GB y GitHub no admite archivos de más de 100 MB. Se exporta desde VMware con **File → Export to OVF**. Los archivos pequeños están en el repositorio, en [`docs/evidencias/12-dual-boot/vm/`](../evidencias/12-dual-boot/vm/). El disco y las credenciales están en Google Drive: [carpeta Reto-Asir](https://drive.google.com/drive/folders/13diK9g2t1CdGL-nc2t7qDt9rSzgpb_n_?usp=drive_link).
 

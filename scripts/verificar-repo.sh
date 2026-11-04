@@ -17,7 +17,10 @@ echo "== Enlaces relativos de los .md"
 rotos=$(python3 - <<'EOF'
 import re, subprocess, urllib.parse
 from pathlib import Path
-for f in subprocess.check_output(["git", "ls-files", "*.md"], text=True).split():
+# -z: nombres con espacios o tildes llegan tal cual (sin -z, git los entrecomilla)
+for f in subprocess.check_output(["git", "ls-files", "-z", "*.md"], text=True).split("\0"):
+    if not f:
+        continue
     p = Path(f)
     txt = re.sub(r"```.*?```", "", p.read_text(encoding="utf-8"), flags=re.S)
     for m in re.finditer(r"!?\[[^\]]*\]\(([^)\s]+)", txt):
@@ -28,7 +31,7 @@ for f in subprocess.check_output(["git", "ls-files", "*.md"], text=True).split()
         if destino and not (p.parent / destino).exists():
             print(f"{f}: {u}")
 EOF
-)
+) || rotos="(el comprobador de enlaces ha fallado)"
 if [[ -z "$rotos" ]]; then ok "ningún enlace roto"; else mal "enlaces rotos:"; echo "$rotos" | sed 's/^/           /'; fi
 
 echo "== Sintaxis de scripts"

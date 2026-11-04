@@ -34,7 +34,7 @@ Solo leen `/proc` y `/sys`, así que funcionan en Debian y en Batocera sin insta
 
 ## 4. Cómo usarlo en la recreativa (Debian 13 + MAME)
 
-El sistema elegido, de momento, es **Debian 13 con MAME** (tareas 16 y 17); Batocera está en estudio (tarea 51, sección 4.5). La recreativa está en la Wi-Fi de invitados, aislada, así que **no se llega a ella por SSH desde la LAN** ([tarea 23, apartado 5.2](../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): los scripts se ejecutan **en la propia recreativa, desde su consola**.
+El sistema elegido es **Debian 13 con MAME** (tareas 16 y 17); Batocera se probó y se descartó (tarea 51). La recreativa está en la Wi-Fi de invitados, aislada, así que **no se llega a ella por SSH desde la LAN** ([tarea 23, apartado 5.2](../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)): los scripts se ejecutan **en la propia recreativa, desde su consola**.
 
 ### 4.1 Copiar los scripts
 
@@ -127,12 +127,12 @@ En un Linux normal (no Batocera), con `dash` y `bash`:
 | Parada con Ctrl+C en una terminal y con `kill` | Para limpiamente y conserva las muestras tomadas |
 | Resumen de dos CSV | Una fila por fichero con medias y extremos |
 
-**Falta:** ejecutarlo en la VM `Recreativa-1GB` (1 núcleo, 1 GB) durante una partida, siguiendo el protocolo de la sección 5, y guardar los CSV como evidencia.
+**Hecho el 29/10** en la VM `Recreativa-53` (1 núcleo, 1 GB) durante una partida de 10 min antes y después de optimizar, con el protocolo de la sección 5: CPU máxima 65 %, siempre más de 460 MB libres y sin swap. Los CSV están en la [tarea 54](54-medidas-equipo-real/DOCUMENTACION.md).
 
 ## 8. Seguridad
 
 - En Debian los scripts se ejecutan como `tecnico` (no hace falta `root`). SSH solo admite clave (tarea 16).
-- Si se elige Batocera: su SSH usa `root` con una contraseña por defecto conocida. Hay que cambiarla antes de conectar la recreativa a la red del local y desactivar el SSH cuando no se use. Se revisará en la tarea 46.
+- Batocera (descartada en la tarea 51) usa `root` por SSH con una contraseña por defecto conocida: es una razón más para no usarla en el local.
 - Los scripts solo leen información del sistema y escriben en su carpeta de salida. No cambian nada.
 
 ## 9. Limitaciones

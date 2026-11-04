@@ -109,7 +109,7 @@ El script de copias busca la ruta con `docker volume inspect`, así que no hay q
 | 4 | Cambio de disco y reconstrucción | ✅ `--remove`, `--add` y **reconstruido en 30 s** → `[UU]`, `clean`; la venta sigue ahí | [11](evidencias/11-fallo-con-odoo.log) |
 | 5 | Reinicio del servidor | ✅ RAID `[UU]`, `/srv/datos` y los volúmenes montados desde `md0`, Docker activo, Odoo 200, ningún servicio fallido | [12](evidencias/12-tras-reinicio-bd-en-raid.txt) |
 
-**Pendiente:** repetir la prueba de la tarea 45 (restauración) ahora que la BD está en el RAID, y borrar
+**Hecho el 27/10:** la prueba de la tarea 45 se repitió con la BD en el RAID (todo OK en 63 s, [tarea 45](../45-restauracion/DOCUMENTACION.md)). **Queda:** borrar
 `/var/lib/docker/volumes.antiguo` cuando haya pasado una semana sin problemas.
 
 **Las copias no pueden quedarse solo en el mismo RAID:** si el RAID entero se pierde (fallo de la controladora, borrado,

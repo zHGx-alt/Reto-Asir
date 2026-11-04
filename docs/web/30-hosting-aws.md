@@ -248,7 +248,7 @@ aws s3 sync web/ s3://almi-chain-web-2026/ --delete --exclude "README.txt" --exc
 
 ## 9. Para la tarea 31 (Terraform)
 
-**Hecho el 24/10/2026** en [`iac/`](../../iac/README.md) (Terraform validado; falta el `apply` en el Learner Lab) y en [`desplegar-web.yml`](../../.github/workflows/desplegar-web.yml). Recursos que crea:
+**Hecho el 24/10/2026** en [`iac/`](../../iac/README.md) (Terraform aplicado en el Learner Lab el 29/10, con su [plan](../../iac/evidencias/01-plan.txt), [apply](../../iac/evidencias/02-apply.txt), [pruebas con curl](../../iac/evidencias/03-pruebas-curl.txt) y [despliegue por GitHub Actions](../../iac/evidencias/04-actions-desplegar-web.txt)) y en [`desplegar-web.yml`](../../.github/workflows/desplegar-web.yml). Recursos que crea:
 
 | Recurso de Terraform | Sección |
 |---|---|

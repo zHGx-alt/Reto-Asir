@@ -126,7 +126,7 @@ psql -d almi_chain -f 07-consultas.sql > ../evidencias/41-consultas.txt
 
 **Ejecutado el 24/10/2026** en un PostgreSQL 18.3 vacío: 13 tablas con datos (8 facturas, 26 líneas) y las 12 consultas sin errores. Salida completa: [`evidencias/41-datos-y-consultas.txt`](evidencias/41-datos-y-consultas.txt). Los resultados tienen sentido: C-05 devuelve el plato sin ventas (Pimientos de Gernika), C-08 la chuleta de Abando por debajo del mínimo, C-11 las tres impresoras con su TPV.
 
-**Pendiente:** crear la base en el servidor (sección 2).
+**Hecho el 27/10 en la `ServidorERP` del equipo** (Iker): base creada con 14 tablas y datos, incluida en la copia diaria ([evidencia de la tarea 44](../backup/44-backup-3-2-1/evidencias/04-almi-chain-y-aviso-de-fallo.log)). El 04/11 se restauró desde la copia con tablas, filas, importes y permisos comparados ([tarea 45](../backup/45-restauracion/DOCUMENTACION.md)).
 
 ## 8. Tarea 42: usuarios con acceso y mínimos privilegios
 

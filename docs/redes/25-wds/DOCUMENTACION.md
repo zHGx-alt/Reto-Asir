@@ -3,218 +3,294 @@
 - **Bloque:** 5 Redes
 - **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
-- **Estado (27/10/2026):** 🟡 Prueba de laboratorio hecha por Peio (sección 1.2): el enlace WDS funciona. Falta repetirlo con la red del proyecto, con la red de invitados, y hacer las pruebas W3 a W10 y las medidas de la sección 8
+- **Estado (04/11/2026):** 🟡 Enlace hecho y probado (router 2 en Range Extender en `192.168.10.2`, DHCP apagado, ping al router 1 sin pérdidas, invitados aislados). Falta lo de la sección 14 para darla por hecha con la rúbrica. La práctica de laboratorio del 27/10 (dos TL-WR841N en `192.168.1.0/24`) está en el historial de Git de este fichero
 - **Fechas:** 02/11 – 03/11/2026
-- **Depende de:** tarea 24 (router 1 configurado) y tarea 23 (plano y plan de IP)
-- **La necesita:** tarea 26 (Wireshark y nmap)
 
-> [!IMPORTANT]
-> **Peio, lo que falta para cerrar la tarea** (tu prueba del 27/10 está en la sección 1.2 y vale como ensayo):
-> 1. **Red de invitados en el router 1** (tu tarea 24, hallazgo S-06). Sin ella no se pueden hacer los pasos 4 y 5.
-> 2. **Repetir el WDS con la red del proyecto:** router 1 en `192.168.10.1`, router 2 en `192.168.10.2`, SSID `Restaurante-Almichain` y `Restaurante-Almichain-Invitados` (secciones 3, 4 y 6). No con `TP-Link_AF60`.
-> 3. **Captura de *WDS Status: Run*** en el router 2 (W1) y `ping 192.168.10.2` desde el PC del gerente (W2).
-> 4. **Aislamiento de invitados** (W3 a W7): móvil en la Wi-Fi de invitados junto al router 2, **con el BSSID del router 2** (WiFi Analyzer), que navega pero **no** llega a Odoo, a los TPV ni a los paneles de los routers.
-> 5. **Medidas de antes y después** en los 5 puntos (sección 8): señal en dBm, velocidad de internet e iperf3, primero con el router 2 apagado y luego encendido.
-> 6. Evidencias con los nombres de la sección 9 (desde `10-`), con las contraseñas tapadas, y subirlo **por rama y PR** (CONTRIBUTING), no directamente a `main`.
-> 7. Tu informe es [README.md](README.md): si quieres cambiarlo, **edítalo** (lápiz de GitHub) en vez de borrarlo y subir otro. Al borrarlo se rompen los enlaces de esta guía.
+## 1. Objetivo
 
-## 1. Qué pide el enunciado y qué hay que demostrar
+El objetivo de esta tarea es ampliar la cobertura Wi-Fi del local utilizando un segundo router conectado inalámbricamente al router principal.
 
-> «Para ampliar la cobertura Wi-Fi para los clientes del local se dispondrá de otro router Wi-Fi conectado mediante WDS al router principal, comprobando que la solución funciona correctamente.»
+Se ha utilizado un segundo **TP-Link TL-WR841N** configurado en modo **Range Extender**, que realiza la función de extensión inalámbrica de la red principal.
 
-**WDS** (*Wireless Distribution System*) une dos routers **por radio, sin cable**. El router 2 se conecta por Wi-Fi al router 1 y repite su red: un móvil junto al router 2 se conecta a él, pero recibe la IP y sale a internet por el router 1. El router 2 funciona como un **puente**: no hace NAT ni reparte IP.
+La configuración permite:
 
-Hay que demostrar cuatro cosas, con evidencia:
+1. Conectar inalámbricamente el router 2 con el router principal.
+2. Mantener ambos equipos dentro de la red `192.168.10.0/24`.
+3. Mantener un único servidor DHCP, situado en el router principal.
+4. Dar acceso a Internet a los clientes de la red ampliada.
+5. Mantener aislada la red de invitados respecto a la LAN interna.
+6. Comprobar la cobertura y el punto de acceso mediante WiFi Analyzer.
 
-| # | Qué | Dónde |
+## 2. Topología y direccionamiento
+
+```text
+                    Enlace inalámbrico
+                    Range Extender
+
+Router 1  <================================>  Router 2
+192.168.10.1                                192.168.10.2
+DHCP activo                                 DHCP desactivado
+Canal 6                                     Canal 6
+Router principal                            Range Extender
+```
+
+| Parámetro | Router 1 | Router 2 |
 |---|---|---|
-| 1 | El enlace WDS está activo | Sección 6 |
-| 2 | Un cliente junto al router 2 se conecta a él y navega | Sección 7, pruebas W2 a W4 |
-| 3 | **Los clientes que entran por el router 2 siguen aislados de la LAN** (la red de la caja) | Sección 7, pruebas W5 a W7 |
-| 4 | La cobertura y la velocidad mejoran con el router 2 (antes y después) | Sección 8 |
+| IP LAN | `192.168.10.1` | `192.168.10.2` |
+| Máscara | `255.255.255.0` | `255.255.255.0` |
+| DHCP | Activado | **Desactivado** |
+| Banda | 2,4 GHz | 2,4 GHz |
+| Canal | **6 fijo** | 6 |
+| SSID principal | `Restaurante_Almichain` | `Restaurante_Almichain` |
+| Modo | Router principal | Range Extender |
 
-El punto 3 es el más importante para este proyecto: la red es plana con la Wi-Fi de invitados aislada ([tarea 23, 5.2](../23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)). Si el router 2 deja a los clientes en la LAN, se rompe la seguridad de todo el diseño.
+## 3. Router principal
 
-También demuestra el **RA.2 de PAR** («evaluando su funcionamiento y prestaciones»): las medidas de la sección 8.
+El router principal se mantiene en `192.168.10.1`. Para evitar que el enlace inalámbrico cambie de canal durante el funcionamiento, la banda de 2,4 GHz se ha configurado en el **canal 6 fijo**.
 
-### 1.2 Prueba de laboratorio del 27/10/2026
+![Red de invitados del router 1](evidencias/14-router1-red-invitados.png)
 
-Peio montó el WDS con dos TL-WR841N antes de tener la red del proyecto. El informe completo, con los problemas que encontró y cómo los resolvió, está en [README.md](README.md).
+*No hay captura del canal 6 fijo en el router 1; el estado del router 2 (más abajo) sí muestra el canal 6.*
 
-| Qué se hizo | Resultado | Evidencia |
-|---|---|---|
-| Router 2 enlazado por WDS (*Connect to Network*) al router 1, en WPA2-PSK/AES | ✅ El enlace funciona: un PC enchufado al router 2 recibe por DHCP una IP del router 1 (`192.168.1.102`, puerta de enlace `192.168.1.1`) y le hace `ping` con 0 % de pérdida | [01](evidencias/01-pdf-seleccion-y-configuracion-wds.png), [02](evidencias/02-pdf-wds-y-dhcp-desactivado.png) (contraseña tapada), [03](evidencias/03-pdf-ping-y-estado-interfaz.png), [04](evidencias/10-captura-ping-router-principal.png) |
-| DHCP del router 2 | ✅ Apagado: las IP las da solo el router 1 | [02](evidencias/02-pdf-wds-y-dhcp-desactivado.png) |
-| Móvil en la Wi-Fi | ✅ Se conecta, recibe IP del router 1 (`192.168.1.100`), señal excelente y enlace de 72 Mbit/s cerca de los routers. Lejos, sigue conectado cuando ya no ve ninguna otra red ([07](evidencias/13-captura-limite-cobertura.png)); más allá se desconecta (sin captura) | [05](evidencias/11-captura-cobertura-cerca.png), [06](evidencias/12-captura-detalles-wifi.png) |
+La red de invitados utilizada es `Restaurante-Almichain-Invitados`, configurada para proporcionar acceso a Internet sin permitir acceso a la red local.
 
-**En qué se queda corta** (por eso la tarea sigue en curso):
+## 4. Configuración LAN del router 2
 
-1. **No es la red del proyecto.** El router 1 era uno de pruebas con el nombre de fábrica (`TP-Link_AF60`) en `192.168.1.0/24`, y el router 2 quedó en `192.168.1.101`. El plan es `192.168.10.1` y `192.168.10.2` con `Restaurante-Almichain` (sección 3).
-2. **Sin red de invitados**, así que no se pudo comprobar lo más importante: que los clientes del router 2 siguen aislados de la LAN (W3 a W7). Depende de la tarea 24 (hallazgo S-06 de la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md)).
-3. **La cobertura no demuestra que el router 2 la amplíe.** No se miró el BSSID, así que no se sabe a qué router estaba conectado el móvil, y no hay medidas de antes y después (sección 8).
-4. **Sin salida a internet:** el móvil marcaba «Sin acceso a Internet».
-5. El router 2 fue un TL-WR841N y no el Archer C6 de la sección 6: en el TL-WR841N el WDS está en *Wireless → Connect to Network*. Vale igual, pero el WR841N no tiene WPA3 (S-07).
+El segundo router estaba inicialmente en otra subred. Se modificó su configuración LAN para integrarlo en la red del proyecto con la dirección:
 
-## 2. Material
+```text
+IP:      192.168.10.2
+Máscara: 255.255.255.0
+```
 
-| Qué | Para qué |
-|---|---|
-| Router 1 configurado según la tarea 24 (LAN `192.168.10.1`, Wi-Fi del personal y de invitados) | Router principal |
-| Router 2: TP-Link Archer C6 V3, el mismo modelo que el router 1 | WDS no está estandarizado: con dos aparatos de modelos distintos puede no funcionar, y TP-Link lo avisa |
-| Un portátil con cable | Configurar el router 2 y hacer de servidor de `iperf3` |
-| Un móvil Android con **WiFi Analyzer** (u otra app que dé la señal en dBm y el BSSID) | Medir la cobertura |
-| Un portátil con Wi-Fi e `iperf3` instalado | Medir la velocidad dentro del local |
-| El plano de la [tarea 23](../23-plano-direccionamiento.md#3-plano-del-local) | Puntos de medida |
+![Configuración LAN del router 2](evidencias/13-router2-lan.png)
 
-> [!NOTE]
-> **Si no hay Archer C6:** el procedimiento se puede hacer con dos TL-WR841N (como la tarea 24). Su panel es el antiguo: el WDS está en *Wireless → Wireless Settings → Enable WDS Bridging*. En la documentación se dice con qué aparatos se hizo.
+De esta manera, los dos routers tienen direcciones diferentes pero pertenecen a la misma red `192.168.10.0/24`.
 
-## 3. Valores del plan
+## 5. DHCP del router 2
 
-| Dato | Router 1 | Router 2 |
-|---|---|---|
-| IP LAN | `192.168.10.1` | `192.168.10.2` ([tarea 23, 4.3](../23-plano-direccionamiento.md#43-equipos)) |
-| DHCP | Encendido | **Apagado** |
-| Banda del enlace WDS | 2,4 GHz | 2,4 GHz |
-| Canal de 2,4 GHz | **Fijo** (1, 6 u 11, el menos ocupado según WiFi Analyzer) | El mismo, lo toma del router 1 |
-| SSID del personal | `Restaurante-Almichain` | `Restaurante-Almichain` (mismo nombre y misma contraseña) |
-| SSID de invitados | `Restaurante-Almichain-Invitados` | `Restaurante-Almichain-Invitados` (mismo nombre y misma contraseña) |
-| Lugar | Armario del despacho | Pared del comedor, cerca de la barra (plano de la tarea 23) |
+El servidor DHCP del segundo router se ha desactivado.
 
-**Por qué el canal fijo:** el router 2 se engancha al canal del router 1. Si el router 1 está en *Auto* y cambia de canal, el enlace WDS se cae.
+![DHCP desactivado](evidencias/19-router2-dhcp-desactivado.jpg)
 
-**Por qué los mismos SSID y contraseñas:** así el móvil pasa de un router a otro sin hacer nada.
+Solo el router principal reparte direcciones IP. Esto evita conflictos entre dos servidores DHCP dentro de la misma red.
 
-Las contraseñas son las de la tarea 24, las que guarda el equipo. **No se escriben aquí ni salen en las capturas.**
+```text
+Router 1 → DHCP activado
+Router 2 → DHCP desactivado
+```
 
-## 4. Antes de empezar: router 1
+## 6. Enlace inalámbrico / Range Extender
 
-1. Entrar en el router 1 (`http://192.168.10.1` o `tplinkwifi.net`) desde el PC del gerente, con cable.
-2. *Wireless* (2,4 GHz): cambiar el canal de *Auto* al elegido en la sección 3. Guardar y apuntar el canal.
-3. Comprobar que la red de invitados está encendida y que **no** está marcada la opción de dejar a los invitados ver la red local (tarea 24).
-4. Captura de la página de Wi-Fi (canal) y de la red de invitados, **con las contraseñas tapadas**.
+En el firmware del TP-Link TL-WR841N utilizado, la extensión inalámbrica se configura mediante **Range Extender / Connect to Host Network**.
 
-## 5. Medidas «antes» (solo el router 1)
+Como red principal se seleccionó:
 
-Con el router 2 **apagado**, hacer las medidas de la sección 8 en los cinco puntos y rellenar las columnas *Antes*. Así se puede comparar.
+```text
+Restaurante_Almichain
+```
 
-## 6. Configurar el router 2
+La contraseña necesaria para establecer el enlace está ocultada en la evidencia publicada.
 
-Pasos de la guía oficial de TP-Link para WDS ([FAQ 1555](https://www.tp-link.com/us/support/faq/1555/)), con los valores de este proyecto. Los menús pueden cambiar un poco según la versión de hardware y firmware: si no aparece una opción, buscarla en *Advanced* y apuntar dónde estaba.
+![Selección de Host Network](evidencias/12-router2-conectar-red-principal.png)
 
-1. **Firmware y modo.** Actualizar el router 2 al último firmware de la web de TP-Link. Comprobar que el modo de funcionamiento es **Router**: en modo *Access Point* el WDS no aparece.
-2. **Conectar** el portátil por cable a un puerto LAN del router 2 (todavía no a la red del local) y entrar en `http://192.168.0.1` o `tplinkwifi.net`. Cambiar la contraseña de administración por una robusta (tarea 24).
-3. **IP LAN:** *Advanced → Network → LAN* → `192.168.10.2`, máscara `255.255.255.0`. Guardar. El router cambia de IP: poner en el portátil una IP fija `192.168.10.50/24` y volver a entrar en `http://192.168.10.2`.
-4. **DHCP apagado:** *Advanced → Network → DHCP Server* → desmarcar *Enable DHCP Server*. Guardar. Las IP las da solo el router 1.
-5. **WDS:** *Advanced → System Tools → System Parameters* → apartado **2.4GHz Wireless** → marcar **Enable WDS Bridging** → **Survey** → elegir `Restaurante-Almichain` (el SSID del personal del router 1) → **Choose** → poner su contraseña → **Save**. En algunos firmware está en *Advanced → Wireless → Wireless Settings*.
-6. **Wi-Fi del router 2:** poner los mismos SSID y contraseñas que el router 1 (sección 3), con WPA2/WPA3 y AES, sin WPS (tarea 24).
-7. **Red de invitados del router 2:** encenderla con el SSID de invitados y **sin** acceso a la red local, igual que en el router 1.
-8. **Administración:** dejarla solo para la MAC del PC del gerente y cerrar la administración remota (tarea 24).
-9. **Comprobar el enlace:** *Advanced → Status → Wireless* → **WDS Status: Run**. Captura.
-10. Colocar el router 2 en el comedor, quitar el cable del portátil y volver a poner el portátil en DHCP.
+Una vez configurado, el estado del router 2 muestra:
 
-**Si el WDS no pasa a *Run*:** comprobar el canal (sección 4) y la contraseña. Algunos usuarios del Archer C6 cuentan que el modo *Auto* del WDS no engancha y funciona al forzar otro tipo. Apuntar lo que pasó y lo que se probó, aunque no salga.
+- **Operation Mode:** Range Extender.
+- **Wireless Radio:** Enabled.
+- **Root AP:** `Restaurante_Almichain`.
+- **SSID:** `Restaurante_Almichain`.
+- **Channel:** 6.
+- **IP LAN:** `192.168.10.2`.
 
-## 7. Pruebas de funcionamiento
+![Router 2 en modo Range Extender](evidencias/11-router2-estado-range-extender.png)
 
-Cada prueba con su captura o su salida (sección 9). El **BSSID** es la MAC del punto de acceso al que está conectado el móvil: WiFi Analyzer lo enseña. Apuntar antes el BSSID de cada router (pegatina o *Status → Wireless*), para saber a cuál está conectado.
+El router 2 queda así enlazado inalámbricamente con el router principal y utiliza el mismo canal de 2,4 GHz.
 
-| # | Prueba | Esperado | Resultado |
-|---|---|---|---|
-| W1 | Router 2: *Status → Wireless* | WDS Status **Run** | |
-| W2 | Desde el PC del gerente: `ping 192.168.10.2` | Responde: el router 2 está en la LAN por el enlace WDS | |
-| W3 | Móvil en la Wi-Fi de **invitados**, junto al router 2 | El BSSID es el del **router 2** | |
-| W4 | Ese móvil: abrir una web y mirar su IP (*Ajustes → Wi-Fi → detalles*) | Navega. Apuntar la IP: tiene que ser de la red de invitados (la misma que da el router 1 a los invitados, tarea 24), **no** `192.168.10.x` | |
-| W5 | Ese móvil: abrir `https://192.168.10.10` (Odoo) y hacer ping con una app (por ejemplo *Fing* o *PingTools*) a `192.168.10.10` y `192.168.10.31` | **No** llega a ninguno | |
-| W6 | Ese móvil: abrir `http://192.168.10.2` y `http://192.168.10.1` | **No** abre el panel de ningún router | |
-| W7 | Dos móviles en la Wi-Fi de invitados del router 2: uno hace ping al otro | **No** responde (aislamiento de clientes) | |
-| W8 | Portátil en la Wi-Fi del **personal** junto al router 2 → `https://192.168.10.10` | Abre Odoo: el personal también tiene cobertura en la barra | |
-| W9 | Ir andando del despacho a la barra con el móvil en la Wi-Fi de invitados y un vídeo puesto | Cambia de router (cambia el BSSID) y el vídeo, como mucho, se corta un momento | |
-| W10 | Apagar el router 2 con el móvil conectado a él | El móvil pasa al router 1 si tiene señal; en la barra, la señal baja (se ve en la sección 8) | |
+## 7. Prueba de conectividad
 
-### Si W4, W5 o W6 fallan (el cliente llega a la LAN)
+Para comprobar la comunicación a través del montaje se hizo ping al router principal:
 
-Puede pasar: el enlace WDS une el router 2 con la **LAN** del router 1, y depende del firmware que la red de invitados del router 2 aísle de verdad. Si un móvil del router 2 recibe una IP `192.168.10.x`, llega a Odoo, a un TPV o al panel de un router:
+```bash
+ping -c 4 192.168.10.1
+```
 
-1. **No dejar el router 2 así:** apagar su red de invitados hasta resolverlo.
-2. Apuntar en la sección 9 qué IP recibió y a qué llegó, con capturas. **Es un resultado de la prueba, no un fallo de la tarea:** el enunciado pide comprobar que funciona, y esto es lo que se comprueba.
-3. Probar con el último firmware y repetir W4 a W6.
-4. Si sigue igual, avisar a Adrian para decidir. La alternativa es que el router 2 emita **solo** la Wi-Fi del personal y que la cobertura de clientes en la barra dependa del router 1. Hay que corregir el plano, el diagrama de la tarea 11 y la tarea 23 con lo que se decida.
+El resultado fue:
 
-## 8. Cobertura y velocidad
+```text
+4 packets transmitted
+4 received
+0% packet loss
+```
 
-### 8.1 Puntos de medida
+![Ping al router principal](evidencias/10-ping-router-principal.png)
 
-Cinco puntos del plano de la tarea 23, siempre los mismos y a la misma altura (a la altura de una mesa, con el móvil en la mano):
+El **0 % de pérdida de paquetes** confirma que existe conectividad con el router principal.
 
-| Punto | Dónde |
-|---|---|
-| P1 | Despacho, junto al armario (referencia: al lado del router 1) |
-| P2 | Comedor, mitad izquierda |
-| P3 | Barra, junto al TPV 2 |
-| P4 | Comedor, mitad derecha |
-| P5 | Entrada |
+También se comprobó desde un dispositivo móvil, con los datos móviles desactivados, que la conexión Wi-Fi permitía navegar correctamente por Internet.
 
-### 8.2 Cómo se mide
+## 8. Prueba de cobertura con WiFi Analyzer
 
-- **Señal (dBm):** WiFi Analyzer, la red de invitados. Esperar 10 segundos y apuntar el valor que más se repite. Apuntar también el BSSID (router 1 o 2).
-- **Velocidad a internet:** desde el móvil en la Wi-Fi de invitados, `https://fast.com` o la app de Speedtest. Tres medidas y apuntar la del medio (la mediana).
-- **Velocidad dentro del local:** el portátil del servidor de pruebas, con cable en el router 1, ejecuta `iperf3 -s`. El portátil con Wi-Fi, en la red del **personal** (la de invitados no llega a la LAN, a propósito), ejecuta `iperf3 -c <IP del portátil con cable> -t 10`. Apuntar el *receiver*, en Mbit/s. Así se mide el Wi-Fi y el enlace WDS sin que influya la línea a internet.
+Para comprobar las características de la red inalámbrica se utilizó **WiFi Analyzer** desde un móvil Android.
 
-**Cómo leer la señal:**
+La aplicación permitió comprobar el SSID, BSSID, canal y nivel de señal recibido.
+
+![WiFi Analyzer](evidencias/15-wifi-analyzer-p1-antes.jpg)
+
+En la medición realizada se observó:
+
+```text
+Canal:      6
+Frecuencia: 2437 MHz
+Ancho:      20 MHz
+Señal:      aproximadamente -31 dBm
+```
+
+Como referencia:
 
 | Señal | Calidad |
 |---|---|
-| -30 a -67 dBm | Buena: vídeo y llamadas sin problemas |
-| -67 a -75 dBm | Aceptable: navegar |
-| Peor que -75 dBm | Mala: cortes |
+| -30 a -67 dBm | Buena |
+| -67 a -75 dBm | Aceptable |
+| Peor que -75 dBm | Mala |
 
-**Qué esperar:** con el router 2, la señal en P3, P4 y P5 tiene que mejorar. La velocidad por el router 2 suele ser **menor** que la del router 1 a la misma distancia: el router 2 recibe y reenvía por la misma radio, así que la velocidad se queda más o menos en la mitad. Es normal en WDS y se explica en la conclusión.
+El valor obtenido, aproximadamente **-31 dBm**, corresponde a una señal de calidad muy buena en el punto comprobado.
 
-### 8.3 Resultados
+## 9. Aislamiento de la red de invitados
 
-| Punto | Antes · señal (dBm) | Antes · internet (Mbit/s) | Antes · iperf3 (Mbit/s) | Después · router (1 o 2) | Después · señal (dBm) | Después · internet (Mbit/s) | Después · iperf3 (Mbit/s) |
-|---|---|---|---|---|---|---|---|
-| P1 | | | | | | | |
-| P2 | | | | | | | |
-| P3 | | | | | | | |
-| P4 | | | | | | | |
-| P5 | | | | | | | |
+Una parte importante de la prueba consiste en garantizar que ampliar la Wi-Fi no permite a los clientes invitados acceder a la LAN interna.
 
-**Datos de la medida:** fecha y hora, canal, modelo del móvil y del portátil, y si el local estaba vacío o con gente.
+El móvil se conectó a:
 
-## 9. Evidencias
+```text
+Restaurante-Almichain-Invitados
+```
 
-En [`evidencias/`](evidencias/), con nombres que digan qué demuestran:
+Primero se comprobó que el móvil podía navegar por Internet. Después se intentó acceder a diferentes direcciones de la red interna.
+
+### 9.1 Acceso al router 2
+
+Se intentó acceder a:
+
+```text
+192.168.10.2
+```
+
+El navegador mostró `ERR_ADDRESS_UNREACHABLE`.
+
+![Invitados sin acceso al router 2](evidencias/16-invitados-sin-acceso-router2.jpg)
+
+**Resultado:** el panel del router 2 no es accesible desde la red de invitados.
+
+### 9.2 Acceso a un equipo de la LAN
+
+También se probó:
+
+```text
+192.168.10.10
+```
+
+El navegador volvió a indicar que la dirección no era alcanzable.
+
+![Invitados sin acceso a la LAN](evidencias/17-invitados-sin-acceso-lan.jpg)
+
+Durante las pruebas también se comprobó que desde la red de invitados no se podía acceder a `192.168.10.1`.
+
+| Destino | Resultado desde invitados |
+|---|---|
+| Internet | ✅ Accesible |
+| `192.168.10.1` | ✅ Bloqueado |
+| `192.168.10.2` | ✅ Bloqueado |
+| `192.168.10.10` | ✅ Bloqueado |
+
+Por tanto, la ampliación inalámbrica mantiene el aislamiento entre los clientes invitados y la red interna.
+
+## 10. Incidencias y soluciones durante la configuración
+
+### 10.1 Cambio de subred
+
+El router 2 estaba inicialmente en `192.168.0.0/24`. Se cambió su dirección a `192.168.10.2/24` para integrarlo en la red del proyecto.
+
+### 10.2 Desactivación de DHCP
+
+Al desactivar DHCP en el router 2, el ordenador dejó de recibir temporalmente una dirección mientras permanecía conectado únicamente a ese equipo.
+
+Para continuar la administración se utilizó temporalmente una dirección manual de la red, por ejemplo:
+
+```text
+192.168.10.50/24
+```
+
+Después se pudo acceder de nuevo al router 2 mediante `192.168.10.2`.
+
+### 10.3 Navegador y conectividad IP
+
+Durante algunas comprobaciones el navegador podía mostrar errores HTTP aunque existiera conectividad IP. Por ello se utilizó también `ping` para separar los problemas del servicio web de los problemas de red.
+
+## 11. Resultados
+
+| Comprobación | Resultado |
+|---|---|
+| Router principal en `192.168.10.1` | ✅ |
+| Canal 2,4 GHz fijo | ✅ Canal 6 |
+| Router 2 en `192.168.10.2` | ✅ |
+| DHCP del router 2 desactivado | ✅ |
+| Router 2 en modo Range Extender | ✅ |
+| Enlace con `Restaurante_Almichain` | ✅ |
+| Mismo canal en el enlace | ✅ Canal 6 |
+| Comunicación con `192.168.10.1` | ✅ |
+| Pérdida de paquetes | ✅ 0 % |
+| Acceso a Internet por Wi-Fi | ✅ |
+| Comprobación con WiFi Analyzer | ✅ |
+| Señal registrada | ✅ ~ -31 dBm |
+| Invitados con Internet | ✅ |
+| Invitados sin acceso a `192.168.10.1` | ✅ |
+| Invitados sin acceso a `192.168.10.2` | ✅ |
+| Invitados sin acceso a `192.168.10.10` | ✅ |
+| Aislamiento de la LAN | ✅ |
+
+## 12. Evidencias
+
+Todas las evidencias están guardadas en la carpeta `evidencias/`.
 
 | Fichero | Qué demuestra |
 |---|---|
-| `01` a `07` | Prueba de laboratorio del 27/10 (sección 1.2). Revisadas: no se lee ninguna contraseña. El 27/10 Peio cambió las fotos del monitor por capturas de pantalla (01, 02, 03, 06 y 07); la 04 se queda porque es la única con `ip route` |
-| `10-router1-canal-fijo.png` | Canal fijo en el router 1 |
-| `11-router2-lan-y-dhcp.png` | Router 2 en `192.168.10.2` y DHCP apagado |
-| `12-router2-wds-run.png` | WDS Status: Run (W1) |
-| `13-ping-gerente-router2.txt` | W2 |
-| `14-movil-bssid-router2.png` | El móvil está en el router 2 (W3) |
-| `15-movil-ip-invitados.png` | IP del móvil por el router 2 (W4) |
-| `16-movil-sin-acceso-lan.png` | W5 y W6 |
-| `17-cobertura-antes.png` y `18-cobertura-despues.png` | Pantallas de WiFi Analyzer en P3 |
-| `19-iperf3-p3-antes.txt` y `20-iperf3-p3-despues.txt` | Velocidad en la barra |
+| `01-pdf-seleccion-y-configuracion-wds.png` | Práctica del 27/10: selección de la red y configuración WDS |
+| `10-ping-router-principal.png` | Ping al router principal con 0 % de pérdida |
+| `11-router2-estado-range-extender.png` | Estado del router 2: Range Extender, `192.168.10.2`, canal 6, MAC `B0:BE:76:17:89:87` |
+| `12-router2-conectar-red-principal.png` | *Connect to Host Network*: el router 2 se une a `Restaurante_Almichain` (contraseña vacía en la captura) |
+| `13-router2-lan.png` | Router 2 con IP fija `192.168.10.2` |
+| `14-router1-red-invitados.png` | Red de invitados del router 1: sin acceso a la LAN y con aislamiento |
+| `15-wifi-analyzer-p1-antes.jpg` | Señal, BSSID y canal vistos desde WiFi Analyzer |
+| `16-invitados-sin-acceso-router2.jpg` | La red de invitados no alcanza `192.168.10.2` |
+| `17-invitados-sin-acceso-lan.jpg` | La red de invitados no alcanza `192.168.10.10` |
+| `19-router2-dhcp-desactivado.jpg` | DHCP desactivado en el router 2 (foto de la pantalla) |
 
-> [!WARNING]
-> Antes de subir cada captura, ábrela **ampliada** y comprueba que no se lee ninguna contraseña (Wi-Fi, administración, WDS). gitleaks no mira dentro de las imágenes: es lo que pasó en la tarea 24.
+El 04/11 se renombraron las capturas para que el nombre diga lo que muestran (estaban cruzadas) y se quitaron dos duplicadas.
 
-## 10. Conclusión
+Las contraseñas y credenciales sensibles se han ocultado antes de publicar las evidencias.
 
-*(Rellenar al terminar: si el WDS funciona, cuánto mejora la cobertura en la barra y la entrada, qué pasa con la velocidad y si los clientes del router 2 siguen aislados.)*
+## 13. Conclusión
 
-## 11. Pendiente
+La prueba realizada confirma el funcionamiento del segundo router como **extensor inalámbrico** de la red del restaurante.
 
-- [x] Prueba de laboratorio del enlace WDS y del DHCP del router 2 (27/10, Peio; sección 1.2).
-- [x] Red de invitados en el router 1 (tarea 24, hecha el 29/10 y probada el 30/10): ya se pueden hacer W3 a W7.
-- [ ] Router 1 con el canal fijo (sección 4).
-- [ ] Medidas «antes» (sección 5).
-- [ ] Router 2 configurado y WDS en *Run* (sección 6).
-- [ ] Pruebas W1 a W10 con sus evidencias (sección 7).
-- [ ] Medidas «después» y tabla 8.3.
-- [ ] Conclusión, y si cambia algo, corregir el plano (tarea 23) y el diagrama (tarea 11).
-- [ ] CSV: tarea 25 en **Hecho** con la evidencia, y `python3 scripts/gantt.py`.
+El router principal permanece en `192.168.10.1` y el segundo router se integra en la misma red mediante `192.168.10.2`, manteniendo el servidor DHCP desactivado y utilizando el mismo canal inalámbrico.
+
+El TP-Link TL-WR841N queda funcionando en modo **Range Extender**, enlazado a `Restaurante_Almichain`. La prueba de conectividad con el router principal obtiene **0 % de pérdida de paquetes** y se comprueba navegación por Internet desde la red inalámbrica.
+
+Mediante **WiFi Analyzer** se verifica el canal y la intensidad de señal, con aproximadamente **-31 dBm** en la medición realizada, valor correspondiente a una señal de muy buena calidad.
+
+Finalmente, la red `Restaurante-Almichain-Invitados` mantiene su aislamiento: permite acceder a Internet, pero no permite acceder a `192.168.10.1`, `192.168.10.2` ni `192.168.10.10`.
+
+Por tanto, la solución permite **ampliar la cobertura Wi-Fi manteniendo el direccionamiento previsto y el aislamiento entre la red de invitados y la LAN interna**.
+
+## 14. Pendiente
+
+Lo que pide el enunciado o la rúbrica (PAR, nivel 4 y 5) y aún no está probado:
+
+- [ ] **Ampliar la Wi-Fi de clientes.** El router 2 repite `Restaurante_Almichain` (personal); el enunciado pide ampliar la de **clientes**. O se repite `Restaurante-Almichain-Invitados`, o se explica con capturas por qué el Range Extender del TL-WR841N no puede repetir la red de invitados y qué se haría con el Archer C6 del diseño ([tarea 24, sección 12](../24-red-segura/DOCUMENTACION.md#12-pendiente)).
+- [ ] **Prueba conectado al router 2:** captura de WiFi Analyzer con el BSSID del router 2 (`B0:BE:76:17:89:87`), no el del 1, y desde ahí ping o navegación.
+- [ ] **Qué demuestran hoy las secciones 8 y 9:** la medida de -31 dBm es del **router 1** (el móvil está en el BSSID `…:AF:60`, a 0 m), y las pruebas de aislamiento se hicieron en la red de invitados del router 1, no a través del router 2. Hay que repetirlas conectado al router 2.
+- [ ] **Por qué el Range Extender cuenta como WDS:** explicarlo (une los dos routers por Wi-Fi sin cable, como el puente WDS que se usó en la práctica del 27/10).
+- [ ] **Cobertura antes y después:** señal (dBm) en la barra y en la entrada con el router 2 apagado y encendido. Hoy hay una sola medida (-31 dBm) en un punto.
+- [ ] **Desactivar UPnP** en el router 1 (hallazgo S-25 de la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md)), con captura.

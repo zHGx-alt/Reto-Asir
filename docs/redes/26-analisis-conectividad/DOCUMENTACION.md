@@ -178,6 +178,6 @@ Capturas filtradas en `evidencias/captura-lan.pcapng` (filtro `dhcp || arp || (i
 - [x] `analizar-red.sh lan` y pruebas desde invitados (con el móvil).
 - [x] Capturas W1 a W4 con Wireshark.
 - [x] Secciones 5 y 6.
-- [ ] Avisar de H-01 a H-05 a Peio y Adrian.
+- [x] H-01 a H-05 pasados a la [tarea 46](../../seguridad/46-revision-seguridad/DOCUMENTACION.md) como S-25 (UPnP y SSH y firmware antiguos del router).
 - [ ] Cuando el servidor (tarea 52) y los TPV estén en la red: repetir `analizar-red.sh lan` (L2-L8) y W5. Con eso se cierra la comprobación 2 de la tarea 46.
 - [ ] WDS (tarea 25): repetir L1 con el segundo router conectado.

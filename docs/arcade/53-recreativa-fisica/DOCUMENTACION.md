@@ -126,8 +126,8 @@ Salidas completas: [`06-comprobaciones.txt`](evidencias/06-comprobaciones.txt) y
 ## 8. Pendiente
 
 - [ ] Comprobar que la contraseña de `tecnico` está en el KeePassXC del proyecto y borrar `~/preseed-vm.cfg` del anfitrión.
-- [ ] Compartir la contraseña de `tecnico` de `Recreativa-53` (KeePassXC) con Eneko.P para las medidas de las tareas 17 y 18.
-- [ ] Tarea 54: medidas antes y después en `Recreativa-53`.
+- [x] ~~Compartir la contraseña de `tecnico` con Eneko.P para las medidas~~: las medidas las hizo Eneko.S en la tarea 54 (29/10).
+- [x] Tarea 54: medidas antes y después en `Recreativa-53` (29/10, [tarea 54](../54-medidas-equipo-real/DOCUMENTACION.md)).
 - [x] Tarea 21: con MAME funciona (P4 y P10); en Batocera, entradas comprobadas por Iker y partida jugada el 27/10 (sin captura).
 
 ## Anexo: si hubiera que instalarla en un equipo físico
