@@ -6,9 +6,11 @@
 #     (si se restaurase en el PostgreSQL de producción, el programador de tareas del Odoo de producción
 #      se conectaría también a la copia)
 #   - el Odoo de prueba solo escucha en 127.0.0.1:8070 del servidor
-# Compara lo restaurado con lo original, entra en el Odoo restaurado y al final lo borra todo.
+# Compara lo restaurado con lo original (Odoo y la BD propia almi_chain), entra en el Odoo restaurado
+# y al final lo borra todo.
 #
-# Uso:  sudo ./probar-restauracion.sh [usb|raid]     (por defecto usb: la copia que está fuera del local)
+# Uso:  sudo ./probar-restauracion.sh [usb|raid|s3]  (por defecto usb: la copia que está fuera del local;
+#       s3 lee las claves de /root/.config/backup-odoo/s3.env, como backup-odoo.sh)
 set -euo pipefail
 
 ORIGEN=${1:-usb}
@@ -25,6 +27,9 @@ log() { printf '\n==> [%s] %s\n' "$(date +%T)" "$*"; }
 # </dev/null: si no, "docker compose exec" se come la entrada estándar del bucle que lee las comprobaciones
 sql_prod()   { "${COMPOSE[@]}" exec -T db psql -U "$POSTGRES_USER" -d "$ODOO_DB" -tAc "$1" </dev/null; }
 sql_prueba() { docker exec "$PG" psql -U "$POSTGRES_USER" -d "$ODOO_DB" -tAc "$1" </dev/null; }
+# Lo mismo contra la BD propia de la tarea 40 (almi_chain)
+sql_prod_bd()   { "${COMPOSE[@]}" exec -T db psql -U "$POSTGRES_USER" -d almi_chain -tAc "$1" </dev/null; }
+sql_prueba_bd() { docker exec "$PG" psql -U "$POSTGRES_USER" -d almi_chain -tAc "$1" </dev/null; }
 
 limpiar() {
   docker rm -f "$ODOO" "$PG" >/dev/null 2>&1 || true
@@ -43,6 +48,10 @@ if [[ $ORIGEN == usb ]]; then
   blkid -L BACKUP_USB >/dev/null || { echo "ERROR: conecta el disco USB BACKUP_USB" >&2; exit 1; }
   mount /mnt/usb-backup
   REPO=/mnt/usb-backup/restic
+elif [[ $ORIGEN == s3 ]]; then
+  [[ -r /root/.config/backup-odoo/s3.env ]] || { echo "ERROR: falta /root/.config/backup-odoo/s3.env" >&2; exit 1; }
+  set -a; source /root/.config/backup-odoo/s3.env; set +a
+  REPO=$REPO_S3
 else
   REPO=/srv/datos/restic
 fi
@@ -65,6 +74,17 @@ sleep 2
 docker exec "$PG" createdb -U "$POSTGRES_USER" "$ODOO_DB"
 docker exec -i "$PG" pg_restore -U "$POSTGRES_USER" -d "$ODOO_DB" --no-owner --exit-on-error < "$DUMP"
 echo "  Base '$ODOO_DB' restaurada en el PostgreSQL aislado ($PG, red interna '$RED')"
+DUMP_BD="$DESTINO/srv/datos/temp-backup/almi_chain.dump"
+HAY_BD=0
+if [[ -f $DUMP_BD ]]; then
+  HAY_BD=1
+  # Primero los roles (globals.sql): sin rol_aplicacion y rol_lectura, los permisos de la tarea 42 no se restauran.
+  # El rol del administrador ya existe en el contenedor: ese error es esperado y se ignora.
+  docker exec -i "$PG" psql -q -U "$POSTGRES_USER" -d postgres < "$DESTINO/srv/datos/temp-backup/globals.sql" >/dev/null 2>&1 || true
+  docker exec "$PG" createdb -U "$POSTGRES_USER" almi_chain
+  docker exec -i "$PG" pg_restore -U "$POSTGRES_USER" -d almi_chain --no-owner --exit-on-error < "$DUMP_BD"
+  echo "  Base 'almi_chain' (tarea 40) restaurada con sus roles y permisos"
+fi
 
 log "4/6 Comparar: producción vs restaurado"
 printf '  %-36s %-34s %-34s %s\n' "Dato" "Producción" "Restaurado" ""
@@ -92,6 +112,21 @@ REST_FS="$ADJUNTOS/filestore/$ODOO_DB"
 huella_carpeta() { (cd "$1" && find . -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -c1-16); }
 comparar "Adjuntos: nº de ficheros" "$(find "$ORIG_FS" -type f | wc -l)" "$(find "$REST_FS" -type f | wc -l)"
 comparar "Adjuntos: huella del contenido" "$(huella_carpeta "$ORIG_FS")" "$(huella_carpeta "$REST_FS")"
+if [[ $HAY_BD -eq 1 ]]; then
+  while IFS='|' read -r nombre sql; do
+    comparar "$nombre" "$(sql_prod_bd "$sql")" "$(sql_prueba_bd "$sql")"
+  done <<'EOF'
+almi_chain: tablas|SELECT count(*) FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'
+almi_chain: filas por tabla (huella)|SELECT md5(string_agg(relname || '=' || n, ',' ORDER BY relname)) FROM (SELECT relname, (xpath('/row/c/text()', query_to_xml('SELECT count(*) AS c FROM public.' || quote_ident(relname), false, true, '')))[1]::text AS n FROM pg_stat_user_tables) t
+almi_chain: clientes|SELECT count(*) FROM cliente
+almi_chain: platos en carta|SELECT count(*) FROM plato
+almi_chain: facturas|SELECT count(*) FROM factura
+almi_chain: total de líneas (€)|SELECT coalesce(sum(cantidad * precio_unitario),0) FROM linea_factura
+almi_chain: permisos de rol_aplicacion y rol_lectura|SELECT count(*) FROM information_schema.role_table_grants WHERE grantee IN ('rol_aplicacion','rol_lectura')
+EOF
+else
+  echo "  (la copia no lleva almi_chain: no se compara la BD propia)"
+fi
 for f in docker-compose.yml .env config/odoo.conf; do
   comparar "Config: $f" "$(sha256sum < "/opt/odoo/$f" | cut -c1-16)" "$(sha256sum < "$DESTINO/opt/odoo/$f" | cut -c1-16)"
 done

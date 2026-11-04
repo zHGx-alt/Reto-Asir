@@ -1,7 +1,7 @@
 # Tarea 44 · Plan de backup 3-2-1 cifrado y automatizado
 
 **Responsable:** Iker (hecha por Iker; antes estaba a nombre de Markel) · **Fecha:** 22/10/2026 · **Depende de:** 41, 43
-**Estado:** ✅ Hecha en máquina virtual (`ServidorERP`): copia diaria cifrada de Odoo **y de `almi_chain`** (probado el 27/10/2026), con aviso si falla · ⏳ Mejora: tercer repositorio en S3 (preparado, sin probar)
+**Estado:** ✅ Hecha en máquina virtual (`ServidorERP`): copia diaria cifrada de Odoo **y de `almi_chain`** (probado el 27/10/2026), con aviso si falla · ✅ Tercer repositorio en AWS S3 probado el 04/11/2026 (copia y restauración, tarea 60)
 
 ## 1. Resultado
 Copia de seguridad **diaria, automática y cifrada** de todo lo que hace falta para recuperar Odoo, siguiendo la regla **3-2-1**:
@@ -68,7 +68,7 @@ journalctl -u backup-odoo               # ver qué ha pasado
 - [x] Crear `almi_chain` en el PostgreSQL del servidor (tarea 40, sección 2) y repetir la copia con las dos bases (27/10: 14 tablas; la copia lleva `tienda.dump` y `almi_chain.dump`, [04](evidencias/04-almi-chain-y-aviso-de-fallo.log)).
 - [x] Pasar la contraseña de restic a KeePassXC y borrar `.credenciales-backup` del PC del técnico (27/10).
 - [x] Fijar cada cuánto se renueva la copia fuera del local: cada lunes, con aviso a los 7 días (sección 1).
-- [ ] (Mejora) Tercer repositorio en AWS S3: **preparado el 27/10** (sección 8); falta crear el bucket y el usuario IAM y probarlo.
+- [x] Tercer repositorio en AWS S3: preparado el 27/10 y **probado el 04/11** (sección 8.2): copia y restauración correctas.
 - [x] Avisar si la copia falla (`OnFailure=`): instalado y probado el 27/10 con un fallo provocado (sección 8.1). El correo queda pendiente de un MTA.
 
 ## 8. Mejoras del 27/10/2026
@@ -107,9 +107,9 @@ Usuario IAM solo para esto (mínimos privilegios: nada más que su bucket):
   "Version": "2012-10-17",
   "Statement": [
     { "Effect": "Allow", "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
-      "Resource": "arn:aws:s3:::almi-chain-backup" },
+      "Resource": "arn:aws:s3:::almi-chain-backup-2026" },
     { "Effect": "Allow", "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
-      "Resource": "arn:aws:s3:::almi-chain-backup/*" }
+      "Resource": "arn:aws:s3:::almi-chain-backup-2026/*" }
   ]
 }
 ```
@@ -117,5 +117,18 @@ Usuario IAM solo para esto (mínimos privilegios: nada más que su bucket):
 `DeleteObject` hace falta para el `forget --prune`. Para que un atacante con esas claves no pueda borrar las copias, se puede
 activar el **versionado** del bucket con una regla de ciclo de vida que borre las versiones antiguas a los 30 días.
 
-**Falta:** crear el bucket y el usuario IAM en la cuenta de AWS del equipo (la de la web, tarea 30), copiar `s3.env` al servidor
-con `chmod 600` y lanzar una copia. El script solo tiene la sintaxis comprobada (`bash -n`): no se ha probado contra S3.
+**Probado el 04/11/2026 (tarea 60)** en la `ServidorERP` de laboratorio, montada desde cero con los scripts del repo: RAID 1
+(`crear-raid1.sh`), `almi_chain` con sus datos (tareas 40 y 41), `instalar-backup.sh` con un tercer disco como USB y
+`mover-docker-al-raid.sh`.
+
+| Paso | Resultado | Evidencia |
+|---|---|---|
+| Bucket `almi-chain-backup-2026` (us-east-1) | Privado: los cuatro bloqueos de acceso público activos y cifrado AES-256 por defecto. Dentro solo está el repositorio restic, cifrado | [`s3-bucket-2026-11-04.txt`](evidencias/s3-bucket-2026-11-04.txt) |
+| Copia diaria con S3 (`systemctl start backup-odoo`) | RAID, USB y S3 en la misma ejecución, `check` sin errores en los tres: *Copia terminada correctamente* | [`backup-raid-usb-s3-2026-11-04.log`](evidencias/backup-raid-usb-s3-2026-11-04.log) |
+| Restaurar **desde S3** (`probar-restauracion.sh s3`) | **23 comprobaciones OK**, también `almi_chain`; Odoo restaurado con login 200; **166 s** (80 s son la descarga) | [tarea 45](../45-restauracion/evidencias/restauracion-s3-2026-11-04.log) |
+
+**Limitación del Learner Lab.** La cuenta de AWS Academy no deja crear usuarios IAM: el rol `voclabs` no tiene
+`iam:CreateUser` (*AccessDenied*). Por eso la prueba usa en `s3.env` las credenciales temporales del lab, con
+`AWS_SESSION_TOKEN`. Caducan al cerrar la sesión, así que en el laboratorio la copia a S3 solo funciona con el lab arrancado.
+Si una noche no lo está, el servicio acaba con error y salta el aviso (`OnFailure`), pero la copia de esa noche ya está en el RAID y, si toca, en el USB, porque S3 va lo último. En una cuenta real de AWS se
+crea el usuario IAM con la política de arriba y `s3.env` lleva solo su clave, sin token.

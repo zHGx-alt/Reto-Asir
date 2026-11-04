@@ -101,6 +101,9 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Windows de los TPV | Windows 10 IoT Enterprise LTSC 2021 (licencia Entry, 37,41 € cada una) | Es Windows 10, como pide el enunciado, y tiene actualizaciones de seguridad hasta enero de 2032; el ESU es de pago cada año y solo llega a 2028. Las VM de pruebas usan Windows 11 Pro porque la LTSC no se descarga sin contrato OEM ([tarea 10, apartado 4.1](../hardware/10-presupuesto-hardware.md)) | 30/10/2026 |
 | Red del local | Plana (LAN del personal) con la Wi-Fi de invitados aislada; separación entre TPV, gerente y servidor por el cortafuegos de cada equipo | Las VLAN reales exigían OpenWrt en los routers, complicaban el WDS, no se podían probar con el router de prácticas y obligaban a rehacer el plan de IP, los scripts de los TPV, el HTTPS, el presupuesto y los diagramas. ([tarea 23, apartados 5.2 y 5.3](../redes/23-plano-direccionamiento.md#52-decisión-red-plana-con-red-de-invitados-aislada-24102026)) | 24/10/2026 |
 | Simulación de Packet Tracer | Simular la red real (ISP, NAT, LAN, dos Wi-Fi, router 2 como puente). El primer `.pkt`, con una VLAN por grupo, se quitó el 25/10/2026 para que solo quede el diseño que se monta | La simulación tiene que coincidir con lo que se monta; el router 2 en WDS es un puente, y en Packet Tracer el aparato equivalente es un punto de acceso ([guía](../redes/23-packet-tracer-red-local.md)) | 24/10/2026 |
+| Plan tras la rúbrica | Gantt final del 04/11 al 11/11 y reparto por los huecos de la rúbrica: una tarea por cada criterio que no llega al 5 (56-63), 5-6 días de trabajo por persona | La rúbrica ([rubrica-anexo-VI.md](rubrica-anexo-VI.md)) es acumulativa: un nivel no cuenta sin el anterior, así que primero se cierra lo que falta para el 4 en cada criterio ([gantt.md](gantt.md)) | 04/11/2026 |
+| Copia remota en el Learner Lab | Bucket privado `almi-chain-backup-2026` con las credenciales temporales del lab en `s3.env` | El Learner Lab no deja crear usuarios IAM (`iam:CreateUser` denegado). Con la cuenta real se crea el usuario con la política de la [tarea 44, sección 8.2](../backup/44-backup-3-2-1/DOCUMENTACION.md#82-tercer-repositorio-en-aws-s3-copia-3b) | 04/11/2026 |
+| Clave SSH del servidor | El preseed lleva la marca `CLAVE_PUBLICA_SSH`, que se sustituye por la clave del PC del gerente antes de instalar | Antes tenía fija la clave del laboratorio (`recreativa-claude`). Así cada instalación autoriza solo la clave de quien administra (tarea 46, S-08) | 04/11/2026 |
 
 ## 6. Planificación
 
@@ -112,7 +115,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 |---|---|---|
 | 1 | 21/10 – 27/10 | Organización, requisitos, comparativas, diseño (red, web, E/R) y presupuesto; buena parte de la implantación en VM |
 | 2 | 28/10 – 04/11 | Terminar lo técnico (corte el miércoles 4/11, día de la rúbrica): equipos físicos, red y WDS, comprobaciones de seguridad |
-| 3 | 05/11 – 10/11 | Tabla de pruebas, documentación final y presentación, ajustadas a la rúbrica |
+| 3 | 05/11 – 11/11 | Huecos de la rúbrica (tareas 56-63), tabla de pruebas, documentación final, presentación y ensayo el 11/11 |
 
 > **Fechas del reto:** del lunes 26/10 al jueves 12/11/2026. El 27/10 se fijó el corte técnico el 4/11 (sección 5). Las tareas ya hechas conservan sus fechas reales.
 
@@ -154,6 +157,9 @@ Incidencias relevantes durante la ejecución:
 | 30/10/2026 | ERP | `cortafuegos-servidor.sh` lanzado con `ssh host 'sudo …'` no encontraba la IP de quien lo ejecutaba (`who -m` no tiene entrada sin shell de login) y podía dejarle sin SSH | Busca `SSH_CLIENT` en los procesos padre; probado en el laboratorio ([tarea 33](../erp/33-odoo-docker/DOCUMENTACION.md)) |
 | 30/10/2026 | Redes | El nmap de la tarea 26 encontró en el router UPnP activo y SSH con software de hace más de diez años | Hallazgo S-25 de la tarea 46 (Peio): desactivar UPnP y actualizar el firmware |
 | 03/11/2026 | Seguridad | En la `ServidorERP` del laboratorio el SSH sigue aceptando contraseña y no hay actualizaciones automáticas (comprobaciones 6 y 7 de la tarea 46) | Aplicada la sección 4.2 en el laboratorio y repetidas: las dos pasan. Falta en el servidor del equipo (S-08 y S-09, Iker); los comandos están en la sección 4.2 de la [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md#42-s-08-y-s-09-endurecer-el-servidor-erp) |
+| 04/11/2026 | Backup | La prueba de restauración solo comparaba la base de Odoo: la de `almi_chain` iba en la copia pero nadie comprobaba que se recuperara | `probar-restauracion.sh` restaura también los roles y `almi_chain` y compara tablas, filas, importes y permisos; 23 comprobaciones OK desde S3 y desde el RAID ([tarea 45](../backup/45-restauracion/DOCUMENTACION.md)) |
+| 04/11/2026 | Backup | Al montar el laboratorio desde cero, `mover-docker-al-raid.sh` no se podía ejecutar: estaba en Git sin permiso de ejecución | Permiso corregido en Git; esa vez se lanzó con `bash` |
+| 04/11/2026 | Backup | El Learner Lab no deja crear el usuario IAM que preveía la tarea 44 para S3 | Credenciales temporales del lab (sección 5); la copia a S3 solo funciona con el lab arrancado |
 
 ## 8. Pruebas
 
@@ -172,12 +178,12 @@ Incidencias relevantes durante la ejecución:
 | ERP | Factura automática de extremo a extremo | Pedido, factura validada, cobro y PDF sin intervención | Repetido el 23/10 en una instalación limpia: `INV/2026/00001` y `00002` cobradas y con PDF. No incluye envío por correo ni descuento de stock (ideas del plan, no exigidas por el enunciado). Repetido el 27/10 con el caso de uso real (menú de grupo, IVA 10 %): `INV/2026/00004` = 660,00 € | [tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
 | BD | Usuario de aplicación ejecuta DDL | Permiso denegado | `CREATE TABLE`: *permission denied for schema public*; `DROP` y `ALTER`: *must be owner*; `DELETE`/`UPDATE` de facturas denegados; 33 pruebas de reglas correctas (repetido el 23/10) | [verificación](verificacion.md), [05-pruebas.sql](../bd/scripts/05-pruebas.sql) |
 | RAID | Retirada de un disco del RAID 1 | Servicio continúa; reconstrucción correcta | Los datos siguen accesibles y se puede escribir; arranca degradado; reconstrucción en 27 s con las sumas SHA-256 intactas. El 27/10 la BD y los adjuntos de Odoo pasan al RAID y se repite con una venta en el RAID degradado ([tarea 43](../backup/43-raid1/DOCUMENTACION.md)) | [tarea 43](../backup/43-raid1/DOCUMENTACION.md) |
-| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor; repetida el 27/10 con la BD en el RAID: todo correcto en 63 s. **Falta** el RTO real, restaurando en una máquina nueva | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
+| Backup | Restauración completa en entorno limpio | Datos íntegros; tiempo de recuperación registrado | Restaurada la copia del USB en un entorno aislado: 16 comprobaciones coinciden con producción; 46 s de restauración en el mismo servidor; repetida el 27/10 con la BD en el RAID: todo correcto en 63 s. **Falta** el RTO real, restaurando en una máquina nueva. 04/11 (tarea 60): copia en AWS S3 y restauración desde S3 con `almi_chain` incluida, 23 comprobaciones OK en 166 s | [tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
 | Seguridad | Revisión transversal de scripts y configuraciones | Hallazgos con gravedad, responsable y arreglo | 26 hallazgos (6 altos), repasado hasta el PR #99 (03/11); 10 corregidos (S-01, S-04, S-05, S-06, S-13, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente, S-12 resuelto en el diseño de los TPV y S-03 sin aplicar (se descarta Batocera). Comprobaciones: invitados sin acceso a la LAN y router (1, 4, 5) y cifrado del gerente (9) ✅; en el laboratorio, solo 22, 80 y 443 hacia fuera, y SSH solo con clave y `unattended-upgrades` activo tras aplicar la sección 4.2 (6 y 7; falta en el servidor del equipo, S-08 y S-09). Faltan las de los equipos del equipo en la red (2, 3) | [tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
 ## 9. Documentación y presentación
 
-> **Borrador del 26/10/2026** (Adrian). Lo que existe hoy y lo que falta para la entrega. Cada responsable actualiza su fila.
+> **Borrador del 26/10/2026, revisado el 04/11 con la rúbrica** (Adrian). Lo que existe hoy y lo que falta para la entrega. Cada responsable actualiza su fila.
 
 ### 9.1 Entregables
 
@@ -195,19 +201,20 @@ Incidencias relevantes durante la ejecución:
 
 ### 9.2 Presentación (propuesta)
 
-Una parte por bloque. Cada persona presenta **lo que no ha hecho**, para demostrar que puede defender el conjunto (condición transversal de la sección 1). Duración orientativa, a ajustar con la rúbrica:
+Una parte por bloque. Cada persona presenta **lo que no ha hecho**, para demostrar que puede defender el conjunto (condición transversal de la sección 1). Duración orientativa. La última columna dice qué criterios de la [rúbrica](rubrica-anexo-VI.md) defiende cada parte, para que ninguno se quede sin enseñar:
 
-| # | Parte | Qué enseñar en directo o en captura | Min |
-|---|---|---|---|
-| 1 | El encargo y cómo nos organizamos | Requisitos (sección 2), Gantt, flujo de ramas y PR con gitleaks | 2 |
-| 2 | Red | Plano, plan de IP, Packet Tracer y la decisión de red plana con invitados aislada | 3 |
-| 3 | Puestos de trabajo | GRUB con los dos sistemas; TPV en quiosco intentando abrir otra cosa o un USB | 3 |
-| 4 | ERP | Venta en el TPV por HTTPS y la factura automática (`factura_automatica.py`) | 4 |
-| 5 | Datos y copias | E/R, usuario sin permisos de DDL, quitar un disco del RAID y restaurar una copia | 3 |
-| 6 | Web | `https://almichain1.duckdns.org`, Lighthouse y `terraform plan` | 2 |
-| 7 | Recreativa y stick | MAME arrancando sin escritorio, medidas antes y después y el stick en dos emuladores | 3 |
-| 8 | Seguridad | Hallazgos de la tarea 46 y cómo se cerraron | 2 |
-| 9 | Retrospectiva | Sección 10 | 1 |
+| # | Parte | Qué enseñar en directo o en captura | Min | Rúbrica |
+|---|---|---|---|---|
+| 1 | El encargo y cómo nos organizamos | Requisitos (sección 2), Gantt, flujo de ramas y PR con gitleaks | 2 | — |
+| 2 | Red | Plano, plan de IP, Packet Tracer y la decisión de red plana con invitados aislada | 3 | 4 |
+| 3 | Puestos de trabajo | GRUB con los dos sistemas; TPV en quiosco intentando abrir otra cosa o un USB | 3 | 1 |
+| 4 | ERP | Venta en el TPV por HTTPS y la factura automática (`factura_automatica.py`) | 4 | 7 |
+| 5 | Datos y copias | E/R, usuario sin permisos de DDL, quitar un disco del RAID y restaurar una copia | 3 | 2, 8, 9, 10 |
+| 6 | Web | `https://almichain1.duckdns.org`, Lighthouse y `terraform plan` | 2 | 5, 6 |
+| 7 | Recreativa y stick | MAME arrancando sin escritorio, medidas antes y después y el stick en dos emuladores | 3 | 3, 12 |
+| 8 | Seguridad | Hallazgos de la tarea 46 y cómo se cerraron | 2 | 1 y 4 (nivel 5) |
+| 8b | Tecnologías habilitadoras | Nube (AWS), ERP y microcontrolador: para qué sirven en el restaurante y frente a qué alternativas (tarea 58) | 2 | 11 |
+| 9 | Retrospectiva | Sección 10 | 1 | — |
 
 **Plan B para la demo:** si falla la red del aula o el Learner Lab está parado, cada demo tiene su captura o su `.txt` en `evidencias/`. Se llevan abiertas en pestañas.
 

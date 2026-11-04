@@ -1,0 +1,27 @@
+# Tarea 46 · preseed-servidor.cfg con S-08 y S-09: instalación desatendida desde cero (04/11/2026)
+# VM temporal Prueba-preseed-46, Debian 13.7 netinst, VBoxManage unattended install con el preseed del repo
+# (CLAVE_PUBLICA_SSH sustituida por la clave del PC de pruebas). Instalación lanzada 10:50:14, SSH listo 10:56:39.
+
+## Comprobación 6: SSH sin clave
+$ ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password,keyboard-interactive tecnico@<vm>
+tecnico@127.0.0.1: Permission denied (publickey).
+
+## Root por SSH
+root@127.0.0.1: Permission denied (publickey).
+
+## Con la clave autorizada
+$ cat /etc/ssh/sshd_config.d/10-endurecer.conf   (lo aplica: las dos pruebas de arriba lo confirman)
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PermitRootLogin no
+
+## Comprobación 7: actualizaciones automáticas
+$ systemctl is-active unattended-upgrades
+active
+$ cat /etc/apt/apt.conf.d/20auto-upgrades
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+$ ls -l ~/.ssh/authorized_keys
+-rw------- tecnico tecnico
+(una sola clave: la que se puso en CLAVE_PUBLICA_SSH; ya no está recreativa-claude)
+0

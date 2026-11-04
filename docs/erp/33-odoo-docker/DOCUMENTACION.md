@@ -55,8 +55,11 @@ VBoxManage createvm --name ServidorERP --ostype Debian_64 --register
 VBoxManage modifyvm ServidorERP --memory 4096 --cpus 2 --nic1 nat \
   --natpf1 "ssh,tcp,127.0.0.1,2223,,22" --natpf1 "odoo,tcp,127.0.0.1,8069,,8069"
 # disco de 30 GB + unidad de DVD, igual que en la tarea 16
+# Antes: una copia del preseed con la clave pública del PC del gerente (tarea 46, S-08), fuera del repo.
+# Sin ella, el SSH no deja entrar a nadie y solo se entra por consola
+sed "s|CLAVE_PUBLICA_SSH|$(cat ~/.ssh/id_ed25519.pub)|" preseed-servidor.cfg > ~/preseed-servidor.cfg
 VBoxManage unattended install ServidorERP --iso=debian-13.7.0-amd64-netinst.iso \
-  --user=tecnico --password-file=... --script-template=preseed-servidor.cfg --start-vm=headless
+  --user=tecnico --password-file=... --script-template=$HOME/preseed-servidor.cfg --start-vm=headless
 ```
 Instalado en 4 min 18 s.
 

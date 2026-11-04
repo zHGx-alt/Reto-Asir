@@ -1,0 +1,15 @@
+# Tarea 60 · Bucket de la copia 3b (04/11/2026, Learner Lab, us-east-1)
+## Acceso público bloqueado
+PUBLICACCESSBLOCKCONFIGURATION	True	True	True	True
+## Cifrado por defecto
+AES256
+## Contenido (repositorio restic: solo datos cifrados)
+                           PRE data/
+                           PRE index/
+                           PRE keys/
+                           PRE snapshots/
+2026-11-04 10:44:53        155 config
+Total Objects: 10
+   Total Size: 8715218
+## Intento de crear un usuario IAM solo para el bucket
+AccessDenied: el rol voclabs del Learner Lab no tiene iam:CreateUser
