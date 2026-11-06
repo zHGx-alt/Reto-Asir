@@ -112,13 +112,15 @@ La página de estado identifica el equipo como **TP-Link TL-WR841N v14**, muestr
 
 El panel solicita credenciales de administración. La contraseña administrativa debe ser robusta, diferente de la contraseña Wi-Fi y no debe conservar el valor predeterminado.
 
-**Problemas que se ven en las capturas:**
+**Problemas que se veían en las capturas de esta primera parte (23/10) y qué se hizo:**
 
-- Se entra como `Admin` con una contraseña de 5 caracteres, que parece la de fábrica (`admin`). No hay evidencia de que se haya cambiado.
-- El panel va por **HTTP** (el navegador marca «No es seguro»): la contraseña viaja sin cifrar.
-- La administración local está abierta a **todos** los equipos de la LAN (figura 4).
+| Problema | Qué se hizo | Evidencia |
+|---|---|---|
+| Se entraba como `Admin` con una contraseña de 5 caracteres, que parecía la de fábrica (`admin`) | Cambiada por Peio el 26/10 por una de KeePassXC, distinta de la Wi-Fi (sección 10) | **Falta captura.** La contraseña no se puede enseñar; lo que sirve es una captura del panel rechazando `admin`/`admin` |
+| El panel va por **HTTP** (el navegador marca «No es seguro»): la contraseña viaja sin cifrar | El TL-WR841N no tiene HTTPS en el panel. Se compensa limitando quién puede abrirlo: solo el PC del gerente, por cable | [Segunda parte, sección 7](configurar-red-segura.md#7-administración-limitada-al-pc-autorizado) |
+| La administración local estaba abierta a **todos** los equipos de la LAN (figura 4) | Limitada a la MAC del PC del gerente el 29/10; un móvil por Wi-Fi recibe `ERR_CONNECTION_REFUSED` | [Segunda parte, sección 7](configurar-red-segura.md#7-administración-limitada-al-pc-autorizado) |
 
-**Qué hay que hacer y documentar:** cambiar la contraseña de administración por una de KeePassXC (distinta de la Wi-Fi), limitar la administración local a la MAC del PC del gerente (figura 4) y administrar solo por cable, nunca desde la Wi-Fi.
+> La rúbrica (PAR, nivel 5) pide «credenciales por defecto cambiadas»: el cambio está hecho, pero sin la captura no se puede demostrar (auditoría del 06/11).
 
 ![Acceso al panel del router](imagenes/11-acceso-administracion.png)
 
@@ -135,6 +137,8 @@ El panel solicita credenciales de administración. La contraseña administrativa
 5. Una prueba de acceso a Internet y otra que demuestre que no se puede acceder a `192.168.1.0/24`.
 
 ## 10. Resultado de las comprobaciones
+
+> Las filas de dirección del equipo, comunicación y LAN del router (`192.168.1.x`) son de la primera parte (23/10), antes de pasar la LAN a `192.168.10.0/24` el 29/10 (última fila).
 
 | Comprobación | Resultado |
 |---|---|
@@ -163,6 +167,7 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 
 - [x] Cambiar la contraseña Wi-Fi expuesta del TL-WR841N (26/10/2026, guardada en KeePassXC).
 - [x] Cambiar la contraseña de administración (26/10/2026, guardada en KeePassXC).
+- [ ] Captura del panel rechazando la contraseña de fábrica (`admin`/`admin`), como evidencia de «credenciales por defecto cambiadas» (rúbrica PAR, nivel 5; auditoría del 06/11).
 - [x] Limitar la administración a la MAC del PC del gerente; captura (29/10).
 - [x] Desactivar WPS; captura (29/10).
 - [x] Cambiar la contraseña Wi-Fi del personal (se leía en las capturas 14 y 16) y poner otra distinta en la de invitados (29/10).
