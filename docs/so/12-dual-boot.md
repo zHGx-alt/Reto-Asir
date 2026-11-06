@@ -139,6 +139,24 @@ El [script](../../scripts/so/12-cifrar-home-gerente.sh) instala `fscrypt` y `lib
 
 ⚠️ La contraseña de `gerente` se cambia **desde su sesión** (`passwd`), no como root: así `pam_fscrypt` actualiza también la protección de la carpeta. Si root la cambia, la carpeta ya no se abre al entrar.
 
+**Servicios reducidos.** Los dos sistemas traen servicios que el despacho no usa: cuantos menos haya, menos superficie de ataque. Cada script desactiva una lista fija (en el propio script, con el motivo de cada uno), se puede repetir sin problema y guarda la lista de servicios antes y después como evidencia. La cola de impresión se queda en los dos, porque el gerente imprime.
+
+En Windows, en PowerShell como administrador (`admin`):
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\so\12-servicios-reducidos.ps1 -Salida E:\
+```
+
+Quita Xbox (4 servicios), Fax, compartir la biblioteca de Windows Media Player, mapas sin conexión, geolocalización, modo demostración, Registro remoto, Conexión compartida a Internet y la telemetría. Evidencia: `win-14-servicios-reducidos.txt`.
+
+En Ubuntu, como `administrador`:
+
+```bash
+sudo bash scripts/so/12-servicios-reducidos.sh
+```
+
+Quita `cups-browsed` (añade solas las impresoras de la red), `avahi-daemon` (anuncia el equipo en la red local), `ModemManager` (no hay módem) y los informes de fallos a Canonical (`whoopsie`, `kerneloops`, `apport`). Evidencia: `/root/ubu-11-servicios-reducidos.txt`, con los puertos que quedan a la escucha (`ss -tulpn`).
+
 ## 5. Cuentas
 
 | Sistema | Cuenta | Tipo | Uso |
@@ -227,5 +245,5 @@ La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM 
 - [x] Cifrado: BitLocker en `C:` y fscrypt en `/home/gerente` (29/10, sección 4.4).
 - [x] ~~Exportar la VM a OVA y subirla a Drive~~: no se hace (decisión del 30/10). La VM se queda en el PC de Adrian ([maquinas-virtuales.md](../gestion/maquinas-virtuales.md)). Si hay que pasarla: `VBoxManage export VM-dualboot-W10-ubuntu -o VM-dualboot-W10-ubuntu.ova` en ese momento, y la clave de recuperación y las contraseñas nuevas van en el `.kdbx`.
 - [ ] En el equipo real: Windows 11 Pro o ESU (sección 7) y BitLocker con TPM + PIN.
-- [ ] **Servicios reducidos** (rúbrica, ISO RA1, nivel 5: «el sistema queda endurecido (mínimos privilegios, servicios reducidos)»): hoy solo hay evidencia de mínimos privilegios. Falta la lista de servicios desactivados en cada sistema, con la salida antes y después: en Ubuntu `systemctl list-unit-files --type=service --state=enabled` (candidatos: `cups-browsed`, `avahi-daemon`, `ModemManager`, `bluetooth` si el equipo no lo usa) y en Windows `Get-Service | Where-Object StartType -eq Automatic` (candidatos: Xbox, Fax, Servicio de geolocalización, Servicio de uso compartido de red de Windows Media Player). Auditoría del 06/11. (Las Guest Additions de la VM van en la tarea 62.)
+- [ ] **Servicios reducidos** (rúbrica, ISO RA1, nivel 5: «el sistema queda endurecido (mínimos privilegios, servicios reducidos)»; auditoría del 06/11). Los scripts están hechos (sección 4.4) y comprobada su sintaxis, pero **falta ejecutarlos en la VM** (PC de Adrian) y copiar las dos evidencias, `win-14-servicios-reducidos.txt` y `ubu-11-servicios-reducidos.txt`, a `docs/evidencias/12-dual-boot/`. Después, añadir sus filas a la tabla de la sección 6. (Las Guest Additions de la VM van en la tarea 62.)
 - [x] Drive revisado el 24/10: están el `.vmdk` y el `.kdbx` del 23/10 y no hay ningún `.txt` con contraseñas.
