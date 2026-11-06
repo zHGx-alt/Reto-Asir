@@ -2,7 +2,7 @@
 
 **Equipo:** Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio.
 
-> El enunciado dice «Equipos de 4-5 personas», pero el grupo es de **6 personas** (confirmado el 24/10/2026, [Anexo I](anexo-I-contrato-equipo.md)). Eneko.P volvió el 26/10/2026 y tiene tareas desde entonces.
+> El enunciado dice «Equipos de 4-5 personas», pero el grupo es de **6 personas** (confirmado el 24/10/2026, [Anexo I](anexo-I-contrato-equipo.md)): los grupos los hizo el profesor. Eneko.P volvió el 26/10/2026 y tiene tareas desde entonces.
 
 No hay roles fijos por bloque: las tareas se reparten de forma que cada persona trabaje en varios bloques. El objetivo es que cualquiera pueda defender el proyecto completo.
 

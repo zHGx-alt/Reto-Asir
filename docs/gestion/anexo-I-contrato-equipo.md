@@ -14,7 +14,7 @@
 | Markel | 
 | Peio | 
 
-> **Tamaño del equipo.** El enunciado dice «Equipos de 4-5 personas», pero el grupo es de **6 personas** (confirmado el 24/10/2026). Eneko.P vuelve al equipo el 26/10/2026 y recibe las tareas 17, 18, 31 y 36 ([roles.md](roles.md#26102026)); le falta su primer commit (tarea 5).
+> **Tamaño del equipo.** El enunciado dice «Equipos de 4-5 personas», pero el grupo es de **6 personas** (confirmado el 24/10/2026): los grupos los hizo el profesor. Eneko.P vuelve al equipo el 26/10/2026 y recibe las tareas 17, 18, 31 y 36 ([roles.md](roles.md#26102026)); le falta su primer commit (tarea 5).
 
 ## 2. Objetivo común
 
