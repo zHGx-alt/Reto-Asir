@@ -18,7 +18,7 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 
 | Persona | Días de trabajo | Tareas |
 |---|---|---|
-| Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11); #5 Repo con estructura y gitleaks; commits de todos (04/11–06/11); #46 Revisión de seguridad transversal (04/11–06/11); #64 Servicios reducidos en la VM del gerente (Windows y Ubuntu) (09/11–09/11) |
+| Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11); #5 Repo con estructura y gitleaks; commits de todos (04/11–06/11); #46 Revisión de seguridad transversal (04/11–06/11) |
 | Eneko.P | 5 | #36 Importar y exportar datos en Odoo (04/11–06/11); #63 Usar CRM, personal, marketing e inventario con datos (05/11–06/11); #58 Tecnologías habilitadoras: análisis y comparativa (09/11–10/11) |
 | Eneko.S | 4 | #62 Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA (06/11–09/11); #47 Tabla de pruebas por bloque (10/11–11/11) |
 | Iker | 5 | #15 Scripts de configuración reproducibles (Windows) (04/11–05/11); #57 Integrar la BD propia con la de Odoo (06/11–10/11) |
@@ -29,13 +29,13 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 
 ## Resumen
 
-**48 de 64 tareas hechas (75 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**49 de 64 tareas hechas (76 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 12 | 2 | 4 | 18 |
-| Software | 26 | 3 | 4 | 33 |
+| Software | 27 | 3 | 3 | 33 |
 | Físico | 6 | 1 | 0 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -58,7 +58,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 63 | Usar CRM, personal, marketing e inventario con datos | Software | Eneko.P | 06/11 | Pendiente | Rúbrica, LMSGI RA7, nivel 4 (y por ser acumulativo, el 5): los módulos están instalados pero solo se usan facturación y TPV. Una oportunidad de CRM que acaba en presupuesto, los empleados dados de alta, una campaña de correo y un movimiento de inventario, con capturas. Se hace a la vez que la 36 en la ServidorERP. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
 | 61 | Poner al día los textos desfasados que señala la auditoría | Documentación | Peio | 09/11 | Pendiente | Hallazgos de la auditoría del 04/11: README; CORRECIONES; tareas 7-11; 17; 18; 30; listas de pendientes ya hechas. LOGICA_RETO va en la 48. | — |
 | 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | Documentación | Eneko.S | 09/11 | Pendiente | Rúbrica, cuatro huecos pequeños. ISO RA1 n4: en la tarea 12, la VM de VirtualBox con RAM, disco y Guest Additions (no aparecen en ningún sitio). ISO RA2 n4: un párrafo que justifique la interfaz de MAME como front-end (selección de juego, pantalla completa) y cite la tarea 51, donde ya se probó Batocera (EmulationStation) y se descartó con datos. LMSGI RA1 n3: wireframe y punto de corte de tableta (el CSS solo tiene 800 px). LMSGI RA1 n5: justificar WCAG AA (contraste, teclado, textos alternativos); la 27 solo habla de contraste. | — |
-| 64 | Servicios reducidos en la VM del gerente (Windows y Ubuntu) | Software | Adrian | 09/11 | Pendiente | Rúbrica, ISO RA1, nivel 5 («servicios reducidos»; auditoría del 06/11). Los scripts están hechos y con la sintaxis comprobada (scripts/so/12-servicios-reducidos.ps1 y .sh; procedimiento en la tarea 12, sección 4.4). FALTA: ejecutarlos en la VM del gerente (PC de Adrian), subir win-14-servicios-reducidos.txt y ubu-11-servicios-reducidos.txt a docs/evidencias/12-dual-boot/ y añadir sus filas a la tabla de la sección 6 de la tarea 12. | [12-dual-boot.md](../../docs/so/12-dual-boot.md) |
 | 57 | Integrar la BD propia con la de Odoo | Software | Iker | 10/11 | Pendiente | Rúbrica, GBD RA3, nivel 4. YA HECHO: la 36 importa en Odoo la carta en CSV, con los mismos platos que almi_chain, pero a mano y sin enlace entre las bases. FALTA: un script que lea de almi_chain y escriba en Odoo (o al revés), por ejemplo carta y precios o clientes, que se pueda repetir y con evidencia. | — |
 | 58 | Tecnologías habilitadoras: análisis y comparativa | Documentación | Eneko.P | 10/11 | Pendiente | Rúbrica, Digitalización RA2, niveles 4 y 5: caracterizar las THD del reto (cloud/AWS, IaC, ERP-TPV, Arduino/IoT, IA) y su aplicación, comparando alternativas y justificando la elección. Hoy no hay ningún documento que hable de THD. | — |
 | 49 | Presentación y ensayo | Documentación | Peio | 11/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. 04/11: ensayo con todos el 11/11. | — |
@@ -67,7 +66,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
-| Adrian | 20 | 4 | 2 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
+| Adrian | 20 | 3 | 1 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
 | Eneko.P | 4 | 3 | 2 | 0 | 9 | 6, 7, 11 |
 | Eneko.S | 11 | 2 | 0 | 0 | 19 | 1, 3, 5, 7, 8, 11 |
 | Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
@@ -85,7 +84,6 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 | 5 | Repo con estructura y gitleaks; commits de todos | 0 Gestión | Gestión | 21/10–06/11 | — | En curso |
 | 46 | Revisión de seguridad transversal | 10 Seguridad | Software | 02/11–06/11 | #13 (Markel), #24 (Peio), #30 (Adrian), #42 (Adrian), #52 (Adrian) | En curso |
 | 2 | Mantener Anexo II (11 pasos) | 0 Gestión | Gestión | 21/10–11/11 | — | En curso |
-| 64 | Servicios reducidos en la VM del gerente (Windows y Ubuntu) | 2 SO | Software | 09/11–09/11 | #12 (Adrian) | Pendiente |
 
 ### Eneko.P
 
@@ -176,3 +174,4 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Drive revisado el 24/10: .vmdk y .kdbx nuevos y ningún .txt con contraseñas. 29/10: contraseñas de administrador y gerente de Ubuntu repuestas desde el modo de recuperación y guardadas en KeePassXC, con la contraseña de BitLocker y su clave de recuperación. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
 | 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | Eneko.S | Rúbrica, GBD RA1-RA2, niveles 3 y 4: el E/R actual solo tiene relaciones binarias. Añadir una ternaria, un historial (p. ej. de precios) y atributos especiales (derivado, multivaluado), y llevarlo a las tareas 39 y 40. 04/11: hecho. Ternaria SUMINISTRO (proveedor, artículo y local, con precio_compra), historial HISTORIAL_PRECIO_PLATO (débil; lo escribe el disparador R-07 y la aplicación solo lo lee), multivaluado alergeno y derivado total en el E/R Chen; llevado a las tareas 39 y 40 (17 tablas; 05-pruebas 49/49; C-13 a C-15) y probado en PostgreSQL 16. | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
 | 60 | Copia remota en S3 y restauración de almi_chain probadas | 9 Backup | Software | Adrian | Hecha el 04/11 en la ServidorERP de laboratorio, montada desde cero con los scripts 43 y 44: copia diaria a RAID, USB y S3 (bucket privado almi-chain-backup-2026, cifrado AES-256) y restauración desde S3 con 23 comprobaciones OK en 166 s, también almi_chain (roles, tablas, filas, importes y permisos). El Learner Lab no deja crear usuarios IAM: se usan sus credenciales temporales (tarea 44, sección 8.2). | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
+| 64 | Servicios reducidos en la VM del gerente (Windows y Ubuntu) | 2 SO | Software | Adrian | Rúbrica, ISO RA1, nivel 5 («servicios reducidos»; auditoría del 06/11). Hecho el 09/11 en la VM del gerente: Windows con 11 servicios deshabilitados (248 → 237 no deshabilitados; la cola de impresión se queda) y Ubuntu con 5 unidades fuera (73 → 68 habilitadas); tras un arranque normal solo escucha en localhost (DNS local, chrony y CUPS). Evidencias win-14, win-15, ubu-11 a ubu-14 en docs/evidencias/12-dual-boot/ y filas «tarea 64» en la sección 6 de la tarea 12. Instantáneas antes-servicios-reducidos-2026-11-09 y tarea64-servicios-reducidos-2026-11-09. De paso, Windows Update había vuelto a poner Windows primero en el arranque EFI: corregido con efibootmgr. | [ubu-12-servicios-tras-arranque-normal.txt](../../docs/evidencias/12-dual-boot/ubu-12-servicios-tras-arranque-normal.txt) |

@@ -18,7 +18,7 @@ declare -A QUITAR=(
   [apport.service]="recoge informes de fallos para enviarlos"
 )
 
-habilitados() { systemctl list-unit-files --type=service --type=socket --state=enabled --no-legend | awk '{print $1}' | sort; }
+habilitados() { systemctl list-unit-files --type=service --type=socket --state=enabled --no-legend | awk '{print $1}' | LC_ALL=C sort; }
 
 ANTES=$(habilitados)
 for u in "${!QUITAR[@]}"; do
@@ -31,7 +31,7 @@ DESPUES=$(habilitados)
 { echo "# Tarea 12 · Ubuntu del gerente: servicios reducidos ($(date '+%F %H:%M'))"
   echo; echo "## Servicios y sockets habilitados ANTES ($(echo "$ANTES" | grep -c .))"; echo "$ANTES"
   echo; echo "## Servicios y sockets habilitados DESPUÉS ($(echo "$DESPUES" | grep -c .))"; echo "$DESPUES"
-  echo; echo "## Quitados en esta ejecución"; comm -23 <(echo "$ANTES") <(echo "$DESPUES") || true
+  echo; echo "## Quitados en esta ejecución"; LC_ALL=C comm -23 <(echo "$ANTES") <(echo "$DESPUES") || true
   echo; echo "## Motivo de cada uno"; for u in "${!QUITAR[@]}"; do echo "- $u: ${QUITAR[$u]}"; done
   echo; echo '$ ss -tulpn (puertos a la escucha después)'; ss -tulpn
 } > "$OUT"

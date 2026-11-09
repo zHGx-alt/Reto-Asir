@@ -1,0 +1,527 @@
+﻿# Tarea 12 - Windows del gerente: servicios reducidos (2026-11-09 09:09)
+
+## Servicios no deshabilitados ANTES (248)
+
+Name                                      DisplayName                                                                                                                       StartType  Status
+----                                      -----------                                                                                                                       ---------  ------
+AarSvc_2ea0da                             Agent Activation Runtime_2ea0da                                                                                                      Manual Stopped
+AJRouter                                  Servicio de enrutador de AllJoyn                                                                                                     Manual Stopped
+ALG                                       Servicio de puerta de enlace de nivel de aplicación                                                                                  Manual Stopped
+AppIDSvc                                  Identidad de aplicación                                                                                                              Manual Stopped
+Appinfo                                   Información de la aplicación                                                                                                         Manual Running
+AppMgmt                                   Administración de aplicaciones                                                                                                       Manual Stopped
+AppReadiness                              Preparación de aplicaciones                                                                                                          Manual Stopped
+AppXSvc                                   Servicio de implementación de AppX (AppXSVC)                                                                                         Manual Running
+AssignedAccessManagerSvc                  Servicio AssignedAccessManager                                                                                                       Manual Stopped
+AudioEndpointBuilder                      Compilador de extremo de audio de Windows                                                                                         Automatic Running
+Audiosrv                                  Audio de Windows                                                                                                                  Automatic Running
+autotimesvc                               Hora de la red de telefonía móvil                                                                                                    Manual Stopped
+AxInstSV                                  Instalador de ActiveX (AxInstSV)                                                                                                     Manual Stopped
+BcastDVRUserService_2ea0da                Servicio de usuario de difusión y GameDVR_2ea0da                                                                                     Manual Stopped
+BDESVC                                    Servicio Cifrado de unidad BitLocker                                                                                                 Manual Running
+BFE                                       Motor de filtrado de base                                                                                                         Automatic Running
+BITS                                      Servicio de transferencia inteligente en segundo plano (BITS)                                                                        Manual Stopped
+BluetoothUserService_2ea0da               Servicio de soporte técnico de usuario de Bluetooth_2ea0da                                                                           Manual Stopped
+BrokerInfrastructure                      Servicio de infraestructura de tareas en segundo plano                                                                            Automatic Running
+BTAGService                               Servicio de puerta de enlace de audio de Bluetooth                                                                                   Manual Stopped
+BthAvctpSvc                               Servicio AVCTP                                                                                                                       Manual Stopped
+bthserv                                   Servicio de compatibilidad con Bluetooth                                                                                             Manual Stopped
+camsvc                                    Servicio Administrador de funcionalidad de acceso                                                                                    Manual Running
+CaptureService_2ea0da                     CaptureService_2ea0da                                                                                                                Manual Stopped
+cbdhsvc_2ea0da                            Servicio de usuario del portapapeles_2ea0da                                                                                          Manual Running
+CDPSvc                                    Servicio de plataforma de dispositivos conectados                                                                                 Automatic Running
+CDPUserSvc_2ea0da                         Servicio de usuario de plataforma de dispositivos conectados_2ea0da                                                               Automatic Running
+CertPropSvc                               Propagación de certificados                                                                                                          Manual Stopped
+ClipSVC                                   Servicio de licencia de cliente (ClipSVC)                                                                                            Manual Running
+cloudidsvc                                Servicio de identidad en la nube de Microsoft                                                                                        Manual Stopped
+COMSysApp                                 Aplicación del sistema COM+                                                                                                          Manual Stopped
+ConsentUxUserSvc_2ea0da                   ConsentUX_2ea0da                                                                                                                     Manual Stopped
+CoreMessagingRegistrar                    CoreMessaging                                                                                                                     Automatic Running
+CredentialEnrollmentManagerUserSvc_2ea0da CredentialEnrollmentManagerUserSvc_2ea0da                                                                                            Manual Stopped
+CryptSvc                                  Servicios de cifrado                                                                                                              Automatic Running
+CscService                                Archivos sin conexión                                                                                                                Manual Stopped
+DcomLaunch                                Iniciador de procesos de servidor DCOM                                                                                            Automatic Running
+dcsvc                                     Declared Configuration(DC) service                                                                                                   Manual Stopped
+defragsvc                                 Optimizar unidades                                                                                                                   Manual Stopped
+DeviceAssociationBrokerSvc_2ea0da         DeviceAssociationBroker_2ea0da                                                                                                       Manual Stopped
+DeviceAssociationService                  Servicio de asociación de dispositivos                                                                                               Manual Stopped
+DeviceInstall                             Servicio de instalación de dispositivos                                                                                              Manual Running
+DevicePickerUserSvc_2ea0da                DevicePicker_2ea0da                                                                                                                  Manual Stopped
+DevicesFlowUserSvc_2ea0da                 DevicesFlow_2ea0da                                                                                                                   Manual Stopped
+DevQueryBroker                            Agente de detección en segundo plano de DevQuery                                                                                     Manual Stopped
+Dhcp                                      Cliente DHCP                                                                                                                      Automatic Running
+diagnosticshub.standardcollector.service  Servicio Recopilador estándar del concentrador de diagnósticos de Microsoft (R)                                                      Manual Stopped
+diagsvc                                   Diagnostic Execution Service                                                                                                         Manual Stopped
+DiagTrack                                 Experiencias del usuario y telemetría asociadas                                                                                   Automatic Running
+DispBrokerDesktopSvc                      Mostrar el servicio de directivas                                                                                                 Automatic Running
+DisplayEnhancementService                 Servicio de mejora de visualización                                                                                                  Manual Stopped
+DmEnrollmentSvc                           Servicio de inscripción de administración de dispositivos                                                                            Manual Stopped
+dmwappushservice                          Servicio de enrutamiento de mensajes de inserción del Protocolo de aplicación inalámbrica (WAP) de administración de dispositivos    Manual Stopped
+Dnscache                                  Cliente DNS                                                                                                                       Automatic Running
+DoSvc                                     Optimización de distribución                                                                                                      Automatic Running
+dot3svc                                   Configuración automática de redes cableadas                                                                                          Manual Stopped
+DPS                                       Servicio de directivas de diagnóstico                                                                                             Automatic Running
+DsmSvc                                    Administrador de configuración de dispositivos                                                                                       Manual Stopped
+DsSvc                                     Servicio de uso compartido de datos                                                                                                  Manual Stopped
+DusmSvc                                   Uso de datos                                                                                                                      Automatic Running
+Eaphost                                   Protocolo de autenticación extensible                                                                                                Manual Stopped
+edgeupdate                                Microsoft Edge Update Service (edgeupdate)                                                                                        Automatic Stopped
+edgeupdatem                               Microsoft Edge Update Service (edgeupdatem)                                                                                          Manual Stopped
+EFS                                       Sistema de cifrado de archivos (EFS)                                                                                                 Manual Stopped
+embeddedmode                              Modo incrustado                                                                                                                      Manual Stopped
+EntAppSvc                                 Servicio de administración de aplicaciones de empresa                                                                                Manual Stopped
+EventLog                                  Registro de eventos de Windows                                                                                                    Automatic Running
+EventSystem                               Sistema de eventos COM+                                                                                                           Automatic Running
+Fax                                       Fax                                                                                                                                  Manual Stopped
+fdPHost                                   Host de proveedor de detección de función                                                                                            Manual Running
+FDResPub                                  Publicación de recurso de detección de función                                                                                       Manual Stopped
+fhsvc                                     Servicio de historial de archivos                                                                                                    Manual Stopped
+FontCache                                 Servicio de caché de fuentes de Windows                                                                                           Automatic Running
+FrameServer                               Servicio FrameServer de la Cámara de Windows                                                                                         Manual Stopped
+GameInputSvc                              GameInput Service                                                                                                                    Manual Stopped
+gpsvc                                     Cliente de directiva de grupo                                                                                                     Automatic Stopped
+GraphicsPerfSvc                           GraphicsPerfSvc                                                                                                                      Manual Stopped
+hidserv                                   Servicio de dispositivo de interfaz humana                                                                                           Manual Stopped
+HvHost                                    Servicio de host HV                                                                                                                  Manual Stopped
+icssvc                                    Servicio de zona con cobertura inalámbrica móvil de Windows                                                                          Manual Stopped
+IKEEXT                                    Módulos de creación de claves de IPsec para IKE y AuthIP                                                                             Manual Stopped
+InstallService                            Servicio de instalación de Microsoft Store                                                                                           Manual Running
+iphlpsvc                                  Aplicación auxiliar IP                                                                                                            Automatic Running
+IpxlatCfgSvc                              Servicio de configuración de traslación de IP                                                                                        Manual Stopped
+KeyIso                                    Aislamiento de claves CNG                                                                                                            Manual Running
+KtmRm                                     KTMRM para DTC (Coordinador de transacciones distribuidas)                                                                           Manual Stopped
+LanmanServer                              Servidor                                                                                                                          Automatic Running
+LanmanWorkstation                         Estación de trabajo                                                                                                               Automatic Running
+lfsvc                                     Servicio de geolocalización                                                                                                          Manual Running
+LicenseManager                            Servicio de administrador de licencias de Windows                                                                                    Manual Running
+lltdsvc                                   Asignador de detección de topologías de nivel de vínculo                                                                             Manual Stopped
+lmhosts                                   Aplicación auxiliar de NetBIOS sobre TCP/IP                                                                                          Manual Running
+LSM                                       Administrador de sesión local                                                                                                     Automatic Running
+LxpSvc                                    Servicio de experiencia de idioma                                                                                                    Manual Stopped
+MapsBroker                                Administrador de mapas descargados                                                                                                Automatic Stopped
+McpManagementService                      McpManagementService                                                                                                                 Manual Stopped
+MDCoreSvc                                 Servicio principal de Microsoft Defender                                                                                          Automatic Running
+MessagingService_2ea0da                   MessagingService_2ea0da                                                                                                              Manual Stopped
+MicrosoftEdgeElevationService             Microsoft Edge Elevation Service (MicrosoftEdgeElevationService)                                                                     Manual Stopped
+MixedRealityOpenXRSvc                     Windows Mixed Reality OpenXR Service                                                                                                 Manual Stopped
+mpssvc                                    Firewall de Windows Defender                                                                                                      Automatic Running
+MSDTC                                     Coordinador de transacciones distribuidas                                                                                            Manual Stopped
+MSiSCSI                                   Servicio del iniciador iSCSI de Microsoft                                                                                            Manual Stopped
+msiserver                                 Windows Installer                                                                                                                    Manual Stopped
+NaturalAuthentication                     Autenticación natural                                                                                                                Manual Stopped
+NcaSvc                                    Asistente para la conectividad de red                                                                                                Manual Stopped
+NcbService                                Agente de conexión de red                                                                                                            Manual Running
+NcdAutoSetup                              Configuración automática de dispositivos conectados a la red                                                                         Manual Stopped
+Netlogon                                  Net Logon                                                                                                                            Manual Stopped
+Netman                                    Conexiones de red                                                                                                                    Manual Stopped
+netprofm                                  Servicio de lista de redes                                                                                                           Manual Running
+NetSetupSvc                               Servicio de configuración de red                                                                                                     Manual Stopped
+NgcCtnrSvc                                Contenedor de Microsoft Passport                                                                                                     Manual Stopped
+NgcSvc                                    Microsoft Passport                                                                                                                   Manual Stopped
+NlaSvc                                    Reconoc. ubicación de red                                                                                                         Automatic Running
+nsi                                       Servicio Interfaz de almacenamiento en red                                                                                        Automatic Running
+OneSyncSvc_2ea0da                         Sincronizar host_2ea0da                                                                                                           Automatic Running
+p2pimsvc                                  Administrador de identidad de redes de mismo nivel                                                                                   Manual Stopped
+p2psvc                                    Agrupación de red del mismo nivel                                                                                                    Manual Stopped
+PcaSvc                                    Servicio Asistente para la compatibilidad de programas                                                                               Manual Running
+PeerDistSvc                               BranchCache                                                                                                                          Manual Stopped
+perceptionsimulation                      Servicio de simulación de percepción de Windows                                                                                      Manual Stopped
+PerfHost                                  DLL de host del Contador de rendimiento                                                                                              Manual Stopped
+PhoneSvc                                  Servicio telefónico                                                                                                                  Manual Stopped
+PimIndexMaintenanceSvc_2ea0da             Datos de contactos_2ea0da                                                                                                            Manual Stopped
+pla                                       Registros y alertas de rendimiento                                                                                                   Manual Stopped
+PlugPlay                                  Plug and Play                                                                                                                        Manual Running
+PNRPAutoReg                               Servicio de publicación de nombres de equipo PNRP                                                                                    Manual Stopped
+PNRPsvc                                   Protocolo de resolución de nombres de mismo nivel                                                                                    Manual Stopped
+PolicyAgent                               Agente de directiva IPsec                                                                                                            Manual Stopped
+Power                                     Energía                                                                                                                           Automatic Running
+PrintNotify                               Extensiones y notificaciones de impresora                                                                                            Manual Stopped
+PrintWorkflowUserSvc_2ea0da               PrintWorkflow_2ea0da                                                                                                                 Manual Stopped
+ProfSvc                                   Servicio de perfil de usuario                                                                                                     Automatic Running
+PushToInstall                             Servicio PushToInstall de Windows                                                                                                    Manual Stopped
+QWAVE                                     Experiencia de calidad de audio y vídeo de Windows (qWave)                                                                           Manual Stopped
+RasAuto                                   Administrador de conexiones automáticas de acceso remoto                                                                             Manual Stopped
+RasMan                                    Administrador de conexiones de acceso remoto                                                                                      Automatic Running
+RetailDemo                                Servicio de prueba comercial                                                                                                         Manual Stopped
+RmSvc                                     Servicio de administración de radio                                                                                                  Manual Running
+RpcEptMapper                              Asignador de extremos de RPC                                                                                                      Automatic Running
+RpcLocator                                Ubicador de llamada a procedimiento remoto (RPC)                                                                                     Manual Stopped
+RpcSs                                     Llamada a procedimiento remoto (RPC)                                                                                              Automatic Running
+SamSs                                     Administrador de cuentas de seguridad                                                                                             Automatic Running
+SCardSvr                                  Tarjeta inteligente                                                                                                                  Manual Stopped
+ScDeviceEnum                              Servicio de enumeración de dispositivos de tarjeta inteligente                                                                       Manual Stopped
+Schedule                                  Programador de tareas                                                                                                             Automatic Running
+SCPolicySvc                               Directiva de extracción de tarjetas inteligentes                                                                                     Manual Stopped
+SDRSVC                                    Copias de seguridad de Windows                                                                                                       Manual Stopped
+seclogon                                  Inicio de sesión secundario                                                                                                          Manual Stopped
+SecurityHealthService                     Servicio Seguridad de Windows                                                                                                        Manual Running
+SEMgrSvc                                  Administrador de pagos y NFC/SE                                                                                                      Manual Running
+SENS                                      Servicio de notificación de eventos de sistema                                                                                    Automatic Running
+Sense                                     Servicio de Protección contra amenazas avanzada de Windows Defender                                                                  Manual Stopped
+SensorDataService                         Servicio de datos del sensor                                                                                                         Manual Stopped
+SensorService                             Servicio de sensores                                                                                                                 Manual Stopped
+SensrSvc                                  Servicio de supervisión de sensores                                                                                                  Manual Stopped
+SessionEnv                                Configuración de Escritorio remoto                                                                                                   Manual Stopped
+SharedAccess                              Conexión compartida a Internet (ICS)                                                                                                 Manual Stopped
+SharedRealitySvc                          Servicio de datos espacial                                                                                                           Manual Stopped
+ShellHWDetection                          Detección de hardware shell                                                                                                       Automatic Running
+smphost                                   SMP de Espacios de almacenamiento de Microsoft                                                                                       Manual Running
+SmsRouter                                 Servicio enrutador de SMS de Microsoft Windows.                                                                                      Manual Stopped
+SNMPTRAP                                  Captura de SNMP                                                                                                                      Manual Stopped
+spectrum                                  Servicio de percepción de Windows                                                                                                    Manual Stopped
+Spooler                                   Cola de impresión                                                                                                                 Automatic Running
+sppsvc                                    Protección de software                                                                                                            Automatic Stopped
+SSDPSRV                                   Detección SSDP                                                                                                                       Manual Running
+SstpSvc                                   Servicio de protocolo de túnel de sockets seguros                                                                                    Manual Running
+StateRepository                           Servicio de repositorio de estado                                                                                                    Manual Running
+stisvc                                    Adquisición de imágenes de Windows (WIA)                                                                                             Manual Stopped
+StorSvc                                   Servicio de almacenamiento                                                                                                        Automatic Running
+svsvc                                     Comprobador puntual                                                                                                                  Manual Stopped
+swprv                                     Proveedor de instantáneas de software de Microsoft                                                                                   Manual Running
+SysMain                                   SysMain                                                                                                                           Automatic Running
+SystemEventsBroker                        Agente de eventos del sistema                                                                                                     Automatic Running
+TabletInputService                        Servicio de Panel de escritura a mano y teclado táctil                                                                               Manual Running
+TapiSrv                                   Telefonía                                                                                                                            Manual Stopped
+TermService                               Servicios de Escritorio remoto                                                                                                       Manual Stopped
+Themes                                    Temas                                                                                                                             Automatic Running
+TieringEngineService                      Administración de capas de almacenamiento                                                                                            Manual Stopped
+TimeBrokerSvc                             Agente de eventos de tiempo                                                                                                          Manual Running
+TokenBroker                               Administrador de cuentas web                                                                                                         Manual Running
+TrkWks                                    Cliente de seguimiento de vínculos distribuidos                                                                                   Automatic Running
+TroubleshootingSvc                        Servicio de solución de problemas recomendado                                                                                        Manual Stopped
+TrustedInstaller                          Instalador de módulos de Windows                                                                                                  Automatic Running
+UdkUserSvc_2ea0da                         Servicio de usuario de Udk_2ea0da                                                                                                    Manual Stopped
+UmRdpService                              Redirector de puerto en modo usuario de Servicios de Escritorio remoto                                                               Manual Stopped
+UnistoreSvc_2ea0da                        Almacenamiento de datos de usuarios_2ea0da                                                                                           Manual Stopped
+upnphost                                  Dispositivo host de UPnP                                                                                                             Manual Stopped
+UserDataSvc_2ea0da                        Acceso a datos de usuarios_2ea0da                                                                                                    Manual Stopped
+UserManager                               Administrador de usuarios                                                                                                         Automatic Running
+UsoSvc                                    Servicio Orquestador de actualizaciones                                                                                           Automatic Running
+VacSvc                                    Servicio Volumetric Audio Compositor                                                                                                 Manual Stopped
+VaultSvc                                  Administrador de credenciales                                                                                                        Manual Running
+vds                                       Disco virtual                                                                                                                        Manual Stopped
+vmicguestinterface                        Interfaz de servicio invitado de Hyper-V                                                                                             Manual Stopped
+vmicheartbeat                             Servicio de latido de Hyper-V                                                                                                        Manual Stopped
+vmickvpexchange                           Servicio de intercambio de datos de Hyper-V                                                                                          Manual Stopped
+vmicrdv                                   Servicio de virtualización de Escritorio remoto de Hyper-V                                                                           Manual Stopped
+vmicshutdown                              Servicio de cierre de invitado de Hyper-V                                                                                            Manual Stopped
+vmictimesync                              Servicio de sincronización de hora de Hyper-V                                                                                        Manual Stopped
+vmicvmsession                             Servicio PowerShell Direct de Hyper-V                                                                                                Manual Stopped
+vmicvss                                   Solicitante de instantáneas de volumen de Hyper-V                                                                                    Manual Stopped
+vmvss                                     VMware Snapshot Provider                                                                                                             Manual Stopped
+VSS                                       Instantáneas de volumen                                                                                                              Manual Running
+W32Time                                   Hora de Windows                                                                                                                   Automatic Stopped
+WaaSMedicSvc                              Servicio de Windows Update Medic                                                                                                     Manual Stopped
+WalletService                             WalletService                                                                                                                        Manual Stopped
+WarpJITSvc                                WarpJITSvc                                                                                                                           Manual Stopped
+wbengine                                  Servicio del módulo de copia de seguridad a nivel de bloque                                                                          Manual Stopped
+WbioSrvc                                  Servicio biométrico de Windows                                                                                                       Manual Stopped
+Wcmsvc                                    Administrador de conexiones de Windows                                                                                            Automatic Running
+wcncsvc                                   Registrador de configuración de Windows Connect Now                                                                                  Manual Stopped
+WdiServiceHost                            Host del servicio de diagnóstico                                                                                                     Manual Running
+WdiSystemHost                             Host de sistema de diagnóstico                                                                                                       Manual Running
+WdNisSvc                                  Servicio de inspección de red de Antivirus de Microsoft Defender                                                                     Manual Running
+WebClient                                 Cliente web                                                                                                                          Manual Stopped
+Wecsvc                                    Recopilador de eventos de Windows                                                                                                    Manual Stopped
+WEPHOSTSVC                                Servicio host de proveedor de cifrado de Windows                                                                                     Manual Stopped
+wercplsupport                             Soporte técnico del panel de control Informes de problemas                                                                           Manual Stopped
+WerSvc                                    Servicio Informe de errores de Windows                                                                                               Manual Stopped
+WFDSConMgrSvc                             Servicio de administrador de conexiones con servicios Wi-Fi Direct                                                                   Manual Stopped
+WiaRpc                                    Eventos de adquisición de imágenes estáticas                                                                                         Manual Stopped
+WinDefend                                 Servicio Antivirus de Microsoft Defender                                                                                          Automatic Running
+WinHttpAutoProxySvc                       Servicio de detección automática de proxy web WinHTTP                                                                                Manual Running
+Winmgmt                                   Instrumental de administración de Windows                                                                                         Automatic Running
+WinRM                                     Administración remota de Windows (WS-Management)                                                                                     Manual Stopped
+wisvc                                     Servicio de Windows Insider                                                                                                          Manual Stopped
+WlanSvc                                   Configuración automática de WLAN                                                                                                     Manual Stopped
+wlidsvc                                   Ayudante para el inicio de sesión de cuenta Microsoft                                                                                Manual Running
+wlpasvc                                   Servicio de asistente para perfil local                                                                                              Manual Stopped
+WManSvc                                   Servicio de administración de Windows                                                                                                Manual Stopped
+wmiApSrv                                  Adaptador de rendimiento de WMI                                                                                                      Manual Stopped
+WMPNetworkSvc                             Servicio de uso compartido de red del Reproductor de Windows Media                                                                   Manual Stopped
+workfolderssvc                            Carpetas de trabajo                                                                                                                  Manual Stopped
+WpcMonSvc                                 Control parental                                                                                                                     Manual Stopped
+WPDBusEnum                                Servicio enumerador de dispositivos portátiles                                                                                       Manual Running
+WpnService                                Servicio del sistema de notificaciones de inserción de Windows                                                                    Automatic Running
+WpnUserService_2ea0da                     Servicio de usuario de notificaciones de inserción de Windows_2ea0da                                                              Automatic Running
+wscsvc                                    Centro de seguridad                                                                                                               Automatic Running
+WSearch                                   Windows Search                                                                                                                    Automatic Running
+wuauserv                                  Windows Update                                                                                                                       Manual Running
+WwanSvc                                   Configuración automática de WWAN                                                                                                     Manual Stopped
+XblAuthManager                            Administración de autenticación de Xbox Live                                                                                         Manual Stopped
+XblGameSave                               Partida guardada en Xbox Live                                                                                                        Manual Stopped
+XboxGipSvc                                Xbox Accessory Management Service                                                                                                    Manual Stopped
+XboxNetApiSvc                             Servicio de red de Xbox Live                                                                                                         Manual Stopped
+
+
+
+## Servicios no deshabilitados DESPUES (237)
+
+Name                                      DisplayName                                                                                                                       StartType  Status
+----                                      -----------                                                                                                                       ---------  ------
+AarSvc_2ea0da                             Agent Activation Runtime_2ea0da                                                                                                      Manual Stopped
+AJRouter                                  Servicio de enrutador de AllJoyn                                                                                                     Manual Stopped
+ALG                                       Servicio de puerta de enlace de nivel de aplicación                                                                                  Manual Stopped
+AppIDSvc                                  Identidad de aplicación                                                                                                              Manual Stopped
+Appinfo                                   Información de la aplicación                                                                                                         Manual Running
+AppMgmt                                   Administración de aplicaciones                                                                                                       Manual Stopped
+AppReadiness                              Preparación de aplicaciones                                                                                                          Manual Stopped
+AppXSvc                                   Servicio de implementación de AppX (AppXSVC)                                                                                         Manual Running
+AssignedAccessManagerSvc                  Servicio AssignedAccessManager                                                                                                       Manual Stopped
+AudioEndpointBuilder                      Compilador de extremo de audio de Windows                                                                                         Automatic Running
+Audiosrv                                  Audio de Windows                                                                                                                  Automatic Running
+autotimesvc                               Hora de la red de telefonía móvil                                                                                                    Manual Stopped
+AxInstSV                                  Instalador de ActiveX (AxInstSV)                                                                                                     Manual Stopped
+BcastDVRUserService_2ea0da                Servicio de usuario de difusión y GameDVR_2ea0da                                                                                     Manual Stopped
+BDESVC                                    Servicio Cifrado de unidad BitLocker                                                                                                 Manual Running
+BFE                                       Motor de filtrado de base                                                                                                         Automatic Running
+BITS                                      Servicio de transferencia inteligente en segundo plano (BITS)                                                                        Manual Stopped
+BluetoothUserService_2ea0da               Servicio de soporte técnico de usuario de Bluetooth_2ea0da                                                                           Manual Stopped
+BrokerInfrastructure                      Servicio de infraestructura de tareas en segundo plano                                                                            Automatic Running
+BTAGService                               Servicio de puerta de enlace de audio de Bluetooth                                                                                   Manual Stopped
+BthAvctpSvc                               Servicio AVCTP                                                                                                                       Manual Stopped
+bthserv                                   Servicio de compatibilidad con Bluetooth                                                                                             Manual Stopped
+camsvc                                    Servicio Administrador de funcionalidad de acceso                                                                                    Manual Running
+CaptureService_2ea0da                     CaptureService_2ea0da                                                                                                                Manual Stopped
+cbdhsvc_2ea0da                            Servicio de usuario del portapapeles_2ea0da                                                                                          Manual Running
+CDPSvc                                    Servicio de plataforma de dispositivos conectados                                                                                 Automatic Running
+CDPUserSvc_2ea0da                         Servicio de usuario de plataforma de dispositivos conectados_2ea0da                                                               Automatic Running
+CertPropSvc                               Propagación de certificados                                                                                                          Manual Stopped
+ClipSVC                                   Servicio de licencia de cliente (ClipSVC)                                                                                            Manual Running
+cloudidsvc                                Servicio de identidad en la nube de Microsoft                                                                                        Manual Stopped
+COMSysApp                                 Aplicación del sistema COM+                                                                                                          Manual Stopped
+ConsentUxUserSvc_2ea0da                   ConsentUX_2ea0da                                                                                                                     Manual Stopped
+CoreMessagingRegistrar                    CoreMessaging                                                                                                                     Automatic Running
+CredentialEnrollmentManagerUserSvc_2ea0da CredentialEnrollmentManagerUserSvc_2ea0da                                                                                            Manual Stopped
+CryptSvc                                  Servicios de cifrado                                                                                                              Automatic Running
+CscService                                Archivos sin conexión                                                                                                                Manual Stopped
+DcomLaunch                                Iniciador de procesos de servidor DCOM                                                                                            Automatic Running
+dcsvc                                     Declared Configuration(DC) service                                                                                                   Manual Stopped
+defragsvc                                 Optimizar unidades                                                                                                                   Manual Stopped
+DeviceAssociationBrokerSvc_2ea0da         DeviceAssociationBroker_2ea0da                                                                                                       Manual Stopped
+DeviceAssociationService                  Servicio de asociación de dispositivos                                                                                               Manual Stopped
+DeviceInstall                             Servicio de instalación de dispositivos                                                                                              Manual Running
+DevicePickerUserSvc_2ea0da                DevicePicker_2ea0da                                                                                                                  Manual Stopped
+DevicesFlowUserSvc_2ea0da                 DevicesFlow_2ea0da                                                                                                                   Manual Stopped
+DevQueryBroker                            Agente de detección en segundo plano de DevQuery                                                                                     Manual Stopped
+Dhcp                                      Cliente DHCP                                                                                                                      Automatic Running
+diagnosticshub.standardcollector.service  Servicio Recopilador estándar del concentrador de diagnósticos de Microsoft (R)                                                      Manual Stopped
+diagsvc                                   Diagnostic Execution Service                                                                                                         Manual Stopped
+DispBrokerDesktopSvc                      Mostrar el servicio de directivas                                                                                                 Automatic Running
+DisplayEnhancementService                 Servicio de mejora de visualización                                                                                                  Manual Stopped
+DmEnrollmentSvc                           Servicio de inscripción de administración de dispositivos                                                                            Manual Stopped
+dmwappushservice                          Servicio de enrutamiento de mensajes de inserción del Protocolo de aplicación inalámbrica (WAP) de administración de dispositivos    Manual Stopped
+Dnscache                                  Cliente DNS                                                                                                                       Automatic Running
+DoSvc                                     Optimización de distribución                                                                                                      Automatic Running
+dot3svc                                   Configuración automática de redes cableadas                                                                                          Manual Stopped
+DPS                                       Servicio de directivas de diagnóstico                                                                                             Automatic Running
+DsmSvc                                    Administrador de configuración de dispositivos                                                                                       Manual Stopped
+DsSvc                                     Servicio de uso compartido de datos                                                                                                  Manual Stopped
+DusmSvc                                   Uso de datos                                                                                                                      Automatic Running
+Eaphost                                   Protocolo de autenticación extensible                                                                                                Manual Stopped
+edgeupdate                                Microsoft Edge Update Service (edgeupdate)                                                                                        Automatic Stopped
+edgeupdatem                               Microsoft Edge Update Service (edgeupdatem)                                                                                          Manual Stopped
+EFS                                       Sistema de cifrado de archivos (EFS)                                                                                                 Manual Stopped
+embeddedmode                              Modo incrustado                                                                                                                      Manual Stopped
+EntAppSvc                                 Servicio de administración de aplicaciones de empresa                                                                                Manual Stopped
+EventLog                                  Registro de eventos de Windows                                                                                                    Automatic Running
+EventSystem                               Sistema de eventos COM+                                                                                                           Automatic Running
+fdPHost                                   Host de proveedor de detección de función                                                                                            Manual Running
+FDResPub                                  Publicación de recurso de detección de función                                                                                       Manual Stopped
+fhsvc                                     Servicio de historial de archivos                                                                                                    Manual Stopped
+FontCache                                 Servicio de caché de fuentes de Windows                                                                                           Automatic Running
+FrameServer                               Servicio FrameServer de la Cámara de Windows                                                                                         Manual Stopped
+GameInputSvc                              GameInput Service                                                                                                                    Manual Stopped
+gpsvc                                     Cliente de directiva de grupo                                                                                                     Automatic Stopped
+GraphicsPerfSvc                           GraphicsPerfSvc                                                                                                                      Manual Stopped
+hidserv                                   Servicio de dispositivo de interfaz humana                                                                                           Manual Stopped
+HvHost                                    Servicio de host HV                                                                                                                  Manual Stopped
+icssvc                                    Servicio de zona con cobertura inalámbrica móvil de Windows                                                                          Manual Stopped
+IKEEXT                                    Módulos de creación de claves de IPsec para IKE y AuthIP                                                                             Manual Stopped
+InstallService                            Servicio de instalación de Microsoft Store                                                                                           Manual Running
+iphlpsvc                                  Aplicación auxiliar IP                                                                                                            Automatic Running
+IpxlatCfgSvc                              Servicio de configuración de traslación de IP                                                                                        Manual Stopped
+KeyIso                                    Aislamiento de claves CNG                                                                                                            Manual Running
+KtmRm                                     KTMRM para DTC (Coordinador de transacciones distribuidas)                                                                           Manual Stopped
+LanmanServer                              Servidor                                                                                                                          Automatic Running
+LanmanWorkstation                         Estación de trabajo                                                                                                               Automatic Running
+LicenseManager                            Servicio de administrador de licencias de Windows                                                                                    Manual Running
+lltdsvc                                   Asignador de detección de topologías de nivel de vínculo                                                                             Manual Stopped
+lmhosts                                   Aplicación auxiliar de NetBIOS sobre TCP/IP                                                                                          Manual Running
+LSM                                       Administrador de sesión local                                                                                                     Automatic Running
+LxpSvc                                    Servicio de experiencia de idioma                                                                                                    Manual Stopped
+McpManagementService                      McpManagementService                                                                                                                 Manual Stopped
+MDCoreSvc                                 Servicio principal de Microsoft Defender                                                                                          Automatic Running
+MessagingService_2ea0da                   MessagingService_2ea0da                                                                                                              Manual Stopped
+MicrosoftEdgeElevationService             Microsoft Edge Elevation Service (MicrosoftEdgeElevationService)                                                                     Manual Stopped
+MixedRealityOpenXRSvc                     Windows Mixed Reality OpenXR Service                                                                                                 Manual Stopped
+mpssvc                                    Firewall de Windows Defender                                                                                                      Automatic Running
+MSDTC                                     Coordinador de transacciones distribuidas                                                                                            Manual Stopped
+MSiSCSI                                   Servicio del iniciador iSCSI de Microsoft                                                                                            Manual Stopped
+msiserver                                 Windows Installer                                                                                                                    Manual Stopped
+NaturalAuthentication                     Autenticación natural                                                                                                                Manual Stopped
+NcaSvc                                    Asistente para la conectividad de red                                                                                                Manual Stopped
+NcbService                                Agente de conexión de red                                                                                                            Manual Running
+NcdAutoSetup                              Configuración automática de dispositivos conectados a la red                                                                         Manual Stopped
+Netlogon                                  Net Logon                                                                                                                            Manual Stopped
+Netman                                    Conexiones de red                                                                                                                    Manual Stopped
+netprofm                                  Servicio de lista de redes                                                                                                           Manual Running
+NetSetupSvc                               Servicio de configuración de red                                                                                                     Manual Stopped
+NgcCtnrSvc                                Contenedor de Microsoft Passport                                                                                                     Manual Stopped
+NgcSvc                                    Microsoft Passport                                                                                                                   Manual Stopped
+NlaSvc                                    Reconoc. ubicación de red                                                                                                         Automatic Running
+nsi                                       Servicio Interfaz de almacenamiento en red                                                                                        Automatic Running
+OneSyncSvc_2ea0da                         Sincronizar host_2ea0da                                                                                                           Automatic Running
+p2pimsvc                                  Administrador de identidad de redes de mismo nivel                                                                                   Manual Stopped
+p2psvc                                    Agrupación de red del mismo nivel                                                                                                    Manual Stopped
+PcaSvc                                    Servicio Asistente para la compatibilidad de programas                                                                               Manual Running
+PeerDistSvc                               BranchCache                                                                                                                          Manual Stopped
+perceptionsimulation                      Servicio de simulación de percepción de Windows                                                                                      Manual Stopped
+PerfHost                                  DLL de host del Contador de rendimiento                                                                                              Manual Stopped
+PhoneSvc                                  Servicio telefónico                                                                                                                  Manual Stopped
+PimIndexMaintenanceSvc_2ea0da             Datos de contactos_2ea0da                                                                                                            Manual Stopped
+pla                                       Registros y alertas de rendimiento                                                                                                   Manual Stopped
+PlugPlay                                  Plug and Play                                                                                                                        Manual Running
+PNRPAutoReg                               Servicio de publicación de nombres de equipo PNRP                                                                                    Manual Stopped
+PNRPsvc                                   Protocolo de resolución de nombres de mismo nivel                                                                                    Manual Stopped
+PolicyAgent                               Agente de directiva IPsec                                                                                                            Manual Stopped
+Power                                     Energía                                                                                                                           Automatic Running
+PrintNotify                               Extensiones y notificaciones de impresora                                                                                            Manual Stopped
+PrintWorkflowUserSvc_2ea0da               PrintWorkflow_2ea0da                                                                                                                 Manual Stopped
+ProfSvc                                   Servicio de perfil de usuario                                                                                                     Automatic Running
+PushToInstall                             Servicio PushToInstall de Windows                                                                                                    Manual Stopped
+QWAVE                                     Experiencia de calidad de audio y vídeo de Windows (qWave)                                                                           Manual Stopped
+RasAuto                                   Administrador de conexiones automáticas de acceso remoto                                                                             Manual Stopped
+RasMan                                    Administrador de conexiones de acceso remoto                                                                                      Automatic Running
+RmSvc                                     Servicio de administración de radio                                                                                                  Manual Running
+RpcEptMapper                              Asignador de extremos de RPC                                                                                                      Automatic Running
+RpcLocator                                Ubicador de llamada a procedimiento remoto (RPC)                                                                                     Manual Stopped
+RpcSs                                     Llamada a procedimiento remoto (RPC)                                                                                              Automatic Running
+SamSs                                     Administrador de cuentas de seguridad                                                                                             Automatic Running
+SCardSvr                                  Tarjeta inteligente                                                                                                                  Manual Stopped
+ScDeviceEnum                              Servicio de enumeración de dispositivos de tarjeta inteligente                                                                       Manual Stopped
+Schedule                                  Programador de tareas                                                                                                             Automatic Running
+SCPolicySvc                               Directiva de extracción de tarjetas inteligentes                                                                                     Manual Stopped
+SDRSVC                                    Copias de seguridad de Windows                                                                                                       Manual Stopped
+seclogon                                  Inicio de sesión secundario                                                                                                          Manual Stopped
+SecurityHealthService                     Servicio Seguridad de Windows                                                                                                        Manual Running
+SEMgrSvc                                  Administrador de pagos y NFC/SE                                                                                                      Manual Running
+SENS                                      Servicio de notificación de eventos de sistema                                                                                    Automatic Running
+Sense                                     Servicio de Protección contra amenazas avanzada de Windows Defender                                                                  Manual Stopped
+SensorDataService                         Servicio de datos del sensor                                                                                                         Manual Stopped
+SensorService                             Servicio de sensores                                                                                                                 Manual Stopped
+SensrSvc                                  Servicio de supervisión de sensores                                                                                                  Manual Stopped
+SessionEnv                                Configuración de Escritorio remoto                                                                                                   Manual Stopped
+SharedRealitySvc                          Servicio de datos espacial                                                                                                           Manual Stopped
+ShellHWDetection                          Detección de hardware shell                                                                                                       Automatic Running
+smphost                                   SMP de Espacios de almacenamiento de Microsoft                                                                                       Manual Running
+SmsRouter                                 Servicio enrutador de SMS de Microsoft Windows.                                                                                      Manual Stopped
+SNMPTRAP                                  Captura de SNMP                                                                                                                      Manual Stopped
+spectrum                                  Servicio de percepción de Windows                                                                                                    Manual Stopped
+Spooler                                   Cola de impresión                                                                                                                 Automatic Running
+sppsvc                                    Protección de software                                                                                                            Automatic Stopped
+SSDPSRV                                   Detección SSDP                                                                                                                       Manual Running
+SstpSvc                                   Servicio de protocolo de túnel de sockets seguros                                                                                    Manual Running
+StateRepository                           Servicio de repositorio de estado                                                                                                    Manual Running
+stisvc                                    Adquisición de imágenes de Windows (WIA)                                                                                             Manual Stopped
+StorSvc                                   Servicio de almacenamiento                                                                                                        Automatic Running
+svsvc                                     Comprobador puntual                                                                                                                  Manual Stopped
+swprv                                     Proveedor de instantáneas de software de Microsoft                                                                                   Manual Running
+SysMain                                   SysMain                                                                                                                           Automatic Running
+SystemEventsBroker                        Agente de eventos del sistema                                                                                                     Automatic Running
+TabletInputService                        Servicio de Panel de escritura a mano y teclado táctil                                                                               Manual Running
+TapiSrv                                   Telefonía                                                                                                                            Manual Stopped
+TermService                               Servicios de Escritorio remoto                                                                                                       Manual Stopped
+Themes                                    Temas                                                                                                                             Automatic Running
+TieringEngineService                      Administración de capas de almacenamiento                                                                                            Manual Stopped
+TimeBrokerSvc                             Agente de eventos de tiempo                                                                                                          Manual Running
+TokenBroker                               Administrador de cuentas web                                                                                                         Manual Running
+TrkWks                                    Cliente de seguimiento de vínculos distribuidos                                                                                   Automatic Running
+TroubleshootingSvc                        Servicio de solución de problemas recomendado                                                                                        Manual Stopped
+TrustedInstaller                          Instalador de módulos de Windows                                                                                                  Automatic Running
+UdkUserSvc_2ea0da                         Servicio de usuario de Udk_2ea0da                                                                                                    Manual Stopped
+UmRdpService                              Redirector de puerto en modo usuario de Servicios de Escritorio remoto                                                               Manual Stopped
+UnistoreSvc_2ea0da                        Almacenamiento de datos de usuarios_2ea0da                                                                                           Manual Stopped
+upnphost                                  Dispositivo host de UPnP                                                                                                             Manual Stopped
+UserDataSvc_2ea0da                        Acceso a datos de usuarios_2ea0da                                                                                                    Manual Stopped
+UserManager                               Administrador de usuarios                                                                                                         Automatic Running
+UsoSvc                                    Servicio Orquestador de actualizaciones                                                                                           Automatic Running
+VacSvc                                    Servicio Volumetric Audio Compositor                                                                                                 Manual Stopped
+VaultSvc                                  Administrador de credenciales                                                                                                        Manual Running
+vds                                       Disco virtual                                                                                                                        Manual Stopped
+vmicguestinterface                        Interfaz de servicio invitado de Hyper-V                                                                                             Manual Stopped
+vmicheartbeat                             Servicio de latido de Hyper-V                                                                                                        Manual Stopped
+vmickvpexchange                           Servicio de intercambio de datos de Hyper-V                                                                                          Manual Stopped
+vmicrdv                                   Servicio de virtualización de Escritorio remoto de Hyper-V                                                                           Manual Stopped
+vmicshutdown                              Servicio de cierre de invitado de Hyper-V                                                                                            Manual Stopped
+vmictimesync                              Servicio de sincronización de hora de Hyper-V                                                                                        Manual Stopped
+vmicvmsession                             Servicio PowerShell Direct de Hyper-V                                                                                                Manual Stopped
+vmicvss                                   Solicitante de instantáneas de volumen de Hyper-V                                                                                    Manual Stopped
+vmvss                                     VMware Snapshot Provider                                                                                                             Manual Stopped
+VSS                                       Instantáneas de volumen                                                                                                              Manual Running
+W32Time                                   Hora de Windows                                                                                                                   Automatic Stopped
+WaaSMedicSvc                              Servicio de Windows Update Medic                                                                                                     Manual Stopped
+WalletService                             WalletService                                                                                                                        Manual Stopped
+WarpJITSvc                                WarpJITSvc                                                                                                                           Manual Stopped
+wbengine                                  Servicio del módulo de copia de seguridad a nivel de bloque                                                                          Manual Stopped
+WbioSrvc                                  Servicio biométrico de Windows                                                                                                       Manual Stopped
+Wcmsvc                                    Administrador de conexiones de Windows                                                                                            Automatic Running
+wcncsvc                                   Registrador de configuración de Windows Connect Now                                                                                  Manual Stopped
+WdiServiceHost                            Host del servicio de diagnóstico                                                                                                     Manual Running
+WdiSystemHost                             Host de sistema de diagnóstico                                                                                                       Manual Running
+WdNisSvc                                  Servicio de inspección de red de Antivirus de Microsoft Defender                                                                     Manual Running
+WebClient                                 Cliente web                                                                                                                          Manual Stopped
+Wecsvc                                    Recopilador de eventos de Windows                                                                                                    Manual Stopped
+WEPHOSTSVC                                Servicio host de proveedor de cifrado de Windows                                                                                     Manual Stopped
+wercplsupport                             Soporte técnico del panel de control Informes de problemas                                                                           Manual Stopped
+WerSvc                                    Servicio Informe de errores de Windows                                                                                               Manual Stopped
+WFDSConMgrSvc                             Servicio de administrador de conexiones con servicios Wi-Fi Direct                                                                   Manual Stopped
+WiaRpc                                    Eventos de adquisición de imágenes estáticas                                                                                         Manual Stopped
+WinDefend                                 Servicio Antivirus de Microsoft Defender                                                                                          Automatic Running
+WinHttpAutoProxySvc                       Servicio de detección automática de proxy web WinHTTP                                                                                Manual Running
+Winmgmt                                   Instrumental de administración de Windows                                                                                         Automatic Running
+WinRM                                     Administración remota de Windows (WS-Management)                                                                                     Manual Stopped
+wisvc                                     Servicio de Windows Insider                                                                                                          Manual Stopped
+WlanSvc                                   Configuración automática de WLAN                                                                                                     Manual Stopped
+wlidsvc                                   Ayudante para el inicio de sesión de cuenta Microsoft                                                                                Manual Running
+wlpasvc                                   Servicio de asistente para perfil local                                                                                              Manual Stopped
+WManSvc                                   Servicio de administración de Windows                                                                                                Manual Stopped
+wmiApSrv                                  Adaptador de rendimiento de WMI                                                                                                      Manual Stopped
+workfolderssvc                            Carpetas de trabajo                                                                                                                  Manual Stopped
+WpcMonSvc                                 Control parental                                                                                                                     Manual Stopped
+WPDBusEnum                                Servicio enumerador de dispositivos portátiles                                                                                       Manual Running
+WpnService                                Servicio del sistema de notificaciones de inserción de Windows                                                                    Automatic Running
+WpnUserService_2ea0da                     Servicio de usuario de notificaciones de inserción de Windows_2ea0da                                                              Automatic Running
+wscsvc                                    Centro de seguridad                                                                                                               Automatic Running
+WSearch                                   Windows Search                                                                                                                    Automatic Running
+wuauserv                                  Windows Update                                                                                                                       Manual Running
+WwanSvc                                   Configuración automática de WWAN                                                                                                     Manual Stopped
+
+
+
+## Deshabilitados en esta ejecucion
+XblAuthManager (Xbox Live: inicio de sesion de juegos)
+XblGameSave (Xbox Live: partidas guardadas)
+XboxNetApiSvc (Xbox Live: red)
+XboxGipSvc (Accesorios de Xbox)
+Fax (Fax: no hay linea de fax)
+WMPNetworkSvc (Compartir la biblioteca de Windows Media Player en red)
+MapsBroker (Descarga de mapas sin conexion)
+lfsvc (Geolocalizacion del equipo)
+RetailDemo (Modo demostracion de tienda)
+SharedAccess (Compartir la conexion a Internet (ICS))
+DiagTrack (Telemetria (Experiencias del usuario y telemetria asociadas))
+
+## Motivo de cada uno
+- XblAuthManager: Xbox Live: inicio de sesion de juegos
+- XblGameSave: Xbox Live: partidas guardadas
+- XboxNetApiSvc: Xbox Live: red
+- XboxGipSvc: Accesorios de Xbox
+- Fax: Fax: no hay linea de fax
+- WMPNetworkSvc: Compartir la biblioteca de Windows Media Player en red
+- MapsBroker: Descarga de mapas sin conexion
+- lfsvc: Geolocalizacion del equipo
+- RetailDemo: Modo demostracion de tienda
+- RemoteRegistry: Editar el registro desde otro equipo
+- SharedAccess: Compartir la conexion a Internet (ICS)
+- DiagTrack: Telemetria (Experiencias del usuario y telemetria asociadas)

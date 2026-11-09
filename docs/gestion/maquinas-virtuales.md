@@ -6,7 +6,7 @@
 
 | VM | Tareas | Quién la tiene | Dónde | Recursos | Para qué sirve hoy |
 |---|---|---|---|---|---|
-| `VM-dualboot-W10-ubuntu` | 12, 55 | **Adrian** | PC de Adrian, VirtualBox | 4 CPU, 8 GB, disco de 60 GB (64 GB con las instantáneas) | **Entregable:** el equipo del gerente. Instantánea vigente: `tarea12-cifrado-y-actualizado-2026-10-29` |
+| `VM-dualboot-W10-ubuntu` | 12, 55 | **Adrian** | PC de Adrian, VirtualBox | 4 CPU, 8 GB, disco de 60 GB (64 GB con las instantáneas) | **Entregable:** el equipo del gerente. Instantánea vigente: `tarea64-servicios-reducidos-2026-11-09` (09/11, servicios reducidos; la anterior, `antes-servicios-reducidos-2026-11-09`, sirve para volver atrás) |
 | `ServidorERP` (laboratorio) | 52, 37 (y pruebas de 34-35) | **Adrian** | PC de Adrian, VirtualBox, red NAT `reto-lan` (`192.168.10.10`) | 2 CPU, 4 GB, disco de 30 GB (7,6 GB usados) | Odoo por HTTPS y el ticket impreso. No tiene el RAID: es el laboratorio, no el servidor del equipo |
 | `win-11` | 52, 37 | **Adrian** | PC de Adrian, VirtualBox (`192.168.10.60`) | 3 CPU, 8 GB | TPV **provisional** de las pruebas 5-6 de la 52. Es una VM personal: no se entrega |
 | `ServidorERP` del equipo | 33-35, 40-45 | **Iker** | PC de Iker (a confirmar) | — | **Entregable:** el servidor con el RAID 1, la BD de Odoo en el RAID y las copias |
