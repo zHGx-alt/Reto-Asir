@@ -1,0 +1,169 @@
+# Tarea 12 · Ubuntu del gerente: servicios reducidos (2026-11-09 10:19)
+
+## Servicios y sockets habilitados ANTES (73)
+accounts-daemon.service
+anacron.service
+apparmor.service
+apport-forward.socket
+apport.service
+avahi-daemon.service
+avahi-daemon.socket
+bluetooth.service
+chrony.service
+cloud-config.service
+cloud-final.service
+cloud-init-hotplugd.socket
+cloud-init-local.service
+cloud-init-main.service
+cloud-init-network.service
+console-setup.service
+cron.service
+cups-browsed.service
+cups.service
+cups.socket
+dmesg.service
+e2scrub_reap.service
+getty@.service
+gpu-manager.service
+grub2-common.service
+grub-initrd-fallback.service
+kdump-tools.service
+keyboard-setup.service
+ModemManager.service
+netplan-configure.service
+networkd-dispatcher.service
+NetworkManager-dispatcher.service
+NetworkManager.service
+NetworkManager-wait-online.service
+openvpn.service
+polkit-agent-helper.socket
+power-profiles-daemon.service
+rsyslog.service
+secureboot-db.service
+setvtrgb.service
+snapd.apparmor.service
+snapd.autoimport.service
+snapd.core-fixup.service
+snapd.recovery-chooser-trigger.service
+snapd.seeded.service
+snapd.service
+snapd.socket
+snapd.system-shutdown.service
+snap.hwctl.hwctl-daemon.hwctl-socket.socket
+ssl-cert.service
+sssd-autofs.socket
+sssd-nss.socket
+sssd-pac.socket
+sssd-pam.socket
+sssd.service
+sssd-ssh.socket
+sssd-sudo.socket
+switcheroo-control.service
+sysstat.service
+systemd-oomd.service
+systemd-oomd.socket
+systemd-pstore.service
+systemd-resolved-monitor.socket
+systemd-resolved.service
+systemd-resolved-varlink.socket
+thermald.service
+ua-reboot-cmds.service
+ubuntu-advantage.service
+udisks2.service
+ufw.service
+unattended-upgrades.service
+uuidd.socket
+wpa_supplicant.service
+
+## Servicios y sockets habilitados DESPUÉS (68)
+accounts-daemon.service
+anacron.service
+apparmor.service
+apport-forward.socket
+bluetooth.service
+chrony.service
+cloud-config.service
+cloud-final.service
+cloud-init-hotplugd.socket
+cloud-init-local.service
+cloud-init-main.service
+cloud-init-network.service
+console-setup.service
+cron.service
+cups.service
+cups.socket
+dmesg.service
+e2scrub_reap.service
+getty@.service
+gpu-manager.service
+grub2-common.service
+grub-initrd-fallback.service
+kdump-tools.service
+keyboard-setup.service
+netplan-configure.service
+networkd-dispatcher.service
+NetworkManager-dispatcher.service
+NetworkManager.service
+NetworkManager-wait-online.service
+openvpn.service
+polkit-agent-helper.socket
+power-profiles-daemon.service
+rsyslog.service
+secureboot-db.service
+setvtrgb.service
+snapd.apparmor.service
+snapd.autoimport.service
+snapd.core-fixup.service
+snapd.recovery-chooser-trigger.service
+snapd.seeded.service
+snapd.service
+snapd.socket
+snapd.system-shutdown.service
+snap.hwctl.hwctl-daemon.hwctl-socket.socket
+ssl-cert.service
+sssd-autofs.socket
+sssd-nss.socket
+sssd-pac.socket
+sssd-pam.socket
+sssd.service
+sssd-ssh.socket
+sssd-sudo.socket
+switcheroo-control.service
+sysstat.service
+systemd-oomd.service
+systemd-oomd.socket
+systemd-pstore.service
+systemd-resolved-monitor.socket
+systemd-resolved.service
+systemd-resolved-varlink.socket
+thermald.service
+ua-reboot-cmds.service
+ubuntu-advantage.service
+udisks2.service
+ufw.service
+unattended-upgrades.service
+uuidd.socket
+wpa_supplicant.service
+
+## Quitados en esta ejecución
+apport.service
+avahi-daemon.service
+avahi-daemon.socket
+cups-browsed.service
+ModemManager.service
+
+## Motivo de cada uno
+- avahi-daemon.socket: activa avahi-daemon bajo demanda
+- apport.service: recoge informes de fallos para enviarlos
+- whoopsie.service: envía informes de fallos a Canonical
+- kerneloops.service: envía fallos del núcleo a Canonical
+- avahi-daemon.service: anuncia el equipo en la red local (mDNS); en el despacho no hace falta
+- ModemManager.service: gestiona módems 3G/4G; el equipo no tiene
+- cups-browsed.service: busca impresoras en la red y las añade solas; la del gerente va por USB
+
+$ ss -tulpn (puertos a la escucha después)
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                                   
+udp   UNCONN 0      0         127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=426,fd=18))
+udp   UNCONN 0      0      127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=426,fd=16))
+tcp   LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=426,fd=17))
+tcp   LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=426,fd=19))

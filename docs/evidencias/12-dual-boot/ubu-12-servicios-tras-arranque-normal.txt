@@ -1,0 +1,22 @@
+# Tarea 64 · Ubuntu del gerente tras un arranque normal (2026-11-09 10:20)
+
+## Servicio: habilitado / activo
+- cups-browsed: disabled / inactive
+- avahi-daemon: disabled / inactive
+- avahi-daemon.socket: disabled / inactive
+- ModemManager: disabled / inactive
+- whoopsie: static / inactive
+- kerneloops: not-found / inactive
+- apport: disabled / inactive
+- cups: enabled / active
+
+$ ss -tulpn
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                                   
+udp   UNCONN 0      0         127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=430,fd=18))
+udp   UNCONN 0      0      127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=430,fd=16))
+udp   UNCONN 0      0          127.0.0.1:323       0.0.0.0:*    users:(("chronyd",pid=1170,fd=4))        
+udp   UNCONN 0      0              [::1]:323          [::]:*    users:(("chronyd",pid=1170,fd=5))        
+tcp   LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=430,fd=19))
+tcp   LISTEN 0      4096       127.0.0.1:631       0.0.0.0:*    users:(("cupsd",pid=1306,fd=7))          
+tcp   LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=430,fd=17))
+tcp   LISTEN 0      4096           [::1]:631          [::]:*    users:(("cupsd",pid=1306,fd=6))          

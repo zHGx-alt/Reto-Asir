@@ -164,11 +164,11 @@
 <rect x="684" y="504" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>55. Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC · Adrian · 23/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="544" x2="1242" y2="544" stroke="#f0efeb"/>
 <text x="16" y="537.0" class="s">64</text>
-<text x="44" y="537.0" class="t">Servicios reducidos en la VM del gerente (Windows y Ubuntu)</text>
+<text x="44" y="537.0" class="m">Servicios reducidos en la VM del gerente (Windows y Ubuntu) ✓</text>
 <circle cx="449" cy="533.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="537.0" class="t">Adrian</text>
 <text x="528" y="537.0" class="s">12</text>
-<rect x="1124" y="526" width="36" height="14" rx="4" fill="#2a78d6"><title>64. Servicios reducidos en la VM del gerente (Windows y Ubuntu) · Adrian · 09/11–09/11 · Pendiente</title></rect>
+<rect x="1124" y="526" width="36" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>64. Servicios reducidos en la VM del gerente (Windows y Ubuntu) · Adrian · 09/11–09/11 · Hecho</title></rect>
 <rect x="16" y="544" width="1226" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="561" class="t b">3 Arcade</text>
 <line x1="16" y1="592" x2="1242" y2="592" stroke="#f0efeb"/>
