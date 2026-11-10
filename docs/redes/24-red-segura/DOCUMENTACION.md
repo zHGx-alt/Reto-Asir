@@ -15,7 +15,7 @@ Configurar y comprobar la seguridad de la red inalámbrica del restaurante, prot
 > El equipo utilizado es un **TP-Link TL-WR841N v14**. En las capturas solamente aparecen WPA/WPA2 y WPA2-PSK. Por tanto, este equipo no permite demostrar WPA3. La opción más segura mostrada es **WPA2-PSK con AES**. Para cumplir el requisito WPA3 hace falta un router o punto de acceso compatible con WPA3-SAE.
 
 > [!NOTE]
-> **Por qué un TL-WR841N y no el Archer C6.** Los Archer C6 del presupuesto (tarea 10) no se han comprado; el TL-WR841N es el router que había disponible para practicar. Sirve para demostrar el procedimiento (administración, cifrado, firewall), pero **no es el router del diseño**: su LAN está en `192.168.1.0/24` y no en `192.168.10.0/24` (tarea 23), y no tiene WPA3. La configuración definitiva se repite en el Archer C6 (sección 12).
+> **Por qué un TL-WR841N y no el Archer C6.** Los Archer C6 del presupuesto (tarea 10) no se han comprado; el TL-WR841N es el router que había disponible para practicar. Sirve para demostrar el procedimiento (administración, cifrado, firewall), pero **no es el router del diseño**: en la primera parte (23-26/10) su LAN estaba en `192.168.1.0/24`; desde el 29/10 ya está en la `192.168.10.0/24` del diseño (tarea 23). No tiene WPA3. Lo que este router no puede hacer queda para el Archer C6 (sección 12).
 
 > [!NOTE]
 > **Este documento es la primera parte (23-26/10), con la red de prácticas `192.168.1.0/24`.** La configuración definitiva del 29/10, con la red del proyecto (tarea 23), está en [configurar-red-segura.md](configurar-red-segura.md). Las secciones 9, 10 y 12 recogen ya el resultado de las dos.
@@ -96,7 +96,7 @@ El TP-Link TL-WR841N v14 no muestra WPA3-SAE en el panel. Por ello, esta documen
 
 ## 7. Nombre y estado de la red
 
-En la configuración básica aparece el SSID `Restaurante-Almichain`, con modo `11bgn mixed`, canal automático y difusión del SSID.
+En la configuración básica aparece el SSID `Restaurante-Almichain`, con modo `11bgn mixed`, canal automático y difusión del SSID. El 29/10 la red se renombró a `Restaurante_Almichain` (guion bajo) y se fijó el canal 6, que necesita el enlace con el router 2 (tarea 25): ver la [figura 14 de la segunda parte](imagenes/14-wifi-personal.png).
 
 ![Configuración del SSID](imagenes/09-configuracion-ssid.png)
 
@@ -176,4 +176,6 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 - [x] LAN en `192.168.10.0/24`, reserva del gerente y renovación de la clave de grupo, en el TL-WR841N (29/10).
 - [ ] En el local, con el Archer C6: WPA3 (o WPA2/WPA3) y modo sin 802.11b, que el TL-WR841N no tiene (limitación).
 - [x] Configurar la red de invitados con aislamiento entre clientes (29/10). El TL-WR841N no le da una subred propia en el panel: el aislamiento es interno (tarea 23, apartado 4.4).
-- [x] Comprobar en la tarea 25 si la red de invitados pasa por el enlace WDS al router 2: **no pasa** (04/11). El TL-WR841N en Range Extender solo repite la Wi-Fi del personal. Los diagramas (tarea 11 y LOGICA_RETO) dibujan el diseño con dos Archer C6, que sí repiten las dos; lo que falta en el router de pruebas sigue en la [tarea 25, sección 14](../25-wds/DOCUMENTACION.md#14-pendiente).
+- [x] Comprobar en la tarea 25 si la red de invitados pasa por el enlace WDS al router 2: **no pasa** (04/11). El TL-WR841N en modo Range Extender repite **una sola** red del router 1, y se enlazó a la del personal. Se arregla enlazándolo a la de invitados ([tarea 25, sección 6](../25-wds/DOCUMENTACION.md#6-por-qué-el-router-2-no-repite-la-wi-fi-de-clientes-y-cómo-se-arregla)).
+- [ ] Desactivar UPnP en el router 1 (*Forwarding → UPnP*): está activado de fábrica y permite que cualquier equipo de la red abra puertos hacia Internet sin pedir permiso (auditoría del 06/11, S-25). Se hace en la misma visita que la tarea 25 ([sección 7, paso 4](../25-wds/DOCUMENTACION.md#7-lo-que-falta-hoja-de-trabajo)).
+- [x] Firmware: el TL-WR841N lleva el 0.9.1 4.16 (Build 180319). Se decide no actualizarlo: es un router de prácticas que se sustituye por el Archer C6, y en el Archer se instala el último firmware antes de ponerlo en marcha (auditoría, H-02).

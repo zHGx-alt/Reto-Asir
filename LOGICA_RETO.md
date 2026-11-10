@@ -173,8 +173,8 @@ Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direc
 - **Invitados en el router real:** el TL-WR841N no da a los invitados una subred propia: van en `192.168.10.0/24` y los aísla con reglas internas (un móvil recibió `192.168.10.100`). El diseño con los Archer C6 y Packet Tracer usan `192.168.50.0/24`. El aislamiento, que es lo que importa, está probado en los dos ([tarea 23, 4.4](docs/redes/23-plano-direccionamiento.md)).
 - Las contraseñas que se vieron en capturas (Wi-Fi, administración y PIN de WPS) se cambiaron el 26/10 y el 29/10 y están en KeePassXC.
 - **Análisis con nmap y Wireshark hecho** (#26, 30/10): desde invitados no se ve ningún equipo de la LAN y el panel y el SSH del router salen filtrados.
-- **WDS** (#25, en curso): el 04/11 el router 2 funciona en Range Extender en `192.168.10.2`, sin DHCP y con ping al router 1 sin pérdidas. Falta que amplíe la Wi-Fi de clientes (hoy repite la del personal) y medir la cobertura antes y después.
-- Falta desactivar UPnP en el router (S-25 de la #46).
+- **WDS** (#25, en curso): el 04/11 el router 2 funciona en Range Extender en `192.168.10.2`, sin DHCP y con ping al router 1 sin pérdidas. Falta que amplíe la Wi-Fi de clientes: en Range Extender el TL-WR841N repite una sola red y se enlazó a la del personal; se cambia a la de invitados, como en el diseño de Packet Tracer. Y medir la cobertura antes y después ([tarea 25, sección 7](docs/redes/25-wds/DOCUMENTACION.md#7-lo-que-falta-hoja-de-trabajo)).
+- Falta desactivar UPnP en el router (S-25 de la #46), en la misma visita que la #25. El firmware no se actualiza: el router de prácticas se sustituye por el Archer C6.
 
 ---
 

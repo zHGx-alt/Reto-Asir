@@ -116,7 +116,7 @@ Las IPs de los equipos fijos se dan por **reserva DHCP** (el router siempre da l
 
 | SSID | Seguridad | Red | Quién se conecta |
 |---|---|---|---|
-| `Restaurante-Almichain` | WPA3-Personal (o WPA2/WPA3 mixto si algún equipo no soporta WPA3) | LAN | Personal |
+| `Restaurante_Almichain` | WPA3-Personal (o WPA2/WPA3 mixto si algún equipo no soporta WPA3) | LAN | Personal |
 | `Restaurante-Almichain-Invitados` | WPA2/WPA3, contraseña distinta y que se cambia cada cierto tiempo | Invitados | Clientes y recreativa |
 
 Se mantienen los nombres de la [tarea 24](24-red-segura/DOCUMENTACION.md).
