@@ -176,4 +176,4 @@ Se ha verificado la conectividad, se ha revisado la administración local y remo
 - [x] LAN en `192.168.10.0/24`, reserva del gerente y renovación de la clave de grupo, en el TL-WR841N (29/10).
 - [ ] En el local, con el Archer C6: WPA3 (o WPA2/WPA3) y modo sin 802.11b, que el TL-WR841N no tiene (limitación).
 - [x] Configurar la red de invitados con aislamiento entre clientes (29/10). El TL-WR841N no le da una subred propia en el panel: el aislamiento es interno (tarea 23, apartado 4.4).
-- [ ] Comprobar en la tarea 25 si la red de invitados pasa por el enlace WDS al router 2. Si no pasa, documentarlo y corregir los diagramas (tarea 11 y LOGICA_RETO).
+- [x] Comprobar en la tarea 25 si la red de invitados pasa por el enlace WDS al router 2: **no pasa** (04/11). El TL-WR841N en Range Extender solo repite la Wi-Fi del personal. Los diagramas (tarea 11 y LOGICA_RETO) dibujan el diseño con dos Archer C6, que sí repiten las dos; lo que falta en el router de pruebas sigue en la [tarea 25, sección 14](../25-wds/DOCUMENTACION.md#14-pendiente).

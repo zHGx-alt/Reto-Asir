@@ -8,6 +8,8 @@ Este documento explica **cómo encaja todo**: qué pide el enunciado, qué pieza
 - Enunciado: [Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx) · Plan con herramientas: [almi-chain-plan.pdf](almi-chain-plan.pdf).
 
 > Los números de tarea (#12, #34…) son los del backlog. Si una pieza está pendiente, se dice.
+>
+> **Al día el 10/11/2026** (49 de 64 tareas hechas). Para montarlo todo desde cero, en orden, ve a la [sección 15](#15-montarlo-desde-cero-en-orden).
 
 ---
 
@@ -17,7 +19,7 @@ Una cadena de restaurantes nos contrata para montar la informática de un local.
 
 | # | Qué pide el enunciado | Cómo lo resolvemos | Tareas | Carpeta |
 |---|---|---|---|---|
-| 1 | Equipo del gerente con arranque dual Windows 10 + Linux | Windows 10 + Ubuntu 26.04.1 LTS con GRUB, en una VM de VirtualBox, con BitLocker y `/home/gerente` cifrado | 7, 8, 12 | [docs/so](docs/so/) |
+| 1 | Equipo del gerente con arranque dual Windows 10 + Linux | Windows 10 + Ubuntu 26.04.1 LTS con GRUB, en una VM de VirtualBox, con BitLocker, `/home/gerente` cifrado y servicios reducidos | 7, 8, 12, 64 | [docs/so](docs/so/) |
 | 2 | 2 TPV Windows de barra + impresoras de tickets, con configuración, presupuesto y diagrama | Todo en uno táctil Iggual N100 + Epson TM-T20IV por USB; el TPV es un navegador en modo quiosco contra Odoo | 7–11, 13–15, 37 | [docs/hardware](docs/hardware/) |
 | 3 | Mínimos privilegios y seguridad por defecto | Cuentas separadas usuario/administrador en todos los sistemas, secretos fuera de Git, cifrado | 13, 42, 46, 52 | Transversal |
 | 4 | Recreativa MAME en un equipo de 1 núcleo y 1 GB, optimizada y con pruebas de rendimiento | Debian 13 mínimo que arranca directamente en MAME; medidas antes y después; monitorización | 16–18, 51, 53, 54 | [docs/arcade](docs/arcade/) |
@@ -38,7 +40,7 @@ Los RA del enunciado, con las tareas que los demuestran y el criterio de la [rú
 
 | Módulo | Resultado de aprendizaje | Tareas | Criterio |
 |---|---|---|---|
-| ISO | RA.1 Instala sistemas operativos, analizando sus características e interpretando la documentación técnica | 12, 13, 16, 33, 51, 53 | Sistema operativo; recreativa |
+| ISO | RA.1 Instala sistemas operativos, analizando sus características e interpretando la documentación técnica | 12, 13, 16, 33, 51, 53, 64 | Sistema operativo; recreativa |
 | ISO | RA.2 Configura el software de base, analizando las necesidades de explotación del sistema | 13, 14, 15, 17, 18, 54, 55 | Sistema operativo; recreativa |
 | ISO | RA.3 Asegura la información del sistema con copias de seguridad y sistemas tolerantes a fallos | 43, 44, 45, 60 | Copias y RAID |
 | PAR | RA.1 Reconoce la estructura de las redes de datos, sus elementos y principios | 22, 23, 26 | Redes |
@@ -324,9 +326,9 @@ flowchart LR
 |---|---|---|
 | **RAID 1** ([#43](docs/backup/43-raid1/DOCUMENTACION.md)) | La avería de un disco: el servidor sigue funcionando y el espejo se reconstruye (27 s en la prueba). **La BD viva está en el RAID desde el 27/10** (datos de Docker en `/srv/datos`), y el fallo se repitió con Odoo funcionando: con un disco quitado se guardó una venta y el espejo volvió a `[UU]` | Borrados, virus o un incendio: el RAID copia el error a los dos discos |
 | **Copias 3-2-1** ([#44](docs/backup/44-backup-3-2-1/DOCUMENTACION.md)) | Todo lo anterior: **3** copias (datos vivos, RAID, USB), **2** soportes, **1** fuera del local (el USB se renueva cada lunes; aviso si pasan más de 7 días), y desde el 04/11 un **tercer repositorio en AWS S3** (#60), privado y cifrado. Retención 7 diarias, 4 semanales y 6 mensuales. Copia de Odoo (`tienda`) y de `almi_chain` | — |
-| **Prueba de restauración** ([#45](docs/backup/45-restauracion/DOCUMENTACION.md)) | Copias que parecen buenas y no lo son: se restaura de verdad en un entorno aislado y se compara con producción | — |
+| **Prueba de restauración** ([#45](docs/backup/45-restauracion/DOCUMENTACION.md)) | Copias que parecen buenas y no lo son: se restaura de verdad en un entorno aislado y se compara con producción, y el 10/11 en una máquina nueva desde cero | — |
 
-- **RPO** (datos que se pueden perder): hasta 24 h. **Restauración:** 63 s desde el RAID (27/10) y 166 s desde S3 (04/11, 23 comprobaciones, Odoo y `almi_chain`), pero en el mismo servidor; el **RTO real** (servidor perdido: instalar uno nuevo y restaurar) está sin medir (tarea 45, sección 6).
+- **RPO** (datos que se pueden perder): hasta 24 h. **Restauración:** 63 s desde el RAID (27/10) y 166 s desde S3 (04/11, 23 comprobaciones, Odoo y `almi_chain`), pero en el mismo servidor. **RTO real: unos 14 min** (832 s, 10/11): de una máquina vacía a Odoo por HTTPS con los datos del USB, con el preseed y [`recuperar-servidor-nuevo.sh`](docs/backup/45-restauracion/recuperar-servidor-nuevo.sh) ([tarea 45, sección 6](docs/backup/45-restauracion/DOCUMENTACION.md)). La mitad es instalar Debian; casi todo lo demás, descargar las imágenes de Docker.
 - La contraseña de cifrado está en el servidor y **fuera de él**, en KeePassXC; el fichero de texto que se usó durante la prueba se borró del PC del técnico el 27/10. Sin ella, las copias no sirven.
 - Todo se identifica por UUID o etiqueta, nunca por `/dev/sdX`: al conectar el USB los discos cambiaron de nombre y no se rompió nada.
 
@@ -362,8 +364,10 @@ Primero Windows y después Ubuntu (si se hace al revés, Windows borra el arranq
 
 | Sistema | Cuenta de uso diario | Cuenta de mantenimiento | Seguridad |
 |---|---|---|---|
-| Windows 10 | `gerente` (estándar) | `admin`; la cuenta integrada `Administrador`, desactivada | UAC pide la contraseña de `admin`; Firewall y Windows Update |
-| Ubuntu | `gerente` (sin sudo) | `administrador` (sudo; `admin` está reservado en Ubuntu) | `ufw` deniega lo entrante; actualizaciones de seguridad automáticas |
+| Windows 10 | `gerente` (estándar) | `admin`; la cuenta integrada `Administrador`, desactivada | UAC pide la contraseña de `admin`; Firewall y Windows Update; BitLocker con contraseña de arranque; 12 servicios que no hacen falta deshabilitados (#64) |
+| Ubuntu | `gerente` (sin sudo) | `administrador` (sudo; `admin` está reservado en Ubuntu) | `ufw` deniega lo entrante; actualizaciones de seguridad automáticas; `/home/gerente` cifrado con fscrypt; 5 servicios fuera y nada escuchando hacia la red (#64) |
+
+**Servicios reducidos (#64, 09/11):** [`12-servicios-reducidos.ps1`](scripts/so/12-servicios-reducidos.ps1) y [`12-servicios-reducidos.sh`](scripts/so/12-servicios-reducidos.sh) apagan lo que un PC de oficina no usa (Xbox, fax, escritorio remoto, Bluetooth, Avahi, ModemManager…) y dejan la impresión. Windows pasa de 248 a 237 servicios activos y Ubuntu de 73 a 68 unidades; en un arranque normal Ubuntu solo escucha en `localhost`. Menos servicios es menos superficie de ataque y menos consumo.
 
 [Guía y evidencias (tarea 12)](docs/so/12-dual-boot.md). La VM está en el PC de Adrian ([quién tiene cada VM](docs/gestion/maquinas-virtuales.md)); sus contraseñas, en KeePassXC y nunca en el repositorio.
 
@@ -416,13 +420,13 @@ navegador ─► almichain1.duckdns.org (registro A → IP elástica) ─► 443
 
 | Capa | Mínimos privilegios | Secretos | Cifrado | Estado |
 |---|---|---|---|---|
-| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | BitLocker y `/home/gerente` cifrado en el gerente (29/10) | Gerente (con contraseñas robustas, #55), recreativa y TPV (#13, a mano) hechos; falta `comprobar-tpv.ps1` en los TPV (#15) |
+| Sistemas operativos | Usuario diario sin admin en gerente y recreativa; TPV con cajero estándar; servicios reducidos en el gerente (#64) | Contraseñas fuera de Git; robustas y en KeePassXC (#55) | BitLocker y `/home/gerente` cifrado en el gerente (29/10) | Gerente (con contraseñas robustas, #55, y servicios reducidos, #64), recreativa y TPV (#13, a mano) hechos; falta `comprobar-tpv.ps1` en los TPV (#15) |
 | Red | Invitados y recreativa sin acceso a la LAN; administración del router cerrada desde fuera | Contraseña del router distinta de la Wi-Fi; las dos cambiadas el 26/10 y en KeePassXC (la Wi-Fi estuvo visible en capturas antiguas) | WPA2-AES; WPA3 no existe en el TL-WR841N de pruebas (sí en el Archer C6 del diseño) | Hecho (#24, 30/10; nmap y Wireshark en la #26). Falta desactivar UPnP (S-25) |
 | Odoo | `admin` / `gerente` / cajeros; cajero solo TPV | `.env` generado con contraseñas aleatorias, permisos 600 | HTTP en la LAN; **HTTPS probado entero en VM** (#52: certificado con `nameConstraints`, venta y venta sin red en un TPV); falta activarlo en el servidor del equipo | En curso |
 | Base de datos | `rol_aplicacion` sin DDL ni borrado de facturas; `rol_lectura` | Cuentas `tpv_app` e `informes` con login; contraseñas por variable, nunca en el repositorio (#42) | — | Hecho (probado 9/9 con cada cuenta) |
 | Copias | Solo root lee la contraseña | Contraseña de restic fuera del servidor | AES-256 | Hecho |
 | AWS | Bucket privado; la EC2 lee con su rol; SSH solo desde nuestra IP | Token de DuckDNS y credenciales del laboratorio fuera de Git | HTTPS + HSTS | Hecho |
-| Repositorio | Cambios por Pull Request con CI (gitleaks); nadie escribe en `main` | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
+| Repositorio | Cambios por Pull Request con CI (gitleaks); la norma es no escribir en `main` (se saltó el 04/11 y el 09/11 con subidas desde la web de GitHub; se corrigió por PR) | `.gitignore` de secretos; gitleaks en cada push y en el hook de pre-commit | — | Hecho |
 
 La revisión transversal (#46, [documento](docs/seguridad/46-revision-seguridad/DOCUMENTACION.md)) tiene 26 hallazgos con responsable. Corregidos, entre otros: el certificado de Odoo sin límites (S-01), la administración del router y la red de invitados (S-04, S-06), las contraseñas Wi-Fi expuestas (S-05, S-24); S-03 (root de Batocera) no aplica porque Batocera se descartó. SSH sin contraseña y actualizaciones automáticas del servidor (S-08, S-09) están en el preseed y probados en el laboratorio desde el 04/11. Los más importantes que siguen abiertos: activar HTTPS en el servidor del equipo (S-02) y UPnP y firmware del router (S-25). Las contraseñas de la VM del gerente ya se cambiaron (#55).
 
@@ -481,14 +485,18 @@ flowchart TD
     REQ --> ERP["Comparativa ERP (32)"] --> ODOO["Odoo (33)"] --> CONF["Módulos y TPV (34)"] --> CASO["Factura automática (35)"]
     CONF --> IMPORT["Importar/exportar (36)"]
     SO --> IMPR["Impresora (14)"] --> TICKET["Ticket desde Odoo (37)"]
+    SO --> SERV["Servicios reducidos (64)"]
     CONF --> TICKET
     ODOO --> HTTPS["HTTPS en Odoo (52)"]
     REQ --> ER["E/R (38)"] --> FN["3FN (39)"] --> DDL["DDL (40)"] --> DATOS["Datos y consultas (41)"] & ROLES["Usuarios BD (42)"]
+    ER --> AMPL["Ternaria e historial (56)"] --> DDL
     ODOO --> RAID["RAID 1 (43)"] --> COPIA["Copias 3-2-1 (44)"] --> RESTORE["Restauración (45)"]
+    COPIA --> S3COPIA["Copia en S3 (60)"] --> RESTORE
     DATOS --> COPIA
     REQ --> ARC["Recreativa VM (16)"] --> REND["Rendimiento (17)"] & MON["Monitorización (18)"]
     ARC --> FIS["Recreativa real (53)"] --> MED["Medidas reales (54)"]
     FW["Firmware (20)"] --> PLACA["Prueba en placa (50)"]
+    FW --> REBOTE["Antirrebote (59)"]
     MONT["Montaje stick (19)"] --> PLACA --> STICK["Stick con emuladores (21)"]
     FIS --> STICK
     REQ --> WF["Wireframes (27)"] --> WEB["Web (28)"] --> VAL["W3C y Lighthouse (29)"] & AWS["Hosting (30)"] --> IAC["IaC (31)"]
@@ -500,7 +508,67 @@ flowchart TD
 
 ---
 
-## 15. Glosario rápido
+## 15. Montarlo desde cero, en orden
+
+Es el camino para un técnico que no ha visto el proyecto y tiene que dejar el local funcionando. Cada paso dice qué script o guía usar y cómo saber que ha salido bien. Si un paso no sale, la guía de su tarea tiene una tabla de problemas encontrados y cómo se resolvieron.
+
+**Antes de empezar:** la base de KeePassXC del proyecto (`Contraseñas.kdbx`, en Drive; la contraseña maestra la tiene el gerente). Todas las contraseñas salen de ahí, y las nuevas se guardan ahí. Ninguna va a Git ni a un `.txt`.
+
+```mermaid
+flowchart LR
+    A["1 · Red<br/>(23, 24, 25)"] --> B["2 · Servidor<br/>(33, 43, 34, 52, 40-42)"] --> C["3 · Copias<br/>(44, 60, 45)"]
+    B --> D["4 · Puestos<br/>(12, 13, 15, 14)"]
+    A --> E["5 · Recreativa y stick<br/>(16, 17, 53, 20)"]
+    F["6 · Web en AWS<br/>(31)"]
+    C & D & E & F --> G["7 · Comprobar<br/>(46, 47)"]
+```
+
+### Paso 1 · La red (tareas 23-25)
+
+1. Router 1: [guía de red segura](docs/redes/24-red-segura/configurar-red-segura.md). Contraseña de administración nueva, administración solo desde la MAC del gerente, WPS fuera, WPA2-AES (WPA3 en el Archer C6), red de invitados aislada y **UPnP desactivado**.
+2. Reservas de DHCP del [plan de direccionamiento](docs/redes/23-plano-direccionamiento.md): servidor `.10`, gerente `.20`, TPV `.31` y `.32`, router 2 `.2`.
+3. Router 2 en Range Extender o WDS, sin DHCP: [tarea 25](docs/redes/25-wds/DOCUMENTACION.md).
+4. **Está bien si:** desde la Wi-Fi de invitados un `nmap` no ve nada de la LAN ([tarea 26](docs/redes/26-analisis-conectividad/DOCUMENTACION.md), `analizar-red.sh invitados`).
+
+### Paso 2 · El servidor (tareas 33, 43, 34, 52 y 40-42)
+
+1. **Debian 13** con el [preseed](docs/erp/33-odoo-docker/preseed-servidor.cfg): crea `tecnico`, deja SSH solo con clave y sin root, y activa las actualizaciones automáticas. Antes hay que poner la clave pública del PC del gerente donde dice `CLAVE_PUBLICA_SSH` ([tarea 33](docs/erp/33-odoo-docker/DOCUMENTACION.md)).
+2. **RAID 1** con los dos discos de datos: [`crear-raid1.sh`](docs/backup/43-raid1/crear-raid1.sh) ([tarea 43](docs/backup/43-raid1/DOCUMENTACION.md)).
+3. **Odoo y PostgreSQL** con [`desplegar-odoo.sh`](docs/erp/33-odoo-docker/odoo/desplegar-odoo.sh): genera el `.env` con contraseñas aleatorias. Después, [`mover-docker-al-raid.sh`](docs/backup/43-raid1/mover-docker-al-raid.sh) lleva los datos de Docker al RAID. **Está bien si** `docker info` da *Docker Root Dir* `/srv/datos/docker`.
+4. **Configurar Odoo:** [`configurar-odoo.py`](docs/erp/34-configurar-odoo/configurar-odoo.py) (empresa, IVA, TPV, usuarios), [`cargar-carta-y-mesas.py`](docs/erp/34-configurar-odoo/cargar-carta-y-mesas.py) y [`restringir-menus-cajero.py`](docs/erp/34-configurar-odoo/restringir-menus-cajero.py). Las contraseñas de los usuarios van a KeePassXC y se borra `/root/.credenciales-usuarios` (S-26). La carta real se importa con la [tarea 36](docs/erp/36-importar-exportar/DOCUMENTACION.md).
+5. **HTTPS y cortafuegos:** el [runbook de la tarea 52](docs/erp/52-https-odoo/RUNBOOK.md) en su orden: [`activar-https.sh`](docs/erp/52-https-odoo/activar-https.sh), [`fijar-url-y-qr.sh`](docs/erp/52-https-odoo/fijar-url-y-qr.sh) y [`cortafuegos-servidor.sh`](docs/erp/33-odoo-docker/cortafuegos-servidor.sh). **Está bien si** `https://192.168.10.10` abre sin avisos en un equipo que tiene el certificado y `nmap` desde la LAN solo ve 22, 80 y 443.
+6. **Base de datos propia** `almi_chain`: [scripts](docs/bd/scripts/) 01 a 03 (tablas, reglas y roles), 06 (datos) y 08 (usuarios, con las contraseñas de KeePassXC). **Está bien si** `05-pruebas.sql` da 49 de 49 y `09-pruebas-usuarios.sql` 9 de 9 ([tareas 40-42](docs/bd/40-scripts-ddl.md)).
+
+### Paso 3 · Las copias (tareas 44, 60 y 45)
+
+1. [`instalar-backup.sh`](docs/backup/44-backup-3-2-1/instalar-backup.sh): restic, la contraseña de cifrado, el repositorio del RAID, el USB `BACKUP_USB` y el timer de las 02:30. **La contraseña de restic se guarda en KeePassXC en ese momento:** sin ella las copias no sirven.
+2. Copia en S3 (opcional, [tarea 60](docs/backup/44-backup-3-2-1/DOCUMENTACION.md)): `/root/.config/backup-odoo/s3.env` desde [`s3.env.example`](docs/backup/44-backup-3-2-1/s3.env.example).
+3. **Está bien si** `sudo ./probar-restauracion.sh usb` ([tarea 45](docs/backup/45-restauracion/DOCUMENTACION.md)) termina con «RESTAURACIÓN CORRECTA». Repetirlo una vez al mes.
+4. **Si se pierde el servidor:** máquina nueva con el preseed, el USB conectado y [`recuperar-servidor-nuevo.sh`](docs/backup/45-restauracion/recuperar-servidor-nuevo.sh) con la contraseña de KeePassXC. Es lo que se cronometró como RTO: unos 14 min (sección 8).
+
+### Paso 4 · Los puestos (tareas 12, 13, 15 y 14)
+
+1. **PC del gerente:** [tarea 12](docs/so/12-dual-boot.md). Primero Windows, luego Ubuntu; al final BitLocker ([`12-bitlocker-sin-tpm.ps1`](scripts/so/12-bitlocker-sin-tpm.ps1), o con TPM en el equipo real), fscrypt ([`12-cifrar-home-gerente.sh`](scripts/so/12-cifrar-home-gerente.sh)) y los servicios reducidos ([`.ps1`](scripts/so/12-servicios-reducidos.ps1) y [`.sh`](scripts/so/12-servicios-reducidos.sh), tarea 64).
+2. **TPV:** [`configurar-tpv.ps1`](docs/so/13-tpv/configurar-tpv.ps1) con `-PuertosOdoo 443`, el certificado del servidor y el quiosco a mano (6 clics) contra `https://192.168.10.10/pos/ui` ([tareas 13 y 15](docs/so/13-tpv/DOCUMENTACION.md), [runbook de la 52, sección 4](docs/erp/52-https-odoo/RUNBOOK.md)). **Está bien si** [`comprobar-tpv.ps1`](docs/so/13-tpv/comprobar-tpv.ps1) da los 16 puntos en OK.
+3. **Impresora** por USB al TPV con su driver: [tarea 14](docs/so/14-impresora/DOCUMENTACION.md). **Está bien si** un ticket de venta sale en papel desde el TPV de Odoo.
+
+### Paso 5 · La recreativa y el stick (tareas 16, 17, 53 y 20)
+
+1. Debian con el [preseed de la recreativa](docs/arcade/16-recreativa-mame/preseed-recreativa.cfg) e [`instalar-arcade.sh`](docs/arcade/16-recreativa-mame/instalar-arcade.sh): arranca directo en MAME con el usuario `arcade`, sin contraseña ni `sudo` ([tarea 16](docs/arcade/16-recreativa-mame/DOCUMENTACION.md)); en un equipo de 1 núcleo y 1 GB, [`preparar-preseed-fisico.sh`](docs/arcade/53-recreativa-fisica/preparar-preseed-fisico.sh) ([tarea 53](docs/arcade/53-recreativa-fisica/DOCUMENTACION.md)).
+2. [`optimizar-arcade.sh`](docs/arcade/17-rendimiento-mame/optimizar-arcade.sh) y medir antes y después con [`medir-rendimiento.sh`](docs/arcade/17-rendimiento-mame/medir-rendimiento.sh) ([tareas 17 y 54](docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md)).
+3. Stick: firmware con [`subir.sh`](arduino/mando-joystick/subir.sh) y comprobar cada control con [`ver-mando.py`](arduino/mando-joystick/ver-mando.py) ([README del stick](arduino/mando-joystick/README.md)). **Está bien si** MAME lo ve como joystick y se puede jugar una partida.
+
+### Paso 6 · La web (tareas 30 y 31)
+
+`terraform apply` en [`iac/`](iac/README.md) crea el bucket, la EC2 con nginx y la IP elástica; cada push a `main` que toque `web/` la publica por GitHub Actions. **Está bien si** `https://almichain1.duckdns.org` responde con candado. Al acabar el curso, `terraform destroy` (la IP elástica cuesta dinero aunque la EC2 esté parada).
+
+### Paso 7 · Comprobar el conjunto (tareas 46 y 47)
+
+Las comprobaciones de la [sección 5 de la tarea 46](docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) (nmap desde invitados y desde la LAN, certificado en el TPV, SSH sin contraseña rechazado, actualizaciones activas, cifrado del gerente) y las filas de la [tabla de pruebas](docs/gestion/47-tabla-pruebas.md). En el repositorio, `bash scripts/verificar-repo.sh` tiene que terminar con «Todo correcto».
+
+---
+
+## 16. Glosario rápido
 
 | Término | Qué es |
 |---|---|

@@ -157,7 +157,7 @@ Elementos sin precio verificado, para añadir al presupuesto con el valor que se
 | H-06 | En las pruebas del reto estos equipos se simulan en máquinas virtuales (VirtualBox). | Ver S-07 de la tarea 7. |
 | H-07 | Precios sujetos a cambio. | Actualizar antes de la entrega final. |
 
-## 7. Hardware de otros bloques pendiente de consolidar
+## 7. Hardware de otros bloques (consolidado en el presupuesto)
 
 Ya están en el presupuesto ([tarea 10](10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto), secciones 4.4 y 12): routers, switch, servidor, discos del RAID, disco USB de copias, SAI, cable, adaptador Wi-Fi de la recreativa y palanca del stick. Lista original:
 

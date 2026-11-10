@@ -14,7 +14,7 @@ Revisión del repositorio contra el **enunciado** ([Reto_1_ASIR1_2026-2027.docx]
 | Persona | Correcciones |
 |---|---|
 | **Adrian** | Nada: E/R en notación Chen y VM del gerente cerrados el 30/10 (sección 1) |
-| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [3.5](#35-rto-medido-en-el-mismo-servidor-tarea-45) RTO · [4](#4-datos-que-faltan-en-tareas-hechas) `08-usuarios.sql` en el servidor |
+| **Iker** | [2.1](#21-contraseñas) clave SSH de la recreativa · [2.3](#23-menús-del-cajero-tarea-34) menús del cajero · [2.4](#24-cortafuegos-del-servidor) cortafuegos del servidor · [4](#4-datos-que-faltan-en-tareas-hechas) `08-usuarios.sql` en el servidor |
 | **Peio** | Nada en esta lista: su tarea abierta (25) está en el Gantt; la 24 se cerró el 30/10 |
 | **Eneko.P** | Nada en esta lista: la 3.2 se cerró con las medidas de la tarea 54 (29/10) |
 | **Markel** | Nada en esta lista: la edición de Windows de los TPV se cerró el 30/10 (sección 1) |
@@ -87,7 +87,7 @@ Corregido el 26/10 (sección 1).
 
 ### 3.5 RTO medido en el mismo servidor (tarea 45)
 
-- [ ] 🟠 **Los 46 s de restauración son en un entorno aislado del mismo servidor**, no en una máquina nueva: no es el RTO real. Restaurar en una VM nueva desde cero ([tarea 45, sección 6](docs/backup/45-restauracion/DOCUMENTACION.md)) y cronometrar.
+- [x] 🟠 **Los 46 s de restauración son en un entorno aislado del mismo servidor**, no en una máquina nueva: no es el RTO real. ✅ **Corregido el 10/11** (Adrian): recuperación desde cero en una VM vacía con el preseed y `recuperar-servidor-nuevo.sh`, **RTO ≈ 14 min** ([tarea 45, sección 6](docs/backup/45-restauracion/DOCUMENTACION.md), [log](docs/backup/45-restauracion/evidencias/rto-maquina-nueva-2026-11-10.log)). Sin probar desde un TPV.
   - **Quién:** Iker.
 
 ---
@@ -106,7 +106,7 @@ Corregido el 26/10 (sección 1).
 
 ---
 
-## 5. Cumplimiento del enunciado (04/11)
+## 5. Cumplimiento del enunciado (10/11)
 
 «Tarea» es una tarea pendiente del [Gantt](docs/gestion/gantt.md); «corr.» es una corrección de esta lista.
 
@@ -118,7 +118,7 @@ Corregido el 26/10 (sección 1).
 | Instalación, optimización y monitorización de la recreativa | Hecho: Debian + MAME en la VM de 1 núcleo y 1 GB (tarea 53) y medidas antes y después (tarea 54, 29/10) | Tarea 62: justificar el front-end |
 | Montaje y programación del arcade stick | Hecho: montado y probado en la placa, con la EEPROM, en MAME (tarea 53) y en Batocera (27-29/10); antirrebote en el firmware (04/11) | Tarea 59: probar el antirrebote en la placa, componentes y por qué la Leonardo |
 | Identificar necesidades de comunicación | Hecho | — |
-| Implementación y configuración de sistemas operativos | Hecho: TPV bastionados (tarea 13) y PC del gerente (tarea 55) | Tarea 15: ejecutar `configurar-tpv.ps1` en los TPV |
+| Implementación y configuración de sistemas operativos | Hecho: TPV bastionados (tarea 13) y PC del gerente con contraseñas robustas (tarea 55) y servicios reducidos (tarea 64, 09/11) | Tarea 15: ejecutar `configurar-tpv.ps1` en los TPV |
 | Restricción de cuentas y equipos (mínimos privilegios) | Hecho en el laboratorio: cajero solo con Punto de venta (30/10) | Corr. 2.3 en el servidor del equipo; tarea 15 |
 | Diseño conceptual de la web | Hecho, a posteriori | Tarea 62: tableta y WCAG AA |
 | Web accesible y por HTTPS | Hecho | — |
@@ -128,12 +128,12 @@ Corregido el 26/10 (sección 1).
 | Modelo E/R y tablas | Hecho: E/R en notación Chen (30/10), con relación ternaria, historial de precios y atributos especiales (tarea 56, 04/11) | Tarea 57: enlazar `almi_chain` con Odoo |
 | Implementación de la BD y consulta de sus datos | Hecho: `almi_chain` en el servidor del equipo y en su copia (27/10) | Cargar `08-usuarios.sql` en el servidor (corr. 4) |
 | Configurar disco redundante | Hecho: BD de Odoo en el RAID 1 y fallo probado con Odoo funcionando (27/10) | — |
-| Plan de copias y prueba de restauración | Hecho: copia en el RAID, el USB y S3 (04/11) y restauración comprobada desde el RAID y desde S3 | Corr. 3.5 (RTO en una VM nueva) |
+| Plan de copias y prueba de restauración | Hecho: copia en el RAID, el USB y S3 (04/11), restauración comprobada desde el RAID y desde S3 y RTO real de 14 min en una VM nueva (10/11) | — |
 | Seguridad por defecto en toda la solución | Casi hecho: revisión transversal (tarea 46) con el preseed endurecido (04/11) | Corr. 2.1 y 2.4 en el servidor del equipo; tarea 46 |
-| Verificar con pruebas (funcionamiento, restauración, failover) | Casi hecho: failover del RAID y restauración probados | Tareas 15, 25 y 47 |
-| Documentación reproducible con diagramas | Casi hecho | Tarea 48 |
+| Verificar con pruebas (funcionamiento, restauración, failover) | Casi hecho: failover del RAID y restauración probados; [tabla de pruebas](docs/gestion/47-tabla-pruebas.md) repasada fila a fila (tarea 47, 10/11) | Tareas 15, 25, 36 y 59 (las filas ⏳ de la tabla) |
+| Documentación reproducible con diagramas | Hecho: [LOGICA_RETO](LOGICA_RETO.md) al día con el montaje desde cero en orden (sección 15) y el capítulo de restauración (tarea 48, 10/11) | — |
 | Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | Commits de Eneko.P (tarea 5) |
-| Documentación y presentación | En curso | Tareas 48 y 49 |
+| Documentación y presentación | Documentación hecha; presentación en curso | Tarea 49 |
 
 **Redes, en concreto:**
 

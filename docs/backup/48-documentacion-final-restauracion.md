@@ -3,7 +3,7 @@
 - **Responsable:** Markel
 - **Fecha:** 29/10/2026
 - **Depende de:** [Tarea 45](45-restauracion/DOCUMENTACION.md) · Prueba de restauración con evidencias. Este documento es el capítulo de restauración de la documentación final (tarea 48): explica los pasos; las pruebas y evidencias son las de la 45
-- **Estado:** En curso. Restauración aislada completada; pendiente medir el RTO real en una máquina virtual nueva.
+- **Estado:** ✅ Hecho (10/11/2026). Restauración aislada completada y **RTO real medido en una máquina nueva: 832 s ≈ 14 min** ([tarea 45, sección 6](45-restauracion/DOCUMENTACION.md#6-restaurar-en-una-máquina-nueva-rto-real-10112026)).
 
 ## 1. Objetivo
 
@@ -18,7 +18,7 @@ La documentación parte de la prueba realizada en la Tarea 45 y explica:
 - Cómo se comparan los datos restaurados con producción.
 - Cómo se limpia el entorno al finalizar.
 - Cómo se recuperaría el servicio si el servidor quedara destruido.
-- Qué prueba falta para calcular el RTO real.
+- Cuánto se tarda en recuperar el servicio desde cero (RTO real).
 
 ## 2. Resultado general
 
@@ -29,14 +29,14 @@ Las comprobaciones realizadas coinciden con el entorno de producción. El Odoo r
 | Indicador | Resultado |
 |---|---|
 | Tiempo medido con el servidor ya preparado | **46 segundos** |
-| RTO real | **Pendiente de medir** en una máquina virtual nueva |
+| RTO real | **832 s ≈ 14 min** en una VM nueva (10/11/2026) |
 | RPO máximo | **24 horas**, al existir una copia diaria |
 | Antigüedad de la copia utilizada | **6 minutos** |
 | Producción durante la prueba | No se modificó |
 | Base existente en producción | Únicamente `tienda` |
 | Resultado de las comprobaciones | Coinciden con producción |
 
-> **Importante:** los 46 segundos no representan el RTO real, porque no incluyen la creación de un servidor nuevo ni la instalación de Debian, Docker, Restic y Odoo.
+> **Importante:** los 46 segundos no son el RTO real, porque no incluyen la creación de un servidor nuevo ni la instalación de Debian, Docker, Restic y Odoo. El RTO real (14 min) está en la sección 9.
 
 ## 3. Entorno de restauración
 
@@ -313,18 +313,21 @@ El tiempo medido en el servidor ya preparado fue:
 46 segundos
 ```
 
-Este valor no es todavía el RTO real, porque no incluye:
+Ese valor no es el RTO real, porque el servidor ya tenía Debian, Docker, las imágenes y la configuración. El **10/11/2026** se repitió todo en una máquina virtual vacía, con [`recuperar-servidor-nuevo.sh`](45-restauracion/recuperar-servidor-nuevo.sh) y una copia del USB `BACKUP_USB`:
 
-- Crear una máquina nueva.
-- Instalar Debian 13.
-- Instalar Docker y Docker Compose.
-- Instalar Restic.
-- Conectar el disco externo.
-- Recuperar la contraseña desde KeePassXC.
-- Restaurar completamente Odoo.
-- Comprobar el acceso desde un TPV.
+| Paso | Tiempo |
+|---|---|
+| Crear la máquina e instalar Debian 13 con el preseed | 468 s |
+| Conectar el USB | 41 s |
+| Instalar restic, Docker y Compose | 73 s |
+| Restaurar la copia, las dos bases y los adjuntos y arrancar Odoo con HTTPS | 250 s |
+| **RTO real** | **832 s ≈ 14 minutos** |
 
-El RTO real permanecerá pendiente hasta repetir todo el procedimiento en una máquina virtual vacía.
+```text
+RTO real: 14 minutos (de una máquina vacía a Odoo por HTTPS con los datos de la copia)
+```
+
+Casi todo el tiempo es instalar Debian y descargar las imágenes de Docker. En el local, sin Internet, habría que llevar las imágenes guardadas en el USB (`docker save`). Detalle y log: [tarea 45, sección 6](45-restauracion/DOCUMENTACION.md#6-restaurar-en-una-máquina-nueva-rto-real-10112026).
 
 ## 10. Incidencias y soluciones
 
@@ -334,6 +337,7 @@ El RTO real permanecerá pendiente hasta repetir todo el procedimiento en una m�
 | 2 | El Odoo de producción se conectó a la base restaurada | La copia se restauró inicialmente en el PostgreSQL de producción y el programador de Odoo revisa todas las bases disponibles | Restaurar en un PostgreSQL temporal dentro de una red Docker interna. En producción debe existir únicamente la base `tienda`. |
 | 3 | `dropdb: database is being accessed by other users` | Odoo mantenía conexiones abiertas con la base restaurada | Utilizar `dropdb --force` para limpiar y evitar el problema mediante el nuevo diseño aislado. |
 | 4 | Los contenedores aparecían como `Up Less than a second` | VirtualBox entregaba la hora local como UTC y después `timesyncd` la corregía | Incidencia cosmética. Configurar la VM con `VBoxManage modifyvm ServidorERP --rtc-use-utc on`. Aplicar también a la máquina recreativa si fuera necesario. |
+| 5 | En la máquina nueva (10/11), restic se quedaba reintentando: `read-only file system` | El USB se monta en solo lectura para no tocar la copia, y restic intenta crear un bloqueo en el repositorio | `--no-lock` en `snapshots` y `restore` de `recuperar-servidor-nuevo.sh`. Leer una copia no necesita bloqueo. |
 
 ## 11. Plan de recuperación ante un desastre real
 
@@ -419,31 +423,26 @@ La recuperación solamente se considera terminada cuando:
 - La última venta incluida en la copia está disponible.
 - Un cajero puede acceder desde un TPV.
 
-## 12. Restauración pendiente en una máquina nueva
+## 12. Restauración en una máquina nueva (hecha el 10/11/2026)
 
-La prueba completada se realizó en el mismo servidor, que ya tenía Docker, las imágenes y la configuración instalados.
+El procedimiento de la sección 11 se hizo de verdad en una máquina virtual vacía y está automatizado en [`recuperar-servidor-nuevo.sh`](45-restauracion/recuperar-servidor-nuevo.sh):
 
-Para medir el RTO real se debe repetir la prueba en una máquina virtual completamente nueva.
+```bash
+# En el servidor nuevo, instalado con el preseed y con el USB BACKUP_USB conectado.
+# La contraseña de restic se copia de KeePassXC a un fichero temporal: el script la guarda donde la espera
+# la copia nocturna y borra el temporal.
+sudo ./recuperar-servidor-nuevo.sh /tmp/restic.pass
+```
 
-### Procedimiento pendiente
+1. Instala restic, Docker y Docker Compose.
+2. Guarda la contraseña y monta el USB **en solo lectura**.
+3. Restaura la última instantánea: `/opt/odoo` (Compose, `.env`, `odoo.conf` y certificados del HTTPS), los volcados y los adjuntos.
+4. Arranca PostgreSQL y restaura los roles, `tienda` y `almi_chain`.
+5. Copia los adjuntos al volumen de Odoo.
+6. Arranca Odoo y el proxy HTTPS.
+7. Comprueba `/web/login` por HTTP y por HTTPS, el login de `admin`, los puntos de venta, los cajeros, la última venta y `almi_chain`, y da el tiempo.
 
-1. Crear una máquina virtual vacía.
-2. Iniciar el cronómetro.
-3. Instalar Debian 13 mediante el preseed de la tarea 33.
-4. Instalar Restic, Docker, Docker CLI y Docker Compose.
-5. Conectar el USB `BACKUP_USB`.
-6. Obtener la contraseña desde KeePassXC.
-7. Restaurar la última instantánea.
-8. Iniciar PostgreSQL.
-9. Crear y restaurar la base `tienda`.
-10. Restaurar el filestore.
-11. Iniciar Odoo.
-12. Acceder desde un TPV.
-13. Comprobar que aparece la última venta de la copia.
-14. Detener el cronómetro.
-15. Guardar el log de la prueba.
-16. Sustituir el estado pendiente por el RTO medido.
-17. Actualizar el RTO en la tabla de resultados, en `LOGICA_RETO` y en el Anexo II.
+**Después**, en el servidor nuevo: `instalar-backup.sh` (tarea 44) para que vuelva a haber copias y `cortafuegos-servidor.sh` (tarea 33).
 
 ## 13. Evidencias que deben conservarse
 
@@ -460,14 +459,11 @@ Para medir el RTO real se debe repetir la prueba en una máquina virtual complet
 - Tiempo medido de 46 segundos.
 - Confirmación de que producción no fue modificada.
 
+- Log de la recuperación en una máquina nueva, con la hora de cada paso, el RTO, Odoo por HTTP y HTTPS y la última venta recuperada: [`rto-maquina-nueva-2026-11-10.log`](45-restauracion/evidencias/rto-maquina-nueva-2026-11-10.log).
+
 ### Evidencias pendientes
 
-- Log de la recuperación en una máquina virtual nueva.
-- Hora de inicio y finalización.
-- RTO real.
-- Captura o registro de Odoo funcionando en el servidor nuevo.
-- Evidencia del TPV accediendo al servicio restaurado.
-- Evidencia de la última venta recuperada.
+- Un TPV entrando en el servidor recuperado (la VM de la prueba estaba fuera de la red de los TPV).
 
 ## 14. Lista de comprobación final
 
@@ -482,10 +478,10 @@ Para medir el RTO real se debe repetir la prueba en una máquina virtual complet
 - [x] Los datos funcionales coinciden con producción.
 - [x] El entorno temporal se elimina al terminar.
 - [x] Se ha medido el tiempo en el servidor ya preparado.
-- [ ] Se ha repetido la restauración en una máquina nueva.
-- [ ] Se ha medido el RTO real.
-- [ ] Se ha probado el acceso desde un TPV al servidor recuperado.
-- [ ] Se ha actualizado el RTO en `LOGICA_RETO` y en el Anexo II.
+- [x] Se ha repetido la restauración en una máquina nueva (10/11).
+- [x] Se ha medido el RTO real: 14 min.
+- [ ] Se ha probado el acceso desde un TPV al servidor recuperado (sin hacer: la VM estaba fuera de la red de los TPV).
+- [x] Se ha actualizado el RTO en `LOGICA_RETO` y en el Anexo II.
 
 ## 15. Conclusión
 
@@ -497,4 +493,4 @@ El aislamiento mediante un PostgreSQL temporal, un Odoo temporal y una red Docke
 
 El procedimiento automatizado tardó 46 segundos en un servidor ya preparado. Sin embargo, este tiempo no es el RTO real de un desastre completo.
 
-La documentación quedará completamente cerrada cuando se repita la recuperación en una máquina virtual nueva, un cajero pueda acceder desde el TPV y se mida el tiempo total necesario para recuperar el servicio.
+El 10/11 se repitió la recuperación en una máquina virtual vacía: **14 minutos** desde cero hasta Odoo por HTTPS con los datos de la copia. Ese es el RTO real que se da al cliente. Queda por comprobar que un TPV entra en el servidor recuperado.
