@@ -1,0 +1,10 @@
+# Tarea 12 · Guest Additions de Windows vistas desde el anfitrión (10/11/2026)
+# Instaladas con la sesión de administrador: Start-Process D:/VBoxWindowsAdditions.exe -ArgumentList /S -Wait  → código de salida 0
+# Drivers: VirtualBox Guest Device y VirtualBox Graphics Adapter (WDDM) 7.2.16.24877; servicio VBoxService automático y en marcha (captura win-16)
+
+$ VBoxManage guestproperty enumerate VM-dualboot-W10-ubuntu | grep -E 'GuestAdd|OS/'
+/VirtualBox/GuestAdd/Revision                    = '174877'
+/VirtualBox/GuestAdd/Version                     = '7.2.16'
+/VirtualBox/GuestAdd/VersionExt                  = '7.2.16'
+/VirtualBox/GuestInfo/OS/Product                 = 'Windows 10'
+/VirtualBox/GuestInfo/OS/Release                 = '10.0.19045.6466'

@@ -1,0 +1,234 @@
+2026-11-10T09:52:57+01:00 servidor-erp systemd[1]: Starting backup-odoo.service - Copia de seguridad 3-2-1 cifrada de Odoo...
+2026-11-10T09:52:57+01:00 servidor-erp backup-odoo.sh[3328]: [backup-odoo] Volcando la base de datos tienda
+2026-11-10T09:53:00+01:00 servidor-erp backup-odoo.sh[3328]: [backup-odoo] Volcado: 7,2M
+2026-11-10T09:53:01+01:00 servidor-erp backup-odoo.sh[3328]: [backup-odoo] Volcado almi_chain: 48K
+2026-11-10T09:53:01+01:00 servidor-erp backup-odoo.sh[3328]: [backup-odoo] Copia 2/3 → RAID (/srv/datos/restic)
+2026-11-10T09:53:03+01:00 servidor-erp backup-odoo.sh[3548]: using parent snapshot 9dd8f0c8
+2026-11-10T09:53:03+01:00 servidor-erp backup-odoo.sh[3548]: Files:           0 new,     3 changed,   473 unmodified
+2026-11-10T09:53:03+01:00 servidor-erp backup-odoo.sh[3548]: Dirs:            0 new,    12 changed,   431 unmodified
+2026-11-10T09:53:03+01:00 servidor-erp backup-odoo.sh[3548]: Added to the repository: 5.133 MiB (2.678 MiB stored)
+2026-11-10T09:53:03+01:00 servidor-erp backup-odoo.sh[3548]: processed 476 files, 24.293 MiB in 0:01
+2026-11-10T09:53:03+01:00 servidor-erp backup-odoo.sh[3548]: snapshot 720a678c saved
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: Applying Policy: keep 7 daily, 4 weekly, 6 monthly snapshots
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: keep 3 snapshots:
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: ID        Time                 Host          Tags        Reasons                  Paths                                             Size
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: e7a8089b  2026-11-04 10:40:16  servidor-erp  odoo        oldest daily snapshot    /opt/odoo                                         24.285 MiB
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]:                                                          oldest weekly snapshot   /srv/datos/temp-backup
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]:                                                          oldest monthly snapshot  /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: 9dd8f0c8  2026-11-04 10:44:34  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.285 MiB
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]:                                                                                   /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: 720a678c  2026-11-10 09:53:02  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.293 MiB
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]:                                                          monthly snapshot         /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3558]: 3 snapshots
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3566]: using temporary cache in /var/cache/restic/restic-check-cache-1451002766
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3566]: create exclusive lock for repository
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3566]: load indexes
+2026-11-10T09:53:05+01:00 servidor-erp backup-odoo.sh[3566]: check all packs
+2026-11-10T09:53:06+01:00 servidor-erp backup-odoo.sh[3566]: check snapshots, trees and blobs
+2026-11-10T09:53:06+01:00 servidor-erp backup-odoo.sh[3566]: [0:00] 100.00%  3 / 3 snapshots
+2026-11-10T09:53:06+01:00 servidor-erp backup-odoo.sh[3566]: no errors were found
+2026-11-10T09:53:06+01:00 servidor-erp backup-odoo.sh[3328]: [backup-odoo] Copia 3/3 → USB externo (/dev/sdc)
+2026-11-10T09:53:08+01:00 servidor-erp backup-odoo.sh[3582]: snapshot 720a678c of [/srv/datos/temp-backup /var/lib/docker/volumes/odoo_odoo-web-data/_data /opt/odoo] at 2026-11-10 09:53:02.120535655 +0100 CET by root@servidor-erp
+2026-11-10T09:53:08+01:00 servidor-erp backup-odoo.sh[3582]:   copy started, this may take a while...
+2026-11-10T09:53:08+01:00 servidor-erp backup-odoo.sh[3582]: [0:00] 100.00%  2 / 2 packs copied
+2026-11-10T09:53:08+01:00 servidor-erp backup-odoo.sh[3582]: snapshot 4770da89 saved
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: Applying Policy: keep 7 daily, 4 weekly, 6 monthly snapshots
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: keep 3 snapshots:
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: ID        Time                 Host          Tags        Reasons                  Paths                                             Size
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: 5299fdec  2026-11-04 10:40:16  servidor-erp  odoo        oldest daily snapshot    /opt/odoo                                         24.285 MiB
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]:                                                          oldest weekly snapshot   /srv/datos/temp-backup
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]:                                                          oldest monthly snapshot  /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: f7d67658  2026-11-04 10:44:34  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.285 MiB
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]:                                                                                   /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: 4770da89  2026-11-10 09:53:02  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.293 MiB
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]:                                                          monthly snapshot         /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3610]: 3 snapshots
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3618]: using temporary cache in /var/cache/restic/restic-check-cache-675419603
+2026-11-10T09:53:09+01:00 servidor-erp backup-odoo.sh[3618]: create exclusive lock for repository
+2026-11-10T09:53:10+01:00 servidor-erp backup-odoo.sh[3618]: load indexes
+2026-11-10T09:53:10+01:00 servidor-erp backup-odoo.sh[3618]: check all packs
+2026-11-10T09:53:10+01:00 servidor-erp backup-odoo.sh[3618]: check snapshots, trees and blobs
+2026-11-10T09:53:10+01:00 servidor-erp backup-odoo.sh[3618]: [0:00] 100.00%  3 / 3 snapshots
+2026-11-10T09:53:10+01:00 servidor-erp backup-odoo.sh[3618]: no errors were found
+2026-11-10T09:53:10+01:00 servidor-erp backup-odoo.sh[3328]: [backup-odoo] USB desmontado: ya se puede retirar
+2026-11-10T10:08:14+01:00 servidor-erp backup-odoo.sh[3328]: [backup-odoo] Creando el repositorio en S3 (s3:s3.us-east-1.amazonaws.com/almi-chain-backup-2026/restic)
+2026-11-10T10:08:15+01:00 servidor-erp backup-odoo.sh[7617]: Fatal: create repository at s3:s3.us-east-1.amazonaws.com/almi-chain-backup-2026/restic failed: Fatal: unable to open repository at s3:s3.us-east-1.amazonaws.com/almi-chain-backup-2026/restic: client.BucketExists: 400 Bad Request
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: backup-odoo.service: Main process exited, code=exited, status=1/FAILURE
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: backup-odoo.service: Failed with result 'exit-code'.
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: Failed to start backup-odoo.service - Copia de seguridad 3-2-1 cifrada de Odoo.
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: backup-odoo.service: Consumed 7.768s CPU time, 109.8M memory peak.
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: backup-odoo.service: Triggering OnFailure= dependencies.
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: Starting backup-odoo-fallo.service - Aviso de fallo de la copia de seguridad de Odoo...
+2026-11-10T10:08:15+01:00 servidor-erp backup-odoo[7654]: La copia de seguridad de Odoo ha FALLADO el 10/11/2026 a las 10:08 en servidor-erp. Fatal: create repository at s3:s3.us-east-1.amazonaws.com/almi-chain-backup-2026/restic failed: Fatal: unable to open repository at s3:s3.us-east-1.amazonaws.com/almi-chain-backup-2026/restic: client.BucketExists: 400 Bad Request
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: backup-odoo-fallo.service: Deactivated successfully.
+2026-11-10T10:08:15+01:00 servidor-erp systemd[1]: Finished backup-odoo-fallo.service - Aviso de fallo de la copia de seguridad de Odoo.
+2026-11-10T13:19:40+01:00 servidor-erp systemd[1]: Starting backup-odoo.service - Copia de seguridad 3-2-1 cifrada de Odoo...
+2026-11-10T13:19:40+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Volcando la base de datos tienda
+2026-11-10T13:19:42+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Volcado: 7,2M
+2026-11-10T13:19:42+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Volcado almi_chain: 48K
+2026-11-10T13:19:42+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Copia 2/3 → RAID (/srv/datos/restic)
+2026-11-10T13:19:43+01:00 servidor-erp backup-odoo.sh[54155]: using parent snapshot 720a678c
+2026-11-10T13:19:43+01:00 servidor-erp backup-odoo.sh[54155]: Files:           0 new,     3 changed,   473 unmodified
+2026-11-10T13:19:43+01:00 servidor-erp backup-odoo.sh[54155]: Dirs:            0 new,     3 changed,   440 unmodified
+2026-11-10T13:19:43+01:00 servidor-erp backup-odoo.sh[54155]: Added to the repository: 3.635 MiB (2.016 MiB stored)
+2026-11-10T13:19:43+01:00 servidor-erp backup-odoo.sh[54155]: processed 476 files, 24.294 MiB in 0:00
+2026-11-10T13:19:43+01:00 servidor-erp backup-odoo.sh[54155]: snapshot c5ba6b25 saved
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: Applying Policy: keep 7 daily, 4 weekly, 6 monthly snapshots
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: keep 3 snapshots:
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: ID        Time                 Host          Tags        Reasons                  Paths                                             Size
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: e7a8089b  2026-11-04 10:40:16  servidor-erp  odoo        oldest daily snapshot    /opt/odoo                                         24.285 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                          oldest weekly snapshot   /srv/datos/temp-backup
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                          oldest monthly snapshot  /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: 9dd8f0c8  2026-11-04 10:44:34  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.285 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                                                   /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: c5ba6b25  2026-11-10 13:19:42  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.294 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                          monthly snapshot         /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: 3 snapshots
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: remove 1 snapshots:
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: ID        Time                 Host          Tags        Paths                                             Size
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: ---------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: 720a678c  2026-11-10 09:53:02  servidor-erp  odoo        /opt/odoo                                         24.293 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                          /srv/datos/temp-backup
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]:                                                          /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: ---------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: 1 snapshots
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: [0:00] 100.00%  1 / 1 files deleted
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: 1 snapshots have been removed, running prune
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: loading indexes...
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: loading all snapshots...
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: finding data that is still in use for 3 snapshots
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: [0:00] 100.00%  3 / 3 snapshots
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: searching used packs...
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: collecting packs for deletion and repacking
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: [0:00] 100.00%  8 / 8 packs processed
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: to repack:            19 blobs / 2.678 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: this removes:          9 blobs / 2.015 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: to delete:             0 blobs / 0 B
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: total prune:           9 blobs / 2.015 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: remaining:           967 blobs / 10.909 MiB
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: unused size after prune: 0 B (0.00% of remaining size)
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: repacking packs
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: [0:00] 100.00%  2 / 2 packs repacked
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: rebuilding index
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: [0:00] 100.00%  5 / 5 indexes processed
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: [0:00] 100.00%  5 / 5 old indexes deleted
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: removing 2 old packs
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: [0:00] 100.00%  2 / 2 files deleted
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54163]: done
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54172]: using temporary cache in /var/cache/restic/restic-check-cache-3951336808
+2026-11-10T13:19:44+01:00 servidor-erp backup-odoo.sh[54172]: create exclusive lock for repository
+2026-11-10T13:19:45+01:00 servidor-erp backup-odoo.sh[54172]: load indexes
+2026-11-10T13:19:45+01:00 servidor-erp backup-odoo.sh[54172]: check all packs
+2026-11-10T13:19:45+01:00 servidor-erp backup-odoo.sh[54172]: check snapshots, trees and blobs
+2026-11-10T13:19:45+01:00 servidor-erp backup-odoo.sh[54172]: [0:00] 100.00%  3 / 3 snapshots
+2026-11-10T13:19:45+01:00 servidor-erp backup-odoo.sh[54172]: no errors were found
+2026-11-10T13:19:45+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Copia 3/3 → USB externo (/dev/sdc)
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54206]: snapshot c5ba6b25 of [/srv/datos/temp-backup /var/lib/docker/volumes/odoo_odoo-web-data/_data /opt/odoo] at 2026-11-10 13:19:42.908553015 +0100 CET by root@servidor-erp
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54206]:   copy started, this may take a while...
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54206]: [0:00] 100.00%  2 / 2 packs copied
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54206]: snapshot 9cc7ef2a saved
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: Applying Policy: keep 7 daily, 4 weekly, 6 monthly snapshots
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: keep 3 snapshots:
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: ID        Time                 Host          Tags        Reasons                  Paths                                             Size
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: 5299fdec  2026-11-04 10:40:16  servidor-erp  odoo        oldest daily snapshot    /opt/odoo                                         24.285 MiB
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                          oldest weekly snapshot   /srv/datos/temp-backup
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                          oldest monthly snapshot  /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: f7d67658  2026-11-04 10:44:34  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.285 MiB
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                                                   /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: 9cc7ef2a  2026-11-10 13:19:42  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.294 MiB
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                          monthly snapshot         /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: 3 snapshots
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: remove 1 snapshots:
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: ID        Time                 Host          Tags        Paths                                             Size
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: ---------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: 4770da89  2026-11-10 09:53:02  servidor-erp  odoo        /opt/odoo                                         24.293 MiB
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                          /srv/datos/temp-backup
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]:                                                          /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: ---------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: 1 snapshots
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: [0:00] 100.00%  1 / 1 files deleted
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: 1 snapshots have been removed, running prune
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: loading indexes...
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: loading all snapshots...
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: finding data that is still in use for 3 snapshots
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: [0:00] 100.00%  3 / 3 snapshots
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: searching used packs...
+2026-11-10T13:19:47+01:00 servidor-erp backup-odoo.sh[54215]: collecting packs for deletion and repacking
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: [0:00] 100.00%  8 / 8 packs processed
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: to repack:            19 blobs / 2.678 MiB
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: this removes:          9 blobs / 2.015 MiB
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: to delete:             0 blobs / 0 B
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: total prune:           9 blobs / 2.015 MiB
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: remaining:           967 blobs / 10.909 MiB
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: unused size after prune: 0 B (0.00% of remaining size)
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: repacking packs
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: [0:00] 100.00%  2 / 2 packs repacked
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: rebuilding index
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: [0:00] 100.00%  5 / 5 indexes processed
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: [0:00] 100.00%  5 / 5 old indexes deleted
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: removing 2 old packs
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: [0:00] 100.00%  2 / 2 files deleted
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54215]: done
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54225]: using temporary cache in /var/cache/restic/restic-check-cache-2381363256
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54225]: create exclusive lock for repository
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54225]: load indexes
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54225]: check all packs
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54225]: check snapshots, trees and blobs
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54225]: [0:00] 100.00%  3 / 3 snapshots
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[54225]: no errors were found
+2026-11-10T13:19:48+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] USB desmontado: ya se puede retirar
+2026-11-10T13:19:51+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Copia 3b → AWS S3 (s3:s3.us-east-1.amazonaws.com/almi-chain-backup-2026/restic)
+2026-11-10T13:19:54+01:00 servidor-erp backup-odoo.sh[54266]: snapshot c5ba6b25 of [/srv/datos/temp-backup /var/lib/docker/volumes/odoo_odoo-web-data/_data /opt/odoo] at 2026-11-10 13:19:42.908553015 +0100 CET by root@servidor-erp
+2026-11-10T13:19:54+01:00 servidor-erp backup-odoo.sh[54266]:   copy started, this may take a while...
+2026-11-10T13:19:56+01:00 servidor-erp backup-odoo.sh[54266]: [0:01] 100.00%  4 / 4 packs copied
+2026-11-10T13:19:56+01:00 servidor-erp backup-odoo.sh[54266]: snapshot 6959de7f saved
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: Applying Policy: keep 7 daily, 4 weekly, 6 monthly snapshots
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: keep 3 snapshots:
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: ID        Time                 Host          Tags        Reasons                  Paths                                             Size
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: d6e58443  2026-11-04 10:40:16  servidor-erp  odoo        oldest daily snapshot    /opt/odoo                                         24.285 MiB
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]:                                                          oldest weekly snapshot   /srv/datos/temp-backup
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]:                                                          oldest monthly snapshot  /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: ee64d414  2026-11-04 10:44:34  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.285 MiB
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]:                                                                                   /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: 6959de7f  2026-11-10 13:19:42  servidor-erp  odoo        daily snapshot           /opt/odoo                                         24.294 MiB
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]:                                                          weekly snapshot          /srv/datos/temp-backup
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]:                                                          monthly snapshot         /var/lib/docker/volumes/odoo_odoo-web-data/_data
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: ----------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54294]: 3 snapshots
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54303]: using temporary cache in /var/cache/restic/restic-check-cache-3895752872
+2026-11-10T13:19:58+01:00 servidor-erp backup-odoo.sh[54303]: create exclusive lock for repository
+2026-11-10T13:20:00+01:00 servidor-erp backup-odoo.sh[54303]: load indexes
+2026-11-10T13:20:00+01:00 servidor-erp backup-odoo.sh[54303]: check all packs
+2026-11-10T13:20:01+01:00 servidor-erp backup-odoo.sh[54303]: check snapshots, trees and blobs
+2026-11-10T13:20:01+01:00 servidor-erp backup-odoo.sh[54303]: [0:00] 100.00%  3 / 3 snapshots
+2026-11-10T13:20:01+01:00 servidor-erp backup-odoo.sh[54303]: no errors were found
+2026-11-10T13:20:01+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Instantáneas en el RAID:
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[54334]: ID        Time                 Host          Tags    Size
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[54334]: ---------------------------------------------------------------
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[54334]: e7a8089b  2026-11-04 10:40:16  servidor-erp  odoo    24.285 MiB
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[54334]: 9dd8f0c8  2026-11-04 10:44:34  servidor-erp  odoo    24.285 MiB
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[54334]: c5ba6b25  2026-11-10 13:19:42  servidor-erp  odoo    24.294 MiB
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[54334]: ---------------------------------------------------------------
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[54334]: 3 snapshots
+2026-11-10T13:20:02+01:00 servidor-erp backup-odoo.sh[53955]: [backup-odoo] Copia terminada correctamente
+2026-11-10T13:20:02+01:00 servidor-erp systemd[1]: backup-odoo.service: Deactivated successfully.
+2026-11-10T13:20:02+01:00 servidor-erp systemd[1]: Finished backup-odoo.service - Copia de seguridad 3-2-1 cifrada de Odoo.
+2026-11-10T13:20:02+01:00 servidor-erp systemd[1]: backup-odoo.service: Consumed 7.743s CPU time, 90.4M memory peak.

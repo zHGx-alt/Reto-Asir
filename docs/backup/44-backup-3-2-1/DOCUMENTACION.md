@@ -126,9 +126,15 @@ activar el **versionado** del bucket con una regla de ciclo de vida que borre la
 | Bucket `almi-chain-backup-2026` (us-east-1) | Privado: los cuatro bloqueos de acceso público activos y cifrado AES-256 por defecto. Dentro solo está el repositorio restic, cifrado | [`s3-bucket-2026-11-04.txt`](evidencias/s3-bucket-2026-11-04.txt) |
 | Copia diaria con S3 (`systemctl start backup-odoo`) | RAID, USB y S3 en la misma ejecución, `check` sin errores en los tres: *Copia terminada correctamente* | [`backup-raid-usb-s3-2026-11-04.log`](evidencias/backup-raid-usb-s3-2026-11-04.log) |
 | Restaurar **desde S3** (`probar-restauracion.sh s3`) | **23 comprobaciones OK**, también `almi_chain`; Odoo restaurado con login 200; **166 s** (80 s son la descarga) | [tarea 45](../45-restauracion/evidencias/restauracion-s3-2026-11-04.log) |
+| Credenciales caducadas y renovadas (10/11) | 10:08: RAID y USB guardados, S3 falla (`client.BucketExists: 400 Bad Request`) y salta el aviso de fallo. 13:19, con credenciales nuevas: RAID, USB y S3 (`6959de7f`), `check` sin errores: *Copia terminada correctamente* | [`s3-caducado-y-renovado-2026-11-10.log`](evidencias/s3-caducado-y-renovado-2026-11-10.log) |
 
 **Limitación del Learner Lab.** La cuenta de AWS Academy no deja crear usuarios IAM: el rol `voclabs` no tiene
 `iam:CreateUser` (*AccessDenied*). Por eso la prueba usa en `s3.env` las credenciales temporales del lab, con
 `AWS_SESSION_TOKEN`. Caducan al cerrar la sesión, así que en el laboratorio la copia a S3 solo funciona con el lab arrancado.
 Si una noche no lo está, el servicio acaba con error y salta el aviso (`OnFailure`), pero la copia de esa noche ya está en el RAID y, si toca, en el USB, porque S3 va lo último. En una cuenta real de AWS se
 crea el usuario IAM con la política de arriba y `s3.env` lleva solo su clave, sin token.
+
+**Renovar las credenciales del lab** (pasó el 10/11; unos 2 min):
+1. Arrancar el Learner Lab y copiar las credenciales de *AWS Details* en `~/.aws/credentials` del PC de administración.
+2. Sustituir en el servidor `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` y `AWS_SESSION_TOKEN` de `/root/.config/backup-odoo/s3.env` (root, permisos 600). Las demás líneas no cambian.
+3. `sudo systemctl start backup-odoo` y comprobar que acaba en *Copia terminada correctamente* (`journalctl -u backup-odoo -n 20`).
