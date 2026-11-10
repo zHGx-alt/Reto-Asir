@@ -24,11 +24,11 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | 4 Arduino | 7 | 6 | 0 | 1 | Probar el antirrebote en la placa (tarea 59) |
 | 5 Redes | 10 | 7 | 1 | 2 | WDS: Wi-Fi de clientes por el router 2, aislamiento probado desde él y cobertura antes y después (tarea 25) |
 | 6 Web | 6 | 6 | 0 | 0 | Repetir Lighthouse con la web del 04/11 (necesita la EC2 encendida) |
-| 7 ERP | 8 | 7 | 0 | 1 | Importar y exportar datos contra Odoo (tarea 36) |
+| 7 ERP | 8 | 7 | 1 | 0 | Exportar e ida y vuelta (tarea 36); usar CRM, empleados, marketing e inventario (63, guía hecha) |
 | 8 BD | 4 | 4 | 0 | 0 | — |
 | 9 Backup | 6 | 6 | 0 | 0 | — (sin probar: un TPV contra el servidor recuperado) |
 | 10 Seguridad | 3 | 2 | 1 | 0 | Comprobaciones 2, 3, 6 y 7 en el servidor del equipo (tarea 46, sección 5) |
-| **Total** | **73** | **65** | **2** | **6** | |
+| **Total** | **73** | **65** | **3** | **5** | |
 
 ## 0 · Gestión
 
@@ -127,7 +127,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | E-04 | 35 | Caso de uso automatizado: pedido, factura, cobro y PDF | Factura validada y cobrada | ✅ `INV/2026/00001` y `00002` | 23/10 | [Tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
 | E-05 | 35 | Repetirlo con el caso de uso real: menú de grupo con IVA del 10 % | Factura correcta | ✅ `INV/2026/00004` = 660,00 €; la `00003` (654,55 €, IVA mal calculado) anulada con la rectificativa `RINV/2026/00001` | 27/10 | [INV_2026_00004.pdf](../erp/35-factura-automatica/evidencias/INV_2026_00004.pdf) |
 | E-06 | 52 | Proxy HTTPS: certificado, redirección, TLS 1.2/1.3, cabeceras, venta por HTTPS | 15 pruebas | ✅ 🖥️ 15 de 15 | 26/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
-| E-07 | 36 | Importar y exportar datos (carta, clientes, ventas) | CSV correctos | ⏳ Script y CSV hechos (24/10); Eneko.P: ejecutarlo contra Odoo y guardar las salidas | — | [Tarea 36](../erp/36-importar-exportar/DOCUMENTACION.md) |
+| E-07 | 36 | Importar y exportar datos (carta, clientes, ventas) | CSV correctos | 🟡 Importar la carta, en el laboratorio: 8 nuevos, 6 actualizados, 0 errores (10/11). Eneko.P: reimportar, CSV con errores, exportar e ida y vuelta | 10/11 | [Tarea 36](../erp/36-importar-exportar/DOCUMENTACION.md) |
 | E-08 | 37 | Ticket desde el TPV de Odoo | Imprime | ✅ 🖥️ Desde la VM win-11 por IPP a la Samsung ML-1660 (impresora de pruebas acordada: no hay térmicas para todos) | 27/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
 
 ## 8 · Base de datos

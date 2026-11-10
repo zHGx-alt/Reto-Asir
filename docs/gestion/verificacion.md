@@ -117,9 +117,9 @@ Repasado el 04/11/2026 contra el backlog. Lo que estaba aquí el 23/10 y ya est�
 |---|---|---|
 | TPV restringidos con mínimos privilegios | 13, 15 | Hecho a mano en VM (26/10, tarea 13); falta ejecutar `configurar-tpv.ps1` y `comprobar-tpv.ps1` (tarea 15) |
 | Red segura con WDS comprobado | 24, 25, 26 | 24 y 26 hechas; WDS en curso (25): enlace probado el 04/11, falta ampliar la Wi-Fi de clientes y medir la cobertura |
-| ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | En curso: script y CSV hechos, falta ejecutarlo contra Odoo con evidencias |
-| ERP: usar el resto de módulos con datos | 63 | Pendiente |
-| BD propia integrada con la de Odoo | 57 | Pendiente |
+| ERP: importación y extracción de datos (RA.7 de LMSGI) | 36 | En curso: importación de la carta probada en el laboratorio (10/11, 0 errores); faltan la exportación y la ida y vuelta (Eneko.P) |
+| ERP: usar el resto de módulos con datos | 63 | Pendiente: guía paso a paso en [63-uso-modulos/GUIA.md](../erp/63-uso-modulos/GUIA.md) (10/11) para Eneko.P |
+| BD propia integrada con la de Odoo | 57 | Pendiente: diseño en [57-integracion-odoo.md](../bd/57-integracion-odoo.md) (10/11), falta el script (Iker) |
 | Comunicaciones cifradas y seguridad en toda la solución | 52, 46 | Odoo por HTTPS probado entero en VM (52), falta activarlo en el servidor del equipo (S-02); revisión transversal en curso (46): falta lo que depende del servidor del equipo y de la red del aula |
 | Tecnologías habilitadoras (Digitalización RA.2) | 58 | Hecho el 10/11: [58-tecnologias-habilitadoras.md](../digitalizacion/58-tecnologias-habilitadoras.md), 7 THD con alternativas comparadas |
 | Tabla de pruebas, documentación y presentación | 47, 48, 49 | En curso / pendiente (hasta el 11/11) |
