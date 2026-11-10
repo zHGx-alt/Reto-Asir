@@ -66,7 +66,7 @@ Los RA del enunciado, con las tareas que los demuestran y el criterio de la [rú
 | Sistemas embebidos / IoT | Arduino Leonardo como mando HID (#19-21, #59) | Hardware a medida, barato y reprogramable |
 | Inteligencia artificial | Asistentes para redactar, revisar y programar ([registro de IA](docs/gestion/registro-ia.md)) | Más rapidez, siempre con revisión humana |
 
-El análisis con sus características, alternativas y la comparativa que pide la rúbrica es la tarea 58 (pendiente).
+El análisis de cada una (qué es, cómo se usa, qué aporta y frente a qué alternativas se eligió), y las THD que no se usan y por qué, está en la [tarea 58](docs/digitalizacion/58-tecnologias-habilitadoras.md) (10/11). Añade virtualización y contenedores (Docker) y ciberseguridad.
 
 ---
 

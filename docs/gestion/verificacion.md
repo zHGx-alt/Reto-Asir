@@ -121,7 +121,7 @@ Repasado el 04/11/2026 contra el backlog. Lo que estaba aquí el 23/10 y ya est�
 | ERP: usar el resto de módulos con datos | 63 | Pendiente |
 | BD propia integrada con la de Odoo | 57 | Pendiente |
 | Comunicaciones cifradas y seguridad en toda la solución | 52, 46 | Odoo por HTTPS probado entero en VM (52), falta activarlo en el servidor del equipo (S-02); revisión transversal en curso (46): falta lo que depende del servidor del equipo y de la red del aula |
-| Tecnologías habilitadoras (Digitalización RA.2) | 58 | Pendiente |
+| Tecnologías habilitadoras (Digitalización RA.2) | 58 | Hecho el 10/11: [58-tecnologias-habilitadoras.md](../digitalizacion/58-tecnologias-habilitadoras.md), 7 THD con alternativas comparadas |
 | Tabla de pruebas, documentación y presentación | 47, 48, 49 | En curso / pendiente (hasta el 11/11) |
 
 ## 8. Comprobaciones del 24/10/2026

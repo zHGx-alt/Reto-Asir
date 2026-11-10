@@ -19,7 +19,7 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 | Persona | Días de trabajo | Tareas |
 |---|---|---|
 | Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11); #5 Repo con estructura y gitleaks; commits de todos (04/11–06/11); #46 Revisión de seguridad transversal (04/11–06/11) |
-| Eneko.P | 5 | #36 Importar y exportar datos en Odoo (04/11–06/11); #63 Usar CRM, personal, marketing e inventario con datos (05/11–06/11); #58 Tecnologías habilitadoras: análisis y comparativa (09/11–10/11) |
+| Eneko.P | 3 | #36 Importar y exportar datos en Odoo (04/11–06/11); #63 Usar CRM, personal, marketing e inventario con datos (05/11–06/11) |
 | Eneko.S | 2 | #62 Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA (06/11–09/11) |
 | Iker | 5 | #15 Scripts de configuración reproducibles (Windows) (04/11–05/11); #57 Integrar la BD propia con la de Odoo (06/11–10/11) |
 | Markel | 3 | #59 Stick: antirrebote; componentes y por qué este microcontrolador (04/11–06/11) |
@@ -29,12 +29,12 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 
 ## Resumen
 
-**52 de 64 tareas hechas (81 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**53 de 64 tareas hechas (82 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
-| Documentación | 15 | 0 | 3 | 18 |
+| Documentación | 16 | 0 | 2 | 18 |
 | Software | 27 | 3 | 3 | 33 |
 | Físico | 6 | 1 | 0 | 7 |
 
@@ -56,7 +56,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 63 | Usar CRM, personal, marketing e inventario con datos | Software | Eneko.P | 06/11 | Pendiente | Rúbrica, LMSGI RA7, nivel 4 (y por ser acumulativo, el 5): los módulos están instalados pero solo se usan facturación y TPV. Una oportunidad de CRM que acaba en presupuesto, los empleados dados de alta, una campaña de correo y un movimiento de inventario, con capturas. Se hace a la vez que la 36 en la ServidorERP. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
 | 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | Documentación | Eneko.S | 09/11 | Pendiente | Rúbrica, cuatro huecos pequeños. ISO RA1 n4: en la tarea 12, la VM de VirtualBox con RAM, disco y Guest Additions (no aparecen en ningún sitio). ISO RA2 n4: un párrafo que justifique la interfaz de MAME como front-end (selección de juego, pantalla completa) y cite la tarea 51, donde ya se probó Batocera (EmulationStation) y se descartó con datos. LMSGI RA1 n3: wireframe y punto de corte de tableta (el CSS solo tiene 800 px). LMSGI RA1 n5: justificar WCAG AA (contraste, teclado, textos alternativos); la 27 solo habla de contraste. | — |
 | 57 | Integrar la BD propia con la de Odoo | Software | Iker | 10/11 | Pendiente | Rúbrica, GBD RA3, nivel 4. YA HECHO: la 36 importa en Odoo la carta en CSV, con los mismos platos que almi_chain, pero a mano y sin enlace entre las bases. FALTA: un script que lea de almi_chain y escriba en Odoo (o al revés), por ejemplo carta y precios o clientes, que se pueda repetir y con evidencia. | — |
-| 58 | Tecnologías habilitadoras: análisis y comparativa | Documentación | Eneko.P | 10/11 | Pendiente | Rúbrica, Digitalización RA2, niveles 4 y 5: caracterizar las THD del reto (cloud/AWS, IaC, ERP-TPV, Arduino/IoT, IA) y su aplicación, comparando alternativas y justificando la elección. Hoy no hay ningún documento que hable de THD. | — |
 | 49 | Presentación y ensayo | Documentación | Peio | 11/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. 04/11: ensayo con todos el 11/11. | — |
 
 ## Carga por persona
@@ -64,7 +63,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
 | Adrian | 20 | 3 | 1 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
-| Eneko.P | 4 | 3 | 2 | 0 | 9 | 6, 7, 11 |
+| Eneko.P | 4 | 2 | 2 | 0 | 9 | 6, 7, 11 |
 | Eneko.S | 11 | 1 | 0 | 0 | 18 | 1, 3, 5, 7, 8, 11 |
 | Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 8 | 1 | 1 | 0 | 18 | 1, 2, 4, 5, 6, 11 |
@@ -88,7 +87,6 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 |---|---|---|---|---|---|---|
 | 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 03/11–06/11 | #34 (Iker) | En curso |
 | 63 | Usar CRM, personal, marketing e inventario con datos | 7 ERP | Software | 05/11–06/11 | #34 (Iker) | Pendiente |
-| 58 | Tecnologías habilitadoras: análisis y comparativa | 11 Entrega | Documentación | 09/11–10/11 | #30 (Adrian), #32 (Eneko.S) | Pendiente |
 
 ### Eneko.S
 
@@ -169,6 +167,7 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 | 54 | Medir rendimiento y monitorizar en la VM de 1 núcleo y 1 GB (antes/después y jugando) | 3 Arcade | Software | Eneko.S | Con medir-rendimiento.sh y monitor-recreativa.sh. 27/10: protocolo y resumir-rendimiento.sh (reproduce la tabla de la tarea 17); falta medir en el equipo real. 29/10: se mide en Recreativa-53 (tarea 53); sirve también para lo que le falta a la 17 en 1 GB. 29/10: es la única tarea que mide en 1 GB: absorbe lo que faltaba de la 17 y la 18. 29/10: medido en Recreativa-53 (3+3 arranques; reposo; 10 min de juego antes y después): timers 8→5 y disco −12 %; arranque 14,4 s, RAM y velocidad sin cambios significativos (Robby Roto 773 % → 777 %); jugando, CPU media 52-58 %, más de 460 MB libres y sin swap. Las 3 primeras de después se repitieron: el anfitrión estaba ocupado (−45 % en -bench; control con el anfitrión libre: 777 %). | [DOCUMENTACION.md](../../docs/arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
 | 55 | Contraseñas robustas en la VM del gerente y guardarlas en KeePassXC | 2 SO | Software | Adrian | 4 contraseñas cambiadas el 23/10 con frases generadas en KeePassXC; la cuenta de instalación de Windows ya no existe; VM exportada de nuevo. Drive revisado el 24/10: .vmdk y .kdbx nuevos y ningún .txt con contraseñas. 29/10: contraseñas de administrador y gerente de Ubuntu repuestas desde el modo de recuperación y guardadas en KeePassXC, con la contraseña de BitLocker y su clave de recuperación. | [ubu-07-cuentas-y-contrasenas.txt](../../docs/evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
 | 56 | Ampliar el E/R: relación ternaria; historiales y atributos especiales | 8 BD | Documentación | Eneko.S | Rúbrica, GBD RA1-RA2, niveles 3 y 4: el E/R actual solo tiene relaciones binarias. Añadir una ternaria, un historial (p. ej. de precios) y atributos especiales (derivado, multivaluado), y llevarlo a las tareas 39 y 40. 04/11: hecho. Ternaria SUMINISTRO (proveedor, artículo y local, con precio_compra), historial HISTORIAL_PRECIO_PLATO (débil; lo escribe el disparador R-07 y la aplicación solo lo lee), multivaluado alergeno y derivado total en el E/R Chen; llevado a las tareas 39 y 40 (17 tablas; 05-pruebas 49/49; C-13 a C-15) y probado en PostgreSQL 16. | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
+| 58 | Tecnologías habilitadoras: análisis y comparativa | 11 Entrega | Documentación | Eneko.P | Rúbrica, Digitalización RA2, niveles 4 y 5: caracterizar las THD del reto (cloud/AWS, IaC, ERP-TPV, Arduino/IoT, IA) y su aplicación, comparando alternativas y justificando la elección. Hoy no hay ningún documento que hable de THD. 10/11 (Adrian): hecho. Siete THD (nube, IaC, ERP-TPV, embebidos, virtualización, ciberseguridad, IA), cada una con qué es, dónde está en el reto, qué aporta y tabla de alternativas; las que no se usan, justificadas. Eneko.P lo revisa para defenderlo. | [58-tecnologias-habilitadoras.md](../../docs/digitalizacion/58-tecnologias-habilitadoras.md) |
 | 60 | Copia remota en S3 y restauración de almi_chain probadas | 9 Backup | Software | Adrian | Hecha el 04/11 en la ServidorERP de laboratorio, montada desde cero con los scripts 43 y 44: copia diaria a RAID, USB y S3 (bucket privado almi-chain-backup-2026, cifrado AES-256) y restauración desde S3 con 23 comprobaciones OK en 166 s, también almi_chain (roles, tablas, filas, importes y permisos). El Learner Lab no deja crear usuarios IAM: se usan sus credenciales temporales (tarea 44, sección 8.2). | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 61 | Poner al día los textos desfasados que señala la auditoría | 11 Entrega | Documentación | Peio | Hallazgos de la auditoría del 04/11: README; CORRECIONES; tareas 7-11; 17; 18; 30; listas de pendientes ya hechas. LOGICA_RETO va en la 48. 10/11 (Adrian; Peio lo revisa): casi todo se corrigió el 04/11 (PR #108); el 10/11 se repasaron los documentos de todas las tareas hechas buscando «falta», «pendiente» y «a confirmar»: README, CORRECIONES (sección 5), diagrama 11, tablas 08 y 24, y lo que cambió después del 04/11 (tarea 64 y RTO). | [CORRECIONES.md](../../CORRECIONES.md) |
 | 64 | Servicios reducidos en la VM del gerente (Windows y Ubuntu) | 2 SO | Software | Adrian | Rúbrica, ISO RA1, nivel 5 («servicios reducidos»; auditoría del 06/11). Hecho el 09/11 en la VM del gerente: Windows con 11 servicios deshabilitados (248 → 237 no deshabilitados; la cola de impresión se queda) y Ubuntu con 5 unidades fuera (73 → 68 habilitadas); tras un arranque normal solo escucha en localhost (DNS local, chrony y CUPS). Evidencias win-14, win-15, ubu-11 a ubu-14 en docs/evidencias/12-dual-boot/ y filas «tarea 64» en la sección 6 de la tarea 12. Instantáneas antes-servicios-reducidos-2026-11-09 y tarea64-servicios-reducidos-2026-11-09. De paso, Windows Update había vuelto a poner Windows primero en el arranque EFI: corregido con efibootmgr. | [ubu-12-servicios-tras-arranque-normal.txt](../../docs/evidencias/12-dual-boot/ubu-12-servicios-tras-arranque-normal.txt) |
