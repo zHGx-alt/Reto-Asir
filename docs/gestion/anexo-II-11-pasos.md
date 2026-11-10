@@ -112,6 +112,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Tareas de otros que vencen sin empezar | Adrian hace la 47, la 48 y la 61 el 10/11; sus responsables (Eneko.S, Markel y Peio) las revisan para poder defenderlas | La entrega es el 13/11 y las tres son de documentación sobre trabajo ya hecho; cada uno presenta lo que no ha hecho (sección 9.2) | 10/11/2026 |
 | Red que repite el router 2 (TL-WR841N) | La Wi-Fi de **invitados** (`Restaurante-Almichain-Invitados`), no la del personal | En modo Range Extender el TL-WR841N repite una sola red y no tiene menú de invitados. El enunciado pide ampliar la Wi-Fi de los clientes, el diseño de Packet Tracer ya lo dibuja así y el personal no lo necesita porque TPV, servidor y gerente van por cable ([tarea 25, sección 6](../redes/25-wds/DOCUMENTACION.md#6-por-qué-el-router-2-no-repite-la-wi-fi-de-clientes-y-cómo-se-arregla)) | 10/11/2026 |
 | Firmware del TL-WR841N | No se actualiza | Es el router de prácticas y se sustituye por el Archer C6, que se pone en marcha con el último firmware; mientras, la administración está limitada al PC del gerente (hallazgo H-02 de la tarea 26) | 10/11/2026 |
+| Tecnologías habilitadoras que se analizan | Siete: nube, IaC y automatización, ERP-TPV, sistemas embebidos, virtualización y contenedores, ciberseguridad e IA; y por qué no big data, blockchain ni robótica | Son las que de verdad están montadas en el repositorio, cada una con su evidencia; las que no se usan se justifican por el tamaño del restaurante ([tarea 58](../digitalizacion/58-tecnologias-habilitadoras.md)) | 10/11/2026 |
 
 ## 6. Planificación
 
@@ -215,6 +216,7 @@ Incidencias relevantes durante la ejecución:
 | Anexo II (este documento) | 2 | Adrian | Secciones 1 a 8, al día el 09/11 | Lo que entre hasta la entrega; cerrar la 9 y la 10 después de la presentación | En curso |
 | Commits de todos (Anexo IX) | 5 | Adrian | 5 de 6 personas con commits propios | Un commit de Eneko.P | En curso |
 | Máquinas virtuales | 12, 13, 33, 53 | Quien tiene cada una | No se suben a Drive (30/10): cada VM está en el PC de quien la tiene ([maquinas-virtuales.md](maquinas-virtuales.md)) | Que Iker y Markel confirmen en qué PC están las suyas | En curso |
+| Tecnologías habilitadoras | 58 | Eneko.P | [58-tecnologias-habilitadoras.md](../digitalizacion/58-tecnologias-habilitadoras.md) (10/11, redactado por Adrian) | Que Eneko.P lo revise y lo sepa defender | Hecho |
 | Registro de uso de IA | — | Todos | [registro-ia.md](registro-ia.md) | Que cada persona revise sus entradas | En curso |
 
 ### 9.2 Presentación (propuesta)
