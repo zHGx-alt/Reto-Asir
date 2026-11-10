@@ -55,7 +55,7 @@
 <circle cx="449" cy="247.0" r="4.5" fill="#e87ba4"/>
 <text x="458" y="251.0" class="t">Markel</text>
 <text x="528" y="251.0" class="s">21</text>
-<rect x="604" y="240" width="116" height="14" rx="4" fill="#e87ba4"><title>59. Stick: antirrebote, componentes y por qué este microcontrolador · Markel · 04/11–06/11 · Pendiente</title></rect>
+<rect x="604" y="240" width="116" height="14" rx="4" fill="#e87ba4" stroke="#0b0b0b" stroke-width="1.5"><title>59. Stick: antirrebote, componentes y por qué este microcontrolador · Markel · 04/11–06/11 · En curso</title></rect>
 <rect x="16" y="258" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="275" class="t b">5 Redes</text>
 <line x1="16" y1="306" x2="842" y2="306" stroke="#f0efeb"/>

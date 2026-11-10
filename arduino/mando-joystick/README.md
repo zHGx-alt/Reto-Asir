@@ -94,7 +94,10 @@ Al arrancar se lee la EEPROM. Si está vacía o los datos no son válidos (no co
 
 ## Antirrebote (tarea 59)
 
-> **Para Markel:** el código está hecho y probado en simulación. Falta probarlo en la placa y terminar de documentar esta sección.
+**Por qué hace falta.** Un botón arcade o un microinterruptor de la palanca es una lámina de metal que, al cerrarse, **rebota** durante unos milisegundos: el contacto se abre y se cierra varias veces antes de quedarse quieto. El Arduino lee cada pin miles de veces por segundo, así que sin filtro una sola pulsación puede llegar al PC como dos o tres (en un juego, varios disparos o una moneda de más). El 27/10, con un cable suelto, Iker vio 21 pulsaciones fantasma del botón 3 en 20 s.
+
+**Por qué 5 ms.** Los microinterruptores de arcade rebotan menos de 5 ms; una pulsación humana rápida dura más de 30 ms (las del 27/10, de 31 a 113 ms). Con 5 ms se filtra el rebote y la pulsación llega al PC en unos 6 ms, por debajo de un fotograma de juego (16,7 ms a 60 Hz). Antes se usaba `delay(10)`, que paraba todo el programa 10 ms en cada vuelta; ahora cada entrada lleva su propio temporizador con `millis()` y el resto sigue funcionando.
+
 
 **Dónde está el código**, en [mando_joystick.ino](mando_joystick/mando_joystick.ino):
 
@@ -108,12 +111,7 @@ Al arrancar se lee la EEPROM. Si está vacía o los datos no son válidos (no co
 
 **La prueba simulada** está en [prueba-antirrebote/](prueba-antirrebote/): `prueba.cpp` compila el `.ino` real en el PC con sustitutos de Arduino (`stubs/`) y simula rebotes. Se lanza con `bash prueba-antirrebote/probar.sh`. El 04/11 dio 9 de 9 OK: una pulsación con rebotes cuenta 1, el ruido de 1-2 ms no pasa, la pulsación llega en 6 ms y remapear no deja botones colgados.
 
-**Lo que falta (Markel):**
-
-1. Conectar el stick y subir el firmware: `./subir.sh`.
-2. `python3 ver-mando.py` (sección siguiente) y pulsar cada botón y cada dirección varias veces, rápido. En el resumen, **ninguna pulsación de menos de 30 ms** y cada botón con el número de pulsaciones que has hecho. Guardar el fichero de `evidencias/`.
-3. Con eso, la tabla de pruebas por control (cada dirección y botón: llega, se suelta, número de pulsaciones).
-4. Explicar aquí con tus palabras por qué hace falta (rebote del microinterruptor) y por qué 5 ms.
+**Lo que falta (Markel, 10 min con el stick):** subir esta versión a la placa (`./subir.sh`) y repetir `python3 ver-mando.py` pulsando cada botón y cada dirección varias veces, rápido. Sale bien si cada botón cuenta las pulsaciones hechas y ninguna dura menos de 30 ms. El fichero que deja en `evidencias/` va en la [tabla de pruebas por control](#pruebas-por-control). Las pruebas por control del 27 y el 30/10 se hicieron con la versión anterior (`delay(10)`), que también filtraba el rebote, aunque peor.
 
 ## Prueba guiada (Linux)
 
@@ -173,3 +171,55 @@ Hecha el 27/10/2026 con el stick montado (#19): primero Iker (subida, cableado d
 **Sin comprobar:** `INV X` / `INV Y` moviendo la palanca. El script solo comprueba que la placa responde «invertido».
 
 Nota: la lista original hablaba de ejes de 0 a 1023. El kernel los entrega de −32767 a 32767 (en `evtest`, de 0 a 65535), así que eso es lo que se mide.
+
+## Pruebas por control
+
+Cada control del stick, probado en la placa real con la versión anterior al antirrebote nuevo (`delay(10)`). Registros del 27/10 ([1](evidencias/entrada-stick-2026-10-27-1124.txt), [2](evidencias/entrada-stick-2026-10-27-1125.txt)) y repaso del 30/10 con `probar-stick.py` ([prueba-stick](evidencias/prueba-stick-2026-10-30_0744.txt)).
+
+| Control | Pin | Llega al PC como | Se suelta | En MAME | En Batocera | Resultado |
+|---|---|---|---|---|---|---|
+| Reposo (nada pulsado) | — | Ejes X=0, Y=0, ningún botón | — | — | ✅ | ✅ |
+| Botón 1 | 2 | Botón HID 1 | ✅ | Disparo 1 | ✅ `evtest` | ✅ |
+| Botón 2 | 3 | Botón HID 2 | ✅ | Disparo 2 | ✅ | ✅ |
+| Botón 3 | 4 | Botón HID 3 | ✅ | Moneda | ✅ | ✅ (sin pulsaciones fantasma con el montaje final: 45 s de registro) |
+| Botón 4 | 5 | Botón HID 4 | ✅ | Start | ✅ | ✅ |
+| Palanca arriba | A5 | Y = −32767 | ✅ vuelve a 0 | ✅ | ✅ | ✅ |
+| Palanca abajo | A4 | Y = 32767 | ✅ | ✅ | ✅ | ✅ |
+| Palanca izquierda | A2 | X = −32767 | ✅ | ✅ | ✅ | ✅ |
+| Palanca derecha | A3 | X = 32767 | ✅ | ✅ | ✅ | ✅ |
+| Diagonal (arriba-derecha) | A5 + A3 | X = 32767, Y = −32767 | ✅ | ✅ | — | ✅ |
+| Remapeo `MAP 1 3` | serie | El botón 1 llega como 3 | — | — | — | ✅ (y sigue tras reiniciar con `GUARDAR`) |
+
+- **Duración de las pulsaciones:** de 31 a 113 ms; ninguna de menos de 30 ms (sin rebotes que lleguen al PC).
+- **Numeración:** el 30/10 los botones se pulsaron sin saber qué número tenía cada uno (en la caja no se ven los pines), de ahí los 5 «FALLO» del registro: cada pulsación llegó como **un solo** botón y los cuatro son distintos, que es lo que se comprueba.
+- **En MAME:** partida de *Gridlee* con el stick en la recreativa de 1 núcleo y 1 GB ([tarea 53](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md), P4 y P10, 29/10). **En Batocera (RetroArch):** `evtest` recibe los 4 botones y los ejes ([evtest](evidencias/batocera-evtest-2026-10-27.txt)) y se jugó una partida (27/10, sin captura).
+- **Sin comprobar:** `INV X` / `INV Y` moviendo la palanca (solo que la placa responde «invertido») y el antirrebote nuevo en la placa (arriba).
+
+## Componentes y presupuesto
+
+Precios de referencia consultados el 10/11/2026 (IVA incluido, sin envío). La palanca es la del [presupuesto de la tarea 10](../../docs/hardware/10-presupuesto-hardware.md#12-elementos-que-faltaban-en-el-presupuesto); la placa y los botones no tenían precio.
+
+| Componente | Modelo | Uds. | Precio unidad | Subtotal | Fuente |
+|---|---|---:|---:|---:|---|
+| Placa | Keyestudio Leonardo R3 (KS0248), ATmega32U4, con cable USB | 1 | 18,73 € | 18,73 € | [abcescolar.pt](https://abcescolar.pt/en/products/placa-controladora-arduino-leonardo-r3-keyestudio) (agotada ese día; en otras tiendas, hasta 35 €) |
+| Palanca | Sanwa JLF-TP-8YT, 4 microinterruptores | 1 | 22,73 € | 22,73 € | Tarea 10, sección 12 |
+| Botones | 30 mm tipo Sanwa OBSF-30 (la caja tiene 6; el firmware lee 4) | 6 | 2,19 € | 13,14 € | [Arcadexpress](https://www.arcadexpress.com/en/buttons/104-boton-arcade-sanwa-obsf-30.html) |
+| Cableado | Protoboard, cables dupont macho-macho y terminales de los botones | 1 | — | — | Material del aula |
+| Caja | Caja del stick con los agujeros de la palanca y los 6 botones | 1 | — | — | Material del aula |
+| **Total con precio** | | | | **54,60 €** | |
+
+Sin resistencias ni condensadores: el firmware usa la resistencia interna de cada pin (`INPUT_PULLUP`) y el antirrebote es por software.
+
+## Por qué un microcontrolador y no un encoder USB comercial
+
+El stick es un **sistema embebido**: un microcontrolador dentro del mando, programado para una sola tarea. El análisis completo, con el resto de tecnologías habilitadoras del reto, está en la [tarea 58, sección 5](../../docs/digitalizacion/58-tecnologias-habilitadoras.md#5-sistemas-embebidos-e-iot-arduino).
+
+| Opción | Precio de referencia | Ventajas | Inconvenientes |
+|---|---|---|---|
+| **Arduino Leonardo (ATmega32U4)** ✅ | 54,60 € con la palanca y los botones | USB nativo: el PC lo ve como mando sin drivers; **remapeo sin reprogramar** guardado en la EEPROM; antirrebote ajustable; firmware propio, comentado y en Git; ampliable (luces, contador de partidas, Wi-Fi con otra placa) | Hay que programarlo y cablearlo |
+| Encoder USB «zero delay» (kit con palanca y botones) | Unos 20 € el kit de 1 jugador con 10 botones ([Arcadexpress](https://www.arcadexpress.com/en/joystick-kits/149-287-kit-1-jugador-americano-joystick-10-botones-usb.html)) | Más barato y se conecta y funciona | Mapeo fijo de fábrica; no se puede cambiar el antirrebote ni guardar configuración; caja negra que no se puede ampliar ni explicar |
+| Arduino Uno (ATmega328P) | Similar a la Leonardo | Muy común | Su chip no hace USB: para ser un mando HID hay que cambiar el firmware del conversor USB |
+| Raspberry Pi Pico (RP2040) | Más barata que la Leonardo | Más potente | Menos material de clase y librerías de mando menos maduras |
+
+**Decisión:** el encoder comercial es más barato, pero lo que pide el reto (y la rúbrica) es un mando **programable y personalizable**: con el Leonardo el restaurante puede cambiar qué hace cada botón para cada juego desde el puerto serie, sin tocar el código, y el mismo firmware sirve para otra recreativa. La diferencia (unos 35 €) es pequeña frente al presupuesto total.
+
