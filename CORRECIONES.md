@@ -120,7 +120,7 @@ Corregido el 26/10 (sección 1).
 | Identificar necesidades de comunicación | Hecho | — |
 | Implementación y configuración de sistemas operativos | Hecho: TPV bastionados (tarea 13) y PC del gerente con contraseñas robustas (tarea 55) y servicios reducidos (tarea 64, 09/11) | Tarea 15: ejecutar `configurar-tpv.ps1` en los TPV |
 | Restricción de cuentas y equipos (mínimos privilegios) | Hecho en el laboratorio: cajero solo con Punto de venta (30/10) | Corr. 2.3 en el servidor del equipo; tarea 15 |
-| Diseño conceptual de la web | Hecho, a posteriori | Tarea 62: tableta y WCAG AA |
+| Diseño conceptual de la web | Hecho, a posteriori | 10/11 (tarea 62): wireframe y punto de corte de tableta, WCAG 2.1 AA criterio a criterio y patrones de UX ([tarea 27](docs/web/27-wireframes.md)) |
 | Web accesible y por HTTPS | Hecho | — |
 | Hosting en AWS con dominio propio y despliegue reproducible | Hecho: Terraform aplicado y despliegue por GitHub Actions (tarea 31, 29/10) | — |
 | ERP + TPV con un caso de uso automatizado | Hecho: factura de 660,00 € (27/10) | Tareas 36 y 63 |
