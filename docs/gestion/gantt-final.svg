@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="858" height="628" viewBox="0 0 858 628" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="12">
+<svg xmlns="http://www.w3.org/2000/svg" width="858" height="584" viewBox="0 0 858 584" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="12">
 <style>.t{fill:#0b0b0b}.s{fill:#52514e}.m{fill:#8a8984}.b{font-weight:600}</style>
-<rect width="858" height="628" fill="#fcfcfb"/>
+<rect width="858" height="584" fill="#fcfcfb"/>
 <text x="16" y="28" class="t b" font-size="16">Almi-Chain · Plan final 04/11–11/11</text>
-<text x="16" y="48" class="s">04/11/2026 – 11/11/2026 · 6 días laborables (sin fines de semana) · 12 tareas</text>
+<text x="16" y="48" class="s">04/11/2026 – 11/11/2026 · 6 días laborables (sin fines de semana) · 10 tareas</text>
 <text x="606" y="70" class="t b">Semana 1<tspan class="s" font-weight="400"> 04/11–06/11</tspan></text>
 <text x="726" y="70" class="t b">Semana 2<tspan class="s" font-weight="400"> 09/11–11/11</tspan></text>
 <text x="622.0" y="86" text-anchor="middle" class="s" font-size="11">X 4</text>
@@ -15,13 +15,13 @@
 <text x="44" y="86" class="s b" font-size="11">Tarea</text>
 <text x="444" y="86" class="s b" font-size="11">Responsable</text>
 <text x="528" y="86" class="s b" font-size="11">Necesita</text>
-<line x1="602" y1="74" x2="602" y2="564" stroke="#b8b7b0" stroke-width="1"/>
-<line x1="642" y1="92" x2="642" y2="564" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="682" y1="92" x2="682" y2="564" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="722" y1="74" x2="722" y2="564" stroke="#b8b7b0" stroke-width="1"/>
-<line x1="762" y1="92" x2="762" y2="564" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="802" y1="92" x2="802" y2="564" stroke="#e6e5e0" stroke-width="1"/>
-<line x1="842" y1="74" x2="842" y2="564" stroke="#b8b7b0" stroke-width="1"/>
+<line x1="602" y1="74" x2="602" y2="520" stroke="#b8b7b0" stroke-width="1"/>
+<line x1="642" y1="92" x2="642" y2="520" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="682" y1="92" x2="682" y2="520" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="722" y1="74" x2="722" y2="520" stroke="#b8b7b0" stroke-width="1"/>
+<line x1="762" y1="92" x2="762" y2="520" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="802" y1="92" x2="802" y2="520" stroke="#e6e5e0" stroke-width="1"/>
+<line x1="842" y1="74" x2="842" y2="520" stroke="#b8b7b0" stroke-width="1"/>
 <rect x="16" y="92" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="109" class="t b">0 Gestión</text>
 <line x1="16" y1="140" x2="842" y2="140" stroke="#f0efeb"/>
@@ -55,7 +55,7 @@
 <circle cx="449" cy="247.0" r="4.5" fill="#e87ba4"/>
 <text x="458" y="251.0" class="t">Markel</text>
 <text x="528" y="251.0" class="s">21</text>
-<rect x="604" y="240" width="116" height="14" rx="4" fill="#e87ba4"><title>59. Stick: antirrebote, componentes y por qué este microcontrolador · Markel · 04/11–06/11 · Pendiente</title></rect>
+<rect x="604" y="240" width="116" height="14" rx="4" fill="#e87ba4" stroke="#0b0b0b" stroke-width="1.5"><title>59. Stick: antirrebote, componentes y por qué este microcontrolador · Markel · 04/11–06/11 · En curso</title></rect>
 <rect x="16" y="258" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="275" class="t b">5 Redes</text>
 <line x1="16" y1="306" x2="842" y2="306" stroke="#f0efeb"/>
@@ -108,34 +108,20 @@
 <text x="458" y="513.0" class="t">Peio</text>
 <text x="528" y="513.0" class="s">46</text>
 <rect x="764" y="502" width="76" height="14" rx="4" fill="#008300"><title>49. Presentación y ensayo · Peio · 10/11–11/11 · Pendiente</title></rect>
-<line x1="16" y1="542" x2="842" y2="542" stroke="#f0efeb"/>
-<text x="16" y="535.0" class="s">58</text>
-<text x="44" y="535.0" class="t">Tecnologías habilitadoras: análisis y comparativa</text>
-<circle cx="449" cy="531.0" r="4.5" fill="#eb6834"/>
-<text x="458" y="535.0" class="t">Eneko.P</text>
-<text x="528" y="535.0" class="s">30, 32</text>
-<rect x="724" y="524" width="76" height="14" rx="4" fill="#eb6834"><title>58. Tecnologías habilitadoras: análisis y comparativa · Eneko.P · 09/11–10/11 · Pendiente</title></rect>
-<line x1="16" y1="564" x2="842" y2="564" stroke="#f0efeb"/>
-<text x="16" y="557.0" class="s">62</text>
-<text x="44" y="557.0" class="t">Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA</text>
-<circle cx="449" cy="553.0" r="4.5" fill="#1baf7a"/>
-<text x="458" y="557.0" class="t">Eneko.S</text>
-<text x="528" y="557.0" class="s">—</text>
-<rect x="684" y="546" width="76" height="14" rx="4" fill="#1baf7a"><title>62. Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA · Eneko.S · 06/11–09/11 · Pendiente</title></rect>
-<rect x="16" y="588" width="22" height="12" rx="4" fill="#2a78d6"/>
-<text x="44" y="598" class="t">Adrian</text>
-<rect x="116" y="588" width="22" height="12" rx="4" fill="#eb6834"/>
-<text x="144" y="598" class="t">Eneko.P</text>
-<rect x="216" y="588" width="22" height="12" rx="4" fill="#1baf7a"/>
-<text x="244" y="598" class="t">Eneko.S</text>
-<rect x="316" y="588" width="22" height="12" rx="4" fill="#eda100"/>
-<text x="344" y="598" class="t">Iker</text>
-<rect x="416" y="588" width="22" height="12" rx="4" fill="#e87ba4"/>
-<text x="444" y="598" class="t">Markel</text>
-<rect x="516" y="588" width="22" height="12" rx="4" fill="#008300"/>
-<text x="544" y="598" class="t">Peio</text>
-<rect x="636" y="588" width="22" height="12" rx="4" fill="#8a8984" stroke="#0b0b0b" stroke-width="1.5"/>
-<text x="664" y="598" class="s">En curso</text>
-<rect x="736" y="588" width="22" height="12" rx="4" fill="#8a8984" fill-opacity="0.4"/>
-<text x="764" y="598" class="s">Hecho ✓</text>
+<rect x="16" y="544" width="22" height="12" rx="4" fill="#2a78d6"/>
+<text x="44" y="554" class="t">Adrian</text>
+<rect x="116" y="544" width="22" height="12" rx="4" fill="#eb6834"/>
+<text x="144" y="554" class="t">Eneko.P</text>
+<rect x="216" y="544" width="22" height="12" rx="4" fill="#1baf7a"/>
+<text x="244" y="554" class="t">Eneko.S</text>
+<rect x="316" y="544" width="22" height="12" rx="4" fill="#eda100"/>
+<text x="344" y="554" class="t">Iker</text>
+<rect x="416" y="544" width="22" height="12" rx="4" fill="#e87ba4"/>
+<text x="444" y="554" class="t">Markel</text>
+<rect x="516" y="544" width="22" height="12" rx="4" fill="#008300"/>
+<text x="544" y="554" class="t">Peio</text>
+<rect x="636" y="544" width="22" height="12" rx="4" fill="#8a8984" stroke="#0b0b0b" stroke-width="1.5"/>
+<text x="664" y="554" class="s">En curso</text>
+<rect x="736" y="544" width="22" height="12" rx="4" fill="#8a8984" fill-opacity="0.4"/>
+<text x="764" y="554" class="s">Hecho ✓</text>
 </svg>

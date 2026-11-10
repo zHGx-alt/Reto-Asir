@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="2140" viewBox="0 0 820 2140" font-family="Arial, sans-serif" font-size="14">
+  <title>Wireframe de tableta (801-1100 px) de la web de Almi Chain</title>
+  <style>
+    .caja{fill:#fff;stroke:#555;stroke-width:1.5}
+    .img{fill:#e6e6e6;stroke:#555;stroke-width:1.5}
+    .oscuro{fill:#444;stroke:#222}
+    .txt{fill:#222}
+    .peq{fill:#555;font-size:12px}
+    .tit{font-family:Georgia, serif;font-size:44px;font-weight:bold;fill:#222}
+    .titc{font-family:Georgia, serif;font-size:44px;font-weight:bold;fill:#fff}
+    .nota{fill:#b03a24;font-size:12px}
+    .linea{stroke:#999;stroke-width:1}
+  </style>
+  <rect width="820" height="2140" fill="#f7f7f7"/>
+  <!-- 1 Cabecera -->
+  <rect class="caja" x="0" y="0" width="820" height="88"/>
+  <text class="txt" x="32" y="50" font-weight="bold">ALMI CHAIN</text>
+  <text class="txt" x="430" y="50">HISTORIA   PLATOS   UBICACIÓN   <tspan fill="#b03a24">CONTACTO</tspan></text>
+  <text class="nota" x="430" y="74">1 · menú completo en una fila (no hace falta el botón «Menú»)</text>
+  <!-- 2 Portada -->
+  <text class="peq" x="32" y="140">BILBAO · COCINA VASCA CONTEMPORÁNEA</text>
+  <text class="tit" x="32" y="200">Tradición que</text>
+  <text class="tit" x="32" y="250" font-style="italic" font-weight="normal">se mueve.</text>
+  <rect class="caja" x="548" y="280" width="240" height="110"/>
+  <text class="peq" x="560" y="305">Texto de presentación</text>
+  <text class="peq" x="560" y="375">Ver platos estrella ↘</text>
+  <rect class="img" x="32" y="410" width="756" height="420"/>
+  <line class="linea" x1="32" y1="410" x2="788" y2="830"/><line class="linea" x1="788" y1="410" x2="32" y2="830"/>
+  <text class="nota" x="32" y="855">2 · imagen al 100 % del ancho; sin pie vertical ni «01» decorativo (se salían de la pantalla)</text>
+  <!-- 3 Historia -->
+  <text class="peq" x="32" y="910">NUESTRA MANERA DE HACER</text>
+  <text class="tit" x="32" y="965">Menos decoración.</text>
+  <rect class="caja" x="32" y="990" width="756" height="90"/>
+  <text class="peq" x="44" y="1015">Texto de la filosofía, a todo el ancho</text>
+  <text class="nota" x="32" y="1100">3 · título y texto apilados (en escritorio, dos columnas)</text>
+  <!-- 4 Platos -->
+  <rect class="oscuro" x="0" y="1120" width="820" height="400"/>
+  <text class="titc" x="32" y="1250">Platos</text>
+  <text class="titc" x="32" y="1300" font-style="italic" font-weight="normal">estrella.</text>
+  <text fill="#fff" x="32" y="1350">←  01 / 03  →</text>
+  <rect class="img" x="340" y="1150" width="448" height="290"/>
+  <line class="linea" x1="340" y1="1150" x2="788" y2="1440"/><line class="linea" x1="788" y1="1150" x2="340" y2="1440"/>
+  <text fill="#fff" x="340" y="1470">01  Nombre del plato · descripción</text>
+  <text fill="#f2a28f" font-size="12" x="32" y="1505">4 · se mantienen dos columnas (título y controles | carrusel), más equilibradas: 0,8 / 1,2</text>
+  <!-- 5 Ubicación -->
+  <text class="tit" x="32" y="1580">Bilbao</text>
+  <rect class="caja" x="32" y="1600" width="756" height="70"/>
+  <text class="peq" x="44" y="1625">Zona, dirección y horario · [Cómo llegar] [Usar mi ubicación]</text>
+  <rect class="img" x="32" y="1685" width="756" height="160"/>
+  <text class="peq" x="330" y="1770">Mapa (480 px de alto como mínimo)</text>
+  <text class="nota" x="32" y="1865">5 · mapa debajo de los datos y a todo el ancho</text>
+  <!-- 6 Contacto -->
+  <text class="tit" x="32" y="1930">Tu mesa empieza aquí.</text>
+  <rect class="caja" x="32" y="1950" width="370" height="40"/><text class="peq" x="44" y="1975">Nombre</text>
+  <rect class="caja" x="418" y="1950" width="370" height="40"/><text class="peq" x="430" y="1975">Correo electrónico</text>
+  <rect class="caja" x="32" y="2000" width="756" height="60"/><text class="peq" x="44" y="2025">Mensaje</text>
+  <text class="nota" x="32" y="2080">6 · título encima y formulario a todo el ancho, con nombre y correo en dos columnas</text>
+  <!-- 7 Pie -->
+  <rect class="caja" x="0" y="2095" width="820" height="45"/>
+  <text class="peq" x="32" y="2123">ALMI CHAIN · Proyecto web académico                     BILBAO, BIZKAIA      (7 · pie en dos columnas)</text>
+</svg>

@@ -128,6 +128,22 @@ Detalles en [`STICK-ARDUINO.md`](STICK-ARDUINO.md) y firmware en [`arduino/mando
 
 ![Partida con el stick simulado](evidencias/09-partida-gridlee-stick.png)
 
+### 4.7 El front-end gráfico: la interfaz de MAME
+
+Un *front-end* es el menú con el que el jugador elige juego sin teclado ni comandos. La recreativa usa **la interfaz propia de MAME** como front-end, configurada para el jugador:
+
+| Lo que hace un front-end | Cómo lo hace la recreativa | Dónde |
+|---|---|---|
+| Arranca solo, sin escritorio | Autologin del usuario `arcade` → `startx` → MAME, en **4,7 s** (7,1 s en la VM de 1 GB) | `.bash_profile` y `.xinitrc` de [`instalar-arcade.sh`](instalar-arcade.sh); [captura](evidencias/05-arranque-directo-mame.png) |
+| Pantalla completa, sin ventanas ni cursor | MAME a pantalla completa (por defecto), X sin gestor de ventanas y `startx -- -nocursor`; sin salvapantallas (`xset s off -dpms`) | `.xinitrc` |
+| Lista de juegos con imagen y datos | Menú de selección de MAME: lista, búsqueda escribiendo el nombre, favoritos e información de cada juego | [captura con los 5 juegos](evidencias/06-mame-con-roms.png) |
+| Solo los juegos que funcionan | Filtro **Available** guardado en `~/.mame/ui.ini`: enseña los 5 juegos instalados y no los 41.390 que MAME sabe emular (incidencia 4) | `ui.ini` |
+| Se maneja con el mando | **Botón 1** y **Start** del stick sirven para elegir en los menús, además de Enter | `~/.mame/cfg/default.cfg`; [partida con el stick](evidencias/09-partida-gridlee-stick.png) |
+| Va directo al juego | `-skip_gameinfo` salta la pantalla de avisos | `.xinitrc` |
+| El jugador no puede romperlo | Si sale con Esc, MAME se vuelve a abrir en 1 s; la cuenta no tiene sudo ni contraseña | `.xinitrc`, sección 7 |
+
+**Por qué no un front-end aparte.** En la [tarea 51](../16-batocera/NOTAS.md) se probó y se midió **Batocera**, que trae el front-end EmulationStation, en la misma VM de 1 núcleo y 1 GB: solo el menú ocupa **554 MB** de RAM sin abrir ningún juego (ya tirando de swap) y tarda **12,9 s** en aparecer, frente a los **400 MB con el juego abierto** y **7,1 s** de Debian con la interfaz de MAME. Lo que aporta EmulationStation (carátulas, muchos sistemas) no lo necesita una recreativa con 5 juegos de MAME. Otros front-ends para Linux (Attract-Mode, Pegasus) no se probaron: añadirían un programa más encima de MAME que consume RAM y hay que mantener, para el mismo resultado.
+
 ## 5. Medidas (punto de partida para la tarea 17)
 
 | Medida | Debian limpio | Con recreativa configurada |

@@ -120,7 +120,7 @@ Corregido el 26/10 (sección 1).
 | Identificar necesidades de comunicación | Hecho | — |
 | Implementación y configuración de sistemas operativos | Hecho: TPV bastionados (tarea 13) y PC del gerente con contraseñas robustas (tarea 55) y servicios reducidos (tarea 64, 09/11) | Tarea 15: ejecutar `configurar-tpv.ps1` en los TPV |
 | Restricción de cuentas y equipos (mínimos privilegios) | Hecho en el laboratorio: cajero solo con Punto de venta (30/10) | Corr. 2.3 en el servidor del equipo; tarea 15 |
-| Diseño conceptual de la web | Hecho, a posteriori | Tarea 62: tableta y WCAG AA |
+| Diseño conceptual de la web | Hecho, a posteriori | 10/11 (tarea 62): wireframe y punto de corte de tableta, WCAG 2.1 AA criterio a criterio y patrones de UX ([tarea 27](docs/web/27-wireframes.md)) |
 | Web accesible y por HTTPS | Hecho | — |
 | Hosting en AWS con dominio propio y despliegue reproducible | Hecho: Terraform aplicado y despliegue por GitHub Actions (tarea 31, 29/10) | — |
 | ERP + TPV con un caso de uso automatizado | Hecho: factura de 660,00 € (27/10) | Tareas 36 y 63 |
@@ -143,7 +143,7 @@ Corregido el 26/10 (sección 1).
 | Esquema de conectividad | Hecho ([tarea 22, sección 4](docs/redes/22-comparativa-wan.md#4-esquema-de-conectividad)) |
 | Diagrama de la red (plano), cableado y Wi-Fi | Hecho: plano y Packet Tracer de la red real probado |
 | Red configurada de forma segura | Casi hecho: tarea 24 hecha (30/10): red de invitados aislada y probada, WPS desactivado, administración solo desde la MAC del gerente y contraseñas en KeePassXC. WPA3 queda como limitación del TL-WR841N. Falta corr. 2.4 en el servidor del equipo y desactivar UPnP en el router (A-22) |
-| Segundo router por WDS, comprobando que funciona | En curso (tarea 25): el 04/11 el router 2 extiende la red del proyecto en `192.168.10.2` sin DHCP, con ping al router 1 y los invitados sin acceso a la LAN. Falta que amplíe la Wi-Fi de clientes, la prueba en el BSSID del router 2 y la cobertura antes y después |
+| Segundo router por WDS, comprobando que funciona | En curso (tarea 25): el 04/11 el router 2 extiende la red del proyecto en `192.168.10.2` sin DHCP, con ping al router 1 y los invitados sin acceso a la LAN. Falta enlazarlo a la Wi-Fi de clientes (en Range Extender repite una sola red y hoy es la del personal), la prueba en el BSSID del router 2 y la cobertura antes y después: hoja de trabajo en la tarea 25, sección 7 |
 | RA.7 de PAR: conectar redes privadas a públicas | Demostrado en Packet Tracer: NAT, WAN e Internet sin acceso a la LAN (pruebas 11 y 12) |
 
 ---

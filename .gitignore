@@ -66,3 +66,6 @@ preseed-local.cfg
 # --- Exportaciones de Odoo (tarea 36): llevan datos personales ---
 exportaciones-*/
 *.tfplan
+
+# --- PDF de la documentación completa (se genera con scripts/documentacion-entrega.py) ---
+entrega/

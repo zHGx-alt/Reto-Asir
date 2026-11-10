@@ -249,7 +249,7 @@
 <circle cx="449" cy="827.0" r="4.5" fill="#e87ba4"/>
 <text x="458" y="831.0" class="t">Markel</text>
 <text x="528" y="831.0" class="s">21</text>
-<rect x="1004" y="820" width="116" height="14" rx="4" fill="#e87ba4"><title>59. Stick: antirrebote, componentes y por qué este microcontrolador · Markel · 04/11–06/11 · Pendiente</title></rect>
+<rect x="1004" y="820" width="116" height="14" rx="4" fill="#e87ba4" stroke="#0b0b0b" stroke-width="1.5"><title>59. Stick: antirrebote, componentes y por qué este microcontrolador · Markel · 04/11–06/11 · En curso</title></rect>
 <rect x="16" y="838" width="1226" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="855" class="t b">5 Redes</text>
 <line x1="16" y1="886" x2="1242" y2="886" stroke="#f0efeb"/>
@@ -497,11 +497,11 @@
 <rect x="1164" y="1728" width="76" height="14" rx="4" fill="#008300"><title>49. Presentación y ensayo · Peio · 10/11–11/11 · Pendiente</title></rect>
 <line x1="16" y1="1768" x2="1242" y2="1768" stroke="#f0efeb"/>
 <text x="16" y="1761.0" class="s">58</text>
-<text x="44" y="1761.0" class="t">Tecnologías habilitadoras: análisis y comparativa</text>
+<text x="44" y="1761.0" class="m">Tecnologías habilitadoras: análisis y comparativa ✓</text>
 <circle cx="449" cy="1757.0" r="4.5" fill="#eb6834"/>
 <text x="458" y="1761.0" class="t">Eneko.P</text>
 <text x="528" y="1761.0" class="s">30, 32</text>
-<rect x="1124" y="1750" width="76" height="14" rx="4" fill="#eb6834"><title>58. Tecnologías habilitadoras: análisis y comparativa · Eneko.P · 09/11–10/11 · Pendiente</title></rect>
+<rect x="1124" y="1750" width="76" height="14" rx="4" fill="#eb6834" fill-opacity="0.4"><title>58. Tecnologías habilitadoras: análisis y comparativa · Eneko.P · 09/11–10/11 · Hecho</title></rect>
 <line x1="16" y1="1790" x2="1242" y2="1790" stroke="#f0efeb"/>
 <text x="16" y="1783.0" class="s">61</text>
 <text x="44" y="1783.0" class="m">Poner al día los textos desfasados que señala la auditoría ✓</text>
@@ -511,11 +511,11 @@
 <rect x="1164" y="1772" width="36" height="14" rx="4" fill="#008300" fill-opacity="0.4"><title>61. Poner al día los textos desfasados que señala la auditoría · Peio · 10/11–10/11 · Hecho</title></rect>
 <line x1="16" y1="1812" x2="1242" y2="1812" stroke="#f0efeb"/>
 <text x="16" y="1805.0" class="s">62</text>
-<text x="44" y="1805.0" class="t">Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA</text>
+<text x="44" y="1805.0" class="m">Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA ✓</text>
 <circle cx="449" cy="1801.0" r="4.5" fill="#1baf7a"/>
 <text x="458" y="1805.0" class="t">Eneko.S</text>
 <text x="528" y="1805.0" class="s">—</text>
-<rect x="1084" y="1794" width="76" height="14" rx="4" fill="#1baf7a"><title>62. Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA · Eneko.S · 06/11–09/11 · Pendiente</title></rect>
+<rect x="1084" y="1794" width="76" height="14" rx="4" fill="#1baf7a" fill-opacity="0.4"><title>62. Huecos de la rúbrica: VM, front-end de MAME, tablet, WCAG AA · Eneko.S · 06/11–09/11 · Hecho</title></rect>
 <rect x="16" y="1836" width="22" height="12" rx="4" fill="#2a78d6"/>
 <text x="44" y="1846" class="t">Adrian</text>
 <rect x="116" y="1836" width="22" height="12" rx="4" fill="#eb6834"/>
