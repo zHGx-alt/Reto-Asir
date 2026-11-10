@@ -253,7 +253,7 @@ write memory
    | `AP-INVITADOS` | Fa0/6 | `Restaurante-Almichain-Invitados` | WPA2-PSK, AES, `<CLAVE-WIFI-INVITADOS>` |
    | `ROUTER2-WDS` | Fa0/7 | `Restaurante-Almichain-Invitados` (el mismo) | La misma que `AP-INVITADOS` |
 
-   Packet Tracer no tiene WPA3: en el local, WPA3 o WPA2/WPA3 (tarea 24).
+   Packet Tracer no tiene WPA3: en el local, WPA3 o WPA2/WPA3 (tarea 24). En el router real la Wi-Fi del personal se llama `Restaurante_Almichain` (guion bajo, desde el 29/10); en la simulación se ha dejado con guion porque solo cambia el nombre.
 2. Poner una **nota** junto a `ROUTER2-WDS`: «Router 2 · Archer C6 en modo WDS (puente). El cable representa el enlace por radio con el router 1 (tarea 25)».
 3. **CLIENTE** (Laptop-PT): apagarlo (botón del equipo, pestaña *Physical*), quitar el módulo de cable y poner el **WPC300N**; encenderlo. En *Desktop → PC Wireless → Connect*, elegir la red de invitados y poner la clave. *IP Configuration* en **DHCP**.
 4. **RECREATIVA** (PC-PT): igual, con el módulo **WMP300N**, en la red de invitados y por DHCP.

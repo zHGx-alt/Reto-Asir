@@ -1,6 +1,6 @@
 # Tarea 26 · Análisis de conectividad con Wireshark y nmap
 
-**Responsable:** Eneko.S · **Fechas:** 04–05/11/2026 · **Depende de:** tarea 25 (WDS; y antes, la 24: red segura con invitados)
+**Responsable:** Eneko.S · **Fechas:** 27/10/2026 (script) y 30/10/2026 (pruebas con el router real) · **Depende de:** tarea 24 (red segura con invitados). La tarea 25 (WDS) solo añade repetir L1 con el router 2 conectado
 **Estado:** ✅ Hecho el 30/10/2026 con el router real (TL-WR841N): LAN, invitados y Wireshark W1-W4. Pendiente solo lo que depende de que el servidor y los TPV estén en la red (sección 8).
 
 Objetivo: comprobar **con herramientas de análisis**, y no solo con `ping`, que la red se comporta como dice el plan de la [tarea 23](../23-plano-direccionamiento.md):
@@ -147,10 +147,10 @@ Capturas filtradas en `evidencias/captura-lan.pcapng` (filtro `dhcp || arp || (i
 
 | Id | Hallazgo | Riesgo | Acción | Para |
 |---|---|---|---|---|
-| H-01 | El router tiene **UPnP** activo (libupnp 1.6.19, de 2013) | Cualquier equipo de la LAN puede abrir puertos hacia Internet sin pedir permiso; esa versión tiene fallos conocidos | Desactivar UPnP (*Forwarding → UPnP*) | Peio (24) |
-| H-02 | El router tiene **SSH** abierto en la LAN (Dropbear 2012.55) y el firmware es antiguo (Linux 2.6.36) | Software sin actualizar | Actualizar el firmware desde la web de TP-Link. Si el SSH no se puede quitar (lo usa la app Tether), se acepta el riesgo porque la administración ya está limitada | Peio (24), Adrian (46) |
+| H-01 | El router tiene **UPnP** activo (libupnp 1.6.19, de 2013) | Cualquier equipo de la LAN puede abrir puertos hacia Internet sin pedir permiso; esa versión tiene fallos conocidos | Desactivar UPnP (*Forwarding → UPnP*). ⏳ En la visita de la tarea 25 ([sección 7, paso 4](../25-wds/DOCUMENTACION.md#7-lo-que-falta-hoja-de-trabajo)) | Peio (24) |
+| H-02 | El router tiene **SSH** abierto en la LAN (Dropbear 2012.55) y el firmware es antiguo (Linux 2.6.36) | Software sin actualizar | Decidido el 10/11: no se actualiza el router de prácticas, que se sustituye por el Archer C6 (con el último firmware antes de instalarlo). Mientras, el riesgo se acepta porque la administración está limitada al PC del gerente ([tarea 24, sección 12](../24-red-segura/DOCUMENTACION.md#12-pendiente)) | Peio (24), Adrian (46) |
 | H-03 | La red de invitados usa el **mismo rango** `192.168.10.0/24` con aislamiento, no `192.168.50.0/24` | Ninguno: el aislamiento funciona (5.2) | Corregir el «a comprobar» de la tarea 23 | Peio (23) |
-| H-04 | La Wi-Fi del personal se llama `Restaurante_Almichain` (guion bajo); la documentación pone `Restaurante-Almichain` | Ninguno | Unificar el nombre en la documentación | Peio (24) |
+| H-04 | La Wi-Fi del personal se llama `Restaurante_Almichain` (guion bajo); la documentación pone `Restaurante-Almichain` | Ninguno | ✅ Unificado el 10/11 en las tareas 23 y 24 (la simulación de Packet Tracer mantiene el guion: es solo el nombre) | Peio (24) |
 | H-05 | Se ve tráfico **HTTP sin cifrar** (W4) | Lo que vaya por HTTP se lee con Wireshark | Argumento para que Odoo vaya solo por HTTPS (tarea 52) | Adrian (46, 52) |
 
 ## 6. Conclusión

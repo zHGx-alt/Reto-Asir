@@ -50,7 +50,7 @@ En `Wireless > Basic Settings` se configuró:
 
 | Parámetro | Valor |
 |---|---|
-| SSID | `Restaurante-Almichain` |
+| SSID | `Restaurante_Almichain` (con guion bajo; en la primera parte era `Restaurante-Almichain`) |
 | Modo | `11bgn mixed` |
 | Canal | `6` fijo |
 | Ancho de canal | `20 MHz` |
