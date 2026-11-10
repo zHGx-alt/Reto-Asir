@@ -4,6 +4,14 @@ Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de res
 
 **Para entender el proyecto entero** (qué pide el enunciado, qué pieza lo resuelve y cómo se relacionan la red, Odoo, la web, la base de datos y las copias): [LOGICA_RETO.md](LOGICA_RETO.md). Para montarlo desde cero, en orden: [LOGICA_RETO, sección 15](LOGICA_RETO.md#15-montarlo-desde-cero-en-orden). Pruebas de cada bloque: [tabla de pruebas](docs/gestion/47-tabla-pruebas.md).
 
+**Documentación completa en un solo PDF** (la que se entrega al profesor): portada, índice y todos los documentos del repositorio ordenados por bloques. Se genera con Docker y Google Chrome:
+
+```bash
+python3 scripts/documentacion-entrega.py
+```
+
+Sale en `entrega/Almi-Chain-documentacion.pdf` (no se sube a Git por tamaño). Si se añade un documento nuevo en `docs/`, hay que meterlo en la lista `PARTES` del script; si no, avisa y no genera nada.
+
 ## Estado
 
 **52 de 64 tareas hechas** (10/11/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md); la rúbrica, en [rubrica-anexo-VI.md](docs/gestion/rubrica-anexo-VI.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
@@ -31,7 +39,7 @@ bash scripts/verificar-repo.sh
 | `iac/` | Infraestructura como código: Terraform de la web en AWS (tarea 31) |
 | `web/` | Página web del restaurante |
 | `arduino/` | Firmware, esquema, prueba del antirrebote y scripts de prueba del arcade stick (tareas 19-21, 50 y 59) |
-| `scripts/` | Gantt, verificación, hooks de Git, servidor web, monitorización de la recreativa y scripts del PC del gerente (cifrado y servicios, tareas 12 y 64) |
+| `scripts/` | Gantt, PDF de la documentación completa, verificación, hooks de Git, servidor web, monitorización de la recreativa y scripts del PC del gerente (cifrado y servicios, tareas 12 y 64) |
 
 ## Gestión del proyecto
 
