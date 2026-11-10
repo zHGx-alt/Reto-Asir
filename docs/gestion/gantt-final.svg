@@ -89,7 +89,7 @@
 <circle cx="449" cy="413.0" r="4.5" fill="#eda100"/>
 <text x="458" y="417.0" class="t">Iker</text>
 <text x="528" y="417.0" class="s">34, 40</text>
-<rect x="684" y="406" width="116" height="14" rx="4" fill="#eda100"><title>57. Integrar la BD propia con la de Odoo · Iker · 06/11–10/11 · Pendiente</title></rect>
+<rect x="684" y="406" width="116" height="14" rx="4" fill="#eda100" stroke="#0b0b0b" stroke-width="1.5"><title>57. Integrar la BD propia con la de Odoo · Iker · 06/11–10/11 · En curso</title></rect>
 <rect x="16" y="424" width="826" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="441" class="t b">10 Seguridad</text>
 <line x1="16" y1="472" x2="842" y2="472" stroke="#f0efeb"/>

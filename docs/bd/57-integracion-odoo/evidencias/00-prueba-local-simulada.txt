@@ -1,0 +1,71 @@
+# Prueba LOCAL del 10/11/2026 con un Odoo SIMULADO (XML-RPC de mentira con la carta de la tarea 36)
+# y la carta de 06-datos.sql. No es la evidencia del servidor: esa va en 01-, 02- y 03-.
+
+$ python3 sincronizar-carta.py --simular
+almi_chain: 12 platos leídos con la cuenta de solo lectura.
+  ~ ALMI-1 Gilda: enlazado
+  ~ ALMI-2 Croquetas de jamón: enlazado, descripción
+  ~ ALMI-3 Bacalao al pil-pil: enlazado
+  ~ ALMI-4 Txuleta a la brasa: enlazado, descripción
+  ~ ALMI-5 Marmitako: enlazado
+  ~ ALMI-6 Pimientos de Gernika: enlazado, descripción
+  ~ ALMI-7 Tarta de queso: enlazado
+  ~ ALMI-8 Pantxineta: enlazado
+  ~ ALMI-9 Caña: enlazado
+  ~ ALMI-10 Txakoli (copa): enlazado
+  ~ ALMI-11 Agua mineral: enlazado, descripción
+  ~ ALMI-12 Café: enlazado, precio 1.60 → 1.71 €, descripción
+
+Sincronización (SIMULACIÓN, no se ha cambiado nada): 0 nuevos, 12 actualizados, 0 sin cambios.
+
+$ python3 sincronizar-carta.py
+almi_chain: 12 platos leídos con la cuenta de solo lectura.
+  ~ ALMI-1 Gilda: enlazado
+  ~ ALMI-2 Croquetas de jamón: enlazado, descripción
+  ~ ALMI-3 Bacalao al pil-pil: enlazado
+  ~ ALMI-4 Txuleta a la brasa: enlazado, descripción
+  ~ ALMI-5 Marmitako: enlazado
+  ~ ALMI-6 Pimientos de Gernika: enlazado, descripción
+  ~ ALMI-7 Tarta de queso: enlazado
+  ~ ALMI-8 Pantxineta: enlazado
+  ~ ALMI-9 Caña: enlazado
+  ~ ALMI-10 Txakoli (copa): enlazado
+  ~ ALMI-11 Agua mineral: enlazado, descripción
+  ~ ALMI-12 Café: enlazado, precio 1.60 → 1.71 €, descripción
+
+Sincronización (hecho): 0 nuevos, 12 actualizados, 0 sin cambios.
+
+$ python3 sincronizar-carta.py      # otra vez: no duplica ni cambia nada
+almi_chain: 12 platos leídos con la cuenta de solo lectura.
+  = ALMI-1 Gilda: 2.50 € (sin cambios)
+  = ALMI-2 Croquetas de jamón: 8.00 € (sin cambios)
+  = ALMI-3 Bacalao al pil-pil: 21.00 € (sin cambios)
+  = ALMI-4 Txuleta a la brasa: 50.00 € (sin cambios)
+  = ALMI-5 Marmitako: 15.00 € (sin cambios)
+  = ALMI-6 Pimientos de Gernika: 7.00 € (sin cambios)
+  = ALMI-7 Tarta de queso: 6.50 € (sin cambios)
+  = ALMI-8 Pantxineta: 6.00 € (sin cambios)
+  = ALMI-9 Caña: 2.50 € (sin cambios)
+  = ALMI-10 Txakoli (copa): 3.50 € (sin cambios)
+  = ALMI-11 Agua mineral: 2.00 € (sin cambios)
+  = ALMI-12 Café: 1.71 € (sin cambios)
+
+Sincronización (hecho): 0 nuevos, 0 actualizados, 12 sin cambios.
+
+# Café pasa de 1,55 a 1,64 € sin IVA en almi_chain
+$ python3 sincronizar-carta.py
+almi_chain: 12 platos leídos con la cuenta de solo lectura.
+  = ALMI-1 Gilda: 2.50 € (sin cambios)
+  = ALMI-2 Croquetas de jamón: 8.00 € (sin cambios)
+  = ALMI-3 Bacalao al pil-pil: 21.00 € (sin cambios)
+  = ALMI-4 Txuleta a la brasa: 50.00 € (sin cambios)
+  = ALMI-5 Marmitako: 15.00 € (sin cambios)
+  = ALMI-6 Pimientos de Gernika: 7.00 € (sin cambios)
+  = ALMI-7 Tarta de queso: 6.50 € (sin cambios)
+  = ALMI-8 Pantxineta: 6.00 € (sin cambios)
+  = ALMI-9 Caña: 2.50 € (sin cambios)
+  = ALMI-10 Txakoli (copa): 3.50 € (sin cambios)
+  = ALMI-11 Agua mineral: 2.00 € (sin cambios)
+  ~ ALMI-12 Café: precio 1.71 → 1.80 €
+
+Sincronización (hecho): 0 nuevos, 1 actualizados, 11 sin cambios.
