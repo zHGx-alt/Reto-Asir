@@ -1,43 +1,44 @@
 # Tarea 47 · Tabla de pruebas por bloque
 
-**Responsable:** Eneko.S · **Fechas:** 05–06/11/2026 · **Depende de:** tareas 21, 26 y 29
-**Estado:** 📝 Borrador del 27/10/2026, actualizado el 29/10 (tareas 53 y 54) y el 04/11 (tareas 24, 31, 56, 59 y 60, y filas desfasadas). Se completa a medida que se cierran las pruebas pendientes (⏳, y 🟡 si están a medias).
+**Responsable:** Eneko.S · **Fechas:** 10–11/11/2026 · **Depende de:** tareas 21, 26 y 29
+**Estado:** ✅ Repasada fila a fila el 10/11/2026 contra el documento de cada tarea (antes: 27/10, 29/10 y 04/11). Añadidas las pruebas del cifrado y los servicios reducidos del gerente (tareas 12 y 64) y la restauración en una máquina nueva (RTO). Las filas ⏳ y 🟡 que quedan son pruebas que dependen de otras tareas abiertas; cada una dice qué falta y de quién es.
 
-Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde está la evidencia**. No sustituye a la documentación de cada tarea: cada fila enlaza a ella. Los resultados se han copiado de los documentos de cada tarea, de [verificacion.md](verificacion.md) y del [backlog](backlog-kanban.csv) a fecha de 29/10/2026; no se han inventado ni redondeado.
+Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde está la evidencia**. No sustituye a la documentación de cada tarea: cada fila enlaza a ella. Los resultados se han copiado de los documentos de cada tarea, de [verificacion.md](verificacion.md) y del [backlog](backlog-kanban.csv) (repaso del 10/11/2026); no se han inventado ni redondeado. Si una prueba se hizo en una máquina virtual y no en el equipo real, lleva 🖥️.
 
 | Símbolo | Significa |
 |---|---|
 | ✅ | Prueba hecha con el resultado esperado |
 | ❌ | Prueba hecha con un resultado distinto del esperado (sin corregir) |
+| 🟡 | Prueba hecha en parte: la fila dice qué falta |
 | ⏳ | Prueba prevista y todavía sin hacer |
 | 🖥️ | Hecha en máquina virtual: falta repetirla en el equipo real |
 
 ## Resumen
 
-| Bloque | Pruebas | ✅ | ⏳ | Lo que falta, en una línea |
-|---|---|---|---|---|
-| 0 Gestión | 5 | 4 | 1 | Commits de Eneko.P |
-| 1 Hardware | 3 | 3 | 0 | — |
-| 2 SO | 7 | 6 | 1 | Scripts del TPV en los dos equipos (S-20) |
-| 3 Arcade | 9 | 9 | 0 | — |
-| 4 Arduino | 7 | 6 | 1 | Probar el antirrebote en la placa (tarea 59) |
-| 5 Redes | 6 | 5 | 1 | WDS que amplíe la Wi-Fi de clientes, con cobertura antes y después (tarea 25) |
-| 6 Web | 5 | 5 | 0 | — |
-| 7 ERP | 8 | 7 | 1 | Importar y exportar datos contra Odoo (tarea 36) |
-| 8 BD | 4 | 4 | 0 | — |
-| 9 Backup | 6 | 5 | 1 | Restauración en una VM nueva (RTO real) |
-| 10 Seguridad | 3 | 2 | 1 | Comprobaciones en el servidor del equipo y la red (tarea 46, sección 5) |
-| **Total** | **63** | **56** | **7** | |
+| Bloque | Pruebas | ✅ | 🟡 | ⏳ | Lo que falta, en una línea |
+|---|---|---|---|---|---|
+| 0 Gestión | 5 | 4 | 0 | 1 | Commits de Eneko.P (tarea 5) |
+| 1 Hardware | 3 | 3 | 0 | 0 | — |
+| 2 SO | 11 | 10 | 0 | 1 | Scripts del TPV en los dos equipos (tarea 15, S-20) |
+| 3 Arcade | 9 | 9 | 0 | 0 | — |
+| 4 Arduino | 7 | 6 | 0 | 1 | Probar el antirrebote en la placa (tarea 59) |
+| 5 Redes | 10 | 7 | 1 | 2 | WDS: Wi-Fi de clientes por el router 2, aislamiento probado desde él y cobertura antes y después (tarea 25) |
+| 6 Web | 5 | 5 | 0 | 0 | Repetir Lighthouse con la web del 04/11 (necesita la EC2 encendida) |
+| 7 ERP | 8 | 7 | 0 | 1 | Importar y exportar datos contra Odoo (tarea 36) |
+| 8 BD | 4 | 4 | 0 | 0 | — |
+| 9 Backup | 6 | 6 | 0 | 0 | — (sin probar: un TPV contra el servidor recuperado) |
+| 10 Seguridad | 3 | 2 | 1 | 0 | Comprobaciones 2, 3, 6 y 7 en el servidor del equipo (tarea 46, sección 5) |
+| **Total** | **71** | **63** | **2** | **6** | |
 
 ## 0 · Gestión
 
 | Id | Tarea | Prueba | Esperado | Resultado | Fecha | Evidencia |
 |---|---|---|---|---|---|---|
-| G-01 | 5 | CI de gitleaks en los merges a `main` | En verde | ✅ Los 3 últimos merges, en verde | 23/10 | [verificacion.md §3](verificacion.md) |
-| G-02 | 5 | gitleaks local sobre todo el historial | Sin fugas | ✅ 81 commits, sin fugas | 23/10 | [verificacion.md §2](verificacion.md) |
+| G-01 | 5 | CI de gitleaks en los merges a `main` | En verde | ✅ Los 3 últimos merges, en verde (23/10); repetido el 10/11: los merges de las PR #111 a #113 (09/11), en verde | 23/10 y 10/11 | [verificacion.md §3](verificacion.md) · [Actions](https://github.com/zHGx-alt/Reto-Asir/actions) |
+| G-02 | 5 | gitleaks local sobre todo el historial | Sin fugas | ✅ 81 commits, sin fugas (23/10); 420 commits, sin fugas (10/11) | 23/10 y 10/11 | [verificacion.md §2](verificacion.md) |
 | G-03 | 5 | Las 6 personas tienen commits propios (Anexo IX) | 6 de 6 | ⏳ 5 de 6: falta Eneko.P | 23/10 | [verificacion.md §3](verificacion.md) |
 | G-04 | 4 | `python3 scripts/gantt.py`: backlog coherente | Sin errores | ✅ Sin errores | 27/10 | [gantt.md](gantt.md) |
-| G-05 | 5 | `bash scripts/verificar-repo.sh` | «Todo correcto» | ✅ Ver nota al final | 27/10 | [verificar-repo.sh](../../scripts/verificar-repo.sh) |
+| G-05 | 5 | `bash scripts/verificar-repo.sh` | «Todo correcto» | ✅ «Todo correcto» con Docker: enlaces, Gantt, sintaxis, antirrebote, SQL (49/49 y 9/9), shellcheck, W3C y gitleaks | 10/11 | [verificar-repo.sh](../../scripts/verificar-repo.sh) |
 
 ## 1 · Hardware
 
@@ -56,8 +57,12 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | S-03 | 12, 55 | Integridad de la VM entregada y contraseñas robustas | SHA-256 coinciden; contraseñas en KeePassXC | ✅ | 23/10 | [cuentas y contraseñas](../evidencias/12-dual-boot/ubu-07-cuentas-y-contrasenas.txt) |
 | S-04 | 13 | TPV: usuario estándar, quiosco con Edge, USB bloqueado, cortafuegos y Defender | Todo aplicado | ✅ 🖥️ A mano en dos VM con Windows 11 Pro. El quiosco apunta todavía a `http://localhost:8069` (provisional). Sin el bloqueo de salida del firewall ni la lista blanca de Edge que da `configurar-tpv.ps1` (hallazgo S-20 de la tarea 46) | 26/10 | [Bastionado del TPV](../so/13-tpv/Tarea13_Markdown_GitHub/13-bastionado-tpv-windows.md) |
 | S-05 | 15 | Analizador de PowerShell sobre `configurar-tpv.ps1` y `comprobar-tpv.ps1` | 0 errores | ✅ | 24/10 | [comprobar-tpv.ps1](../so/13-tpv/comprobar-tpv.ps1) |
-| S-06 | 15 | `comprobar-tpv.ps1` en los dos TPV | Todo OK | ⏳ | — | [comprobar-tpv.ps1](../so/13-tpv/comprobar-tpv.ps1) |
+| S-06 | 15 | `comprobar-tpv.ps1` en los dos TPV | Todo OK | ⏳ Iker: pasar `configurar-tpv.ps1` y `comprobar-tpv.ps1` en las VM de Markel (hallazgo S-20 de la 46) | — | [comprobar-tpv.ps1](../so/13-tpv/comprobar-tpv.ps1) |
 | S-07 | 14 | Impresión de prueba desde el TPV | Imprime | ✅ 🖥️ Con la Samsung ML-1660 (impresora de pruebas acordada el 27/10): por IPP a la cola CUPS del PC, el ticket de Odoo sale en papel desde la VM del TPV. Por USB pasado a la VM, Windows no crea el puerto | 27/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
+| S-08 | 12 | Cifrado del PC del gerente: BitLocker en `C:` y `/home/gerente` con fscrypt | Cifrado; Windows pide la contraseña al arrancar en frío | ✅ 🖥️ XTS-AES 256 al 100 % con contraseña de arranque; `fscrypt status` «is encrypted» y la carpeta se abre al entrar como `gerente` | 29/10 | [BitLocker](../evidencias/12-dual-boot/win-10-bitlocker-final.txt) · [arranque](../evidencias/12-dual-boot/win-11-bitlocker-pide-contrasena-al-arrancar.png) · [fscrypt](../evidencias/12-dual-boot/ubu-09-fscrypt-home-gerente.txt) |
+| S-09 | 12 | Actualizaciones del gerente: Windows Update y `20auto-upgrades` en Ubuntu | Al día; automáticas | ✅ 🖥️ Acumulativa KB5066791 (19045.6456) y las dos opciones de Ubuntu a `"1"` | 29/10 | [Windows Update](../evidencias/12-dual-boot/win-13-historial-windows-update-kb5066791.png) · [Ubuntu](../evidencias/12-dual-boot/ubu-03-ufw-y-auto-upgrades.png) |
+| S-10 | 64 | Servicios reducidos en Windows: `12-servicios-reducidos.ps1` y `Get-Service` de los 12 de la lista | Los 12 deshabilitados; la impresión sigue | ✅ 🖥️ Los 12 en *Disabled / Stopped*, `Spooler` en marcha; 248 → 237 servicios no deshabilitados | 09/11 | [antes y después](../evidencias/12-dual-boot/win-14-servicios-reducidos.txt) · [captura](../evidencias/12-dual-boot/win-15-servicios-deshabilitados.png) |
+| S-11 | 64 | Servicios reducidos en Ubuntu: `12-servicios-reducidos.sh` y `ss -tulpn` en un arranque normal | 5 unidades fuera; nada escucha hacia la red | ✅ 🖥️ Las 5 *disabled / inactive*, `cups` activo; 73 → 68 habilitadas; solo escucha en `127.0.0.x` y `::1` | 09/11 | [antes y después](../evidencias/12-dual-boot/ubu-11-servicios-reducidos.txt) · [arranque normal](../evidencias/12-dual-boot/ubu-12-servicios-tras-arranque-normal.txt) |
 
 ## 3 · Recreativa
 
@@ -83,7 +88,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | R-04 | 50 | Firmware en la placa: HID, comandos y EEPROM | Funciona | ✅ Los 4 botones y las 4 direcciones llegan al PC y a Batocera | 27/10 | [Entrada registrada](../../arduino/mando-joystick/evidencias/entrada-stick-2026-10-27-1124.txt) · [EEPROM](../../arduino/mando-joystick/evidencias/eeprom-2026-10-27.txt) |
 | R-05 | 21 | Stick con MAME y con otro emulador | Funciona en los dos | ✅ MAME: partida en `Recreativa-53` (tarea 53, 29/10). Batocera (RetroArch): evtest con los 4 botones y los ejes y una partida el 27/10, sin captura | 27-29/10 | [evtest en Batocera](../../arduino/mando-joystick/evidencias/batocera-evtest-2026-10-27.txt) · [partida en MAME](../arcade/53-recreativa-fisica/evidencias/07-partida-stick.png) |
 | R-06 | 59 | Antirrebote del firmware con rebotes simulados (`prueba-antirrebote/probar.sh`) | Una pulsación con rebotes cuenta 1; el ruido no pasa | ✅ 9 de 9: pulsación con rebotes de 3 ms = 1, picos de 1-2 ms ignorados, retardo 6 ms, remapeo sin botones colgados | 04/11 | [README del stick, Antirrebote](../../arduino/mando-joystick/README.md#antirrebote-tarea-59) |
-| R-07 | 59 | Antirrebote en la placa: `ver-mando.py` pulsando cada control | Ninguna pulsación de menos de 30 ms | ⏳ Falta subirlo con `subir.sh` | — | [README del stick, Antirrebote](../../arduino/mando-joystick/README.md#antirrebote-tarea-59) |
+| R-07 | 59 | Antirrebote en la placa: `ver-mando.py` pulsando cada control | Ninguna pulsación de menos de 30 ms | ⏳ Markel: subirlo a la placa con `subir.sh` y pulsar cada control | — | [README del stick, Antirrebote](../../arduino/mando-joystick/README.md#antirrebote-tarea-59) |
 
 ## 5 · Redes
 
@@ -93,15 +98,19 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | N-02 | 24 | Red segura en un TL-WR841N: administración remota cerrada, WPA2-AES, SPI, contraseñas cambiadas | Aplicado | ✅ | 26/10 | [Tarea 24](../redes/24-red-segura/DOCUMENTACION.md) |
 | N-03 | 24 | Red de invitados aislada y WPA3 en el Archer C6 | Aislada | ✅ Aislada en el TL-WR841N de pruebas: Internet sí, gerente y otro invitado no (30/10). WPA3 no existe en ese router: queda para el Archer C6 | 30/10 | [Tarea 24](../redes/24-red-segura/DOCUMENTACION.md) |
 | N-04 | 25 | Práctica de WDS con dos TL-WR841N en `192.168.1.0/24`: enlace, DHCP del router 2 apagado, ping y cobertura | Enlazados, sin pérdidas | ✅ El PC conectado al router 2 recibe IP del router 1 y le hace ping: 4/4, 0 % de pérdidas; DHCP del router 2 apagado; cobertura comprobada con el móvil (sin medidas numéricas) | 27/10 | [Tarea 25](../redes/25-wds/DOCUMENTACION.md) (la práctica del 27/10, en el historial de Git del fichero) |
-| N-05 | 25 | WDS en el plan real: Archer C6, `192.168.10.0/24`, pruebas W1-W10 (sobre todo, clientes del router 2 aislados de la LAN) y cobertura antes y después | Aislados; más cobertura | 🟡 04/11 con dos TL-WR841N: router 2 en Range Extender en `192.168.10.2`, DHCP apagado, ping al router 1 sin pérdidas e invitados sin acceso a la LAN. Falta que amplíe la Wi-Fi de clientes y la cobertura antes y después | 04/11 | [Tarea 25](../redes/25-wds/DOCUMENTACION.md) |
+| N-05 | 25 | WDS en la red del proyecto: router 2 en Range Extender enlazado al router 1, en `192.168.10.2` y con su DHCP apagado | Enlazado; un solo DHCP | ✅ Estado «Range Extender» conectado a `Restaurante_Almichain`; LAN `192.168.10.2/24`; DHCP del router 2 desactivado | 04/11 | [estado](../redes/25-wds/evidencias/11-router2-estado-range-extender.png) · [LAN](../redes/25-wds/evidencias/13-router2-lan.png) · [DHCP](../redes/25-wds/evidencias/19-router2-dhcp-desactivado.jpg) |
 | N-06 | 26 | nmap desde la LAN y desde invitados; capturas de Wireshark | Lo del plan de la tarea 23 | ✅ Invitados no ven la LAN; router con UPnP y SSH (H-01, H-02); L2-L8 y W5 pendientes de que el servidor esté en la red | 30/10 Eneko.S | [Tarea 26](../redes/26-analisis-conectividad/DOCUMENTACION.md) |
+| N-07 | 25 | Ping al router 1 a través del montaje | 0 % de pérdidas | ✅ 4/4, 0 % de pérdidas | 04/11 | [ping](../redes/25-wds/evidencias/10-ping-router-principal.png) |
+| N-08 | 25 | Desde la Wi-Fi de invitados: Internet sí; `192.168.10.1`, `.2` y `.10` no | Aislados de la LAN | 🟡 Internet sí y los tres destinos inalcanzables, pero conectado al **router 1**: falta repetirlo en el BSSID del router 2 | 04/11 | [router 2](../redes/25-wds/evidencias/16-invitados-sin-acceso-router2.jpg) · [LAN](../redes/25-wds/evidencias/17-invitados-sin-acceso-lan.jpg) |
+| N-09 | 25 | La Wi-Fi de **clientes** llega a través del router 2 | El SSID de invitados también se repite | ⏳ Peio: hoy el router 2 solo repite la Wi-Fi del personal (A-06). Repetir la de invitados o justificar por escrito por qué el TL-WR841N no puede y qué hace el Archer C6 | — | [Tarea 25, sección 14](../redes/25-wds/DOCUMENTACION.md#14-pendiente) |
+| N-10 | 25 | Cobertura antes y después: dBm en la barra y en la entrada con el router 2 apagado y encendido | Más señal con el router 2 | ⏳ Peio: hay una sola medida (-31 dBm, a 0 m del router 1) | — | [WiFi Analyzer](../redes/25-wds/evidencias/15-wifi-analyzer-p1-antes.jpg) |
 
 ## 6 · Web
 
 | Id | Tarea | Prueba | Esperado | Resultado | Fecha | Evidencia |
 |---|---|---|---|---|---|---|
-| W-01 | 29 | Validador W3C contra la URL pública | 0 errores | ✅ 0 en HTML y en CSS. Hay que repetirlo: la web cambió el 27/10 (fotos) | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
-| W-02 | 29 | Lighthouse contra la URL pública (mediana de 5) | ≥ 90 | ✅ Móvil 94/100/100/100; escritorio 99/100/100/100. Hay que repetirlo por el cambio del 27/10 | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
+| W-01 | 29 | Validador W3C contra la URL pública | 0 errores | ✅ 0 en HTML y en CSS (26/10); repetido el 10/11 con la web actual (validador Nu en Docker, desde `verificar-repo.sh`): 0 errores en `index.html` y `style.css` | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
+| W-02 | 29 | Lighthouse contra la URL pública (mediana de 5) | ≥ 90 | ✅ Móvil 94/100/100/100; escritorio 99/100/100/100. Hay que repetirlo por los cambios del 27/10 y el 04/11 (con la EC2 encendida) | 26/10 | [lighthouse-w3c.txt](../evidencias/web/lighthouse-w3c.txt) |
 | W-03 | 30 | Web en AWS con dominio y HTTPS; `nginx -t` | Responde por HTTPS | ✅ Con el laboratorio encendido; fuera de sesión no responde (el Learner Lab apaga la EC2) | 23/10 | [Tarea 30](../web/30-hosting-aws.md) |
 | W-04 | 28 | Geolocalización con una posición simulada | Distancia y ruta | ✅ «1,1 km» y enlace a la ruta | 24/10 | [verificacion.md §8](verificacion.md) |
 | W-05 | 31 | `terraform fmt`/`validate` y `apply` en el Learner Lab | Infraestructura creada | ✅ `validate` y `fmt` (24/10); `apply`, pruebas con curl, despliegue por Actions y `plan` sin cambios (29/10) | 29/10 | [iac/evidencias/](../../iac/evidencias/02-apply.txt) |
@@ -116,7 +125,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | E-04 | 35 | Caso de uso automatizado: pedido, factura, cobro y PDF | Factura validada y cobrada | ✅ `INV/2026/00001` y `00002` | 23/10 | [Tarea 35](../erp/35-factura-automatica/DOCUMENTACION.md) |
 | E-05 | 35 | Repetirlo con el caso de uso real: menú de grupo con IVA del 10 % | Factura correcta | ✅ `INV/2026/00004` = 660,00 €; la `00003` (654,55 €, IVA mal calculado) anulada con la rectificativa `RINV/2026/00001` | 27/10 | [INV_2026_00004.pdf](../erp/35-factura-automatica/evidencias/INV_2026_00004.pdf) |
 | E-06 | 52 | Proxy HTTPS: certificado, redirección, TLS 1.2/1.3, cabeceras, venta por HTTPS | 15 pruebas | ✅ 🖥️ 15 de 15 | 26/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
-| E-07 | 36 | Importar y exportar datos (carta, clientes, ventas) | CSV correctos | ⏳ Script hecho; falta ejecutarlo contra Odoo | — | [Tarea 36](../erp/36-importar-exportar/DOCUMENTACION.md) |
+| E-07 | 36 | Importar y exportar datos (carta, clientes, ventas) | CSV correctos | ⏳ Script y CSV hechos (24/10); Eneko.P: ejecutarlo contra Odoo y guardar las salidas | — | [Tarea 36](../erp/36-importar-exportar/DOCUMENTACION.md) |
 | E-08 | 37 | Ticket desde el TPV de Odoo | Imprime | ✅ 🖥️ Desde la VM win-11 por IPP a la Samsung ML-1660 (impresora de pruebas acordada: no hay térmicas para todos) | 27/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
 
 ## 8 · Base de datos
@@ -137,15 +146,15 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | B-03 | 44 | Copia 3-2-1 cifrada y diaria (RAID y USB) y aviso si falla | Copia de las dos bases; aviso | ✅ 🖥️ Odoo y `almi_chain`; aviso (`OnFailure=`) probado con un fallo provocado. El tercer destino en S3 está preparado sin probar | 22/10 y 27/10 | [Tarea 44](../backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | B-04 | 45 | Restaurar la copia del USB en un entorno aislado | Odoo restaurado | ✅ 🖥️ 46 s (con el servidor ya instalado) | 22/10 | [Tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
 | B-06 | 60 | Copia en S3 y restauración desde S3, con `almi_chain` comparada (tablas, filas, importes y permisos) | Todo igual que en producción | ✅ 🖥️ 23 OK en 166 s desde S3; desde el RAID, 23 OK en 68 s (laboratorio) | 04/11 | [restauracion-s3-2026-11-04.log](../backup/45-restauracion/evidencias/restauracion-s3-2026-11-04.log) |
-| B-05 | 45 | Restaurar en una VM nueva (RTO real), con la BD ya en el RAID | Medir el tiempo | ⏳ | — | [Tarea 45](../backup/45-restauracion/DOCUMENTACION.md) |
+| B-05 | 45, 48 | Recuperar el servidor en una VM **vacía** desde el USB (RTO real): preseed + `recuperar-servidor-nuevo.sh` | Odoo por HTTPS con los datos de la copia; tiempo medido | ✅ 🖥️ **832 s ≈ 14 min**; `/web/login` 200 por HTTP y HTTPS, `admin` entra, última venta `TPV Barra 1 - 000007` y `almi_chain` (13 tablas) recuperadas. Sin probar desde un TPV | 10/11 | [rto-maquina-nueva-2026-11-10.log](../backup/45-restauracion/evidencias/rto-maquina-nueva-2026-11-10.log) |
 
 ## 10 · Seguridad
 
 | Id | Tarea | Prueba | Esperado | Resultado | Fecha | Evidencia |
 |---|---|---|---|---|---|---|
-| X-01 | 46 | Revisión de seguridad del repositorio, repasada el 27/10 y el 29/10 | Hallazgos con responsable | ✅ 26 hallazgos (04/11): corregidos S-01, S-04, S-05, S-06, S-13, S-15, S-18, S-21, S-22 y S-24; S-03 ya no aplica (se descarta Batocera) | 26/10-04/11 | [Tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| X-01 | 46 | Revisión de seguridad del repositorio, repasada el 27/10, el 29/10 y el 03/11 | Hallazgos con responsable | ✅ 26 hallazgos (S-01 a S-26): corregidos S-01, S-04, S-05, S-06, S-13, S-15, S-18, S-21, S-22 y S-24, y S-08 y S-09 en el preseed (04/11); S-03 ya no aplica (se descarta Batocera) | 26/10-04/11 | [Tarea 46](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 | X-02 | 46, 52 | S-01: certificado de Odoo limitado con `nameConstraints` | No vale para otras webs | ✅ 🖥️ Probado también en Edge | 26/10 | [Tarea 46, §4.1](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
-| X-03 | 46 | Comprobaciones en los equipos (nmap, router, SSH, cifrado) | 9 comprobaciones | ⏳ La 1 hecha con la tarea 26 (30/10); la 6 y la 7 (SSH y actualizaciones) en el laboratorio y en una instalación nueva con el preseed (03-04/11); la 2, la 3 y la 6 y 7 en el servidor del equipo esperan a que esté en la red | — | [Tarea 46, §5](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
+| X-03 | 46 | Comprobaciones en los equipos (nmap, router, SSH, cifrado) | 9 comprobaciones | 🟡 La 1 hecha con la tarea 26 (30/10); la 6 y la 7 (SSH y actualizaciones) en el laboratorio y en una instalación nueva con el preseed (03-04/11); la 2, la 3 y la 6 y 7 en el servidor del equipo esperan a que esté en la red | — | [Tarea 46, §5](../seguridad/46-revision-seguridad/DOCUMENTACION.md) |
 
 ## Cómo actualizar esta tabla
 
@@ -153,4 +162,4 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 2. Recalcular el resumen (contar ✅ y ⏳ por bloque).
 3. Antes de la entrega, comprobar que cada enlace abre: `bash scripts/verificar-repo.sh` revisa los enlaces rotos.
 
-**Nota sobre G-05 (27/10):** ejecutado en un Linux sin Docker, PlatformIO ni shellcheck; esas comprobaciones se saltan (lo indica el propio script).
+**Nota sobre G-05:** el 27/10 se ejecutó en un Linux sin Docker y se saltaron shellcheck, W3C y gitleaks; el 10/11, en el PC de Adrian con Docker, pasó todo.

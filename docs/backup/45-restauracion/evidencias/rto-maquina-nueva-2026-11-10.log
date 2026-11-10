@@ -1,0 +1,93 @@
+# Tareas 45 y 48 · RTO real: recuperar el servidor en una máquina NUEVA desde el USB de copias (10/11/2026)
+#
+# Escenario: el servidor se ha perdido. Hay una VM vacía (RTO-48: 2 CPU, 4 GB, disco de 20 GB, NAT con salida a
+# Internet), la ISO de Debian 13.7 netinst y una copia del disco USB BACKUP_USB de la ServidorERP del laboratorio
+# (clonado con VBoxManage clonemedium con la ServidorERP apagada: el USB original no se toca).
+# La contraseña de restic se pasa en un fichero temporal (en el local saldría de KeePassXC); el script la guarda
+# en /root/.config/backup-odoo/restic.pass y borra el temporal. No aparece en este log.
+#
+# Cronología (hora del PC anfitrión):
+#   07:54:51  VM creada y arrancada la instalación desatendida con preseed-servidor.cfg (tarea 33)
+#   08:02:39  Debian instalado, SSH con clave listo .................................. 468 s
+#   08:08:01  «Conectar el USB»: apagar la VM, añadir el disco y arrancar; SSH listo 08:08:42 ... 41 s
+#             (con un USB de verdad se enchufa en caliente: 0 s. Se cuenta igual, para no quedarse corto)
+#   1.er intento de recuperar-servidor-nuevo.sh, 08:08:42:
+#             paso 1/7 (apt: restic, docker.io, docker-compose) ............................ 73 s
+#             paso 2/7 falló: el USB se monta en solo lectura y restic no podía crear su bloqueo.
+#             Corregido con --no-lock (la copia no se modifica). El tiempo perdido no se cuenta.
+#   2.º intento, 08:19:55 → 08:24:08 (abajo, completo; el paso 1 ya estaba hecho: 3 s) ........ 250 s
+#
+#   RTO = 468 + 41 + 73 + 250 = 832 s ≈ 14 min, de una máquina vacía a Odoo por HTTPS con los datos de la copia.
+#   Lo que más pesa: instalar Debian (7 min 48 s) y descargar las imágenes de PostgreSQL 17 y Odoo 19 de Docker Hub
+#   (pasos 4 y 6: 94 s y 151 s). Sin Internet en el local, hay que llevar las imágenes guardadas (docker save).
+#
+# Comparación con la ServidorERP de origen, consultada el 10/11 antes de apagarla:
+#   última venta del TPV  TPV Barra 1 - 000007 · 2026-10-27 08:25:31 · 1,50 €   (igual en la restaurada)
+#   ventas del TPV 7 · clientes 9 · productos 20                                   (igual en la restaurada)
+#
+# Salida del 2.º intento (sin las barras de progreso de «docker pull»):
+
+==> [08:19:55] (+0s) 1/7 Herramientas: restic, Docker y Compose
+Docker Compose version 2.26.1-4
+
+==> [08:19:58] (+3s) 2/7 Contraseña de restic y disco USB
+ID        Time                 Host          Tags    Size
+---------------------------------------------------------------
+f7d67658  2026-11-04 10:44:34  servidor-erp  odoo    24.285 MiB
+---------------------------------------------------------------
+1 snapshots
+
+==> [08:19:59] (+4s) 3/7 Restaurar la última instantánea
+Summary: Restored 919 files/dirs (24.285 MiB) in 0:00
+  /opt/odoo: config docker-compose.https.yml docker-compose.yml .env https 
+
+==> [08:20:00] (+5s) 4/7 PostgreSQL y bases de datos (tienda y almi_chain)
+ db Pulling 
+ db Pulled 
+ Network odoo_interna  Creating
+ Network odoo_interna  Created
+ Volume "odoo_odoo-db-data"  Creating
+ Volume "odoo_odoo-db-data"  Created
+ Volume "odoo_odoo-web-data"  Creating
+ Volume "odoo_odoo-web-data"  Created
+ Container odoo-db-1  Creating
+ Container odoo-db-1  Created
+ Container odoo-db-1  Starting
+ Container odoo-db-1  Started
+
+==> [08:21:34] (+99s) 5/7 Adjuntos de Odoo (filestore)
+  466 ficheros
+
+==> [08:21:34] (+99s) 6/7 Arrancar Odoo (y el proxy HTTPS si la copia lo lleva)
+ odoo Pulling 
+ proxy Pulling 
+ proxy Pulled 
+ odoo Pulled 
+ Container odoo-db-1  Running
+ Container odoo-odoo-1  Creating
+ Container odoo-odoo-1  Created
+ Container odoo-proxy-1  Creating
+ Container odoo-proxy-1  Created
+ Container odoo-db-1  Healthy
+ Container odoo-odoo-1  Starting
+ Container odoo-odoo-1  Started
+ Container odoo-proxy-1  Starting
+ Container odoo-proxy-1  Started
+odoo-db-1 postgres:17 Up 3 minutes (healthy)
+odoo-odoo-1 odoo:19.0 Up Less than a second
+odoo-proxy-1 nginx:1.27-alpine Up Less than a second
+
+==> [08:24:05] (+250s) 7/7 Comprobaciones
+  Odoo /web/login por HTTP (solo el propio servidor): 200
+  Odoo /web/login por HTTPS (proxy de la tarea 52): 200
+  Login de admin (uid): 2
+  Puntos de venta: TPV Barra 1, TPV Barra 2
+  Cajeros activos: cajero1, cajero2
+  Última venta del TPV: TPV Barra 1 - 000007 · 2026-10-27 08:25:31 · 1.5 €
+  Ventas del TPV: 7 · clientes: 9 · productos: 20
+  almi_chain: 13 tablas, 8 facturas
+  Antigüedad de la copia (RPO): 141 h
+
+  Tiempo de este script: 253 s
+  ✅ Servidor recuperado. Falta: la copia nocturna (instalar-backup.sh de la tarea 44) y el cortafuegos (tarea 33).
+rc=0
