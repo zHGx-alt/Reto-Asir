@@ -4,7 +4,7 @@
 - **Responsable:** Eneko.P (desde el 26/10; el script y el CSV los hizo Iker el 24/10)
 - **Depende de:** tarea 34 (Odoo configurado, usuario `gerente`)
 - **Resultado de aprendizaje:** RA.7 de LMSGI, «trabaja con sistemas empresariales de gestión de información realizando tareas de **importación, integración, aseguramiento y extracción** de la información»
-- **Estado (24/10/2026):** script y CSV listos (`py_compile` correcto). **Falta ejecutarlo contra Odoo** y guardar las evidencias (sección 4).
+- **Estado (10/11/2026):** 🟡 Paso 1 hecho en la VM `ServidorERP` del laboratorio de Adrian el 10/11 (sección 3.1): la carta entra en Odoo 19 sin errores. **Faltan los pasos 2 a 6** (Eneko.P), sobre todo la exportación (sección 4).
 
 ## 1. Qué se hace
 
@@ -50,9 +50,21 @@ cd docs/erp/36-importar-exportar && mkdir -p evidencias
    Abrir `carta.csv` y `facturas.csv` en Excel o LibreOffice (captura). **No subir la carpeta de exportación**: solo la salida del comando.
 6. **Ida y vuelta:** importar el `carta.csv` exportado → `0 nuevos, 14 actualizados`: el formato de exportación sirve para volver a importar.
 
+### 3.1 Ejecución del paso 1 (10/11/2026, laboratorio)
+
+En la VM `ServidorERP` (Odoo 19, base `tienda`), con el script y el CSV tal cual están en el repositorio:
+
+```text
+Importación: 8 nuevos, 6 actualizados, 0 con errores (14 filas en carta.csv).
+```
+
+Salida completa: [`evidencias/01-importar-2026-11-10.txt`](evidencias/01-importar-2026-11-10.txt). Seis productos ya existían con el mismo nombre (menú del día, tarta de queso, caña, agua y los dos cafés, de la carta de ejemplo de la [tarea 34](../34-configurar-odoo/DOCUMENTACION.md#81-carta-salas-y-mesas-de-ejemplo)) y el script los **actualizó en vez de duplicarlos**; los otros ocho son nuevos. Los productos de ejemplo que no están en la carta real siguen en Odoo. Los nombres de campo de Odoo 19 (`pos_categ_ids`, `available_in_pos`, `description_sale`) funcionan sin cambios.
+
+> Se ejecutó con el usuario `admin` porque la contraseña de `gerente` está en el KeePassXC del equipo, no en la VM. En el servidor del equipo se hace con `gerente`, como dice el procedimiento.
+
 **Alternativa sin script (interfaz de Odoo):** *Punto de venta → Productos → ⚙ → Importar registros* con el mismo CSV; Odoo pide asociar cada columna a un campo. Sirve para enseñarlo en la defensa, pero no es repetible ni valida los datos como el script.
 
 ## 4. Pendiente
 
-- [ ] Ejecutar los pasos 1 a 6 contra la VM `ServidorERP` y guardar las salidas en `docs/erp/36-importar-exportar/evidencias/`.
-- [ ] Si `export_data` o algún campo cambia de nombre en Odoo 19, corregirlo en el script (los nombres usados son los de Odoo 17-19: `pos_categ_ids`, `available_in_pos`, `description_sale`).
+- [x] Paso 1, importar la carta (10/11, laboratorio, sección 3.1). Los campos de producto de Odoo 19 funcionan.
+- [ ] Pasos 2 a 6 (Eneko.P, unos 20 min): reimportar (`0 nuevos, 14 actualizados`), probar la validación con un CSV con errores, captura de la carta en el TPV, exportar y la ida y vuelta. Si `export_data` falla en Odoo 19, apuntar el error aquí.
