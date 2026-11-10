@@ -116,6 +116,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Front-end de la recreativa | La interfaz propia de MAME (menú con filtro de juegos instalados, pantalla completa, manejo con el stick), sin EmulationStation ni Attract-Mode | Batocera (EmulationStation) ocupa 554 MB solo con el menú en 1 GB de RAM y tarda 12,9 s; Debian con MAME, 400 MB con el juego abierto y 7,1 s ([tarea 16, sección 4.7](../arcade/16-recreativa-mame/DOCUMENTACION.md#47-el-front-end-gráfico-la-interfaz-de-mame)) | 10/11/2026 |
 | Web en tableta | Segundo punto de corte (801-1100 px) | La rúbrica pide móvil, tableta y escritorio; a 820 px la portada se salía de la pantalla y el formulario quedaba con campos de 150 px ([tarea 27, sección 4.1](../web/27-wireframes.md#41-tableta-801-1100-px)) | 10/11/2026 |
 | Controlador del stick frente a un encoder USB | Arduino Leonardo (54,60 € con palanca y botones) y no un kit con encoder «zero delay» (unos 20 €) | El encoder tiene el mapeo fijo y no se puede programar; el Leonardo permite remapear sin reprogramar, ajustar el antirrebote y ampliarlo ([README del stick](../../arduino/mando-joystick/README.md#por-qué-un-microcontrolador-y-no-un-encoder-usb-comercial)) | 10/11/2026 |
+| Documentación para entregar al profesor | Un único PDF (`entrega/Almi-Chain-documentacion.pdf`, unas 336 páginas) que se genera desde el repositorio con `python3 scripts/documentacion-entrega.py`: portada, índice con enlaces, 14 partes por bloque y los 59 documentos tal cual; los scripts y evidencias en texto quedan enlazados a GitHub. El PDF no se sube a Git (27 MB) | Cada tarea ya tiene su guía y no hay que redactarlo dos veces: si alguien corrige su documento antes del 13/11, se vuelve a generar en medio minuto. El script falla si aparece un `.md` nuevo sin meter en el índice, así que no se queda nada fuera | 10/11/2026 |
 
 ## 6. Planificación
 
@@ -213,6 +214,7 @@ Incidencias relevantes durante la ejecución:
 | Entregable | Tarea | Responsable | Qué hay ya | Qué falta | Estado |
 |---|---|---|---|---|---|
 | Documentación técnica paso a paso | 48 | Markel | [LOGICA_RETO.md](../../LOGICA_RETO.md) con el montaje desde cero en orden (sección 15: red → servidor → copias → puestos → recreativa → web → comprobar), un `DOCUMENTACION.md` por tarea y el capítulo de restauración ([48-documentacion-final-restauracion.md](../backup/48-documentacion-final-restauracion.md)) con el RTO real (10/11) | Que Markel lo repase para defenderlo | Hecho (10/11) |
+| Documentación completa en un solo PDF | 48 | Adrian | `python3 scripts/documentacion-entrega.py` genera `entrega/Almi-Chain-documentacion.pdf` con todo el repositorio en orden (10/11) | Regenerarlo el día de la entrega, después de la última PR | Hecho (10/11) |
 | Diagramas | Cada bloque | Responsable de cada bloque | Arquitectura de equipos ([tarea 11](../diagramas/11-arquitectura-equipos/DIAGRAMA.md)), plano y red ([tarea 23](../redes/23-plano-direccionamiento.md)), E/R y 3FN ([tareas 38](../bd/38-modelo-er.md) y [39](../bd/39-modelo-logico-3fn.md)), wireframes ([tarea 27](../web/27-wireframes.md)), Gantt ([gantt.md](gantt.md)) | **AWS:** hecho el 29/10 ([tarea 30, sección 2](../web/30-hosting-aws.md#2-arquitectura)). **Copias:** un esquema de la regla 3-2-1 (datos → RAID → USB fuera del local) | Parcial |
 | Tabla de pruebas por bloque | 47 | Eneko.S | [47-tabla-pruebas.md](47-tabla-pruebas.md): 73 pruebas de los 11 bloques (65 ✅, 3 🟡, 5 ⏳), repasada fila a fila el 10/11; sección 8 de este anexo y [verificacion.md](verificacion.md) | Las filas ⏳ dependen de tareas abiertas (5, 15, 25, 36, 59); que Eneko.S la repase para defenderla | Hecho (10/11) |
 | Presentación y ensayo | 49 | Peio | — | Ver 9.2 | Pendiente |
@@ -246,6 +248,7 @@ Una parte por bloque. Cada persona presenta **lo que no ha hecho**, para demostr
 
 - [ ] `main` con todas las PR unidas y el CI en verde.
 - [ ] `bash scripts/verificar-repo.sh` sin errores y `python3 scripts/gantt.py` regenerado.
+- [ ] PDF de la documentación regenerado con `python3 scripts/documentacion-entrega.py` después de la última PR, y subido a la entrega.
 - [ ] Backlog al día: ninguna tarea «En curso» sin explicar en *Observaciones*.
 - [ ] Ninguna captura con contraseñas (revisar ampliadas: gitleaks no mira imágenes).
 - [ ] Enlace de Drive del `.kdbx` accesible para el profesor; la contraseña maestra se entrega aparte, nunca en el repositorio. Las VM entregables, arrancadas o a mano en el PC de quien las tiene ([maquinas-virtuales.md](maquinas-virtuales.md)).
