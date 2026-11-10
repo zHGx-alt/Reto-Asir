@@ -20,15 +20,15 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | 0 Gestión | 5 | 4 | 0 | 1 | Commits de Eneko.P (tarea 5) |
 | 1 Hardware | 3 | 3 | 0 | 0 | — |
 | 2 SO | 11 | 10 | 0 | 1 | Scripts del TPV en los dos equipos (tarea 15, S-20) |
-| 3 Arcade | 9 | 9 | 0 | 0 | — |
+| 3 Arcade | 10 | 10 | 0 | 0 | — |
 | 4 Arduino | 7 | 6 | 0 | 1 | Probar el antirrebote en la placa (tarea 59) |
 | 5 Redes | 10 | 7 | 1 | 2 | WDS: Wi-Fi de clientes por el router 2, aislamiento probado desde él y cobertura antes y después (tarea 25) |
-| 6 Web | 5 | 5 | 0 | 0 | Repetir Lighthouse con la web del 04/11 (necesita la EC2 encendida) |
+| 6 Web | 6 | 6 | 0 | 0 | Repetir Lighthouse con la web del 04/11 (necesita la EC2 encendida) |
 | 7 ERP | 8 | 7 | 0 | 1 | Importar y exportar datos contra Odoo (tarea 36) |
 | 8 BD | 4 | 4 | 0 | 0 | — |
 | 9 Backup | 6 | 6 | 0 | 0 | — (sin probar: un TPV contra el servidor recuperado) |
 | 10 Seguridad | 3 | 2 | 1 | 0 | Comprobaciones 2, 3, 6 y 7 en el servidor del equipo (tarea 46, sección 5) |
-| **Total** | **71** | **63** | **2** | **6** | |
+| **Total** | **73** | **65** | **2** | **6** | |
 
 ## 0 · Gestión
 
@@ -77,6 +77,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | A-07 | 18 | Scripts de monitorización en Linux | CSV correcto, parada limpia | ✅ | 23/10 | [Tarea 18](../arcade/18-monitorizacion-recreativa.md) |
 | A-08 | 53 | Recreativa en VM de 1 núcleo y 1 GB con el stick: comprobaciones P1-P10 | Todo OK | ✅ 🖥️ `Recreativa-53`: arranque directo a MAME, 5 juegos, partida con el stick, MAME se reabre, `arcade` sin privilegios, SSH solo con clave; 524 MB libres con MAME | 29/10 | [Tarea 53](../arcade/53-recreativa-fisica/DOCUMENTACION.md) |
 | A-09 | 54 | Medidas antes y después en `Recreativa-53` (1 núcleo y 1 GB): 3 + 3 arranques, reposo y 10 min de juego | Datos de antes y después | ✅ 🖥️ Timers 8 → 5, disco −12 %; arranque (14,4 s), RAM y velocidad sin cambios significativos (*Robby Roto* 773 % → 777 %). Jugando: CPU media 52-58 %, más de 460 MB libres y sin swap | 29/10 | [Tarea 54](../arcade/54-medidas-equipo-real/DOCUMENTACION.md) |
+| A-10 | 16, 62 | Front-end: arranque al menú de juegos a pantalla completa, filtro de juegos instalados y selección con el stick | Elegir juego sin teclado | ✅ 🖥️ Menú de MAME con los 5 juegos (filtro *Available*), Botón 1 y Start eligen, Esc vuelve a abrir MAME | 22/10 y 29/10 | [Tarea 16, §4.7](../arcade/16-recreativa-mame/DOCUMENTACION.md#47-el-front-end-gráfico-la-interfaz-de-mame) |
 
 ## 4 · Arcade stick (Arduino)
 
@@ -114,6 +115,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | W-03 | 30 | Web en AWS con dominio y HTTPS; `nginx -t` | Responde por HTTPS | ✅ Con el laboratorio encendido; fuera de sesión no responde (el Learner Lab apaga la EC2) | 23/10 | [Tarea 30](../web/30-hosting-aws.md) |
 | W-04 | 28 | Geolocalización con una posición simulada | Distancia y ruta | ✅ «1,1 km» y enlace a la ruta | 24/10 | [verificacion.md §8](verificacion.md) |
 | W-05 | 31 | `terraform fmt`/`validate` y `apply` en el Learner Lab | Infraestructura creada | ✅ `validate` y `fmt` (24/10); `apply`, pruebas con curl, despliegue por Actions y `plan` sin cambios (29/10) | 29/10 | [iac/evidencias/](../../iac/evidencias/02-apply.txt) |
+| W-06 | 27, 62 | Web en tableta: 820 × 1180 y 1024 × 1366 con Chrome | Sin desplazamiento horizontal; todo visible | ✅ Con el nuevo punto de corte (801-1100 px): sin desplazamiento horizontal, imagen de portada a todo el ancho y campos del formulario de 354 px (antes, 150) | 10/11 | [capturas](../web/27-wireframes.md#41-tableta-801-1100-px) |
 
 ## 7 · ERP (Odoo)
 

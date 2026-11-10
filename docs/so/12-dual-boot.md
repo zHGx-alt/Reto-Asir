@@ -29,6 +29,38 @@ El equipo real (Lenovo ThinkCentre Neo 50q, tarea 8) se simula en una máquina v
 | Sistema 2 | **Ubuntu Desktop 26.04.1 LTS** («Resolute Raccoon»), imagen `Release amd64 (20260826)`. Leído del disco de la VM sin arrancarla el 27/10 ([evidencia](../evidencias/12-dual-boot/ubu-08-version-desde-disco.txt)). Lleva GRUB 2.14 y sudo-rs |
 | Nombre del equipo en Ubuntu | `pc-gerente` |
 
+### 2.1 Configuración de la VM en VirtualBox (comprobada el 10/11/2026)
+
+Leída con `VBoxManage showvminfo VM-dualboot-W10-ubuntu --machinereadable` en VirtualBox 7.2.16, y el estado de las Guest Additions de los registros de la VM (`Logs/VBox.log*`, arranques del 29/10 y del 09/11):
+
+| Ajuste | Valor | Por qué |
+|---|---|---|
+| Tipo de sistema | Windows 10 (64-bit) | Es el primer sistema del disco; VirtualBox ajusta con él los dispositivos por defecto |
+| Firmware | **EFI** | Como el Lenovo del despacho: disco GPT y el gestor de arranque de Windows y GRUB en la partición EFI (sección 3) |
+| CPU | 4 núcleos virtuales | La mitad de los del PC anfitrión: Windows y Ubuntu se instalan y actualizan sin que el anfitrión se quede sin CPU |
+| RAM | **8192 MB** | Lo mínimo cómodo para Windows 10 con BitLocker y actualizaciones; el equipo real lleva 16 GB (tarea 8) |
+| Disco | **60 GB**, VMDK dinámico, controlador **SATA** | Caben Windows y Ubuntu (unos 18 GB para `/`, sección 3). SATA porque con NVMe Windows no arranca en VirtualBox (sección 7). Cuatro instantáneas (*snapshots*) para volver atrás: recién migrada de VMware, cifrada y actualizada (29/10), y antes y después de reducir servicios (09/11) |
+| Gráficos | VBoxSVGA, 128 MB de vídeo, sin 3D | El adaptador que VirtualBox recomienda para Windows 10; la aceleración 3D no hace falta |
+| Red | NAT | La VM sale a Internet para actualizar sin aparecer en la red del aula |
+| Portapapeles compartido | Bidireccional | Para copiar comandos durante la instalación. En una VM con datos reales se pondría en *Desactivado* (fuga de datos entre anfitrión e invitado) |
+| Arrastrar y soltar, USB | Desactivados | No se usan; menos superficie de ataque |
+| Teclado | USB | Con el PS/2 la pantalla de BitLocker no recibe las teclas (sección 7) |
+
+**Guest Additions** (los controladores de VirtualBox dentro del sistema invitado: ajuste de la resolución a la ventana, portapapeles, carpetas compartidas y hora sincronizada):
+
+| Sistema | Estado | Cómo se ve |
+|---|---|---|
+| Ubuntu 26.04 | Controlador `vboxguest` del propio núcleo de Linux (informa como versión 6.0.0); sin los servicios de usuario | Los registros de la VM, en cada arranque de Ubuntu: `Guest Additions information report: Version 6.0.0 … (Linux >= 2.6, 64-bit)` y `graphics: no` |
+| Windows 10 | No instaladas | Ningún arranque de Windows deja ese informe en los registros |
+
+Para instalarlas (necesita la cuenta `administrador` de cada sistema, de KeePassXC):
+
+1. **Windows:** con la VM arrancada en Windows, menú *Dispositivos → Insertar imagen de CD de las Guest Additions*; en el Explorador, abrir la unidad de CD y ejecutar `VBoxWindowsAdditions.exe` (pide la contraseña del `administrador` en el UAC); siguiente, siguiente, reiniciar.
+2. **Ubuntu:** `sudo apt install virtualbox-guest-utils virtualbox-guest-x11` y reiniciar. Es el paquete de Ubuntu: se actualiza con el resto del sistema.
+3. **Comprobar:** en el anfitrión, `VBoxManage guestproperty get VM-dualboot-W10-ubuntu /VirtualBox/GuestAdd/Version` devuelve la versión, y en `VBox.log` aparece `graphics: yes`.
+
+En el equipo real (el Lenovo) no hacen falta: solo existen dentro de VirtualBox.
+
 ## 3. Particiones
 
 Resultado de `lsblk -f` en Ubuntu ([captura](../evidencias/12-dual-boot/ubu-04-lsblk-particiones.png)):
@@ -251,6 +283,7 @@ La `.nvram` es necesaria: guarda las entradas de arranque UEFI. Sin ella, la VM 
 - [x] Windows Update al día: acumulativa 2025-10 KB5066791 (29/10).
 - [x] Cifrado: BitLocker en `C:` y fscrypt en `/home/gerente` (29/10, sección 4.4).
 - [x] ~~Exportar la VM a OVA y subirla a Drive~~: no se hace (decisión del 30/10). La VM se queda en el PC de Adrian ([maquinas-virtuales.md](../gestion/maquinas-virtuales.md)). Si hay que pasarla: `VBoxManage export VM-dualboot-W10-ubuntu -o VM-dualboot-W10-ubuntu.ova` en ese momento, y la clave de recuperación y las contraseñas nuevas van en el `.kdbx`.
+- [ ] Instalar las Guest Additions en Windows y los servicios de usuario en Ubuntu (sección 2.1, unos 10 min con la cuenta `administrador`).
 - [ ] En el equipo real: Windows 11 Pro o ESU (sección 7) y BitLocker con TPM + PIN.
-- [x] **Servicios reducidos** ([tarea 64](../gestion/gantt.md), rúbrica ISO RA1, nivel 5; auditoría del 06/11): hecho el 09/11, sección 4.4 y filas «tarea 64» de la sección 6. (Las Guest Additions de la VM van en la tarea 62.)
+- [x] **Servicios reducidos** ([tarea 64](../gestion/gantt.md), rúbrica ISO RA1, nivel 5; auditoría del 06/11): hecho el 09/11, sección 4.4 y filas «tarea 64» de la sección 6. La configuración de la VM en VirtualBox está en la sección 2.1 (tarea 62, 10/11).
 - [x] Drive revisado el 24/10: están el `.vmdk` y el `.kdbx` del 23/10 y no hay ningún `.txt` con contraseñas.

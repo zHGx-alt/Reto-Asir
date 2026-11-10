@@ -20,7 +20,7 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 |---|---|---|
 | Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11); #5 Repo con estructura y gitleaks; commits de todos (04/11–06/11); #46 Revisión de seguridad transversal (04/11–06/11) |
 | Eneko.P | 3 | #36 Importar y exportar datos en Odoo (04/11–06/11); #63 Usar CRM, personal, marketing e inventario con datos (05/11–06/11) |
-| Eneko.S | 2 | #62 Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA (06/11–09/11) |
+| Eneko.S | 0 | — |
 | Iker | 5 | #15 Scripts de configuración reproducibles (Windows) (04/11–05/11); #57 Integrar la BD propia con la de Odoo (06/11–10/11) |
 | Markel | 3 | #59 Stick: antirrebote; componentes y por qué este microcontrolador (04/11–06/11) |
 | Peio | 4 | #25 WDS con segundo router y pruebas de cobertura (04/11–05/11); #49 Presentación y ensayo (10/11–11/11) |
@@ -29,12 +29,12 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 
 ## Resumen
 
-**53 de 64 tareas hechas (82 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**54 de 64 tareas hechas (84 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
-| Documentación | 16 | 0 | 2 | 18 |
+| Documentación | 17 | 0 | 1 | 18 |
 | Software | 27 | 3 | 3 | 33 |
 | Físico | 6 | 1 | 0 | 7 |
 
@@ -54,7 +54,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 11/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. 29/10: puesto al día (decisiones sustituidas marcadas, firmware de router, cifrado del gerente, semanas con el corte del 4/11, incidencias y pruebas del 27-29/10). 29/10 (tarde): pruebas de redes y arcade al día, incidencias del 29/10, retrospectiva (qué mejorar y desviaciones) y diagrama de AWS en la tarea 30. 30/10: decisiones de las VM (no van a Drive) y de la notación Chen del E/R; incidencia de las medidas de la recreativa cerrada con la tarea 54; revisión de seguridad con 24 hallazgos. 03/11: decisión de Windows de los TPV (LTSC 2021), incidencias del 30/10 y del 03/11 y prueba de seguridad al día. 06/11: al día con lo del 04/11 (decisiones del antirrebote, de subir.sh y de la ampliación del E/R; incidencias de la auditoría, de las capturas de la 25 y del documento del stick; pruebas de BD, stick, WDS y seguridad; entregables y retrospectiva) y las tareas que siguen abiertas tras su fecha de fin. 09/11: decisión de servicios reducidos, incidencias del 09/11 (arranque EFI, renombrado directo a main y tareas vencidas), prueba de SO y retrospectiva al día. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 59 | Stick: antirrebote; componentes y por qué este microcontrolador | Software | Markel | 06/11 | Pendiente | Rúbrica, Digitalización RA2 (stick), niveles 4 y 5. YA HECHO: HID sin drivers, remapeo sin reprogramar (MAP + GUARDAR en EEPROM, probado el 27/10), esquema SVG y código comentado. 04/11 (Adrian): antirrebote por software hecho (5 ms por entrada, sin delay(10)) y probado con rebotes simulados en arduino/mando-joystick/prueba-antirrebote (9 de 9 OK); dónde está el código y pasos, en la sección «Antirrebote» del README del stick. FALTA: subirlo a la placa y probar cada control (Markel, con ./subir.sh), documentar el antirrebote en el README, captura de una partida en un segundo emulador, tabla de pruebas por control, precio de la Leonardo y los botones (solo está la palanca) y por qué un ATmega32U4 (sistema embebido) y no un encoder USB comercial. | [README.md](../../arduino/mando-joystick/README.md) |
 | 63 | Usar CRM, personal, marketing e inventario con datos | Software | Eneko.P | 06/11 | Pendiente | Rúbrica, LMSGI RA7, nivel 4 (y por ser acumulativo, el 5): los módulos están instalados pero solo se usan facturación y TPV. Una oportunidad de CRM que acaba en presupuesto, los empleados dados de alta, una campaña de correo y un movimiento de inventario, con capturas. Se hace a la vez que la 36 en la ServidorERP. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
-| 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | Documentación | Eneko.S | 09/11 | Pendiente | Rúbrica, cuatro huecos pequeños. ISO RA1 n4: en la tarea 12, la VM de VirtualBox con RAM, disco y Guest Additions (no aparecen en ningún sitio). ISO RA2 n4: un párrafo que justifique la interfaz de MAME como front-end (selección de juego, pantalla completa) y cite la tarea 51, donde ya se probó Batocera (EmulationStation) y se descartó con datos. LMSGI RA1 n3: wireframe y punto de corte de tableta (el CSS solo tiene 800 px). LMSGI RA1 n5: justificar WCAG AA (contraste, teclado, textos alternativos); la 27 solo habla de contraste. | — |
 | 57 | Integrar la BD propia con la de Odoo | Software | Iker | 10/11 | Pendiente | Rúbrica, GBD RA3, nivel 4. YA HECHO: la 36 importa en Odoo la carta en CSV, con los mismos platos que almi_chain, pero a mano y sin enlace entre las bases. FALTA: un script que lea de almi_chain y escriba en Odoo (o al revés), por ejemplo carta y precios o clientes, que se pueda repetir y con evidencia. | — |
 | 49 | Presentación y ensayo | Documentación | Peio | 11/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. 04/11: ensayo con todos el 11/11. | — |
 
@@ -64,7 +63,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 |---|---|---|---|---|---|---|
 | Adrian | 20 | 3 | 1 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
 | Eneko.P | 4 | 2 | 2 | 0 | 9 | 6, 7, 11 |
-| Eneko.S | 11 | 1 | 0 | 0 | 18 | 1, 3, 5, 7, 8, 11 |
+| Eneko.S | 11 | 0 | 0 | 0 | 18 | 1, 3, 5, 7, 8, 11 |
 | Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 8 | 1 | 1 | 0 | 18 | 1, 2, 4, 5, 6, 11 |
 | Peio | 7 | 2 | 0 | 1 | 15 | 0, 1, 5, 6, 11 |
@@ -90,9 +89,7 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 
 ### Eneko.S
 
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | 11 Entrega | Documentación | 06/11–09/11 | — | Pendiente |
+Nada en curso ni pendiente.
 
 ### Iker
 
@@ -170,4 +167,5 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 | 58 | Tecnologías habilitadoras: análisis y comparativa | 11 Entrega | Documentación | Eneko.P | Rúbrica, Digitalización RA2, niveles 4 y 5: caracterizar las THD del reto (cloud/AWS, IaC, ERP-TPV, Arduino/IoT, IA) y su aplicación, comparando alternativas y justificando la elección. Hoy no hay ningún documento que hable de THD. 10/11 (Adrian): hecho. Siete THD (nube, IaC, ERP-TPV, embebidos, virtualización, ciberseguridad, IA), cada una con qué es, dónde está en el reto, qué aporta y tabla de alternativas; las que no se usan, justificadas. Eneko.P lo revisa para defenderlo. | [58-tecnologias-habilitadoras.md](../../docs/digitalizacion/58-tecnologias-habilitadoras.md) |
 | 60 | Copia remota en S3 y restauración de almi_chain probadas | 9 Backup | Software | Adrian | Hecha el 04/11 en la ServidorERP de laboratorio, montada desde cero con los scripts 43 y 44: copia diaria a RAID, USB y S3 (bucket privado almi-chain-backup-2026, cifrado AES-256) y restauración desde S3 con 23 comprobaciones OK en 166 s, también almi_chain (roles, tablas, filas, importes y permisos). El Learner Lab no deja crear usuarios IAM: se usan sus credenciales temporales (tarea 44, sección 8.2). | [DOCUMENTACION.md](../../docs/backup/44-backup-3-2-1/DOCUMENTACION.md) |
 | 61 | Poner al día los textos desfasados que señala la auditoría | 11 Entrega | Documentación | Peio | Hallazgos de la auditoría del 04/11: README; CORRECIONES; tareas 7-11; 17; 18; 30; listas de pendientes ya hechas. LOGICA_RETO va en la 48. 10/11 (Adrian; Peio lo revisa): casi todo se corrigió el 04/11 (PR #108); el 10/11 se repasaron los documentos de todas las tareas hechas buscando «falta», «pendiente» y «a confirmar»: README, CORRECIONES (sección 5), diagrama 11, tablas 08 y 24, y lo que cambió después del 04/11 (tarea 64 y RTO). | [CORRECIONES.md](../../CORRECIONES.md) |
+| 62 | Huecos de la rúbrica: VM; front-end de MAME; tablet; WCAG AA | 11 Entrega | Documentación | Eneko.S | Rúbrica, cuatro huecos pequeños. ISO RA1 n4: en la tarea 12, la VM de VirtualBox con RAM, disco y Guest Additions (no aparecen en ningún sitio). ISO RA2 n4: un párrafo que justifique la interfaz de MAME como front-end (selección de juego, pantalla completa) y cite la tarea 51, donde ya se probó Batocera (EmulationStation) y se descartó con datos. LMSGI RA1 n3: wireframe y punto de corte de tableta (el CSS solo tiene 800 px). LMSGI RA1 n5: justificar WCAG AA (contraste, teclado, textos alternativos); la 27 solo habla de contraste. 10/11 (Adrian): hecho. Tarea 12 §2.1: configuración de la VM leída con VBoxManage y estado de las Guest Additions (Ubuntu solo con el controlador del núcleo; Windows sin ellas: instalarlas, 10 min con el administrador). Tarea 16 §4.7: interfaz de MAME como front-end, con los datos de Batocera de la 51. Tarea 27: punto de corte y wireframe de tableta (style.css), WCAG 2.1 AA criterio a criterio y patrones de UX. Eneko.S lo revisa para defenderlo. | [27-wireframes.md](../../docs/web/27-wireframes.md) |
 | 64 | Servicios reducidos en la VM del gerente (Windows y Ubuntu) | 2 SO | Software | Adrian | Rúbrica, ISO RA1, nivel 5 («servicios reducidos»; auditoría del 06/11). Hecho el 09/11 en la VM del gerente: Windows con 11 servicios deshabilitados (248 → 237 no deshabilitados; la cola de impresión se queda) y Ubuntu con 5 unidades fuera (73 → 68 habilitadas); tras un arranque normal solo escucha en localhost (DNS local, chrony y CUPS). Evidencias win-14, win-15, ubu-11 a ubu-14 en docs/evidencias/12-dual-boot/ y filas «tarea 64» en la sección 6 de la tarea 12. Instantáneas antes-servicios-reducidos-2026-11-09 y tarea64-servicios-reducidos-2026-11-09. De paso, Windows Update había vuelto a poner Windows primero en el arranque EFI: corregido con efibootmgr. | [ubu-12-servicios-tras-arranque-normal.txt](../../docs/evidencias/12-dual-boot/ubu-12-servicios-tras-arranque-normal.txt) |
