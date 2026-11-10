@@ -1,0 +1,15 @@
+# Tarea 12 · Guest Additions de Ubuntu vistas desde el anfitrión (10/11/2026)
+# Instaladas desde GRUB → recovery → root con: apt-get install virtualbox-guest-utils virtualbox-guest-x11 (paquetes de Ubuntu, 7.2.6)
+# Después, arranque normal hasta la pantalla de inicio de sesión (sin entrar con ninguna cuenta).
+
+$ VBoxManage guestproperty enumerate VM-dualboot-W10-ubuntu | grep GuestAdd
+/VirtualBox/GuestAdd/Revision              = '172322'
+/VirtualBox/GuestAdd/Version               = '7.2.6'
+/VirtualBox/GuestAdd/VersionExt            = '7.2.6_Ubuntu'
+/VirtualBox/GuestInfo/OS/Product           = 'Linux'
+
+$ grep 'Guest Additions information report' VBox.log (último arranque)
+VMMDev: Guest Additions capability report: (0x0 -> 0x0) seamless: no, hostWindowMapping: no, graphics: no
+VMMDev: Guest Additions information report: Version 6.0.0 r127566 '6.0.0'
+VMMDev: Guest Additions information report: Interface = 0x00010004 osType = 0x00053100 (Linux >= 2.6, 64-bit)
+VMMDev: Guest Additions capability report: (0x0 -> 0x0) seamless: no, hostWindowMapping: no, graphics: no
