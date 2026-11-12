@@ -3,7 +3,7 @@
 - **Bloque:** 10 Seguridad
 - **Responsable:** Adrian
 - **Depende de:** tareas 13, 24, 30, 42 y 52
-- **Estado (04/11/2026):** 🟡 Revisión del repositorio hecha el 26/10 y repasada el 27/10, el 29/10 y el 03/11 con lo que entró después (secciones 1.1 a 1.3): 26 hallazgos; 10 corregidos (S-01, S-04, S-05, S-06, S-13, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente, S-12 resuelto en el diseño de los TPV y S-03 ya no aplica. Comprobaciones de la sección 5: 1, 4, 5 y 9 hechas; 2, 3, 6 y 7 en el laboratorio (6 y 7 pasan tras aplicar la sección 4.2). El 04/11, S-08 y S-09 entran en el preseed del servidor y se prueban con una instalación desde cero: 6 y 7 pasan sin tocar nada a mano. Faltan las de los equipos del equipo en la red y que cada responsable cierre los suyos (sección 3).
+- **Estado (12/11/2026):** ✅ Se da por terminada el 12/11 por falta de tiempo; lo que queda sin hacer está al final de este punto. Revisión del repositorio hecha el 26/10 y repasada el 27/10, el 29/10 y el 03/11 con lo que entró después (secciones 1.1 a 1.3): 26 hallazgos; 10 corregidos (S-01, S-04, S-05, S-06, S-13, S-15, S-18, S-21, S-22 y S-24), S-11 hecho en el PC del gerente, S-12 resuelto en el diseño de los TPV y S-03 ya no aplica. Comprobaciones de la sección 5: 1, 4, 5 y 9 hechas; 2, 3, 6 y 7 en el laboratorio (6 y 7 pasan tras aplicar la sección 4.2). El 04/11, S-08 y S-09 entran en el preseed del servidor y se prueban con una instalación desde cero: 6 y 7 pasan sin tocar nada a mano. Quedan sin hacer las comprobaciones 2 y 3 con el servidor y los TPV del equipo en la red, y que cada responsable cierre sus hallazgos abiertos (sección 3).
 
 ## 1. Qué se ha revisado y cómo
 

@@ -129,7 +129,7 @@ Corregido el 26/10 (sección 1).
 | Implementación de la BD y consulta de sus datos | Hecho: `almi_chain` en el servidor del equipo y en su copia (27/10) | Cargar `08-usuarios.sql` en el servidor (corr. 4) |
 | Configurar disco redundante | Hecho: BD de Odoo en el RAID 1 y fallo probado con Odoo funcionando (27/10) | — |
 | Plan de copias y prueba de restauración | Hecho: copia en el RAID, el USB y S3 (04/11), restauración comprobada desde el RAID y desde S3 y RTO real de 14 min en una VM nueva (10/11) | — |
-| Seguridad por defecto en toda la solución | Casi hecho: revisión transversal (tarea 46) con el preseed endurecido (04/11) | Corr. 2.1 y 2.4 en el servidor del equipo; tarea 46 |
+| Seguridad por defecto en toda la solución | Hecho (tarea 46, cerrada el 12/11): revisión transversal con el preseed endurecido (04/11); sin las comprobaciones 2 y 3 en los equipos del equipo | Corr. 2.1 y 2.4 en el servidor del equipo; tarea 46 |
 | Verificar con pruebas (funcionamiento, restauración, failover) | Casi hecho: failover del RAID y restauración probados; [tabla de pruebas](docs/gestion/47-tabla-pruebas.md) repasada fila a fila (tarea 47, 10/11) | Tareas 15, 25, 36 y 59 (las filas ⏳ de la tabla) |
 | Documentación reproducible con diagramas | Hecho: [LOGICA_RETO](LOGICA_RETO.md) al día con el montaje desde cero en orden (sección 15) y el capítulo de restauración (tarea 48, 10/11) | — |
 | Seguimiento (Gantt o Kanban) y Git | Hecho, con huecos | Commits de Eneko.P (tarea 5) |
