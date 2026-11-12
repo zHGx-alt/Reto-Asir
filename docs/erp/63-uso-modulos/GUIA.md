@@ -1,10 +1,10 @@
-# Tarea 63: Usar CRM, empleados, marketing e inventario con datos (guía)
+# Tarea 63: Usar CRM, empleados, marketing e inventario con datos
 
 - **Bloque:** 7 ERP
 - **Responsable:** Eneko.P
 - **Depende de:** tareas 34 (módulos instalados) y 36 (carta importada)
 - **Criterio de la rúbrica:** [7. Implementación de un ERP](../../gestion/rubrica-anexo-VI.md#7-implementación-de-un-erp). Nivel 4: «se usan de forma correcta el resto de módulos del ERP». Como la rúbrica es acumulativa, sin el 4 tampoco cuenta el 5 (la factura automática de la tarea 35, que ya está hecha).
-- **Estado (10/11/2026):** ⏳ Guía preparada por Adrian. **Falta hacerlo** (Eneko.P, 45-60 min) y rellenar la sección 7.
+- **Estado (12/11/2026):** ✅ Hecha en la VM `ServidorERP` con el usuario `gerente`: los cinco casos de abajo con su captura (sección 7). Primera prueba de Eneko.P en su Odoo local (sección 8) y cierre en el servidor con [`caso-63.py`](caso-63.py) (sección 9).
 
 ## 1. Qué hay que demostrar
 
@@ -84,19 +84,46 @@ Los módulos están instalados desde la tarea 34, pero solo se han usado Factura
 
 **Para la defensa:** la venta del TPV descuenta el stock sola. Es la integración entre módulos que da un ERP.
 
-## 7. Resultados (rellenar)
+## 7. Resultados
+
+Hecho el 12/11/2026 en `ServidorERP` (Odoo 19, base `tienda`) con el usuario `gerente`. Salida completa: [`evidencias/63-caso-2026-11-12.txt`](evidencias/63-caso-2026-11-12.txt).
 
 | # | Módulo | Prueba | Resultado | Captura |
 |---|---|---|---|---|
-| 1 | CRM | Oportunidad de Nuevo a Ganada | | `63-01`, `63-03` |
-| 2 | Ventas | Presupuesto desde la oportunidad, confirmado | | `63-02` |
-| 3 | Empleados | 4 empleados en 2 departamentos, gerente enlazado a su usuario | | `63-04` |
-| 4 | Marketing | Lista y campaña de prueba | | `63-05`, `63-06` |
-| 5 | Inventario | 48 → venta de 2 → 46 → ajuste a 45 | | `63-07` a `63-09` |
+| 0 | Permisos | `gerente` con Empleados (Administrador) y Marketing por correo (Usuario) | ✅ Lo hace `admin` al principio del script; todo lo demás, `gerente` | — |
+| 1 | CRM | Oportunidad de Nuevo a Ganada | ✅ «Comida de empresa 20 personas», Talleres Ejemplo S.L., 600 €. Pasa por Nuevo → Cualificado → Propuesta → Ganado y cada cambio queda en el historial | [`63-01`](evidencias/63-01-crm-pipeline.png), [`63-03`](evidencias/63-03-oportunidad-ganada.png) |
+| 2 | Ventas | Presupuesto desde la oportunidad, enviado y confirmado | ✅ `S00001`: 20 menús del día, 20 txakolis y 20 tartas de queso; 445,45 € + 10 % de IVA = **490,00 €**. Presupuesto → Presupuesto enviado → Pedido de venta, enlazado a la oportunidad | [`63-02`](evidencias/63-02-pedido-venta.png) |
+| 3 | Empleados | 4 empleados en 2 departamentos, gerente enlazada a su usuario | ✅ Ane Gerente, Jon Camarero e Iñigo Barra (Sala) y Miren Cocina (Cocina). Ane está enlazada al usuario `gerente`, es responsable de Jon e Iñigo y jefa de Sala | [`63-04`](evidencias/63-04-empleados.png) |
+| 4 | Marketing | Lista y campaña de prueba | ✅ Lista «Clientes que aceptan publicidad» con 3 contactos `@example.com` y campaña «Menú de temporada de otoño» en borrador. La prueba a `prueba@example.com` queda registrada como «Connection refused», porque el servidor no tiene correo saliente (lo esperado) | [`63-05`](evidencias/63-05-lista-correo.png), [`63-06`](evidencias/63-06-campana.png) |
+| 5 | Inventario | 48 → venta de 2 → 46 → ajuste a 45 | ✅ Agua 50 cl pasa a rastrear inventario. Recuento de 48; pedido `S00002` de 2 aguas con el albarán `WH/OUT/00002` validado → 46; ajuste físico a 45 (una rota) | [`63-07`](evidencias/63-07-producto-agua.png), [`63-08`](evidencias/63-08-albaran-venta.png), [`63-09`](evidencias/63-09-historial-movimientos.png) |
 
-Al terminar:
-- copiar la tabla a la [tabla de pruebas](../../gestion/47-tabla-pruebas.md) del bloque ERP;
-- cambiar la 63 a «Hecho» en el backlog;
-- subirlo **por Pull Request** desde una rama ([CONTRIBUTING.md](../../../CONTRIBUTING.md)): es tu commit para el Anexo IX.
+La venta de las 2 aguas se hizo con un pedido de venta, que la sección 6 da como alternativa al TPV. En el historial de movimientos (`63-09`) también se ven las ventas del TPV de octubre (`WH/POS/…`), que descuentan stock de la misma forma.
 
-Antes de subir las capturas, comprobar que no se ve ninguna contraseña.
+## 8. Primera prueba de Eneko.P (12/11, en su Odoo local)
+
+Eneko.P probó los módulos en su propio Odoo (`localhost:8069`, compañía «My Company», usuario `admin`). Usó el caso de Almi-Chain como empresa de informática, no el del restaurante. Sus capturas están en [`evidencias/eneko-p-local/`](evidencias/eneko-p-local/). Las subió primero en un Word (`docs/evidencias/CRM,INVENTARIO.ETC.docx`, commit `ab8d5bb`) y aquí se han pasado a PNG.
+
+| Captura | Qué enseña |
+|---|---|
+| `01`, `02`, `06` | Importar empleados, clientes y productos desde CSV con la pantalla de importación de Odoo, asociando columnas a campos (sirve también para la [tarea 36](../36-importar-exportar/DOCUMENTACION.md)). En la `06` todavía no están asociadas las columnas |
+| `03`, `04` | 7 empleados en 5 departamentos y 39 contactos con etiquetas (VIP, habitual, empresa…) |
+| `05` | Embudo del CRM con 7 oportunidades en Cualificado, Propuesta y Ganado |
+| `07` | Recuentos de inventario de 10 productos, todavía sin aplicar |
+| `08` | Campaña de correo «Digitaliza tu restaurante…» |
+| `09`, `10`, `11` | Factura `INV/2026/00001`, ticket del TPV y factura proforma en PDF |
+
+Lo que faltaba para el nivel 4 se hizo en el servidor (sección 7): el presupuesto que sale de la oportunidad, el stock aplicado y descontado por una venta, la plantilla del restaurante enlazada a `gerente` y la lista de correo. Todo con el caso del restaurante y con `gerente`.
+
+## 9. Cómo repetirlo
+
+[`caso-63.py`](caso-63.py) hace los cinco casos por la API de Odoo (XML-RPC). Busca cada registro por nombre antes de crearlo, así que se puede lanzar otra vez sin duplicar nada. Las contraseñas las lee en el servidor y no las muestra:
+
+```bash
+sudo bash -c 'set -a; . /opt/odoo/.env; python3 caso-63.py' | tee 63-caso-$(date +%F).txt
+```
+
+Antes de lanzarlo se hizo la instantánea `antes-tarea-63-2026-11-12` de la VM. Al escribirlo salieron dos cosas de Odoo 19:
+- los botones que no devuelven nada (`action_quotation_sent`, `action_set_won`) dan un error de XML-RPC aunque Odoo ya los ha ejecutado. El script lo ignora;
+- una campaña de correo necesita remitente (`email_from`) y, con «responder a» en modo `new`, también `reply_to`. Si no, la pestaña Ajustes sale en rojo.
+
+Para la defensa basta con abrir Odoo como `gerente` y recorrer las capturas en este orden: CRM → presupuesto → empleados → marketing → inventario.

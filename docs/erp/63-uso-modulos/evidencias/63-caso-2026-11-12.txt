@@ -1,0 +1,9 @@
+0. Permisos: gerente con Empleados (Administrador) y Marketing por correo (Usuario).
+1. CRM: oportunidad 1 «Comida de empresa 20 personas», 600 €, cierre 2026-11-19.
+2. Ventas: S00001 (sale), 445.45 € sin IVA, 490.00 € con IVA. Oportunidad en «Won».
+3. Empleados: 4 en Sala y Cocina; Ane Gerente enlazada al usuario gerente y responsable de Jon e Iñigo.
+4. Marketing: lista «Clientes que aceptan publicidad» con 3 contactos; campaña 2 en borrador, con envío de prueba a prueba@example.com.
+5. Inventario: Agua 50 cl 48 → venta S00002 de 2 → 46 → ajuste físico → 45.
+   2026-11-12 10:42:40  Cantidad de producto actualizada (Gerente)       Inventory adjustment → WH/Stock                   48
+   2026-11-12 10:42:41  WH/OUT/00002                                   WH/Stock → Customers                  2
+   2026-11-12 10:42:41  Cantidad de producto actualizada (Gerente)                   WH/Stock → Inventory adjustment       1
