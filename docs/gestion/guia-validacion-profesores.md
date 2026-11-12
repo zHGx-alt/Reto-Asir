@@ -87,9 +87,9 @@ Tareas [19] [20] [21] [50] [59]
 2. Conectarlo: lo reconoce como mando HID sin instalar drivers ([20] [50]).
 3. Remapear sin reprogramar: `MAP` + `GUARDAR` en la EEPROM, desenchufar, volver a enchufar y ver que se conserva.
 4. Una partida en MAME (Gridlee) con el stick ([21]).
-5. El antirrebote por software, 5 ms por entrada, y la prueba con 9 de 9 OK ([59]).
+5. El antirrebote por software, 5 ms por entrada: prueba simulada con 9 de 9 OK y, en la placa, 116 pulsaciones sin ninguna de menos de 30 ms (12/11) ([59]).
 
-**Ojo, falta ([59], de Markel):** subir el firmware con antirrebote a la placa y probarlo, la captura en un segundo emulador, la tabla de pruebas por control, el precio de la Leonardo y los botones, y por qué un ATmega32U4. La caja tiene 6 botones pero el firmware lee 4 (decisión del profesor).
+**Ojo:** en Batocera, el segundo emulador, la partida se jugó el 27/10 pero no hay captura ([README del stick](../../arduino/mando-joystick/README.md)). La caja tiene 6 botones pero el firmware lee 4 (decisión del profesor).
 
 ### 12 · Optimizar y monitorizar la recreativa (media-difícil, ~12 min)
 Tareas [16] [51] [17] [18] [53] [54]

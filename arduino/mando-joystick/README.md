@@ -17,7 +17,7 @@ Tareas relacionadas en el [backlog](../../docs/gestion/backlog-kanban.csv): #19 
 | **Prueba en la placa real** | **Hecha el 27/10** (tarea #50): botones, palanca, puerto serie y EEPROM. Ver [la prueba](#prueba-en-físico-tarea-50) |
 | Pruebas con MAME y otro emulador | Hecho (tarea #21): en MAME, partida de *Gridlee* con el stick en la recreativa de 1 GB ([tarea 53](../../docs/arcade/53-recreativa-fisica/DOCUMENTACION.md), P4 y P10, 29/10); en Batocera (RetroArch), entradas comprobadas ([evtest](evidencias/batocera-evtest-2026-10-27.txt)) y partida jugada el 27/10, sin captura |
 
-Funciona en la placa real desde el 27/10. Desde el 04/11 lleva antirrebote por software (5 ms por entrada) y ya no usa `delay(10)`; `bash prueba-antirrebote/probar.sh` compila el `.ino` en el PC y lo prueba con rebotes simulados (9 de 9 OK). **Falta subirlo a la placa y probarlo** con el stick: ver [Antirrebote](#antirrebote-tarea-59).
+Funciona en la placa real desde el 27/10. Desde el 04/11 lleva antirrebote por software (5 ms por entrada) y ya no usa `delay(10)`; `bash prueba-antirrebote/probar.sh` compila el `.ino` en el PC y lo prueba con rebotes simulados (9 de 9 OK). El 12/11 se subió a la placa y se probó con el stick: 116 pulsaciones en 45 s, todas bien ([registro](evidencias/entrada-stick-2026-11-12-0918.txt)); ver [Antirrebote](#antirrebote-tarea-59).
 
 ## Conexiones
 
@@ -111,7 +111,17 @@ Al arrancar se lee la EEPROM. Si está vacía o los datos no son válidos (no co
 
 **La prueba simulada** está en [prueba-antirrebote/](prueba-antirrebote/): `prueba.cpp` compila el `.ino` real en el PC con sustitutos de Arduino (`stubs/`) y simula rebotes. Se lanza con `bash prueba-antirrebote/probar.sh`. El 04/11 dio 9 de 9 OK: una pulsación con rebotes cuenta 1, el ruido de 1-2 ms no pasa, la pulsación llega en 6 ms y remapear no deja botones colgados.
 
-**Lo que falta (Markel, 10 min con el stick):** subir esta versión a la placa (`./subir.sh`) y repetir `python3 ver-mando.py` pulsando cada botón y cada dirección varias veces, rápido. Sale bien si cada botón cuenta las pulsaciones hechas y ninguna dura menos de 30 ms. El fichero que deja en `evidencias/` va en la [tabla de pruebas por control](#pruebas-por-control). Las pruebas por control del 27 y el 30/10 se hicieron con la versión anterior (`delay(10)`), que también filtraba el rebote, aunque peor.
+**La prueba en la placa (12/11).** Firmware subido con `./subir.sh` y `python3 ver-mando.py 45` pulsando cada botón y cada dirección varias veces, rápido ([registro](evidencias/entrada-stick-2026-11-12-0918.txt)). Sale bien si cada botón cuenta las pulsaciones hechas y ninguna dura menos de 30 ms:
+
+| Control | Pulsaciones | De menos de 30 ms | Resultado |
+|---|---|---|---|
+| Botón 1 (pin 2) | 23 | 0 | ✅ |
+| Botón 2 (pin 3) | 28 | 0 | ✅ |
+| Botón 3 (pin 4) | 41 | 0 | ✅ |
+| Botón 4 (pin 5) | 24 | 0 | ✅ |
+| Palanca | Las 4 direcciones | — | ✅ |
+
+La pulsación más corta duró 39 ms, así que no llega al PC ningún rebote, ni con pulsaciones muy seguidas (botones 2 y 3 alternados, unas 7 por segundo). Resultado de `ver-mando.py`: «todo llega bien». Las pruebas por control del 27 y el 30/10 se hicieron con la versión anterior (`delay(10)`), que también filtraba el rebote, aunque peor.
 
 ## Prueba guiada (Linux)
 
@@ -174,7 +184,7 @@ Nota: la lista original hablaba de ejes de 0 a 1023. El kernel los entrega de �
 
 ## Pruebas por control
 
-Cada control del stick, probado en la placa real con la versión anterior al antirrebote nuevo (`delay(10)`). Registros del 27/10 ([1](evidencias/entrada-stick-2026-10-27-1124.txt), [2](evidencias/entrada-stick-2026-10-27-1125.txt)) y repaso del 30/10 con `probar-stick.py` ([prueba-stick](evidencias/prueba-stick-2026-10-30_0744.txt)).
+Cada control del stick, probado en la placa real con la versión anterior al antirrebote nuevo (`delay(10)`). Registros del 27/10 ([1](evidencias/entrada-stick-2026-10-27-1124.txt), [2](evidencias/entrada-stick-2026-10-27-1125.txt)) y repaso del 30/10 con `probar-stick.py` ([prueba-stick](evidencias/prueba-stick-2026-10-30_0744.txt)). El 12/11 se repitieron botones y palanca con el antirrebote nuevo y salieron igual ([registro](evidencias/entrada-stick-2026-11-12-0918.txt), [tabla](#antirrebote-tarea-59)).
 
 | Control | Pin | Llega al PC como | Se suelta | En MAME | En Batocera | Resultado |
 |---|---|---|---|---|---|---|
