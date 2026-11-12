@@ -9,7 +9,7 @@ Este documento explica **cómo encaja todo**: qué pide el enunciado, qué pieza
 
 > Los números de tarea (#12, #34…) son los del backlog. Si una pieza está pendiente, se dice.
 >
-> **Al día el 13/11/2026** (61 de 64 tareas hechas). Para montarlo todo desde cero, en orden, ve a la [sección 15](#15-montarlo-desde-cero-en-orden).
+> **Al día el 13/11/2026** (64 de 64 tareas hechas). Para montarlo todo desde cero, en orden, ve a la [sección 15](#15-montarlo-desde-cero-en-orden).
 
 ---
 
@@ -371,7 +371,7 @@ Primero Windows y después Ubuntu (si se hace al revés, Windows borra el arranq
 
 [Guía y evidencias (tarea 12)](docs/so/12-dual-boot.md). La VM está en el PC de Adrian ([quién tiene cada VM](docs/gestion/maquinas-virtuales.md)); sus contraseñas, en KeePassXC y nunca en el repositorio.
 
-### 10.2 TPV (#13 hecha a mano en VM; #15, los scripts, falta ejecutarlos)
+### 10.2 TPV (#13 hecha a mano en VM; #15, los scripts, listos; ejecutarlos en los TPV queda como mejora)
 
 [`configurar-tpv.ps1`](docs/so/13-tpv/configurar-tpv.ps1) deja cada TPV con usuario estándar `cajero`, UAC que no deja elevar, USB de almacenamiento bloqueado, firewall con entrada y salida bloqueadas salvo Odoo, DNS, DHCP y actualizaciones, Edge limitado a Odoo y actualizaciones a las 3:00. El **modo quiosco** (Acceso asignado con Edge) se pone a mano en 6 clics. [`comprobar-tpv.ps1`](docs/so/13-tpv/comprobar-tpv.ps1) comprueba los 16 puntos y guarda la evidencia ([guía](docs/so/13-tpv/DOCUMENTACION.md)).
 

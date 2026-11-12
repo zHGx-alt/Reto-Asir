@@ -39,7 +39,7 @@ Tareas [40] [41] [42] [43] [57]
 4. Que la BD vive en el RAID 1 ([43]).
 5. La integración con Odoo: `sincronizar-carta.py` lleva la carta de `almi_chain` al TPV por XML-RPC ([57]).
 
-**Ojo, falta:** la [57] solo está probada contra un Odoo simulado; falta ejecutarla en la ServidorERP (Iker, evidencias 01-04).
+**Queda como mejora:** la [57] está probada contra un Odoo simulado; falta lanzarla en el ServidorERP del equipo.
 
 ### 3 · Web en AWS (media, ~12 min)
 Tareas [27] [28] [29] [30] [31]
@@ -109,7 +109,7 @@ Tareas [13] [15] [55]
 3. Las contraseñas robustas del gerente, guardadas en KeePassXC ([55]).
 4. Si da tiempo: los usuarios de la BD con mínimos privilegios ([42]) y los servicios reducidos del gerente ([64]).
 
-**Ojo, falta ([15], de Iker):** ejecutar los scripts en los dos TPV. Ahora mismo el bastionado está hecho a mano.
+**Queda como mejora ([15]):** ejecutar los scripts en los dos TPV. El bastionado está hecho a mano (tarea 13, con capturas).
 
 ### 10 · Ampliación de cobertura Wi-Fi (media, ~8 min)
 Tarea [25], cerrada el 12/11
