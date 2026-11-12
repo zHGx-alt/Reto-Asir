@@ -78,11 +78,11 @@
 <rect x="604" y="188" width="116" height="14" rx="4" fill="#eda100" fill-opacity="0.4"><title>4. Herramienta de seguimiento (Gantt en el repo) · Iker · 21/10–23/10 · Hecho</title></rect>
 <line x1="16" y1="228" x2="1282" y2="228" stroke="#f0efeb"/>
 <text x="16" y="221.0" class="s">5</text>
-<text x="44" y="221.0" class="t">Repo con estructura y gitleaks, commits de todos</text>
+<text x="44" y="221.0" class="m">Repo con estructura y gitleaks, commits de todos ✓</text>
 <circle cx="449" cy="217.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="221.0" class="t">Adrian</text>
 <text x="528" y="221.0" class="s">—</text>
-<rect x="604" y="210" width="516" height="14" rx="4" fill="#2a78d6" stroke="#0b0b0b" stroke-width="1.5"><title>5. Repo con estructura y gitleaks, commits de todos · Adrian · 21/10–06/11 · En curso</title></rect>
+<rect x="604" y="210" width="596" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>5. Repo con estructura y gitleaks, commits de todos · Adrian · 21/10–10/11 · Hecho</title></rect>
 <line x1="16" y1="250" x2="1282" y2="250" stroke="#f0efeb"/>
 <text x="16" y="243.0" class="s">6</text>
 <text x="44" y="243.0" class="m">Resolver dudas pendientes con el profesor ✓</text>
@@ -469,11 +469,11 @@
 <text x="22" y="1623" class="t b">10 Seguridad</text>
 <line x1="16" y1="1654" x2="1282" y2="1654" stroke="#f0efeb"/>
 <text x="16" y="1647.0" class="s">46</text>
-<text x="44" y="1647.0" class="t">Revisión de seguridad transversal</text>
+<text x="44" y="1647.0" class="m">Revisión de seguridad transversal ✓</text>
 <circle cx="449" cy="1643.0" r="4.5" fill="#2a78d6"/>
 <text x="458" y="1647.0" class="t">Adrian</text>
 <text x="528" y="1647.0" class="s">13, 24, 30, 42, 52</text>
-<rect x="924" y="1636" width="196" height="14" rx="4" fill="#2a78d6" stroke="#0b0b0b" stroke-width="1.5"><title>46. Revisión de seguridad transversal · Adrian · 02/11–06/11 · En curso</title></rect>
+<rect x="924" y="1636" width="116" height="14" rx="4" fill="#2a78d6" fill-opacity="0.4"><title>46. Revisión de seguridad transversal · Adrian · 02/11–04/11 · Hecho</title></rect>
 <rect x="16" y="1654" width="1266" height="26" fill="#efeeea" fill-opacity="0.85"/>
 <text x="22" y="1671" class="t b">11 Entrega</text>
 <line x1="16" y1="1702" x2="1282" y2="1702" stroke="#f0efeb"/>
