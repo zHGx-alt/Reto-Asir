@@ -1,0 +1,32 @@
+Carta del TPV en Odoo (base tienda, usuario gerente), por categoría del punto de venta:
+
+Cafés (3)
+    Café con leche: 1.80 €
+    Café solo: 1.60 €
+  [no está en carta.csv]   Infusión: 1.60 €
+Bebidas (5)
+    Agua 50 cl: 2.00 €
+    Caña: 2.50 €
+  [no está en carta.csv]   Copa de vino: 3.00 €
+  [no está en carta.csv]   Refresco: 2.50 €
+    Txakoli (copa): 3.50 €
+Entrantes (6)
+  [no está en carta.csv]   Croquetas (6 uds): 7.00 €
+    Croquetas de jamón (6 uds): 8.00 €
+  [no está en carta.csv]   Ensalada mixta: 8.50 €
+    Gilda: 2.50 €
+  [no está en carta.csv]   Patatas bravas: 5.50 €
+    Pimientos de Gernika: 7.00 €
+Platos (6)
+    Bacalao al pil-pil: 21.00 €
+  [no está en carta.csv]   Entrecot: 19.00 €
+  [no está en carta.csv]   Hamburguesa Almi: 12.50 €
+    Marmitako: 15.00 €
+    Menú del día: 14.50 €
+    Txuleta a la brasa (1 kg): 50.00 €
+Postres (3)
+  [no está en carta.csv]   Flan casero: 4.00 €
+    Pantxineta: 6.00 €
+    Tarta de queso: 6.50 €
+
+23 productos en el TPV; los 14 de carta.csv aparecen 14 veces (sin duplicados: True).

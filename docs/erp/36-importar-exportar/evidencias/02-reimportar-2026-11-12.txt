@@ -1,0 +1,17 @@
+  = Entrantes · Gilda: 2.50 € (actualizado)
+  = Entrantes · Croquetas de jamón (6 uds): 8.00 € (actualizado)
+  = Entrantes · Pimientos de Gernika: 7.00 € (actualizado)
+  = Platos · Bacalao al pil-pil: 21.00 € (actualizado)
+  = Platos · Txuleta a la brasa (1 kg): 50.00 € (actualizado)
+  = Platos · Marmitako: 15.00 € (actualizado)
+  = Platos · Menú del día: 14.50 € (actualizado)
+  = Postres · Tarta de queso: 6.50 € (actualizado)
+  = Postres · Pantxineta: 6.00 € (actualizado)
+  = Bebidas · Caña: 2.50 € (actualizado)
+  = Bebidas · Txakoli (copa): 3.50 € (actualizado)
+  = Bebidas · Agua 50 cl: 2.00 € (actualizado)
+  = Cafés · Café solo: 1.60 € (actualizado)
+  = Cafés · Café con leche: 1.80 € (actualizado)
+
+Importación: 0 nuevos, 14 actualizados, 0 con errores (14 filas en carta.csv).
+salida: 0

@@ -19,7 +19,7 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 | Persona | Días de trabajo | Tareas |
 |---|---|---|
 | Adrian | 6 | #2 Mantener Anexo II (11 pasos) (04/11–11/11) |
-| Eneko.P | 3 | #36 Importar y exportar datos en Odoo (04/11–06/11) |
+| Eneko.P | 0 | — |
 | Eneko.S | 0 | — |
 | Iker | 5 | #15 Scripts de configuración reproducibles (Windows) (04/11–05/11); #57 Integrar la BD propia con la de Odoo (06/11–10/11) |
 | Markel | 0 | — |
@@ -29,13 +29,13 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 
 ## Resumen
 
-**59 de 64 tareas hechas (92 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**60 de 64 tareas hechas (93 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 5 | 1 | 0 | 6 |
 | Documentación | 17 | 0 | 1 | 18 |
-| Software | 30 | 3 | 0 | 33 |
+| Software | 31 | 2 | 0 | 33 |
 | Físico | 7 | 0 | 0 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
@@ -47,9 +47,8 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Tipo | Responsable | Fin | Estado | Qué falta | Evidencia |
 |---|---|---|---|---|---|---|---|
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 05/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
-| 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 06/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). 10/11 (Adrian, laboratorio): paso 1 ejecutado, 8 nuevos, 6 actualizados, 0 errores (evidencias/01-importar-2026-11-10.txt); los campos de Odoo 19 funcionan. Faltan los pasos 2-6 (Eneko.P). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 57 | Integrar la BD propia con la de Odoo | Software | Iker | 10/11 | En curso | Rúbrica, GBD RA3, nivel 4. 10/11 (Adrian): diseño en docs/bd/57-integracion-odoo.md. 10/11 (Iker): HECHO el script sincronizar-carta.py, que lee la carta de almi_chain (cuenta informes, solo lectura) y la escribe en el TPV de Odoo por XML-RPC (usuario gerente). Enlaza cada producto con su plato por la referencia ALMI-<id_plato>, no duplica y almi_chain manda en el precio. Probado en local contra un Odoo simulado (evidencias/00). FALTA: ejecutarlo en ServidorERP (pasos 1 a 3 de la DOCUMENTACION) y guardar las evidencias 01 a 04. | [DOCUMENTACION.md](../../docs/bd/57-integracion-odoo/DOCUMENTACION.md) |
-| 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 11/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. 29/10: puesto al día (decisiones sustituidas marcadas, firmware de router, cifrado del gerente, semanas con el corte del 4/11, incidencias y pruebas del 27-29/10). 29/10 (tarde): pruebas de redes y arcade al día, incidencias del 29/10, retrospectiva (qué mejorar y desviaciones) y diagrama de AWS en la tarea 30. 30/10: decisiones de las VM (no van a Drive) y de la notación Chen del E/R; incidencia de las medidas de la recreativa cerrada con la tarea 54; revisión de seguridad con 24 hallazgos. 03/11: decisión de Windows de los TPV (LTSC 2021), incidencias del 30/10 y del 03/11 y prueba de seguridad al día. 06/11: al día con lo del 04/11 (decisiones del antirrebote, de subir.sh y de la ampliación del E/R; incidencias de la auditoría, de las capturas de la 25 y del documento del stick; pruebas de BD, stick, WDS y seguridad; entregables y retrospectiva) y las tareas que siguen abiertas tras su fecha de fin. 09/11: decisión de servicios reducidos, incidencias del 09/11 (arranque EFI, renombrado directo a main y tareas vencidas), prueba de SO y retrospectiva al día. 10/11 (tarde): decisión de las Guest Additions, incidencias de S3 caducado, BitLocker sin teclado desde GRUB y cifras desfasadas, y pruebas de SO y backup. 12/11: decisiones del cierre de la 25 y de la 5 y la 46, incidencia de arduino-cli y prueba del antirrebote en la placa. 12/11 (tarde): tarea 63 cerrada (decisión de terminarla en el servidor, incidencia del Word subido a main y prueba E-09) y G-03 en verde. Sigue abierta: la retrospectiva (sección 10) se completa entre todos después de la presentación. | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
+| 2 | Mantener Anexo II (11 pasos) | Gestión | Adrian | 11/11 | En curso | Dura todo el reto. Borrador de las secciones 9 (entrega) y 10 (retrospectiva) el 26/10; la 10 se completa entre todos después de la presentación. 27/10: añadidas las incidencias del día (impresión por IPP; S-20 y S-21) y quitado el «pendiente de confirmar» de Eneko.P. 29/10: puesto al día (decisiones sustituidas marcadas, firmware de router, cifrado del gerente, semanas con el corte del 4/11, incidencias y pruebas del 27-29/10). 29/10 (tarde): pruebas de redes y arcade al día, incidencias del 29/10, retrospectiva (qué mejorar y desviaciones) y diagrama de AWS en la tarea 30. 30/10: decisiones de las VM (no van a Drive) y de la notación Chen del E/R; incidencia de las medidas de la recreativa cerrada con la tarea 54; revisión de seguridad con 24 hallazgos. 03/11: decisión de Windows de los TPV (LTSC 2021), incidencias del 30/10 y del 03/11 y prueba de seguridad al día. 06/11: al día con lo del 04/11 (decisiones del antirrebote, de subir.sh y de la ampliación del E/R; incidencias de la auditoría, de las capturas de la 25 y del documento del stick; pruebas de BD, stick, WDS y seguridad; entregables y retrospectiva) y las tareas que siguen abiertas tras su fecha de fin. 09/11: decisión de servicios reducidos, incidencias del 09/11 (arranque EFI, renombrado directo a main y tareas vencidas), prueba de SO y retrospectiva al día. 10/11 (tarde): decisión de las Guest Additions, incidencias de S3 caducado, BitLocker sin teclado desde GRUB y cifras desfasadas, y pruebas de SO y backup. 12/11: decisiones del cierre de la 25 y de la 5 y la 46, incidencia de arduino-cli y prueba del antirrebote en la placa. 12/11 (tarde): tarea 63 cerrada (decisión de terminarla en el servidor, incidencia del Word subido a main y prueba E-09) y G-03 en verde. Sigue abierta: la retrospectiva (sección 10) se completa entre todos después de la presentación. 12/11: Anexo II con la tarea 36 cerrada (decisión, incidencia y prueba del permiso de exportar). | [anexo-II-11-pasos.md](../../docs/gestion/anexo-II-11-pasos.md) |
 | 49 | Presentación y ensayo | Documentación | Peio | 11/11 | Pendiente |  27/10: después de la rúbrica (4/11), para ajustarla a ella. 04/11: ensayo con todos el 11/11. | — |
 
 ## Carga por persona
@@ -57,7 +56,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Persona | Tareas | Sin terminar | Software sin terminar | Físicas sin terminar | Días-tarea | Bloques que toca |
 |---|---|---|---|---|---|---|
 | Adrian | 20 | 1 | 0 | 0 | 61 | 0, 2, 3, 4, 5, 6, 7, 8, 9, 10 |
-| Eneko.P | 4 | 1 | 1 | 0 | 13 | 6, 7, 11 |
+| Eneko.P | 4 | 0 | 0 | 0 | 13 | 6, 7, 11 |
 | Eneko.S | 11 | 0 | 0 | 0 | 18 | 1, 3, 5, 7, 8, 11 |
 | Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 8 | 0 | 0 | 0 | 22 | 1, 2, 4, 5, 6, 11 |
@@ -75,9 +74,7 @@ Solo las que están en curso o pendientes; las hechas están al final, en *Tarea
 
 ### Eneko.P
 
-| # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
-|---|---|---|---|---|---|---|
-| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | 03/11–06/11 | #34 (Iker) | En curso |
+Nada en curso ni pendiente.
 
 ### Eneko.S
 
@@ -137,6 +134,7 @@ Nada en curso ni pendiente.
 | 33 | Instalar Odoo + PostgreSQL con Docker | 7 ERP | Software | Iker | Repetido el 23/10 en Docker limpio con el mismo docker-compose.yml: login 200; gestor de BD desactivado; 5432 sin publicar; admin/admin rechazado. | [DOCUMENTACION.md](../../docs/erp/33-odoo-docker/DOCUMENTACION.md) |
 | 34 | Configurar módulos de Odoo | 7 ERP | Software | Iker | Hecha por Iker (estaba a nombre de Markel). La prueba en limpio del 23/10 encontró 2 fallos que impedían repetirla desde cero; corregidos (evidencias/prueba-instalacion-limpia.txt). TPV de barra probado con una venta real. | [DOCUMENTACION.md](../../docs/erp/34-configurar-odoo/DOCUMENTACION.md) |
 | 35 | Caso de uso end-to-end automatizado | 7 ERP | Software | Iker | Pedido; factura; cobro y PDF. Repetida el 27/10 con el caso de uso real (menú de grupo, IVA 10 %): INV/2026/00004 = 660,00 €. La primera repetición (INV/2026/00003, 654,55 €) llevaba también el IVA incluido del TPV: el script fija ahora el IVA en la línea y comprueba el total. La 00003 se anuló con la rectificativa RINV/2026/00001. | [DOCUMENTACION.md](../../docs/erp/35-factura-automatica/DOCUMENTACION.md) |
+| 36 | Importar y exportar datos en Odoo | 7 ERP | Software | Eneko.P | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). 10/11 (Adrian, laboratorio): paso 1 ejecutado, 8 nuevos, 6 actualizados, 0 errores (evidencias/01-importar-2026-11-10.txt); los campos de Odoo 19 funcionan. Faltan los pasos 2-6 (Eneko.P). 12/11 (Adrian, laboratorio, con gerente): pasos 2-6 hechos. Reimportar 0 nuevos/14 actualizados; CSV con 2 precios malos: 2 ERROR y el resto entra; exportar 4 CSV (carta 23, clientes 6, ventas 8, facturas 0); ida y vuelta 0 nuevos/23 actualizados. En Odoo 19 exportar necesita el grupo «Permitir exportar»: se le da a gerente con permiso-exportar.py (falta hacerlo en el servidor del equipo). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 37 | Imprimir ticket desde el TPV de Odoo en la impresora real | 7 ERP | Físico | Adrian | El ticket ya sale en pantalla (tarea 34; sección 8). Pasos en docs/so/14-impresora/DOCUMENTACION.md (paso 6). Espera a la impresora del centro. 26/10: el recibo de una venta por HTTPS se genera e imprime desde Edge (tarea 52, evidencia 09), pero salió por el CUPS del PC, no desde el TPV. 27/10: ya sale desde la VM win-11 por IPP a la Samsung del PC (tarea 52, evidencia 16). Decisión del 27/10: la impresora de tickets de las pruebas es la Samsung ML-1660 (las térmicas del centro no llegan para todos los grupos), así que la tarea se da por hecha con ese ticket (evidencias 16 y 17 de la 52). Pasa de Peio a Adrian, que la hizo. | [DOCUMENTACION.md](../../docs/erp/52-https-odoo/DOCUMENTACION.md) |
 | 38 | Modelo E/R | 8 BD | Documentación | Adrian | 30/10: diagrama pasado a notación Chen (docs/bd/38-modelo-er-chen.svg y .drawio, generados con scripts/bd/er-chen.py); la vista de tablas en Mermaid se queda como complemento. | [38-modelo-er.md](../../docs/bd/38-modelo-er.md) |
 | 39 | Modelo lógico normalizado (3FN) | 8 BD | Documentación | Eneko.S | — | [39-modelo-logico-3fn.md](../../docs/bd/39-modelo-logico-3fn.md) |
