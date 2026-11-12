@@ -116,7 +116,7 @@ Corregido el 26/10 (sección 1).
 | Identificar y documentar el hardware necesario | Hecho | — |
 | Identificar y documentar el software necesario | Hecho (Ubuntu 26.04.1 LTS leído del disco; el driver de Epson no se apunta, decisión del 27/10) | — |
 | Instalación, optimización y monitorización de la recreativa | Hecho: Debian + MAME en la VM de 1 núcleo y 1 GB (tarea 53) y medidas antes y después (tarea 54, 29/10) | Tarea 62: justificar el front-end |
-| Montaje y programación del arcade stick | Hecho: montado y probado en la placa, con la EEPROM, en MAME (tarea 53) y en Batocera (27-29/10); antirrebote en el firmware (04/11) | Tarea 59: probar el antirrebote en la placa, componentes y por qué la Leonardo |
+| Montaje y programación del arcade stick | Hecho: montado y probado en la placa, con la EEPROM, en MAME (tarea 53) y en Batocera (27-29/10); antirrebote en el firmware (04/11) y probado en la placa (12/11); componentes con precio y por qué la Leonardo (tarea 59) | — |
 | Identificar necesidades de comunicación | Hecho | — |
 | Implementación y configuración de sistemas operativos | Hecho: TPV bastionados (tarea 13) y PC del gerente con contraseñas robustas (tarea 55) y servicios reducidos (tarea 64, 09/11) | Tarea 15: ejecutar `configurar-tpv.ps1` en los TPV |
 | Restricción de cuentas y equipos (mínimos privilegios) | Hecho en el laboratorio: cajero solo con Punto de venta (30/10) | Corr. 2.3 en el servidor del equipo; tarea 15 |

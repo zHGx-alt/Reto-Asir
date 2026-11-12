@@ -21,14 +21,14 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | 1 Hardware | 3 | 3 | 0 | 0 | — |
 | 2 SO | 11 | 10 | 0 | 1 | Scripts del TPV en los dos equipos (tarea 15, S-20) |
 | 3 Arcade | 10 | 10 | 0 | 0 | — |
-| 4 Arduino | 7 | 6 | 0 | 1 | Probar el antirrebote en la placa (tarea 59) |
+| 4 Arduino | 7 | 7 | 0 | 0 | — |
 | 5 Redes | 10 | 7 | 1 | 2 | WDS: Wi-Fi de clientes por el router 2, aislamiento probado desde él y cobertura antes y después (tarea 25) |
 | 6 Web | 6 | 6 | 0 | 0 | Repetir Lighthouse con la web del 04/11 (necesita la EC2 encendida) |
 | 7 ERP | 8 | 7 | 1 | 0 | Exportar e ida y vuelta (tarea 36); usar CRM, empleados, marketing e inventario (63, guía hecha) |
 | 8 BD | 4 | 4 | 0 | 0 | — |
 | 9 Backup | 6 | 6 | 0 | 0 | — (sin probar: un TPV contra el servidor recuperado) |
 | 10 Seguridad | 3 | 2 | 1 | 0 | Comprobaciones 2, 3, 6 y 7 en el servidor del equipo (tarea 46, sección 5) |
-| **Total** | **73** | **65** | **3** | **5** | |
+| **Total** | **73** | **66** | **3** | **4** | |
 
 ## 0 · Gestión
 
@@ -89,7 +89,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | R-04 | 50 | Firmware en la placa: HID, comandos y EEPROM | Funciona | ✅ Los 4 botones y las 4 direcciones llegan al PC y a Batocera | 27/10 | [Entrada registrada](../../arduino/mando-joystick/evidencias/entrada-stick-2026-10-27-1124.txt) · [EEPROM](../../arduino/mando-joystick/evidencias/eeprom-2026-10-27.txt) |
 | R-05 | 21 | Stick con MAME y con otro emulador | Funciona en los dos | ✅ MAME: partida en `Recreativa-53` (tarea 53, 29/10). Batocera (RetroArch): evtest con los 4 botones y los ejes y una partida el 27/10, sin captura | 27-29/10 | [evtest en Batocera](../../arduino/mando-joystick/evidencias/batocera-evtest-2026-10-27.txt) · [partida en MAME](../arcade/53-recreativa-fisica/evidencias/07-partida-stick.png) |
 | R-06 | 59 | Antirrebote del firmware con rebotes simulados (`prueba-antirrebote/probar.sh`) | Una pulsación con rebotes cuenta 1; el ruido no pasa | ✅ 9 de 9: pulsación con rebotes de 3 ms = 1, picos de 1-2 ms ignorados, retardo 6 ms, remapeo sin botones colgados | 04/11 | [README del stick, Antirrebote](../../arduino/mando-joystick/README.md#antirrebote-tarea-59) |
-| R-07 | 59 | Antirrebote en la placa: `ver-mando.py` pulsando cada control | Ninguna pulsación de menos de 30 ms | ⏳ Markel: subirlo a la placa con `subir.sh` y pulsar cada control | — | [README del stick, Antirrebote](../../arduino/mando-joystick/README.md#antirrebote-tarea-59) |
+| R-07 | 59 | Antirrebote en la placa: `ver-mando.py` pulsando cada control | Ninguna pulsación de menos de 30 ms | ✅ 116 pulsaciones en 45 s, la más corta de 39 ms; las 4 direcciones ([registro](../../arduino/mando-joystick/evidencias/entrada-stick-2026-11-12-0918.txt)) | 12/11 | [README del stick, Antirrebote](../../arduino/mando-joystick/README.md#antirrebote-tarea-59) |
 
 ## 5 · Redes
 
