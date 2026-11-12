@@ -1,14 +1,14 @@
 # Guía para validar con los profesores
 
-13 actividades por validar (la 6, la 13 y la 14 ya están validadas). Van agrupadas por profesor y, dentro de cada uno, **de la que más tiempo lleva enseñar a la que menos**. Los tiempos son una estimación de lo que dura la demostración, sin contar la preparación.
+10 actividades por validar (la 5, la 6, la 7, la 12, la 13 y la 14 ya están validadas). Van agrupadas por profesor y, dentro de cada uno, **de la que más tiempo lleva enseñar a la que menos**. Los tiempos son una estimación de lo que dura la demostración, sin contar la preparación.
 
 Cada actividad del profesor agrupa varias tareas del backlog (`docs/gestion/backlog-kanban.csv`); el número entre corchetes es la tarea.
 
 | Profesor | Actividades | Tiempo aprox. |
 |---|---|---|
 | Ales | 4, 16, 3, 15, 2, 1 | ~65 min |
-| Jose Mari | 5, 12, 11, 10 | ~45 min |
-| Virginia | 7, 9, 8 | ~30 min |
+| Jose Mari | 11, 10 (la 5 y la 12, validadas el 12/11) | ~18 min |
+| Virginia | 9, 8 (la 7, validada el 12/11) | ~15 min |
 
 ---
 
@@ -77,7 +77,7 @@ Tareas [7] [8] [10] [11]
 
 ## Jose Mari
 
-### 5 · Arcade stick con Arduino (difícil, ~15 min)
+### 5 · Arcade stick con Arduino (difícil, ~15 min) · ✅ validada el 12/11
 Tareas [19] [20] [21] [50] [59]
 
 **Preparar:** el stick montado, un cable USB y la VM de la recreativa con MAME.
@@ -91,7 +91,7 @@ Tareas [19] [20] [21] [50] [59]
 
 **Ojo:** en Batocera, el segundo emulador, la partida se jugó el 27/10 pero no hay captura ([README del stick](../../arduino/mando-joystick/README.md)). La caja tiene 6 botones pero el firmware lee 4 (decisión del profesor).
 
-### 12 · Optimizar y monitorizar la recreativa (media-difícil, ~12 min)
+### 12 · Optimizar y monitorizar la recreativa (media-difícil, ~12 min) · ✅ validada el 12/11
 Tareas [16] [51] [17] [18] [53] [54]
 
 **Enseñar:**
@@ -111,18 +111,20 @@ Tareas [13] [15] [55]
 
 **Ojo, falta ([15], de Iker):** ejecutar los scripts en los dos TPV. Ahora mismo el bastionado está hecho a mano.
 
-### 10 · Ampliación de cobertura Wi-Fi (media, ~8 min, **no está terminada**)
-Tarea [25]
+### 10 · Ampliación de cobertura Wi-Fi (media, ~8 min)
+Tarea [25], cerrada el 12/11
 
-**Hecho:** el router 2 está en modo Range Extender (192.168.10.2, DHCP apagado, responde al ping del router 1).
+**Enseñar:**
+1. El router 2 en modo Range Extender, enlazado por radio al router 1: `192.168.10.2` y DHCP apagado ([25]).
+2. Las pruebas de conectividad: ping al router 1, salida a Internet y los invitados sin acceso a la LAN.
 
-**Ojo, falta (Peio, sección 7, 30-45 min):** enlazarlo a la Wi-Fi de invitados en vez de a la del personal, probar en su BSSID, medir los dBm antes y después en la barra y en la entrada, y quitar UPnP. **Sin las medidas de dBm no hay prueba de que mejore la cobertura**; mejor no enseñarla hasta que Peio la acabe.
+**Ojo, queda como mejora (Peio, sección 7 de la tarea):** el router 2 repite la Wi-Fi del personal y no la de clientes, y no hay medidas de cobertura en dBm antes y después (pruebas W6 y W8 en ⏳). Si pregunta si mejora la cobertura, la respuesta honesta es que el enlace funciona pero la mejora no está medida; se cerró así por falta de tiempo (decisión en el Anexo II).
 
 ---
 
 ## Virginia
 
-### 7 · Instalación de S.O. y arranque dual (difícil, ~15 min)
+### 7 · Instalación de S.O. y arranque dual (difícil, ~15 min) · ✅ validada el 12/11
 Tareas [12] [55] [62] [64]
 
 **Preparar:** la VM `VM-dualboot-W10-ubuntu` en VirtualBox, con la instantánea `guest-additions-2026-11-10`.
