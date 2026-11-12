@@ -279,7 +279,7 @@ El enunciado pide **diseñar** las bases de datos de cada establecimiento (E/R, 
 | Alcance | Un local | Base **central** de la cadena con los datos de cada establecimiento ([tarea 38, apartado 1.1](docs/bd/38-modelo-er.md#11-una-base-central-para-toda-la-cadena)) |
 | Tablas | Las de Odoo | 17: establecimiento, empleado, cliente, modelo_equipo, equipo, plato, plato_alergeno, historial_precio_plato, articulo, proveedor, stock, suministro (la relación ternaria), receta, factura, linea_factura, campana_marketing, envio_campana |
 | Para qué | Funcionamiento real del restaurante | Demostrar el diseño: claves, normalización, reglas y permisos |
-| Datos y consultas | Los del restaurante | `06-datos.sql` (2 locales, 8 ventas) y `07-consultas.sql` (12 consultas), ejecutados el 24/10 ([evidencia](docs/bd/evidencias/41-datos-y-consultas.txt)); usuarios `tpv_app` e `informes` con sus pruebas (#42, [evidencia](docs/bd/evidencias/42-usuarios-y-permisos.txt)) |
+| Datos y consultas | Los del restaurante | `06-datos.sql` (2 locales, 8 ventas) y `07-consultas.sql` (15 consultas desde la tarea 56; 12 el 24/10), ejecutados el 24/10 ([evidencia](docs/bd/evidencias/41-datos-y-consultas.txt)); usuarios `tpv_app` e `informes` con sus pruebas (#42, [evidencia](docs/bd/evidencias/42-usuarios-y-permisos.txt)) |
 | Copia de seguridad | Sí (restic, tarea 44) | Sí: creada en el servidor del equipo el 27/10 y en la copia diaria; restaurada el 04/11 desde el RAID y desde S3 con tablas, filas, importes y permisos comparados (#45, #60) |
 
 Las dos modelan **el mismo negocio**, así que sus entidades se corresponden:
