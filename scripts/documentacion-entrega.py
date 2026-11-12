@@ -103,6 +103,7 @@ PARTES = [
         "docs/bd/39-modelo-logico-3fn.md",
         "docs/bd/40-scripts-ddl.md",
         "docs/bd/57-integracion-odoo.md",
+        "docs/bd/57-integracion-odoo/DOCUMENTACION.md",
     ]),
     ("Disco redundante, copias y restauración (tareas 43-45, 48 y 60)", [
         "docs/backup/43-raid1/DOCUMENTACION.md",
@@ -120,6 +121,7 @@ PARTES = [
         "docs/gestion/47-tabla-pruebas.md",
         "docs/gestion/verificacion.md",
         "docs/gestion/rubrica-anexo-VI.md",
+        "docs/gestion/guia-validacion-profesores.md",
         "CORRECIONES.md",
     ]),
 ]
@@ -135,12 +137,15 @@ def comprobar_completo():
     """Todo .md de docs/ (y los README sueltos) tiene que estar en PARTES."""
     incluidos = {d for _, docs in PARTES for d in docs}
     faltan = [d for d in incluidos if not (RAIZ / d).is_file()]
+    # as_posix(): en Windows relative_to() da barras invertidas y no casaría con PARTES.
+    # Se saltan carpetas ocultas (.pio, .terraform…): son de herramientas, no documentación.
     sobran = sorted(
-        str(p.relative_to(RAIZ))
+        r
         for p in list((RAIZ / "docs").rglob("*.md"))
         + list((RAIZ / "arduino").rglob("*.md"))
         + list((RAIZ / "iac").rglob("*.md"))
-        if str(p.relative_to(RAIZ)) not in incluidos
+        if not any(parte.startswith(".") for parte in p.relative_to(RAIZ).parts)
+        and (r := p.relative_to(RAIZ).as_posix()) not in incluidos
     )
     if faltan or sobran:
         for d in faltan:

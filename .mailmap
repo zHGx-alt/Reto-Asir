@@ -1,0 +1,11 @@
+# Une las identidades de cada persona en git shortlog / git log (no reescribe el historial).
+# Formato: Nombre <correo-canónico> <correo-usado-en-el-commit>
+Adrian <not.thoradri@gmail.com> <not,thoradri@gmail.com>
+Adrian <not.thoradri@gmail.com> <not.thoradri@gmail.com>
+Eneko.S <enekosanchez95@gmail.com> <38722272+enekosanchez95@users.noreply.github.com>
+Eneko.S <enekosanchez95@gmail.com> <enekosanchez95@gmail.com>
+Eneko.P <enekopsmg@gmail.com> <enekopsmg@gmail.com>
+Iker <205588885+Ikeee10@users.noreply.github.com> <ikeeeee.10@gmail.com>
+Iker <205588885+Ikeee10@users.noreply.github.com> <205588885+Ikeee10@users.noreply.github.com>
+Markel <markelgl21@gmail.com> <markelgl21@gmail.com>
+Peio <peio.amenabar@gmail.com> <peio.amenabar@gmail.com>

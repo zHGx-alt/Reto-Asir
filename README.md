@@ -2,7 +2,7 @@
 
 Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de restaurantes. Enunciado en [Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx) y plan de trabajo en [almi-chain-plan.pdf](almi-chain-plan.pdf).
 
-**Para entender el proyecto entero** (qué pide el enunciado, qué pieza lo resuelve y cómo se relacionan la red, Odoo, la web, la base de datos y las copias): [LOGICA_RETO.md](LOGICA_RETO.md). Para montarlo desde cero, en orden: [LOGICA_RETO, sección 15](LOGICA_RETO.md#15-montarlo-desde-cero-en-orden). Pruebas de cada bloque: [tabla de pruebas](docs/gestion/47-tabla-pruebas.md).
+**Para entender el proyecto entero** (qué pide el enunciado, qué pieza lo resuelve y cómo se relacionan la red, Odoo, la web, la base de datos y las copias): [LOGICA_RETO.md](LOGICA_RETO.md). Para montarlo desde cero, en orden: [LOGICA_RETO, sección 15](LOGICA_RETO.md#15-montarlo-desde-cero-en-orden). Pruebas de cada bloque: [tabla de pruebas](docs/gestion/47-tabla-pruebas.md). Presentación del 13/11: [docs/Almi-Chain-presentacion.pptx](docs/Almi-Chain-presentacion.pptx).
 
 **Documentación completa en un solo PDF** (la que se entrega al profesor): portada, índice y todos los documentos del repositorio ordenados por bloques. Se genera con Docker y Google Chrome:
 
@@ -14,7 +14,7 @@ Sale en `entrega/Almi-Chain-documentacion.pdf` (no se sube a Git por tamaño). S
 
 ## Estado
 
-**60 de 64 tareas hechas** (12/11/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md); la rúbrica, en [rubrica-anexo-VI.md](docs/gestion/rubrica-anexo-VI.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
+**61 de 64 tareas hechas** (13/11/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md); la rúbrica, en [rubrica-anexo-VI.md](docs/gestion/rubrica-anexo-VI.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
 
 ```bash
 bash scripts/verificar-repo.sh
