@@ -9,7 +9,7 @@ Este documento explica **cómo encaja todo**: qué pide el enunciado, qué pieza
 
 > Los números de tarea (#12, #34…) son los del backlog. Si una pieza está pendiente, se dice.
 >
-> **Al día el 12/11/2026** (55 de 64 tareas hechas). Para montarlo todo desde cero, en orden, ve a la [sección 15](#15-montarlo-desde-cero-en-orden).
+> **Al día el 12/11/2026** (56 de 64 tareas hechas). Para montarlo todo desde cero, en orden, ve a la [sección 15](#15-montarlo-desde-cero-en-orden).
 
 ---
 
