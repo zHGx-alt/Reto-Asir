@@ -241,7 +241,7 @@ def main():
         "(sacadas de los documentos y del historial de Git); en el resto, las planificadas. "
         "El reto oficial va del lunes 26/10 al jueves 12/11/2026; el Gantt empieza el 21/10 porque el "
         "equipo empezó a preparar el repositorio y el material antes. Corte técnico el miércoles 4/11 (ese día "
-        "dan la rúbrica); lo que queda, la documentación y el ensayo, hasta el 11/11 (plan del 04/11/2026).",
+        "dan la rúbrica); lo que queda, la documentación y la presentación, hasta el 12/11 (plan del 04/11/2026).",
         "",
         "![Diagrama de Gantt](gantt.svg)",
         "",

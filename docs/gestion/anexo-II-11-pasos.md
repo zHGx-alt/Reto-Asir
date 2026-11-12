@@ -5,7 +5,7 @@
 | **Reto** | 1 · Almi-Chain |
 | **Grupo** | ASIR1 2026-2027 |
 | **Equipo** | Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio |
-| **Periodo** | 21/10/2026 – 12/11/2026 (técnico hasta el 4/11; huecos de la rúbrica, documentación y presentación del 5 al 11/11, con el ensayo el 11/11) |
+| **Periodo** | 21/10/2026 – 12/11/2026 (técnico hasta el 4/11; huecos de la rúbrica, documentación y presentación del 5 al 12/11) |
 | **Responsable del documento** | Adrian |
 
 ---
@@ -134,7 +134,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 |---|---|---|
 | 1 | 21/10 – 27/10 | Organización, requisitos, comparativas, diseño (red, web, E/R) y presupuesto; buena parte de la implantación en VM |
 | 2 | 28/10 – 04/11 | Terminar lo técnico (corte el miércoles 4/11, día de la rúbrica): equipos físicos, red y WDS, comprobaciones de seguridad |
-| 3 | 05/11 – 11/11 | Huecos de la rúbrica (tareas 56-63), tabla de pruebas, documentación final, presentación y ensayo el 11/11 |
+| 3 | 05/11 – 11/11 | Huecos de la rúbrica (tareas 56-63), tabla de pruebas, documentación final y presentación |
 
 > **Fechas del reto:** del lunes 26/10 al jueves 12/11/2026. El 27/10 se fijó el corte técnico el 4/11 (sección 5). Las tareas ya hechas conservan sus fechas reales.
 
@@ -236,7 +236,7 @@ Incidencias relevantes durante la ejecución:
 | Documentación completa en un solo PDF | 48 | Adrian | `python3 scripts/documentacion-entrega.py` genera `entrega/Almi-Chain-documentacion.pdf` con todo el repositorio en orden (10/11) | Regenerarlo el día de la entrega, después de la última PR | Hecho (10/11) |
 | Diagramas | Cada bloque | Responsable de cada bloque | Arquitectura de equipos ([tarea 11](../diagramas/11-arquitectura-equipos/DIAGRAMA.md)), plano y red ([tarea 23](../redes/23-plano-direccionamiento.md)), E/R y 3FN ([tareas 38](../bd/38-modelo-er.md) y [39](../bd/39-modelo-logico-3fn.md)), wireframes ([tarea 27](../web/27-wireframes.md)), Gantt ([gantt.md](gantt.md)) | **AWS:** hecho el 29/10 ([tarea 30, sección 2](../web/30-hosting-aws.md#2-arquitectura)). **Copias:** un esquema de la regla 3-2-1 (datos → RAID → USB fuera del local) | Parcial |
 | Tabla de pruebas por bloque | 47 | Eneko.S | [47-tabla-pruebas.md](47-tabla-pruebas.md): 74 pruebas de los 11 bloques (69 ✅, 2 🟡, 3 ⏳ tras las tareas 36 y 63 y el primer commit de Eneko.P del 12/11), repasada fila a fila el 10/11; sección 8 de este anexo y [verificacion.md](verificacion.md) | Las filas ⏳ son los scripts de los TPV (tarea 15, abierta) y la cobertura del WDS en dBm (tarea 25, cerrada con eso como mejora); que Eneko.S la repase para defenderla | Hecho (10/11) |
-| Presentación y ensayo | 49 | Peio | Presentación en .pptx (16 diapositivas, con quién habla en las notas) hecha el 12/11 con Claude Code a petición de Adrian; subida por Peio el 12/11 a [docs/Almi-Chain-presentacion.pptx](../Almi-Chain-presentacion.pptx) | Presentarla el 13/11 (9.2) | Hecho |
+| Presentación | 49 | Peio | Presentación en .pptx (16 diapositivas, con quién habla en las notas) hecha el 12/11 con Claude Code a petición de Adrian; subida por Peio el 12/11 a [docs/Almi-Chain-presentacion.pptx](../Almi-Chain-presentacion.pptx) | Presentarla el 13/11 (9.2) | Hecho |
 | Anexo I (contrato de equipo) | 1 | Adrian | [Firmado el 21/10](anexo-I-contrato-equipo.md) | — | Hecho |
 | Anexo II (este documento) | 2 | Adrian | Secciones 1 a 8, al día el 12/11 | Lo que entre hasta la entrega; cerrar la 9 y la 10 después de la presentación | En curso |
 | Commits de todos (Anexo IX) | 5 | Adrian | 6 de 6 personas con commits propios (Eneko.P, el 12/11) | — | Hecho (12/11) |
