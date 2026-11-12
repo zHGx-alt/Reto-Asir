@@ -4,7 +4,7 @@
 - **Responsable:** Iker
 - **Depende de:** tarea 34 (Odoo configurado, usuario `gerente`) y tarea 40 (base `almi_chain`)
 - **Rúbrica:** GBD RA3, nivel 4
-- **Estado (10/11/2026):** script hecho y probado en local contra un Odoo simulado ([`evidencias/00-prueba-local-simulada.txt`](evidencias/00-prueba-local-simulada.txt)). **Falta ejecutarlo en `ServidorERP`** y guardar las evidencias 01 a 03 (sección 4).
+- **Estado (12/11/2026, cerrada):** script hecho y probado en local contra un Odoo simulado ([`evidencias/00-prueba-local-simulada.txt`](evidencias/00-prueba-local-simulada.txt)). **Queda como mejora** ejecutarlo en `ServidorERP` y guardar las evidencias 01 a 03 (sección 4).
 
 ## 1. Qué se hace
 
@@ -64,7 +64,7 @@ read -rs ODOO_PASSWORD && export ODOO_PASSWORD
 
 Si `almi_chain` está en otro sitio, la orden de lectura se cambia con la variable `ALMI_PSQL`, y la de Odoo con `ODOO_URL`, `ODOO_DB` y `ODOO_USER` (como en la tarea 36).
 
-## 4. Pendiente
+## 4. Mejora (no hecha)
 
 - [ ] Ejecutar los pasos 1 a 3 en `ServidorERP` y guardar las salidas y la captura en `evidencias/`.
 - [ ] Si `informes` no puede entrar por el socket del contenedor (depende de `pg_hba.conf`), añadir `-h localhost` a `ALMI_PSQL` y la contraseña en `PGPASSWORD`.

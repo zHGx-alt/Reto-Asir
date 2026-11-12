@@ -9,7 +9,7 @@ Este documento explica **cómo encaja todo**: qué pide el enunciado, qué pieza
 
 > Los números de tarea (#12, #34…) son los del backlog. Si una pieza está pendiente, se dice.
 >
-> **Al día el 12/11/2026** (60 de 64 tareas hechas). Para montarlo todo desde cero, en orden, ve a la [sección 15](#15-montarlo-desde-cero-en-orden).
+> **Al día el 13/11/2026** (64 de 64 tareas hechas). Para montarlo todo desde cero, en orden, ve a la [sección 15](#15-montarlo-desde-cero-en-orden).
 
 ---
 
@@ -32,7 +32,7 @@ Una cadena de restaurantes nos contrata para montar la informática de un local.
 | 11 | Bases de datos de cada establecimiento: E/R, tablas, implementación y consultas | Modelo E/R en notación Chen (con relación ternaria e historial de precios) → 3FN → PostgreSQL con reglas y roles | 38–42, 56 | [docs/bd](docs/bd/) |
 | 12 | BD en un dispositivo redundante, plan de copias y prueba de restauración | RAID 1 con mdadm, restic cifrado 3-2-1 (RAID, USB y S3), restauración aislada | 43–45, 60 | [docs/backup](docs/backup/) |
 | 13 | Seguimiento (Gantt o Kanban) y control de versiones | CSV → Gantt generado por script; GitHub con PR, CI en verde y gitleaks | 1–6 | [docs/gestion](docs/gestion/) |
-| 14 | Pruebas, documentación reproducible con diagramas, presentación | Tabla de pruebas, este documento, guías por tarea | 47–49 | — |
+| 14 | Pruebas, documentación reproducible con diagramas, presentación | Tabla de pruebas, este documento, guías por tarea, [presentación](docs/Almi-Chain-presentacion.pptx) | 47–49 | — |
 
 ### 1.1 Resultados de aprendizaje → tareas
 
@@ -173,8 +173,8 @@ Detalle: [plano y plan de direccionamiento (tarea 23)](docs/redes/23-plano-direc
 - **Invitados en el router real:** el TL-WR841N no da a los invitados una subred propia: van en `192.168.10.0/24` y los aísla con reglas internas (un móvil recibió `192.168.10.100`). El diseño con los Archer C6 y Packet Tracer usan `192.168.50.0/24`. El aislamiento, que es lo que importa, está probado en los dos ([tarea 23, 4.4](docs/redes/23-plano-direccionamiento.md)).
 - Las contraseñas que se vieron en capturas (Wi-Fi, administración y PIN de WPS) se cambiaron el 26/10 y el 29/10 y están en KeePassXC.
 - **Análisis con nmap y Wireshark hecho** (#26, 30/10): desde invitados no se ve ningún equipo de la LAN y el panel y el SSH del router salen filtrados.
-- **WDS** (#25, en curso): el 04/11 el router 2 funciona en Range Extender en `192.168.10.2`, sin DHCP y con ping al router 1 sin pérdidas. Falta que amplíe la Wi-Fi de clientes: en Range Extender el TL-WR841N repite una sola red y se enlazó a la del personal; se cambia a la de invitados, como en el diseño de Packet Tracer. Y medir la cobertura antes y después ([tarea 25, sección 7](docs/redes/25-wds/DOCUMENTACION.md#7-lo-que-falta-hoja-de-trabajo)).
-- Falta desactivar UPnP en el router (S-25 de la #46), en la misma visita que la #25. El firmware no se actualiza: el router de prácticas se sustituye por el Archer C6.
+- **WDS** (#25, cerrada el 12/11): el router 2 funciona en Range Extender en `192.168.10.2`, enlazado por radio, sin DHCP y con ping e Internet a través de él. Quedan como mejora declarada que repita la Wi-Fi de clientes (en Range Extender el TL-WR841N repite una sola red y se enlazó a la del personal; en el diseño de Packet Tracer es la de invitados) y la cobertura medida en dBm antes y después ([tarea 25, sección 7](docs/redes/25-wds/DOCUMENTACION.md#7-lo-que-falta-hoja-de-trabajo)).
+- Falta desactivar UPnP en el router (S-25 de la #46), la próxima vez que se tenga el router. El firmware no se actualiza: el router de prácticas se sustituye por el Archer C6.
 
 ---
 
@@ -225,7 +225,7 @@ sequenceDiagram
     O->>P: Asiento contable POSS/2026/10/0001 (Clientes 35,50 · Ventas 32,27 · IVA 3,23)
 ```
 
-- La carta de ejemplo (15 productos, salas y mesas) la carga [`cargar-carta-y-mesas.py`](docs/erp/34-configurar-odoo/cargar-carta-y-mesas.py). La carta real la importa desde un CSV el script de la tarea 36 (en curso: falta ejecutarlo contra Odoo con evidencias).
+- La carta de ejemplo (15 productos, salas y mesas) la carga [`cargar-carta-y-mesas.py`](docs/erp/34-configurar-odoo/cargar-carta-y-mesas.py). La carta real la importa desde un CSV el script de la tarea 36 ([`importar-exportar.py`](docs/erp/36-importar-exportar/DOCUMENTACION.md), ejecutado contra Odoo el 12/11 con importación, errores, exportación e ida y vuelta).
 - **Stock:** los productos de la carta no tienen activado el seguimiento de inventario, así que una venta **no descuenta stock** en Odoo. Se puede activar si el cliente lo quiere; el descuento por receta sí está en la BD de la tarea 40 (sección 7).
 - **HTTPS:** el proxy de la tarea 52 ([`docs/erp/52-https-odoo`](docs/erp/52-https-odoo/DOCUMENTACION.md)) pone nginx con certificado propio delante y Odoo deja de escuchar en la LAN. Probado entero el 26-27/10 en una VM nueva (venta, venta sin red y ticket impreso por HTTPS); **falta activarlo en el servidor del equipo** (S-02 de la #46), donde Odoo sigue por HTTP en la LAN. Además permite al TPV seguir cobrando si se cae la red (el *service worker* solo funciona con HTTPS).
 
@@ -371,7 +371,7 @@ Primero Windows y después Ubuntu (si se hace al revés, Windows borra el arranq
 
 [Guía y evidencias (tarea 12)](docs/so/12-dual-boot.md). La VM está en el PC de Adrian ([quién tiene cada VM](docs/gestion/maquinas-virtuales.md)); sus contraseñas, en KeePassXC y nunca en el repositorio.
 
-### 10.2 TPV (#13 hecha a mano en VM; #15, los scripts, falta ejecutarlos)
+### 10.2 TPV (#13 hecha a mano en VM; #15, los scripts, listos; ejecutarlos en los TPV queda como mejora)
 
 [`configurar-tpv.ps1`](docs/so/13-tpv/configurar-tpv.ps1) deja cada TPV con usuario estándar `cajero`, UAC que no deja elevar, USB de almacenamiento bloqueado, firewall con entrada y salida bloqueadas salvo Odoo, DNS, DHCP y actualizaciones, Edge limitado a Odoo y actualizaciones a las 3:00. El **modo quiosco** (Acceso asignado con Edge) se pone a mano en 6 clics. [`comprobar-tpv.ps1`](docs/so/13-tpv/comprobar-tpv.ps1) comprueba los 16 puntos y guarda la evidencia ([guía](docs/so/13-tpv/DOCUMENTACION.md)).
 

@@ -5,7 +5,7 @@
 | **Reto** | 1 · Almi-Chain |
 | **Grupo** | ASIR1 2026-2027 |
 | **Equipo** | Adrian, Iker, Eneko.S, Eneko.P, Markel, Peio |
-| **Periodo** | 21/10/2026 – 12/11/2026 (técnico hasta el 4/11; huecos de la rúbrica, documentación y presentación del 5 al 11/11, con el ensayo el 11/11) |
+| **Periodo** | 21/10/2026 – 12/11/2026 (técnico hasta el 4/11; huecos de la rúbrica, documentación y presentación del 5 al 12/11) |
 | **Responsable del documento** | Adrian |
 
 ---
@@ -121,6 +121,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 | Cierre de la tarea 25 (WDS) | Se da por terminada el 12/11 con el router 2 enlazado por radio, sin DHCP y con ping e Internet; quedan como mejora la Wi-Fi de clientes por el router 2 y la cobertura medida en dBm | La entrega es el 12/11 y no hay tiempo de volver a montar los routers; lo que falta está descrito paso a paso en la sección 7 de la tarea y las pruebas W6 y W8 siguen como ⏳ en la tabla de pruebas | 12/11/2026 |
 | Cierre de las tareas 5 y 46 | Se dan por terminadas el 12/11. La 5 con el repositorio, gitleaks y commits de 5 de las 6 personas (Eneko.P sin commits propios); la 46 con 26 hallazgos repartidos y las comprobaciones 1, 4, 5, 6, 7 y 9 hechas, sin las 2 y 3 en el servidor y los TPV del equipo | Es el día de la entrega; lo que falta no depende ya de Adrian (commits de Eneko.P) o necesita los equipos del equipo en la red. Queda apuntado en la tabla de pruebas (G-03) y en la sección 5 de la tarea 46 | 12/11/2026 |
 | Cierre de la tarea 63 (Odoo con datos) | Eneko.P hace el 12/11 una primera prueba en un Odoo local y la termina en `ServidorERP` con `gerente` y el caso del restaurante, con un script repetible (`caso-63.py`). Las capturas locales quedan como primera prueba | Es el día de la entrega y la 63 es la que da el nivel 4 (y el 5) del criterio 7 de la rúbrica. Hacerlo por script deja la prueba repetible y no duplica datos | 12/11/2026 |
+| Cierre de las tareas 15 y 57 | Se dan por terminadas el 12/11 con lo hecho y su límite escrito. La 15: los TPV están bastionados a mano (tarea 13, con capturas) y `configurar-tpv.ps1` y `comprobar-tpv.ps1` están listos y comprobados; no se han ejecutado en las VM de los TPV. La 57: `sincronizar-carta.py` hecho y probado contra un Odoo simulado; no se ha lanzado en el `ServidorERP` del equipo. Las dos quedan como mejora | No hay tiempo antes de la presentación del 13/11 y el `ServidorERP` y los TPV están en los PC de Iker y Markel. Lo entregado funciona y se puede repetir; lo que falta es ejecutarlo en las máquinas del equipo (pruebas S-06 y de la 57 en ⏳) | 12/11/2026 |
 | Información a la vista en Packet Tracer | Una nota junto a cada equipo con su IP, máscara, puerta de enlace y si es fija o por DHCP; en R1 los pools DHCP, la NAT y la ruta por defecto; una leyenda de redes; y AWS dibujado como un servidor `AWS-EC2` (52.200.94.167) colgado del ISP, con `almichain1.duckdns.org` en el DNS de INTERNET | La profesora pidió el 12/11 ver la información en el propio diagrama, no solo en la guía. AWS va detrás del ISP porque la web está en Internet, fuera del local ([guía de Packet Tracer, sección 10](../redes/23-packet-tracer-red-local.md#10-información-en-el-lienzo-12112026)) | 12/11/2026 |
 | Permiso de exportar en Odoo (tarea 36) | Solo `gerente` tiene el grupo «Permitir exportar» de Odoo 19; los cajeros no. Se le da una vez con `admin` (`permiso-exportar.py`, la clave por la entrada estándar) | Odoo 19 no deja exportar a un usuario interno sin ese grupo, y las exportaciones llevan datos personales: mínimos privilegios ([tarea 36, sección 3.3](../erp/36-importar-exportar/DOCUMENTACION.md#33-permiso-para-exportar-en-odoo-19)) | 12/11/2026 |
 
@@ -134,7 +135,7 @@ Fuentes y documentación técnica de referencia por bloque. Cada responsable añ
 |---|---|---|
 | 1 | 21/10 – 27/10 | Organización, requisitos, comparativas, diseño (red, web, E/R) y presupuesto; buena parte de la implantación en VM |
 | 2 | 28/10 – 04/11 | Terminar lo técnico (corte el miércoles 4/11, día de la rúbrica): equipos físicos, red y WDS, comprobaciones de seguridad |
-| 3 | 05/11 – 11/11 | Huecos de la rúbrica (tareas 56-63), tabla de pruebas, documentación final, presentación y ensayo el 11/11 |
+| 3 | 05/11 – 11/11 | Huecos de la rúbrica (tareas 56-63), tabla de pruebas, documentación final y presentación |
 
 > **Fechas del reto:** del lunes 26/10 al jueves 12/11/2026. El 27/10 se fijó el corte técnico el 4/11 (sección 5). Las tareas ya hechas conservan sus fechas reales.
 
@@ -236,9 +237,9 @@ Incidencias relevantes durante la ejecución:
 | Documentación completa en un solo PDF | 48 | Adrian | `python3 scripts/documentacion-entrega.py` genera `entrega/Almi-Chain-documentacion.pdf` con todo el repositorio en orden (10/11) | Regenerarlo el día de la entrega, después de la última PR | Hecho (10/11) |
 | Diagramas | Cada bloque | Responsable de cada bloque | Arquitectura de equipos ([tarea 11](../diagramas/11-arquitectura-equipos/DIAGRAMA.md)), plano y red ([tarea 23](../redes/23-plano-direccionamiento.md)), E/R y 3FN ([tareas 38](../bd/38-modelo-er.md) y [39](../bd/39-modelo-logico-3fn.md)), wireframes ([tarea 27](../web/27-wireframes.md)), Gantt ([gantt.md](gantt.md)) | **AWS:** hecho el 29/10 ([tarea 30, sección 2](../web/30-hosting-aws.md#2-arquitectura)). **Copias:** un esquema de la regla 3-2-1 (datos → RAID → USB fuera del local) | Parcial |
 | Tabla de pruebas por bloque | 47 | Eneko.S | [47-tabla-pruebas.md](47-tabla-pruebas.md): 74 pruebas de los 11 bloques (69 ✅, 2 🟡, 3 ⏳ tras las tareas 36 y 63 y el primer commit de Eneko.P del 12/11), repasada fila a fila el 10/11; sección 8 de este anexo y [verificacion.md](verificacion.md) | Las filas ⏳ son los scripts de los TPV (tarea 15, abierta) y la cobertura del WDS en dBm (tarea 25, cerrada con eso como mejora); que Eneko.S la repase para defenderla | Hecho (10/11) |
-| Presentación y ensayo | 49 | Peio | Presentación en .pptx (16 diapositivas, con quién habla en las notas) hecha el 12/11 con Claude Code a petición de Adrian; la sube Peio | Subirla y ensayarla (9.2) | En curso |
+| Presentación | 49 | Peio | Presentación en .pptx (16 diapositivas, con quién habla en las notas) hecha el 12/11 con Claude Code a petición de Adrian; subida por Peio el 12/11 a [docs/Almi-Chain-presentacion.pptx](../Almi-Chain-presentacion.pptx) | Presentarla el 13/11 (9.2) | Hecho |
 | Anexo I (contrato de equipo) | 1 | Adrian | [Firmado el 21/10](anexo-I-contrato-equipo.md) | — | Hecho |
-| Anexo II (este documento) | 2 | Adrian | Secciones 1 a 8, al día el 12/11 | Lo que entre hasta la entrega; cerrar la 9 y la 10 después de la presentación | En curso |
+| Anexo II (este documento) | 2 | Adrian | Secciones 1 a 10, cerrado el 12/11 | — | Hecho |
 | Commits de todos (Anexo IX) | 5 | Adrian | 6 de 6 personas con commits propios (Eneko.P, el 12/11) | — | Hecho (12/11) |
 | Máquinas virtuales | 12, 13, 33, 53 | Quien tiene cada una | No se suben a Drive (30/10): cada VM está en el PC de quien la tiene ([maquinas-virtuales.md](maquinas-virtuales.md)) | Que Iker y Markel confirmen en qué PC están las suyas | En curso |
 | Tecnologías habilitadoras | 58 | Eneko.P | [58-tecnologias-habilitadoras.md](../digitalizacion/58-tecnologias-habilitadoras.md) (10/11, redactado por Adrian) | Que Eneko.P lo revise y lo sepa defender | Hecho |
