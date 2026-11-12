@@ -17,18 +17,18 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 
 | Bloque | Pruebas | ✅ | 🟡 | ⏳ | Lo que falta, en una línea |
 |---|---|---|---|---|---|
-| 0 Gestión | 5 | 4 | 0 | 1 | Commits de Eneko.P (tarea 5) |
+| 0 Gestión | 5 | 5 | 0 | 0 | — |
 | 1 Hardware | 3 | 3 | 0 | 0 | — |
 | 2 SO | 11 | 10 | 0 | 1 | Scripts del TPV en los dos equipos (tarea 15, S-20) |
 | 3 Arcade | 10 | 10 | 0 | 0 | — |
 | 4 Arduino | 7 | 7 | 0 | 0 | — |
 | 5 Redes | 10 | 7 | 1 | 2 | WDS: Wi-Fi de clientes por el router 2, aislamiento probado desde él y cobertura antes y después (tarea 25) |
 | 6 Web | 6 | 6 | 0 | 0 | Repetir Lighthouse con la web del 04/11 (necesita la EC2 encendida) |
-| 7 ERP | 8 | 7 | 1 | 0 | Exportar e ida y vuelta (tarea 36); usar CRM, empleados, marketing e inventario (63, guía hecha) |
+| 7 ERP | 9 | 8 | 1 | 0 | Exportar e ida y vuelta (tarea 36) |
 | 8 BD | 4 | 4 | 0 | 0 | — |
 | 9 Backup | 6 | 6 | 0 | 0 | — (sin probar: un TPV contra el servidor recuperado) |
 | 10 Seguridad | 3 | 2 | 1 | 0 | Comprobaciones 2, 3, 6 y 7 en el servidor del equipo (tarea 46, sección 5) |
-| **Total** | **73** | **66** | **3** | **4** | |
+| **Total** | **74** | **68** | **3** | **3** | |
 
 ## 0 · Gestión
 
@@ -36,7 +36,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 |---|---|---|---|---|---|---|
 | G-01 | 5 | CI de gitleaks en los merges a `main` | En verde | ✅ Los 3 últimos merges, en verde (23/10); repetido el 10/11: los merges de las PR #111 a #113 (09/11), en verde | 23/10 y 10/11 | [verificacion.md §3](verificacion.md) · [Actions](https://github.com/zHGx-alt/Reto-Asir/actions) |
 | G-02 | 5 | gitleaks local sobre todo el historial | Sin fugas | ✅ 81 commits, sin fugas (23/10); 420 commits, sin fugas (10/11) | 23/10 y 10/11 | [verificacion.md §2](verificacion.md) |
-| G-03 | 5 | Las 6 personas tienen commits propios (Anexo IX) | 6 de 6 | ⏳ 5 de 6: falta Eneko.P | 23/10 | [verificacion.md §3](verificacion.md) |
+| G-03 | 5 | Las 6 personas tienen commits propios (Anexo IX) | 6 de 6 | ✅ 6 de 6: el primero de Eneko.P es `ab8d5bb` (tarea 63) | 12/11 | [verificacion.md §3](verificacion.md) |
 | G-04 | 4 | `python3 scripts/gantt.py`: backlog coherente | Sin errores | ✅ Sin errores | 27/10 | [gantt.md](gantt.md) |
 | G-05 | 5 | `bash scripts/verificar-repo.sh` | «Todo correcto» | ✅ «Todo correcto» con Docker: enlaces, Gantt, sintaxis, antirrebote, SQL (49/49 y 9/9), shellcheck, W3C y gitleaks | 10/11 | [verificar-repo.sh](../../scripts/verificar-repo.sh) |
 
@@ -129,6 +129,7 @@ Resume, por bloque del reto, **qué se ha probado, qué resultado dio y dónde e
 | E-06 | 52 | Proxy HTTPS: certificado, redirección, TLS 1.2/1.3, cabeceras, venta por HTTPS | 15 pruebas | ✅ 🖥️ 15 de 15 | 26/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
 | E-07 | 36 | Importar y exportar datos (carta, clientes, ventas) | CSV correctos | 🟡 Importar la carta, en el laboratorio: 8 nuevos, 6 actualizados, 0 errores (10/11). Eneko.P: reimportar, CSV con errores, exportar e ida y vuelta | 10/11 | [Tarea 36](../erp/36-importar-exportar/DOCUMENTACION.md) |
 | E-08 | 37 | Ticket desde el TPV de Odoo | Imprime | ✅ 🖥️ Desde la VM win-11 por IPP a la Samsung ML-1660 (impresora de pruebas acordada: no hay térmicas para todos) | 27/10 | [Tarea 52](../erp/52-https-odoo/DOCUMENTACION.md) |
+| E-09 | 63 | Usar CRM, ventas, empleados, marketing e inventario con datos, como `gerente` | Oportunidad ganada con su presupuesto; 4 empleados; lista y campaña; stock 48 → 46 → 45 | ✅ `S00001` = 490,00 €; prueba de correo registrada (sin servidor de correo saliente); agua 45 tras venta y ajuste | 12/11 | [Tarea 63 §7](../erp/63-uso-modulos/GUIA.md#7-resultados) |
 
 ## 8 · Base de datos
 
