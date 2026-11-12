@@ -1,0 +1,7 @@
+  carta.csv: 23 filas (product.template)
+  clientes.csv: 6 filas (res.partner)
+  ventas-tpv.csv: 8 filas (pos.order)
+  facturas.csv: 0 filas (account.move)
+
+Exportado en /home/tecnico/36-importar-exportar/exportaciones-20261112. Contiene datos personales: no subirlo a Git ni enviarlo sin cifrar.
+salida: 0

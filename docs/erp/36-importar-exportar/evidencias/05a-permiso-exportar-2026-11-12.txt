@@ -1,0 +1,1 @@
+gerente: grupo «Allowed» (base.group_allow_export) añadido por admin.

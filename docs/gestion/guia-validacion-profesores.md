@@ -27,7 +27,7 @@ Tareas [32] [33] [34] [35] [36] [37] [52] [63]
 5. El caso de uso automatizado: pedido → factura → cobro → PDF ([35], menú de grupo con IVA 10 %).
 6. Importar la carta con `importar-exportar.py` ([36]).
 
-**Ojo, falta:** [36] pasos 2-6 y [63] (CRM, empleados, marketing, inventario) son de Eneko.P y están sin hacer. Si Ales pregunta por los módulos que no son facturación ni TPV, de momento solo están instalados. Los ajustes del TPV solo se aplican con una sesión de caja nueva.
+[36] completa el 12/11: reimportar sin duplicar, CSV con errores, exportar a CSV e ida y vuelta (para exportar, `gerente` necesita el grupo «Permitir exportar» de Odoo 19). [63] hecha el 12/11: CRM, empleados, marketing e inventario usados con datos. Los ajustes del TPV solo se aplican con una sesión de caja nueva.
 
 ### 16 · Implementación de la base de datos (media-difícil, ~15 min)
 Tareas [40] [41] [42] [43] [57]
