@@ -33,8 +33,8 @@ Tareas [32] [33] [34] [35] [36] [37] [52] [63]
 Tareas [40] [41] [42] [43] [57]
 
 **Enseñar:**
-1. Los scripts DDL 01-03 ejecutándose sin errores y `05-pruebas` con 33/33 ([40]).
-2. Datos de prueba y algunas de las 12 consultas de `07-consultas.sql` ([41]).
+1. Los scripts DDL 01-03 ejecutándose sin errores y `05-pruebas` con 49/49 ([40] y [56]).
+2. Datos de prueba y algunas de las 15 consultas de `07-consultas.sql` ([41]).
 3. Usuarios con mínimos privilegios: `tpv_app` e `informes`, y `09-pruebas-usuarios.sql` con 9/9 ([42]).
 4. Que la BD vive en el RAID 1 ([43]).
 5. La integración con Odoo: `sincronizar-carta.py` lleva la carta de `almi_chain` al TPV por XML-RPC ([57]).
