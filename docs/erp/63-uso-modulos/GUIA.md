@@ -4,7 +4,7 @@
 - **Responsable:** Eneko.P
 - **Depende de:** tareas 34 (módulos instalados) y 36 (carta importada)
 - **Criterio de la rúbrica:** [7. Implementación de un ERP](../../gestion/rubrica-anexo-VI.md#7-implementación-de-un-erp). Nivel 4: «se usan de forma correcta el resto de módulos del ERP». Como la rúbrica es acumulativa, sin el 4 tampoco cuenta el 5 (la factura automática de la tarea 35, que ya está hecha).
-- **Estado (12/11/2026):** ✅ Hecha en la VM `ServidorERP` con el usuario `gerente`: los cinco casos de abajo con su captura (sección 7). Primera prueba de Eneko.P en su Odoo local (sección 8) y cierre en el servidor con [`caso-63.py`](caso-63.py) (sección 9).
+- **Estado (12/11/2026):** ✅ Hecha por Eneko.P: primero en un Odoo local (sección 8) y después en la VM `ServidorERP` con el usuario `gerente` y [`caso-63.py`](caso-63.py) (secciones 7 y 9).
 
 ## 1. Qué hay que demostrar
 
@@ -99,9 +99,9 @@ Hecho el 12/11/2026 en `ServidorERP` (Odoo 19, base `tienda`) con el usuario `ge
 
 La venta de las 2 aguas se hizo con un pedido de venta, que la sección 6 da como alternativa al TPV. En el historial de movimientos (`63-09`) también se ven las ventas del TPV de octubre (`WH/POS/…`), que descuentan stock de la misma forma.
 
-## 8. Primera prueba de Eneko.P (12/11, en su Odoo local)
+## 8. Primera prueba en un Odoo local (12/11)
 
-Eneko.P probó los módulos en su propio Odoo (`localhost:8069`, compañía «My Company», usuario `admin`). Usó el caso de Almi-Chain como empresa de informática, no el del restaurante. Sus capturas están en [`evidencias/eneko-p-local/`](evidencias/eneko-p-local/). Las subió primero en un Word (`docs/evidencias/CRM,INVENTARIO.ETC.docx`, commit `ab8d5bb`) y aquí se han pasado a PNG.
+Antes de hacerlo en el servidor, Eneko.P probó los módulos en un Odoo local (`localhost:8069`, compañía «My Company», usuario `admin`). Usó el caso de Almi-Chain como empresa de informática, no el del restaurante. Sus capturas están en [`evidencias/eneko-p-local/`](evidencias/eneko-p-local/). Se subieron primero en un Word (`ab8d5bb`) y después se pasaron a PNG.
 
 | Captura | Qué enseña |
 |---|---|
@@ -112,7 +112,7 @@ Eneko.P probó los módulos en su propio Odoo (`localhost:8069`, compañía «My
 | `08` | Campaña de correo «Digitaliza tu restaurante…» |
 | `09`, `10`, `11` | Factura `INV/2026/00001`, ticket del TPV y factura proforma en PDF |
 
-Lo que faltaba para el nivel 4 se hizo en el servidor (sección 7): el presupuesto que sale de la oportunidad, el stock aplicado y descontado por una venta, la plantilla del restaurante enlazada a `gerente` y la lista de correo. Todo con el caso del restaurante y con `gerente`.
+Lo que faltaba para el nivel 4 se hizo después en el servidor (sección 7): el presupuesto que sale de la oportunidad, el stock aplicado y descontado por una venta, la plantilla del restaurante enlazada a `gerente` y la lista de correo. Todo con el caso del restaurante y con `gerente`.
 
 ## 9. Cómo repetirlo
 
