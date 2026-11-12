@@ -311,3 +311,14 @@ Hacer cada una y apuntar el resultado en la tabla de pruebas de la [tarea 23](23
 **Notas para repetirla con el MCP:** la función `configureIosDevice` necesita `exit` entre bloques de interfaz (si no, se pierde la línea `interface` siguiente); en los PC, la IP fija se guarda con `configurePcIp` más la puerta de enlace del equipo (`setDefaultGateway`), porque solo con el puerto no queda guardada; el módulo inalámbrico de PC se llama `Linksys-WMP300N` y el de portátil `Linksys-WPC300N`. La función `swapLaptopToWireless` de PTBuilder pone una tarjeta genérica (`PT-LAPTOP-NM-1W`) con la que *PC Wireless* no deja conectar: hay que cambiarla por la `Linksys-WPC300N`. Para la prueba 15, la radio del punto de acceso se apaga con `getPort('Port 1').setPower(false)`.
 
 Las contraseñas de R1, SW1 y las Wi-Fi de prueba están en KeePassXC desde el 26/10/2026 ([CORRECIONES, 2.1](../../CORRECIONES.md)).
+
+## 10. Información en el lienzo (12/11/2026)
+
+La profesora pidió que el diagrama enseñe la información sin abrir cada equipo. Hecho con el MCP de Packet Tracer:
+
+- **Una nota junto a cada equipo**: IP y máscara, puerta de enlace, y si la IP es **fija** o **por DHCP**. Los equipos Wi-Fi (CLIENTE y RECREATIVA) la reciben del R1 en `192.168.50.x`.
+- **Routers**: en R1, sus interfaces, la NAT, la ruta por defecto y que es **el servidor DHCP** (personal `192.168.10.100-199`, invitados `192.168.50.10-254`); en ISP, que todo es IP fija y no hay DHCP; en SW1, la VLAN de cada puerto y la IP de gestión.
+- **AWS**: servidor `AWS-EC2` (`52.200.94.167/24`, puerta de enlace `52.200.94.1`) en `ISP Gi0/2`, con la nota de la [tarea 30](../web/30-hosting-aws.md) (región us-east-1, EC2 `web-almichain`, bucket S3, `almichain1.duckdns.org` con Let's Encrypt). El DNS de INTERNET resuelve `almichain1.duckdns.org` → `52.200.94.167`.
+- **Leyenda** con las cuatro redes y los rangos de IP fijas y DHCP.
+
+Se movieron los equipos de abajo para que las notas no se pisen; la configuración de la sección 1-8 no cambia.
