@@ -154,6 +154,17 @@ todo lo que llegó con un resumen: pulsaciones de cada botón, si llegan las 4 d
 duraron menos de 30 ms. Esas son las que no hace un dedo: un cable que toca GND a ratos. Si todo está bien, termina
 con `RESULTADO: todo llega bien`.
 
+## Pasar el stick entre el PC y la VM
+
+En el PC, la VM de la recreativa tiene un filtro USB que se queda el stick en cuanto se enchufa, y MAME solo busca mandos al arrancar. Para no ir a los menús de VirtualBox:
+
+```bash
+./pasar-stick.sh pc    # el PC lo ve: ver-mando.py, probar-stick.py y el puerto serie
+./pasar-stick.sh vm    # activa el filtro y reinicia la VM: MAME arranca con el stick
+```
+
+La VM es `Recreativa-Demo` por defecto; otra con `VM=Nombre ./pasar-stick.sh vm`. Probado en los dos sentidos el 12/11, al validar las tareas 5 y 12.
+
 ## Prueba en físico (tarea #50)
 
 Hecha el 27/10/2026 con el stick montado (#19): primero Iker (subida, cableado de la palanca y Batocera) y después Adrian (registro de entrada y EEPROM).
