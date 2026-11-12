@@ -4,7 +4,7 @@
 - **Responsable:** Peio
 - **Reto:** Almi-Chain (ASIR1 2026-27)
 - **Fechas reales:** práctica el 27/10/2026 (red de prácticas `192.168.1.0/24`); montaje con la red del proyecto el 04/11/2026. Documento reordenado el 10/11/2026 con lo que demuestra cada captura.
-- **Estado (10/11/2026):** 🟡 **El enlace entre los dos routers está hecho y probado.** Faltan dos cosas, que se hacen en unos 30 min con los routers delante ([sección 7](#7-lo-que-falta-hoja-de-trabajo)): enlazar el router 2 a la Wi-Fi **de clientes** en vez de a la del personal, y medir la cobertura con el router 2 apagado y encendido.
+- **Estado (12/11/2026):** ✅ **Terminada: el enlace entre los dos routers está hecho y probado** (enlace, DHCP único, ping e Internet). Por falta de tiempo antes de la entrega, el 12/11 se cierra sin dos mejoras que quedan descritas en la [sección 7](#7-lo-que-falta-hoja-de-trabajo) (unos 30 min con los routers delante): enlazar el router 2 a la Wi-Fi **de clientes** en vez de a la del personal, y medir la cobertura con el router 2 apagado y encendido.
 
 ## 0. Resumen para la defensa
 

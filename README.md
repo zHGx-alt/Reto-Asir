@@ -14,7 +14,7 @@ Sale en `entrega/Almi-Chain-documentacion.pdf` (no se sube a Git por tamaño). S
 
 ## Estado
 
-**55 de 64 tareas hechas** (12/11/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md); la rúbrica, en [rubrica-anexo-VI.md](docs/gestion/rubrica-anexo-VI.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
+**56 de 64 tareas hechas** (12/11/2026; lo que hay que corregir, en [CORRECIONES.md](CORRECIONES.md); la rúbrica, en [rubrica-anexo-VI.md](docs/gestion/rubrica-anexo-VI.md)). Lo hecho y lo que falta, tarea por tarea y separado en software y montaje físico: [Gantt](docs/gestion/gantt.md). Cómo se ha comprobado: [verificacion.md](docs/gestion/verificacion.md). Para repetir las comprobaciones automáticas:
 
 ```bash
 bash scripts/verificar-repo.sh

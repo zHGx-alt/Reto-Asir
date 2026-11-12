@@ -23,20 +23,20 @@ Replanificado el 04/11/2026 con la rúbrica (Anexo VI, [rubrica-anexo-VI.pdf](ru
 | Eneko.S | 0 | — |
 | Iker | 5 | #15 Scripts de configuración reproducibles (Windows) (04/11–05/11); #57 Integrar la BD propia con la de Odoo (06/11–10/11) |
 | Markel | 0 | — |
-| Peio | 4 | #25 WDS con segundo router y pruebas de cobertura (04/11–05/11); #49 Presentación y ensayo (10/11–11/11) |
+| Peio | 2 | #49 Presentación y ensayo (10/11–11/11) |
 
 *Días de trabajo:* días laborables del tramo en que la persona tiene al menos una tarea. Las tareas 2 y 5 de Adrian son de seguimiento y ocupan poco cada día.
 
 ## Resumen
 
-**55 de 64 tareas hechas (85 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
+**56 de 64 tareas hechas (87 %).** *Hecho* significa que el entregable existe y tiene evidencias; las comprobaciones del 23/10/2026 están en [verificacion.md](verificacion.md).
 
 | Tipo | Hechas | En curso | Pendientes | Total |
 |---|---|---|---|---|
 | Gestión | 4 | 2 | 0 | 6 |
 | Documentación | 17 | 0 | 1 | 18 |
 | Software | 28 | 4 | 1 | 33 |
-| Físico | 6 | 1 | 0 | 7 |
+| Físico | 7 | 0 | 0 | 7 |
 
 *Software* se hace en un ordenador o en una máquina virtual; *Físico* necesita el equipo real (montar, cablear o configurar hardware).
 
@@ -47,7 +47,6 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | # | Tarea | Tipo | Responsable | Fin | Estado | Qué falta | Evidencia |
 |---|---|---|---|---|---|---|---|
 | 15 | Scripts de configuración reproducibles (Windows) | Software | Iker | 05/11 | En curso | configurar-tpv.ps1 y comprobar-tpv.ps1 hechos el 24/10 (tareas 13 y 15). Falta ejecutarlos en los dos TPV. | [configurar-tpv.ps1](../../docs/so/13-tpv/configurar-tpv.ps1) |
-| 25 | WDS con segundo router y pruebas de cobertura | Físico | Peio | 05/11 | En curso | 04/11: router 2 en Range Extender (192.168.10.2, DHCP apagado, ping al router 1). 10/11: documento reordenado. Falta (sección 7, 30-45 min): enlazarlo a la Wi-Fi de invitados en vez de a la del personal, pruebas en su BSSID, dBm antes y después en barra y entrada, y de paso UPnP fuera (A-22). | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
 | 5 | Repo con estructura y gitleaks; commits de todos | Gestión | Adrian | 06/11 | En curso | 04/11: quitados los .gitkeep de carpetas con contenido, permiso de ejecución de mover-docker-al-raid.sh corregido y correo de Git de Adrian corregido en el repo (los commits viejos con coma se quedan: no se reescribe el historial). Falta solo un commit de Eneko.P (lo hará con la 36 o la 63). | [gitleaks.yml](../../.github/workflows/gitleaks.yml) |
 | 36 | Importar y exportar datos en Odoo | Software | Eneko.P | 06/11 | En curso | carta.csv (14 productos) e importar-exportar.py (importar carta; exportar carta; clientes; ventas y facturas a CSV) hechos el 24/10. Falta ejecutarlo contra Odoo y guardar las evidencias. El 26/10 pasa de Iker a Eneko.P (reparto de carga). 10/11 (Adrian, laboratorio): paso 1 ejecutado, 8 nuevos, 6 actualizados, 0 errores (evidencias/01-importar-2026-11-10.txt); los campos de Odoo 19 funcionan. Faltan los pasos 2-6 (Eneko.P). | [DOCUMENTACION.md](../../docs/erp/36-importar-exportar/DOCUMENTACION.md) |
 | 46 | Revisión de seguridad transversal | Software | Adrian | 06/11 | En curso | 04/11: S-08 y S-09 en preseed-servidor.cfg (SSH solo con clave y sin root; clave del PC del gerente en vez de recreativa-claude; unattended-upgrades), probado con una instalación desde cero: comprobaciones 6 y 7 OK. Falta lo que necesita el servidor del equipo (PC de Iker) y la red del aula: comprobaciones 2 y 3, y 6 y 7 en ese servidor tras aplicar la sección 4.2. | [DOCUMENTACION.md](../../docs/seguridad/46-revision-seguridad/DOCUMENTACION.md) |
@@ -65,7 +64,7 @@ Ordenadas por estado y fecha de fin. *Qué falta* sale de revisar el documento d
 | Eneko.S | 11 | 0 | 0 | 0 | 18 | 1, 3, 5, 7, 8, 11 |
 | Iker | 14 | 2 | 2 | 0 | 33 | 0, 1, 2, 3, 7, 8, 9 |
 | Markel | 8 | 0 | 0 | 0 | 22 | 1, 2, 4, 5, 6, 11 |
-| Peio | 7 | 2 | 0 | 1 | 15 | 0, 1, 5, 6, 11 |
+| Peio | 7 | 1 | 0 | 0 | 18 | 0, 1, 5, 6, 11 |
 
 ## Tareas por persona
 
@@ -105,7 +104,6 @@ Nada en curso ni pendiente.
 
 | # | Tarea | Bloque | Tipo | Fechas | Depende de | Estado |
 |---|---|---|---|---|---|---|
-| 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | 02/11–05/11 | #24 (Peio) | En curso |
 | 49 | Presentación y ensayo | 11 Entrega | Documentación | 10/11–11/11 | #46 (Adrian) | Pendiente |
 
 ## Tareas hechas
@@ -133,6 +131,7 @@ Nada en curso ni pendiente.
 | 22 | Comparativa de operadores WAN | 5 Redes | Documentación | Markel | Elige DIGI 1 Gb (30 €/mes). El 24/10 se añaden el análisis de necesidades y el esquema de conectividad. Es la WAN de todo el proyecto. | [22-comparativa-wan.md](../../docs/redes/22-comparativa-wan.md) |
 | 23 | Plano del local y plan de direccionamiento IP | 5 Redes | Documentación | Adrian | Plano; plan de IP; red plana con invitados aislada (5.2 y 5.3). 23-red-local.pkt hecho el 25/10 (MCP de Packet Tracer y dos pasos a mano): las 16 pruebas correctas. | [23-plano-direccionamiento.md](../../docs/redes/23-plano-direccionamiento.md) |
 | 24 | Configurar red segura (WPA3; invitados; firewall) | 5 Redes | Físico | Peio | Hecho en un TL-WR841N: administración remota cerrada; WPA2-AES; SPI y anti-DoS; contraseñas Wi-Fi y de administración cambiadas y en KeePassXC (26/10). 29/10 (Peio, configurar-red-segura.md): LAN 192.168.10.0/24, reserva del gerente, WPS desactivado, red de invitados aislada, administración solo desde la MAC del gerente y renovación de la clave de grupo. 29/10: contraseñas del personal y de invitados cambiadas (distintas) tras verse en las capturas 14 y 16 (S-24). PIN de WPS nuevo. 30/10: capturas de ping P3b y P4 desde la red de invitados (sin respuesta al gerente ni entre móviles; Internet sí). WPA3: limitación del TL-WR841N. | [DOCUMENTACION.md](../../docs/redes/24-red-segura/DOCUMENTACION.md) |
+| 25 | WDS con segundo router y pruebas de cobertura | 5 Redes | Físico | Peio | 04/11: router 2 en Range Extender (192.168.10.2, DHCP apagado, ping al router 1). 10/11: documento reordenado. 12/11: se da por terminada por falta de tiempo, con el enlace y las pruebas de conectividad hechos. Queda sin hacer, documentado en la sección 7 como mejora: enlazar el router 2 a la Wi-Fi de invitados en vez de a la del personal, pruebas en su BSSID, dBm antes y después en barra y entrada, y UPnP fuera (A-22). | [DOCUMENTACION.md](../../docs/redes/25-wds/DOCUMENTACION.md) |
 | 26 | Análisis de conectividad (Wireshark; nmap) | 5 Redes | Físico | Eneko.S | Con el equipo real o en VM: Packet Tracer no tiene Wireshark ni nmap (su modo simulación solo enseña los paquetes). Probar que desde la Wi-Fi de invitados nmap no ve la LAN. 27/10: se acorta a un día (4/11) por el corte técnico de esa fecha; depende de que la 25 acabe el 3/11. 27/10: plan W1-W7 de Wireshark y analizar-red.sh (nmap con veredicto; probado con servicios locales). 30/10: hecho con el router real; invitados aislados; hallazgos H-01 a H-05 (UPnP y SSH en el router). | [DOCUMENTACION.md](../../docs/redes/26-analisis-conectividad/DOCUMENTACION.md) |
 | 27 | Wireframes y diseño conceptual web | 6 Web | Documentación | Peio | — | [27-wireframes.md](../../docs/web/27-wireframes.md) |
 | 28 | Implementar web (mapa; formulario; slideshow) | 6 Web | Software | Markel | Mapa de OpenStreetMap; geolocalización; formulario de ejemplo y slideshow. | [index.html](../../web/index.html) |
