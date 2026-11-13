@@ -32,6 +32,7 @@ dist/
 
 # --- Arduino ---
 arduino/**/build/
+arduino/**/.pio/
 
 # --- Python ---
 __pycache__/
