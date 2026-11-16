@@ -2,7 +2,7 @@
 
 Reto 1 de ASIR1 2026-2027 (285 h): solución informática para una cadena de restaurantes. Enunciado en [Reto_1_ASIR1_2026-2027.docx](Reto_1_ASIR1_2026-2027.docx) y plan de trabajo en [almi-chain-plan.pdf](almi-chain-plan.pdf).
 
-**Para entender el proyecto entero** (qué pide el enunciado, qué pieza lo resuelve y cómo se relacionan la red, Odoo, la web, la base de datos y las copias): [LOGICA_RETO.md](LOGICA_RETO.md). Para montarlo desde cero, en orden: [LOGICA_RETO, sección 15](LOGICA_RETO.md#15-montarlo-desde-cero-en-orden). Pruebas de cada bloque: [tabla de pruebas](docs/gestion/47-tabla-pruebas.md). Presentación del 13/11: [docs/Almi-Chain-presentacion.pptx](docs/Almi-Chain-presentacion.pptx).
+**Para entender el proyecto entero** (qué pide el enunciado, qué pieza lo resuelve y cómo se relacionan la red, Odoo, la web, la base de datos y las copias): [LOGICA_RETO.md](LOGICA_RETO.md). Para montarlo desde cero, en orden: [LOGICA_RETO, sección 15](LOGICA_RETO.md#15-montarlo-desde-cero-en-orden). Pruebas de cada bloque: [tabla de pruebas](docs/gestion/47-tabla-pruebas.md). Presentación del 13/11: [docs/Grupo3-Almi-Chain-presentacion.pptx](docs/Grupo3-Almi-Chain-presentacion.pptx).
 
 **Documentación completa en un solo PDF** (la que se entrega al profesor): portada, índice y todos los documentos del repositorio ordenados por bloques. Se genera con Docker y Google Chrome:
 

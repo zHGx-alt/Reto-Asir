@@ -32,7 +32,7 @@ Una cadena de restaurantes nos contrata para montar la informática de un local.
 | 11 | Bases de datos de cada establecimiento: E/R, tablas, implementación y consultas | Modelo E/R en notación Chen (con relación ternaria e historial de precios) → 3FN → PostgreSQL con reglas y roles | 38–42, 56 | [docs/bd](docs/bd/) |
 | 12 | BD en un dispositivo redundante, plan de copias y prueba de restauración | RAID 1 con mdadm, restic cifrado 3-2-1 (RAID, USB y S3), restauración aislada | 43–45, 60 | [docs/backup](docs/backup/) |
 | 13 | Seguimiento (Gantt o Kanban) y control de versiones | CSV → Gantt generado por script; GitHub con PR, CI en verde y gitleaks | 1–6 | [docs/gestion](docs/gestion/) |
-| 14 | Pruebas, documentación reproducible con diagramas, presentación | Tabla de pruebas, este documento, guías por tarea, [presentación](docs/Almi-Chain-presentacion.pptx) | 47–49 | — |
+| 14 | Pruebas, documentación reproducible con diagramas, presentación | Tabla de pruebas, este documento, guías por tarea, [presentación](docs/Grupo3-Almi-Chain-presentacion.pptx) | 47–49 | — |
 
 ### 1.1 Resultados de aprendizaje → tareas
 
